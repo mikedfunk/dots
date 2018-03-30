@@ -1,0 +1,668 @@
+#!/bin/zsh
+# zsh config
+# vim: set foldmethod=marker ft=zsh:
+
+# notes {{{
+# https://code.joejag.com/2014/why-zsh.html
+# https://til.hashrocket.com/posts/alk38eeu8r-use-fc-to-fix-commands-in-the-shell
+# ctrl-z won't work? remove ~/.zsh/log/jog.lock
+# This is documented with tomdoc.sh style https://github.com/tests-always-included/tomdoc.sh
+# }}}
+
+# p10k instant prompt {{{
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+# https://unix.stackexchange.com/a/608921
+# export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# }}}
+
+# helper functions {{{
+
+# Internal: Whether a command is available
+_has() {
+    type "$1" &>/dev/null
+}
+
+# colors {{{
+local BLACK="$(tput setaf 0)"
+local RED="$(tput setaf 1)"
+local GREEN="$(tput setaf 2)"
+local YELLOW="$(tput setaf 3)"
+local BLUE="$(tput setaf 4)"
+local PINK="$(tput setaf 5)"
+local CYAN="$(tput setaf 6)"
+local WHITE="$(tput setaf 7)"
+local NORMAL="$(tput sgr0)"
+local MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
+local LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
+local UNDERLINE="$(tput smul)"
+# }}}
+
+# }}}
+
+# Paths {{{
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# when CDing from anywhere, this will add the configured path to the
+# completions always. Why would I want to do this ever? It just looks like a
+# bug and gets in the way.
+# cdpath=(
+#   $HOME/Code
+#   $cdpath
+# )
+
+# https://github.com/denisidoro/navi
+navipath=(
+  $HOME/.navi
+  $navipath
+)
+
+infopath=(
+  $(brew --prefix)/share/info
+  /usr/share/info
+  $infopath
+)
+
+manpath=(
+  $(brew --prefix)/share/man
+  /usr/share/man
+  $manpath
+)
+
+path=(
+  # my own scripts
+  $HOME/.bin
+  # global ruby gems
+  $HOME/bin
+  # global python pip packages
+  $HOME/.local/bin
+  # emacs
+  # $HOME/.emacs.d/bin
+  # /Applications/Docker.app/Contents/Resources/bin
+  # (homebrew is already covered by the eval above)
+  # wtf homebrew? this is too far down the list!
+  # $(brew --prefix)/{bin,sbin}
+  # homebrew doesn't like to link curl
+  $(brew --prefix)/opt/{curl,perl}/bin
+  # rust cargo packages
+  # $HOME/.cargo/bin
+  # golang packages
+  # $HOME/go/bin
+  # golang executables
+  # $(brew --prefix)/opt/go/libexec/bin
+  # $HOME/.{pl,nod,py}env/bin # these will be set up by shell integration
+  $HOME/.composer/vendor/bin
+  # $([ -f $HOME/.asdf/shims/gem ] && $HOME/.asdf/shims/gem env home)
+  # /usr/{bin,sbin}
+  # /{bin,sbin}
+  # $(brew --prefix)/opt/icu4c/{bin,sbin}
+  # add gnu coreutils before path... this seems a bit heavy-handed :/
+  # $(brew --prefix)/opt/coreutils/libexec/gnubin
+  $path
+)
+# echo "PATH:----" $path
+# }}}
+
+# zsh {{{
+# If I don't do this I get "compdef undefined"
+# moved below plugins for zsh-users/zsh-completions to be happy
+# autoload -Uz compinit
+# compinit
+
+# https://github.com/machinshin/dotfiles/blob/master/.zshrc#L159-L160
+# Complete the hosts and - last but not least - the remote directories.
+#  $ scp file username@<TAB><TAB>:/<TAB>
+zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
+zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
+
+# https://www.justingarrison.com/blog/2020-05-28-shell-shortcuts/
+bindkey '^q' push-line-or-edit
+# }}}
+
+# antibody zsh plugins (#slow) {{{
+# make oh-my-zsh plugins work with antibody... this is kind of crazy
+ZSH="$HOME/Library/Caches/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+# If I re-source antibody init a second time it takes MINUTES to reinit. Even
+# if I re-run antibody bundle commands it takes progressively longer each time
+# I reload. Better to just run once on load. Only takes 3 seconds the first
+# time.
+if [[ ! $ANTIBODY_LOADED ]]; then
+    source <(antibody init)
+
+    # antibody bundle dim-an/cod tries to call compdef for bash... wtf
+    # antibody bundle djui/alias-tips # tell you when an alias would shorten the command you ran
+    # antibody bundle marlonrichert/zsh-autocomplete branch:main # automatically show flags/options completion (this plugin is really janky)
+    # antibody bundle mfaerevaag/wd # warp directory
+    # antibody bundle oldratlee/hacker-quotes # just add some cool hacker quotes in shell init like MOTD
+    # antibody bundle paulmelnikow/zsh-startup-timer # uncomment to show startup time. This plugin itself is slow, but helpful to measure once in a while.
+    # antibody bundle qoomon/zsh-lazyload # lazyload various commands (broken)
+    # antibody bundle sei40kr/fast-alias-tips-bin branch:v0.1.1 (doesn't work - he doesn't put the executable on a branch, it's in a release, which antibody doesn't know how to get)
+    # antibody bundle sei40kr/zsh-fast-alias-tips (this does not play nice with antibody)
+    # antibody bundle zdharma-continuum/zsh-startify # like vim-startify for zsh (neat, but doesn't really help)
+    # antibody bundle zsh-users/zsh-history-substring-search # up arrow after typing part of command (not needed with fzf reverse i-search)
+    # antibody bundle zsh-users/zsh-syntax-highlighting # colored input... replaced with fast-syntax-highlighting below
+    antibody bundle hlissner/zsh-autopair # auto close parens, etc.
+    antibody bundle marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
+    antibody bundle mroth/evalcache # speeds up subsequent runs of eval init functions. if you make a change just call `_evalcache_clear`.
+    antibody bundle robbyrussell/oh-my-zsh path:lib/functions.zsh # some dependencies for oh-my-zsh plugins
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/alias-finder # supposed to be 10x faster than alias-tips O_O https://github.com/djui/alias-tips/issues/49#issuecomment-569726313
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/colored-man-pages
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/colorize # Plugin for highlighting file content
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/command-not-found # suggest packages to install if command not found
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/gitfast # fix git completion issues https://unix.stackexchange.com/a/204308 downside: this also adds a TON of gxx aliases https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/gitfast it also adds MORE git aliases and functions from the main git plugin https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/jira # simple command-line tool that just opens jira on different pages. No fancy shit.
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/vi-mode
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/wd/wd.plugin.zsh # warp directory
+    antibody bundle romkatv/powerlevel10k # zsh prompt theme (see ~/.p10k.zsh)
+    antibody bundle yous/vanilli.sh # sensible zsh defaults
+    antibody bundle zdharma-continuum/fast-syntax-highlighting # colored input but faster
+    antibody bundle zsh-users/zsh-autosuggestions # OLD COMMENT: buggy if enabled along with zsh-syntax-highlighting. crashes the shell regularly.
+    antibody bundle zsh-users/zsh-completions # do-everything argument completions
+
+    ANTIBODY_LOADED=1
+fi
+# }}}
+
+# source additional files and env vars {{{
+# moved here for zsh-users/zsh-completions
+autoload -Uz compinit
+compinit
+
+_has cod && source <(cod init $$ zsh)
+export ZK_NOTEBOOK_DIR="$HOME/Notes"
+# _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="TwoDark"
+# use `gO` to open a quickfox with a table of contents!
+# _has nvim && export MANPAGER='nvim +colo\ base16-heetch +Man!'
+# _has lvim && export MANPAGER='lvim +colo\ base16-heetch +Man!'
+_has lvim && export MANPAGER='lvim +Man!'
+# _has nvim && export MANPAGER='nvim -u NONE +Man!'
+
+export XDG_CONFIG_HOME="$HOME/.config"
+# export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim"
+
+export COMPOSE_HTTP_TIMEOUT=120 # default is 60
+export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
+[ -f ~/.private_vars.sh ] && source ~/.private_vars.sh # where I store my secret env vars
+[ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
+# https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
+[ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem
+# [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
+export ASDF_DIR="$(brew --prefix asdf)/libexec" # this used to not need to be set but something changed https://github.com/asdf-vm/asdf/issues/1103
+[ -f "$ASDF_DIR"/asdf.sh ] && source "$ASDF_DIR"/asdf.sh
+
+# evaluated startup commands {{{
+_has mutagen && mutagen daemon start
+_has direnv && _evalcache direnv hook zsh # (evalcache version)
+# #slow
+# _has hub && _evalcache hub alias -s # alias git to hub with completion intact
+
+# https://github.com/trapd00r/LS_COLORS
+local DIRCOLORS_CMD="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
+local DIRCOLORS_FILE="$HOME/.dircolors"
+[[ -e "$DIRCOLORS_CMD" && -f "$DIRCOLORS_FILE" ]] && _evalcache "$DIRCOLORS_CMD" -b "$DIRCOLORS_FILE"
+# }}}
+
+export LC_CTYPE=en_US.UTF-8 # https://unix.stackexchange.com/a/302418/287898
+export LC_ALL=en_US.UTF-8 # https://unix.stackexchange.com/a/302418/287898
+# https://github.com/variadico/noti/blob/master/docs/noti.md#environment
+export NOTI_NSUSER_SOUNDNAME="Hero"
+# don't notify when these die after being "long-running processes"
+export AUTO_NTFY_DONE_IGNORE=(
+    ctop
+    htop
+    less
+    man
+    screen
+    tig
+    tmux
+    ts
+    v
+    vim
+    y
+    yadm
+)
+# colorize less... I get weird indentations all over the place with this
+# https://www.reddit.com/r/linux/comments/b5n1l5/whats_your_favorite_cli_tool_nobody_knows_about/ejex2pm/
+# export LESSOPEN="| $(brew --prefix)/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
+# alias less="less -R"
+lessc () {
+    rougify highlight $@ | \less -R -M
+}
+export GITWEB_PROJECTROOT="$HOME/Code"
+export PRE_COMMIT_COLOR=always # https://pre-commit.com/#cli
+export PSQL_PAGER="pspg"
+
+set PLANTUML_LIMIT_SIZE=8192
+
+# [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh" # this seems to conflict with direnv. Direnv seems to wipe the PATH changes this applies.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+builtin setopt aliases # weird, this should have already been done :/
+
+_has kubectl && _evalcache kubectl completion zsh
+# _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
+# _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
+_has akamai && _evalcache akamai --zsh
+# _has starship && _evalcache starship init zsh
+
+# https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
+_has navi && _evalcache navi widget zsh
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+[[ -f "$HOME"/.iterm2_shell_integration.zsh ]] && source "$HOME"/.iterm2_shell_integration.zsh
+
+export HOMEBREW_NO_ANALYTICS=1
+
+# disable weird highlighting of pasted text
+# https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
+zle_highlight=('paste:none')
+# }}}
+
+# ssh {{{
+# disable autossh port monitoring and use ServerAliveInterval and
+# ServerAliveCountMax instead.
+# https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/
+export AUTOSSH_PORT=0
+
+# Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
+# servers don't like anything *-256color so I need to use screen via ssh
+ssh() { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
+autossh() { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
+
+compdef autossh="ssh"
+
+# https://infosec.mozilla.org/guidelines/openssh#openssh-client
+ssh-add --apple-use-keychain --apple-load-keychain ~/.ssh/keys/* 2>/dev/null # add all keys stored in keychain if they haven't been added yet
+# ssh-add -c -K -A 2>/dev/null # add all keys stored in keychain if they haven't been added yet
+# [c] confirm password on use
+# [K] store/use password with macos keychain
+# [A] add all identities stored in keychain. Therefore, before this is useful, you'll need to add each key to the ssh agent at least once.
+# }}}
+
+# gpg {{{
+# enable gpg passwords in the terminal
+# make gpg prompt for a password
+# https://unix.stackexchange.com/a/608921
+# export GPG_TTY=$(tty)
+export PINENTRY_USER_DATA="USE_CURSES=1"
+# }}}
+
+# fzf {{{
+export FZF_DEFAULT_OPTS="--multi"
+export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
+# }}}
+
+# functions and aliases {{{
+
+# misc {{{
+# alias news="BROWSER=\"echo '%u' | pbcopy\" newsboat" # when opening links, just copy to clipboard
+alias news="BROWSER=\"open '%u'\" newsboat"
+alias info="info --vi-keys" # info -> pinfo is like top -> htop
+alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
+alias be="bundle exec"
+
+alias upgrade-lunarvim="cd ${HOME}/.local/share/lunarvim/lvim && git pull && cd -"
+alias tail-lunarvim-logs="tail -f ${HOME}/.cache/nvim/lvim.log"
+
+# https://www.youtube.com/watch?v=Wl7CDe9jsuo&feature=youtu.be
+alias mv="mv -iv"
+alias cp="cp -riv"
+alias mkdir="mkdir -vp"
+
+mysql-web-server () {
+    ( docker ps | grep -q dbgate ) && return
+    docker run --rm --detach -ti --name=dbgate-instance \
+        --publish 8001:3000 \
+        --env SHELL_CONNECTION='1' \
+        dbgate/dbgate
+}
+
+# tip: curl ping.gg to set up a pingdom-style alert
+shorten-url () { curl -s http://tinyurl.com/api-create.php?url=$1; }
+
+cd () { builtin cd "$@" && ls -FAG; } # auto ls on cd
+alias ..="cd .."
+alias ...="cd ../.."
+# _has lsd && alias ls="lsd" # fancy ls augmentation (disabled because it's missing flags that ls _has >:(  )
+alias du="grc --colour=auto /usr/bin/du"
+# https://github.com/sharkdp/vivid/issues/25#issuecomment-450423306
+# _has gls && alias ls="gls --color"
+alias ll='ls -lhGFA'
+alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
+alias work="smug start work"
+alias home="smug start home"
+alias rmf='rm -rf'
+compdef rmf="rm"
+mkcd () { mkdir $1 && cd $1; }
+compdef mkcd="mkdir"
+alias src="source ~/.zshrc"
+alias jobs="jobs -l"
+# alias k="k --no-vcs"
+alias pso="ps -o pid,command"
+# alias add-keys="ssh-add -K ~/.ssh/keys/githubkey ~/.ssh/keys/bitbucketkey ~/.ssh/keys/saatchiartkey"
+alias art="php artisan"
+alias pc="phing -logger phing.listener.DefaultLogger"
+# compdef pc="phing"
+alias pg="phing"
+# compdef pg="phing"
+
+alias y="yadm"
+# compdef y="yadm"
+alias upgrades="yadm bootstrap"
+save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+alias sdx="save-dotfiles && exit"
+save-dotfiles-without-encryption () { yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+# alias notes="joplin"
+# alias notes="npx --no-install joplin"
+# alias notes="wd notes && [ -f $(date +%Y-%m-%d).md ] && zk edit $(date +%Y-%m-%d) || zk new --id $(date +%Y-%m-%d) --title $(date +%Y-%m-%d)"
+alias journal="zk journal"
+alias journals="zk edit journals --interactive"
+# alias search-notes="zk list --match "
+alias notes="zk edit --interactive"
+# alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc" # javascript repl for testing javascript wonkiness
+alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude vendor" # enhanced interactive disk usage command
+alias tmux-layout="tmux display-message -p \"#{window_layout}\""
+# fuzzy wd
+wf () { wd $(wd list | gsed '1d' | fzf | gsed -E 's/^ +(\w+).*$/\1/'); }
+
+export CLICOLOR=1 # ls colors by default
+
+# pretty-print PATH with line breaks
+pretty-path() { tr : '\n' <<<"$PATH"; }
+# alias vit="vim +TW" # until vit gets its act together
+# alias tree="alder" # colorized tree from npm (I colorize tree with "lsd" now so this is not needed)
+# https://unix.stackexchange.com/a/293608/287898
+alias mc="mc --nosubshell --xterm"
+alias multitail="multitail -F $HOME/.config/multitail/multitail.conf"
+# }}}
+
+# games {{{
+alias play-starwars="telnet towel.blinkenlights.nl" # :)
+# alias play-gameboy="telnet gameboy.live 1989" # not working any more :(
+alias play-nethack="ssh nethack@alt.org" # :)
+alias play-chess="telnet freechess.org" # :)
+alias play-aardwolf="telnet aardmud.org" # :)
+alias play-tron="ssh sshtron.zachlatta.com" # :)
+alias play-zork="zork" # :)
+alias play-mume="telnet mume.org 4242" # :)
+alias play-alter-aeon="telnet alteraeon.com 23" # :)
+# }}}
+
+# suffix aliases {{{
+# https://unix.stackexchange.com/questions/354960/zsh-suffix-alias-alternative-in-bash
+# NOTE: This breaks php-language-server.php
+# alias -s css=vim
+# alias -s html=vim
+# alias -s js=vim
+# alias -s json=vim
+# alias -s jsx=vim
+# alias -s markdown=vim
+# alias -s md=vim
+# alias -s phar=php
+# alias -s php=vim
+# alias -s phtml=vim
+# alias -s rb=vim
+# alias -s scss=vim
+# alias -s txt=vim
+# alias -s xml=vim
+# alias -s xql=vim
+# alias -s yaml=vim
+# alias -s yml=vim
+# }}}
+
+# phpunit {{{
+alias pu="phpunitnotify"
+
+# Public: phpunit coverage
+puc() { pu --coverage-html=./coverage $@ && open coverage/index.html; }
+# alias puc-clover="pu --coverage-clover=./coverage/clover.xml "
+alias puf="pu --filter="
+
+# Public: phpunit watch
+puw() {
+    noglob ag -l -g \
+        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests)/.*\.php' \
+        | entr -cr \
+        phpdbg -qrr \
+        -dmemory_limit=2048M \
+        -ddisplay_errors=on \
+        ./vendor/bin/phpunit \
+        --colors=always \
+        $@
+}
+
+# Public: phpunit watch with a "pretty" formatter (close to phpspec's pretty formatter)
+puw-pretty() {
+    noglob ag -l -g \
+        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|tests)/.*\.php' \
+        | entr -cr \
+        "$HOME/.bin/pu-pretty" \
+        $@
+}
+# }}}
+
+# composer {{{
+export COMPOSER_MEMORY_LIMIT=-1
+alias cda="composer dump-autoload"
+alias cu="composer update"
+alias ci="composer install --prefer-dist"
+alias cr="composer require"
+alias crd="composer require --dev"
+alias crs="composer run-script"
+# }}}
+
+# git {{{
+alias g="git"
+compdef g="git"
+# grt() { cd `g root`; }
+# alias cdg="grt"
+# alias standup="tig --since='2 days ago' --author='Mike Funk' --no-merges"
+# Experimenting with using taskwarrior for this instead
+# alias t="tig"
+alias ts="tig status"
+alias td="tig develop.."
+# alias tm="tig master.."
+# }}}
+
+# phpspec {{{
+alias psr="phpspecnotify"
+alias psd="phpspec describe"
+alias psw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed\" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction -vvv"
+# phpspec coverage
+psc() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml $@ && open coverage/index.html; }
+# psc-clover() {
+#     php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-clover.yml $@ && node ./clover-to-lcov.js
+#     [[ $? == 0 ]] && noti --message "✅ PhpSpec tests passed" ||
+#         noti --message "❌ PhpSpec tests failed"
+# }
+# phpspec watch with a "pretty" formatter
+alias psw-pretty="psw --format=pretty "
+# }}}
+
+# pip {{{
+# why is this so hard (to update all dependencies and store new versions in requirements.txt)?
+# this version will also add dependencies of dependencies to your ~/requirements.txt which is a huge downside, not worth it
+# alias pipu="pip list --outdated | cut -d' ' -f1 | xargs pip install --upgrade"
+# use a better wrapper tool
+alias pipu="pip-review --local --auto"
+# }}}
+
+# taskwarrior {{{
+# note: this conflicts with tig
+# alias t="task"
+# alias tl="task list"
+# alias ta="task add"
+# }}}
+
+# neovim {{{
+# alias nvim="lvim" # lunarvim.org
+# alias v="nvim"
+alias v="lvim"
+# compdef v="nvim"
+compdef v="vim"
+# alias vim="nvim"
+alias vim="lvim"
+# compdef vim="nvim"
+compdef lvim=vim
+# export EDITOR=nvim # aww yeah
+export EDITOR=lvim # aww yeah
+# useful for mc
+export VIEWER="bat --paging=always"
+export LANG=en_US.UTF-8
+KEYTIMEOUT=1 # no vim delay entering normal mode
+# }}}
+
+# docker {{{
+
+alias docker-restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
+
+# wrap docker status with color and underline in header
+docker-stats() {
+    docker stats --format "table ${GREEN}{{.Name}}\t${YELLOW}{{.CPUPerc}}\t${BLUE}{{.MemPerc}}" | sed -E -e "s/(NAME.*)/${UNDERLINE}\1${NORMAL}/"
+}
+# }}}
+
+# phpunit {{{
+
+# Public: runs phpunit and uses noti to show the results
+phpunitnotify() {
+    # xdebug-off > /dev/null
+    # php -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpunit --colors "${@}"
+    # autoloader is failing :(
+    phpdbg -qrr -dmemory_limit=4096M -ddisplay_errors=on ./vendor/bin/phpunit --colors "${@}"
+    [[ $? == 0 ]] && noti --message "✅ PHPUnit tests passed" ||
+        noti --message "❌ PHPUnit tests failed"
+    # xdebug-on > /dev/null
+}
+
+# but why
+alias magento-phpunit="pu -c dev/tests/unit/phpunit.xml.dist"
+
+# Public: runs phpspec run and uses noti to show the results
+phpspecnotify() {
+    # xdebug-off > /dev/null
+    phpdbg -qrr -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
+    # php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=${XDEBUG_IDE_KEY} -dxdebug.remote_port=9015 -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
+    [[ $? == 0 ]] && noti --message "✅ Specs passed" ||
+        noti --message "❌ Specs failed"
+    # xdebug-on > /dev/null
+}
+
+# Public: phpunit with xdebug turned on
+pux() {
+    # xdebug-off 2> /dev/null
+    phpx -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpunit --colors "${@}"
+    [[ $? == 0 ]] && noti --message "✅ PHPUnit tests passed" || noti --message "❌ PHPUnit tests failed"
+    # xdebug-on > /dev/null
+}
+# }}}
+
+# xdebug {{{
+xdebug-off () {
+    ( mv "$(asdf where php)"/conf.d/05_xdebug.ini{,_OLD} 2> /dev/null ) || true
+}
+
+xdebug-on () {
+    ( mv "$(asdf where php)"/conf.d/05_xdebug.ini{_OLD,} 2>/dev/null ) || true
+}
+# }}}
+
+# }}}
+
+# source more files {{{
+[ -e "$HOME/.saatchirc" ] && source "$HOME/.saatchirc"
+# [ -e "$HOME/.toafrc" ] && source "$HOME/.toafrc"
+# ensure the tmux term exists, otherwise some stuff like ncurses apps (e.g. tig) might break. This is very fast.
+[ -f "$HOME/.support/tmux-256color.terminfo" ] && tic -x "$HOME/.support/tmux-256color.terminfo" &>/dev/null
+[ -f "$HOME/.support/tmux.terminfo" ] && tic -x "$HOME/.support/tmux.terminfo" &>/dev/null
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fuzzy finder - installed via yadm bootstrap
+# https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
+ZLE_RPROMPT_INDENT=0
+# }}}
+
+# zsh options {{{
+
+# fuzzy completion: cd ~/Cde -> ~/Code
+# https://superuser.com/a/815317
+# 0 -- vanilla completion (abc => abc)
+# 1 -- smart case completion (abc => Abc)
+# 2 -- word flex completion (abc => A-big-Car)
+# 3 -- full flex completion (abc => ABraCadabra)
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+
+# https://mastodon.social/@vonheikemen@hachyderm.io/109367664531721862
+autoload -U edit-command-line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+# https://unix.stackexchange.com/questions/167582/why-zsh-ends-a-line-with-a-highlighted-percent-symbol
+PROMPT_EOL_MARK=''
+
+# cdr {{{
+# https://github.com/willghatch/zsh-cdr/blob/master/cdr.plugin.zsh
+# this also enables zsh-autocomplete recent directories `cdr <Tab>`
+if [[ -z "$ZSH_CDR_DIR" ]]; then
+    ZSH_CDR_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/zsh-cdr
+fi
+
+mkdir -p $ZSH_CDR_DIR
+autoload -Uz chpwd_recent_dirs cdr
+autoload -U add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-file $ZSH_CDR_DIR/recent-dirs
+zstyle ':chpwd:*' recent-dirs-max 1000
+# fall through to cd
+zstyle ':chpwd:*' recent-dirs-default yes
+# }}}
+
+# }}}
+
+# zsh plugins config {{{
+
+# zsh-autocomplete {{{
+# so chatty
+zstyle ':autocomplete:*:no-matches-yet' message ''
+zstyle ':autocomplete:*:too-many-matches' message ''
+zstyle ':autocomplete:*:no-matches-at-all' message ''
+# turn off fzf bindings
+zstyle ':autocomplete:*' fuzzy-search off
+
+# zstyle ':autocomplete:*' fzf-completion yes
+# }}}
+
+# zsh-autosuggest {{{
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion) # https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy (this prevents me from typing more e.g. `php artisan ...`!)
+
+# fix problem with zsh autosuggest color getting overwritten somewhere
+typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+# }}}
+
+# zsh-notify {{{
+# https://gist.github.com/marzocchi/14c47a49643389029a2026b4d4fec7ae
+# zstyle ':notify:*' error-icon "https://media3.giphy.com/media/10ECejNtM1GyRy/200_s.gif"
+zstyle ':notify:*' error-icon "http://getdrawings.com/free-icon/x-mark-icon-57.png"
+zstyle ':notify:*' error-title "❌ in #{time_elapsed}"
+zstyle ':notify:*' error-sound 'Sosumi'
+# zstyle ':notify:*' success-icon "https://s-media-cache-ak0.pinimg.com/564x/b5/5a/18/b55a1805f5650495a74202279036ecd2.jpg"
+zstyle ':notify:*' success-icon "https://cdn1.iconfinder.com/data/icons/color-bold-style/21/34-512.png"
+zstyle ':notify:*' success-title "✅ in #{time_elapsed}"
+zstyle ':notify:*' success-sound 'default'
+
+# zstyle ':notify:*' blacklist-regex 'v|lvim|vim'
+# }}}
+
+# oh-mhy-zsh-jira {{{
+# https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/jira
+export JIRA_DEFAULT_ACTION='dashboard'
+# }}}
+
+# }}}

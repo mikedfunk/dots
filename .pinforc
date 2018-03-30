@@ -1,0 +1,14 @@
+# pinfo config https://packages.debian.org/sid/pinfo
+# vim: set foldmethod=marker:
+
+# key bindings {{{
+# I find the defaults utterly confusing
+KEY_BACK_2='h'
+KEY_FOLLOWLINK_1='l'
+KEY_GOLINE_1='1'
+# KEY_NEXTNODE_1='f'
+# KEY_NEXTNODE_2=0
+KEY_SEARCH_AGAIN_1='n'
+KEY_PGDN_2 = 'f'
+KEY_PGUP_2 = 'b'
+# }}}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>launched.mike.reindex-zk-notes</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>sh</string>
+		<string>-c</string>
+		<string>/opt/homebrew/bin/zk index</string>
+	</array>
+	<key>StandardErrorPath</key>
+	<string>/tmp/reindex-zk-notes-stderr.log</string>
+	<key>StandardOutPath</key>
+	<string>/tmp/reindex-zk-notes-stdout.log</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+	<key>UserName</key>
+	<string>mikefunk</string>
+	<key>WorkingDirectory</key>
+	<string>/Users/mikefunk/Notes</string>
+</dict>
+</plist>

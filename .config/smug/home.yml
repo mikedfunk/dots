@@ -1,0 +1,54 @@
+session: " Home"
+windows:
+  - name: config
+    root: ~/.config/yadm
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [htop]
+      - commands: [ctop]
+      - commands: [cd && while true; do clear && yadm st; sleep 60; done]
+
+  - name: blog
+    root: ~/Code/mikedfunk.github.io
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [bundle install && bundle exec jekyll serve --watch]
+      - commands: [ts]
+
+  # - name: nextjs
+  #   root: ~/Code/test/nextjs-blog
+  #   manual: true
+  #   layout: main-horizontal
+  #   commands: [v]
+  #   panes:
+  #     - commands: [npm run dev]
+  #     - commands: [./pocketbase serve]
+  #     - commands: [ts]
+
+  - name: nextjs
+    root: ~/Code/test/nextjs-playground
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [npm run dev]
+      - commands: [./pocketbase serve]
+      - commands: [ts]
+
+  - name: neotest
+    root: ~/Code/neotest-phpspec
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [ts]
+
+  - name: journal
+    commands: [journal]
+
+  - name: news
+    manual: true
+    commands: [news]

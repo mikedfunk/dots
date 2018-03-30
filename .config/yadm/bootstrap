@@ -1,0 +1,753 @@
+#!/bin/bash
+# main yadm setup file https://github.com/TheLocehiliosan/yadm
+# vim: set foldmethod=marker ft=sh:
+
+# notes {{{
+# Why did I wrap everything in functions? So I could re-run specific things
+# when necessary without having to re-run the entire bootstrap file. It also
+# makes it easier to temporarily run one or more install steps.
+# }}}
+
+# helper functions {{{
+function _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; "${@:2}"; }
+function _log_error() { echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"; "${@:2}"; }
+function _log_notice() { echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"; "${@:2}"; }
+function _has() { type "$1" &>/dev/null; }
+# }}}
+
+# create dirs {{{
+_create_dirs () {
+    _log_info "Creating any missing home directories"
+    [[ -d "$HOME/Code" ]] || mkdir "$HOME/Code"
+}
+# }}}
+
+# clone repos {{{
+
+# _log_info "Cloning repos"
+# mkdir -p "$HOME/Code"
+# builtin cd "$HOME/Code"
+# [[ -d "$HOME/Code/mikedfunk.github.io" ]] || git clone git@github.com:mikedfunk/mikedfunk.github.io.git
+# builtin cd -
+
+# }}}
+
+# decrypt yadm files {{{
+# _log_info "Decrypting yadm files"
+# yadm decrypt
+#
+# This is commented out because it requires the GPG password each time. Yadm
+# asynmetric encryption still requires a password on _decrypt_.
+#
+# TODO: This is also a chicken/egg scenario. Some encrypted files get symlinked
+# into ~/Code/* directories, but those directories do not yet exist on a new
+# install. But in order to clone those repos, I need my ssh keys, which are in
+# my encrypted files too! If I decrypt _then_ clone, I'll get an error because
+# the directories already exist. If I clone _then_ decrypt, I won't be able to
+# clone yet.
+#
+# One workaround for this is to just clone the https urls for them,
+# allowing me to authenticate via https basic auth. Downside: now the remotes
+# on everything are set to the https version. I'll need to change to the ssh
+# versions to let them use public key authorization. Hmmm...
+#
+# Another way would be if I was able to decrypt just my ssh keys separately.
+# Maybe I can use a different encryption setup outside of yadm for those?
+# Downside: now I have to deal with two methods of encryption. :(
+#
+# Another approach would be to decrypt, check to see if the repos have been
+# cloned, if not delete the repo directories and their contents, clone, then
+# decrypt again. Slight downside - I have to decrypt twice, requiring two
+# password entries. But really this should only happen once - when the code has
+# not been cloned. This seems like the right approach.
+#
+# TODO add .git/config/exclude for each codebase to yadm
+# }}}
+
+# install xcode command line tools {{{
+# needed for a variety of things including phpenv (zlib), CommandLineTools below, sshpass
+_install_xcode_command_line_tools () {
+    _log_info "Installing xcode command line tools"
+    xcode-select --install || true
+    # /System/Library/CoreServices/Install Command Line Developer Tools.app
+}
+# }}}
+
+# install homebrew if it's missing {{{
+_install_homebrew_if_its_missing () {
+    _has brew && return
+    _log_info "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+# }}}
+
+# install/update homebrew packages {{{
+_install_update_homebrew_packages () {
+    [ -e "$HOME"/Brewfile ] || return
+    _log_info "Installing/upgrading homebrew packages"
+    cd
+    brew update # update homebrew itself and the list of brew package versions
+    brew bundle # install/upgrade from ~/Brewfile
+    brew upgrade         # upgrade all homebrew packages
+    brew upgrade --cask  # upgrade all homebrew casks
+    # brew cleanup         # remove outdated versions and dead symlinks from the homebrew prefix. WARNING this could break dependencies if low level libs are not pinned!!
+    # brew bundle cleanup --force # remove brew packages not in ~/Brewfile
+    _pin_homebrew_packages
+    brew unlink node
+    cd -
+}
+
+# }}}
+
+# pin homebrew packages {{{
+# I no longer do this - instead I avoid `brew cleanup` and hope I don't run out of storage :/
+# I unpinned everything and icu4c broke for some reason. I'll add anything to this list that actually breaks.
+_pin_homebrew_packages () {
+    _log_info "Pinning brew packages that need pinning"
+    # brew pin bison
+    # brew pin bzip2
+    # brew pin cmake
+    # brew pin curl
+    brew pin icu4c
+    brew pin imagemagick
+    # brew pin libedit
+    # brew pin libiconv
+    # brew pin libmcrypt
+    # brew pin libmemcached
+    # brew pin openssl
+    # brew pin pkg-config
+    # brew pin re2c
+    # brew pin readline
+    # brew pin xz
+    # brew pin zlib
+}
+# }}}
+
+# akamai {{{
+_install_upgrade_akamai () {
+    _has akamai && return
+    _log_info "Updating akamai commands"
+    ( akamai list | grep --quiet purge ) || akamai install purge
+    akamai update
+}
+# }}}
+
+# install kubectl (specific version) {{{
+_install_older_kubectl () {
+    _has kubectl && ( kubectl version --client | grep 1.17.17 ) && return
+    _log_info "Installing kubectl 1.17.17"
+    _has kubectl && rm $(which kubectl)
+    builtin cd /usr/local/bin || return
+    curl -LO "https://dl.k8s.io/release/v1.17.17/bin/darwin/amd64/kubectl"
+    chmod +x kubectl
+    builtin cd - || return
+}
+
+# }}}
+
+# set zsh as shell {{{
+_set_zsh_as_shell () {
+    if [[ $(grep "$(brew --prefix)/bin/zsh" /etc/shells -c) == 0 ]]; then
+        _log_info "Installing homebrew zsh to /etc/shells"
+        sudo /bin/sh -c "echo $(brew --prefix)/bin/zsh >> /etc/shells"
+    fi
+    if [[ "$SHELL" != "$(brew --prefix)/bin/zsh" ]]; then
+        _log_info "Changing shell to homebrew zsh"
+        chsh -s "$(which zsh)"
+    fi
+}
+# }}}
+
+# install tmux plugin manager {{{
+_install_tmux_plugin_manager () {
+    [[ -d "$HOME"/.tmux/plugins/tpm ]] && return
+    _log_info "Installing tmux plugin manager. Upgrade packages with \`<c-a>U\`."
+    git clone https://github.com/tmux-plugins/tpm "$HOME"/.tmux/plugins/tpm
+}
+# }}}
+
+# install/update tmux plugins {{{
+_install_upgrade_tmux_plugins () {
+    _log_info "Install/upgrade tmux plugins"
+    "$HOME"/.tmux/plugins/tpm/bin/install_plugins
+    "$HOME"/.tmux/plugins/tpm/bin/update_plugins all
+}
+# }}}
+
+# Vim (LunarVim) {{{
+
+# install/upgrade lunarvim {{{
+_install_lunarvim () {
+    _has lvim && return
+    _log_info "Installing LunarVim"
+    # https://www.lunarvim.org/01-installing.html#prerequisites
+    # LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+    bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+
+}
+# }}}
+
+# install/upgrade lvim plugins {{{
+_install_upgrade_lvim_plugins () {
+    _log_info "Installing/upgrading lunarvim plugins"
+    lvim +LvimUpdate +qall
+    # lvim +LspInstall intelephense +qall
+    # lvim +LspInstall sumneko_lua +qall
+    # lvim +LspInstall pyright +qall
+    # lvim +LspInstall flow@0.96.0 +qall
+    # lvim +LspInstall flow@0.126.1 +qall
+    # lvim +LspInstall emmet_ls --update +qall
+    lvim +TSUpdate +qall
+    lvim +PackerSync +qall
+    lvim +PackerCompile +qall
+    echo ''
+}
+# }}}
+
+# }}}
+
+# update asdf plugins {{{
+_update_asdf_plugins () {
+    _log_info "Updating asdf plugins"
+    asdf plugin update --all
+}
+# }}}
+
+# install neovim version(s) {{{
+_install_neovim_versions () {
+    ( asdf list neovim | grep --quiet stable ) && return
+    _log_info "installing neovim stable"
+    asdf install neovim stable
+    asdf global neovim stable
+    asdf install neovim nightly # but don't activate it by default
+}
+# }}}
+
+# install php versions {{{
+
+_install_php_74 () {
+    ( asdf list php | grep --quiet 7.4.7 ) && return
+    _log_info "installing php 7.4.7"
+    asdf install php 7.4.7
+    asdf global php 7.4.7 || return
+
+    # install php extensions (different set for 7.4.7)
+    local PHP_PATH
+    PHP_PATH="$(asdf where php)"
+    mkdir -p "${PHP_PATH}"/conf.d
+
+    local PICKLE="${PHP_PATH}"/pickle.phar
+    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
+    chmod +x "${PICKLE}"
+
+    yes "" | "${PICKLE}" install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
+    yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini )
+    yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini )
+    # latest xdebug 3.2 is php 8.0+ only
+    yes "" | "${PICKLE}" install xdebug@3.1.5 && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini )
+    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+
+    # install global composer packages
+    mkdir -p  "${PHP_PATH}"/{.,}composer
+    ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    asdf reshim php 7.4.7
+}
+
+_install_php_81 () {
+    ( asdf list php | grep --quiet "8.1.12" ) && return
+    _log_info "installing php 8.1.12"
+    asdf install php 8.1.12
+    asdf global php 8.1.12 || return
+
+    # install php extensions (different set for 8.1.12)
+    local PHP_PATH="$(asdf where php)"
+    mkdir -p "${PHP_PATH}"/conf.d
+
+    local PICKLE="${PHP_PATH}"/pickle.phar
+    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
+    chmod +x "${PICKLE}"
+
+    # yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
+    # yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
+    yes "" | "${PICKLE}" install xdebug && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/04_xdebug.ini )
+    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+
+    # install global composer packages
+    mkdir -p  "${PHP_PATH}"/{.,}composer
+    ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    asdf reshim php "8.1.12"
+}
+
+# https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
+_install_php_versions () {
+    pushd .
+    builtin cd "$HOME" >/dev/null || return
+    _log_info "Installing php version(s)"
+    asdf plugin add php
+    local INSTALL_PATH="$HOME"/.asdf/plugins/php/bin/install
+    # intl fails to install in php 7.0 due to an incompatibility with icu4c latest
+    [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-intl/d" "$INSTALL_PATH" )
+    # gd fails to install in php 8.0
+    # [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-gd/d" "$INSTALL_PATH" )
+
+    # configure flags and paths for homebrew tools (I probably don't need to configure all of these) {{{
+
+    # configure bison {{{
+    export PATH="$(brew --prefix bison)/bin:${PATH}"
+    # For compilers to find bison you may need to set:
+    export LDFLAGS="-L$(brew --prefix bison)/lib ${LDFLAGS}"
+    # }}}
+
+    # configure bzip2 {{{
+    export PATH="$(brew --prefix bzip2)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
+    # }}}
+
+    # configure curl {{{
+    export PATH="$(brew --prefix curl)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix curl)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix curl)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix curl)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure freetype {{{
+    export PKG_CONFIG_PATH="-I$(brew --prefix freetype)/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure gettext {{{
+    export PATH="$(brew --prefix gettext)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix gettext)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix gettext)/include ${CPPFLAGS}"
+    # }}}
+
+    # configure icu4c (needed for php intl extension) {{{
+    # If you need to have icu4c first in your PATH run:
+    export PATH="$(brew --prefix icu4c)/bin:${PATH}"
+    export PATH="$(brew --prefix icu4c)/sbin:${PATH}"
+    # For compilers to find icu4c you may need to set:
+    export LDFLAGS="-L$(brew --prefix icu4c)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix icu4c)/include ${CPPFLAGS}"
+    # For pkg-config to find icu4c you may need to set:
+    export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # export LDFLAGS=$(echo "${LDFLAGS}" | sed 's/-L\/lib //g')
+    # export CFLAGS=$(echo "${CFLAGS}" | sed 's/-L\/lib //g')
+    # }}}
+
+    # configure krb5 (needed to build php) {{{
+    export PATH="$(brew --prefix krb5)/bin:${PATH}"
+    export PATH="$(brew --prefix krb5)/sbin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix krb5)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix krb5)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure libiconv (needed to build php) {{{
+    export PATH="$(brew --prefix libiconv)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libiconv)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libiconv)/include ${CPPFLAGS}"
+    # }}}
+
+    # configure libedit (needed to build php) {{{
+    export LDFLAGS="-L$(brew --prefix libedit)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libedit)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure libjpeg (needed to build php) {{{
+    export PATH="$(brew --prefix libjpeg)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libjpeg)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libjpeg)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure libmcrypt (needed to build php) {{{
+    export PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
+    # }}}
+
+    # configure libpng (needed to build php) {{{
+    export PATH="$(brew --prefix libpng)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libpng)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libpng)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libpng)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure libxml2 (needed to build php) {{{
+    export PATH="$(brew --prefix libxml2)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libxml2)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libxml2)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libxml2)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure libzip (needed to build php) {{{
+    export PATH="$(brew --prefix libzip)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libzip)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libzip)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libzip)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure openssl@1.1 {{{
+    export PATH="$(brew --prefix openssl@1.1)/bin:${PATH}"
+    # For compilers to find openssl@1.1 you may need to set:
+    export LDFLAGS="-L$(brew --prefix openssl@1.1)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix openssl@1.1)/include ${CPPFLAGS}"
+    # For pkg-config to find openssl@1.1 you may need to set:
+    export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure postgresql {{{
+    export PATH="$(brew --prefix postgresql)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix postgresql)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix postgresql)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix postgresql)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # configure zlib (needed to build php) {{{
+    export LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    # }}}
+
+    # }}}
+
+    # change implicit function declaration to warning instead of error
+    # https://bugs.php.net/bug.php?id=80171
+    export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
+    # export CFLAGS="-Wno-error ${CFLAGS}"
+
+    _install_php_74 # *works* because whatever feature used readdir_r was removed
+    _install_php_81
+    asdf global php 8.1.12
+
+    popd || return
+}
+# }}}
+
+# install node version(s) {{{
+_install_node_versions () {
+    builtin cd >/dev/null || return
+    _log_info "Installing node version(s)"
+    # https://github.com/asdf-vm/asdf-nodejs#problems-with-openpgp-signatures-in-older-versions
+    # bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-previous-release-team-keyring'
+    asdf plugin add nodejs
+    # https://github.com/asdf-vm/asdf-nodejs/issues/40#issuecomment-297053730
+    # bash "$HOME"/.asdf/plugins/nodejs/bin/import-release-team-keyring
+
+    # legacy, gallery:
+    ( asdf list nodejs | grep --quiet 9.11.2 ) || asdf install nodejs 9.11.2
+    # legacy react:
+    ( asdf list nodejs | grep --quiet 12.22.7 ) || asdf install nodejs 12.22.7
+    # zed
+    ( asdf list nodejs | grep --quiet 6.7.0 ) || asdf install nodejs 6.7.0
+    # easel: NOTE: npm will not work on this node version!
+    ( asdf list nodejs | grep --quiet 15.4.0 ) || asdf install nodejs 15.4.0
+    ( asdf list nodejs | grep --quiet latest ) || asdf install nodejs latest
+
+    asdf global nodejs latest
+    asdf exec npm install -g npm
+    asdf reshim nodejs
+
+    # TODO where the heck is the global asdf npm package.json for just one node version??
+    # npm install -g eslint
+    # npm install -g eslint_d
+    # npm install -g joplin
+    # npm install -g flow-bin@0.126.1
+    # npm install -g sql-formatter # mangles variables
+
+    builtin cd - >/dev/null || return
+}
+# }}}
+
+# install python version(s) {{{
+_install_python_versions () {
+    builtin cd >/dev/null || return
+    _log_info "Installing python version(s)"
+    asdf plugin add python
+
+    export LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    export LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
+    export PATH="$(brew --prefix bzip2)/bin:$PATH"
+
+    # imgproc:
+    # https://github.com/danhper/asdf-python/issues/98
+    # imgproc uses 3.7.3. It won't install on macos but 3.7.10 will.
+    # https://github.com/pyenv/pyenv/issues/1740#issuecomment-986082691
+    # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
+    # ( asdf list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && asdf install python 3.7.10 )
+    # api tests and ui tests:
+    ( asdf list python | grep --quiet 3.8.15 ) || ( _log_info "installing python 3.8.15" && asdf install python 3.8.15 )
+    # global and legacy react:
+    ( asdf list python | grep --quiet 3.10.1 ) || ( _log_info "installing python 3.10.1" && asdf install python 3.10.1 && asdf install python 2.7.18 && asdf global python 3.10.1 2.7.18 )
+    builtin cd - >/dev/null || return
+}
+# }}}
+
+# install ruby version(s) {{{
+_install_ruby_versions () {
+    builtin cd "$HOME" >/dev/null || return
+    _log_info "Installing ruby version(s)"
+    asdf plugin add ruby
+    # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # zed (compass) - doesn't install on mac but 3.x works
+    ( asdf list ruby | grep --quiet 3.1.2 ) || asdf install ruby 3.1.2
+    asdf global ruby 3.1.2
+    builtin cd - >/dev/null || return
+}
+# }}}
+
+# install erlang version {{{
+_install_erlang_version () {
+    builtin cd "$HOME" >/dev/null || return
+    _log_info "Installing erland version"
+    asdf plugin add erlang
+    export KERL_CONFIGURE_OPTIONS="--enable-m64-build --disable-debug --without-javac"
+    export PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
+    export MACOSX_DEPLOYMENT_TARGET=10.4
+    export SYSTEM_VERSION_COMPAT=1
+    ( asdf list erlang | grep --quiet 23.0 ) || asdf install erlang 23.0
+    asdf global erlang 23.0
+    builtin cd - >/dev/null || return
+}
+# }}}
+
+# install elixir version {{{
+_install_elixir_version () {
+    builtin cd "$HOME" >/dev/null || return
+    _log_info "Installing elixir version"
+    asdf plugin add elixir
+    ( asdf list elixir | grep --quiet 1.10.4-otp-23 ) || asdf install elixir 1.10.4-otp-23
+    asdf global elixir 1.10.4-otp-23
+    builtin cd - >/dev/null || return
+}
+# }}}
+
+# update python3 pip packages {{{
+
+# update all pip packages
+# _pip-update () {
+#     pip3 list --outdated | \
+#         grep --invert-match 'Package' | \
+#         grep --invert-match --regexp='\-\{5\}' | \
+#         awk '{print $1}' | \
+#         xargs -n1 pip3 install --upgrade
+# }
+_update_python3_pip_packages () {
+    _log_info "Installing/upgrading pip3 packages"
+    # pip3 install neovim --user # neovim uses this pip/python version
+    pip install --upgrade pip
+    PIP_SUCCESSFUL=1
+    pip3 install -r "$HOME"/requirements.txt --user || PIP_SUCCESSFUL=0
+    # pip-review broke recently:
+    # zsh: /usr/local/bin/pip-review: bad interpreter: /usr/local/opt/python/bin/python3.6: no such file or directory
+    # pip-review --local --auto &&
+    # 	pip3 freeze >"$HOME/requirements.txt"
+    # pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+    # _pip-update || PIP_SUCCESSFUL=0
+    # this is ok but it adds a ton of shit to my requirements when really the
+    # only thing I require are... my requirements :/ . This adds requirements
+    # of my requirements, which I don't want. It also led to a catch-22
+    # requirements.txt where there were conflicting requirements.
+    # [[ $PIP_SUCCESSFUL ]] && pip3 freeze >"$HOME"/requirements.txt
+}
+# }}}
+
+# install cod {{{
+# completion generator via --help https://github.com/dim-an/cod
+_install_cod () {
+    _has cod && return
+    _log_info "Installing cod"
+    builtin cd || return
+    wget https://github.com/dim-an/cod/releases/download/v0.0.0/cod-Darwin.tgz
+    tar xzvf cod-Darwin.tgz
+    mv cod-Darwin/cod /usr/local/bin/
+    chmod +x /usr/local/bin/cod
+    rm -rf cod-Darwin
+    builtin cd - || return
+}
+# }}}
+
+# antibody {{{
+_update_antibody_plugins () {
+    _log_info "Updating antibody plugins"
+    # source <(antibody init)
+    antibody update # update all packages
+}
+# }}}
+
+# apply hosts file {{{
+_apply_hosts_file () {
+    _log_info "Syncing hosts file"
+    sudo hostess apply "$HOME/.support/hosts.json"
+}
+# }}}
+
+# enable terminal text formatting {{{
+# e.g. italics, curly underscore, etc.
+# https://github.com/tmux/tmux/issues/3218#issue-1265998468
+_enable_terminal_text_formattting () {
+    _log_info "Enabling terminal text formatting"
+    $(brew --prefix)/Cellar/ncurses/6.3/bin/infocmp -x tmux-256color >tmux-256color.terminfo
+    tic -x "$HOME/.support/tmux-256color.terminfo"
+    $(brew --prefix)/Cellar/ncurses/6.3/bin/infocmp -x tmux >tmux.terminfo
+    tic -x "$HOME/.support/tmux.terminfo"
+$ sudo /usr/bin/tic -x tmux-256color.src
+}
+# }}}
+
+# Mac preferences {{{
+# https://www.reddit.com/r/MacOS/comments/9ijy88/font_antialiasing_on_mojave/?utm_content=title&utm_medium=front&utm_source=reddit&utm_name=MacOS
+_apply_mac_preferences () {
+    defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+
+    # TODO write a function to abstract the repetition here
+    _log_info "Setting general mac preferences"
+    # Disable “natural” (Lion-style) scrolling
+    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+    # dock on left side
+    defaults write com.apple.dock orientation -string 'left'
+    # mac dark mode
+    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
+    # graphite color theme
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+    # disable dashboard
+    defaults write com.apple.dashboard dashboard-enabled-state -int 1
+    # Disable press-and-hold for keys in favor of key repeat
+    # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+    # Set a blazingly fast keyboard repeat rate
+    # defaults write NSGlobalDomain KeyRepeat -int 1
+    # defaults write NSGlobalDomain InitialKeyRepeat -int 10
+    # Increase sound quality for Bluetooth headphones/headsets
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+    # Require password immediately after sleep or screen saver begins
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
+    # Use column view in all Finder windows by default
+    # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `Flwv`
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+    # show hidden files in finder
+    defaults write com.apple.Finder AppleShowAllFiles true
+    # Show the ~/Library folder
+    chflags nohidden ~/Library
+    # Chrome - Disable the all too sensitive backswipe on Magic Mouse
+    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+    defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+    defaults write com.apple.screencapture location ~/Screenshots
+
+    killall Dock
+    killall Finder
+    killall SystemUIServer
+
+    # finder default location home
+    defaults write com.apple.finder NewWindowTargetPath "file:/$HOME/"
+    if [[ $(defaults read com.apple.dock orientation) != "left" ]]; then
+        _log_info "Moving dock to left side"
+        defaults write com.apple.dock orientation -string 'left'
+        killall Dock
+    fi
+    if [[ $(defaults read NSGlobalDomain AppleInterfaceStyle) != "Dark" ]]; then
+        _log_info "Mac dark mode"
+        defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
+        killall Dock
+        killall SystemUIServer
+    fi
+    if [[ $(defaults read NSGlobalDomain AppleAquaColorVariant) != 6 ]]; then
+        _log_info "Graphite color theme"
+        defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+        killall Finder
+    fi
+    if [[ $(defaults read com.apple.dashboard dashboard-enabled-state) != 1 ]]; then
+        _log_info "Disable dashboard"
+        defaults write com.apple.dashboard dashboard-enabled-state -int 1
+        killall Finder
+    fi
+}
+# }}}
+
+# launchctl jobs {{{
+# debug launchd jobs https://stackoverflow.com/q/6337513/557215
+# use this form to easily generate a launchd plist: http://launched.zerowidth.com/
+_start_launch_agents () {
+    _log_info "Starting launch agents"
+    # let's use lunchy instead of launchctl! https://github.com/eddiezane/lunchy
+    lunchy start --write mike.saatchi-tunnel.autossh
+    # lunchy start --write mike.saatchi-proxy.autossh
+}
+# }}}
+
+# fix file size limit for watching with entr {{{
+# http://entrproject.org/limits.html
+# DO NOT DO THIS it seems to cause the CrowdStrike memory leak!!!
+_fix_file_size_limit_for_watching_with_entr () {
+    [ -f /Library/LaunchDaemons/limit.maxfiles.plist ] && return
+    _log_info "Installing max files limit fixer for watching with entr"
+    builtin cd /Library/LaunchDaemons || return
+    sudo curl -sO http://entrproject.org/etc/limit.maxfiles.plist
+    builtin cd - || return
+}
+# }}}
+
+# fix delta syntax highlighting for php {{{
+# https://github.com/dandavison/delta/issues/162#issuecomment-625952288
+_fix_delta_syntax_highlighting_for_php () {
+    _has bat && _log_info "fixing delta syntax highlighting for php" && bat cache --build
+}
+# }}}
+
+# clear evalcache {{{
+_clear_evalcache () {
+    _log_info "Clearing evalcache"
+    # This is what _evalcache_clear does
+    rm -f "$ZSH_EVALCACHE_DIR"/init-*.sh
+}
+# }}}
+
+# install fzf to shell {{{
+_install_fzf_to_shell () {
+    [ -f ~/.fzf.zsh ] && return
+    _log_info "Installing fzf to shell"
+    $(brew --prefix)/opt/fzf/install
+}
+# }}}
+
+# run functions {{{
+# this way I can still source this file but comment out these function calls
+# and run one or more independently. This is extremely useful!!
+
+_create_dirs
+_install_xcode_command_line_tools
+_install_homebrew_if_its_missing
+_install_update_homebrew_packages
+_install_neovim_versions
+_install_php_versions
+_install_node_versions
+_install_python_versions
+_update_python3_pip_packages
+_install_ruby_versions
+_install_upgrade_akamai
+_install_older_kubectl
+_install_erlang_version
+_install_elixir_version
+_set_zsh_as_shell
+_install_tmux_plugin_manager
+_install_upgrade_tmux_plugins
+_install_lunarvim
+_install_upgrade_lvim_plugins
+_update_antibody_plugins
+_apply_hosts_file
+_enable_terminal_text_formattting
+_apply_mac_preferences
+_start_launch_agents
+# _fix_file_size_limit_for_watching_with_entr
+_install_cod
+_install_fzf_to_shell
+_update_asdf_plugins
+_fix_delta_syntax_highlighting_for_php
+_clear_evalcache
+
+_log_info "Installation complete"
+# }}}

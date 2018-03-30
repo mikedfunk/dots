@@ -1,0 +1,43 @@
+# _ide_helper.php
+# composer.phar
+# .ctags
+*.swp
+*.tags
+*.un~
+.DS_Store
+.DS_Store
+.direnv
+.envrc
+.exrc
+.ignore
+.netrwhist
+.notags
+.phing_targets
+.php-version
+.php_cs.cache
+.phpspec
+.pre-commit-config.yaml
+.projections.json
+.tern-project
+.vimrc
+.yo-rc.json
+Session.vim
+TAGS
+__LAST__
+coverage
+cscope.files
+cscope.out
+cscope.out.files
+cscope.out.lock
+cscope.out.temp
+ncscope.out.temp
+nohup.out
+sonar-project.properties
+tags
+tags*
+yarn-error.log
+.php-cs-fixer.cache
+.phpunit.result.cache
+.null-ls_*
+.deptrac.cache
+.tool-versions

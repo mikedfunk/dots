@@ -1,0 +1,55 @@
+# files to encrypt and put in my dotfiles. This is handled by yadm and
+# encrypted with gpg. globbing is supported. Also inverse via !... is
+# supported.
+# https://github.com/TheLocehiliosan/yadm/blob/master/yadm.md#encryption
+# vim: set foldmethod=marker filetype=conf:
+
+# leafgroup {{{
+
+.config/lvim/lua/saatchiart/plugin_configs.lua
+.saatchirc
+
+Code/saatchi/queries/**/*.sql
+Code/saatchi/uml/**/*.uml
+
+
+.config/smug/work.yml
+
+Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
+Code/saatchi/gallery/.prettierrc.json
+
+Code/saatchi/**/.pre-commit-config.yaml
+Code/saatchi/**/.envrc
+Code/saatchi/**/.ignore
+Code/saatchi/**/.nlsp-settings/*.json
+Code/saatchi/**/.tool-versions
+Code/saatchi/**/.projections.json
+Code/saatchi/**/.php-cs-fixer.php
+
+Library/LaunchAgents/mike.saatchi-tunnel.autossh.plist
+Code/saatchi/{zed,gallery,legacy}/phpstan.neon
+
+# }}}
+
+# misc {{{
+
+# .aws/credentials
+.boto
+.circleci/cli.yml
+.edgerc
+.mailmap
+.mylogin.cnf
+.netrc
+.private_vars.sh
+.ssh/config
+.ssh/keys
+Library/Application Support/Sequel Pro/Data/Favorites.plist
+Notes/**/*.md
+intelephense/licence.txt
+.aws/config
+.warprc
+.bin/pu-pretty
+.config/multitail/multitail.conf
+.support/hosts.json
+
+# }}}

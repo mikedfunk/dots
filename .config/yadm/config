@@ -1,0 +1,3 @@
+# https://github.com/TheLocehiliosan/yadm/issues/110
+[yadm]
+    gpg-recipient = mike@mikefunk.com
