@@ -370,7 +370,7 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes',
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'dosini' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.cnf', callback = function() vim.bo.filetype = 'dosini' end })
+vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '{' .. table.concat({
@@ -705,7 +705,7 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.cmp.formatting.source_names['buffer'] = ''
 lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
-lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '' -- ➒
+lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '➒' -- 
 lvim.builtin.cmp.formatting.source_names['color_names'] = 'C'
 lvim.builtin.cmp.formatting.source_names['dap'] = ''
 lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
@@ -1332,7 +1332,7 @@ plugins.cmp_tabnine = {
   after = 'nvim-cmp',
   run = './install.sh',
   setup = function()
-    if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'cmp_tabnine' }) then return end
+    if not vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'cmp_tabnine' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'cmp_tabnine' })
   end,
   config = function()
@@ -2945,7 +2945,6 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
-  -- plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
   -- plugins.document_color_nvim, -- tailwind color previewing
   -- plugins.fold_preview_nvim, -- preview with h, open with h again
   -- plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
@@ -2968,6 +2967,7 @@ lvim.plugins = {
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
   plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
   plugins.cmp_rg, -- might help to include comments, strings, etc. in other files. This is actually really useful! (makes expensive rg calls regularly, caught in htop)
+  plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
   plugins.cmp_tmux, -- Add a tmux source to nvim-cmp
   plugins.cmp_treesitter, -- cmp completion source for treesitter
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
@@ -3016,7 +3016,7 @@ lvim.plugins = {
   { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
   { 'lambdalisue/reword.vim', event = 'BufEnter', cmd = { 'Reword', 'Rew' } }, -- like :Subvert from vim-abolish but handles underscores, dashes, and previewing. :%Rew/Foo/Bar/g . (no lazy-load if you want previewing) (previewing turns off syntax... just use Rew to avoid previewing) TODO: replace with https://github.com/johmsalas/text-case.nvim ?
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently.
+  { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf

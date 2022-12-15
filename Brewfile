@@ -83,6 +83,7 @@ tap "mutagen-io/mutagen"
 # brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ )
 # brew "https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb" # use an ssh password. trying this for leaf group LDAP access. (didn't work, don't need it for anything else at the moment)
 # brew "hub" # , args: ["devel"] # github tool is a superset of git with extra commands.
+# brew "hurl" # language-agnostic http testing tool
 # brew "ievms" # internet explorer VirtualBox VMs to test a site in various IE versions
 # brew "imagemagick@6" # image transformation tool - v6 needed for catalog
 # brew "intellij-idea-ce" # there's a community edition?? Just bookmarking this for later
