@@ -253,13 +253,13 @@ _install_php_74 () {
     asdf reshim php 7.4.7
 }
 
-_install_php_81 () {
-    ( asdf list php | grep --quiet "8.1.12" ) && return
-    _log_info "installing php 8.1.12"
-    asdf install php 8.1.12
-    asdf global php 8.1.12 || return
+_install_php_82 () {
+    ( asdf list php | grep --quiet "8.2.0" ) && return
+    _log_info "installing php 8.2.0"
+    asdf install php 8.2.0
+    asdf global php 8.2.0 || return
 
-    # install php extensions (different set for 8.1.12)
+    # install php extensions (different set for 8.2.0)
     local PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
@@ -273,9 +273,9 @@ _install_php_81 () {
     echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
-    mkdir -p  "${PHP_PATH}"/{.,}composer
-    ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    asdf reshim php "8.1.12"
+    # mkdir -p  "${PHP_PATH}"/{.,}composer
+    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    # asdf reshim php "8.2.0"
 }
 
 # https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
@@ -418,8 +418,8 @@ _install_php_versions () {
     # export CFLAGS="-Wno-error ${CFLAGS}"
 
     _install_php_74 # *works* because whatever feature used readdir_r was removed
-    _install_php_81
-    asdf global php 8.1.12
+    _install_php_82
+    asdf global php 8.2.0
 
     popd || return
 }
