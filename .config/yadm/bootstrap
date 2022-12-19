@@ -595,7 +595,7 @@ _enable_terminal_text_formattting () {
     tic -x "$HOME/.support/tmux-256color.terminfo"
     $(brew --prefix)/Cellar/ncurses/6.3/bin/infocmp -x tmux >tmux.terminfo
     tic -x "$HOME/.support/tmux.terminfo"
-$ sudo /usr/bin/tic -x tmux-256color.src
+    sudo /usr/bin/tic -x tmux-256color.src
 }
 # }}}
 

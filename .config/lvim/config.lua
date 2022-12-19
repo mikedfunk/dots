@@ -10,7 +10,7 @@ _G.is_plugin_installed = require 'mikedfunk.helpers'.is_plugin_installed
 _G.dump = require 'mikedfunk.helpers'.dump
 
 -- this was recently changed... use the same one that lunarvim sets up
-_G.mason_bin_dir = vim.fn.stdpath('data') .. '/mason/bin'
+_G.mason_path = vim.fn.stdpath('data') .. '/mason'
 
 vim.api.nvim_exec([[
 function! LocListToggle()
@@ -398,8 +398,6 @@ lvim.format_on_save.pattern = table.concat({
 }, ',')
 lvim.format_on_save.timeout = 30000
 
-local pwd = vim.api.nvim_exec('pwd', true)
-
 -- language servers {{{
 -- lvim.lsp.installer.setup.automatic_installation = { exclude = { 'phpactor' } }
 -- NOTE: this is not just ensure installed, if these have language server
@@ -572,9 +570,9 @@ local null_ls_component = {
 }
 
 local cmp_component = {
-  ---@param message string
+  ---@param _ string
   ---@return string
-  function(message)
+  function(_)
     local is_cmp_installed, cmp = pcall(require, 'cmp')
     if not is_cmp_installed then return '' end
     local config = require 'cmp.config'
@@ -890,15 +888,16 @@ local register_dap_adapters = function()
   local dap = require 'dap'
   dap.adapters.php = {
     type = 'executable',
-    command = 'php-debug-adapter',
+    command = 'php-debug-adapter', -- this calls the same thing below
     -- command = 'node',
-    -- args = { mason_bin_dir .. '/../packages/php-debug-adapter/extension/out/phpDebug.js' },
+    -- args = { mason_path .. '/packages/php-debug-adapter/extension/out/phpDebug.js' },
   }
 
   dap.adapters.node2 = {
     type = 'executable',
-    command = 'node',
-    args = { mason_bin_dir .. '/../packages/node-debug2-adapter/out/src/nodeDebug.js' },
+    command = 'node2-debug-adapter', -- this calls the same thing below
+    -- command = 'node',
+    -- args = { mason_path .. '/packages/node-debug2-adapter/out/src/nodeDebug.js' },
   }
 end
 
@@ -2029,8 +2028,8 @@ local configure_phpactor_nvim = function()
   require 'phpactor'.setup {
     lspconfig = { enabled = false },
     install = {
-      bin = mason_bin_dir .. '/phpactor',
-      path = mason_bin_dir .. '/../packages/phpactor',
+      bin = mason_path .. '/bin/phpactor',
+      path = mason_path .. '/packages/phpactor',
     }
   }
 
@@ -2162,7 +2161,7 @@ plugins.refactoring_nvim = {
 local setup_splitjoin = function()
   vim.g['splitjoin_php_method_chain_full'] = 1
   vim.g['splitjoin_quiet'] = 1
-  vim.g['splitjoin_trailing_comma'] = 1
+  -- vim.g['splitjoin_trailing_comma'] = 1
 end
 
 ---@return nil
@@ -2404,7 +2403,7 @@ plugins.vim_camelsnek = {
 ---@return nil
 local configure_fugitive = function()
   vim.cmd('command! -nargs=1 Browse OpenBrowser <args>') -- allow GBrowse to work with open-browser.nvim instead of netrw
-  vim.api.nvim_set_keymap('n', 'y<c-g>', ':<C-U>call setreg(v:register, fugitive#Object(@%))<CR>', { noremap = true, silent = true }) -- work around an issue preventing lazy loading with y<c-g> from working
+  -- vim.api.nvim_set_keymap('n', 'y<c-g>', ':<C-U>call setreg(v:register, fugitive#Object(@%))<CR>', { noremap = true, silent = true }) -- work around an issue preventing lazy loading with y<c-g> from working
 
   if not is_installed('which-key') then return end
 
@@ -2416,29 +2415,29 @@ local configure_fugitive = function()
   }, { prefix = 'y' })
 end
 
-local fugitive_commands = {
-  'G',
-  'GBrowse',
-  'GDelete',
-  'GMove',
-  'GRemove',
-  'GRename',
-  'Gdiffsplit',
-  'Gedit',
-  'Ggrep',
-  'Git',
-  'Glgrep',
-  'Gread',
-  'Gvdiffsplit',
-  'Gwrite',
-}
+-- local fugitive_commands = {
+--   'G',
+--   'GBrowse',
+--   'GDelete',
+--   'GMove',
+--   'GRemove',
+--   'GRename',
+--   'Gdiffsplit',
+--   'Gedit',
+--   'Ggrep',
+--   'Git',
+--   'Glgrep',
+--   'Gread',
+--   'Gvdiffsplit',
+--   'Gwrite',
+-- }
 
 plugins.vim_fugitive = {
   'tpope/vim-fugitive',
-  ft = { 'fugitive' },
-  cmd = fugitive_commands,
-  keys = 'y<c-g>',
-  -- after = 'which-key.nvim',
+  -- ft = { 'fugitive' },
+  -- cmd = fugitive_commands,
+  -- keys = 'y<c-g>',
+  after = 'which-key.nvim',
   requires = { 'tpope/vim-rhubarb', 'tyru/open-browser.vim' },
   config = configure_fugitive,
 }
@@ -2662,7 +2661,7 @@ local configure_vim_unimpaired = function()
 
   require 'which-key'.register({
     o = { name = 'Toggle...' },
-    ['<c-g>'] = { name = 'Copy path' },
+    -- ['<c-g>'] = { name = 'Copy path' },
   }, { prefix = 'y' })
 end
 
@@ -2675,18 +2674,18 @@ plugins.vim_unimpaired = {
 -- }}}
 
 -- zk.nvim {{{
-local setup_zk_conceal = function()
-  vim.cmd [[
-  " markdownWikiLink is a new region
-  syn region markdownWikiLink matchgroup=markdownLinkDelimiter start="\[\[" end="\]\]" contains=markdownUrl keepend oneline concealends
-  " markdownLinkText is copied from runtime files with 'concealends' appended
-  syn region markdownLinkText matchgroup=markdownLinkTextDelimiter start="!\=\[\%(\%(\_[^][]\|\[\_[^][]*\]\)*]\%( \=[[(]\)\)\@=" end="\]\%( \=[[(]\)\@=" nextgroup=markdownLink,markdownId skipwhite contains=@markdownInline,markdownLineStart concealends
-  " markdownLink is copied from runtime files with 'conceal' appended
-  syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" contains=markdownUrl keepend contained conceal
-  ]]
+-- local setup_zk_conceal = function()
+--   vim.cmd [[
+--   " markdownWikiLink is a new region
+--   syn region markdownWikiLink matchgroup=markdownLinkDelimiter start="\[\[" end="\]\]" contains=markdownUrl keepend oneline concealends
+--   " markdownLinkText is copied from runtime files with 'concealends' appended
+--   syn region markdownLinkText matchgroup=markdownLinkTextDelimiter start="!\=\[\%(\%(\_[^][]\|\[\_[^][]*\]\)*]\%( \=[[(]\)\)\@=" end="\]\%( \=[[(]\)\@=" nextgroup=markdownLink,markdownId skipwhite contains=@markdownInline,markdownLineStart concealends
+--   " markdownLink is copied from runtime files with 'conceal' appended
+--   syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" contains=markdownUrl keepend contained conceal
+--   ]]
 
-  vim.wo.conceallevel = 2
-end
+--   vim.wo.conceallevel = 2
+-- end
 
 plugins.zk_nvim = {
   'mickael-menu/zk-nvim',
