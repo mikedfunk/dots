@@ -28,7 +28,7 @@ vim.o.joinspaces = false -- Prevents inserting two spaces after punctuation on a
 vim.o.swapfile = true -- I hate them but they help if neovim crashes
 
 -- https://www.reddit.com/r/neovim/comments/xx5hhp/introducing_livecommandnvim_preview_the_norm/
--- vim.o.splitkeep = "screen"
+vim.o.splitkeep = "screen"
 
 -- vim.o.background = 'light'
 
@@ -1348,7 +1348,11 @@ plugins.cmp_tabnine = {
       max_lines = 1000,
       max_num_results = 20,
       sort = true,
-      ignored_file_types = { 'phtml', 'html' },
+      ignored_file_types = {
+        php = true, -- it's cool but LSP results are smarter, and if it's behind LSP results it's too far to scroll to see them :/
+        phtml = true,
+        html = true,
+      },
     }
 
     local compare = require 'cmp.config.compare'
@@ -2318,6 +2322,31 @@ plugins.tabout_nvim = {
 }
 -- }}}
 
+-- text-case.nvim {{{
+plugins.text_case_nvim = {
+  'johmsalas/text-case.nvim',
+  event = 'BufRead',
+  requires = 'folke/which-key.nvim',
+  before = 'which-key.nvim',
+  setup = function()
+    lvim.builtin.which_key.mappings['C'] = {
+      name = 'Coerce',
+      c = { function() require 'textcase'.current_word('to_camel_case') end, 'camelCase' },
+      S = { function() require 'textcase'.current_word('to_pascal_case') end, 'StudlyCase' },
+      s = { function() require 'textcase'.current_word('to_snake_case') end, 'snake_case' },
+      k = { function() require 'textcase'.current_word('to_dash_case') end, 'kebab-case' },
+      ['.'] = { '<Cmd>TextCaseOpenTelescope<CR>', 'Telescope' },
+    }
+
+    lvim.builtin.which_key.vmappings['C'] = {
+      name = 'Coerce',
+      ['.'] = { '<Cmd>TextCaseOpenTelescope<CR>', 'Telescope' },
+    }
+  end,
+  config = function() require 'textcase'.setup {} end,
+}
+-- }}}
+
 -- todo-comments.nvim {{{
 
 ---@return nil
@@ -2413,22 +2442,6 @@ plugins.undotree = {
   'mbbill/undotree',
   cmd = 'UndotreeToggle',
   setup = setup_undotree,
-}
--- }}}
-
--- vim-camelsnek {{{
-plugins.vim_camelsnek = {
-  'nicwest/vim-camelsnek',
-  event = 'BufRead',
-  setup = function()
-    lvim.builtin.which_key.mappings['C'] = {
-      name = 'Coerce',
-      c = { '<Cmd>CamelB<CR>', 'camelCase' },
-      S = { '<Cmd>Camel<CR>', 'StudlyCase' },
-      s = { '<Cmd>Snek<CR>', 'snake_case' },
-      k = { '<Cmd>Kebab<CR>', 'kebab-case' },
-    }
-  end
 }
 -- }}}
 
@@ -2979,19 +2992,12 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
-  -- plugins.document_color_nvim, -- tailwind color previewing
-  -- plugins.fold_preview_nvim, -- preview with h, open with h again
-  -- plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
-  -- plugins.nvim_context_vt, -- like nvim-biscuits but execution is MUCH better
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.tmuxline_vim, -- tmux statusline generator
   -- { 'echasnovski/mini.animate', event = 'VimEnter', config = function() require 'mini.animate'.setup {} end }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
-  -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
-  -- { 'lambdalisue/reword.vim', event = 'BufEnter', cmd = { 'Reword', 'Rew' } }, -- like :Subvert from vim-abolish but handles underscores, dashes, and previewing. :%Rew/Foo/Bar/g . (no lazy-load if you want previewing) (previewing turns off syntax... just use Rew to avoid previewing) TODO: replace with https://github.com/johmsalas/text-case.nvim ? (switched to traces.vim, fucking works great, no more BS)
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
-  -- { 'luukvbaal/stabilize.nvim', event = 'BufRead', config = function() require 'stabilize'.setup {} end }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.bufonly_nvim, -- close all buffers but the current one
@@ -3008,15 +3014,19 @@ lvim.plugins = {
   plugins.cmp_tmux, -- Add a tmux source to nvim-cmp
   plugins.cmp_treesitter, -- cmp completion source for treesitter
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
+  plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
+  plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.headlines_nvim, -- add markdown highlights
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
+  plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
   plugins.numb_nvim, -- preview jumping to line number
   plugins.nvim_bqf, -- add a preview for quickfix items! works faster with treesitter
+  plugins.nvim_context_vt, -- like nvim-biscuits but execution is MUCH better
   plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
@@ -3030,9 +3040,9 @@ lvim.plugins = {
   plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua)
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
+  plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes
-  plugins.vim_camelsnek, -- like that tpope plugin vim-abolish to coerce text to different cases
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
   plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls
@@ -3043,6 +3053,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
+  { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
@@ -3051,7 +3062,6 @@ lvim.plugins = {
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
-  { 'markonm/traces.vim', event = 'BufRead' }, -- substitute preview
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
