@@ -9,10 +9,10 @@
 # }}}
 
 # helper functions {{{
-function _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; "${@:2}"; }
-function _log_error() { echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"; "${@:2}"; }
-function _log_notice() { echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"; "${@:2}"; }
-function _has() { type "$1" &>/dev/null; }
+_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; "${@:2}"; }
+_log_error() { echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"; "${@:2}"; }
+_log_notice() { echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"; "${@:2}"; }
+_has() { type "$1" &>/dev/null; }
 # }}}
 
 # create dirs {{{
@@ -282,7 +282,7 @@ _install_php_74 () {
 }
 
 _install_php_82 () {
-    ( asdf list php | grep --quiet "8.2.0" ) && return
+    # ( asdf list php | grep --quiet "8.2.0" ) && return
     _log_info "installing php 8.2.0"
     asdf install php 8.2.0
     asdf global php 8.2.0 || return
@@ -299,7 +299,15 @@ _install_php_82 () {
     export PHP_ZLIB_DIR="$(brew --prefix zlib)"
     yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
     yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
-    yes "" | "${PICKLE}" install xdebug && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/04_xdebug.ini )
+    _xdebug_config() {
+        cat << 'END_HEREDOC'
+zend_extension="xdebug.so"
+[xdebug]
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+END_HEREDOC
+    }
+    yes "" | "${PICKLE}" install xdebug && ( echo "$(_xdebug_config)" >"${PHP_PATH}"/conf.d/04_xdebug.ini )
     echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
