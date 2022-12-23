@@ -252,12 +252,12 @@ _install_php_70 () {
 }
 
 _install_php_74 () {
-    ( asdf list php | grep --quiet 7.4.7 ) && return
-    _log_info "installing php 7.4.7"
-    asdf install php 7.4.7
-    asdf global php 7.4.7 || return
+    ( asdf list php | grep --quiet 7.4.32 ) && return
+    _log_info "installing php 7.4.32"
+    asdf install php 7.4.32
+    asdf global php 7.4.32 || return
 
-    # install php extensions (different set for 7.4.7)
+    # install php extensions (different set for 7.4.32)
     local PHP_PATH
     PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
@@ -267,6 +267,8 @@ _install_php_74 () {
     chmod +x "${PICKLE}"
 
     yes "" | "${PICKLE}" install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
+    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
+    export PHP_ZLIB_DIR="$(brew --prefix zlib)"
     yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini )
     yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini )
     # latest xdebug 3.2 is php 8.0+ only
@@ -276,7 +278,7 @@ _install_php_74 () {
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
     # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    asdf reshim php 7.4.7
+    asdf reshim php 7.4.32
 }
 
 _install_php_82 () {
@@ -293,8 +295,10 @@ _install_php_82 () {
     wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
     chmod +x "${PICKLE}"
 
-    # yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
-    # yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
+    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
+    export PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
+    yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
     yes "" | "${PICKLE}" install xdebug && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/04_xdebug.ini )
     echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
 
@@ -444,8 +448,8 @@ _install_php_versions () {
     # export CFLAGS="-Wno-error ${CFLAGS}"
 
     _install_php_70
-    # _install_php_74 # *works* because whatever feature used readdir_r was removed
-    # _install_php_82
+    _install_php_74
+    _install_php_82
     asdf global php 8.2.0
 
     popd || return
