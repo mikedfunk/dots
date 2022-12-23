@@ -72,6 +72,7 @@
     dc = diff --cached
     dd = diff develop..HEAD
     ddn = diff develop..HEAD --name-only
+    # delete-prs = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
     # df = diff
     # dl = diff --cached HEAD~1 --name-only # show modified files _only_ in the last commit
     # dlc = diff --cached HEAD~1 # show a diff of _only_ the last commit

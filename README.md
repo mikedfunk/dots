@@ -3,7 +3,7 @@
 ## TL;DR
 
 ```
-curl https://raw.githubusercontent.com/mikedfunk/dotfiles/master/install.sh | sh
+curl https://raw.githubusercontent.com/mikedfunk/dots/master/install.sh | sh
 ```
 
 My Bash, Neovim ([LunarVim](https://www.lunarvim.org)), Git, and other dotfiles. Managed by [yadm](https://thelocehiliosan.github.io/yadm/docs).

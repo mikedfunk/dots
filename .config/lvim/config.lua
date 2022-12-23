@@ -407,6 +407,7 @@ lvim.format_on_save.timeout = 30000
 --
 -- this will GENERATE an ftplugin! https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
 lvim.lsp.installer.setup.ensure_installed = {
+  'astro',
   'bashls',
   'cssls',
   'dockerls',
@@ -416,10 +417,20 @@ lvim.lsp.installer.setup.ensure_installed = {
   'ruby_ls',
   'solargraph',
   'sumneko_lua',
+  'svelte',
+  'vuels',
   'yamlls',
   'zk',
+  -- 'cssmodules_ls',
+  -- 'denols',
+  -- 'emberls',
+  -- 'emmet_ls',
+  -- 'glint', -- typed ember
+  -- 'graphql',
   -- 'intelephense',
   -- 'phpactor',
+  -- 'prismals', -- node ORM
+  -- 'relay_lsp', -- react framework
   -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'taplo',
@@ -766,8 +777,8 @@ require 'lvim.lsp.null-ls.linters'.setup {
     name = 'phpcs',
     timeout = 30000,
     extra_args = {
-      '--cache',
-      '--parallel=1',
+      -- '--cache',
+      -- '--parallel=1', -- try to avoid zombie processes
       '--warning-severity=3',
       '-d',
       'memory_limit=100M',
@@ -823,11 +834,11 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   },
   { name = 'prettierd', condition = function() return vim.fn.executable 'prettier' == 1 end },
   {
-    name = 'rustywind',
+    name = 'rustywind', -- tailwind helper
     condition = function()
       return vim.fn.executable 'rustywind' == 1 and vim.fn.filereadable 'tailwind.config.js' == 1
     end
-  }, -- tailwind helper
+  },
   -- { name = 'sql_formatter', condition = function() return vim.fn.executable 'sql-formatter' == 1 end }, -- mangles variables
   {
     name = 'sqlfluff',
@@ -839,17 +850,15 @@ require 'lvim.lsp.null-ls.formatters'.setup {
 }
 
 if is_null_ls_installed then
-  null_ls.setup {
-    sources = {
-      null_ls.builtins.formatting.phpcbf.with({
-        command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
-        extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
-        condition = function()
-          return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
-        end,
-      })
-    }
-  } -- @diagnostic disable-line redundant-parameter
+  null_ls.setup { sources = {
+    null_ls.builtins.formatting.phpcbf.with({
+      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
+      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+      condition = function()
+        return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
+      end,
+    })
+  } } -- @diagnostic disable-line redundant-parameter
 end
 -- }}}
 
@@ -1077,7 +1086,7 @@ lvim.builtin.theme.tokyonight.options.style = 'moon'
 -- lvim.builtin.theme.tokyonight.options.style = 'night'
 
 lvim.builtin.theme.tokyonight.options.dim_inactive = true
-lvim.builtin.theme.tokyonight.options.sidebars = { 'NvimTree', 'aerial', 'Outline', 'DapSidebar', 'UltestSummary' }
+lvim.builtin.theme.tokyonight.options.sidebars = { 'NvimTree', 'aerial', 'Outline', 'DapSidebar', 'UltestSummary', 'dap-repl' }
 lvim.builtin.theme.tokyonight.options.day_brightness = 0.05 -- high contrast
 lvim.builtin.theme.tokyonight.options.lualine_bold = true -- section headers in lualine theme will be bold
 lvim.builtin.theme.tokyonight.options.hide_inactive_statusline = true
@@ -1772,6 +1781,32 @@ plugins.nvim_context_vt = {
   'haringsrob/nvim_context_vt',
   event = 'BufRead',
   config = configure_nvim_context_vt,
+}
+-- }}}
+
+-- nvim-dap-tab {{{
+plugins.nvim_dap_tab = {
+  'przepompownia/nvim-dap-tab',
+  -- ft = {
+  --   'php',
+  --   'javascript',
+  --   'typescript',
+  --   'javascriptreact',
+  --   'typescriptreact',
+  --   'ruby',
+  --   'python',
+  -- },
+  -- after = 'which-key.nvim',
+  requires = {
+    'mfussenegger/nvim-dap',
+    'folke/which-key.nvim',
+    'rcarriga/nvim-dap-ui',
+  },
+  setup = function()
+    lvim.builtin.which_key.mappings['d']['T'] = { function() require 'dap-tab'.verboseGoToDebugWin() end, 'Open Debug Tab' }
+    lvim.builtin.which_key.mappings['d']['X'] = { function() require 'dap-tab'.verboseGoToDebugWin() end, 'Close Debug Tab' }
+  end,
+  config = function() require 'dap-tab'.setup() end
 }
 -- }}}
 
@@ -2949,9 +2984,12 @@ lvim.plugins = {
   -- plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_context_vt, -- like nvim-biscuits but execution is MUCH better
+  -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.tmuxline_vim, -- tmux statusline generator
+  -- { 'echasnovski/mini.animate', event = 'VimEnter', config = function() require 'mini.animate'.setup {} end }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
+  -- { 'lambdalisue/reword.vim', event = 'BufEnter', cmd = { 'Reword', 'Rew' } }, -- like :Subvert from vim-abolish but handles underscores, dashes, and previewing. :%Rew/Foo/Bar/g . (no lazy-load if you want previewing) (previewing turns off syntax... just use Rew to avoid previewing) TODO: replace with https://github.com/johmsalas/text-case.nvim ? (switched to traces.vim, fucking works great, no more BS)
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'luukvbaal/stabilize.nvim', event = 'BufRead', config = function() require 'stabilize'.setup {} end }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows
@@ -2975,7 +3013,7 @@ lvim.plugins = {
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
-  plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on.
+  plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
   plugins.numb_nvim, -- preview jumping to line number
   plugins.nvim_bqf, -- add a preview for quickfix items! works faster with treesitter
@@ -3013,7 +3051,7 @@ lvim.plugins = {
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
-  { 'lambdalisue/reword.vim', event = 'BufEnter', cmd = { 'Reword', 'Rew' } }, -- like :Subvert from vim-abolish but handles underscores, dashes, and previewing. :%Rew/Foo/Bar/g . (no lazy-load if you want previewing) (previewing turns off syntax... just use Rew to avoid previewing) TODO: replace with https://github.com/johmsalas/text-case.nvim ?
+  { 'markonm/traces.vim', event = 'BufRead' }, -- substitute preview
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
