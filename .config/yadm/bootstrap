@@ -225,6 +225,32 @@ _install_neovim_versions () {
 
 # install php versions {{{
 
+# holy shit it works
+_install_php_70 () {
+    ( asdf list php | grep --quiet 7.0.26 ) && return
+    _log_info "installing php 7.0.26"
+    asdf install php 7.0.26
+    asdf global php 7.0.26 || return
+
+    # install php extensions (different set for 7.0.26)
+    local PHP_PATH
+    PHP_PATH="$(asdf where php)"
+    mkdir -p "${PHP_PATH}"/conf.d
+
+    # pickle doesn't work on php 7.0 at all, any version
+
+    yes "" | pecl install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
+    yes "" | pecl install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini )
+    yes "" | pecl install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini )
+    yes "" | pecl install xdebug-2.8.1 && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini )
+    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+
+    # install global composer packages
+    # mkdir -p  "${PHP_PATH}"/{.,}composer
+    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    asdf reshim php 7.0.26
+}
+
 _install_php_74 () {
     ( asdf list php | grep --quiet 7.4.7 ) && return
     _log_info "installing php 7.4.7"
@@ -248,8 +274,8 @@ _install_php_74 () {
     echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
-    mkdir -p  "${PHP_PATH}"/{.,}composer
-    ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    # mkdir -p  "${PHP_PATH}"/{.,}composer
+    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
     asdf reshim php 7.4.7
 }
 
@@ -398,10 +424,10 @@ _install_php_versions () {
     # }}}
 
     # configure postgresql {{{
-    export PATH="$(brew --prefix postgresql)/bin:${PATH}"
-    export LDFLAGS="-L$(brew --prefix postgresql)/lib ${LDFLAGS}"
-    export CPPFLAGS="-I$(brew --prefix postgresql)/include ${CPPFLAGS}"
-    export PKG_CONFIG_PATH="$(brew --prefix postgresql)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    export PATH="$(brew --prefix postgresql@14)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix postgresql@14)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix postgresql@14)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix postgresql@14)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure zlib (needed to build php) {{{
@@ -417,8 +443,9 @@ _install_php_versions () {
     export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
     # export CFLAGS="-Wno-error ${CFLAGS}"
 
-    _install_php_74 # *works* because whatever feature used readdir_r was removed
-    _install_php_82
+    _install_php_70
+    # _install_php_74 # *works* because whatever feature used readdir_r was removed
+    # _install_php_82
     asdf global php 8.2.0
 
     popd || return

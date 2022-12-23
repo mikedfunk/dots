@@ -282,7 +282,7 @@ brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt)
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
-brew "postgresql" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
+brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
 brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.)
 brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
