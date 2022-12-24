@@ -141,7 +141,6 @@ tap "mutagen-io/mutagen"
 # brew "pyenv" # python version manager (same api as rbenv)
 # brew "python" # updated version of python with updated pip. Useful for installing pip packages without root. NOTE: homebrew "pip" breaks neovim. Needed for ntfy, see ~/.config/yadm/bootstrap
 # brew "python-yq" # like yq but also comes with xq for xml
-# brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug
 # brew "qodana" # jetbrains php (and other languages) static analysis
 # brew "ranger" # vim-like file system browser (cool but I don't use it)
 # brew "rbenv" # ruby environment switcher (I use asdf now)
@@ -287,6 +286,7 @@ brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily creat
 brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
+brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
