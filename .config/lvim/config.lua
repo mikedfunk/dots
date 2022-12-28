@@ -184,9 +184,9 @@ vim.api.nvim_create_autocmd('FileType', { pattern = 'plantuml', group = 'comment
 
 -- open quickfix in vsplit, tab, split
 vim.api.nvim_create_augroup('quickfix_splits', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.api.nvim_buf_set_keymap(0, 'n', 's', '<C-w><Enter>', {}) end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.api.nvim_buf_set_keymap(0, 'n', 'v', '<C-w><Enter><C-w>L', {}) end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.api.nvim_buf_set_keymap(0, 'n', 't', '<C-w><Enter><C-w>T', {}) end })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 's', '<C-w><Enter>', { buffer = true }) end })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 'v', '<C-w><Enter><C-w>L', { buffer = true }) end })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 't', '<C-w><Enter><C-w>T', { buffer = true }) end })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', command = 'wincmd J' })
 
 -- view uml diagram in browser {{{
@@ -233,7 +233,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_augroup('show_defs', { clear = true })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'vim', group = 'show_defs',
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<Esc>:help <C-R><C-W><CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', 'K', '<Esc>:help <C-R><C-W><CR>', { noremap = true, silent = true, buffer = true })
   end,
 })
 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<Cmd>SymbolsOutline<CR>', { noremap = true })
@@ -303,10 +303,10 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 vim.env.PATH = vim.fn.getenv('HOME') .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
-vim.api.nvim_set_keymap('o', 'iz', '<cmd>normal! [zj0v]zk$<cr>', { noremap = true })
-vim.api.nvim_set_keymap('x', 'iz', '<cmd>normal! [zj0o]zk$<cr>', { noremap = true })
-vim.api.nvim_set_keymap('o', 'az', '<cmd>normal! [zv]z$<cr>', { noremap = true })
-vim.api.nvim_set_keymap('x', 'az', '<cmd>normal! [zo]z$<cr>', { noremap = true })
+vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
+vim.keymap.set('x', 'iz', '<Cmd>normal! [zj0o]zk$<CR>', { noremap = true })
+vim.keymap.set('o', 'az', '<Cmd>normal! [zv]z$<CR>', { noremap = true })
+vim.keymap.set('x', 'az', '<Cmd>normal! [zo]z$<CR>', { noremap = true })
 -- }}}
 
 -- Close current window and all its floating subwindows https://github.com/neovim/neovim/issues/11440 {{{
@@ -327,8 +327,8 @@ local close_win_and_floats = function()
   vim.cmd('quit')
 end
 
-vim.api.nvim_set_keymap('n', '<C-w>c', '', { callback = close_win_and_floats, noremap = true })
-vim.api.nvim_set_keymap('n', 'ZQ', '', { callback = close_win_and_floats, noremap = true })
+vim.keymap.set('n', '<C-w>c', close_win_and_floats, { noremap = true })
+vim.keymap.set('n', 'ZQ', close_win_and_floats, { noremap = true })
 -- }}}
 
 -- vim-markdown (builtin) {{{
@@ -690,8 +690,8 @@ lvim.builtin.lualine.sections.lualine_c = {
 -- luasnip {{{
 if is_installed('luasnip') then
   -- strangely these aren't mapped by LunarVim. Doesn't work with noremap... i think because it's already mapped by something else
-  vim.api.nvim_set_keymap('i', '<C-E>', '<Plug>luasnip-next-choice', {})
-  vim.api.nvim_set_keymap('s', '<C-E>', '<Plug>luasnip-next-choice', {})
+  vim.keymap.set('i', '<C-E>', '<Plug>luasnip-next-choice', {})
+  vim.keymap.set('s', '<C-E>', '<Plug>luasnip-next-choice', {})
 end
 -- }}}
 
@@ -1466,14 +1466,14 @@ local configure_dial = function()
     },
   }
 
-  vim.api.nvim_set_keymap('n', '<c-a>', require 'dial.map'.inc_normal(), { noremap = true })
-  vim.api.nvim_set_keymap('n', '<c-x>', require 'dial.map'.dec_normal(), { noremap = true })
+  vim.keymap.set('n', '<c-a>', require 'dial.map'.inc_normal(), { noremap = true })
+  vim.keymap.set('n', '<c-x>', require 'dial.map'.dec_normal(), { noremap = true })
 
-  vim.api.nvim_set_keymap('v', '<c-a>', require 'dial.map'.inc_visual(), { noremap = true })
-  vim.api.nvim_set_keymap('v', '<c-x>', require 'dial.map'.dec_visual(), { noremap = true })
+  vim.keymap.set('v', '<c-a>', require 'dial.map'.inc_visual(), { noremap = true })
+  vim.keymap.set('v', '<c-x>', require 'dial.map'.dec_visual(), { noremap = true })
 
-  vim.api.nvim_set_keymap('v', 'g<c-a>', require 'dial.map'.inc_gvisual(), { noremap = true })
-  vim.api.nvim_set_keymap('v', 'g<c-x>', require 'dial.map'.dec_gvisual(), { noremap = true })
+  vim.keymap.set('v', 'g<c-a>', require 'dial.map'.inc_gvisual(), { noremap = true })
+  vim.keymap.set('v', 'g<c-x>', require 'dial.map'.dec_gvisual(), { noremap = true })
 end
 
 plugins.dial_nvim = {
@@ -1612,7 +1612,7 @@ end
 local configure_mkdx = function()
   vim.api.nvim_create_augroup('mkdx_map', { clear = true })
   vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'mkdx_map',
-    callback = function() vim.api.nvim_buf_set_keymap(0, 'n', '<cr>', '<Plug>(mkdx-checkbox-prev-n)', { noremap = true }) end,
+    callback = function() vim.keymap.set('n', '<cr>', '<Plug>(mkdx-checkbox-prev-n)', { buffer = true, noremap = true }) end,
   })
 
   if not is_installed('which-key') then return end
@@ -1841,18 +1841,16 @@ plugins.nvim_hlslens = {
       -- nearest_only = true,
     }
 
-    local kopts = { noremap = true, silent = true }
-
-    vim.api.nvim_set_keymap('n', 'n',
+    vim.keymap.set('n', 'n',
       [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-      kopts)
-    vim.api.nvim_set_keymap('n', 'N',
+      { noremap = true, silent = true })
+    vim.keymap.set('n', 'N',
       [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-      kopts)
-    vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-    vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-    vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-    vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      { noremap = true, silent = true })
+    vim.keymap.set('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], { noremap = true, silent = true })
 
     -- vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
   end
@@ -2496,20 +2494,20 @@ plugins.vim_fugitive = {
 ---@return nil
 local configure_vim_git = function()
   local current_buf = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'I', '<Cmd>Pick<cr>', { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'R', '<Cmd>Reword<cr>', { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'E', '<Cmd>Edit<cr>', { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'S', '<Cmd>Squash<cr>', { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'F', '<Cmd>Fixup<cr>', { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'n', 'D', '<Cmd>Drop<cr>', { noremap = true })
+  vim.keymap.set('n', 'I', '<Cmd>Pick<cr>', { buffer = current_buf, noremap = true })
+  vim.keymap.set('n', 'R', '<Cmd>Reword<cr>', { buffer = current_buf, noremap = true })
+  vim.keymap.set('n', 'E', '<Cmd>Edit<cr>', { buffer = current_buf, noremap = true })
+  vim.keymap.set('n', 'S', '<Cmd>Squash<cr>', { buffer = current_buf, noremap = true })
+  vim.keymap.set('n', 'F', '<Cmd>Fixup<cr>', { buffer = current_buf, noremap = true })
+  vim.keymap.set('n', 'D', '<Cmd>Drop<cr>', { buffer = current_buf, noremap = true })
 
   -- need to test these (visual mode)
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'I', ":'<,'>Pick<cr>", { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'R', ":'<,'>Reword<cr>", { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'E', ":'<,'>Edit<cr>", { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'S', ":'<,'>Squash<cr>", { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'F', ":'<,'>Fixup<cr>", { noremap = true })
-  vim.api.nvim_buf_set_keymap(current_buf, 'v', 'D', ":'<,'>Drop<cr>", { noremap = true })
+  vim.keymap.set('v', 'I', ":'<,'>Pick<cr>", { buffer = current_buf, noremap = true })
+  vim.keymap.set('v', 'R', ":'<,'>Reword<cr>", { buffer = current_buf, noremap = true })
+  vim.keymap.set('v', 'E', ":'<,'>Edit<cr>", { buffer = current_buf, noremap = true })
+  vim.keymap.set('v', 'S', ":'<,'>Squash<cr>", { buffer = current_buf, noremap = true })
+  vim.keymap.set('v', 'F', ":'<,'>Fixup<cr>", { buffer = current_buf, noremap = true })
+  vim.keymap.set('v', 'D', ":'<,'>Drop<cr>", { buffer = current_buf, noremap = true })
 end
 
 plugins.vim_git = { 'tpope/vim-git', ft = 'gitrebase', config = configure_vim_git }
@@ -2841,8 +2839,8 @@ end
 
 local toggle_hover_def = function() lvim.lsp.hover_definition = not lvim.lsp.hover_definition end
 lvim.builtin.which_key.mappings['l']['H'] = { toggle_hover_def, 'Toggle LSP Hover' }
-vim.api.nvim_set_keymap('n', '<C-h>', '', { callback = toggle_hover_def, noremap = true })
-vim.api.nvim_set_keymap('i', '<C-h>', '', { callback = toggle_hover_def, noremap = true })
+vim.keymap.set('n', '<C-h>', toggle_hover_def, { noremap = true })
+vim.keymap.set('i', '<C-h>', toggle_hover_def, { noremap = true })
 -- }}}
 
 -- put cursor at end of text on y and p
@@ -2856,8 +2854,8 @@ lvim.keys.insert_mode['kj'] = nil
 lvim.keys.insert_mode['jj'] = nil
 
 -- Wrapped lines goes down/up to next row, rather than next line in file.
-vim.api.nvim_set_keymap('n', 'j', "v:count ? 'j' : 'gj'", { noremap = true, expr = true })
-vim.api.nvim_set_keymap('n', 'k', "v:count ? 'k' : 'gk'", { noremap = true, expr = true })
+vim.keymap.set('n', 'j', "v:count ? 'j' : 'gj'", { noremap = true, expr = true })
+vim.keymap.set('n', 'k', "v:count ? 'k' : 'gk'", { noremap = true, expr = true })
 
 -- Easier horizontal scrolling
 lvim.keys.normal_mode['zl'] = 'zL'
@@ -2894,7 +2892,7 @@ local php_splitter = function() vim.cmd [[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]
 
 ---@return nil
 local map_php_splitter = function()
-  vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', ',.', '', { callback = php_splitter, noremap = true })
+  vim.keymap.set('n', ',.', php_splitter, { buffer = vim.api.nvim_get_current_buf(), noremap = true })
 end
 vim.api.nvim_create_augroup('php_splitter', { clear = true })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'php', group = 'php_splitter', callback = map_php_splitter, desc = 'php splitter' })
@@ -2968,7 +2966,7 @@ end
 ---@param bufnr integer
 ---@return nil
 lvim.lsp.on_attach_callback = function(client, bufnr)
-  vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-v>', '', { callback = function() vim.lsp.buf.signature_help() end, noremap = true })
+  vim.keymap.set('i', '<c-v>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
 
   if client.server_capabilities.document_formatting == true then
     vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr(#{timeout_ms:250})')
