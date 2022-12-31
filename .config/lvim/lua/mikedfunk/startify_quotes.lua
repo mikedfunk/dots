@@ -106,6 +106,7 @@ local startify_quotes = {
   { "Enjoy every step you take. If you're curious, there is always something new to be discovered in the backdrop of your daily life.", "", "- Roy T. Bennett" },
   { "Estimate before you start. You'll spot potential problems up front." },
   { "Estimate to avoid surprises." },
+  { "Every application has an inherent amount of complexity that cannot be removed or hidden. Instead, it must be dealt with, either in product development or user interaction.", "", "- Law of conservation of complexity" },
   { "Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.", "", "- Patrick McKenzie" },
   { "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system." },
   { "Exceptions can suffer from all the readability and maintainability problems of classic spaghetti code. Reserve exceptions for exceptional things." },
@@ -329,6 +330,7 @@ local startify_quotes = {
   { "When faced with an impossible problem, identify the real constraints. Ask yourself: \"Does it have to be done this way? Does it have to be done at all?\"" },
   { "When in doubt, leave it out.", "", "- Joshua Bloch" },
   { "When we focus on building an intuition, we don't need to memorize rules. We can rely on our mental model to come up with the right answer. It's wayyy more practical.", "", "- Josh W. Comeau" }, -- https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
+  { "When you choose not to care about complexity, you're merely pushing it onto other developers in your org. Ops people, your customers, someone. Now they have to work around your assumptions to make sure everything keeps running smoothly.", "", "And nowadays, I'm often that someone, and I'm tired of it.", "", "- fasterthanli.me" },
   { "When you come across a stumbling block because the code doesn't quite fit anymore, or you notice two things that should really be merged, or anything else at all strikes you as being \"wrong\", don't hesitate to change it. There's no time like the present.", "", "- Andy Hunt, Dave Thomas" },
   { "Why do we make the mess? What drives us to make the mess in the first place? Because we want to go fast.", "- Uncle Bob" },
   { "Why do we never have time to do it right, but always have time to do it over?" },

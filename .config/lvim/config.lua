@@ -28,14 +28,14 @@ vim.o.joinspaces = false -- Prevents inserting two spaces after punctuation on a
 vim.o.swapfile = true -- I hate them but they help if neovim crashes
 
 -- https://www.reddit.com/r/neovim/comments/xx5hhp/introducing_livecommandnvim_preview_the_norm/
-vim.o.splitkeep = "screen"
+-- vim.o.splitkeep = "screen"
 
 -- vim.o.background = 'light'
 
 vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
-vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
+-- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
 vim.o.relativenumber = true -- relative line numbers
 -- turn off relativenumber in insert mode and others
 local norelative_events = { 'InsertEnter', 'WinLeave', 'FocusLost' }
@@ -1355,23 +1355,25 @@ plugins.cmp_tabnine = {
       },
     }
 
-    local compare = require 'cmp.config.compare'
-    require 'cmp'.setup {
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          require 'cmp_tabnine.compare',
-          compare.offset,
-          compare.exact,
-          compare.score,
-          compare.recently_used,
-          compare.kind,
-          compare.sort_text,
-          compare.length,
-          compare.order,
-        },
-      },
-    }
+    -- make tabnine higher priority
+    --
+    -- local compare = require 'cmp.config.compare'
+    -- require 'cmp'.setup {
+    --   sorting = {
+    --     priority_weight = 2,
+    --     comparators = {
+    --       require 'cmp_tabnine.compare',
+    --       compare.offset,
+    --       compare.exact,
+    --       compare.score,
+    --       compare.recently_used,
+    --       compare.kind,
+    --       compare.sort_text,
+    --       compare.length,
+    --       compare.order,
+    --     },
+    --   },
+    -- }
 
     vim.api.nvim_create_augroup('tabnine_prefetch', { clear = true })
     vim.api.nvim_create_autocmd('FileType', {
@@ -2773,7 +2775,7 @@ local mappings = {}
 lvim.keys.normal_mode['<C-w>t'] = 'mz:tabe %<cr>`z'
 lvim.keys.normal_mode['<c-l>'] = ':silent! call LocListToggle()<CR>'
 
-lvim.builtin.which_key.mappings['e'] = { '<Cmd>NvimTreeFindFileToggle<CR>', 'Explore file' }
+lvim.builtin.which_key.mappings['e'] = { '<Cmd>NvimTreeFindFileToggle<CR>', 'Explore File' }
 lvim.builtin.which_key.mappings['E'] = { '<Cmd>NvimTreeToggle<CR>', 'Explore' }
 
 lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Configure LSP' }
@@ -2782,13 +2784,21 @@ lvim.builtin.which_key.mappings['l']['R'] = { '<Cmd>LspRestart<CR>', 'Restart LS
 lvim.builtin.which_key.mappings['b']['d'] = { '<Cmd>bd<CR>', 'Delete' }
 lvim.builtin.which_key.mappings['b']['p'] = { '<Cmd>BufferLineTogglePin<CR>', 'Pin/Unpin' }
 
--- lvim.lsp.buffer_mappings.normal_mode['gr'] = { vim.lsp.buf.references, 'Telescope references' }
-lvim.lsp.buffer_mappings.normal_mode['gR'] = { ':Telescope lsp_references<CR>', 'Telescope references' }
-lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
-lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
-lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'Outgoing calls' }
+-- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
+-- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
+-- lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'Outgoing calls' }
 
-lvim.builtin.which_key.vmappings.d = lvim.builtin.which_key.vmappings.d or { name = 'debug' }
+-- telescope versions of some lsp mappings
+lvim.lsp.buffer_mappings.normal_mode['gr'] = { '<Cmd>Telescope lsp_references<CR>', 'Telescope References' }
+lvim.lsp.buffer_mappings.normal_mode['gd'] = { '<Cmd>Telescope lsp_definitions<CR>', 'Goto Definition' }
+lvim.lsp.buffer_mappings.normal_mode['gI'] = { '<Cmd>Telescope lsp_implementations<CR>', 'Goto Implementation' }
+lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Goto Type Definition' }
+lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>Telescope lsp_incoming_calls<CR>', 'Incoming Calls' }
+lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>Telescope lsp_outgoing_calls<CR>', 'Outgoing Calls' }
+lvim.lsp.buffer_mappings.normal_mode['ld'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
+
+-- debugger mappings
+lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
 lvim.builtin.which_key.vmappings['d']['h'] = { function() require('dapui').eval() end, 'Eval Visual' }
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
@@ -2809,9 +2819,8 @@ local toggle_diagnostics = function()
   if are_diagnostics_visible then vim.diagnostic.show() else vim.diagnostic.hide() end
 end
 
-lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
 lvim.builtin.which_key.mappings['l']['T'] = { toggle_diagnostics, 'Toggle Diagnostics' }
-lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second
+lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
 
 -- hover definition {{{
 lvim.lsp.hover_definition = false

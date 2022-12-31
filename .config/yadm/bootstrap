@@ -491,6 +491,7 @@ _install_node_versions () {
     asdf reshim nodejs
 
     # TODO where the heck is the global asdf npm package.json for just one node version??
+    npm install -g pnpm
     # npm install -g eslint
     # npm install -g eslint_d
     # npm install -g joplin
