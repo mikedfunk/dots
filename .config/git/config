@@ -397,13 +397,6 @@
     # editor = interactive-rebase-tool
 # }}}
 
-# fix for itt tech torrance firewall and github {{{
-# [url "https://github"]
-    # insteadOf = git://github
-# [hub]
-    # protocol = https
-# }}}
-
 # tools {{{
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
