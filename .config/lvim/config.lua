@@ -37,6 +37,7 @@ vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
 vim.o.relativenumber = true -- relative line numbers
+vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
 -- turn off relativenumber in insert mode and others
 local norelative_events = { 'InsertEnter', 'WinLeave', 'FocusLost' }
 local relative_events = { 'InsertLeave', 'WinEnter', 'FocusGained', 'BufNewFile', 'BufReadPost' }
@@ -471,8 +472,28 @@ vim.api.nvim_create_augroup('bufferline_fill_fix', { clear = true })
 vim.api.nvim_create_autocmd('ColorScheme', { group = 'bufferline_fill_fix',
   callback = function() vim.cmd [[silent! hi! link BufferLineFill BufferLineGroupSeparator]] end,
 })
-lvim.builtin.bufferline.highlights.background = nil -- no italic background tabs
+
+-- Bufferline tries to make everything italic. Why?
+lvim.builtin.bufferline.highlights.background = { italic = false }
+lvim.builtin.bufferline.highlights.buffer_selected.italic = false
+lvim.builtin.bufferline.highlights.diagnostic_selected = { italic = false }
+lvim.builtin.bufferline.highlights.hint_selected = { italic = false }
+lvim.builtin.bufferline.highlights.hint_diagnostic_selected = { italic = false }
+lvim.builtin.bufferline.highlights.info_selected = { italic = false }
+lvim.builtin.bufferline.highlights.info_diagnostic_selected = { italic = false }
+lvim.builtin.bufferline.highlights.warning_selected = { italic = false }
+lvim.builtin.bufferline.highlights.warning_diagnostic_selected = { italic = false }
+lvim.builtin.bufferline.highlights.error_selected = { italic = false }
+lvim.builtin.bufferline.highlights.error_diagnostic_selected = { italic = false }
+lvim.builtin.bufferline.highlights.duplicate_selected = { italic = false }
+lvim.builtin.bufferline.highlights.duplicate_visible = { italic = false }
+lvim.builtin.bufferline.highlights.duplicate = { italic = false }
+lvim.builtin.bufferline.highlights.pick_selected = { italic = false }
+lvim.builtin.bufferline.highlights.pick_visible = { italic = false }
+lvim.builtin.bufferline.highlights.pick = { italic = false }
+
 lvim.builtin.bufferline.options.persist_buffer_sort = true
+lvim.builtin.bufferline.options.hover.enabled = true
 lvim.builtin.bufferline.options.sort_by = 'insert_after_current'
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.bufferline.options.separator_style = 'slant'
@@ -832,7 +853,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
       return vim.fn.executable 'php-cs-fixer' == 1 and vim.fn.filereadable '.php-cs-fixer.php' == 1
     end,
   },
-  { name = 'prettierd', condition = function() return vim.fn.executable 'prettier' == 1 end },
+  { name = 'prettier', condition = function() return vim.fn.executable 'prettier' == 1 end },
   {
     name = 'rustywind', -- tailwind helper
     condition = function()
@@ -2036,6 +2057,18 @@ plugins.nvim_ts_autotag = {
 }
 -- }}}
 
+-- nvim-various-textobjs{{{
+plugins.nvim_various_textobjs = {
+  'chrisgrieser/nvim-various-textobjs',
+  -- event = 'BufRead',
+  -- config = function()
+  --   require 'various-textobjs'.setup {
+  --     useDefaultKeymaps = true,
+  --   }
+  -- end,
+}
+-- }}}
+
 -- org-bullets.nvim {{{
 local configure_org_bullets = function()
   require 'org-bullets'.setup {}
@@ -2125,56 +2158,6 @@ plugins.range_highlight_nvim = {
 
 -- refactoring.nvim {{{
 
----@return nil
-local configure_refactoring = function()
-  require 'refactoring'.setup {}
-
-  -- doesn't work right - null_ls says it's set up but the language server can't find it
-  -- local is_null_ls_installed, null_ls = pcall(require, 'null-ls')
-  -- if is_null_ls_installed then null_ls.setup{ sources = { null_ls.builtins.code_actions.refactoring } } end
-
-  ---@param prompt_bufnr integer
-  ---@return nil
-  local refactor_helper = function(prompt_bufnr)
-    local content = require 'telescope.actions.state'.get_selected_entry()
-    require 'telescope.actions'.close(prompt_bufnr)
-    require 'refactoring'.refactor(content.value)
-  end
-
-  ---@return nil
-  _G.show_refactors = function()
-    local opts = require 'telescope.themes'.get_cursor()
-    require 'telescope.pickers'.new(opts, {
-      prompt_title = 'refactors',
-      finder = require 'telescope.finders'.new_table({
-        results = require 'refactoring'.get_refactors(),
-      }),
-      sorter = require 'telescope.config'.values.generic_sorter(opts),
-      ---@param map fun(mode: string, mapping: string, callback: fun(bufnr: integer): nil): boolean
-      ---@return boolean
-      attach_mappings = function(_, map)
-        map('i', '<CR>', refactor_helper)
-        map('n', '<CR>', refactor_helper)
-        return true
-      end
-    }):find()
-  end
-
-  if not is_installed('which-key') then return end
-  require 'which-key'.register({ r = {
-    name = 'Refactor',
-    v = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>", 'Extract Variable' },
-    -- V = { "<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", 'Inline Variable' }, -- doesn't work in php anyway
-    e = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>", 'Extract Function' },
-    f = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>", 'Extract Function to File' },
-    t = { '<Esc><Cmd>lua show_refactors()<CR>', 'Show Refactors' },
-  } }, { prefix = '<Leader>', mode = 'v', silent = true })
-
-  -- require'which-key'.register({ r = {
-  --   V = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", 'Inline Variable' }, -- doesn't work in php anyway
-  -- } }, { prefix = '<Leader>' })
-end
-
 plugins.refactoring_nvim = {
   'ThePrimeagen/refactoring.nvim',
   ft = {
@@ -2190,7 +2173,23 @@ plugins.refactoring_nvim = {
   },
   after = { 'plenary.nvim', 'nvim-treesitter', 'telescope.nvim', 'which-key.nvim', 'null-ls.nvim' },
   requires = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
-  config = configure_refactoring,
+  config = function() require 'refactoring'.setup {} end,
+  setup = function()
+    lvim.builtin.which_key.vmappings['r'] = {
+      name = 'Refactor',
+      v = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>", 'Extract Variable', silent = true },
+      V = { "<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", 'Inline Variable' }, -- doesn't work in php
+      e = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>", 'Extract Function', silent = true },
+      f = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>", 'Extract Function to File', silent = true },
+      t = { "<Esc><Cmd>lua require 'telescope'.extensions.refactoring.refactors()<CR>", 'Show Refactors' },
+    }
+
+    lvim.builtin.which_key.mappings['r'] = {
+      name = 'Refactor',
+      b = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Block')<CR>", 'Extract Block', silent = true },
+      f = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>", 'Extract Block to File', silent = true },
+    }
+  end,
 }
 -- }}}
 
@@ -2795,7 +2794,7 @@ lvim.lsp.buffer_mappings.normal_mode['gI'] = { '<Cmd>Telescope lsp_implementatio
 lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Goto Type Definition' }
 lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>Telescope lsp_incoming_calls<CR>', 'Incoming Calls' }
 lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>Telescope lsp_outgoing_calls<CR>', 'Outgoing Calls' }
-lvim.lsp.buffer_mappings.normal_mode['ld'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
+lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
 
 -- debugger mappings
 lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
@@ -2879,8 +2878,8 @@ lvim.builtin.which_key.mappings['l']['a'] = { function() vim.lsp.buf.code_action
 -- visual lsp functions
 lvim.builtin.which_key.vmappings['l'] = {
   name = 'LSP',
-  a = { ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", 'Code Action' },
-  f = { ":'<,'>lua vim.lsp.buf.range_formatting()<CR>", 'Format' },
+  a = { ":'<,'>lua vim.lsp.buf.code_action()<CR>", 'Code Action' },
+  f = { ":'<,'>lua vim.lsp.buf.format()<CR>", 'Format' },
 }
 
 -- diffget for mergetool
@@ -3005,7 +3004,9 @@ lvim.plugins = {
   -- plugins.tmuxline_vim, -- tmux statusline generator
   -- { 'echasnovski/mini.animate', event = 'VimEnter', config = function() require 'mini.animate'.setup {} end }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
-  -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows
+  -- { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
+  -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows (I don't need this)
+  -- { 'tiagovla/scope.nvim', event = 'BufRead', config = function() require 'scope'.setup {} end }, -- scope buffers to tabs. This is only useful when I use tabs.
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
@@ -3040,6 +3041,7 @@ lvim.plugins = {
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
+  plugins.nvim_various_textobjs, -- indent object and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
@@ -3049,13 +3051,13 @@ lvim.plugins = {
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
   plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
-  plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes
+  plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
-  plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls
+  plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls or whatever
   plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=`
   plugins.vim_matchup, -- better %
-  plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim
+  plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim or https://github.com/otavioschwanck/telescope-alternate.nvim
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions.
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
@@ -3064,13 +3066,12 @@ lvim.plugins = {
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
-  { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load)
+  { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf

@@ -28,6 +28,7 @@ Code/saatchi/**/.php-cs-fixer.php
 
 Library/LaunchAgents/mike.saatchi-tunnel.autossh.plist
 Code/saatchi/{zed,gallery,legacy}/phpstan.neon
+Code/saatchi/zed/.editorconfig
 
 # }}}
 

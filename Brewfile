@@ -448,6 +448,7 @@ cask "nvidia-geforce-now" # game streaming
 cask "postman" # http api client (I use the web interface mostly)
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
+cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 
 # }}}
 

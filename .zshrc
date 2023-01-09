@@ -563,12 +563,16 @@ pux() {
 # }}}
 
 # xdebug {{{
-xdebug-off () {
-    ( mv "$(asdf where php)"/conf.d/05_xdebug.ini{,_OLD} 2> /dev/null ) || true
+xdebug-off() {
+    local ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini")
+    [ -n $ini_file ] && mv ${ini_file}{,_OLD}
 }
 
-xdebug-on () {
-    ( mv "$(asdf where php)"/conf.d/05_xdebug.ini{_OLD,} 2>/dev/null ) || true
+xdebug-on() {
+    local ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini_OLD")
+    [ -z $ini_file ] && return
+    ini_file=$(echo ${ini_file} | sed s/_OLD//)
+    mv ${ini_file}{_OLD,}
 }
 # }}}
 
