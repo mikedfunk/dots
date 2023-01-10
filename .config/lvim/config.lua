@@ -383,6 +383,19 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes',
 }, ',') .. '}', callback = function() vim.bo.filetype = 'conf' end })
 -- }}}
 
+-- automatically jump to the last place you've visited in a file before exiting {{{
+-- https://this-week-in-neovim.org/2023/Jan/02#tips
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+-- }}}
+
 -- }}}
 
 -- lvim options {{{
@@ -1360,6 +1373,11 @@ plugins.cmp_tabnine = {
   event = 'InsertEnter',
   after = 'nvim-cmp',
   run = './install.sh',
+  cond = function()
+    -- do not enable tabnine for dotfiles. It takes tons of CPU.
+    local pwd = vim.api.nvim_exec('pwd', true)
+    return pwd:match('/Code')
+  end,
   setup = function()
     if not vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'cmp_tabnine' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'cmp_tabnine' })
@@ -1572,6 +1590,22 @@ plugins.headlines_nvim = {
   end,
 }
 -- }}}
+
+-- incolla.nvim {{{
+plugins.incolla_nvim = {
+  'mattdibi/incolla.nvim',
+  ft = 'markdown',
+  -- before = 'which-key.nvim',
+  setup = function()
+    lvim.builtin.which_key.mappings['m'] = lvim.builtin.which_key.mappings['m'] or { name = 'Markdown' }
+    lvim.builtin.which_key.mappings['m']['p'] = {
+      function() require 'incolla'.incolla() end,
+      'Paste Image',
+    }
+  end,
+  config = function() require 'incolla'.setup {} end
+}
+  -- }}}
 
 -- lsp-inlayhints.nvim {{{
 plugins.lsp_inlayhints_nvim = {
@@ -2429,6 +2463,33 @@ plugins.tmuxline_vim = {
 }
 -- }}}
 
+-- ts-node-action {{{
+plugins.ts_node_action = {
+  'CKolkey/ts-node-action',
+  ft = {
+    'php',
+    'lua',
+    'javascript',
+    'typescript',
+    'javascriptreact',
+    'typescriptreact',
+    'python',
+    'ruby',
+  },
+  after = 'which-key.nvim',
+  config = function()
+    require 'ts-node-action'.setup {}
+    if not is_installed('which-key') then return end
+    require 'which-key'.register({
+      J = {
+        function() require 'ts-node-action'.node_action() end,
+        'Split/Join'
+      },
+    }, { prefix = 'g' })
+  end,
+}
+-- }}}
+
 -- undotree {{{
 
 ---@return nil
@@ -3003,6 +3064,7 @@ lvim.plugins = {
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.nvim_various_textobjs, -- indent object and others
   -- plugins.tmuxline_vim, -- tmux statusline generator
+  -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
   -- { 'echasnovski/mini.animate', event = 'VimEnter', config = function() require 'mini.animate'.setup {} end }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows (I don't need this)
@@ -3026,6 +3088,7 @@ lvim.plugins = {
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
   plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.headlines_nvim, -- add markdown highlights
+  plugins.incolla_nvim, -- paste images in markdown. configurable.
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
@@ -3045,7 +3108,7 @@ lvim.plugins = {
   plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
   plugins.refactoring_nvim, -- refactoring plugin with telescope support
-  plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua)
+  plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua) TODO: replace with https://github.com/CKolkey/ts-node-action
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
   plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
