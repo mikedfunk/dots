@@ -12,7 +12,6 @@
 Code/saatchi/queries/**/*.sql
 Code/saatchi/uml/**/*.uml
 
-
 .config/smug/work.yml
 
 Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
