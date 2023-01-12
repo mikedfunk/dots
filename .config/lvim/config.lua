@@ -1559,6 +1559,7 @@ plugins.fold_preview_nvim = {
   ft = { 'lua', 'gitconfig', 'dosini' },
   config = function()
     require('fold-preview').setup {
+      auto = 400,
       border = 'rounded'
       -- default_keybindings = false,
     }
@@ -2378,13 +2379,13 @@ plugins.text_case_nvim = {
 ---@return nil
 local configure_todo_comments = function()
   require 'todo-comments'.setup {
-    highlight = {
-      after = '',
-      pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlightng (vim regex) https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
-    },
-    search = {
-      pattern = [[\b(KEYWORDS)]], -- ripgrep regex
-    }
+    -- highlight = {
+    --   after = '',
+    --   pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlightng (vim regex) https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
+    -- },
+    -- search = {
+    --   pattern = [[\b(KEYWORDS)]], -- ripgrep regex
+    -- }
   }
 end
 
@@ -2844,8 +2845,6 @@ plugins.zk_nvim = {
 -- }}}
 
 -- mappings (including whichkey) and commands {{{
-local mappings = {}
-
 -- lvim.keys.normal_mode['<C-s>'] = ':nohlsearch<cr>'
 lvim.keys.normal_mode['<C-w>t'] = 'mz:tabe %<cr>`z'
 lvim.keys.normal_mode['<c-l>'] = ':silent! call LocListToggle()<CR>'
@@ -2878,15 +2877,15 @@ lvim.builtin.which_key.vmappings['d']['h'] = { function() require('dapui').eval(
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
-lvim.builtin.which_key.mappings['d']['e'] = { function() require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, 'Expression Breakpoint' }
-lvim.builtin.which_key.mappings['d']['L'] = { function() require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, 'Log on line' }
+lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
+lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
 
 lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
 
 -- lvim.builtin.which_key.mappings['h'] = nil -- I map this in hop.nvim
 lvim.builtin.which_key.mappings[';'] = nil
 
-lvim.builtin.which_key.mappings['p']['C'] = { '<Cmd>PackerClean<CR>', 'Clean' }
+-- lvim.builtin.which_key.mappings['p']['C'] = { '<Cmd>PackerClean<CR>', 'Clean' }
 -- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
 local are_diagnostics_visible = true
 local toggle_diagnostics = function()
@@ -2905,7 +2904,7 @@ lvim.lsp.hover_definition = false
 ---@param client_id integer
 ---@param bufnr integer
 ---@return nil
-mappings.enable_lsp_hover_definition = function(client_id, bufnr)
+local enable_lsp_hover_definition = function(client_id, bufnr)
   local client_ok, method_supported = pcall(function()
     return vim.lsp.get_client_by_id(client_id).server_capabilities.hoverProvider
   end)
@@ -3061,7 +3060,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
   end
 
-  mappings.enable_lsp_hover_definition(client.id, bufnr)
+  enable_lsp_hover_definition(client.id, bufnr)
   plugins.symbols_outline_on_attach(client, bufnr)
   plugins.nvim_lightbulb_on_attach()
   if is_installed('neodim') then require 'neodim'.setup {} end
@@ -3144,7 +3143,6 @@ lvim.plugins = {
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
-  { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
@@ -3156,5 +3154,6 @@ lvim.plugins = {
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
   { 'zbirenbaum/neodim', event = 'BufRead' }, -- dim unused functions with lsp and treesitter
+  { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
 }
 -- }}}
