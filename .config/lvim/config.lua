@@ -1211,7 +1211,10 @@ plugins.cmp_color_names = {
 -- cmp-dap {{{
 plugins.cmp_dap = {
   'rcarriga/cmp-dap',
-  dependencies = { 'rcarriga/cmp-dap', 'hrsh7th/nvim-cmp' },
+  dependencies = {
+    'rcarriga/cmp-dap',
+    'hrsh7th/nvim-cmp',
+  },
   event = 'InsertEnter',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'dap' }) then return end
@@ -1261,7 +1264,10 @@ plugins.cmp_emoji = {
 plugins.cmp_git = {
   'petertriho/cmp-git',
   ft = { 'gitcommit', 'octo', 'markdown' },
-  dependencies = { 'hrsh7th/nvim-cmp', 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'hrsh7th/nvim-cmp',
+    'nvim-lua/plenary.nvim',
+  },
   event = 'InsertEnter',
   before = 'nvim-cmp',
   init = function()
@@ -1421,7 +1427,10 @@ plugins.cmp_tmux = {
 
 plugins.cmp_treesitter = {
   'ray-x/cmp-treesitter',
-  dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter',
+    'hrsh7th/nvim-cmp',
+  },
   event = 'InsertEnter',
   before = 'nvim-cmp',
   init = function()
@@ -1582,7 +1591,10 @@ end
 -- 2022-11-22 this plugin is no longer automatically setting up sources I had defined in automatic_setup.types. not sure why.
 plugins.mason_null_ls_nvim = {
   'jayp0521/mason-null-ls.nvim',
-  dependencies = { 'null-ls.nvim', 'mason.nvim' },
+  dependencies = {
+    'null-ls.nvim',
+    'mason.nvim',
+  },
   opts = {
     automatic_installation = { -- which null-ls sources to use default installation for
       exclude = { 'phpcs', 'phpcbf' },
@@ -1722,7 +1734,6 @@ plugins.noice_nvim = {
   'folke/noice.nvim',
   event = 'VimEnter',
   dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     'MunifTanjim/nui.nvim',
     'rcarriga/nvim-notify',
     'hrsh7th/nvim-cmp',
@@ -1798,11 +1809,12 @@ plugins.nvim_dap_tab = {
   --   'ruby',
   --   'python',
   -- },
-  -- dependencies = 'which-key.nvim',
   dependencies = {
     'mfussenegger/nvim-dap',
     'folke/which-key.nvim',
     'rcarriga/nvim-dap-ui',
+    'which-key.nvim',
+
   },
   init = function()
     lvim.builtin.which_key.mappings['d']['T'] = { function() require 'dap-tab'.verboseGoToDebugWin() end, 'Open Debug Tab' }
@@ -1878,8 +1890,10 @@ plugins.nvim_lightbulb = {
 -- nvim-scrollbar {{{
 plugins.nvim_scrollbar = {
   'petertriho/nvim-scrollbar',
-  dependencies = 'folke/tokyonight.nvim',
-  -- dependencies = 'nvim-hlslens',
+  dependencies = {
+    'folke/tokyonight.nvim',
+    -- 'nvim-hlslens',
+  },
   event = 'VimEnter',
   config = function()
     if is_installed 'hlslens' then require 'scrollbar.handlers.search'.setup() end -- for hlslens. doesn't seem to work :/
@@ -2004,8 +2018,10 @@ plugins.nvim_treesitter_textobjects = {
     'typescriptreact',
   },
   before = 'nvim-treesitter',
-  -- dependencies = 'which-key.nvim',
-  dependencies = 'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter',
+    'which-key.nvim',
+  },
   init = setup_nvim_treesitter_objects,
   config = configure_nvim_treesitter_textobjects,
 }
@@ -2109,7 +2125,7 @@ end
 plugins.phpactor_nvim = {
   'gbprod/phpactor.nvim',
   ft = 'php',
-  -- dependencies = 'which-key.nvim',
+  dependencies = 'which-key.nvim',
   config = configure_phpactor_nvim,
   -- build = function() require 'phpactor.handler.update' () end,
 }
@@ -2138,7 +2154,13 @@ plugins.refactoring_nvim = {
     'typescript',
     'typescriptreact',
   },
-  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter', 'nvim-telescope/telescope.nvim', 'folke/which-key.nvim', 'jose-elias-alvarez/null-ls.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-telescope/telescope.nvim',
+    'folke/which-key.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
+  },
   init = function()
     lvim.builtin.which_key.vmappings['r'] = {
       name = 'Refactor',
@@ -2196,7 +2218,7 @@ plugins.splitjoin_vim = {
   'AndrewRadev/splitjoin.vim',
   ft = splitjoin_filetypes,
   branch = 'main',
-  -- dependencies = 'which-key.nvim',
+  dependencies = 'which-key.nvim',
   init = setup_splitjoin,
   config = configure_splitjoin,
 }
@@ -2234,7 +2256,7 @@ plugins.symbols_outline_nvim = {
   'simrat39/symbols-outline.nvim',
   event = 'BufRead',
   -- before = 'bufferline.nvim',
-  -- dependencies = 'which-key.nvim',
+  dependencies = 'which-key.nvim',
   init = setup_symbols_outline,
   opts = {
     width = 35,
@@ -2274,7 +2296,10 @@ plugins.symbols_outline_nvim = {
 -- tabout.nvim {{{
 plugins.tabout_nvim = {
   'abecodes/tabout.nvim',
-  dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter',
+    'hrsh7th/nvim-cmp',
+  },
   event = 'InsertEnter',
 }
 -- }}}
@@ -2495,7 +2520,11 @@ plugins.vim_fugitive = {
   -- ft = { 'fugitive' },
   -- cmd = fugitive_commands,
   -- keys = 'y<c-g>',
-  dependencies = { 'tpope/vim-rhubarb', 'tyru/open-browser.vim', 'folke/which-key.nvim' },
+  dependencies = {
+    'tpope/vim-rhubarb',
+    'tyru/open-browser.vim',
+    'folke/which-key.nvim',
+  },
   config = configure_fugitive,
 }
 -- }}}
@@ -2553,7 +2582,7 @@ end
 plugins.vim_lion = {
   'tommcdo/vim-lion',
   event = 'BufRead',
-  -- dependencies = 'which-key.nvim',
+  dependencies = 'which-key.nvim',
   init = function() vim.g['lion_map_right'] = 'ga' end,
   config = configure_vim_lion,
 }
@@ -2724,7 +2753,7 @@ end
 plugins.vim_unimpaired = {
   'tpope/vim-unimpaired',
   event = 'BufRead',
-  -- dependencies = 'which-key.nvim',
+  dependencies = 'which-key.nvim',
   config = configure_vim_unimpaired,
 }
 -- }}}

@@ -1,7 +1,8 @@
 local startify_quotes = {
 
+  -- https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
   -- and some more from https://defprogramming.com
-  -- some more quotes from @codewisdom
+  -- some more quotes from @codewisdom@twitter.com
   -- { ""select" isn't broken.", "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application." },
   -- { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
   -- { "All loops are infinite ones for faulty RAM modules." },
