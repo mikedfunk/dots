@@ -2283,7 +2283,11 @@ plugins.tabout_nvim = {
 plugins.text_case_nvim = {
   'johmsalas/text-case.nvim',
   event = 'BufRead',
-  dependencies = 'folke/which-key.nvim',
+  dependencies = {
+    'folke/which-key.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-telescope/telescope.nvim',
+  },
   before = 'which-key.nvim',
   init = function()
     lvim.builtin.which_key.mappings['C'] = {
@@ -2300,7 +2304,10 @@ plugins.text_case_nvim = {
       ['.'] = { '<Cmd>TextCaseOpenTelescope<CR>', 'Telescope' },
     }
   end,
-  config = function() require 'textcase'.setup {} end,
+  config = function()
+    require 'textcase'.setup {}
+    require 'telescope'.load_extension 'textcase'
+  end,
 }
 -- }}}
 
@@ -2997,6 +3004,7 @@ end
 -- additional plugins {{{
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
+  -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
@@ -3011,7 +3019,6 @@ lvim.plugins = {
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
-  -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   plugins.cmp_dap, -- completion source for dap stuff
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
@@ -3070,7 +3077,7 @@ lvim.plugins = {
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
-  { 'kylechui/nvim-surround', event = 'BufRead' }, -- alternative to vim-surround and vim-sandwich
+  { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
