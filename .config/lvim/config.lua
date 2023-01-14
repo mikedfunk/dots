@@ -1161,23 +1161,11 @@ plugins.auto_dark_mode = {
   'f-person/auto-dark-mode.nvim',
   dependencies = 'tokyonight.nvim',
   config = function()
-    local auto_dark_mode = require 'auto-dark-mode'
-    auto_dark_mode.setup {
+    require 'auto-dark-mode'.setup {
       set_dark_mode = function() vim.o.background = 'dark' end,
       set_light_mode = function() vim.o.background = 'light' end
     }
-    auto_dark_mode.init()
-
-    -- vim.api.nvim_create_augroup('reload_lunarvim', { clear = true })
-    -- vim.api.nvim_create_autocmd('User', {
-    --   group = 'reload_lunarvim',
-    --   pattern = 'PackerCompileDone',
-    --   callback = function()
-    --     local is_auto_dark_mode_installed, auto_dark_mode = pcall(require, 'auto-dark-mode')
-    --     if not is_auto_dark_mode_installed then return end
-    --     auto_dark_mode.init()
-    --   end,
-    -- })
+    require 'auto-dark-mode'.init()
   end,
 }
 -- }}}
@@ -1204,9 +1192,6 @@ plugins.ccc_nvim = {
     'css',
     'scss',
   },
-  config = function()
-    require 'ccc'.setup {}
-  end,
 }
 --}}}
 
@@ -1219,9 +1204,6 @@ plugins.cmp_color_names = {
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'color_names' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'color_names' })
-  end,
-  config = function()
-    require 'cmp-color-names'.setup()
   end,
 }
 -- }}}
@@ -1286,11 +1268,7 @@ plugins.cmp_git = {
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'git' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'git' })
   end,
-  config = function()
-    require 'cmp_git'.setup {
-      filetypes = { 'gitcommit', 'octo', 'markdown' },
-    }
-  end,
+  opts = { filetypes = { 'gitcommit', 'octo', 'markdown' } },
 }
 -- }}}
 
@@ -1343,7 +1321,6 @@ plugins.cmp_plugins = {
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'plugins' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'plugins' })
   end,
-  config = function() require 'cmp-plugins'.setup {} end,
 }
 -- }}}
 
@@ -1524,10 +1501,7 @@ plugins.dial_nvim = {
 
 -- document-color.nvim {{{
 -- tailwind color previewing
-plugins.document_color_nvim = {
-  'mrshmllow/document-color.nvim',
-  config = function() require 'document-color'.setup {} end
-}
+plugins.document_color_nvim = { 'mrshmllow/document-color.nvim' }
 
 plugins.document_color_nvim_on_attach = function(client, bufnr)
   if not is_installed('document-color') then return end
@@ -1541,13 +1515,11 @@ end
 plugins.dressing_nvim = {
   'stevearc/dressing.nvim',
   event = 'BufReadPre',
-  config = function()
-    require 'dressing'.setup {
-      input = {
-        default_prompt = ' ', --  
-      },
-    }
-  end,
+  opts = {
+    input = {
+      default_prompt = ' ', --  
+    },
+  },
 }
 -- }}}
 
@@ -1557,25 +1529,11 @@ plugins.fold_preview_nvim = {
   dependencies = 'anuvyklack/keymap-amend.nvim',
   -- event = 'BufRead',
   ft = { 'lua', 'gitconfig', 'dosini' },
-  config = function()
-    require('fold-preview').setup {
-      auto = 400,
-      border = 'rounded'
-      -- default_keybindings = false,
-    }
-
-    -- local keymap = vim.keymap
-    -- keymap.amend = require('keymap-amend')
-    -- local map = require('fold-preview').mapping
-
-    -- keymap.amend('n', 'K', map.show_close_preview_open_fold)
-    -- keymap.amend('n', 'l',  map.close_preview_open_fold)
-    -- keymap.amend('n', 'zo', map.close_preview)
-    -- keymap.amend('n', 'zO', map.close_preview)
-    -- keymap.amend('n', 'zc', map.close_preview_without_defer)
-    -- keymap.amend('n', 'zR', map.close_preview)
-    -- keymap.amend('n', 'zM', map.close_preview_without_defer)
-  end
+  opts = {
+    auto = 400,
+    border = 'rounded'
+    -- default_keybindings = false,
+  },
 }
 
 -- }}}
@@ -1584,9 +1542,7 @@ plugins.fold_preview_nvim = {
 plugins.headlines_nvim = {
   'lukas-reineke/headlines.nvim',
   ft = 'markdown',
-  config = function()
-    require('headlines').setup { markdown = { fat_headlines = false } }
-  end,
+  opts = { markdown = { fat_headlines = false } },
 }
 -- }}}
 
@@ -1602,13 +1558,13 @@ plugins.incolla_nvim = {
       'Paste Image',
     }
   end,
-  config = function() require 'incolla'.setup {} end
 }
   -- }}}
 
 -- lsp-inlayhints.nvim {{{
 plugins.lsp_inlayhints_nvim = {
   'lvimuser/lsp-inlayhints.nvim',
+  opts = {}
 }
 
 ---@param client table
@@ -1627,25 +1583,23 @@ end
 plugins.mason_null_ls_nvim = {
   'jayp0521/mason-null-ls.nvim',
   dependencies = { 'null-ls.nvim', 'mason.nvim' },
-  config = function()
-    require 'mason-null-ls'.setup {
-      automatic_installation = { -- which null-ls sources to use default installation for
-        exclude = { 'phpcs', 'phpcbf' },
-      },
-      -- automatic_setup = {
-      --   types = {
-      --     -- spectral = { 'diagnostics' }, -- tries to run yarn clean which doesn't exist
-      --     blade_formatter = { 'formatting' },
-      --     cbfmt = { 'formatting' },
-      --     gitlint = { 'diagnostics' },
-      --     refactoring = { 'code_actions' },
-      --     spell = { 'completion' },
-      --     php = { 'diagnostics' },
-      --     zsh = { 'diagnostics' },
-      --   },
-      -- },
-    }
-  end
+  opts = {
+    automatic_installation = { -- which null-ls sources to use default installation for
+      exclude = { 'phpcs', 'phpcbf' },
+    },
+    -- automatic_setup = {
+    --   types = {
+    --     -- spectral = { 'diagnostics' }, -- tries to run yarn clean which doesn't exist
+    --     blade_formatter = { 'formatting' },
+    --     cbfmt = { 'formatting' },
+    --     gitlint = { 'diagnostics' },
+    --     refactoring = { 'code_actions' },
+    --     spell = { 'completion' },
+    --     php = { 'diagnostics' },
+    --     zsh = { 'diagnostics' },
+    --   },
+    -- },
+  },
 }
 -- }}}
 
@@ -1745,10 +1699,9 @@ plugins.modes_nvim = {
     -- https://github.com/mvllow/modes.nvim#known-issues
     lvim.builtin.which_key.setup.plugins.presets.operators = false
   end,
-  config = function() require 'modes'.setup {
-      ignored_filetypes = { 'startify' }
-    }
-  end,
+  opts = {
+    ignored_filetypes = { 'startify' }
+  },
 }
 -- }}}
 
@@ -1768,7 +1721,6 @@ plugins.neoscroll_nvim = {
 plugins.noice_nvim = {
   'folke/noice.nvim',
   event = 'VimEnter',
-  config = function() require('noice').setup() end,
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     'MunifTanjim/nui.nvim',
@@ -1782,19 +1734,17 @@ plugins.noice_nvim = {
 plugins.notifier_nvim = {
   'vigoux/notifier.nvim',
   event = 'BufRead',
-  config = function()
-    require 'notifier'.setup {
-      ignore_messages = {
-        'codespell',
-        'null-ls', -- ignores diagnostics_on_open, not sure why
-      }, -- ignore messages _from LSP servers_ with this name
-      notify = {
-        clear_timer = 5000, -- default 5000
-        min_level = vim.log.levels.WARN, -- default INFO (hide No information available)
-      },
-      component_name_recall = true,
-    }
-  end
+  opts = {
+    ignore_messages = {
+      'codespell',
+      'null-ls', -- ignores diagnostics_on_open, not sure why
+    }, -- ignore messages _from LSP servers_ with this name
+    notify = {
+      clear_timer = 5000, -- default 5000
+      min_level = vim.log.levels.WARN, -- default INFO (hide No information available)
+    },
+    component_name_recall = true,
+  },
 }
 -- }}}
 
@@ -1802,12 +1752,10 @@ plugins.notifier_nvim = {
 plugins.numb_nvim = {
   'nacro90/numb.nvim',
   event = 'CmdlineEnter',
-  config = function()
-    require 'numb'.setup {
-      show_numbers = true, -- Enable 'number' for the window while peeking
-      show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-    }
-  end,
+  opts = {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  },
 }
 -- }}}
 
@@ -1824,22 +1772,17 @@ plugins.nvim_bqf = {
 
 -- nvim_context_vt {{{
 
----@return nil
-local configure_nvim_context_vt = function()
-  require 'nvim_context_vt'.setup {
+plugins.nvim_context_vt = {
+  'haringsrob/nvim_context_vt',
+  event = 'BufRead',
+  opts = {
     ---@param node table
     ---@return string|nil
     custom_text_handler = function(node)
       if not is_installed 'nvim-treesitter' then return nil end
       return '↩ ' .. vim.treesitter.query.get_node_text(node, 0)[1]
     end
-  }
-end
-
-plugins.nvim_context_vt = {
-  'haringsrob/nvim_context_vt',
-  event = 'BufRead',
-  config = configure_nvim_context_vt,
+  },
 }
 -- }}}
 
@@ -1880,22 +1823,18 @@ plugins.nvim_femaco_lua = {
       }, }, { prefix = '<Leader>' })
     end
   end,
-  config = function()
-    require('femaco').setup()
-  end,
 }
 -- }}}
 
 -- nvim-hlslens {{{
 plugins.nvim_hlslens = {
   'kevinhwang91/nvim-hlslens',
+  -- taken from minimal config https://github.com/kevinhwang91/nvim-hlslens#minimal-configuration
   config = function()
-    -- taken from minimal config https://github.com/kevinhwang91/nvim-hlslens#minimal-configuration
-    require 'hlslens'.setup {
+    require 'nvim-hlslens'.setup {
       -- calm_down = true,
       -- nearest_only = true,
     }
-
     vim.keymap.set('n', 'n',
       [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
       { noremap = true, silent = true })
@@ -2102,7 +2041,6 @@ plugins.nvim_various_textobjs = {
 
 -- org-bullets.nvim {{{
 local configure_org_bullets = function()
-  require 'org-bullets'.setup {}
   require 'org-bullets'.__init() -- init on first entering markdown file
 
   -- setup autocmd for future entering of markdown files
@@ -2135,7 +2073,6 @@ local configure_phpactor_nvim = function()
       path = mason_path .. '/packages/phpactor',
     }
   }
-
   if not is_installed('which-key') then return end
 
   require 'which-key'.register({ r = {
@@ -2183,7 +2120,6 @@ plugins.range_highlight_nvim = {
   'winston0410/range-highlight.nvim',
   event = 'CmdlineEnter',
   dependencies = 'winston0410/cmd-parser.nvim',
-  config = function() require 'range-highlight'.setup {} end,
 }
 -- }}}
 
@@ -2203,7 +2139,6 @@ plugins.refactoring_nvim = {
     'typescriptreact',
   },
   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter', 'nvim-telescope/telescope.nvim', 'folke/which-key.nvim', 'jose-elias-alvarez/null-ls.nvim' },
-  config = function() require 'refactoring'.setup {} end,
   init = function()
     lvim.builtin.which_key.vmappings['r'] = {
       name = 'Refactor',
@@ -2301,40 +2236,38 @@ plugins.symbols_outline_nvim = {
   -- before = 'bufferline.nvim',
   -- dependencies = 'which-key.nvim',
   init = setup_symbols_outline,
-  config = function()
-    require 'symbols-outline'.setup {
-      width = 35,
-      relative_width = false,
-      auto_close = true,
-      -- highlight_hovered_item = false,
-      -- auto_preview = true,
-      autofold_depth = 2,
-      auto_unfold_hover = false,
-      -- possible values https://github.com/simrat39/symbols-outline.nvim/blob/master/lua/symbols-outline/symbols.lua
-      -- symbol_blacklist = {
-      --   -- works best for object-oriented code
-      --   'Field',
-      --   'Function',
-      --   'Key',
-      --   'Variable',
-      -- },
-      symbols = {
-        Class = { icon = '' },
-        Constant = { icon = '' },
-        Constructor = { icon = '' },
-        Enum = { icon = '了' },
-        EnumMember = { icon = '' },
-        File = { icon = '' },
-        Function = { icon = '' },
-        Interface = { icon = 'ﰮ' },
-        Method = { icon = 'ƒ' },
-        Module = { icon = '' },
-        Property = { icon = '' },
-        Struct = { icon = '' },
-        Variable = { icon = '' },
-      },
-    }
-  end
+  opts = {
+    width = 35,
+    relative_width = false,
+    auto_close = true,
+    -- highlight_hovered_item = false,
+    -- auto_preview = true,
+    autofold_depth = 2,
+    auto_unfold_hover = false,
+    -- possible values https://github.com/simrat39/symbols-outline.nvim/blob/master/lua/symbols-outline/symbols.lua
+    -- symbol_blacklist = {
+    --   -- works best for object-oriented code
+    --   'Field',
+    --   'Function',
+    --   'Key',
+    --   'Variable',
+    -- },
+    symbols = {
+      Class = { icon = '' },
+      Constant = { icon = '' },
+      Constructor = { icon = '' },
+      Enum = { icon = '了' },
+      EnumMember = { icon = '' },
+      File = { icon = '' },
+      Function = { icon = '' },
+      Interface = { icon = 'ﰮ' },
+      Method = { icon = 'ƒ' },
+      Module = { icon = '' },
+      Property = { icon = '' },
+      Struct = { icon = '' },
+      Variable = { icon = '' },
+    },
+  },
 }
 -- }}}
 
@@ -2343,9 +2276,6 @@ plugins.tabout_nvim = {
   'abecodes/tabout.nvim',
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
   event = 'InsertEnter',
-  config = function()
-    require 'tabout'.setup {}
-  end,
 }
 -- }}}
 
@@ -2376,9 +2306,11 @@ plugins.text_case_nvim = {
 
 -- todo-comments.nvim {{{
 
----@return nil
-local configure_todo_comments = function()
-  require 'todo-comments'.setup {
+plugins.todo_comments_nvim = {
+  'folke/todo-comments.nvim',
+  dependencies = 'nvim-lua/plenary.nvim',
+  event = 'BufRead',
+  opts = {
     -- highlight = {
     --   after = '',
     --   pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlightng (vim regex) https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
@@ -2386,14 +2318,7 @@ local configure_todo_comments = function()
     -- search = {
     --   pattern = [[\b(KEYWORDS)]], -- ripgrep regex
     -- }
-  }
-end
-
-plugins.todo_comments_nvim = {
-  'folke/todo-comments.nvim',
-  dependencies = 'nvim-lua/plenary.nvim',
-  event = 'BufRead',
-  config = configure_todo_comments,
+  },
   init = function()
     if not is_installed('which-key') then return end
     require 'which-key'.register({ s = { T = { '<Cmd>TodoTelescope<CR>', 'Todos' } } }, { prefix = '<leader>' })
@@ -2836,9 +2761,9 @@ plugins.zk_nvim = {
     -- vim.api.nvim_create_augroup('zk_conceal', { clear = true })
     -- vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'zk_conceal', callback = setup_zk_conceal })
   end,
-  config = function()
-    require 'zk'.setup()
-  end
+  -- config = function()
+  --   require 'zk'.setup()
+  -- end
 }
 -- }}}
 
@@ -3079,14 +3004,14 @@ lvim.plugins = {
   -- plugins.nvim_various_textobjs, -- indent object and others
   -- plugins.tmuxline_vim, -- tmux statusline generator
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
-  -- { 'echasnovski/mini.animate', event = 'VimEnter', config = function() require 'mini.animate'.setup {} end }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
+  -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
-  -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead', config = function() require 'colorful-winsep'.setup {} end }, -- just a clearer separator between windows (I don't need this)
-  -- { 'tiagovla/scope.nvim', event = 'BufRead', config = function() require 'scope'.setup {} end }, -- scope buffers to tabs. This is only useful when I use tabs.
+  -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
+  -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
-  plugins.cmp_color_names, -- css color names like SteelBlue, etc.
+  -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   plugins.cmp_dap, -- completion source for dap stuff
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
@@ -3095,8 +3020,8 @@ lvim.plugins = {
   plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
   plugins.cmp_rg, -- might help to include comments, strings, etc. in other files. This is actually really useful! (makes expensive rg calls regularly, caught in htop)
   plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
-  plugins.cmp_tmux, -- Add a tmux source to nvim-cmp
-  plugins.cmp_treesitter, -- cmp completion source for treesitter
+  plugins.cmp_tmux, -- Add a tmux source to nvim-cmp (all text in all tmux windows/panes)
+  plugins.cmp_treesitter, -- cmp completion source for treesitter nodes
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
@@ -3145,7 +3070,7 @@ lvim.plugins = {
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
-  { 'kylechui/nvim-surround', event = 'BufRead', config = function() require 'nvim-surround'.setup {} end }, -- alternative to vim-surround and vim-sandwich
+  { 'kylechui/nvim-surround', event = 'BufRead' }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
