@@ -425,6 +425,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'bashls',
   'cssls',
   'dockerls',
+  'emmet_ls',
   'eslint', -- eslint-lsp
   'jsonls',
   'lemminx',
@@ -438,17 +439,18 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
-  -- 'emmet_ls',
   -- 'glint', -- typed ember
   -- 'graphql',
-  -- 'intelephense',
-  -- 'phpactor',
+  -- 'intelephense', -- I customze the ocnfig
+  -- 'nginx-language-server', -- not in lspconfig
+  -- 'phpactor', -- I use intelephense instead
   -- 'prismals', -- node ORM
   -- 'relay_lsp', -- react framework
+  -- 'remark-language-server', -- not in lspconfig
   -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'taplo',
-  -- 'tsserver',
+  -- 'tsserver', -- handled by typescript.nvim instead
   -- 'vimls',
 }
 
@@ -913,7 +915,6 @@ end
 
 -- code actions {{{
 require 'lvim.lsp.null-ls.code_actions'.setup {
-  { name = 'eslint' },
   { name = 'gitrebase' }, -- just provides helpers to switch pick to fixup, etc.
   { name = 'refactoring' },
   { name = 'proselint' }, -- trying this out for markdown
@@ -1615,7 +1616,7 @@ plugins.lsp_inlayhints_on_attach = function(client, bufnr)
   local is_lsp_inlayhints_installed, lsp_inlayhints = pcall(require, 'lsp-inlayhints')
   if not is_lsp_inlayhints_installed then return end
   lsp_inlayhints.on_attach(client, bufnr)
-  vim.cmd 'hi link LspInlayHint Comment'
+  -- vim.cmd 'hi link LspInlayHint Comment'
 end
 -- }}}
 
@@ -1796,7 +1797,7 @@ plugins.notifier_nvim = {
       clear_timer = 5000, -- default 5000
       min_level = vim.log.levels.WARN, -- default INFO (hide No information available)
     },
-    component_name_recall = true,
+    -- component_name_recall = true, -- Whether to prefix the title of the notification by the component name (e.g. lsp:null-ls)
   },
 }
 -- }}}

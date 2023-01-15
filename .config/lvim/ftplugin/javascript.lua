@@ -1,5 +1,6 @@
 local pwd = vim.api.nvim_exec('pwd', true)
-if not pwd:match '/Code/saatchi/.*' then require 'lvim.lsp.manager'.setup 'tsserver' end
+-- if not pwd:match '/Code/saatchi/.*' then require 'lvim.lsp.manager'.setup 'tsserver' end
+if pwd:match '/Code/saatchi/.*' then vim.bo.filetype = 'javascriptreact' end
 
 local should_setup_flow = require 'saatchiart.plugin_configs'.should_setup_flow() and is_installed 'lspconfig'
 
