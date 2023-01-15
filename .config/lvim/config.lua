@@ -467,7 +467,7 @@ end
 
 -- intelephense: moved to ./ftplugin/php.lua
 -- flow: moved to ./ftplugin/javascript.lua
--- tsserver: moved to ./ftplugin/javascript.lua and ./ftplugin/typescriptreact.lua
+-- tsserver: moved to typescript.nvim
 -- }}}
 
 -- builtin plugins {{{
@@ -2529,6 +2529,29 @@ plugins.ts_node_action = {
 }
 -- }}}
 
+-- typescript.nvim {{{
+plugins.typescript_nvim = {
+  'jose-elias-alvarez/typescript.nvim',
+  dependencies = 'jose-elias-alvarez/null-ls.nvim',
+  ft = {
+    'typescript',
+    'typescriptreact',
+  },
+  config = function()
+    require 'typescript'.setup {
+      server = {
+        on_attach = require 'lvim.lsp'.common_on_attach,
+        on_init = require 'lvim.lsp'.common_on_init,
+        on_exit = require 'lvim.lsp'.common_on_exit,
+        capabilities = require 'lvim.lsp'.common_capabilities(),
+      }
+    }
+
+    require 'null-ls'.setup { sources = { require 'typescript.extensions.null-ls.code-actions' } }
+  end
+}
+-- }}}
+
 -- undotree {{{
 
 ---@return nil
@@ -3150,6 +3173,7 @@ lvim.plugins = {
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
   plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
+  plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
@@ -3166,6 +3190,7 @@ lvim.plugins = {
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
+  { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn["mkdp#util#install"]() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
