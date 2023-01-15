@@ -19,7 +19,6 @@
 # tap "xvxx/code" # shy
 tap "buo/cask-upgrade" # for `brew cu`
 tap "derailed/k9s" # k9s
-tap "getantibody/tap" # antibody
 tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
@@ -33,7 +32,8 @@ tap "mutagen-io/mutagen"
 # brew "ansible" # used in some of my company-specific stuff to run ssh commands on multiple servers.
 # brew "ansifilter" # filter out ansi codes. used by tmux-logging tpm plugin.
 # brew "ant" # apache build tool
-# brew "antigen" # zsh package manager. I switched to antibody for speed
+# brew "antibody" # like antigen but faster! (zsh plugin system) (archived - replaced with antidote)
+# brew "antigen" # zsh package manager. I switched to ~antibody~ antidote for speed
 # brew "autojump" # used by zsh-autocomplete to display recent directories
 # brew "bandwhich" # top-like tool to see which processes are using the most bandwidth (sudo bandwhich)
 # brew "bash" # for extrakto
@@ -199,12 +199,12 @@ tap "mutagen-io/mutagen"
 # brew "yarn" # wrapper for npm with real lock files and caching (installing via npm is deprecated, but installing it here causes problems with asdf nodejs :/ ) (used by cloudbeaver: mysql web app)
 # brew "yq" # jq is to json what yq is to yaml (and xml!). yaml parser and searcher. I use it to read configs my circleci stuff, etc. (I use the python-yq version instead because it also installs xq)
 # brew "zork" # seriously? yes. tip: `save` and `restore` And yes, there's only one save slot, what do you think this is, 1990?
-# brew "zplug" # zsh plugin manager like composer. bash installer crashes for some reason. works fine via homebrew. (switched to antibody)
+# brew "zplug" # zsh plugin manager like composer. bash installer crashes for some reason. works fine via homebrew. (switched to ~antibody~ antidote)
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "akamai" # interact with akamai caching
-brew "antibody" # like antigen but faster! (zsh plugin system)
+brew "antidote" # zsh plugin system like antigen but faster
 brew "apr" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "apr-util" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "argon2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1

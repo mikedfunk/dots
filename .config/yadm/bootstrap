@@ -604,20 +604,19 @@ _install_cod () {
     _has cod && return
     _log_info "Installing cod"
     builtin cd || return
-    wget https://github.com/dim-an/cod/releases/download/v0.0.0/cod-Darwin.tgz
-    tar xzvf cod-Darwin.tgz
-    mv cod-Darwin/cod /usr/local/bin/
+    wget https://github.com/dim-an/cod/releases/download/v0.1.0/cod-darwin-amd64.tgz
+    tar xzvf cod-darwin-amd64.tgz
+    mv ./cod /usr/local/bin/
     chmod +x /usr/local/bin/cod
-    rm -rf cod-Darwin
+    rm cod-darwin-amd64.tgz
     builtin cd - || return
 }
 # }}}
 
-# antibody {{{
-_update_antibody_plugins () {
-    _log_info "Updating antibody plugins"
-    # source <(antibody init)
-    antibody update # update all packages
+# antidote {{{
+_update_antidote_plugins () {
+    _log_info "Updating antidote plugins"
+    antidote update --bundles # update all packages
 }
 # }}}
 
@@ -779,13 +778,13 @@ _install_tmux_plugin_manager
 _install_upgrade_tmux_plugins
 _install_lunarvim
 _install_upgrade_lvim_plugins
-_update_antibody_plugins
+_update_antidote_plugins
 _apply_hosts_file
 _enable_terminal_text_formattting
 _apply_mac_preferences
 _start_launch_agents
 # _fix_file_size_limit_for_watching_with_entr
-_install_cod
+# _install_cod
 _install_fzf_to_shell
 _update_asdf_plugins
 _fix_delta_syntax_highlighting_for_php

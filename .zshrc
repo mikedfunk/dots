@@ -125,48 +125,13 @@ zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 bindkey '^q' push-line-or-edit
 # }}}
 
-# antibody zsh plugins (#slow) {{{
-# make oh-my-zsh plugins work with antibody... this is kind of crazy
-ZSH="$HOME/Library/Caches/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-# If I re-source antibody init a second time it takes MINUTES to reinit. Even
-# if I re-run antibody bundle commands it takes progressively longer each time
-# I reload. Better to just run once on load. Only takes 3 seconds the first
-# time.
-if [[ ! $ANTIBODY_LOADED ]]; then
-    source <(antibody init)
-
-    # antibody bundle dim-an/cod tries to call compdef for bash... wtf
-    # antibody bundle djui/alias-tips # tell you when an alias would shorten the command you ran
-    # antibody bundle marlonrichert/zsh-autocomplete branch:main # automatically show flags/options completion (this plugin is really janky)
-    # antibody bundle mfaerevaag/wd # warp directory
-    # antibody bundle oldratlee/hacker-quotes # just add some cool hacker quotes in shell init like MOTD
-    # antibody bundle paulmelnikow/zsh-startup-timer # uncomment to show startup time. This plugin itself is slow, but helpful to measure once in a while.
-    # antibody bundle qoomon/zsh-lazyload # lazyload various commands (broken)
-    # antibody bundle sei40kr/fast-alias-tips-bin branch:v0.1.1 (doesn't work - he doesn't put the executable on a branch, it's in a release, which antibody doesn't know how to get)
-    # antibody bundle sei40kr/zsh-fast-alias-tips (this does not play nice with antibody)
-    # antibody bundle zdharma-continuum/zsh-startify # like vim-startify for zsh (neat, but doesn't really help)
-    # antibody bundle zsh-users/zsh-history-substring-search # up arrow after typing part of command (not needed with fzf reverse i-search)
-    # antibody bundle zsh-users/zsh-syntax-highlighting # colored input... replaced with fast-syntax-highlighting below
-    antibody bundle hlissner/zsh-autopair # auto close parens, etc.
-    antibody bundle marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
-    antibody bundle mroth/evalcache # speeds up subsequent runs of eval init functions. if you make a change just call `_evalcache_clear`.
-    antibody bundle robbyrussell/oh-my-zsh path:lib/functions.zsh # some dependencies for oh-my-zsh plugins
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/alias-finder # supposed to be 10x faster than alias-tips O_O https://github.com/djui/alias-tips/issues/49#issuecomment-569726313
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/colored-man-pages
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/colorize # Plugin for highlighting file content
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/command-not-found # suggest packages to install if command not found
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/gitfast # fix git completion issues https://unix.stackexchange.com/a/204308 downside: this also adds a TON of gxx aliases https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/gitfast it also adds MORE git aliases and functions from the main git plugin https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/jira # simple command-line tool that just opens jira on different pages. No fancy shit.
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/vi-mode
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/wd/wd.plugin.zsh # warp directory
-    antibody bundle romkatv/powerlevel10k # zsh prompt theme (see ~/.p10k.zsh)
-    antibody bundle yous/vanilli.sh # sensible zsh defaults
-    antibody bundle zdharma-continuum/fast-syntax-highlighting # colored input but faster
-    antibody bundle zsh-users/zsh-autosuggestions # OLD COMMENT: buggy if enabled along with zsh-syntax-highlighting. crashes the shell regularly.
-    antibody bundle zsh-users/zsh-completions # do-everything argument completions
-
-    ANTIBODY_LOADED=1
-fi
+# antidote zsh plugins (#slow) {{{
+# make oh-my-zsh plugins work with antidote... this is kind of crazy
+ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+( brew list | grep antidote > /dev/null ) \
+    && source $(brew --prefix antidote)/share/antidote/antidote.zsh \
+    && antidote load
+# zsh plugins are in ~/.zsh_plugins.txt
 # }}}
 
 # source additional files and env vars {{{
@@ -174,7 +139,6 @@ fi
 autoload -Uz compinit
 compinit
 
-_has cod && source <(cod init $$ zsh)
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 # _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="TwoDark"
@@ -191,11 +155,10 @@ export COMPOSE_HTTP_TIMEOUT=120 # default is 60
 export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
 [ -f ~/.private_vars.sh ] && source ~/.private_vars.sh # where I store my secret env vars
 [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
-# https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
-[ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem
+[ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
-export ASDF_DIR="$(brew --prefix asdf)/libexec" # this used to not need to be set but something changed https://github.com/asdf-vm/asdf/issues/1103
-[ -f "$ASDF_DIR"/asdf.sh ] && source "$ASDF_DIR"/asdf.sh
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1103
+( antidote list | grep dim-an/cod > /dev/null ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
 
 # evaluated startup commands {{{
 _has mutagen && mutagen daemon start
@@ -587,6 +550,7 @@ xdebug-on() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fuzzy finder - installed via yadm bootstrap
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
+# _has cod && source <(cod init $$ zsh) # does not work well on arm64
 # }}}
 
 # zsh options {{{
