@@ -24,7 +24,7 @@ Light mode:
 - [Luasnip php snippets](.config/lvim/luasnippets/php.lua)
 - [Collection of engineering quotes](.config/lvim/lua/mikedfunk/startify_quotes.lua)
 - [Zshrc](.zshrc)
-- [Zsh plugins managed by antidote](.zsh_plugins.txt)
+- [Zsh plugins](.zsh_plugins.txt)
 - [P10k prompt config](.p10k.zsh)
 - [Git config](.config/git/config)
 - [Tig config](.config/tig/config)

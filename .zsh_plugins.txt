@@ -1,4 +1,6 @@
 # vim: set ft=dosini:
+# managed by [antidote](https://github.com/mattmc3/antidote)
+# compiles to ./.zsh_plugins.zsh by ./.zshrc antidote setup
 
 # dim-an/cod kind:clone # tries to call bash completion, doesn't work well with arm64
 # djui/alias-tips # tell you when an alias would shorten the command you ran
