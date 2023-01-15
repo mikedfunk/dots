@@ -743,6 +743,8 @@ lvim.builtin.mason.ui.icons = {
 
 lvim.builtin.cmp.cmdline.enable = true
 
+-- table.insert(lvim.builtin.cmp.cmdline.options[2].sources, { name = 'nvim_lsp_document_symbol' })
+
 -- lvim.builtin.cmp.experimental.ghost_text = true
 
 lvim.builtin.cmp.formatting.source_names['buffer'] = ''
@@ -805,7 +807,7 @@ lvim.lsp.null_ls.setup.debug = true -- turn on debug null-ls logging: tail -f ~/
 -- linters {{{
 
 require 'lvim.lsp.null-ls.linters'.setup {
-  { name = 'codespell', extra_args = { '--ignore-words-list', 'tabe' } },
+  -- { name = 'codespell', extra_args = { '--ignore-words-list', 'tabe' } },
   { name = 'gitlint' },
   {
     name = 'phpcs',
@@ -840,6 +842,19 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'trail_space' },
   { name = 'zsh' },
 }
+
+
+if is_null_ls_installed then
+  null_ls.setup { sources = {
+    null_ls.builtins.diagnostics.codespell.with {
+      -- force the severity to be HINT
+      diagnostics_postprocess = function(diagnostic)
+        diagnostic.severity = vim.diagnostic.severity.HINT
+      end,
+      extra_args = { '--ignore-words-list', 'tabe' },
+    }
+  } }
+end
 
 -- }}}
 
@@ -885,13 +900,13 @@ require 'lvim.lsp.null-ls.formatters'.setup {
 
 if is_null_ls_installed then
   null_ls.setup { sources = {
-    null_ls.builtins.formatting.phpcbf.with({
+    null_ls.builtins.formatting.phpcbf.with {
       command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
       extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
       condition = function()
         return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
       end,
-    })
+    }
   } } -- @diagnostic disable-line redundant-parameter
 end
 -- }}}
@@ -911,9 +926,10 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 -- }}}
 
 -- completion {{{
-if is_null_ls_installed then null_ls.setup {
-    sources = { null_ls.builtins.completion.spell },
-  }
+if is_null_ls_installed then
+  null_ls.setup { sources = {
+    null_ls.builtins.completion.spell
+  } }
 end ---@diagnostic disable-line redundant-parameter
 -- }}}
 
@@ -996,22 +1012,37 @@ if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '.git') then
 -- nvim-treesitter {{{
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { 'php' } -- needed to make non-treesitter indent work
 
--- NOTE: doesn't work that well for PHP. It seems to be skipping functions, but works for classes and blocks.
--- vim.api.nvim_create_augroup('treesitter_foldexpr', { clear = true })
--- vim.api.nvim_create_autocmd('FileType', { pattern = 'php,javascript,ruby,python,go', group = 'treesitter_foldexpr',
---   callback = function()
---     if vim.wo.foldmethod == 'marker' then return end
---     vim.wo.foldmethod = 'expr'
---     vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
---     vim.wo.foldlevel = 99
---   end,
--- })
+vim.api.nvim_create_augroup('treesitter_foldexpr', { clear = true })
+vim.api.nvim_create_autocmd(
+  'FileType',
+  {
+    pattern = table.concat({
+      'php',
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'ruby',
+      'python',
+      'go',
+    }, ','),
+    group = 'treesitter_foldexpr',
+    callback = function()
+      if vim.wo.foldmethod == 'marker' then return end
+      vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.wo.foldlevel = 99
+    end,
+  }
+)
 
 lvim.builtin.treesitter.ensure_installed = {
+  'lua', -- update to latest
   'markdown_inline',
   'phpdoc',
   'regex', -- used by php-enhanced-treesitter
   'sql', -- used by php-enhanced-treesitter
+  'vim', -- MUST update from the built-in or my config will cause problems when trying to display
 }
 
 lvim.builtin.treesitter.context_commentstring.config.gitconfig = '# %s'
@@ -1281,8 +1312,8 @@ plugins.cmp_git = {
 -- cmp-nvim-lsp-document-symbol {{{
 local setup_cmp_nvim_lsp_document_symbol = function()
   local symbol_source = {
-    sources = { { name = 'nvim_lsp_document_symbol', option = {} } },
-    type = '/',
+    sources = require 'cmp'.config.sources { { name = 'nvim_lsp_document_symbol', option = {} } },
+    type = { '/' },
   }
   if vim.tbl_contains(lvim.builtin.cmp.cmdline.options, symbol_source) then return end
 
@@ -1293,9 +1324,10 @@ end
 
 plugins.cmp_nvim_lsp_document_symbol = {
   'hrsh7th/cmp-nvim-lsp-document-symbol',
-  dependencies = 'hrsh7th/nvim-cmp',
-  before = 'nvim-cmp',
-  event = 'InsertEnter',
+  dependencies = { 'hrsh7th/nvim-cmp', 'hrsh7th/cmp-cmdline' },
+  -- before = 'nvim-cmp',
+  -- event = 'InsertEnter',
+  event = 'CmdlineEnter',
   init = setup_cmp_nvim_lsp_document_symbol
 }
 -- }}}
@@ -1536,8 +1568,8 @@ plugins.dressing_nvim = {
 plugins.fold_preview_nvim = {
   'anuvyklack/fold-preview.nvim',
   dependencies = 'anuvyklack/keymap-amend.nvim',
-  -- event = 'BufRead',
-  ft = { 'lua', 'gitconfig', 'dosini' },
+  event = 'BufRead',
+  -- ft = { 'lua', 'gitconfig', 'dosini' },
   opts = {
     auto = 400,
     border = 'rounded'
@@ -1721,7 +1753,17 @@ plugins.modes_nvim = {
 plugins.neoscroll_nvim = {
   'karb94/neoscroll.nvim',
   dependencies = 'which-key.nvim',
-  keys = { '<C-u>', '<C-d>', '<C-f>', '<C-b>', 'zz', 'zt', 'zb', 'gg', 'G' },
+  keys = {
+    '<C-u>',
+    '<C-d>',
+    '<C-f>',
+    '<C-b>',
+    'zz',
+    'zt',
+    'zb',
+    'gg',
+    'G',
+  },
   config = function()
     require 'neoscroll'.setup { easing_function = 'cubic' }
     if is_installed('which-key') then require 'which-key'.register({ g = { 'Go to top of file' } }, { prefix = 'g' }) end
@@ -1915,7 +1957,12 @@ plugins.nvim_scrollbar = {
 plugins.nvim_treesitter_endwise = {
   'RRethy/nvim-treesitter-endwise',
   -- event = 'BufRead',
-  ft = { 'ruby', 'lua', 'zsh', 'bash' },
+  ft = {
+    'ruby',
+    'lua',
+    'zsh',
+    'bash',
+  },
   before = 'nvim-treesitter',
   init = function()
     lvim.builtin.treesitter.endwise = { enable = true }
@@ -2082,11 +2129,14 @@ plugins.org_bullets = {
 
 -- phpactor_nvim {{{
 local configure_phpactor_nvim = function()
+  local php_bin_path = vim.fn.getenv('HOME') .. '/.asdf/installs/php/8.2.0/bin'
   require 'phpactor'.setup {
     lspconfig = { enabled = false },
     install = {
       bin = mason_path .. '/bin/phpactor',
       path = mason_path .. '/packages/phpactor',
+      php_bin = php_bin_path .. '/php',
+      composer_bin = php_bin_path .. '/composer',
     }
   }
   if not is_installed('which-key') then return end
@@ -2101,15 +2151,25 @@ local configure_phpactor_nvim = function()
     i = { '<Cmd>PhpActor class_inflect<CR>', 'PHP Inflect Class' },
     I = { '<Cmd>PhpActor import_missing_classes<CR>', 'PHP Import Missing' },
     p = { '<Cmd>PhpActor transform<CR>', 'PHP Add Missing Properties' },
-    -- expand_class
-    -- generate_accessor
-    -- import_class
+
+    -- class options:
+    --
+    -- goto_definition
+    -- hover
+    -- copy
+    -- generate_accessor (doesn't work... something about nullable)
+    -- import_missing_classes
+    -- find_references
+    -- transform_file
+    -- replace_references
+    -- generate_mutator (doesn't work... something about nullable)
+    -- override_method (useful! filter through parent methods to copy empty signature to)
+    -- inflect
+    -- goto_implementation
+    -- class_new
+    -- move
+    -- import
     -- navigate
-    -- new_class
-    -- update
-    -- config
-    -- status
-    -- cache_clear
   } }, { prefix = '<Leader>' })
 
   require 'which-key'.register({ r = {
@@ -2125,9 +2185,13 @@ end
 plugins.phpactor_nvim = {
   'gbprod/phpactor.nvim',
   ft = 'php',
-  dependencies = 'which-key.nvim',
+  dependencies = {
+    'folke/which-key.nvim',
+    'neovim/nvim-lspconfig',
+    'nvim-lua/plenary.nvim',
+  },
   config = configure_phpactor_nvim,
-  -- build = function() require 'phpactor.handler.update' () end,
+  build = function() require 'phpactor.handler.update' () end,
 }
 -- }}}
 
@@ -2859,8 +2923,6 @@ lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils
 
 -- hover definition {{{
 lvim.lsp.hover_definition = false
-
--- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(function(_, result, ctx, config) dump({ result = result, ctx = ctx, config = config }) return vim.lsp.handlers.hover(_, result, ctx, config) end, {})
 
 ---@param client_id integer
 ---@param bufnr integer

@@ -1,8 +1,7 @@
 local startify_quotes = {
-
-  -- https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
-  -- and some more from https://defprogramming.com
-  -- some more quotes from @codewisdom@twitter.com
+  -- 1. https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
+  -- 2. and some more from https://defprogramming.com
+  -- 3. some more quotes from @codewisdom@twitter.com
   -- { ""select" isn't broken.", "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application." },
   -- { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
   -- { "All loops are infinite ones for faulty RAM modules." },
@@ -66,7 +65,7 @@ local startify_quotes = {
   { "Code is there to explain the comments to the computer", "", "- Andy Harris" },
   { "Code never lies, comments sometimes do.", "", "- Ron Jeffries" },
   { "Come to understand your users' expectations, then deliver just that little bit more." },
-  { "Compatibility means repeating other peoples' mistakes" },
+  { "Compatibility means deliberately repeating other peoples' mistakes.", "", "- David Wheeler" },
   { "Complexity kills. It sucks the life out of developers, it makes products difficult to plan, build and test, it introduces security challenges, and it causes end-user and administrator frustration.", "", "- Ray Ozzie" },
   { "Computer science education cannot make anybody an expert programmer any more than studying brushes and pigment can make somebody an expert painter.", "", "- Eric S. Raymond" },
   { "Computers are good at following instructions, but not at reading your mind.", "", "- Donald Knuth" },
@@ -183,6 +182,7 @@ local startify_quotes = {
   { "Once a new technology rolls over you, if you're not part of the steamroller you're part of the road.", "", "- Stewart Brand" },
   { "One accurate measurement is worth a thousand expert opinions.", "", "- Grace Hopper" },
   { "One of the best programming skills you can have is knowing when to walk away for awhile.", "", "- Oscar Godson" },
+  { "One of the most underrated secrets to success is to start before you’re ready", "", "- Marie Forleo" },
   { "Optimism is an occupational hazard of programming; feedback is the treatment.", "", "- Kent Beck" },
   { "Optimization hinders evolution.", "", "- Alan Perlis" },
   { "Overnight success takes 30 years.", "", "- Sophie Wilson, Early designer of ARM instruction set and lead dev of BBC BASIC" },
@@ -281,6 +281,7 @@ local startify_quotes = {
   { "To be a programmer is to develop a carefully managed relationship with error.", "", "- Ellen Ullman" },
   { "To iterate is human, to recurse divine.", "", "- L. Peter Deutsch" },
   { "To me programming is more than an important practical art. It is also a gigantic undertaking in the foundations of knowledge.", "", "- Grace Hopper" },
+  { "To truly learn, one must open their mind with humility and be willing to admit ignorance." },
   { "To understand recursion, one must first understand recursion.", "", "- Stephen Hawking" },
   { "Treat your code like poetry and take it to the edge of the bare minimum.", "", "- Ilyo" },
   { "Unix was not designed to stop its users from doing stupid things, as that would also stop them from doing clever things." },
