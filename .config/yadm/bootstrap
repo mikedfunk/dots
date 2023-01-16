@@ -138,7 +138,7 @@ _install_older_kubectl () {
     _log_info "Installing kubectl 1.17.17"
     _has kubectl && rm $(which kubectl)
     builtin cd /usr/local/bin || return
-    curl -LO "https://dl.k8s.io/release/v1.17.17/bin/darwin/amd64/kubectl"
+    curl -LO "https://dl.k8s.io/release/v1.17.17/bin/darwin/amd64/kubectl" # there's no ARM version
     chmod +x kubectl
     builtin cd - || return
 }
@@ -198,8 +198,8 @@ _install_upgrade_lvim_plugins () {
     # lvim +LspInstall flow@0.126.1 +qall
     # lvim +LspInstall emmet_ls --update +qall
     lvim +TSUpdate +qall
-    lvim +PackerSync +qall
-    lvim +PackerCompile +qall
+    # lvim +PackerSync +qall
+    # lvim +PackerCompile +qall
     echo ''
 }
 # }}}
@@ -572,11 +572,11 @@ _install_elixir_version () {
 _update_python_pip_packages () {
     _log_info "Installing/upgrading pip3 packages"
     pip install --upgrade pip
-    pip install neovim --user # neovim uses this pip/python version
+    pip install --upgrade neovim --user # neovim uses this pip/python version
 }
 # }}}
 
-# antidote {{{
+# antidote (zsh plugin manager) {{{
 _update_antidote_plugins () {
     _log_info "Updating antidote plugins"
     antidote update --bundles # update all packages
