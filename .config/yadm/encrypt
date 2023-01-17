@@ -8,7 +8,7 @@
 
 .config/lvim/lua/saatchiart/plugin_configs.lua
 .saatchirc
-.support/docker-status.sh
+.support/saatchi/*
 
 Code/saatchi/queries/**/*.sql
 Code/saatchi/uml/**/*.uml
