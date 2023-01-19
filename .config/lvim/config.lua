@@ -429,7 +429,9 @@ lvim.lsp.installer.setup.ensure_installed = {
   'eslint', -- eslint-lsp
   'jsonls',
   'lemminx',
+  'pyright',
   'ruby_ls',
+  'ruff_lsp', -- python linter lsp
   'solargraph',
   'sumneko_lua',
   'svelte',
@@ -441,7 +443,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'emberls',
   -- 'glint', -- typed ember
   -- 'graphql',
-  -- 'intelephense', -- I customze the ocnfig
+  -- 'intelephense', -- I customze the config
   -- 'nginx-language-server', -- not in lspconfig
   -- 'phpactor', -- I use intelephense instead
   -- 'prismals', -- node ORM
@@ -613,7 +615,7 @@ local null_ls_component = {
   color = { gui = 'None' --[[, fg = require"lvim.core.lualine.colors".purple]] },
   icon = { '', color = { fg = require 'lvim.core.lualine.colors'.purple } },
   cond = function() return is_installed 'null-ls' and require 'lvim.core.lualine.conditions'.hide_in_width() end,
-  on_click = function() vim.cmd 'NullLsInfo' end,
+  on_click = function() require 'null-ls.info'.show_window { border = 'rounded' } end,
 }
 
 local cmp_component = {
@@ -810,6 +812,8 @@ lvim.lsp.null_ls.setup.debug = true -- turn on debug null-ls logging: tail -f ~/
 
 require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'codespell', extra_args = { '--ignore-words-list', 'tabe' } },
+  -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
+  -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   { name = 'gitlint' },
   {
     name = 'phpcs',
@@ -836,6 +840,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
     end,
   },
   { name = 'php' },
+  { name = 'rubocop' },
   {
     name = 'sqlfluff',
     extra_args = { '--dialect', 'mysql' },
@@ -848,6 +853,8 @@ require 'lvim.lsp.null-ls.linters'.setup {
 
 if is_null_ls_installed then
   null_ls.setup { sources = {
+    -- null_ls.builtins.diagnostics.mypy,
+    -- null_ls.builtins.diagnostics.pycodestyle,
     null_ls.builtins.diagnostics.codespell.with {
       -- force the severity to be HINT
       diagnostics_postprocess = function(diagnostic)
@@ -862,6 +869,7 @@ end
 
 -- formatters {{{
 require 'lvim.lsp.null-ls.formatters'.setup {
+  { name = 'autopep8' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
   { name = 'json_tool', extra_args = { '--indent=2' } },
@@ -1630,7 +1638,7 @@ plugins.mason_null_ls_nvim = {
   },
   opts = {
     automatic_installation = { -- which null-ls sources to use default installation for
-      exclude = { 'phpcs', 'phpcbf' },
+      exclude = { 'phpcs', 'phpcbf', 'mypy', 'pycodestyle' },
     },
     -- automatic_setup = {
     --   types = {
@@ -2103,8 +2111,21 @@ plugins.nvim_various_textobjs = {
 }
 -- }}}
 
+-- nvim-yati {{{
+plugins.nvim_yati = {
+  "yioneko/nvim-yati",
+  version = "*",
+  dependencies = "nvim-treesitter/nvim-treesitter",
+  init = function()
+    lvim.builtin.treesitter.yati = { enable = true }
+    lvim.builtin.treesitter.indent.enable = false
+  end
+}
+-- }}}
+
 -- org-bullets.nvim {{{
 local configure_org_bullets = function()
+  require 'org-bullets'.setup {}
   require 'org-bullets'.__init() -- init on first entering markdown file
 
   -- setup autocmd for future entering of markdown files
@@ -3165,6 +3186,7 @@ lvim.plugins = {
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
+  plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2

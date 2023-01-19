@@ -95,7 +95,8 @@
     # ffp = flow feature publish
     # ffpl = flow feature pull
     # ffr = flow feature rebase
-    ffs = "!f() { git checkout develop && git pull && git flow feature start $1; }; f"
+    # ffs = "!f() { git checkout develop && git pull && git flow feature start $1; }; f"
+    ffs = "!f() { git checkout develop && git pull && git checkout -b feature/$1; }; f"
     # fft = flow feature track
     # git flow hotfix shortcuts
     # fhc = flow hotfix checkout

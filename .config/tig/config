@@ -141,7 +141,7 @@ bind generic gcs @git cs
 bind generic gcop @gh pr checkout "%(prompt Enter PR number: )"
 
 # git flow
-bind generic gffs @git flow feature start "%(prompt Enter feature branch name: )"
+bind generic gffs @git ffs "%(prompt Enter feature branch name: )"
 bind generic gfhf !git fhf "%(prompt Enter hotfix version: )"
 bind generic gfhs @git fhs "%(prompt Enter hotfix version: )"
 bind generic gfrf !git frf "%(prompt Enter release version: )"
