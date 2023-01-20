@@ -429,7 +429,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'eslint', -- eslint-lsp
   'jsonls',
   'lemminx',
-  'pyright',
   'ruby_ls',
   'ruff_lsp', -- python linter lsp
   'solargraph',
@@ -447,6 +446,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'nginx-language-server', -- not in lspconfig
   -- 'phpactor', -- I use intelephense instead
   -- 'prismals', -- node ORM
+  -- 'pyright',
   -- 'relay_lsp', -- react framework
   -- 'remark-language-server', -- not in lspconfig
   -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128

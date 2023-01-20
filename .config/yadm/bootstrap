@@ -466,6 +466,16 @@ _install_php_versions () {
 }
 # }}}
 
+# install deno version(s) {{{
+_install_deno_versions() {
+    builtin cd >/dev/null || return
+    _log_info "Installing deno version(s)"
+    asdf plugin add deno
+    ( asdf list deno | grep --quiet 1.29.4 ) || asdf install deno 1.29.4
+    asdf global deno 1.29.4
+}
+# }}}
+
 # install node version(s) {{{
 _install_node_versions () {
     builtin cd >/dev/null || return
@@ -729,6 +739,7 @@ _install_update_homebrew_packages
 _install_neovim_versions
 _install_php_versions
 _install_node_versions
+_install_deno_versions
 _install_python_versions
 _update_python_pip_packages
 _install_ruby_versions
