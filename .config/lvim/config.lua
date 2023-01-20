@@ -431,7 +431,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'lemminx',
   'ruby_ls',
   'ruff_lsp', -- python linter lsp
-  'solargraph',
   'sumneko_lua',
   'svelte',
   'vuels',
@@ -449,6 +448,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'pyright',
   -- 'relay_lsp', -- react framework
   -- 'remark-language-server', -- not in lspconfig
+  -- 'solargraph',
   -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'taplo',
@@ -827,16 +827,17 @@ require 'lvim.lsp.null-ls.linters'.setup {
       '-d',
       'xebug.mode=off',
     },
-    condition = function()
-      return vim.fn.executable('phpcs') == 1 and vim.fn.filereadable 'phpcs.xml' == 1
+    condition = function(utils)
+      return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }
     end,
   },
   {
     name = 'phpstan',
     timeout = 30000,
     extra_args = { '--memory-limit=100M', '--level=5', '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon' }, -- 40MB is not enough
-    condition = function()
-      return vim.fn.executable('phpstan') == 1 and vim.fn.filereadable 'phpstan.neon' == 1
+    condition = function(utils)
+      return utils.root_has_file { 'phpstan.neon' }
+      -- return vim.fn.executable('phpstan') == 1 and vim.fn.filereadable 'phpstan.neon' == 1
     end,
   },
   { name = 'php' },
@@ -844,7 +845,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   {
     name = 'sqlfluff',
     extra_args = { '--dialect', 'mysql' },
-    condition = function() return vim.fn.executable('sqlfluff') == 1 end,
+    -- condition = function() return vim.fn.executable('sqlfluff') == 1 end,
   },
   -- { name = 'trail_space' },
   { name = 'zsh' },
@@ -874,28 +875,30 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
   { name = 'json_tool', extra_args = { '--indent=2' } },
   -- moved to null-ls setup directly because lunarvim won't let me change the command
-  -- {
-  --   name = 'phpcbf',
-  --   command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
-  --   extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
-  --   -- timeout = 20000,
-  --   condition = function()
-  --     return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
-  --   end,
-  -- },
+  {
+    name = 'phpcbf',
+    -- command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
+    extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+    -- timeout = 20000,
+    condition = function(utils)
+      return vim.fn.executable 'phpcbf' == 1 and utils.root_has_file { 'phpcs.xml' }
+    end,
+  },
   {
     name = 'phpcsfixer',
     extra_args = { '--config=.php-cs-fixer.php' },
     timeout = 20000,
-    condition = function()
-      return vim.fn.executable 'php-cs-fixer' == 1 and vim.fn.filereadable '.php-cs-fixer.php' == 1
+    condition = function(utils)
+      -- return vim.fn.executable 'php-cs-fixer' == 1 and vim.fn.filereadable '.php-cs-fixer.php' == 1
+      return utils.root_has_file { '.php-cs-fixer.php' }
     end,
   },
-  { name = 'prettier', condition = function() return vim.fn.executable 'prettier' == 1 end },
+  { name = 'prettier' }, -- had problems with prettierd for some reason
   {
     name = 'rustywind', -- tailwind helper
-    condition = function()
-      return vim.fn.executable 'rustywind' == 1 and vim.fn.filereadable 'tailwind.config.js' == 1
+    condition = function(utils)
+      -- return vim.fn.executable 'rustywind' == 1 and vim.fn.filereadable 'tailwind.config.js' == 1
+      return utils.root_has_file { 'tailwind.config.js' }
     end
   },
   -- { name = 'sql_formatter', condition = function() return vim.fn.executable 'sql-formatter' == 1 end }, -- mangles variables
@@ -908,17 +911,20 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- { name = 'trim_whitespace' },
 }
 
-if is_null_ls_installed then
-  null_ls.setup { sources = {
-    null_ls.builtins.formatting.phpcbf.with {
-      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
-      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
-      condition = function()
-        return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
-      end,
-    }
-  } } -- @diagnostic disable-line redundant-parameter
-end
+-- not working for some reason, switched back to LunarVim version, seeing if any problems
+--
+-- if is_null_ls_installed then
+--   null_ls.setup { sources = {
+--     null_ls.builtins.formatting.phpcbf.with {
+--       -- command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
+--       extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+--       -- condition = function()
+--       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
+--       --   return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
+--       -- end,
+--     }
+--   } } -- @diagnostic disable-line redundant-parameter
+-- end
 -- }}}
 
 -- code actions {{{
@@ -1609,7 +1615,7 @@ plugins.incolla_nvim = {
     }
   end,
 }
-  -- }}}
+-- }}}
 
 -- lsp-inlayhints.nvim {{{
 plugins.lsp_inlayhints_nvim = {
@@ -1637,8 +1643,14 @@ plugins.mason_null_ls_nvim = {
     'mason.nvim',
   },
   opts = {
-    automatic_installation = { -- which null-ls sources to use default installation for
-      exclude = { 'phpcs', 'phpcbf', 'mypy', 'pycodestyle' },
+    automatic_installation = {
+      -- which null-ls sources to use default PATH installation for (don't install with Mason)
+      exclude = {
+        'phpcs',
+        'phpcbf',
+        'mypy',
+        'pycodestyle',
+      },
     },
     -- automatic_setup = {
     --   types = {
@@ -2113,9 +2125,9 @@ plugins.nvim_various_textobjs = {
 
 -- nvim-yati {{{
 plugins.nvim_yati = {
-  "yioneko/nvim-yati",
-  version = "*",
-  dependencies = "nvim-treesitter/nvim-treesitter",
+  'yioneko/nvim-yati',
+  version = '*',
+  dependencies = 'nvim-treesitter/nvim-treesitter',
   init = function()
     lvim.builtin.treesitter.yati = { enable = true }
     lvim.builtin.treesitter.indent.enable = false
@@ -2516,22 +2528,22 @@ plugins.ts_node_action = {
   dependencies = 'which-key.nvim',
   config = function()
     local padding = {
-      [","] = "%s",
-      ["=>"] = " %s ",
-      ["="] = "%s",
-      ["["] = "%s",
-      ["]"] = "%s",
-      ["}"] = "%s",
-      ["{"] = "%s",
-      ["||"] = " %s ",
-      ["&&"] = " %s ",
-      ["."] = " %s ",
-      ["+"] = " %s ",
-      ["*"] = " %s ",
-      ["-"] = " %s ",
-      ["/"] = " %s ",
+      [','] = '%s',
+      ['=>'] = ' %s ',
+      ['='] = '%s',
+      ['['] = '%s',
+      [']'] = '%s',
+      ['}'] = '%s',
+      ['{'] = '%s',
+      ['||'] = ' %s ',
+      ['&&'] = ' %s ',
+      ['.'] = ' %s ',
+      ['+'] = ' %s ',
+      ['*'] = ' %s ',
+      ['-'] = ' %s ',
+      ['/'] = ' %s ',
     }
-    local toggle_multiline = require("ts-node-action.actions.toggle_multiline")(padding)
+    local toggle_multiline = require('ts-node-action.actions.toggle_multiline')(padding)
     require 'ts-node-action'.setup {
       php = {
         array_creation_expression = toggle_multiline,
@@ -3213,7 +3225,7 @@ lvim.plugins = {
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
-  { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn["mkdp#util#install"]() end }, -- :MarkdownPreview
+  { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
