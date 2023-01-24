@@ -2105,6 +2105,7 @@ plugins.nvim_ts_autotag = {
     'phtml.html',
     'typescript',
     'typescriptreact',
+    'xml',
   },
   before = 'nvim-treesitter',
   init = function() lvim.builtin.treesitter.autotag.enable = true end,
