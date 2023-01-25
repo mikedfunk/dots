@@ -536,7 +536,7 @@ lvim.builtin.indentlines.options.show_first_indent_level = false
 
 -- lualine {{{
 lvim.builtin.lualine.style = 'default'
-lvim.builtin.lualine.options.disabled_filetypes = { 'startify', 'packer', 'TelescopePrompt' }
+lvim.builtin.lualine.options.disabled_filetypes = { 'startify', 'TelescopePrompt' }
 lvim.builtin.lualine.extensions = { 'quickfix', 'nvim-tree', 'symbols-outline', 'fugitive' } -- https://github.com/nvim-lualine/lualine.nvim#extensions
 
 local components = require 'lvim.core.lualine.components'
@@ -2968,7 +2968,6 @@ lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp St
 -- lvim.builtin.which_key.mappings['h'] = nil -- I map this in hop.nvim
 lvim.builtin.which_key.mappings[';'] = nil
 
--- lvim.builtin.which_key.mappings['p']['C'] = { '<Cmd>PackerClean<CR>', 'Clean' }
 -- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
 local are_diagnostics_visible = true
 local toggle_diagnostics = function()
