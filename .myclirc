@@ -61,8 +61,8 @@ syntax_style = trac
 # Emacs mode: Ctrl-A is home, Ctrl-E is end. All emacs keybindings are available in the REPL.
 # When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
 # temp measure to address this bug https://github.com/dbcli/mycli/issues/1087
-key_bindings = emacs
-# key_bindings = vi
+# key_bindings = emacs
+key_bindings = vi
 
 # Enabling this option will show the suggestions in a wider menu. Thus more items are suggested.
 wider_completion_menu = False

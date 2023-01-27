@@ -3215,7 +3215,7 @@ lvim.plugins = {
   plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls or whatever
   plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=`
   plugins.vim_matchup, -- better %
-  plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim or https://github.com/otavioschwanck/telescope-alternate.nvim
+  plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim or https://github.com/otavioschwanck/telescope-alternate.nvim or https://github.com/rgroli/other.nvim
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions.
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
