@@ -714,6 +714,17 @@ local search_count_component = {
   { icon = { lvim.icons.ui.Search } },
 }
 
+local macro_component = {
+  function()
+    if vim.fn.reg_recording() == '' then return '' end
+    return 'Recording: ' .. vim.fn.reg_recording()
+  end,
+  icon = { lvim.icons.ui.Circle, color = { fg = require 'lvim.core.lualine.colors'.red, gui = 'Bold' } },
+  cond = function()
+    return vim.fn.reg_recording() ~= '' and require 'lvim.core.lualine.conditions'.hide_in_width()
+  end,
+}
+
 lvim.builtin.lualine.sections.lualine_c = {
   components.diff,
   components.filetype,
@@ -721,6 +732,7 @@ lvim.builtin.lualine.sections.lualine_c = {
   components.spaces,
   dap_component,
   search_count_component, -- useful for cmdheight=0
+  macro_component,
 }
 
 -- }}}
@@ -990,6 +1002,7 @@ require 'saatchiart.plugin_configs'.configure_nvim_dap()
 -- https://github.com/SmiteshP/nvim-navic#%EF%B8%8F-setup
 vim.g.navic_silence = true
 -- lvim.builtin.breadcrumbs.options.separator = ' ' .. lvim.icons.ui.ChevronShortRight .. ' '
+-- lvim.builtin.breadcrumbs.options.separator = '  ' -- bug: this is only used for the _second_ separator and beyond https://github.com/LunarVim/LunarVim/blob/ea9b648a52de652a972471083f1e1d67f03305fa/lua/lvim/core/breadcrumbs.lua#L160
 -- }}}
 
 -- nvim-tree {{{
@@ -1751,6 +1764,16 @@ plugins.modes_nvim = {
   opts = {
     ignored_filetypes = { 'startify' }
   },
+}
+-- }}}
+
+-- neodim {{{
+plugins.neodim = {
+  'zbirenbaum/neodim',
+  event = 'LspAttach',
+  opts = {
+    alpha = 0.5
+  }
 }
 -- }}}
 
@@ -3129,7 +3152,6 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
   enable_lsp_hover_definition(client.id, bufnr)
   plugins.symbols_outline_on_attach(client, bufnr)
   plugins.nvim_lightbulb_on_attach()
-  if is_installed('neodim') then require 'neodim'.setup {} end
   plugins.lsp_inlayhints_on_attach(client, bufnr)
   plugins.document_color_nvim_on_attach(client, bufnr)
 end
@@ -3222,7 +3244,7 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  { 'zbirenbaum/neodim', event = 'BufRead' }, -- dim unused functions with lsp and treesitter
+  plugins.neodim, -- dim unused functions with lsp and treesitter
   { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
 }
 -- }}}
