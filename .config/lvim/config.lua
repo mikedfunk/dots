@@ -430,7 +430,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'jsonls',
   'lemminx',
   'ruby_ls',
-  'ruff_lsp', -- python linter lsp
+  'ruff_lsp', -- python linter lsp (replaces flake8)
   'sumneko_lua',
   'svelte',
   'vuels',
@@ -806,7 +806,7 @@ end
 lvim.lsp.null_ls.setup.debounce = 1000
 lvim.lsp.null_ls.setup.default_timeout = 30000
 local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic disable-line redefined-local
-lvim.lsp.null_ls.setup.debug = true -- turn on debug null-ls logging: tail -f ~/.cache/nvim/null-ls.log
+-- lvim.lsp.null_ls.setup.debug = true -- turn on debug null-ls logging: tail -f ~/.cache/nvim/null-ls.log
 
 -- linters {{{
 
@@ -851,7 +851,6 @@ require 'lvim.lsp.null-ls.linters'.setup {
   { name = 'zsh' },
 }
 
-
 if is_null_ls_installed then
   null_ls.setup { sources = {
     -- null_ls.builtins.diagnostics.mypy,
@@ -870,20 +869,20 @@ end
 
 -- formatters {{{
 require 'lvim.lsp.null-ls.formatters'.setup {
-  { name = 'autopep8' },
+  { name = 'black' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
   { name = 'json_tool', extra_args = { '--indent=2' } },
   -- moved to null-ls setup directly because lunarvim won't let me change the command
-  {
-    name = 'phpcbf',
-    -- command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
-    extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
-    -- timeout = 20000,
-    condition = function(utils)
-      return vim.fn.executable 'phpcbf' == 1 and utils.root_has_file { 'phpcs.xml' }
-    end,
-  },
+  -- {
+  --   name = 'phpcbf',
+  --   command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead. https://github.com/lunarvim/lunarvim/blob/c18cd3f0a89443d4265f6df8ce12fb89d627f09e/lua/lvim/lsp/null-ls/services.lua#L81
+  --   extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+  --   -- timeout = 20000,
+  --   condition = function(utils)
+  --     return vim.fn.executable 'phpcbf' == 1 and utils.root_has_file { 'phpcs.xml' }
+  --   end,
+  -- },
   {
     name = 'phpcsfixer',
     extra_args = { '--config=.php-cs-fixer.php' },
@@ -911,21 +910,18 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- { name = 'trim_whitespace' },
 }
 
--- not working for some reason, switched back to LunarVim version, seeing if any problems
---
--- if is_null_ls_installed then
---   null_ls.setup { sources = {
---     null_ls.builtins.formatting.phpcbf.with {
---       -- command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
---       extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
---       -- condition = function()
---       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
---       --   return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
---       -- end,
---     }
---   } } -- @diagnostic disable-line redundant-parameter
--- end
--- }}}
+if is_null_ls_installed then
+  null_ls.register { sources = {
+    null_ls.builtins.formatting.phpcbf.with {
+      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
+      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+      -- condition = function()
+      --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
+      --   return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
+      -- end,
+    }
+  } } -- @diagnostic disable-line redundant-parameter
+end
 
 -- code actions {{{
 require 'lvim.lsp.null-ls.code_actions'.setup {
@@ -942,7 +938,7 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 
 -- completion {{{
 if is_null_ls_installed then
-  null_ls.setup { sources = {
+  null_ls.register { sources = {
     null_ls.builtins.completion.spell
   } }
 end ---@diagnostic disable-line redundant-parameter
@@ -2977,6 +2973,8 @@ end
 
 lvim.builtin.which_key.mappings['l']['T'] = { toggle_diagnostics, 'Toggle Diagnostics' }
 lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
+lvim.builtin.which_key.vmappings['l'] = lvim.builtin.which_key.vmappings['l'] or { name = 'LSP' }
+lvim.builtin.which_key.vmappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
 
 -- hover definition {{{
 lvim.lsp.hover_definition = false
