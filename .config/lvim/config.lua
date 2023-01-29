@@ -852,7 +852,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
 }
 
 if is_null_ls_installed then
-  null_ls.setup { sources = {
+  null_ls.register { sources = {
     -- null_ls.builtins.diagnostics.mypy,
     -- null_ls.builtins.diagnostics.pycodestyle,
     null_ls.builtins.diagnostics.codespell.with {
