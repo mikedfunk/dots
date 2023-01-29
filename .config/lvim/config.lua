@@ -2449,7 +2449,7 @@ local setup_tmuxline = function()
     a = { '#S' }, -- session name 
     c = {
       -- '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#{battery_icon_status}#[fg=default]', -- cpu, ram, battery
-      '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#[fg=default] #[fg=green]#{wifi_icon}#[fg=default]', -- cpu, ram, battery, wifi
+      '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#[fg=default] #{wifi_icon}', -- cpu, ram, battery, wifi
       '#(~/.support/tmux-docker-status.sh)',
     },
     win = { '#I', '#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}' }, -- unselected tab
