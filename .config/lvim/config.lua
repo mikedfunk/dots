@@ -419,7 +419,7 @@ lvim.format_on_save.timeout = 30000
 -- I want for phpactor for instance. You must use the same keys as from
 -- nvim-lspconfig. This does not include non-lsp tools.
 --
--- this will GENERATE an ftplugin! https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
+-- this will GENERATE an ftplugin to run lspconfig setup! https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
 lvim.lsp.installer.setup.ensure_installed = {
   'astro',
   'bashls',
@@ -1631,7 +1631,6 @@ end
 -- }}}
 
 -- mason-null-ls.nvim {{{
--- 2022-11-22 this plugin is no longer automatically setting up sources I had defined in automatic_setup.types. not sure why.
 plugins.mason_null_ls_nvim = {
   'jayp0521/mason-null-ls.nvim',
   dependencies = {
@@ -1639,6 +1638,7 @@ plugins.mason_null_ls_nvim = {
     'mason.nvim',
   },
   opts = {
+    -- automatic_setup = true, -- I use lunarvim's lsp module to do the same thing as this feature.
     automatic_installation = {
       -- which null-ls sources to use default PATH installation for (don't install with Mason)
       exclude = {
@@ -1648,18 +1648,6 @@ plugins.mason_null_ls_nvim = {
         'pycodestyle',
       },
     },
-    -- automatic_setup = {
-    --   types = {
-    --     -- spectral = { 'diagnostics' }, -- tries to run yarn clean which doesn't exist
-    --     blade_formatter = { 'formatting' },
-    --     cbfmt = { 'formatting' },
-    --     gitlint = { 'diagnostics' },
-    --     refactoring = { 'code_actions' },
-    --     spell = { 'completion' },
-    --     php = { 'diagnostics' },
-    --     zsh = { 'diagnostics' },
-    --   },
-    -- },
   },
 }
 -- }}}
@@ -2461,8 +2449,8 @@ local setup_tmuxline = function()
     a = { '#S' }, -- session name 
     c = {
       -- '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#{battery_icon_status}#[fg=default]', -- cpu, ram, battery
-      '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#[fg=default]', -- cpu, ram, battery
-      '#(~/.support/docker-status.sh)',
+      '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#[fg=default] #[fg=green]#{wifi_icon}#[fg=default]', -- cpu, ram, battery, wifi
+      '#(~/.support/tmux-docker-status.sh)',
     },
     win = { '#I', '#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}' }, -- unselected tab
     cwin = { '#I', '#W#{?window_zoomed_flag, ,}' }, -- current tab
@@ -2499,7 +2487,7 @@ local setup_tmuxline = function()
   --   cwin = { '231', '31', 'bold' },
   -- }
 
-  vim.cmd 'command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.tmux/tmuxline-dark.conf' -- apply tmuxline settings and snapshot to file
+  vim.cmd 'command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf' -- apply tmuxline settings and snapshot to file
 end
 
 plugins.tmuxline_vim = {
