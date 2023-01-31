@@ -650,12 +650,14 @@ local cmp_component = {
 ---@return string
 local dap_component = {
   function()
-    if not is_installed('dap') then return '' end
-    local dap_status = require 'dap'.status()
-    if dap_status == '' then return '' end
-    return ' ' .. dap_status
+    local is_installed, dap = pcall(require, 'dap')
+    if is_installed then return dap.status() else return '' end
   end,
-  cond = function() return is_installed 'dap' end,
+  icon = { '', color = { fg = require 'lvim.core.lualine.colors'.yellow } },
+  cond = function()
+    local is_installed, dap = pcall(require, 'dap')
+    return is_installed and dap.status ~= ''
+  end,
 }
 
 lvim.builtin.lualine.sections.lualine_x = {
@@ -863,7 +865,8 @@ require 'lvim.lsp.null-ls.linters'.setup {
   { name = 'zsh' },
 }
 
-if is_null_ls_installed then
+local did_register_codespell = false
+if is_null_ls_installed and not did_register_codespell then
   null_ls.register { sources = {
     -- null_ls.builtins.diagnostics.mypy,
     -- null_ls.builtins.diagnostics.pycodestyle,
@@ -875,6 +878,8 @@ if is_null_ls_installed then
       extra_args = { '--ignore-words-list', 'tabe' },
     }
   } }
+
+  did_register_codespell = true
 end
 
 -- }}}
@@ -922,7 +927,9 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- { name = 'trim_whitespace' },
 }
 
-if is_null_ls_installed then
+local did_register_phpcbf = false
+
+if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
       command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
@@ -933,6 +940,7 @@ if is_null_ls_installed then
       -- end,
     }
   } } -- @diagnostic disable-line redundant-parameter
+  did_register_phpcbf = true
 end
 
 -- code actions {{{
@@ -949,10 +957,12 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 -- }}}
 
 -- completion {{{
-if is_null_ls_installed then
+local did_register_spell = false
+if is_null_ls_installed and not did_register_spell then
   null_ls.register { sources = {
     null_ls.builtins.completion.spell
   } }
+  did_register_spell = true
 end ---@diagnostic disable-line redundant-parameter
 -- }}}
 
@@ -1780,7 +1790,7 @@ plugins.neodim = {
 -- neoscroll.nvim {{{
 plugins.neoscroll_nvim = {
   'karb94/neoscroll.nvim',
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   keys = {
     '<C-u>',
     '<C-d>',
@@ -1794,8 +1804,38 @@ plugins.neoscroll_nvim = {
   },
   config = function()
     require 'neoscroll'.setup { easing_function = 'cubic' }
-    if is_installed('which-key') then require 'which-key'.register({ g = { 'Go to top of file' } }, { prefix = 'g' }) end
+    require 'which-key'.register({ g = { 'Go to top of file' } }, { prefix = 'g' })
   end,
+}
+-- }}}
+
+-- NeoZoom.lua {{{
+plugins.neo_zoom_lua = {
+  'nyngwang/NeoZoom.lua',
+  dependencies = 'folke/which-key.nvim',
+  ft = { 'dapui_.*', 'dap-repl' },
+  init = function()
+    require 'which-key'.register({ z = {
+      function() vim.cmd 'NeoZoomToggle' end,
+      'Toggle Zoom',
+    }, }, { prefix = '<C-w>' })
+  end,
+  opts = {
+    presets = {
+      {
+        filetypes = { 'dapui_.*', 'dap-repl' },
+        config = {
+          top_ratio = 0.25,
+          left_ratio = 0.6,
+          width_ratio = 0.4,
+          height_ratio = 0.65,
+        },
+        -- callbacks = {
+        --   function() vim.wo.wrap = true end,
+        -- },
+      },
+    },
+  }
 }
 -- }}}
 
@@ -2327,6 +2367,19 @@ plugins.splitjoin_vim = {
   dependencies = 'which-key.nvim',
   init = setup_splitjoin,
   config = configure_splitjoin,
+}
+-- }}}
+
+-- surround-ui.nvim {{{
+plugins.surround_ui_nvim = {
+  "roobert/surround-ui.nvim",
+  dependencies = {
+    "kylechui/nvim-surround",
+    "folke/which-key.nvim",
+  },
+  config = function()
+    require("surround-ui").setup { root_key = "S" }
+  end,
 }
 -- }}}
 
@@ -2969,6 +3022,7 @@ lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
 lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
 lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
+lvim.builtin.which_key.mappings['d']['q'] = { function() require('dap').close(); require('dapui').close({ reset = true }) end, 'Quit' }
 
 lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
 
@@ -3195,6 +3249,8 @@ lvim.plugins = {
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
+  plugins.neo_zoom_lua, -- zoom a window, especially helpful with nvim-dap-ui
+  plugins.neodim, -- dim unused functions with lsp and treesitter
   plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
   plugins.numb_nvim, -- preview jumping to line number
@@ -3212,6 +3268,7 @@ lvim.plugins = {
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
   plugins.refactoring_nvim, -- refactoring plugin with telescope support
   plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua) TODO: replace with https://github.com/CKolkey/ts-node-action
+  plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
   plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
@@ -3244,7 +3301,6 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  plugins.neodim, -- dim unused functions with lsp and treesitter
   { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
 }
 -- }}}
