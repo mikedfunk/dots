@@ -2297,30 +2297,28 @@ plugins.org_bullets = {
 -- persistent-breakpoints {{{
 plugins.persistent_breakpoints = {
   'Weissle/persistent-breakpoints.nvim',
-  ft = {
-    'php',
-    'javascript',
-    'ruby',
-    'python',
-  },
-  dependencies = { 'mfussenegger/nvim-dap', 'folke/which-key.nvim' },
+  -- ft = {
+  --   'php',
+  --   'javascript',
+  --   'ruby',
+  --   'python',
+  -- },
+  dependencies = { 'mfussenegger/nvim-dap' },
   init = function()
     lvim.builtin.which_key.mappings['d']['t'] = {
-      function()
-        require 'persistent-breakpoints.api'.toggle_breakpoint()
-      end,
+      function() require 'persistent-breakpoints.api'.toggle_breakpoint() end,
       'Toggle Breakpoint',
     }
+    lvim.builtin.which_key.mappings['d']['X'] = {
+      function() require 'persistent-breakpoints.api'.clear_all_breakpoints() end,
+      'Clear All Breakpoints',
+    }
+    lvim.builtin.which_key.mappings['d']['e'] = {
+      function() require 'persistent-breakpoints.api'.set_conditional_breakpoint() end,
+      'Expression Breakpoint',
+    }
   end,
-  config = function()
-    require 'persistent-breakpoints'.setup {}
-
-    vim.api.nvim_create_augroup('persistent_breakpoints', { clear = true })
-    vim.api.nvim_create_autocmd('BufReadPost', {
-      callback = require 'persistent-breakpoints.api'.load_breakpoints,
-      group = 'persist_breakpoints',
-    })
-  end,
+  opts = { load_breakpoints_event = { 'BufReadPost' } },
 }
 -- }}}
 
