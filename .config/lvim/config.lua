@@ -32,7 +32,7 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 
 -- vim.o.background = 'light'
 
-vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
+-- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
@@ -1265,7 +1265,7 @@ plugins.cmp_color_names = {
   'nat-418/cmp-color-names.nvim',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'color_names' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'color_names' })
@@ -1297,7 +1297,7 @@ plugins.cmp_dictionary = {
   'uga-rosa/cmp-dictionary',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     local source = { name = 'dictionary', keyword_length = 2, max_item_count = 3 }
     if vim.tbl_contains(lvim.builtin.cmp.sources, source) then return end
@@ -1314,7 +1314,7 @@ plugins.cmp_dictionary = {
 plugins.cmp_emoji = {
   'hrsh7th/cmp-emoji',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   dependencies = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'emoji' }) then return end
@@ -1334,7 +1334,7 @@ plugins.cmp_git = {
     'nvim-lua/plenary.nvim',
   },
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'git' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'git' })
@@ -1359,7 +1359,7 @@ end
 plugins.cmp_nvim_lsp_document_symbol = {
   'hrsh7th/cmp-nvim-lsp-document-symbol',
   dependencies = { 'hrsh7th/nvim-cmp', 'hrsh7th/cmp-cmdline' },
-  -- before = 'nvim-cmp',
+  -- before = 'hrsh7th/nvim-cmp',
   -- event = 'InsertEnter',
   event = 'CmdlineEnter',
   init = setup_cmp_nvim_lsp_document_symbol
@@ -1372,7 +1372,7 @@ plugins.cmp_nvim_lsp_signature_help = {
   'hrsh7th/cmp-nvim-lsp-signature-help',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'nvim_lsp_signature_help' }) then return end
     table.insert(lvim.builtin.cmp.sources, {
@@ -1388,7 +1388,7 @@ plugins.cmp_plugins = {
   'KadoBOT/cmp-plugins',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'plugins' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'plugins' })
@@ -1402,7 +1402,7 @@ plugins.cmp_rg = {
   'lukas-reineke/cmp-rg',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   -- avoid running ripgrep on cwd for things like $HOME for dotfiles, etc. where
   -- it could be expensive
   cond = require 'saatchiart.plugin_configs'.cmp_rg_cond,
@@ -1479,7 +1479,7 @@ plugins.cmp_tmux = {
   'andersevenrud/cmp-tmux',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   branch = 'main',
   init = function()
     local source = { name = 'tmux', option = { all_panes = true } }
@@ -1498,7 +1498,7 @@ plugins.cmp_treesitter = {
     'hrsh7th/nvim-cmp',
   },
   event = 'InsertEnter',
-  before = 'nvim-cmp',
+  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'treesitter' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'treesitter' })
@@ -1613,6 +1613,21 @@ plugins.fold_preview_nvim = {
 
 -- }}}
 
+-- goto-breakpoints.nvim {{{
+plugins.goto_breakpoints_nvim = {
+  'ofirgall/goto-breakpoints.nvim',
+  dependencies = 'folke/which-key.nvim',
+  init = function()
+    require 'which-key'.register({
+      d = { function() require 'goto-breakpoints'.next() end, 'Go to Next Breakpoint' },
+    }, { prefix = ']' })
+    require 'which-key'.register({
+      d = { function() require 'goto-breakpoints'.next() end, 'Go to Previous Breakpoint' },
+    }, { prefix = '[' })
+  end
+}
+-- }}}
+
 -- headlines.nvim {{{
 plugins.headlines_nvim = {
   'lukas-reineke/headlines.nvim',
@@ -1625,7 +1640,7 @@ plugins.headlines_nvim = {
 plugins.incolla_nvim = {
   'mattdibi/incolla.nvim',
   ft = 'markdown',
-  -- before = 'which-key.nvim',
+  -- before = 'folke/which-key.nvim',
   init = function()
     lvim.builtin.which_key.mappings['m'] = lvim.builtin.which_key.mappings['m'] or { name = 'Markdown' }
     lvim.builtin.which_key.mappings['m']['p'] = {
@@ -1756,7 +1771,7 @@ end
 plugins.mkdx = {
   'SidOfc/mkdx',
   ft = 'markdown',
-  -- dependencies = 'which-key.nvim', -- this overrides ft... I think because which-key needs to be loaded _before_ something
+  -- dependencies = 'folke/which-key.nvim', -- this overrides ft... I think because which-key needs to be loaded _before_ something
   init = setup_mkdx,
   config = configure_mkdx,
 }
@@ -1766,7 +1781,7 @@ plugins.mkdx = {
 plugins.modes_nvim = {
   'mvllow/modes.nvim',
   event = 'BufRead',
-  before = 'which-key.nvim',
+  before = 'folke/which-key.nvim',
   init = function()
     -- https://github.com/mvllow/modes.nvim#known-issues
     lvim.builtin.which_key.setup.plugins.presets.operators = false
@@ -1887,7 +1902,7 @@ plugins.nvim_bqf = {
   branch = 'main',
   event = 'BufRead',
   config = function() require 'bqf'.setup {} end,
-  dependencies = 'nvim-treesitter',
+  dependencies = 'nvim-treesitter/nvim-treesitter',
 }
 -- }}}
 
@@ -1900,7 +1915,7 @@ plugins.nvim_context_vt = {
     ---@param node table
     ---@return string|nil
     custom_text_handler = function(node)
-      if not is_installed 'nvim-treesitter' then return nil end
+      if not is_installed 'nvim-treesitter/nvim-treesitter' then return nil end
       return '↩ ' .. vim.treesitter.query.get_node_text(node, 0)[1]
     end
   },
@@ -1923,7 +1938,7 @@ plugins.nvim_dap_tab = {
     'mfussenegger/nvim-dap',
     'folke/which-key.nvim',
     'rcarriga/nvim-dap-ui',
-    'which-key.nvim',
+    'folke/which-key.nvim',
 
   },
   init = function()
@@ -2031,9 +2046,36 @@ plugins.nvim_treesitter_endwise = {
     'zsh',
     'bash',
   },
-  before = 'nvim-treesitter',
+  before = 'nvim-treesitter/nvim-treesitter',
   init = function()
     lvim.builtin.treesitter.endwise = { enable = true }
+  end,
+}
+-- }}}
+
+-- nvim-treesitter-playground {{{
+plugins.nvim_treesitter_playground = {
+  'nvim-treesitter/playground',
+  dependencies = 'nvim-treesitter/nvim-treesitter',
+  init = function()
+    lvim.builtin.treesitter.playground = {
+      enable = true,
+      disable = {},
+      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+      persist_queries = false, -- Whether the query persists across vim sessions
+      keybindings = {
+        toggle_query_editor = 'o',
+        toggle_hl_groups = 'i',
+        toggle_injected_languages = 't',
+        toggle_anonymous_nodes = 'a',
+        toggle_language_display = 'I',
+        focus_language = 'f',
+        unfocus_language = 'F',
+        update = 'R',
+        goto_node = '<cr>',
+        show_help = '?',
+      },
+    }
   end,
 }
 -- }}}
@@ -2132,10 +2174,10 @@ plugins.nvim_treesitter_textobjects = {
     'typescript',
     'typescriptreact',
   },
-  before = 'nvim-treesitter',
+  before = 'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
-    'which-key.nvim',
+    'folke/which-key.nvim',
   },
   init = setup_nvim_treesitter_objects,
   config = configure_nvim_treesitter_textobjects,
@@ -2154,12 +2196,55 @@ plugins.nvim_ts_autotag = {
     'typescriptreact',
     'xml',
   },
-  before = 'nvim-treesitter',
+  before = 'nvim-treesitter/nvim-treesitter',
   init = function() lvim.builtin.treesitter.autotag.enable = true end,
 }
 -- }}}
 
--- nvim-various-textobjs{{{
+-- nvim-ufo {{{
+plugins.nvim_ufo = {
+  'kevinhwang91/nvim-ufo',
+  dependencies = {
+    'kevinhwang91/promise-async',
+    'folke/which-key.nvim',
+  },
+  init = function()
+    vim.o.foldcolumn = '1'
+    vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+    vim.o.foldlevelstart = 99
+    vim.o.foldenable = true
+
+    require 'which-key'.register({
+      R = { function() require('ufo').openAllFolds() end, 'Open All Folds' },
+      M = { function() require('ufo').closeAllFolds() end, 'Close All Folds' },
+      r = { function() require('ufo').closeFoldsExceptKinds() end, 'Close Folds Except Kinds' },
+      m = { function() require('ufo').closeFoldsWith() end, 'Close Folds With' },
+    }, { prefix = 'z' })
+
+    -- require 'which-key'.register({
+    --   K = { function() require('ufo').peekFoldedLinesUnderCursor() end, 'Preview Fold' },
+    -- }, { prefix = 'g' })
+  end,
+  opts = {
+    provider_selector = function(_, _, _)
+      return { 'treesitter', 'indent' }
+    end,
+    -- preview = {
+    --   win_config = {
+    --     -- border = { '', '─', '', '', '', '─', '', '' },
+    --     -- winhighlight = 'Normal:Folded',
+    --     win_blend = 0,
+    --   },
+    -- },
+    mappings = {
+      scrollU = '<C-u>',
+      scrollD = '<C-d>',
+    },
+  }
+}
+-- }}}
+
+-- nvim-various-textobjs {{{
 plugins.nvim_various_textobjs = {
   'chrisgrieser/nvim-various-textobjs',
   -- event = 'BufRead',
@@ -2206,6 +2291,36 @@ plugins.org_bullets = {
   commit = '8dc2e25088ffa10029157c9aaede7d79f3fc75b1',
   ft = 'markdown',
   config = configure_org_bullets,
+}
+-- }}}
+
+-- persistent-breakpoints {{{
+plugins.persistent_breakpoints = {
+  'Weissle/persistent-breakpoints.nvim',
+  ft = {
+    'php',
+    'javascript',
+    'ruby',
+    'python',
+  },
+  dependencies = { 'mfussenegger/nvim-dap', 'folke/which-key.nvim' },
+  init = function()
+    lvim.builtin.which_key.mappings['d']['t'] = {
+      function()
+        require 'persistent-breakpoints.api'.toggle_breakpoint()
+      end,
+      'Toggle Breakpoint',
+    }
+  end,
+  config = function()
+    require 'persistent-breakpoints'.setup {}
+
+    vim.api.nvim_create_augroup('persistent_breakpoints', { clear = true })
+    vim.api.nvim_create_autocmd('BufReadPost', {
+      callback = require 'persistent-breakpoints.api'.load_breakpoints,
+      group = 'persist_breakpoints',
+    })
+  end,
 }
 -- }}}
 
@@ -2364,7 +2479,7 @@ plugins.splitjoin_vim = {
   'AndrewRadev/splitjoin.vim',
   ft = splitjoin_filetypes,
   branch = 'main',
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   init = setup_splitjoin,
   config = configure_splitjoin,
 }
@@ -2372,13 +2487,13 @@ plugins.splitjoin_vim = {
 
 -- surround-ui.nvim {{{
 plugins.surround_ui_nvim = {
-  "roobert/surround-ui.nvim",
+  'roobert/surround-ui.nvim',
   dependencies = {
-    "kylechui/nvim-surround",
-    "folke/which-key.nvim",
+    'kylechui/nvim-surround',
+    'folke/which-key.nvim',
   },
   config = function()
-    require("surround-ui").setup { root_key = "S" }
+    require('surround-ui').setup { root_key = 'S' }
   end,
 }
 -- }}}
@@ -2415,7 +2530,7 @@ plugins.symbols_outline_nvim = {
   'simrat39/symbols-outline.nvim',
   event = 'BufRead',
   -- before = 'bufferline.nvim',
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   init = setup_symbols_outline,
   opts = {
     width = 35,
@@ -2472,7 +2587,7 @@ plugins.text_case_nvim = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-telescope/telescope.nvim',
   },
-  before = 'which-key.nvim',
+  before = 'folke/which-key.nvim',
   init = function()
     lvim.builtin.which_key.mappings['C'] = {
       name = 'Coerce',
@@ -2586,7 +2701,7 @@ plugins.ts_node_action = {
     'python',
     'ruby',
   },
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   config = function()
     local padding = {
       [','] = '%s',
@@ -2764,7 +2879,7 @@ end
 plugins.vim_lion = {
   'tommcdo/vim-lion',
   event = 'BufRead',
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   init = function() vim.g['lion_map_right'] = 'ga' end,
   config = configure_vim_lion,
 }
@@ -2784,7 +2899,7 @@ end
 plugins.vim_matchup = {
   'andymass/vim-matchup',
   event = 'CursorMoved',
-  before = 'nvim-treesitter',
+  before = 'nvim-treesitter/nvim-treesitter',
   init = setup_vim_matchup,
 }
 -- }}}
@@ -2935,7 +3050,7 @@ end
 plugins.vim_unimpaired = {
   'tpope/vim-unimpaired',
   event = 'BufRead',
-  dependencies = 'which-key.nvim',
+  dependencies = 'folke/which-key.nvim',
   config = configure_vim_unimpaired,
 }
 -- }}}
@@ -3219,6 +3334,7 @@ lvim.plugins = {
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
+  -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others
   -- plugins.tmuxline_vim, -- tmux statusline generator
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
@@ -3243,8 +3359,9 @@ lvim.plugins = {
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
   plugins.fold_preview_nvim, -- preview with h, open with h again
+  plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
-  plugins.incolla_nvim, -- paste images in markdown. configurable.
+  plugins.incolla_nvim, -- paste images in markdown. configurable. Alternative: https://github.com/img-paste-devs/img-paste.vim
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
@@ -3260,10 +3377,12 @@ lvim.plugins = {
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
+  plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
   plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
+  plugins.persistent_breakpoints, -- persist breakpoints between sessions
   plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
   plugins.refactoring_nvim, -- refactoring plugin with telescope support
@@ -3294,10 +3413,12 @@ lvim.plugins = {
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
+  { 'lewis6991/foldsigns.nvim', event = 'BufEnter' }, -- show the most important sign hidden by a fold in the fold sign column
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
+  { 'theHamsta/nvim-dap-virtual-text', dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' } }, -- show variable value in virtual text
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis

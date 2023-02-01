@@ -14,7 +14,7 @@
 # would prefer listening for filesystem changes.
 # https://github.com/jonas/tig/issues/794
 set refresh-mode = periodic
-set refresh-interval = 1
+set refresh-interval = 5
 # set refresh-mode = auto
 # I have a meticulously mapped ~/.mailmap to dedupe committers.
 set mailmap = true
