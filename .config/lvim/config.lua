@@ -32,6 +32,7 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 
 -- vim.o.background = 'light'
 
+vim.o.spellfile = vim.fn.expand(vim.env.LUNARVIM_CONFIG_DIR .. '/spell/en.utf-8.add') -- this is necessary because nvim-treesitter is first in the runtimepath
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
@@ -3332,14 +3333,16 @@ lvim.plugins = {
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
-  -- plugins.nvim_ufo, -- fancy folds
-  -- plugins.nvim_various_textobjs, -- indent object and others
-  -- plugins.tmuxline_vim, -- tmux statusline generator
+  -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
+  -- plugins.nvim_ufo, -- fancy folds (probably better with LSP integration, which is a little hard to accomplish with Lunarvim)
+  -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
+  -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
+  -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
-  -- { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
+  -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
@@ -3375,7 +3378,6 @@ lvim.plugins = {
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
-  plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
   plugins.nvim_yati, -- better treesitter support for python and others
@@ -3387,7 +3389,7 @@ lvim.plugins = {
   plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua) TODO: replace with https://github.com/CKolkey/ts-node-action
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
-  plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it. Also a pain to get it working with nvim-cmp)
+  plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
   plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
@@ -3402,7 +3404,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
-  { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
+  { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
@@ -3414,12 +3416,12 @@ lvim.plugins = {
   { 'lewis6991/foldsigns.nvim', event = 'BufEnter' }, -- show the most important sign hidden by a fold in the fold sign column
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
+  { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'theHamsta/nvim-dap-virtual-text', dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' } }, -- show variable value in virtual text
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format
 }
 -- }}}
