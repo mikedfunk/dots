@@ -434,6 +434,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'ruff_lsp', -- python linter lsp (replaces flake8)
   'sumneko_lua',
   'svelte',
+  'taplo',
   'vuels',
   'yamlls',
   'zk',
@@ -452,13 +453,17 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'solargraph',
   -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   -- 'sqls' -- just doesn't do anything, is archived
-  -- 'taplo',
   -- 'tsserver', -- handled by typescript.nvim instead
   -- 'vimls',
 }
 
 lvim.lsp.diagnostics.signs.values[4].text = lvim.icons.diagnostics.Information
 lvim.lsp.document_highlight = true
+
+-- remove toml from skipped filetypes so I can configure taplo
+lvim.lsp.automatic_configuration.skipped_filetypes = vim.tbl_filter(function(val)
+  return not vim.tbl_contains({ "toml" }, val)
+end, lvim.lsp.automatic_configuration.skipped_filetypes)
 
 for _, server in pairs({
   'intelephense',
@@ -888,6 +893,7 @@ end
 -- formatters {{{
 require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'black' },
+  { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
   { name = 'json_tool', extra_args = { '--indent=2' } },
