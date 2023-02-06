@@ -9,7 +9,7 @@
 # This is documented with tomdoc.sh style https://github.com/tests-always-included/tomdoc.sh
 # }}}
 
-# p10k instant prompt {{{
+# p10k instant prompt (must be first) {{{
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -125,9 +125,10 @@ zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 bindkey '^q' push-line-or-edit
 # }}}
 
-# antidote zsh plugins (#slow) {{{
+# load antidote zsh plugins (#slow) {{{
 # make oh-my-zsh plugins work with antidote... this is kind of crazy
 ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+
 ( brew list | grep antidote > /dev/null ) \
     && source $(brew --prefix antidote)/share/antidote/antidote.zsh \
     && antidote load
@@ -199,7 +200,7 @@ lessc () {
     rougify highlight $@ | \less -R -M
 }
 export GITWEB_PROJECTROOT="$HOME/Code"
-export PRE_COMMIT_COLOR=always # https://pre-commit.com/#cli
+export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
 export PSQL_PAGER="pspg"
 
 set PLANTUML_LIMIT_SIZE=8192
@@ -216,7 +217,7 @@ _has akamai && _evalcache akamai --zsh
 
 # https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
 _has navi && _evalcache navi widget zsh
-export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
 [[ -f "$HOME"/.iterm2_shell_integration.zsh ]] && source "$HOME"/.iterm2_shell_integration.zsh
 
 export HOMEBREW_NO_ANALYTICS=1
@@ -224,7 +225,6 @@ export HOMEBREW_NO_ANALYTICS=1
 # disable weird highlighting of pasted text
 # https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
 zle_highlight=('paste:none')
-# }}}
 
 # ssh {{{
 # disable autossh port monitoring and use ServerAliveInterval and
@@ -258,6 +258,8 @@ export PINENTRY_USER_DATA="USE_CURSES=1"
 # fzf {{{
 export FZF_DEFAULT_OPTS="--multi"
 export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
+# }}}
+#
 # }}}
 
 # functions and aliases {{{
@@ -445,6 +447,10 @@ psc() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run
 # }
 # phpspec watch with a "pretty" formatter
 alias psw-pretty="psw --format=pretty "
+# }}}
+
+# pytest {{{
+alias ptw="noglob ag -l -g '.*\\.py' | entr -cr noti --message \"✅ PyTest passed\" pytest"
 # }}}
 
 # pip {{{

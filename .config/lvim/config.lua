@@ -420,7 +420,9 @@ lvim.format_on_save.timeout = 30000
 -- I want for phpactor for instance. You must use the same keys as from
 -- nvim-lspconfig. This does not include non-lsp tools.
 --
--- this will GENERATE an ftplugin to run lspconfig setup! https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
+-- when you run :LvimCacheReset
+-- this will GENERATE an ftplugin to run lspconfig setup with no opts!
+-- https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
 lvim.lsp.installer.setup.ensure_installed = {
   'astro',
   'bashls',
