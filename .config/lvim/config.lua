@@ -1195,7 +1195,8 @@ lvim.builtin.theme.tokyonight.options.style = 'moon'
 
 lvim.builtin.theme.tokyonight.options.dim_inactive = true
 lvim.builtin.theme.tokyonight.options.sidebars = { 'NvimTree', 'aerial', 'Outline', 'DapSidebar', 'UltestSummary', 'dap-repl' }
-lvim.builtin.theme.tokyonight.options.day_brightness = 0.05 -- high contrast
+-- lvim.builtin.theme.tokyonight.options.day_brightness = 0.05 -- high contrast
+lvim.builtin.theme.tokyonight.options.day_brightness = 0.15 -- high contrast but colorful
 lvim.builtin.theme.tokyonight.options.lualine_bold = true -- section headers in lualine theme will be bold
 lvim.builtin.theme.tokyonight.options.hide_inactive_statusline = true
 -- vim.cmd 'silent! hi! link TabLineFill BufferLineGroupSeparator' -- temp workaround to bufferline background issue

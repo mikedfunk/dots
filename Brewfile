@@ -373,6 +373,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "microsoft-edge"
 # cask "microsoft/git/git-credential-manager-core" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
 # cask "minikube" # for learning `minikube start` (alternative: kind)
+# cask "monitorcontrol" # menubar app to control non-apple monitors. works! (same controls are in the menubar dashboard thing)
 # cask "mpv" # video player like vlc
 # cask "mudlet" # muds are rad
 # cask "multifirefox" # profile picker until firefox fixes this glaring omission ( switched to using firefox developer edition and regular firefox for work and home )
@@ -404,7 +405,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "skype" # Dad uses skype. Skype web requires chrome. I don't like chrome.
 # cask "slack" # needed for screen sharing features. I mostly use the web app. (managed by my work)
 # cask "spectacle" # keyboard window splitter/resizer/mover. Kind of like a lightweight i3 window manager. I use it a lot. (replaced with rectangle - a superset that also snaps to edges by dragging)
-# cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 # cask "ssh-tunnel-manager" # mac native gui to manage running ssh tunnels (I just put tunnels in launchctl with autossh and forget about them)
 # cask "stats" # menubar stats
 # cask "steam" # yep
@@ -443,12 +443,12 @@ cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
-cask "monitorcontrol" # menubar app to control non-apple monitors. works!
 cask "nvidia-geforce-now" # game streaming
 cask "postman" # http api client (I use the web interface mostly)
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
+cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 
 # }}}
 

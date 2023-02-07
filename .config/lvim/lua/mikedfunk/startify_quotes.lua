@@ -150,7 +150,7 @@ local startify_quotes = {
   { "It is foolish to answer a question that you do not understand. It is sad to work for an end that you do not desire.", "", "- George Pólya" },
   { "It would be a mistake to think that solving problems is a purely intellectual affair; determination and emotions play an important role.", "", "- George Pólya" },
   { "It's OK to figure out murder mysteries, but you shouldn't need to figure out code. You should be able to read it.", "", "- Steve McConnell" },
-  { "It's both what you say and the way you say it.", "There's no point in having great ideas if you don't communicate them effectively." },
+  { "It's both what you say and the way you say it.", "", "There's no point in having great ideas if you don't communicate them effectively.", "", "- The Pragmatic Programmer" },
   { "It's not at all important to get it right the first time. It's vitally important to get it right the last time.", "", "- Dave Thomas" },
   { "Iterate the schedule with the code.", "", "Use experience you gain as you implement to refine the project time scales.", "", "- The Pragmatic Programmer" },
   { "Java is to JavaScript as ham is to hamster.", "", "- Jeremy Keith" },
