@@ -30,8 +30,6 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 -- https://www.reddit.com/r/neovim/comments/xx5hhp/introducing_livecommandnvim_preview_the_norm/
 -- vim.o.splitkeep = "screen"
 
--- vim.o.background = 'light'
-
 vim.o.spellfile = vim.fn.expand(vim.env.LUNARVIM_CONFIG_DIR .. '/spell/en.utf-8.add') -- this is necessary because nvim-treesitter is first in the runtimepath
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
@@ -39,7 +37,8 @@ vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
 vim.o.relativenumber = true -- relative line numbers
 vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
--- turn off relativenumber in insert mode and others
+
+-- turn off relativenumber in insert mode and others {{{
 local norelative_events = { 'InsertEnter', 'WinLeave', 'FocusLost' }
 local relative_events = { 'InsertLeave', 'WinEnter', 'FocusGained', 'BufNewFile', 'BufReadPost' }
 vim.api.nvim_create_augroup('relnumber_toggle', { clear = true })
@@ -57,6 +56,7 @@ vim.api.nvim_create_autocmd(norelative_events, {
   end,
   desc = 'turn off relative number',
 })
+-- }}}
 
 vim.o.fillchars = table.concat({
   'eob: ', -- remote tildes in startify
@@ -72,7 +72,8 @@ _G.simple_fold = function()
   local end_line = vim.trim(vim.fn.getline(fe))
   local spaces = (' '):rep(vim.o.columns - start_line:len() - end_line:len() - 7)
 
-  return start_line .. '  ' .. end_line .. spaces
+  -- return start_line .. '  ' .. end_line .. spaces
+  return start_line .. ' … ' .. end_line .. spaces
 end
 vim.opt.foldtext = 'v:lua.simple_fold()'
 
@@ -873,11 +874,8 @@ require 'lvim.lsp.null-ls.linters'.setup {
   { name = 'zsh' },
 }
 
-local did_register_codespell = false
 if is_null_ls_installed and not did_register_codespell then
   null_ls.register { sources = {
-    -- null_ls.builtins.diagnostics.mypy,
-    -- null_ls.builtins.diagnostics.pycodestyle,
     null_ls.builtins.diagnostics.codespell.with {
       -- force the severity to be HINT
       diagnostics_postprocess = function(diagnostic)
@@ -936,8 +934,6 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- { name = 'trim_whitespace' },
 }
 
-local did_register_phpcbf = false
-
 if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
@@ -966,10 +962,11 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 -- }}}
 
 -- completion {{{
-local did_register_spell = false
 if is_null_ls_installed and not did_register_spell then
+  local spell_completion = null_ls.builtins.completion.spell
+  spell_completion.filetypes = { "markdown" }
   null_ls.register { sources = {
-    null_ls.builtins.completion.spell
+    spell_completion
   } }
   did_register_spell = true
 end ---@diagnostic disable-line redundant-parameter
