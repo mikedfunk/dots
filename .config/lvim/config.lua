@@ -159,27 +159,6 @@ vim.api.nvim_create_autocmd('QUickFixCmdPost', { pattern = 'l*', group = 'last_q
 -- bug: I don't see a way to apply _local_ iabbrevs so if you load a
 -- markdown file it will enable the abbrev in the entire workspace :/
 
--- abbreviations {{{
-vim.cmd('iabbrev willREturn willReturn')
-vim.cmd('iabbrev shouldREturn shouldReturn')
-vim.cmd('iabbrev willTHrow willThrow')
-vim.cmd('iabbrev sectino section')
-vim.cmd('iabbrev seleciton selection')
-vim.cmd('iabbrev colleciton collection')
-vim.cmd('iabbrev Colleciton Collection')
-vim.cmd('iabbrev conneciton connection')
-vim.cmd('iabbrev Conneciton Connection')
-vim.cmd('iabbrev connecitno connection')
-vim.cmd('iabbrev Connecitno Connection')
-vim.cmd('iabbrev leagcy legacy')
-vim.cmd('iabbrev Leagcy Legacy')
-vim.cmd('iabbrev Couchbsae Couchbase')
-vim.cmd('iabbrev couchbsae couchbase')
-vim.cmd('iabbrev Deafult default')
-vim.cmd('iabbrev deafult default')
-vim.cmd('iabbrev deafult default')
--- }}}
-
 -- comment format (for filetypes that don't have a treesitter parser)
 vim.api.nvim_create_augroup('comment_formats', { clear = true })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'dosini,haproxy,neon,gitconfig', group = 'comment_formats', callback = function() vim.o.commentstring = '# %s' end })
@@ -2762,7 +2741,7 @@ plugins.typescript_nvim = {
       }
     }
 
-    require 'null-ls'.setup { sources = { require 'typescript.extensions.null-ls.code-actions' } }
+    require 'null-ls'.register { sources = { require 'typescript.extensions.null-ls.code-actions' } }
   end
 }
 -- }}}
@@ -2779,6 +2758,29 @@ plugins.undotree = {
   'mbbill/undotree',
   cmd = 'UndotreeToggle',
   init = setup_undotree,
+}
+-- }}}
+
+-- vim-abolish {{{
+plugins.vim_abolish = {
+  'tpope/vim-abolish',
+  init = function()
+    vim.g.abolish_no_mappings = 1
+    vim.g.abolish_save_file = vim.fn.getenv('LUNARVIM_RUNTIME_DIR') .. '/after/plugin/abolish.vim'
+  end,
+  config = function()
+    vim.cmd('iabbrev willREturn willReturn')
+    vim.cmd('iabbrev shouldREturn shouldReturn')
+    vim.cmd('iabbrev willTHrow willThrow')
+    vim.cmd('Abolish sectino section')
+    vim.cmd('Abolish seleciton selection')
+    vim.cmd('Abolish colleciton ollection')
+    vim.cmd('Abolish conneciton connection')
+    vim.cmd('Abolish connecitno connection')
+    vim.cmd('Abolish leagcy legacy')
+    vim.cmd('Abolish couchbsae couchbase')
+    vim.cmd('Abolish deafult default')
+  end
 }
 -- }}}
 
@@ -3342,6 +3344,7 @@ lvim.plugins = {
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
   -- plugins.nvim_ufo, -- fancy folds (probably better with LSP integration, which is a little hard to accomplish with Lunarvim)
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
+  -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
@@ -3396,10 +3399,10 @@ lvim.plugins = {
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
-  plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. :'<'>Subs/... to smart replace WITH SPACES between words
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
+  plugins.vim_abolish, -- No lazy load. I tried others but this is the only stable one so far (for :S)
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
   plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls or whatever
