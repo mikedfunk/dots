@@ -17,6 +17,7 @@ Code/saatchi/uml/**/*.uml
 
 Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
 Code/saatchi/gallery/.prettierrc.json
+Code/saatchi/xdocker/compose.yml
 
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.envrc
