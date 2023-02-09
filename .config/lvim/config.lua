@@ -1056,6 +1056,7 @@ vim.api.nvim_create_autocmd(
 )
 
 lvim.builtin.treesitter.ensure_installed = {
+  'comment',
   'lua', -- update to latest
   'markdown_inline',
   'phpdoc',
