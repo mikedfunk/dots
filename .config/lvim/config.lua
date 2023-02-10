@@ -781,27 +781,10 @@ lvim.builtin.cmp.formatting.source_names['zk'] = ''
 lvim.builtin.cmp.formatting.kind_icons.Method = 'ƒ' -- default is 
 lvim.builtin.cmp.formatting.kind_icons.Function = '' -- default is ƒ
 
-local is_cmp_installed, cmp = pcall(require, 'cmp')
-if is_cmp_installed then
+lvim.builtin.cmp.mapping['<C-J>'] = lvim.builtin.cmp.mapping['<Tab>']
+lvim.builtin.cmp.mapping['<C-K>'] = lvim.builtin.cmp.mapping['<S-Tab>']
 
-  lvim.builtin.cmp.preselect = cmp.PreselectMode.None
-  lvim.builtin.cmp.mapping['<C-y>'] = cmp.mapping.confirm({ select = false }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-
-  -- luasnip cmp mapping {{{
-  local is_luasnip_installed, luasnip = pcall(require, 'luasnip')
-
-  if is_luasnip_installed then
-    -- WTF why was jumpable removed here?
-    lvim.builtin.cmp.mapping['<C-k>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then luasnip.jump(-1) else fallback() end
-    end, { 'i', 's' })
-    lvim.builtin.cmp.mapping['<C-j>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(1) then luasnip.jump(1) else fallback() end
-    end, { 'i', 's' })
-  end
-  -- }}}
-
-end
+-- lvim.builtin.cmp.mapping['<C-Y>'] = function() require 'cmp'.mapping.confirm({ select = false }) end -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 -- }}}
 
 -- null-ls {{{
@@ -1250,9 +1233,8 @@ plugins.ccc_nvim = {
 -- cmp-color-names.nvim {{{
 plugins.cmp_color_names = {
   'nat-418/cmp-color-names.nvim',
-  dependencies = 'hrsh7th/nvim-cmp',
+  dependencies = { 'hrsh7th/nvim-cmp' },
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'color_names' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'color_names' })
@@ -1282,9 +1264,8 @@ plugins.cmp_dap = {
 
 plugins.cmp_dictionary = {
   'uga-rosa/cmp-dictionary',
-  dependencies = 'hrsh7th/nvim-cmp',
+  dependencies = { 'hrsh7th/nvim-cmp' },
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     local source = { name = 'dictionary', keyword_length = 2, max_item_count = 3 }
     if vim.tbl_contains(lvim.builtin.cmp.sources, source) then return end
@@ -1301,7 +1282,6 @@ plugins.cmp_dictionary = {
 plugins.cmp_emoji = {
   'hrsh7th/cmp-emoji',
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   dependencies = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'emoji' }) then return end
@@ -1321,7 +1301,6 @@ plugins.cmp_git = {
     'nvim-lua/plenary.nvim',
   },
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'git' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'git' })
@@ -1346,7 +1325,6 @@ end
 plugins.cmp_nvim_lsp_document_symbol = {
   'hrsh7th/cmp-nvim-lsp-document-symbol',
   dependencies = { 'hrsh7th/nvim-cmp', 'hrsh7th/cmp-cmdline' },
-  -- before = 'hrsh7th/nvim-cmp',
   -- event = 'InsertEnter',
   event = 'CmdlineEnter',
   init = setup_cmp_nvim_lsp_document_symbol
@@ -1359,7 +1337,6 @@ plugins.cmp_nvim_lsp_signature_help = {
   'hrsh7th/cmp-nvim-lsp-signature-help',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'nvim_lsp_signature_help' }) then return end
     table.insert(lvim.builtin.cmp.sources, {
@@ -1375,7 +1352,6 @@ plugins.cmp_plugins = {
   'KadoBOT/cmp-plugins',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'plugins' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'plugins' })
@@ -1389,7 +1365,6 @@ plugins.cmp_rg = {
   'lukas-reineke/cmp-rg',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   -- avoid running ripgrep on cwd for things like $HOME for dotfiles, etc. where
   -- it could be expensive
   cond = require 'saatchiart.plugin_configs'.cmp_rg_cond,
@@ -1466,7 +1441,6 @@ plugins.cmp_tmux = {
   'andersevenrud/cmp-tmux',
   dependencies = 'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   branch = 'main',
   init = function()
     local source = { name = 'tmux', option = { all_panes = true } }
@@ -1485,7 +1459,6 @@ plugins.cmp_treesitter = {
     'hrsh7th/nvim-cmp',
   },
   event = 'InsertEnter',
-  before = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'treesitter' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'treesitter' })
@@ -1627,7 +1600,6 @@ plugins.headlines_nvim = {
 plugins.incolla_nvim = {
   'mattdibi/incolla.nvim',
   ft = 'markdown',
-  -- before = 'folke/which-key.nvim',
   init = function()
     lvim.builtin.which_key.mappings['m'] = lvim.builtin.which_key.mappings['m'] or { name = 'Markdown' }
     lvim.builtin.which_key.mappings['m']['p'] = {
@@ -1768,7 +1740,7 @@ plugins.mkdx = {
 plugins.modes_nvim = {
   'mvllow/modes.nvim',
   event = 'BufRead',
-  before = 'folke/which-key.nvim',
+  dependencies = { 'folke/which-key.nvim' },
   init = function()
     -- https://github.com/mvllow/modes.nvim#known-issues
     lvim.builtin.which_key.setup.plugins.presets.operators = false
@@ -2033,7 +2005,7 @@ plugins.nvim_treesitter_endwise = {
     'zsh',
     'bash',
   },
-  before = 'nvim-treesitter/nvim-treesitter',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   init = function()
     lvim.builtin.treesitter.endwise = { enable = true }
   end,
@@ -2161,7 +2133,6 @@ plugins.nvim_treesitter_textobjects = {
     'typescript',
     'typescriptreact',
   },
-  before = 'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'folke/which-key.nvim',
@@ -2183,7 +2154,7 @@ plugins.nvim_ts_autotag = {
     'typescriptreact',
     'xml',
   },
-  before = 'nvim-treesitter/nvim-treesitter',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   init = function() lvim.builtin.treesitter.autotag.enable = true end,
 }
 -- }}}
@@ -2477,9 +2448,9 @@ plugins.surround_ui_nvim = {
     'kylechui/nvim-surround',
     'folke/which-key.nvim',
   },
-  config = function()
-    require('surround-ui').setup { root_key = 'S' }
-  end,
+  opts = {
+    root_key = 'S'
+  }
 }
 -- }}}
 
@@ -2514,7 +2485,6 @@ end
 plugins.symbols_outline_nvim = {
   'simrat39/symbols-outline.nvim',
   event = 'BufRead',
-  -- before = 'bufferline.nvim',
   dependencies = 'folke/which-key.nvim',
   init = setup_symbols_outline,
   opts = {
@@ -2563,6 +2533,23 @@ plugins.tabout_nvim = {
 }
 -- }}}
 
+-- telescope-dap.nvim {{{
+plugins.telescope_dap_nvim = {
+  'nvim-telescope/telescope-dap.nvim',
+  dependencies = {
+    'mfussenegger/nvim-dap',
+    'nvim-telescope/telescope.nvim',
+  },
+  init = function()
+    lvim.builtin.which_key.mappings.d = lvim.builtin.which_key.mappings.d or {}
+    lvim.builtin.which_key.mappings.d.l = { function() require 'telescope'.extensions.dap.list_breakpoints {} end, 'List Breakpoints' }
+    lvim.builtin.which_key.mappings.d.v = { function() require 'telescope'.extensions.dap.variables {} end, 'Variables' }
+    lvim.builtin.which_key.mappings.d.v = { function() require 'telescope'.extensions.dap.frames {} end, 'Call Stack' }
+  end,
+  config = function() require 'telescope'.load_extension 'dap' end,
+}
+-- }}}
+
 -- text-case.nvim {{{
 plugins.text_case_nvim = {
   'johmsalas/text-case.nvim',
@@ -2572,7 +2559,6 @@ plugins.text_case_nvim = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-telescope/telescope.nvim',
   },
-  before = 'folke/which-key.nvim',
   init = function()
     lvim.builtin.which_key.mappings['C'] = {
       name = 'Coerce',
@@ -2770,17 +2756,18 @@ plugins.vim_abolish = {
     vim.g.abolish_save_file = vim.fn.getenv('LUNARVIM_RUNTIME_DIR') .. '/after/plugin/abolish.vim'
   end,
   config = function()
-    vim.cmd('iabbrev willREturn willReturn')
-    vim.cmd('iabbrev shouldREturn shouldReturn')
-    vim.cmd('iabbrev willTHrow willThrow')
-    vim.cmd('Abolish sectino section')
-    vim.cmd('Abolish seleciton selection')
     vim.cmd('Abolish colleciton ollection')
-    vim.cmd('Abolish conneciton connection')
     vim.cmd('Abolish connecitno connection')
-    vim.cmd('Abolish leagcy legacy')
+    vim.cmd('Abolish conneciton connection')
     vim.cmd('Abolish couchbsae couchbase')
     vim.cmd('Abolish deafult default')
+    vim.cmd('Abolish leagcy legacy')
+    vim.cmd('Abolish sectino section')
+    vim.cmd('Abolish seleciton selection')
+    vim.cmd('Abolish striketrough strikethrough')
+    vim.cmd('iabbrev shouldREturn shouldReturn')
+    vim.cmd('iabbrev willREturn willReturn')
+    vim.cmd('iabbrev willTHrow willThrow')
   end
 }
 -- }}}
@@ -2895,20 +2882,17 @@ plugins.vim_lion = {
 
 -- vim-matchup {{{
 
----@return nil
-local setup_vim_matchup = function()
-  lvim.builtin.treesitter.matchup.enable = true
-  -- vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-  vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
-  -- vim.g.matchup_matchparen_deferred = 1
-  -- vim.g.matchup_matchparen_hi_surround_always = 1
-end
-
 plugins.vim_matchup = {
   'andymass/vim-matchup',
   event = 'CursorMoved',
-  before = 'nvim-treesitter/nvim-treesitter',
-  init = setup_vim_matchup,
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  init = function()
+    lvim.builtin.treesitter.matchup.enable = true
+    -- vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
+    -- vim.g.matchup_matchparen_deferred = 1
+    -- vim.g.matchup_matchparen_hi_surround_always = 1
+  end,
 }
 -- }}}
 
@@ -3351,6 +3335,7 @@ lvim.plugins = {
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
+  -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
@@ -3400,6 +3385,7 @@ lvim.plugins = {
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
+  plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
@@ -3414,6 +3400,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
+  { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
@@ -3423,7 +3410,8 @@ lvim.plugins = {
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
-  { 'lewis6991/foldsigns.nvim', event = 'BufEnter' }, -- show the most important sign hidden by a fold in the fold sign column
+  { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column
+  { 'luukvbaal/stabilize.nvim', event = 'BufRead' }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
