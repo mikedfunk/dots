@@ -393,6 +393,12 @@ lvim.format_on_save.pattern = table.concat({
 }, ',')
 lvim.format_on_save.timeout = 30000
 
+-- icons {{{
+lvim.icons.git.FileUnstaged = '✎'
+lvim.icons.git.FileUntracked = ''
+lvim.icons.git.FileStaged = '✓'
+-- }}}
+
 -- language servers {{{
 -- lvim.lsp.installer.setup.automatic_installation = { exclude = { 'phpactor' } }
 -- NOTE: this is not just ensure installed, if these have language server
@@ -680,7 +686,7 @@ lvim.builtin.lualine.sections.lualine_b = {
   -- components.branch,
   {
     'branch',
-    icon = { '' },
+    icon = { lvim.icons.git.Branch },
     on_click = function() vim.cmd 'Git' end,
   },
 }
@@ -740,7 +746,7 @@ lvim.builtin.mason.ui.border = 'rounded'
 -- lvim.builtin.mason.log_level = vim.log.levels.DEBUG
 lvim.builtin.mason.ui.icons = {
   package_installed = lvim.icons.ui.Check,
-  package_pending = '➜',
+  package_pending = lvim.icons.ui.BoldArrowRight,
   package_uninstalled = lvim.icons.ui.Close,
 }
 -- }}}
@@ -778,8 +784,8 @@ lvim.builtin.cmp.formatting.source_names['treesitter'] = ''
 lvim.builtin.cmp.formatting.source_names['vsnip'] = '✄'
 lvim.builtin.cmp.formatting.source_names['zk'] = ''
 
-lvim.builtin.cmp.formatting.kind_icons.Method = 'ƒ' -- default is 
-lvim.builtin.cmp.formatting.kind_icons.Function = '' -- default is ƒ
+lvim.builtin.cmp.formatting.kind_icons.Method = lvim.icons.kind.Method -- default is 
+lvim.builtin.cmp.formatting.kind_icons.Function = lvim.icons.kind.Function -- default is ƒ
 
 lvim.builtin.cmp.mapping['<C-J>'] = lvim.builtin.cmp.mapping['<Tab>']
 lvim.builtin.cmp.mapping['<C-K>'] = lvim.builtin.cmp.mapping['<S-Tab>']
@@ -799,7 +805,10 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'codespell', extra_args = { '--ignore-words-list', 'tabe' } },
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
+  -- { name = 'dotenv_linter' }, -- not available in Mason
   { name = 'gitlint' },
+  { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
+  -- { name = 'checkmake' }, -- makefile linter
   {
     name = 'phpcs',
     timeout = 30000,
@@ -843,7 +852,7 @@ if is_null_ls_installed and not did_register_codespell then
       diagnostics_postprocess = function(diagnostic)
         diagnostic.severity = vim.diagnostic.severity.HINT
       end,
-      extra_args = { '--ignore-words-list', 'tabe' },
+      extra_args = { '--ignore-words-list', 'tabe,noice' },
     }
   } }
 
@@ -980,8 +989,7 @@ require 'saatchiart.plugin_configs'.configure_nvim_dap()
 -- nvim-navic {{{
 -- https://github.com/SmiteshP/nvim-navic#%EF%B8%8F-setup
 vim.g.navic_silence = true
--- lvim.builtin.breadcrumbs.options.separator = ' ' .. lvim.icons.ui.ChevronShortRight .. ' '
--- lvim.builtin.breadcrumbs.options.separator = '  ' -- bug: this is only used for the _second_ separator and beyond https://github.com/LunarVim/LunarVim/blob/ea9b648a52de652a972471083f1e1d67f03305fa/lua/lvim/core/breadcrumbs.lua#L160
+-- lvim.builtin.breadcrumbs.options.separator = ' ' .. lvim.icons.ui.ChevronShortRight .. ' ' -- bug: this is only used for the _second_ separator and beyond https://github.com/LunarVim/LunarVim/blob/ea9b648a52de652a972471083f1e1d67f03305fa/lua/lvim/core/breadcrumbs.lua#L160
 -- }}}
 
 -- nvim-tree {{{
@@ -994,9 +1002,9 @@ lvim.builtin.nvimtree.git = {
   ignore = true,
 }
 
-lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.unstaged = '✎'
-lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.untracked = ''
-lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.staged = '✓'
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.unstaged = lvim.icons.git.FileUnstaged
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.untracked = lvim.icons.git.FileUntracked
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.staged = lvim.icons.git.FileStaged
 
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.hijack_netrw = true
@@ -2458,20 +2466,6 @@ plugins.surround_ui_nvim = {
 
 -- symbols-outline.nvim {{{
 
----@return nil
-local setup_symbols_outline = function()
-  local heading_options = {
-    filetype = 'Outline',
-    highlight = 'PanelHeading',
-    padding = 1,
-    text = 'Symbols'
-  }
-  if vim.tbl_contains(lvim.builtin.bufferline.options.offsets, heading_options) then return end
-  table.insert(lvim.builtin.bufferline.options.offsets, heading_options)
-
-  vim.cmd 'hi link FocusedSymbol TermCursor'
-end
-
 ---@param _ table
 ---@param bufnr integer
 ---@return nil
@@ -2488,11 +2482,23 @@ plugins.symbols_outline_nvim = {
   'simrat39/symbols-outline.nvim',
   event = 'BufRead',
   dependencies = 'folke/which-key.nvim',
-  init = setup_symbols_outline,
+  init = function()
+    local heading_options = {
+      filetype = 'Outline',
+      highlight = 'PanelHeading',
+      padding = 1,
+      text = 'Symbols'
+    }
+    if vim.tbl_contains(lvim.builtin.bufferline.options.offsets, heading_options) then return end
+    table.insert(lvim.builtin.bufferline.options.offsets, heading_options)
+
+    vim.cmd 'hi link FocusedSymbol TermCursor'
+  end,
   opts = {
     width = 35,
     relative_width = false,
     auto_close = true,
+    winblend = vim.o.winblend,
     -- highlight_hovered_item = false,
     -- auto_preview = true,
     autofold_depth = 2,
@@ -2506,19 +2512,19 @@ plugins.symbols_outline_nvim = {
     --   'Variable',
     -- },
     symbols = {
-      Class = { icon = '' },
-      Constant = { icon = '' },
-      Constructor = { icon = '' },
-      Enum = { icon = '了' },
-      EnumMember = { icon = '' },
-      File = { icon = '' },
-      Function = { icon = '' },
-      Interface = { icon = 'ﰮ' },
-      Method = { icon = 'ƒ' },
-      Module = { icon = '' },
-      Property = { icon = '' },
-      Struct = { icon = '' },
-      Variable = { icon = '' },
+      Class = { icon = lvim.icons.kind.Class },
+      Constant = { icon = lvim.icons.kind.Constant },
+      Constructor = { icon = lvim.icons.kind.Constructor },
+      Enum = { icon = lvim.icons.kind.Enum },
+      EnumMember = { icon = lvim.icons.kind.EnumMember },
+      File = { icon = lvim.icons.kind.File },
+      Function = { icon = lvim.icons.kind.Function },
+      Interface = { icon = lvim.icons.kind.Interface },
+      Method = { icon = lvim.icons.kind.Method },
+      Module = { icon = lvim.icons.kind.Module },
+      Property = { icon = lvim.icons.kind.Property },
+      Struct = { icon = lvim.icons.kind.Struct },
+      Variable = { icon = lvim.icons.kind.Variable },
     },
   },
 }

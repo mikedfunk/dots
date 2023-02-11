@@ -1,2 +1,2 @@
 [codespell]
-skip = './config.lua'
+skip = ./config.lua
