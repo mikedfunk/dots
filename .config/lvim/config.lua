@@ -5,12 +5,11 @@
 -- }}}
 
 -- helpers {{{
-_G.is_installed = require 'mikedfunk.helpers'.is_installed
-_G.is_plugin_installed = require 'mikedfunk.helpers'.is_plugin_installed
-_G.dump = require 'mikedfunk.helpers'.dump
+local is_installed = require 'mikedfunk.helpers'.is_installed
+local dump = require 'mikedfunk.helpers'.dump
 
 -- this was recently changed... use the same one that lunarvim sets up
-_G.mason_path = vim.fn.stdpath('data') .. '/mason'
+local mason_path = vim.fn.stdpath('data') .. '/mason'
 
 vim.api.nvim_exec([[
 function! LocListToggle()
@@ -644,13 +643,13 @@ local cmp_component = {
 ---@return string
 local dap_component = {
   function()
-    local is_installed, dap = pcall(require, 'dap')
-    if is_installed then return dap.status() else return '' end
+    local is_dap_installed, dap = pcall(require, 'dap')
+    if is_dap_installed then return dap.status() else return '' end
   end,
   icon = { '', color = { fg = require 'lvim.core.lualine.colors'.yellow } },
   cond = function()
-    local is_installed, dap = pcall(require, 'dap')
-    return is_installed and dap.status ~= ''
+    local is_dap_installed, dap = pcall(require, 'dap')
+    return is_dap_installed and dap.status ~= ''
   end,
 }
 
@@ -813,7 +812,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   -- { name = 'dotenv_linter' }, -- not available in Mason
-  { name = 'luacheck', condition = function() return vim.fn.filereadable '.luacheckrc' == 1 end  }, -- not in Mason
+  { name = 'luacheck' },
   { name = 'gitlint' },
   { name = 'shellcheck' },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
@@ -822,8 +821,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
     name = 'phpcs',
     timeout = 30000,
     extra_args = {
-      -- '--cache',
-      -- '--parallel=1', -- try to avoid zombie processes
+      '--cache',
       '--warning-severity=3',
       '-d',
       'memory_limit=100M',
@@ -837,7 +835,11 @@ require 'lvim.lsp.null-ls.linters'.setup {
   {
     name = 'phpstan',
     timeout = 30000,
-    extra_args = { '--memory-limit=100M', '--level=5', '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon' }, -- 40MB is not enough
+    extra_args = {
+      '--memory-limit=100M',
+      '--level=5',
+      '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon',
+    }, -- 40MB is not enough
     condition = function(utils)
       return utils.root_has_file { 'phpstan.neon' }
       -- return vim.fn.executable('phpstan') == 1 and vim.fn.filereadable 'phpstan.neon' == 1
@@ -845,11 +847,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   },
   { name = 'php' },
   { name = 'rubocop' },
-  {
-    name = 'sqlfluff',
-    extra_args = { '--dialect', 'mysql' },
-    -- condition = function() return vim.fn.executable('sqlfluff') == 1 end,
-  },
+  { name = 'sqlfluff', extra_args = { '--dialect', 'mysql' } },
   -- { name = 'trail_space' },
   { name = 'zsh' },
 }
@@ -862,7 +860,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
-  { name = 'stylua', condition = function() return vim.fn.filereadable '.stylua.toml' == 1 end },
+  { name = 'stylua' },
   { name = 'shfmt' },
   { name = 'json_tool', extra_args = { '--indent=2' } },
   -- moved to null-ls setup directly because lunarvim won't let me change the command
@@ -1197,7 +1195,7 @@ lvim.builtin.which_key.setup.plugins.presets.z = true
 -- }}}
 
 -- additional plugin definitions {{{
-_G.plugins = {}
+local plugins = {}
 
 -- auto-dark-mode {{{
 
