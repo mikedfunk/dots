@@ -802,11 +802,20 @@ local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic d
 -- linters {{{
 
 require 'lvim.lsp.null-ls.linters'.setup {
-  -- { name = 'codespell', extra_args = { '--ignore-words-list', 'tabe' } },
+  {
+    name = 'codespell',
+    -- force the severity to be HINT
+    diagnostics_postprocess = function(diagnostic)
+      diagnostic.severity = vim.diagnostic.severity.HINT
+    end,
+    extra_args = { '--ignore-words-list', 'tabe,noice' },
+  },
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   -- { name = 'dotenv_linter' }, -- not available in Mason
+  { name = 'luacheck' }, -- not in Mason
   { name = 'gitlint' },
+  { name = 'shellcheck' },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
   -- { name = 'checkmake' }, -- makefile linter
   {
@@ -845,20 +854,6 @@ require 'lvim.lsp.null-ls.linters'.setup {
   { name = 'zsh' },
 }
 
-if is_null_ls_installed and not did_register_codespell then
-  null_ls.register { sources = {
-    null_ls.builtins.diagnostics.codespell.with {
-      -- force the severity to be HINT
-      diagnostics_postprocess = function(diagnostic)
-        diagnostic.severity = vim.diagnostic.severity.HINT
-      end,
-      extra_args = { '--ignore-words-list', 'tabe,noice' },
-    }
-  } }
-
-  did_register_codespell = true
-end
-
 -- }}}
 
 -- formatters {{{
@@ -867,6 +862,8 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
+  { name = 'stylua' },
+  { name = 'shfmt' },
   { name = 'json_tool', extra_args = { '--indent=2' } },
   -- moved to null-ls setup directly because lunarvim won't let me change the command
   -- {
@@ -905,6 +902,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- { name = 'trim_whitespace' },
 }
 
+local did_register_phpcbf
 if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
@@ -933,6 +931,7 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 -- }}}
 
 -- completion {{{
+local did_register_spell
 if is_null_ls_installed and not did_register_spell then
   null_ls.register { sources = {
     null_ls.builtins.completion.spell.with {

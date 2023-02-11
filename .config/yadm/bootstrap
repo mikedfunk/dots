@@ -512,6 +512,20 @@ _install_node_versions () {
 }
 # }}}
 
+# install lua version(s) {{{
+# needed for luarocks, which is needed by luacheck
+_install_lua_versions () {
+    builtin cd >/dev/null || return
+    _log_info "Installing lua version(s)"
+    asdf plugin add lua
+    ( asdf list lua | grep --quiet 5.4.4 ) || asdf install lua 5.4.4
+
+    asdf global lua 5.4.4
+
+    builtin cd - >/dev/null || return
+}
+# }}}
+
 # install python version(s) {{{
 _install_python_versions () {
     builtin cd >/dev/null || return
@@ -739,6 +753,7 @@ _install_update_homebrew_packages
 _install_neovim_versions
 _install_php_versions
 _install_node_versions
+_install_lua_versions
 _install_deno_versions
 _install_python_versions
 _update_python_pip_packages
