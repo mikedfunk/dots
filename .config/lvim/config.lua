@@ -813,7 +813,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   -- { name = 'dotenv_linter' }, -- not available in Mason
-  { name = 'luacheck' }, -- not in Mason
+  { name = 'luacheck', condition = function() return vim.fn.filereadable '.luacheckrc' == 1 end  }, -- not in Mason
   { name = 'gitlint' },
   { name = 'shellcheck' },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
@@ -862,7 +862,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
-  { name = 'stylua' },
+  { name = 'stylua', condition = function() return vim.fn.filereadable '.stylua.toml' == 1 end },
   { name = 'shfmt' },
   { name = 'json_tool', extra_args = { '--indent=2' } },
   -- moved to null-ls setup directly because lunarvim won't let me change the command
