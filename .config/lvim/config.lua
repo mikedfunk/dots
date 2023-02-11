@@ -925,10 +925,11 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
 
 -- completion {{{
 if is_null_ls_installed and not did_register_spell then
-  local spell_completion = null_ls.builtins.completion.spell
-  spell_completion.filetypes = { "markdown" }
   null_ls.register { sources = {
-    spell_completion
+    null_ls.builtins.completion.spell.with {
+      filetypes = { 'markdown' },
+      runtime_condition = function() return vim.wo.spell end,
+    }
   } }
   did_register_spell = true
 end ---@diagnostic disable-line redundant-parameter
@@ -1153,7 +1154,8 @@ lvim.builtin.theme.name = 'tokyonight'
 lvim.builtin.theme.tokyonight.options.style = 'moon'
 -- lvim.builtin.theme.tokyonight.options.style = 'night'
 
-lvim.builtin.theme.tokyonight.options.dim_inactive = true
+lvim.builtin.theme.tokyonight.options.dim_inactive = true -- dim inactive windows
+lvim.builtin.theme.tokyonight.options.lualine_bold = true -- bold headers for each section header
 lvim.builtin.theme.tokyonight.options.sidebars = { 'NvimTree', 'aerial', 'Outline', 'DapSidebar', 'UltestSummary', 'dap-repl' }
 -- lvim.builtin.theme.tokyonight.options.day_brightness = 0.05 -- high contrast
 lvim.builtin.theme.tokyonight.options.day_brightness = 0.15 -- high contrast but colorful
