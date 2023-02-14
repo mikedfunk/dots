@@ -1,3 +1,4 @@
+local is_installed = require 'mikedfunk.helpers'.is_installed
 local pwd = vim.api.nvim_exec('pwd', true)
 -- if not pwd:match '/Code/saatchi/.*' then require 'lvim.lsp.manager'.setup 'tsserver' end
 if pwd:match '/Code/saatchi/.*' then vim.bo.filetype = 'javascriptreact' end

@@ -1,8 +1,0 @@
-{
-  "$schema": "https://raw.githubusercontent.com/tamago324/nlsp-settings.nvim/main/schemas/_generated/pyright.json",
-  "python": {
-    "analysis": {
-      "extraPaths": ["imgproc"]
-    }
-  }
-}
