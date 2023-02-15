@@ -786,6 +786,8 @@ lvim.builtin.cmp.formatting.source_names['zk'] = ''
 lvim.builtin.cmp.formatting.kind_icons.Method = lvim.icons.kind.Method -- default is 
 lvim.builtin.cmp.formatting.kind_icons.Function = lvim.icons.kind.Function -- default is ƒ
 
+local is_cmp_installed, cmp = pcall(require, 'cmp')
+if is_cmp_installed then lvim.builtin.cmp.preselect = cmp.PreselectMode.None end
 lvim.builtin.cmp.mapping['<C-J>'] = lvim.builtin.cmp.mapping['<Tab>']
 lvim.builtin.cmp.mapping['<C-K>'] = lvim.builtin.cmp.mapping['<S-Tab>']
 
@@ -812,7 +814,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   -- { name = 'dotenv_linter' }, -- not available in Mason
-  { name = 'luacheck' },
+  -- { name = 'luacheck' },
   { name = 'gitlint' },
   { name = 'shellcheck' },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
@@ -3408,6 +3410,7 @@ lvim.plugins = {
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
+  { 'fourjay/vim-hurl' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
@@ -3416,14 +3419,14 @@ lvim.plugins = {
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column
-  { 'luukvbaal/stabilize.nvim', event = 'BufRead' }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
+  { 'luukvbaal/stabilize.nvim', event = 'BufRead', opts = {} }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
-  { 'theHamsta/nvim-dap-virtual-text', dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' } }, -- show variable value in virtual text
-  { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf
+  { 'theHamsta/nvim-dap-virtual-text', ft = 'php', dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' }, opts = {} }, -- show variable value in virtual text
+  { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
 }
