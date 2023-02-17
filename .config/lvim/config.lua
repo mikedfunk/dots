@@ -148,7 +148,9 @@ vim.o.sessionoptions = table.concat({
 
 -- if the last window is a quickfix, close it
 vim.api.nvim_create_augroup('last_quickfix', { clear = true })
-vim.api.nvim_create_autocmd('WinEnter', { pattern = '*', group = 'last_quickfix',
+vim.api.nvim_create_autocmd('WinEnter', {
+  pattern = '*',
+  group = 'last_quickfix',
   command = "if winnr('$') == 1 && getbufvar(winbufnr(winnr()), '&buftype') == 'quickfix' | q | endif",
 })
 
@@ -212,7 +214,9 @@ vim.api.nvim_create_autocmd('FileType', {
 -- }}}
 
 vim.api.nvim_create_augroup('show_defs', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'vim', group = 'show_defs',
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'vim',
+  group = 'show_defs',
   callback = function()
     vim.keymap.set('n', 'K', '<Esc>:help <C-R><C-W><CR>', { noremap = true, silent = true, buffer = true })
   end,
@@ -222,7 +226,9 @@ vim.api.nvim_create_autocmd('FileType', { pattern = 'vim', group = 'show_defs',
 -- https://www.reddit.com/r/vim/comments/3oo1e0/has_anyone_found_a_way_to_make_k_useful/
 -- NOTE: keywordprg is not invoked silently, so you will get 'press enter to continue'
 -- also I tried to make this fancy and use filetype but neovim doesn't like it
-vim.api.nvim_create_autocmd('FileType', { pattern = 'zsh,bash,sh', group = 'show_defs',
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'zsh,bash,sh',
+  group = 'show_defs',
   command = 'setlocal keywordprg=devdocs\\ bash',
 })
 
@@ -354,13 +360,17 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes',
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '{' .. table.concat({
-  '.curlrc',
-  '.gitignore',
-  '.gitattributes',
-  '.hgignore',
-  '.jshintignore',
-}, ',') .. '}', callback = function() vim.bo.filetype = 'conf' end })
+vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+  group = 'unusual_filetypes',
+  pattern = '{' .. table.concat({
+    '.curlrc',
+    '.gitignore',
+    '.gitattributes',
+    '.hgignore',
+    '.jshintignore',
+  }, ',') .. '}',
+  callback = function() vim.bo.filetype = 'conf' end
+})
 -- }}}
 
 -- automatically jump to the last place you've visited in a file before exiting {{{
@@ -449,7 +459,7 @@ lvim.lsp.document_highlight = true
 
 -- remove toml from skipped filetypes so I can configure taplo
 lvim.lsp.automatic_configuration.skipped_filetypes = vim.tbl_filter(function(val)
-  return not vim.tbl_contains({ "toml" }, val)
+  return not vim.tbl_contains({ 'toml' }, val)
 end, lvim.lsp.automatic_configuration.skipped_filetypes)
 
 for _, server in pairs({
@@ -479,7 +489,8 @@ lvim.builtin.terminal.active = true -- toggleterm.nvim (useful to tail logs with
 -- bufferline.nvim {{{
 vim.cmd [[hi! default link PanelHeading BufferLineTabSelected]]
 vim.api.nvim_create_augroup('bufferline_fill_fix', { clear = true })
-vim.api.nvim_create_autocmd('ColorScheme', { group = 'bufferline_fill_fix',
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = 'bufferline_fill_fix',
   callback = function() vim.cmd [[silent! hi! link BufferLineFill BufferLineGroupSeparator]] end,
 })
 
@@ -862,9 +873,9 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
-  { name = 'stylua' },
   { name = 'shfmt' },
-  { name = 'json_tool', extra_args = { '--indent=2' } },
+  { name = 'json_tool',      extra_args = { '--indent=2' } },
+  -- { name = 'stylua' }, -- config doesn't seem to be working, even global
   -- moved to null-ls setup directly because lunarvim won't let me change the command
   -- {
   --   name = 'phpcbf',
@@ -949,7 +960,9 @@ end ---@diagnostic disable-line redundant-parameter
 -- require 'dap'.set_log_level('DEBUG') -- debug dap: tail -f ~/.cache/nvim/dap.log
 
 vim.api.nvim_create_augroup('dap_attach', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'dap-repl', group = 'dap_attach',
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'dap-repl',
+  group = 'dap_attach',
   callback = function() require 'dap.ext.autocompl'.attach() end,
 })
 
@@ -1080,7 +1093,6 @@ lvim.builtin.treesitter.auto_install = true
 lvim.builtin.treesitter.context_commentstring.config['php'] = '// %s'
 
 lvim.builtin.treesitter.on_config_done = function()
-
   -- fancy styled-components queries found on the web
   -- local are_treesitter_styled_components_found, treesitter_styled_components = pcall(require, 'mikedfunk.treesitter_styled_components')
   -- if not are_treesitter_styled_components_found then return end
@@ -1140,7 +1152,9 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i['<C-k>'] = actions.move_selection_previous
 
   vim.api.nvim_create_augroup('telescope_no_cmp', { clear = true })
-  vim.api.nvim_create_autocmd('FileType', { group = 'telescope_no_cmp', pattern = 'TelescopePrompt',
+  vim.api.nvim_create_autocmd('FileType', {
+    group = 'telescope_no_cmp',
+    pattern = 'TelescopePrompt',
     callback = function()
       require 'cmp'.setup.buffer { enabled = false }
     end
@@ -1675,37 +1689,41 @@ end
 ---@return nil
 local configure_mkdx = function()
   vim.api.nvim_create_augroup('mkdx_map', { clear = true })
-  vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'mkdx_map',
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'markdown',
+    group = 'mkdx_map',
     callback = function() vim.keymap.set('n', '<cr>', '<Plug>(mkdx-checkbox-prev-n)', { buffer = true, noremap = true }) end,
   })
 
   if not is_installed('which-key') then return end
 
-  require 'which-key'.register({ m = {
-    name = 'Markdown',
-    ["'"] = { name = 'Quote Toggle' },
-    ['-'] = { name = '↓ Checkbox State' },
-    ['<Leader>'] = { name = '↓ Checkbox State' },
-    ['='] = { name = '↑ Checkbox State' },
-    ['/'] = { name = 'Italic' },
-    ['['] = { name = '↑ Header' },
-    [']'] = { name = '↓ Header' },
-    ['`'] = { name = 'Code Block' },
-    b = { name = 'Bold' },
-    I = { name = 'TOC Quickfix' },
-    i = { name = 'TOC Upsert' },
-    j = { name = 'Jump to Header' },
-    k = { name = '<kbd>' },
-    L = { name = 'Links Quickfix' },
-    s = { name = 'Strikethrough' },
-    t = { name = 'Checkbox Toggle' },
-    l = {
-      name = 'List',
-      l = { name = 'List Toggle' },
-      n = { name = 'Link Wrap' },
-      t = { name = 'Checklist Toggle' },
+  require 'which-key'.register({
+    m = {
+      name = 'Markdown',
+      ["'"] = { name = 'Quote Toggle' },
+      ['-'] = { name = '↓ Checkbox State' },
+      ['<Leader>'] = { name = '↓ Checkbox State' },
+      ['='] = { name = '↑ Checkbox State' },
+      ['/'] = { name = 'Italic' },
+      ['['] = { name = '↑ Header' },
+      [']'] = { name = '↓ Header' },
+      ['`'] = { name = 'Code Block' },
+      b = { name = 'Bold' },
+      I = { name = 'TOC Quickfix' },
+      i = { name = 'TOC Upsert' },
+      j = { name = 'Jump to Header' },
+      k = { name = '<kbd>' },
+      L = { name = 'Links Quickfix' },
+      s = { name = 'Strikethrough' },
+      t = { name = 'Checkbox Toggle' },
+      l = {
+        name = 'List',
+        l = { name = 'List Toggle' },
+        n = { name = 'Link Wrap' },
+        t = { name = 'Checklist Toggle' },
+      }
     }
-  } }, { prefix = '<Leader>' })
+  }, { prefix = '<Leader>' })
 
   require 'which-key'.register({
     m = {
@@ -1798,10 +1816,12 @@ plugins.neo_zoom_lua = {
   dependencies = 'folke/which-key.nvim',
   ft = { 'dapui_.*', 'dap-repl' },
   init = function()
-    require 'which-key'.register({ z = {
-      function() vim.cmd 'NeoZoomToggle' end,
-      'Toggle Zoom',
-    }, }, { prefix = '<C-w>' })
+    require 'which-key'.register({
+      z = {
+        function() vim.cmd 'NeoZoomToggle' end,
+        'Toggle Zoom',
+      },
+    }, { prefix = '<C-w>' })
   end,
   opts = {
     presets = {
@@ -1923,9 +1943,11 @@ plugins.nvim_femaco_lua = {
   ft = 'markdown',
   init = function()
     if is_installed('which-key') then
-      require 'which-key'.register({ m = {
-        e = { function() require('femaco.edit').edit_code_block() end, 'Edit Code Block' },
-      }, }, { prefix = '<Leader>' })
+      require 'which-key'.register({
+        m = {
+          e = { function() require('femaco.edit').edit_code_block() end, 'Edit Code Block' },
+        },
+      }, { prefix = '<Leader>' })
     end
   end,
 }
@@ -2123,10 +2145,12 @@ local configure_nvim_treesitter_textobjects = function()
   -- hmm, this is not as useful as it looks. It doesn't peek any surrounding
   -- definition well... it just lets you peek the parent class definition
   -- from a function definition.
-  require 'which-key'.register({ l = {
-    ['C'] = 'Peek Class Definition',
-    -- ['F'] = 'Peek Function Definition',
-  } }, { prefix = '<Leader>' })
+  require 'which-key'.register({
+    l = {
+      ['C'] = 'Peek Class Definition',
+      -- ['F'] = 'Peek Function Definition',
+    }
+  }, { prefix = '<Leader>' })
 end
 
 plugins.nvim_treesitter_textobjects = {
@@ -2303,43 +2327,47 @@ local configure_phpactor_nvim = function()
   }
   if not is_installed('which-key') then return end
 
-  require 'which-key'.register({ r = {
-    name = 'Refactor',
-    r = { '<Cmd>PhpActor context_menu<CR>', 'PHP Menu' },
-    c = { '<Cmd>PhpActor copy_class<CR>', 'PHP Copy Class' },
-    m = { '<Cmd>PhpActor move_class<CR>', 'PHP Move Class' },
-    -- x = { '<Cmd>PhpActor extract_expression<CR>', 'PHP Extract Expression' }, -- not implemented
-    -- C = { '<Cmd>PhpActor extract_constant<CR>', 'PHP Extract Constant' }, -- not implemented
-    i = { '<Cmd>PhpActor class_inflect<CR>', 'PHP Inflect Class' },
-    I = { '<Cmd>PhpActor import_missing_classes<CR>', 'PHP Import Missing' },
-    p = { '<Cmd>PhpActor transform<CR>', 'PHP Add Missing Properties' },
+  require 'which-key'.register({
+    r = {
+      name = 'Refactor',
+      r = { '<Cmd>PhpActor context_menu<CR>', 'PHP Menu' },
+      c = { '<Cmd>PhpActor copy_class<CR>', 'PHP Copy Class' },
+      m = { '<Cmd>PhpActor move_class<CR>', 'PHP Move Class' },
+      -- x = { '<Cmd>PhpActor extract_expression<CR>', 'PHP Extract Expression' }, -- not implemented
+      -- C = { '<Cmd>PhpActor extract_constant<CR>', 'PHP Extract Constant' }, -- not implemented
+      i = { '<Cmd>PhpActor class_inflect<CR>', 'PHP Inflect Class' },
+      I = { '<Cmd>PhpActor import_missing_classes<CR>', 'PHP Import Missing' },
+      p = { '<Cmd>PhpActor transform<CR>', 'PHP Add Missing Properties' },
 
-    -- class options:
-    --
-    -- goto_definition
-    -- hover
-    -- copy
-    -- generate_accessor (doesn't work... something about nullable)
-    -- import_missing_classes
-    -- find_references
-    -- transform_file
-    -- replace_references
-    -- generate_mutator (doesn't work... something about nullable)
-    -- override_method (useful! filter through parent methods to copy empty signature to)
-    -- inflect
-    -- goto_implementation
-    -- class_new
-    -- move
-    -- import
-    -- navigate
-  } }, { prefix = '<Leader>' })
+      -- class options:
+      --
+      -- goto_definition
+      -- hover
+      -- copy
+      -- generate_accessor (doesn't work... something about nullable)
+      -- import_missing_classes
+      -- find_references
+      -- transform_file
+      -- replace_references
+      -- generate_mutator (doesn't work... something about nullable)
+      -- override_method (useful! filter through parent methods to copy empty signature to)
+      -- inflect
+      -- goto_implementation
+      -- class_new
+      -- move
+      -- import
+      -- navigate
+    }
+  }, { prefix = '<Leader>' })
 
-  require 'which-key'.register({ r = {
-    name = 'Refactor PHP',
-    -- e = { ":'<,'>PhpActor extract_method<CR>", 'PHP Extract Method' }, -- overlap with refactoring.nvim, not implemented
-    -- x = { ":'<,'>PhpActor extract_expression<CR>", 'PHP Extract Expression' }, -- not implemented
-    m = { ":'<,'>PhpActor context_menu<CR>", 'PHP Menu' },
-  } }, { prefix = '<Leader>', mode = 'v' })
+  require 'which-key'.register({
+    r = {
+      name = 'Refactor PHP',
+      -- e = { ":'<,'>PhpActor extract_method<CR>", 'PHP Extract Method' }, -- overlap with refactoring.nvim, not implemented
+      -- x = { ":'<,'>PhpActor extract_expression<CR>", 'PHP Extract Expression' }, -- not implemented
+      m = { ":'<,'>PhpActor context_menu<CR>", 'PHP Menu' },
+    }
+  }, { prefix = '<Leader>', mode = 'v' })
 
   require 'which-key'.register({ v = { '<Cmd>PhpActor change_visibility<CR>', 'PHP Cycle Visibility' } }, { prefix = ']' })
 end
@@ -2417,7 +2445,8 @@ end
 
 ---@return nil
 local configure_splitjoin = function()
-  if is_installed('which-key') then require 'which-key'.register({
+  if is_installed('which-key') then
+    require 'which-key'.register({
       J = { name = 'Join' },
       S = { name = 'Split' },
     }, { prefix = 'g' })
@@ -2471,9 +2500,11 @@ plugins.surround_ui_nvim = {
 plugins.symbols_outline_on_attach = function(_, bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<Cmd>SymbolsOutline<CR>', { noremap = true })
   if is_installed('which-key') then
-    require 'which-key'.register({ l = {
-      o = { '<Cmd>SymbolsOutline<CR>', 'Symbols Outline', buffer = bufnr }
-    } }, { prefix = '<Leader>' })
+    require 'which-key'.register({
+      l = {
+        o = { '<Cmd>SymbolsOutline<CR>', 'Symbols Outline', buffer = bufnr }
+      }
+    }, { prefix = '<Leader>' })
   end
 end
 
@@ -2951,8 +2982,8 @@ local setup_startify = function()
 
   -- reorder and whitelist certain groups
   vim.g['startify_lists'] = {
-    { type = 'sessions', header = { '   Sessions' } },
-    { type = 'dir', header = { '   Recent in ' .. vim.fn.getcwd() } },
+    { type = 'sessions',  header = { '   Sessions' } },
+    { type = 'dir',       header = { '   Recent in ' .. vim.fn.getcwd() } },
     { type = 'bookmarks', header = { '   Bookmarks' } },
   }
 
@@ -3136,7 +3167,10 @@ lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
 lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
 lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
-lvim.builtin.which_key.mappings['d']['q'] = { function() require('dap').close(); require('dapui').close({ reset = true }) end, 'Quit' }
+lvim.builtin.which_key.mappings['d']['q'] = { function()
+  require('dap').close();
+  require('dapui').close({ reset = true })
+end, 'Quit' }
 
 lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
 
@@ -3407,6 +3441,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
+  { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
