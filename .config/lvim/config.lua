@@ -6,7 +6,7 @@
 
 -- helpers {{{
 local is_installed = require 'mikedfunk.helpers'.is_installed
-local dump = require 'mikedfunk.helpers'.dump
+-- local dump = require 'mikedfunk.helpers'.dump
 
 -- this was recently changed... use the same one that lunarvim sets up
 local mason_path = vim.fn.stdpath('data') .. '/mason'
@@ -237,6 +237,43 @@ vim.o.colorcolumn = table.concat({
   80,
   120
 }, ',')
+
+-- only show colorcolumn when over {{{
+-- (like https://github.com/m4xshen/smartcolumn.nvim but works for multiple)
+
+-- --- @param colorcolumn integer
+-- --- @return boolean
+-- local function is_a_line_over_colorcolumn(colorcolumn)
+--   local max_column = 0
+--   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+--   for _, line in pairs(lines) do
+--     max_column = math.max(max_column, vim.fn.strdisplaywidth(line))
+--   end
+
+--   return max_column > colorcolumn
+-- end
+
+-- local colorcolumns = { 80, 120 }
+-- local function enable_colorcolumns_if_over()
+--   local enabled_colorcolumns = {}
+--   for _, colorcolumn in ipairs(colorcolumns) do
+--     if is_a_line_over_colorcolumn(colorcolumn) then
+--       table.insert(enabled_colorcolumns, colorcolumn)
+--     end
+--   end
+
+--   if enabled_colorcolumns ~= {} then
+--     vim.wo.colorcolumn = table.concat(enabled_colorcolumns, ',')
+--   end
+-- end
+
+-- vim.api.nvim_create_augroup('color_column_over', { clear = true })
+-- vim.api.nvim_create_autocmd('CursorHold', {
+--   group = 'color_column_over',
+--   callback = enable_colorcolumns_if_over,
+--   desc = 'enable colorcolumns if over',
+-- })
+-- }}}
 
 -- prettier hidden chars. turn on with :set list or yol (different symbols)
 vim.o.listchars = table.concat({
@@ -2643,57 +2680,58 @@ plugins.todo_comments_nvim = {
 
 -- tmuxline.vim {{{
 
----@return nil
-local setup_tmuxline = function()
-  vim.g['tmuxline_preset'] = {
-    a = { '#S' }, -- session name 
-    c = {
-      -- '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#{battery_icon_status}#[fg=default]', -- cpu, ram, battery
-      '#{cpu_fg_color}#{cpu_icon}#[fg=default] #{ram_fg_color}#{ram_icon}#[fg=default] #{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#[fg=default] #{wifi_icon}', -- cpu, ram, battery, wifi
-      '#(~/.support/tmux-docker-status.sh)',
-    },
-    win = { '#I', '#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}' }, -- unselected tab
-    cwin = { '#I', '#W#{?window_zoomed_flag, ,}' }, -- current tab
-    x = { "#(TZ=Etc/UTC date '+%%R UTC')" }, -- UTC time
-    y = { '%l:%M %p' }, -- local time
-    z = { '%a', '%b %d' }, -- local date
-  }
-
-  -- dark
-  -- vim.g['tmuxline_theme'] = {
-  --   a = { '16', '254', 'bold' },
-  --   b = { '237', '240' },
-  --   c = { '247', '236'},
-  --   x = { '250', '232' },
-  --   y = { '247', '236'},
-  --   z = { '235', '252' },
-  --   bg = { '247', '234'},
-  --   win = { '250', '234' },
-  --   ['win.dim'] = { '244', '234' },
-  --   cwin = { '231', '31', 'bold' },
-  --   ['cwin.dim'] = { '117', '31' },
-  -- }
-
-  -- light
-  -- vim.g['tmuxline_theme'] = {
-  --   a = { '250', '232', 'bold' },
-  --   b = { '247', '236' },
-  --   c = { '247', '234'},
-  --   x = { '247', '234' },
-  --   y = { '247', '236'},
-  --   z = { '250', '232' },
-  --   bg = { '16', '254'},
-  --   win = { '16', '254' },
-  --   cwin = { '231', '31', 'bold' },
-  -- }
-
-  vim.cmd 'command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf' -- apply tmuxline settings and snapshot to file
-end
-
 plugins.tmuxline_vim = {
   'edkolev/tmuxline.vim',
   cmd = { 'Tmuxline', 'TmuxlineSnapshot' },
-  init = setup_tmuxline,
+  init = function()
+    vim.g['tmuxline_preset'] = {
+      a = { '#S' }, -- session name |
+      c = {
+        table.concat({
+          '#{cpu_fg_color}#{cpu_icon}#[fg=default]',
+          '#{ram_fg_color}#{ram_icon}#[fg=default]',
+          '#{battery_color_charge_fg}#{battery_icon_charge}#[bg=colour236]#[fg=default]',
+          '#{wifi_icon}',
+        }, ' '),
+        '#(~/.support/tmux-docker-status.sh)',
+      },
+      win = { '#I', '#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}' }, -- unselected tab
+      cwin = { '#I', '#W#{?window_zoomed_flag, ,}' }, -- current tab
+      x = { "#(TZ=Etc/UTC date '+%%R UTC')" }, -- UTC time
+      y = { '%l:%M %p' }, -- local time
+      z = { '%a', '%b %d' }, -- local date
+    }
+
+    -- dark
+    -- vim.g['tmuxline_theme'] = {
+    --   a = { '16', '254', 'bold' },
+    --   b = { '237', '240' },
+    --   c = { '247', '236'},
+    --   x = { '250', '232' },
+    --   y = { '247', '236'},
+    --   z = { '235', '252' },
+    --   bg = { '247', '234'},
+    --   win = { '250', '234' },
+    --   ['win.dim'] = { '244', '234' },
+    --   cwin = { '231', '31', 'bold' },
+    --   ['cwin.dim'] = { '117', '31' },
+    -- }
+
+    -- light
+    -- vim.g['tmuxline_theme'] = {
+    --   a = { '250', '232', 'bold' },
+    --   b = { '247', '236' },
+    --   c = { '247', '234'},
+    --   x = { '247', '234' },
+    --   y = { '247', '236'},
+    --   z = { '250', '232' },
+    --   bg = { '16', '254'},
+    --   win = { '16', '254' },
+    --   cwin = { '231', '31', 'bold' },
+    -- }
+
+    vim.cmd 'command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf' -- apply tmuxline settings and snapshot to file
+  end,
 }
 -- }}}
 
@@ -2899,22 +2937,17 @@ plugins.vim_jdaddy = {
 
 -- vim-lion {{{
 
----@return nil
-local configure_vim_lion = function()
-  if is_installed('which-key') then
-    require 'which-key'.register({
-      a = 'Align operator right',
-      L = 'Align operator left',
-    }, { prefix = 'g' })
-  end
-end
-
 plugins.vim_lion = {
   'tommcdo/vim-lion',
   event = 'BufRead',
   dependencies = 'folke/which-key.nvim',
   init = function() vim.g['lion_map_right'] = 'ga' end,
-  config = configure_vim_lion,
+  config = function()
+    require 'which-key'.register({
+      a = 'Align operator right',
+      L = 'Align operator left',
+    }, { prefix = 'g' })
+  end,
 }
 -- }}}
 
@@ -3376,6 +3409,7 @@ lvim.plugins = {
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
+  -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
@@ -3434,7 +3468,7 @@ lvim.plugins = {
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
   plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls or whatever
-  plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=`
+  plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` TODO: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
   plugins.vim_matchup, -- better %
   plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim or https://github.com/otavioschwanck/telescope-alternate.nvim or https://github.com/rgroli/other.nvim
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions.

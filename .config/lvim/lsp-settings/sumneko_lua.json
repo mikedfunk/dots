@@ -21,10 +21,7 @@
       "displayContext": 1
     },
     "diagnostics": {
-      "disable": [ "lowercase-global" ],
-      "neededFileStatus": {
-        "codestyle-check": "Any"
-      }
+      "disable": [ "lowercase-global" ]
     },
     "workspace": {
       "ignoreDir": [
