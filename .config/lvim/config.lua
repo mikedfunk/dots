@@ -464,9 +464,9 @@ lvim.lsp.installer.setup.ensure_installed = {
   'eslint', -- eslint-lsp
   'jsonls',
   'lemminx',
+  'lua_ls', -- aka sumneko_lua
   'ruby_ls',
   'ruff_lsp', -- python linter lsp (replaces flake8)
-  'sumneko_lua',
   'svelte',
   'taplo',
   'vuels',
@@ -810,7 +810,7 @@ lvim.builtin.cmp.formatting.source_names['buffer'] = ''
 lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
 lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '➒' -- 
-lvim.builtin.cmp.formatting.source_names['color_names'] = 'C'
+lvim.builtin.cmp.formatting.source_names['color_names'] = '(Colors)'
 lvim.builtin.cmp.formatting.source_names['dap'] = ''
 lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
 lvim.builtin.cmp.formatting.source_names['doxygen'] = '@'
@@ -3474,12 +3474,13 @@ lvim.plugins = {
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions.
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
+  { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx
-  { 'fourjay/vim-hurl' }, -- hurl filetype and fold expression
+  { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
   { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )

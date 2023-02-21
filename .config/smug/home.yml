@@ -38,13 +38,13 @@ windows:
       - commands: [./pocketbase serve]
       - commands: [ts]
 
-  - name: neotest
-    root: ~/Code/neotest-phpspec
-    manual: true
-    layout: main-horizontal
-    commands: [v]
-    panes:
-      - commands: [ts]
+  # - name: neotest
+  #   root: ~/Code/neotest-phpspec
+  #   manual: true
+  #   layout: main-horizontal
+  #   commands: [v]
+  #   panes:
+  #     - commands: [ts]
 
   - name: journal
     commands: [journal]

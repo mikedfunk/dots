@@ -43,6 +43,8 @@
     # templatedir = ~/.git_template
 [mailmap]
     file = ~/.mailmap
+[init]
+    defaultBranch = master
 # }}}
 
 # Aliases {{{
