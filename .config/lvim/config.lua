@@ -67,8 +67,8 @@ vim.o.fillchars = table.concat({
 ---@return string: foldtext
 _G.simple_fold = function()
   local fs, fe = vim.v.foldstart, vim.v.foldend
-  local start_line = vim.fn.getline(fs):gsub('\t', ('\t'):rep(vim.opt.ts:get()))
-  local end_line = vim.trim(vim.fn.getline(fe))
+  local start_line = vim.fn.getline(fs):gsub('\t', ('\t'):rep(vim.opt.ts:get())) ---@diagnostic disable-line undefined-field
+  local end_line = vim.trim(vim.fn.getline(fe)) ---@diagnostic disable-line param-type-mismatch
   local spaces = (' '):rep(vim.o.columns - start_line:len() - end_line:len() - 7)
 
   -- return start_line .. '  ' .. end_line .. spaces
@@ -716,7 +716,7 @@ lvim.builtin.lualine.sections.lualine_x = {
 
 -- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#using-external-source-for-diff
 local function diff_source()
-  local gitsigns = vim.b.gitsigns_status_dict
+  local gitsigns = vim.b.gitsigns_status_dict ---@diagnostic disable-line undefined-field
   if gitsigns then
     return {
       added = gitsigns.added,
@@ -1378,7 +1378,7 @@ local setup_cmp_nvim_lsp_document_symbol = function()
   if vim.tbl_contains(lvim.builtin.cmp.cmdline.options, symbol_source) then return end
 
   local sources = { symbol_source }
-  vim.list_extend(sources, lvim.builtin.cmp.cmdline.options)
+  vim.list_extend(sources, lvim.builtin.cmp.cmdline.options) ---@diagnostic disable-line missing-parameter
   lvim.builtin.cmp.cmdline.options = sources
 end
 
