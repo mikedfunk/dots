@@ -29,7 +29,7 @@ local startify_quotes = {
   { "A good programmer is someone who always looks both ways before crossing a one-way street.", "", "- Doug Linder" },
   { "A happy programmer is a productive programmer. That's why we optimize for happiness and you should too. Don't just pick tools and practices based on industry standards or performance metrics. Look at the intangibles: Is there passion, pride, and craftmanship here? Would you truly be happy working in this environment eight hours a day?", "", "- 37Signals" },
   { "A human being should be able to change a diaper, plan an invasion, butcher a hog, conn a ship, design a building, write a sonnet, balance accounts, build a wall, set a bone, comfort the dying, take orders, give orders, cooperate, act alone, solve equations, analyze a new problem, pitch manure, program a computer, cook a tasty meal, fight efficiently, die gallantly. Specialization is for insects.", "", "- Robert A. Heinlein" },
-  { "A method is not a class. Be suspicious of any class whose name is a verb or derived from a verb, especially those that only one piece of meaningful behavior", "", "- Object-Oriented Design Heuristics" },
+  { "A method is not a class. Be suspicious of any class whose name is a verb or derived from a verb, especially those that only one piece of meaningful behavior.", "", "- Object-Oriented Design Heuristics" },
   { "A primary cause of complexity is that software vendors uncritically adopt almost any feature that users want.", "", "- Niklaus Wirth" },
   { "A program is like a poem: you cannot write a poem without writing it.", "", "- E.W. Dijkstra" },
   { "A ship in port is safe, but that is not what ships are for. Sail out to sea and do new things.", "", "- Grace Hopper" },

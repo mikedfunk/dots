@@ -12,6 +12,7 @@
 # tap "codekitchen/pipeline" # pipeline
 # tap "dbcli/tap" # litecli
 # tap "jetbrains/utils" # qodana
+# tap "mutagen-io/mutagen"
 # tap "nextdns/tap" # nextdns
 # tap "pokanop/pokanop" # nostromo
 # tap "universal-ctags/universal-ctags" # universal-ctags
@@ -22,7 +23,6 @@ tap "derailed/k9s" # k9s
 tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
-tap "mutagen-io/mutagen"
 
 # }}}
 
@@ -111,6 +111,8 @@ tap "mutagen-io/mutagen"
 # brew "mc" # old-school file manager, editor, viewer, script runner, remote filesystem access, etc.
 # brew "mkcert" # create a certificate, create a local CA, add the cert as trusted in the CA (Only needed to _create_ certs)
 # brew "mono" # .NET compiler for mac. Useful for OmniSharp. (not needed)
+# brew "mutagen" # docker volume helper - syncs docker volumes on the host machine rather than mounting it.
+# brew "mutagen-compose" # mutagen helper for docker-compose
 # brew "mysql-client" # If I ever need mysql client without mysql on local... downside: it doesn't link automatically - you have to brew link --force even if mysql isn't installed :/
 # brew "nano" # text editor. This gets the latest version: 2.2.6 rather than 2.2.0 that comes with osx.
 # brew "navi" # cool interactive command helper / cheat sheet
@@ -265,8 +267,6 @@ brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from
 brew "mas" # mac app store cli. e.g. `mas install Xcode`
 brew "memcached" # needed by php70 memcached pecl extension
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
-brew "mutagen" # docker volume helper - syncs docker volumes on the host machine rather than mounting it.
-brew "mutagen-compose" # mutagen helper for docker-compose
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql" # I haven't been using the server lately but I use the cli tool to connect and I use mysql_config_editor. Unfortunately I can't just install the config editor separately :(
 brew "node" # nodejs and npm (non-asdf version required by yarn)
@@ -448,6 +448,7 @@ cask "postman" # http api client (I use the web interface mostly)
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
+cask "sloth" # find what is using files, drectories, sockets, pipes, and devices
 cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 
 # }}}

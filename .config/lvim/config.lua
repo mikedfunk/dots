@@ -3194,9 +3194,10 @@ lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=
 
 -- debugger mappings
 lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
-lvim.builtin.which_key.vmappings['d']['h'] = { function() require('dapui').eval() end, 'Eval Visual' }
+lvim.builtin.which_key.vmappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
+lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dapui'.open(); require 'dap'.continue() end, 'Start' }
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
 lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
 lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
@@ -3409,6 +3410,7 @@ lvim.plugins = {
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
+  -- { 'lukas-reineke/virt-column.nvim', event = 'BufRead', opts = {} }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
