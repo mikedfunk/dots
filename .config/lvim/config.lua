@@ -461,7 +461,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'cssls',
   'dockerls',
   'emmet_ls',
-  'eslint', -- eslint-lsp
   'jsonls',
   'lemminx',
   'lua_ls', -- aka sumneko_lua
@@ -475,6 +474,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
+  -- 'eslint', -- eslint-lsp (stopped working on node 17.8.0, lsp debug isn't showing any errors)
   -- 'glint', -- typed ember
   -- 'graphql',
   -- 'intelephense', -- I customze the config
@@ -863,6 +863,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
   -- { name = 'dotenv_linter' }, -- not available in Mason
   -- { name = 'luacheck' },
+  { name = 'eslint_d' }, -- until I can get the eslint-lsp to work again
   { name = 'gitlint' },
   { name = 'shellcheck' },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
@@ -907,6 +908,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
 -- formatters {{{
 require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'black' },
+  { name = 'eslint_d' }, -- until I can get the eslint-lsp to start working again
   { name = 'isort' },
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
@@ -967,6 +969,7 @@ end
 
 -- code actions {{{
 require 'lvim.lsp.null-ls.code_actions'.setup {
+  { name = 'eslint_d' }, -- until I can get eslint-lsp to start working
   { name = 'gitrebase' }, -- just provides helpers to switch pick to fixup, etc.
   { name = 'refactoring' },
   { name = 'proselint' }, -- trying this out for markdown
@@ -2791,6 +2794,7 @@ plugins.typescript_nvim = {
   'jose-elias-alvarez/typescript.nvim',
   dependencies = 'jose-elias-alvarez/null-ls.nvim',
   ft = {
+    -- 'javascript',
     'typescript',
     'typescriptreact',
   },
