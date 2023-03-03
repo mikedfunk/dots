@@ -1977,6 +1977,21 @@ plugins.nvim_dap_tab = {
 }
 -- }}}
 
+-- nvim-dap-virtual-text {{{
+plugins.nvim_dap_virtual_text = {
+  'theHamsta/nvim-dap-virtual-text',
+  ft = 'php',
+  dependencies = {
+    'mfussenegger/nvim-dap',
+    'nvim-treesitter/nvim-treesitter',
+  },
+  opts = {
+    only_first_definition = false,
+    all_references = true,
+  },
+}
+-- }}}
+
 -- nvim-Femaco.lua {{{
 plugins.nvim_femaco_lua = {
   'AckslD/nvim-FeMaco.lua',
@@ -3450,6 +3465,7 @@ lvim.plugins = {
   plugins.numb_nvim, -- preview jumping to line number
   plugins.nvim_bqf, -- add a preview for quickfix items! works faster with treesitter
   plugins.nvim_context_vt, -- like nvim-biscuits but execution is MUCH better
+  plugins.nvim_dap_virtual_text, -- show variable value in virtual text
   plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
@@ -3501,7 +3517,6 @@ lvim.plugins = {
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
-  { 'theHamsta/nvim-dap-virtual-text', ft = 'php', dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' }, opts = {} }, -- show variable value in virtual text
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
