@@ -2648,7 +2648,7 @@ plugins.text_case_nvim = {
   'johmsalas/text-case.nvim',
   event = 'BufRead',
   dependencies = {
-    'folke/which-key.nvim',
+    -- 'folke/which-key.nvim',
     'nvim-treesitter/nvim-treesitter',
     'nvim-telescope/telescope.nvim',
   },
