@@ -284,7 +284,7 @@ _install_php_74 () {
 }
 
 _install_php_82 () {
-    # ( asdf list php | grep --quiet "8.2.0" ) && return
+    ( asdf list php | grep --quiet "8.2.0" ) && return
     _log_info "installing php 8.2.0"
     asdf install php 8.2.0
     asdf global php 8.2.0 || return
