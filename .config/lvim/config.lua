@@ -850,15 +850,6 @@ local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic d
 
 -- linters {{{
 
----@return string
-local function get_phpstan_level()
-  if vim.fn.getenv('PHPSTAN_LEVEL') ~= vim.NIL then
-    return vim.fn.getenv('PHPSTAN_LEVEL')
-  end
-
-  return '5'
-end
-
 require 'lvim.lsp.null-ls.linters'.setup {
   {
     name = 'codespell',
@@ -897,7 +888,6 @@ require 'lvim.lsp.null-ls.linters'.setup {
     timeout = 30000,
     extra_args = {
       '--memory-limit=200M',
-      '--level=' .. get_phpstan_level(),
       -- '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon',
     }, -- 40MB is not enough
     condition = function(utils)
