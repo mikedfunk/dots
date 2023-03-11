@@ -32,7 +32,7 @@ local class_snippet = snippet(
   function_node(function(_, snip)
     local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
-    return 'class ' .. class_name
+    return 'final class ' .. class_name
   end, {}),
   text_node({ '', '{', '    ' }),
   insert_node(0),

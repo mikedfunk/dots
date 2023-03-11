@@ -393,7 +393,7 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes',
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = 'Brewfile', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'dosini' end })
+vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
@@ -865,7 +865,10 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'luacheck' },
   { name = 'eslint_d' }, -- until I can get the eslint-lsp to work again
   { name = 'gitlint' },
-  { name = 'shellcheck' },
+  {
+    name = 'shellcheck',
+    condition = function() return not vim.tbl_contains({'.env', '.env.example'}, vim.fn.expand('%:t')) end,
+  },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
   -- { name = 'checkmake' }, -- makefile linter
   {
@@ -912,7 +915,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   { name = 'blade_formatter' },
   { name = 'cbfmt' }, -- for formatting code blocks inside markdown and org documents
   { name = 'shfmt' },
-  { name = 'json_tool',      extra_args = { '--indent=2' } },
+  { name = 'json_tool', extra_args = { '--indent=2' } },
   -- { name = 'stylua' }, -- config doesn't seem to be working, even global
   -- moved to null-ls setup directly because lunarvim won't let me change the command
   -- {
@@ -2490,46 +2493,38 @@ plugins.refactoring_nvim = {
 
 -- splitjoin.vim {{{
 
----@return nil
-local setup_splitjoin = function()
-  vim.g['splitjoin_php_method_chain_full'] = 1
-  vim.g['splitjoin_quiet'] = 1
-  -- vim.g['splitjoin_trailing_comma'] = 1
-end
-
----@return nil
-local configure_splitjoin = function()
-  if is_installed('which-key') then
-    require 'which-key'.register({
-      J = { name = 'Join' },
-      S = { name = 'Split' },
-    }, { prefix = 'g' })
-  end
-end
-
-local splitjoin_filetypes = {
-  'bash',
-  'css',
-  'html',
-  'javascript',
-  'javascriptreact',
-  'lua',
-  'php',
-  'python',
-  'ruby',
-  'sh',
-  'typescript',
-  'typescriptreact',
-  'zsh',
-}
-
 plugins.splitjoin_vim = {
   'AndrewRadev/splitjoin.vim',
-  ft = splitjoin_filetypes,
+  ft = {
+    'bash',
+    'css',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'lua',
+    'php',
+    'python',
+    'ruby',
+    'sh',
+    'typescript',
+    'typescriptreact',
+    'zsh',
+  },
   branch = 'main',
   dependencies = 'folke/which-key.nvim',
-  init = setup_splitjoin,
-  config = configure_splitjoin,
+  init = function()
+    vim.g['splitjoin_php_method_chain_full'] = 1
+    vim.g['splitjoin_quiet'] = 1
+    vim.g['splitjoin_trailing_comma'] = require 'saatchiart.plugin_configs'.should_enable_trailing_commas() and 1 or 0
+  end,
+  config = function()
+    if is_installed('which-key') then
+      require 'which-key'.register({
+        J = { name = 'Join' },
+        S = { name = 'Split' },
+      }, { prefix = 'g' })
+    end
+  end,
 }
 -- }}}
 
