@@ -478,6 +478,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'glint', -- typed ember
   -- 'graphql',
   -- 'intelephense', -- I customze the config
+  -- 'jqls',
   -- 'nginx-language-server', -- not in lspconfig
   -- 'phpactor', -- I use intelephense instead
   -- 'prismals', -- node ORM
@@ -959,7 +960,7 @@ if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
       command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
-      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
+      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off' }, -- do not fix warnings
       -- condition = function()
       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
       --   return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
@@ -976,10 +977,11 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
   { name = 'refactoring' },
   { name = 'proselint' }, -- trying this out for markdown
   -- adds a LOT of null-ls noise, not that useful
-  -- {
-  --   name = 'gitsigns',
-  --   condition = function() return is_installed 'gitsigns' end,
-  -- },
+  {
+    name = 'gitsigns',
+    condition = function() return is_installed 'gitsigns' end,
+    config = { filter_actions = function(title) return title:lower():match("blame") == nil end },
+  },
 }
 -- }}}
 
@@ -1214,8 +1216,8 @@ lvim.colorscheme = 'tokyonight'
 lvim.builtin.lualine.options.theme = 'tokyonight'
 lvim.builtin.theme.name = 'tokyonight'
 -- lvim.builtin.theme.tokyonight.options.style = 'storm'
-lvim.builtin.theme.tokyonight.options.style = 'moon'
--- lvim.builtin.theme.tokyonight.options.style = 'night'
+-- lvim.builtin.theme.tokyonight.options.style = 'moon'
+lvim.builtin.theme.tokyonight.options.style = 'night'
 
 lvim.builtin.theme.tokyonight.options.dim_inactive = true -- dim inactive windows
 lvim.builtin.theme.tokyonight.options.lualine_bold = true -- bold headers for each section header

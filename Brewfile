@@ -142,7 +142,6 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "pv" # pipe something to pv to see progress of data through a pipeline. pv works like cat so `pv /path/to/myfile.sql > mysql ...`
 # brew "pyenv" # python version manager (same api as rbenv)
 # brew "python" # updated version of python with updated pip. Useful for installing pip packages without root. NOTE: homebrew "pip" breaks neovim. Needed for ntfy, see ~/.config/yadm/bootstrap
-# brew "python-yq" # like yq but also comes with xq for xml
 # brew "qodana" # jetbrains php (and other languages) static analysis
 # brew "ranger" # vim-like file system browser (cool but I don't use it)
 # brew "rbenv" # ruby environment switcher (I use asdf now)
@@ -197,9 +196,10 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "wifi-password" # get your current wifi password quickly without mucking about with keychain access (install if needed)
 # brew "xdebug-osx" # xdebug toggler for homebrew php (which I don't currently use)
 # brew "xmlto" # convert xml to other formats because fuck xml
+# brew "xq" # jq is to json what xq is to xml/html
 # brew "yamllint" # used by vim-ale
 # brew "yarn" # wrapper for npm with real lock files and caching (installing via npm is deprecated, but installing it here causes problems with asdf nodejs :/ ) (used by cloudbeaver: mysql web app)
-# brew "yq" # jq is to json what yq is to yaml (and xml!). yaml parser and searcher. I use it to read configs my circleci stuff, etc. (I use the python-yq version instead because it also installs xq)
+# brew "yq" # jq is to json what yq is to yaml (and xml!). yaml parser and searcher. I use it to read configs my circleci stuff, etc.
 # brew "zork" # seriously? yes. tip: `save` and `restore` And yes, there's only one save slot, what do you think this is, 1990?
 # brew "zplug" # zsh plugin manager like composer. bash installer crashes for some reason. works fine via homebrew. (switched to ~antibody~ antidote)
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)

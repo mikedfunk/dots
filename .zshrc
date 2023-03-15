@@ -391,7 +391,7 @@ alias puf="pu --filter="
 # Public: phpunit watch
 puw() {
     noglob ag -l -g \
-        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests)/.*\.php' \
+        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests|spec|domain|adapter)/.*\.php' \
         | entr -cr \
         phpdbg -qrr \
         -dmemory_limit=2048M \
