@@ -25,7 +25,8 @@
         "**/.history/**",
         "**/vendor/**/vendor/**",
         "**/coverage/**",
-        ".php-cs-fixer.php"
+        ".php-cs-fixer.php",
+        "**/.null-ls_*"
       ]
     },
     "stubs": [

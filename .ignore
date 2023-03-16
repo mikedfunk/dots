@@ -8,3 +8,4 @@ app/cache
 cscope.*
 ncscope.*
 node_modules
+.null-ls_*

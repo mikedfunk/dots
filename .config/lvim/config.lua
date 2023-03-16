@@ -901,10 +901,23 @@ require 'lvim.lsp.null-ls.linters'.setup {
   },
   { name = 'php' },
   { name = 'rubocop' },
+  -- { name = 'spectral' },
   { name = 'sqlfluff', extra_args = { '--dialect', 'mysql' } },
   -- { name = 'trail_space' },
+  -- { name = 'vacuum' }, -- openapi linter (not available yet)
   { name = 'zsh' },
 }
+
+local did_register_spectral
+if is_null_ls_installed and not did_register_spectral then
+  null_ls.register { sources = {
+    null_ls.builtins.diagnostics.spectral.with {
+      command = { 'npx', '@stoplight/spectral-cli' }, -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
+      condition = function(utils) return utils.root_has_file { '.spectral.yaml' } end,
+    }
+  } } -- @diagnostic disable-line redundant-parameter
+  did_register_spectral = true
+end
 
 -- }}}
 
@@ -959,7 +972,7 @@ local did_register_phpcbf
 if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
-      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead.
+      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
       extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off' }, -- do not fix warnings
       -- condition = function()
       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
@@ -2619,6 +2632,7 @@ plugins.tabout_nvim = {
     'hrsh7th/nvim-cmp',
   },
   event = 'InsertEnter',
+  opts = {},
 }
 -- }}}
 
