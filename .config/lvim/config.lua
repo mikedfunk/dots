@@ -904,7 +904,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'spectral' },
   { name = 'sqlfluff', extra_args = { '--dialect', 'mysql' } },
   -- { name = 'trail_space' },
-  { name = 'vacuum' }, -- openapi linter
+  { name = 'vacuum' }, -- openapi linter. Much simpler and more stable than spectral.
   { name = 'zsh' },
 }
 
@@ -915,7 +915,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
 --       command = { 'npx', '@stoplight/spectral-cli' }, -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
 --       condition = function(utils) return utils.root_has_file { '.spectral.yaml' } end,
 --     }
---   } } -- @diagnostic disable-line redundant-parameter
+--   } }
 --   did_register_spectral = true
 -- end
 
