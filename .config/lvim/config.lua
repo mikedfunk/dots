@@ -172,47 +172,6 @@ vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_spli
 vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 't', '<C-w><Enter><C-w>T', { buffer = true }) end })
 vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', command = 'wincmd J' })
 
--- view uml diagram in browser {{{
-
----@return nil
-local open_uml_image = function()
-  local file_path = vim.fn.expand('%')
-  if file_path == nil then return end
-  vim.fn.system('plantuml ' .. file_path .. ' -tsvg')
-  vim.fn.system('open ' .. file_path:gsub('%..-$', '.svg')) -- lua regex is weird
-end
-
----@return nil
-local refresh_uml_image = function()
-  local file_path = vim.fn.expand('%')
-  if file_path == nil then return end
-  vim.fn.system('plantuml ' .. file_path .. ' -tsvg')
-  vim.fn.system('$(brew --prefix)/bin/terminal-notifier -message "uml diagram reloaded"')
-  -- vim.cmd('echom "UML diagram reloaded"')
-end
-
----@return nil
-local register_uml_mappings = function()
-  if not is_installed('which-key') then return end
-
-  require 'which-key'.register({
-    i = {
-      name = 'Image',
-      o = { open_uml_image, 'Open' },
-      r = { refresh_uml_image, 'Refresh' },
-    }
-  }, { prefix = '<Leader>' })
-end
-
-vim.api.nvim_create_augroup('uml_mappings', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'plantuml',
-  group = 'uml_mappings',
-  callback = register_uml_mappings,
-  desc = 'uml mappings',
-})
--- }}}
-
 vim.api.nvim_create_augroup('show_defs', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'vim',
