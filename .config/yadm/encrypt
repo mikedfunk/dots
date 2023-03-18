@@ -12,6 +12,7 @@
 
 Code/saatchi/queries/**/*.sql
 Code/saatchi/uml/**/*.uml
+Code/saatchi/http/**/*.hurl
 
 .config/smug/work.yml
 
