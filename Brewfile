@@ -307,6 +307,7 @@ brew "yadm" # yet another dotfiles manager
 brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zlib" # needed to build php and python
 brew "zsh" # awesome bash shell replacement
+brew cloc # count lines of code
 
 # }}}
 

@@ -14,6 +14,7 @@ local send_hurl_request = function()
   vim.bo.bufhidden = 'hide'
   vim.bo.swapfile = false
   vim.cmd('read !hurl ' .. file_path .. ' | jq')
+  vim.cmd('norm gg')
   vim.cmd('wincmd w')
 end
 

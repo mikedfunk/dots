@@ -535,6 +535,15 @@ if not vim.tbl_contains(lvim.builtin.indentlines.options.filetype_exclude, 'lspi
 lvim.builtin.indentlines.options.show_first_indent_level = false
 -- }}}
 
+-- lir.nvim {{{
+-- There is a bug in the autocmd to fire DirOpened, which enables lir. Just load it.
+vim.api.nvim_create_augroup('force_load_lir', { clear = true })
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = 'force_load_lir',
+  callback = function() vim.cmd 'do User DirOpened' end,
+})
+-- }}}
+
 -- lualine {{{
 lvim.builtin.lualine.style = 'default'
 lvim.builtin.lualine.options.disabled_filetypes = { 'startify', 'TelescopePrompt' }
@@ -1045,7 +1054,8 @@ lvim.builtin.nvimtree.setup.diagnostics.icons = {
   warning = lvim.icons.diagnostics.Warning,
 }
 
-if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '.git') then table.insert(lvim.builtin.nvimtree.setup.filters.custom, '.git') end
+if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '\\.git') then table.insert(lvim.builtin.nvimtree.setup.filters.custom, '\\.git') end
+if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '\\.null-ls*') then table.insert(lvim.builtin.nvimtree.setup.filters.custom, '\\.null-ls*') end
 -- }}}
 
 -- nvim-treesitter {{{

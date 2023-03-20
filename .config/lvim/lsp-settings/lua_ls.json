@@ -24,6 +24,9 @@
       "disable": [ "lowercase-global" ]
     },
     "workspace": {
+      "library": [
+        "${3rd}/luv/library"
+      ],
       "ignoreDir": [
         ".nlsp-settings",
         "spell",

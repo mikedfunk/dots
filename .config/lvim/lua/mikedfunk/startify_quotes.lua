@@ -25,6 +25,7 @@ local startify_quotes = {
   { "640K ought to be enough for anybody.", "", "- Bill Gates, 1981" },
   { "A complex system that works is invariably found to have evolved from a simple system that worked. The inverse proposition also appears to be true: A complex system designed from scratch never works and cannot be made to work.", "", "- John Gall" },
   { "A computer lets you make more mistakes faster than any other invention in human history, with the possible exceptions of handguns and tequila.", "", "- Mitch Ratcliffe" },
+  { "A foolish consistency is the hobgoblin of little minds", "", "- Ralph Waldo Emerson" },
   { "A good API is not just easy to use but also hard to misuse.", "", "- JBD" },
   { "A good programmer is someone who always looks both ways before crossing a one-way street.", "", "- Doug Linder" },
   { "A happy programmer is a productive programmer. That's why we optimize for happiness and you should too. Don't just pick tools and practices based on industry standards or performance metrics. Look at the intangibles: Is there passion, pride, and craftmanship here? Would you truly be happy working in this environment eight hours a day?", "", "- 37Signals" },
