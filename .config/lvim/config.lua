@@ -515,6 +515,15 @@ lvim.builtin.bufferline.options.hover.enabled = true
 lvim.builtin.bufferline.options.sort_by = 'insert_after_current'
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.bufferline.options.separator_style = 'slant'
+
+if is_installed('bufferline') then
+  lvim.builtin.bufferline.options.groups = lvim.builtin.bufferline.options.groups or {}
+  lvim.builtin.bufferline.options.groups.items = lvim.builtin.bufferline.options.groups.items or {}
+  table.insert(
+    lvim.builtin.bufferline.options.groups.items,
+    require 'bufferline.groups'.builtin.pinned:with { icon = "" }
+  )
+end
 -- lvim.builtin.bufferline.on_config_done = function()
 --   vim.o.background = 'light'
 -- end
@@ -3499,5 +3508,8 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
+  { 'ziontee113/icon-picker.nvim', event = 'BufRead', dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
+-- }}}
+
 -- }}}
