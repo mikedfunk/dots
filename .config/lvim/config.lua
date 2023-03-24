@@ -869,6 +869,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
     timeout = 30000,
     extra_args = {
       '--memory-limit=200M',
+      '--level=9', -- force level 9 for better editor intel
       -- '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon',
     }, -- 40MB is not enough
     condition = function(utils)
@@ -3508,7 +3509,7 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  { 'ziontee113/icon-picker.nvim', event = 'BufRead', dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
+  { 'ziontee113/icon-picker.nvim', ft = 'lua', dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}
 
