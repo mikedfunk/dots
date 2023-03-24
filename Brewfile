@@ -439,6 +439,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 cask "glance-chamburr" # fork of glance kept alive
 cask "google-cloud-sdk" # used for BigQuery, etc.
+cask "gpg-suite" # allows adding GPG passphrase to keychain
 cask "grandperspective" # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
