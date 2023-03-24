@@ -132,7 +132,7 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "perl-build" # needed for perlenv (which I don't use currently)
 # brew "php-cs-fixer" # fix php code according to configuration
 # brew "php@7.1", args: ["--with-pear"], link: true
-# brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
+# brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt and to sign git commits)
 # brew "pinfo" # man-like command to get manuals on tools written for info
 # brew "pipeline" # cool subshell to let you interactively view unix pipeline results as you write
 # brew "plenv" # perl version manager. better than perlbrew and consistent with my other env managers (rbenv, phpenv, nodenv, pyenv). used to get percona-toolkit working.
@@ -277,7 +277,7 @@ brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-p
 brew "openssl@1.1" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "pcre2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
-brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt)
+brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
@@ -346,6 +346,7 @@ brew cloc # count lines of code
 # cask "gog-galaxy" # good old games
 # cask "google-chrome"
 # cask "google-drive" (menubar app for google drive access)
+# cask "gpg-suite" # allows adding GPG passphrase to keychain
 # cask "haptickey" # give haptic feedback on touchpad when pressing the touchbar
 # cask "helium" # android backup without root (doesn't seem to work, but the chrome app does)
 # cask "http-toolkit" # kind of like charles or wireshark, but with support for docker. (docker support seems to be coming soon)
@@ -439,7 +440,6 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 cask "glance-chamburr" # fork of glance kept alive
 cask "google-cloud-sdk" # used for BigQuery, etc.
-cask "gpg-suite" # allows adding GPG passphrase to keychain
 cask "grandperspective" # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
