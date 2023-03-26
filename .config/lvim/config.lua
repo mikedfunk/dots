@@ -796,9 +796,10 @@ lvim.builtin.cmp.formatting.source_names['emoji'] = ''
 lvim.builtin.cmp.formatting.source_names['git'] = ''
 lvim.builtin.cmp.formatting.source_names['luasnip'] = '✄'
 lvim.builtin.cmp.formatting.source_names['marksman'] = '🞋'
+lvim.builtin.cmp.formatting.source_names['nerdfont'] = 'ﯔ'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp'] = 'ʪ'
-lvim.builtin.cmp.formatting.source_names['nvim_lsp_signature_help'] = 'ʪ'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp_document_symbol'] = 'ʪ'
+lvim.builtin.cmp.formatting.source_names['nvim_lsp_signature_help'] = 'ʪ'
 lvim.builtin.cmp.formatting.source_names['nvim_lua'] = ''
 lvim.builtin.cmp.formatting.source_names['path'] = ''
 lvim.builtin.cmp.formatting.source_names['path'] = ''
@@ -1365,6 +1366,17 @@ plugins.cmp_git = {
     table.insert(lvim.builtin.cmp.sources, { name = 'git' })
   end,
   opts = { filetypes = { 'gitcommit', 'octo', 'markdown' } },
+}
+-- }}}
+
+-- cmp-nerdfont {{{
+plugins.cmp_nerdfont = {
+  'chrisgrieser/cmp-nerdfont',
+  event = 'InsertEnter',
+  init = function()
+    if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'nerdfont' }) then return end
+    table.insert(lvim.builtin.cmp.sources, { name = 'nerdfont' })
+  end,
 }
 -- }}}
 
@@ -3430,6 +3442,7 @@ lvim.plugins = {
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
   plugins.cmp_git, -- github source in commit messages for cmp e.g. users, PRs, hashes
+  plugins.cmp_nerdfont, -- like emoji completion but for nerd font characters
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
   plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
   plugins.cmp_rg, -- might help to include comments, strings, etc. in other files. This is actually really useful! (makes expensive rg calls regularly, caught in htop)

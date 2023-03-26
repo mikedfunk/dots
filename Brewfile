@@ -407,6 +407,7 @@ brew cloc # count lines of code
 # cask "skype" # Dad uses skype. Skype web requires chrome. I don't like chrome.
 # cask "slack" # needed for screen sharing features. I mostly use the web app. (managed by my work)
 # cask "spectacle" # keyboard window splitter/resizer/mover. Kind of like a lightweight i3 window manager. I use it a lot. (replaced with rectangle - a superset that also snaps to edges by dragging)
+# cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 # cask "ssh-tunnel-manager" # mac native gui to manage running ssh tunnels (I just put tunnels in launchctl with autossh and forget about them)
 # cask "stats" # menubar stats
 # cask "steam" # yep
@@ -438,7 +439,7 @@ cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
-cask "glance-chamburr" # fork of glance kept alive
+cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
@@ -451,7 +452,6 @@ cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces 
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 cask "sloth" # find what is using files, drectories, sockets, pipes, and devices
-cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 
 # }}}
 

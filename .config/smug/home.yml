@@ -46,6 +46,33 @@ windows:
   #   panes:
   #     - commands: [ts]
 
+  - name: paint
+    root: ~/Code/saatchi/paint-wip
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [docker compose --project-directory=$HOME/Code/saatchi/xdocker up mysql.db -d && docker compose up]
+      - commands: [puw]
+      - commands: [while true; do docker compose exec paint.fpm php artisan tinker; sleep 5; done]
+      - commands: [ts]
+
+  - name: brush
+    root: ~/Code/saatchi/brush-wip
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [docker compose up brush.node --force-recreate]
+      - commands: [vitest]
+      - commands: [while true; do docker compose exec brush.node node --experimental-repl-await -i; sleep 5; done]
+      - commands: [ts]
+
+  - name: http
+    root: ~/Code/saatchi/http
+    manual: true
+    commands: [v]
+
   - name: journal
     commands: [journal]
 
