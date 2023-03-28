@@ -1,10 +1,24 @@
 -- vim: set foldmethod=marker:
+local is_installed = require 'mikedfunk.helpers'.is_installed
+
+vim.wo.foldlevel = 1
+-- if is_installed('ufo') then require 'ufo'.closeFoldsWith(1) end
 
 -- NOTE: I tried to put the filetypes config in intelephense.json but that didn't get picked up at all
 -- I also tried that while doing automatic configuration (generated ftplugin), still no dice
-require 'lvim.lsp.manager'.setup('intelephense', { filetypes = { 'php', 'phtml.html' } })
+local capabilities = require 'lvim.lsp'.common_capabilities()
 
--- php {{{
+if is_installed('ufo') then
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
+end
+
+require 'lvim.lsp.manager'.setup('intelephense', {
+  filetypes = { 'php', 'phtml.html' },
+  capabilities = capabilities,
+})
 
 -- enable if I need any of these
 -- vim.g.php_syntax_extensions_enabled = { "bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib" }
@@ -33,4 +47,3 @@ vim.cmd('hi link phpDocParam phpRegion')
 vim.cmd('hi link phpDocIdentifier phpIdentifier')
 vim.cmd('hi link phpUseNamespaceSeparator Comment') -- Colorize namespace separator in use, extends and implements
 vim.cmd('hi link phpClassNamespaceSeparator Comment')
--- }}}

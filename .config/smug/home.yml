@@ -68,6 +68,15 @@ windows:
       - commands: [while true; do docker compose exec brush.node node --experimental-repl-await -i; sleep 5; done]
       - commands: [ts]
 
+  - name: nginx
+    # https://leafgroup.udemy.com/course/nginx-fundamentals/learn/lecture/10614656#overview
+    root: ~/Code/test/nginx
+    manual: true
+    layout: main-horizontal
+    commands:
+      - v
+      - noglob ag -l -g '.*\\.conf' | entr -cr /usr/local/bin/docker compose up --force-recreate -d
+
   - name: http
     root: ~/Code/saatchi/http
     manual: true

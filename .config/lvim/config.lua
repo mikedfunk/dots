@@ -76,17 +76,6 @@ _G.simple_fold = function()
 end
 vim.opt.foldtext = 'v:lua.simple_fold()'
 
--- I only need to set these when using code folding
--- vim.api.nvim_create_augroup('php_foldlevel', { clear = true })
--- vim.api.nvim_create_autocmd('FileType', { pattern = 'php', group = 'php_foldlevel',
---   callback = function() vim.wo.foldlevel = 1 end,
--- })
-
--- vim.api.nvim_create_augroup('javascript_foldlevel', { clear = true })
--- vim.api.nvim_create_autocmd('FileType', { pattern = 'javascript', group = 'javascript_foldlevel',
---   callback = function() vim.wo.foldlevel = 0 end,
--- })
-
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.api.nvim_create_augroup('hi_yanked_text', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -787,7 +776,7 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.cmp.formatting.source_names['buffer'] = ''
 lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
-lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '➒' -- 
+lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '➒' --  
 lvim.builtin.cmp.formatting.source_names['color_names'] = '(Colors)'
 lvim.builtin.cmp.formatting.source_names['dap'] = ''
 lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
@@ -2089,6 +2078,19 @@ plugins.nvim_scrollbar = {
 }
 -- }}}
 
+-- nvim-spider {{{
+plugins.nvim_spider = {
+  'chrisgrieser/nvim-spider',
+  event = 'BufRead',
+  config = function()
+    vim.keymap.set({"n", "o", "x"}, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
+    vim.keymap.set({"n", "o", "x"}, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+    vim.keymap.set({"n", "o", "x"}, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+    vim.keymap.set({"n", "o", "x"}, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
+  end
+}
+-- }
+
 -- nvim-treesitter-endwise {{{
 plugins.nvim_treesitter_endwise = {
   'RRethy/nvim-treesitter-endwise',
@@ -2263,10 +2265,21 @@ plugins.nvim_ufo = {
     'folke/which-key.nvim',
   },
   init = function()
-    vim.o.foldcolumn = '1'
+    -- vim.o.foldcolumn = '1'
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
+
+    vim.api.nvim_create_augroup('foldlevel_marker', { clear = true })
+    vim.api.nvim_create_autocmd('BufReadPost', {
+      group = 'foldlevel_marker',
+      callback = function ()
+        if vim.wo.foldmethod == 'marker' then
+          -- vim.wo.foldlevel = 0
+          if is_installed('ufo') then require 'ufo'.closeFoldsWith(0) end
+        end
+      end
+    })
 
     require 'which-key'.register({
       R = { function() require('ufo').openAllFolds() end, 'Open All Folds' },
@@ -2280,9 +2293,9 @@ plugins.nvim_ufo = {
     -- }, { prefix = 'g' })
   end,
   opts = {
-    provider_selector = function(_, _, _)
-      return { 'treesitter', 'indent' }
-    end,
+    -- provider_selector = function(_, _, _)
+    --   return { 'treesitter', 'indent' }
+    -- end,
     -- preview = {
     --   win_config = {
     --     -- border = { '', '─', '', '', '', '─', '', '' },
@@ -2808,19 +2821,28 @@ plugins.ts_node_action = {
 -- typescript.nvim {{{
 plugins.typescript_nvim = {
   'jose-elias-alvarez/typescript.nvim',
-  dependencies = 'jose-elias-alvarez/null-ls.nvim',
+  dependencies = { 'jose-elias-alvarez/null-ls.nvim', 'kevinhwang91/nvim-ufo' },
   ft = {
     -- 'javascript',
     'typescript',
     'typescriptreact',
   },
   config = function()
+    local capabilities = require 'lvim.lsp'.common_capabilities()
+
+    if is_installed('ufo') then
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
+    end
+
     require 'typescript'.setup {
       server = {
         on_attach = require 'lvim.lsp'.common_on_attach,
         on_init = require 'lvim.lsp'.common_on_init,
         on_exit = require 'lvim.lsp'.common_on_exit,
-        capabilities = require 'lvim.lsp'.common_capabilities(),
+        capabilities = capabilities,
       }
     }
 
@@ -3422,7 +3444,6 @@ lvim.plugins = {
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
-  -- plugins.nvim_ufo, -- fancy folds (probably better with LSP integration, which is a little hard to accomplish with Lunarvim)
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
@@ -3471,9 +3492,11 @@ lvim.plugins = {
   plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
+  plugins.nvim_spider, -- more natural `w,e,b`
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
+  plugins.nvim_ufo, -- fancy folds (probably better with LSP integration, which is a little hard to accomplish with Lunarvim) The ONLY thing this provides is syntax highlighting on folded text.
   plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.persistent_breakpoints, -- persist breakpoints between sessions
