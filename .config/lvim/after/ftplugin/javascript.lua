@@ -6,24 +6,33 @@ if pwd:match '/Code/saatchi/.*' then vim.bo.filetype = 'javascriptreact' end
 
 local should_setup_flow = require 'saatchiart.plugin_configs'.should_setup_flow() and is_installed 'lspconfig'
 
-if should_setup_flow then
+if should_setup_flow and not _G.was_flow_setup then
   local capabilities = require 'lvim.lsp'.common_capabilities()
-
-  if is_installed('ufo') then
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true
-    }
-  end
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
 
   require 'lvim.lsp.manager'.setup('flow', {
     cmd = { 'npx', '--no-install', 'flow-bin@0.126.1', 'lsp', '--lazy-mode=ide' },
     capabilities = capabilities,
   })
-end
 
-if is_installed('ufo') then
-  -- TODO: neither of these are working
-  -- vim.wo.foldlevel = 0
+  require 'ufo'.setup {
+    -- provider_selector = function(_, _, _)
+    --   return { 'treesitter', 'lsp' }
+    -- end,
+    close_fold_kinds = {
+      -- lsp:
+      'comment',
+      'imports',
+      'region',
+
+      -- treesitter:
+      'import_statement',
+      'comment',
+    }
+  }
   require 'ufo'.closeFoldsWith(0)
+  _G.was_flow_setup = true
 end

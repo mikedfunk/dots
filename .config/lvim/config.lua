@@ -1061,29 +1061,29 @@ if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '\\.null-ls*
 -- nvim-treesitter {{{
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { 'php' } -- needed to make non-treesitter indent work
 
-vim.api.nvim_create_augroup('treesitter_foldexpr', { clear = true })
-vim.api.nvim_create_autocmd(
-  'FileType',
-  {
-    pattern = table.concat({
-      'php',
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-      'ruby',
-      'python',
-      'go',
-    }, ','),
-    group = 'treesitter_foldexpr',
-    callback = function()
-      if vim.wo.foldmethod == 'marker' then return end
-      vim.wo.foldmethod = 'expr'
-      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-      vim.wo.foldlevel = 99
-    end,
-  }
-)
+-- vim.api.nvim_create_augroup('treesitter_foldexpr', { clear = true })
+-- vim.api.nvim_create_autocmd(
+--   'FileType',
+--   {
+--     pattern = table.concat({
+--       'php',
+--       'javascript',
+--       'javascriptreact',
+--       'typescript',
+--       'typescriptreact',
+--       'ruby',
+--       'python',
+--       'go',
+--     }, ','),
+--     group = 'treesitter_foldexpr',
+--     callback = function()
+--       if vim.wo.foldmethod == 'marker' then return end
+--       vim.wo.foldmethod = 'expr'
+--       vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+--       vim.wo.foldlevel = 99
+--     end,
+--   }
+-- )
 
 lvim.builtin.treesitter.ensure_installed = {
   'comment',
@@ -2264,50 +2264,25 @@ plugins.nvim_ufo = {
     'kevinhwang91/promise-async',
     'folke/which-key.nvim',
   },
-  init = function()
-    -- vim.o.foldcolumn = '1'
+  lazy = true, -- this is loaded in some ftplugins after lsp setup
+  config = function()
+    vim.o.foldcolumn = '1' -- make folds visible left of the sign column. Very cool ui feature!
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
 
-    vim.api.nvim_create_augroup('foldlevel_marker', { clear = true })
-    vim.api.nvim_create_autocmd('BufReadPost', {
-      group = 'foldlevel_marker',
-      callback = function ()
-        if vim.wo.foldmethod == 'marker' then
-          -- vim.wo.foldlevel = 0
-          if is_installed('ufo') then require 'ufo'.closeFoldsWith(0) end
-        end
-      end
-    })
-
     require 'which-key'.register({
-      R = { function() require('ufo').openAllFolds() end, 'Open All Folds' },
-      M = { function() require('ufo').closeAllFolds() end, 'Close All Folds' },
-      r = { function() require('ufo').closeFoldsExceptKinds() end, 'Close Folds Except Kinds' },
-      m = { function() require('ufo').closeFoldsWith() end, 'Close Folds With' },
+      R = { require 'ufo'.openAllFolds, 'Open All Folds' },
+      M = { require 'ufo'.closeAllFolds, 'Close All Folds' },
+      -- r = { require 'ufo'.openFoldsExceptKinds, 'Open Folds Except Kinds' },
+      -- m = { require 'ufo'.closeFoldsWith, 'Close Folds With' },
     }, { prefix = 'z' })
-
-    -- require 'which-key'.register({
-    --   K = { function() require('ufo').peekFoldedLinesUnderCursor() end, 'Preview Fold' },
-    -- }, { prefix = 'g' })
   end,
-  opts = {
-    -- provider_selector = function(_, _, _)
-    --   return { 'treesitter', 'indent' }
-    -- end,
-    -- preview = {
-    --   win_config = {
-    --     -- border = { '', '─', '', '', '', '─', '', '' },
-    --     -- winhighlight = 'Normal:Folded',
-    --     win_blend = 0,
-    --   },
-    -- },
-    mappings = {
-      scrollU = '<C-u>',
-      scrollD = '<C-d>',
-    },
-  }
+  -- opts = {
+  --   provider_selector = function(_, _, _)
+  --     return { 'treesitter', 'indent' }
+  --   end,
+  -- }
 }
 -- }}}
 

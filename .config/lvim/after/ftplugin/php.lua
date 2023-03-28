@@ -1,24 +1,39 @@
--- vim: set foldmethod=marker:
 local is_installed = require 'mikedfunk.helpers'.is_installed
 
-vim.wo.foldlevel = 1
+-- vim.wo.foldlevel = 1
 -- if is_installed('ufo') then require 'ufo'.closeFoldsWith(1) end
 
 -- NOTE: I tried to put the filetypes config in intelephense.json but that didn't get picked up at all
 -- I also tried that while doing automatic configuration (generated ftplugin), still no dice
+
 local capabilities = require 'lvim.lsp'.common_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
 
-if is_installed('ufo') then
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
+if not _G.was_intelephense_setup then
+  require 'lvim.lsp.manager'.setup('intelephense', {
+    filetypes = { 'php', 'phtml.html' },
+    capabilities = capabilities,
+  })
+  require 'ufo'.setup {
+    close_fold_kinds = {
+      -- lsp:
+      'comment',
+      'imports',
+      'region',
+
+      -- treesitter:
+      -- 'method_declaration',
+      -- 'comment',
+      -- 'namespace_use_declaration',
+      -- 'property_declaration',
+    }
   }
+  -- require 'ufo'.closeFoldsWith(1)
+  _G.was_intelephense_setup = true
 end
-
-require 'lvim.lsp.manager'.setup('intelephense', {
-  filetypes = { 'php', 'phtml.html' },
-  capabilities = capabilities,
-})
 
 -- enable if I need any of these
 -- vim.g.php_syntax_extensions_enabled = { "bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib" }
