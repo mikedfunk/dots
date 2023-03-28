@@ -1144,7 +1144,7 @@ if not vim.tbl_contains(lvim.builtin.project.patterns, 'bootstrap') then table.i
 -- telescope.nvim {{{
 
 lvim.builtin.telescope.defaults.prompt_prefix = ' ' .. lvim.icons.ui.Search .. ' ' -- ⌕ 
-lvim.builtin.telescope.defaults.winblend = 15 -- pseudo-transparency
+lvim.builtin.telescope.defaults.winblend = vim.o.winblend -- pseudo-transparency
 lvim.builtin.telescope.defaults.mappings.i['<Esc>'] = lvim.builtin.telescope.defaults.mappings.i['<C-c>'] -- disable normal mode
 
 lvim.builtin.telescope.defaults.preview = { timeout = 1500 } -- default is 250 :/
@@ -2569,13 +2569,15 @@ plugins.symbols_outline_nvim = {
   end,
   opts = {
     width = 35,
+    border = 'rounded',
+    winblend = vim.o.winblend,
     relative_width = false,
     auto_close = true,
-    winblend = vim.o.winblend,
     -- highlight_hovered_item = false,
     -- auto_preview = true,
     autofold_depth = 2,
     auto_unfold_hover = false,
+    show_symbol_details = true,
     -- possible values https://github.com/simrat39/symbols-outline.nvim/blob/master/lua/symbols-outline/symbols.lua
     -- symbol_blacklist = {
     --   -- works best for object-oriented code
@@ -3509,10 +3511,12 @@ lvim.plugins = {
   { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
+  { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column
   { 'luukvbaal/stabilize.nvim', event = 'BufRead', opts = {} }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
+  { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence.
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
