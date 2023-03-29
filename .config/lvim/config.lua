@@ -2089,7 +2089,7 @@ plugins.nvim_spider = {
     vim.keymap.set({"n", "o", "x"}, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
   end
 }
--- }
+-- }}}
 
 -- nvim-treesitter-endwise {{{
 plugins.nvim_treesitter_endwise = {
@@ -2631,6 +2631,18 @@ plugins.telescope_dap_nvim = {
     lvim.builtin.which_key.mappings.d.v = { function() require 'telescope'.extensions.dap.frames {} end, 'Call Stack' }
   end,
   config = function() require 'telescope'.load_extension 'dap' end,
+}
+-- }}}
+
+-- telescope-lazy.nvim {{{
+plugins.telescope_lazy_nvim = {
+  'tsakirist/telescope-lazy.nvim',
+  dependencies = 'nvim-telescope/telescope.nvim',
+  init = function()
+    lvim.builtin.which_key.mappings.p = lvim.builtin.which_key.mappings.p or {}
+    lvim.builtin.which_key.mappings.p.f = { function() vim.cmd('Telescope lazy') end, 'Find' }
+  end,
+  config = function() require 'telescope'.load_extension 'lazy' end,
 }
 -- }}}
 
@@ -3485,6 +3497,7 @@ lvim.plugins = {
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
+  plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
