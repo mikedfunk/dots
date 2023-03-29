@@ -1212,9 +1212,14 @@ lvim.builtin.theme.tokyonight.options.hide_inactive_statusline = true
 
 lvim.builtin.theme.tokyonight.options.on_highlights = function(hl, c)
   local util = require 'tokyonight.util'
-  -- change the fold color to be more subtle in both night and day modes
   hl.Folded = {
-    bg = util.darken(c.fg_gutter, 0.1), -- yes, the bg was set to an fg color in tokyonight
+    -- change the fold color to be more subtle in both night and day modes
+    -- yes, the bg was set to an fg color in tokyonight
+    bg = util.darken(c.fg_gutter, 0.1),
+  }
+  hl.ColorColumn = {
+    -- higher contrast since I am trying xiyaowong/virtcolumn.nvim
+    bg = util.lighten(c.black, 1.05),
   }
 end
 -- }}}
