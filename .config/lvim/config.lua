@@ -414,6 +414,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'lua_ls', -- aka sumneko_lua
   'ruby_ls',
   'ruff_lsp', -- python linter lsp (replaces flake8)
+  'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   'svelte',
   'taplo',
   'vuels',
@@ -434,7 +435,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'relay_lsp', -- react framework
   -- 'remark-language-server', -- not in lspconfig
   -- 'solargraph',
-  -- 'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'tsserver', -- handled by typescript.nvim instead
   -- 'vimls',
@@ -3425,10 +3425,10 @@ lvim.plugins = {
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
+  -- { 'Bekaboo/deadcolumn.nvim', event = 'BufRead', ft = { 'php' } }, -- highlight colorcolumn in red when exceeded
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
-  -- { 'lukas-reineke/virt-column.nvim', event = 'BufRead', opts = {} }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
@@ -3524,6 +3524,7 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
+  { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   { 'ziontee113/icon-picker.nvim', ft = 'lua', dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}
