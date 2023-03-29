@@ -763,28 +763,6 @@ lvim.builtin.mason.ui.icons = {
   package_pending = lvim.icons.ui.BoldArrowRight,
   package_uninstalled = lvim.icons.ui.Close,
 }
-
-local mason_ensure_installed = {
-  'nginx-language-server',
-  'jq-lsp',
-}
-
-local is_mason_installed, registry = pcall(require, 'mason-registry')
-if is_mason_installed then
-  for _, package_name in ipairs(mason_ensure_installed) do
-    if not registry.is_installed(package_name) then
-      vim.notify_once(string.format("Installation in progress for [%s]", package_name), vim.log.levels.INFO)
-      local pkg = registry.get_package(package_name)
-      pkg:install():once("closed", function()
-        if pkg:is_installed() then
-          vim.schedule(function()
-            vim.notify_once(string.format("Installation complete for [%s]", package_name), vim.log.levels.INFO)
-          end)
-        end
-      end)
-    end
-  end
-end
 -- }}}
 
 -- nvim-cmp {{{
