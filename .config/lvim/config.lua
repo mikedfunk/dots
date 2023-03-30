@@ -1088,6 +1088,8 @@ lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { 'php' } 
 lvim.builtin.treesitter.ensure_installed = {
   'comment',
   'lua', -- update to latest
+  'luadoc',
+  'jsdoc',
   'markdown_inline',
   'phpdoc',
   'regex', -- used by php-enhanced-treesitter
