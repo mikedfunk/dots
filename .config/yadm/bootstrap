@@ -769,7 +769,7 @@ _install_lunarvim
 _install_upgrade_lvim_plugins
 _update_antidote_plugins
 _apply_hosts_file
-_enable_terminal_text_formattting
+# _enable_terminal_text_formattting
 _apply_mac_preferences
 _start_launch_agents
 # _fix_file_size_limit_for_watching_with_entr

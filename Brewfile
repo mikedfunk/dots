@@ -67,6 +67,7 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "flow" # flowtype for javascript. Moved from ~/.config/yarn/global/package.json
 # brew "fpp" # facebook path picker. Used with tmux-fpp to easily open files in an editor. (I don't use it)
 # brew "fx" # json funagler used by some of my shell functions
+# brew "git-absorb" # fixup helper
 # brew "git-extras" # adds some cool additional git commands (conflicts with npm git-standup)
 # brew "git-flow" # adds first class git commands for the git-flow workflow (I use avh version below)
 # brew "git-flow-avh" # adds first class git commands for the git-flow workflow. This version will delete remote feature, release, and hotfix branches on finishing.
@@ -220,6 +221,7 @@ brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set 
 brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "cloc" # count lines of code
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.)
@@ -231,7 +233,6 @@ brew "gd" # needed to build php https://github.com/shivammathur/homebrew-php/blo
 brew "gettext" # needed to build php
 brew "gh" # new github cli
 brew "git"
-brew "git-absorb" # fixup helper
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 brew "glab" # like gh for gitlab
@@ -307,7 +308,6 @@ brew "yadm" # yet another dotfiles manager
 brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zlib" # needed to build php and python
 brew "zsh" # awesome bash shell replacement
-brew cloc # count lines of code
 
 # }}}
 
@@ -319,7 +319,6 @@ brew cloc # count lines of code
 # cask "battle-net" # whoa sweet there's a new mac battle.net app (you need to run the installer: `open /usr/local/Caskroom/battle-net/latest/Battle.net-Setup.app`)
 # cask "beardedspice" # keyboard media controls for media sites. Always seems to be broken :/
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
-# cask "bitbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options
 # cask "bubo" # menubar app that lets you use media and bluetooth keys with spotify web in chrome (but not in firefox, boo!)
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
@@ -447,11 +446,13 @@ cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated 
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "nvidia-geforce-now" # game streaming
+cask "orbstack" # docker-for-mac replacement
 cask "postman" # http api client (I use the web interface mostly)
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 cask "sloth" # find what is using files, drectories, sockets, pipes, and devices
+cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options
 
 # }}}
 
