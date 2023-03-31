@@ -30,7 +30,7 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 -- vim.o.splitkeep = "screen"
 
 vim.o.spellfile = vim.fn.expand(vim.env.LUNARVIM_CONFIG_DIR .. '/spell/en.utf-8.add') -- this is necessary because nvim-treesitter is first in the runtimepath
--- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
+vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
@@ -2825,7 +2825,8 @@ plugins.ts_node_action = {
 -- typescript.nvim {{{
 plugins.typescript_nvim = {
   'jose-elias-alvarez/typescript.nvim',
-  dependencies = { 'jose-elias-alvarez/null-ls.nvim', 'kevinhwang91/nvim-ufo' },
+  dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
+  -- dependencies = { 'jose-elias-alvarez/null-ls.nvim', 'kevinhwang91/nvim-ufo' },
   ft = {
     -- 'javascript',
     'typescript',
@@ -3448,6 +3449,7 @@ lvim.plugins = {
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
+  -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
@@ -3500,7 +3502,6 @@ lvim.plugins = {
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
-  plugins.nvim_ufo, -- fancy folds (probably better with LSP integration, which is a little hard to accomplish with Lunarvim) The ONLY thing this provides is syntax highlighting on folded text.
   plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.persistent_breakpoints, -- persist breakpoints between sessions
@@ -3553,7 +3554,7 @@ lvim.plugins = {
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
   { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
-  { 'ziontee113/icon-picker.nvim', ft = 'lua', dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
+  { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}
 
