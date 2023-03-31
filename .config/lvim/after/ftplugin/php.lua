@@ -12,34 +12,32 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true
 }
 
-if is_installed('treesitter') then
-  vim.wo.foldmethod = 'expr'
-  vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-end
+-- if is_installed('treesitter') then
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+-- end
 
 if not _G.was_intelephense_setup then
   require 'lvim.lsp.manager'.setup('intelephense', {
     filetypes = { 'php', 'phtml.html' },
     capabilities = capabilities,
   })
-  -- local is_ufo_installed, ufo = pcall(require, 'ufo')
-  -- if is_ufo_installed then
-  --   ufo.setup {
-  --     open_fold_hl_timeout = 0,
-  --     close_fold_kinds = {
-  --       -- lsp:
-  --       'comment',
-  --       'imports',
-  --       'region',
 
-  --       -- treesitter:
-  --       -- 'method_declaration',
-  --       -- 'comment',
-  --       -- 'namespace_use_declaration',
-  --       -- 'property_declaration',
-  --     }
-  --   }
-  -- end
+  require 'ufo'.setup {
+    open_fold_hl_timeout = 0,
+    close_fold_kinds = {
+      -- lsp:
+      'comment',
+      'imports',
+      'region',
+
+      -- treesitter:
+      -- 'method_declaration',
+      -- 'comment',
+      -- 'namespace_use_declaration',
+      -- 'property_declaration',
+    }
+  }
   -- require 'ufo'.closeFoldsWith(1)
   _G.was_intelephense_setup = true
 end

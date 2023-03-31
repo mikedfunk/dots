@@ -13,34 +13,31 @@ if should_setup_flow and not _G.was_flow_setup then
     lineFoldingOnly = true
   }
 
-  if is_installed('treesitter') then
-    vim.wo.foldmethod = 'expr'
-    vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-  end
+  -- if is_installed('treesitter') then
+  -- vim.wo.foldmethod = 'expr'
+  -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+  -- end
 
   require 'lvim.lsp.manager'.setup('flow', {
     cmd = { 'npx', '--no-install', 'flow-bin@0.126.1', 'lsp', '--lazy-mode=ide' },
     capabilities = capabilities,
   })
 
-  local is_ufo_installed, ufo = pcall(require, 'ufo')
-  if is_ufo_installed then
-    ufo.setup {
-      -- provider_selector = function(_, _, _)
-      --   return { 'treesitter', 'lsp' }
-      -- end,
-      close_fold_kinds = {
-        -- lsp:
-        'comment',
-        'imports',
-        'region',
+  require 'ufo'.setup {
+    -- provider_selector = function(_, _, _)
+    --   return { 'treesitter', 'lsp' }
+    -- end,
+    close_fold_kinds = {
+      -- lsp:
+      'comment',
+      'imports',
+      'region',
 
-        -- treesitter:
-        'import_statement',
-        'comment',
-      }
+      -- treesitter:
+      -- 'import_statement',
+      -- 'comment',
     }
-    ufo.closeFoldsWith(0)
-  end
+  }
+  ufo.closeFoldsWith(0)
   _G.was_flow_setup = true
 end
