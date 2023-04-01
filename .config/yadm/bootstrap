@@ -497,16 +497,9 @@ _install_node_versions () {
     ( asdf list nodejs | grep --quiet latest ) || asdf install nodejs latest
 
     asdf global nodejs latest
-    asdf exec npm install -g npm
+    # install pnpm and friends next to corepack (must reshim, only on latest node)
+    asdf exec corepack enable
     asdf reshim nodejs
-
-    # TODO where the heck is the global asdf npm package.json for just one node version??
-    npm install -g pnpm
-    # npm install -g eslint
-    # npm install -g eslint_d
-    # npm install -g joplin
-    # npm install -g flow-bin@0.126.1
-    # npm install -g sql-formatter # mangles variables
 
     builtin cd - >/dev/null || return
 }

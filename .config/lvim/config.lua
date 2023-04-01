@@ -3431,6 +3431,7 @@ lvim.plugins = {
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
+  -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
@@ -3483,7 +3484,6 @@ lvim.plugins = {
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
-  plugins.nvim_ufo, -- fancy folds
   plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.persistent_breakpoints, -- persist breakpoints between sessions

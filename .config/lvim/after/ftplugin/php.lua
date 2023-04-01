@@ -23,21 +23,21 @@ if not _G.was_intelephense_setup then
     capabilities = capabilities,
   })
 
-  require 'ufo'.setup {
-    open_fold_hl_timeout = 0,
-    close_fold_kinds = {
-      -- lsp:
-      'comment',
-      'imports',
-      'region',
+  -- require 'ufo'.setup {
+  --   open_fold_hl_timeout = 0,
+  --   close_fold_kinds = {
+  --     -- lsp:
+  --     'comment',
+  --     'imports',
+  --     'region',
 
-      -- treesitter:
-      -- 'method_declaration',
-      -- 'comment',
-      -- 'namespace_use_declaration',
-      -- 'property_declaration',
-    }
-  }
+  --     -- treesitter:
+  --     -- 'method_declaration',
+  --     -- 'comment',
+  --     -- 'namespace_use_declaration',
+  --     -- 'property_declaration',
+  --   }
+  -- }
   -- require 'ufo'.closeFoldsWith(1)
   _G.was_intelephense_setup = true
 end

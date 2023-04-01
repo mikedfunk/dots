@@ -23,21 +23,21 @@ if should_setup_flow and not _G.was_flow_setup then
     capabilities = capabilities,
   })
 
-  require 'ufo'.setup {
-    -- provider_selector = function(_, _, _)
-    --   return { 'treesitter', 'lsp' }
-    -- end,
-    close_fold_kinds = {
-      -- lsp:
-      'comment',
-      'imports',
-      'region',
+  -- require 'ufo'.setup {
+  --   -- provider_selector = function(_, _, _)
+  --   --   return { 'treesitter', 'lsp' }
+  --   -- end,
+  --   close_fold_kinds = {
+  --     -- lsp:
+  --     'comment',
+  --     'imports',
+  --     'region',
 
-      -- treesitter:
-      -- 'import_statement',
-      -- 'comment',
-    }
-  }
-  ufo.closeFoldsWith(0)
+  --     -- treesitter:
+  --     -- 'import_statement',
+  --     -- 'comment',
+  --   }
+  -- }
+  -- ufo.closeFoldsWith(0)
   _G.was_flow_setup = true
 end

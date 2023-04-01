@@ -54,7 +54,7 @@ windows:
     panes:
       - commands: [docker compose --project-directory=$HOME/Code/saatchi/xdocker up mysql.db -d && docker compose up]
       - commands: [puw]
-      - commands: [while true; do docker compose exec paint.fpm php artisan tinker; sleep 5; done]
+      - commands: [while true; do docker compose exec paint.fpm php artisan tinker; sleep 1; done]
       - commands: [ts]
 
   - name: brush
