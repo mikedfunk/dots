@@ -399,7 +399,7 @@ lvim.icons.git.FileStaged = '✓'
 -- configs it will try to set them up as language servers. This is not what
 -- I want for phpactor for instance. You must use the same keys as from
 -- nvim-lspconfig. This does not include non-lsp tools.
---
+
 -- when you run :LvimCacheReset
 -- this will GENERATE an ftplugin to run lspconfig setup with no opts!
 -- https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
@@ -409,6 +409,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'cssls',
   'dockerls',
   'emmet_ls',
+  'intelephense',
   'jsonls',
   'lemminx',
   'lua_ls', -- aka sumneko_lua
@@ -426,10 +427,9 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'eslint', -- eslint-lsp (stopped working on node 17.8.0, lsp debug isn't showing any errors)
   -- 'glint', -- typed ember
   -- 'graphql',
-  -- 'intelephense', -- I customze the config
   -- 'jqls',
   -- 'nginx-language-server', -- not in lspconfig
-  -- 'phpactor', -- I use intelephense instead
+  -- 'phpactor', -- I use intelephense. This requires PHP 8.0+.
   -- 'prismals', -- node ORM
   -- 'pyright',
   -- 'relay_lsp', -- react framework
@@ -449,8 +449,8 @@ lvim.lsp.automatic_configuration.skipped_filetypes = vim.tbl_filter(function(val
 end, lvim.lsp.automatic_configuration.skipped_filetypes)
 
 for _, server in pairs({
-  'intelephense',
-  'phpactor',
+  -- 'intelephense',
+  'phpactor', -- requires php 8.0+
   'tsserver',
 }) do
   if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, server) then
@@ -458,8 +458,7 @@ for _, server in pairs({
   end
 end
 
--- intelephense: moved to ./ftplugin/php.lua
--- flow: moved to ./ftplugin/javascript.lua
+-- flow: moved to ./after/ftplugin/javascript.lua
 -- tsserver: moved to typescript.nvim
 -- }}}
 
