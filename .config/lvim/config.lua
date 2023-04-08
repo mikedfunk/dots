@@ -1,5 +1,7 @@
 -- vim: set foldmethod=marker:
 
+vim.loader.enable() -- enable experimental module loader
+
 -- notes {{{
 -- https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#types-and-type
 -- }}}
@@ -26,8 +28,8 @@ endfunction
 vim.o.joinspaces = false -- Prevents inserting two spaces after punctuation on a join (J)
 vim.o.swapfile = true -- I hate them but they help if neovim crashes
 
--- https://www.reddit.com/r/neovim/comments/xx5hhp/introducing_livecommandnvim_preview_the_norm/
--- vim.o.splitkeep = "screen"
+-- https://github.com/luukvbaal/stabilize.nvim
+vim.o.splitkeep = "screen"
 
 vim.o.spellfile = vim.fn.expand(vim.env.LUNARVIM_CONFIG_DIR .. '/spell/en.utf-8.add') -- this is necessary because nvim-treesitter is first in the runtimepath
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
@@ -413,7 +415,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'jsonls',
   'lemminx',
   'lua_ls', -- aka sumneko_lua
-  'ruby_ls',
   'ruff_lsp', -- python linter lsp (replaces flake8)
   'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   'svelte',
@@ -431,9 +432,10 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'nginx-language-server', -- not in lspconfig
   -- 'phpactor', -- I use intelephense. This requires PHP 8.0+.
   -- 'prismals', -- node ORM
-  -- 'pyright',
+  -- 'pyright', -- just use ruff-lsp
   -- 'relay_lsp', -- react framework
   -- 'remark-language-server', -- not in lspconfig
+  -- 'ruby_ls', -- using the recommended solargraph instead
   -- 'solargraph',
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'tsserver', -- handled by typescript.nvim instead
@@ -449,9 +451,11 @@ lvim.lsp.automatic_configuration.skipped_filetypes = vim.tbl_filter(function(val
 end, lvim.lsp.automatic_configuration.skipped_filetypes)
 
 for _, server in pairs({
-  -- 'intelephense',
   'phpactor', -- requires php 8.0+
   'tsserver',
+  -- 'intelephense',
+  -- 'solargraph',
+  -- 'standardrb',
 }) do
   if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, server) then
     table.insert(lvim.lsp.automatic_configuration.skipped_servers, server)
@@ -846,8 +850,8 @@ require 'lvim.lsp.null-ls.linters'.setup {
       '--warning-severity=3',
       '-d',
       'memory_limit=100M',
-      '-d',
-      'xebug.mode=off',
+      -- '-d',
+      -- 'xebug.mode=off',
     },
     condition = function(utils)
       return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }
@@ -867,11 +871,11 @@ require 'lvim.lsp.null-ls.linters'.setup {
     end,
   },
   { name = 'php' },
-  { name = 'rubocop' },
+  -- { name = 'rubocop' },
   -- { name = 'spectral' },
   { name = 'sqlfluff', extra_args = { '--dialect', 'mysql' } },
   -- { name = 'trail_space' },
-  { name = 'vacuum' }, -- openapi linter. Much simpler and more stable than spectral.
+  -- { name = 'vacuum' }, -- openapi linter. Much simpler and more stable than spectral.
   { name = 'zsh' },
 }
 
@@ -2518,6 +2522,29 @@ plugins.splitjoin_vim = {
 }
 -- }}}
 
+-- statuscol.nvim {{{
+plugins.statuscol_nvim = {
+  'luukvbaal/statuscol.nvim',
+  config = function()
+    require 'statuscol'.setup {
+      -- relculright = true,
+      -- segments = {
+      --   { text = { require 'statuscol.builtin'.foldfunc }, click = "v:lua.ScFa" },
+      --   {
+      --     sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
+      --     click = "v:lua.ScSa"
+      --   },
+      --   { text = { require 'statuscol.builtin'.lnumfunc }, click = "v:lua.ScLa", },
+      --   {
+      --     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true },
+      --     click = "v:lua.ScSa"
+      --   },
+      -- }
+    }
+  end
+}
+-- }}}
+
 -- surround-ui.nvim {{{
 plugins.surround_ui_nvim = {
   'roobert/surround-ui.nvim',
@@ -3438,7 +3465,9 @@ lvim.plugins = {
   -- { 'Bekaboo/deadcolumn.nvim', event = 'BufRead', ft = { 'php' } }, -- highlight colorcolumn in red when exceeded
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
+  -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
+  -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
@@ -3490,6 +3519,7 @@ lvim.plugins = {
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
   plugins.refactoring_nvim, -- refactoring plugin with telescope support
   plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua) TODO: replace with https://github.com/CKolkey/ts-node-action
+  plugins.statuscol_nvim, -- use new statuscol feature for clickable fold signs, etc.
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
@@ -3517,20 +3547,18 @@ lvim.plugins = {
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
-  { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
-  { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column
-  { 'luukvbaal/stabilize.nvim', event = 'BufRead', opts = {} }, -- when opening trouble or splits or quickfix or whatever, don't move the starting window.
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence.
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
+  { 'smjonas/live-command.nvim', event = 'BufRead', config = function ()  require 'live-command'.setup { commands = { Norm = { cmd = 'norm' } } } end }, -- preview norm commands with Norm
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
