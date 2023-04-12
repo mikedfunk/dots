@@ -1036,6 +1036,7 @@ vim.g.navic_silence = true
 
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/674
 lvim.builtin.nvimtree.hide_dotfiles = nil
+lvim.builtin.nvimtree.setup.ignore_buffer_on_setup = nil
 lvim.builtin.nvimtree.ignore = nil
 lvim.builtin.nvimtree.git = {
   enable = true,
@@ -1247,6 +1248,18 @@ plugins.auto_dark_mode = {
   end,
 }
 -- }}}
+
+--- backseat.nvim {{{
+plugins.backseat_nvim = {
+  'james1236/backseat.nvim',
+  cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
+  opts = {
+    highlight = { icon = '' },
+    additional_instruction = 'Respond as if you are Robert C. Martin',
+    -- openai_model_id = 'gpt-4',
+  },
+}
+--}}}
 
 -- BufOnly.nvim {{{
 plugins.bufonly_nvim = {
@@ -3473,6 +3486,7 @@ lvim.plugins = {
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
+  plugins.backseat_nvim, -- ChatGPT stuff!
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff

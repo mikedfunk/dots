@@ -339,6 +339,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "fig" # indispensable terminal completion helper (2022-04-20 If I type too fast it will mess up character order)
 # cask "figma" # mockups app
 # cask "font-fira-code-nerd-font"
+# cask "font-symbols-only-nerd-font" # just the nerd-font symbols
 # cask "freetube" # privacy-friendly and add-free youtube player
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)
 # cask "glance" # all-in-one quicklook app that works with dark mode (abandoned - switch to glamce-chamburr)
@@ -466,5 +467,6 @@ mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menub
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
+mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 
 # }}}
