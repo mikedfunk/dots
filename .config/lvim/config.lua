@@ -274,7 +274,7 @@ vim.api.nvim_create_autocmd('FileType', { pattern = 'lua', group = 'lua_gf', cal
 vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf', callback = enable_lua_gf, desc = 'lua gf' })
 
 -- use latest node version
-vim.env.PATH = vim.fn.getenv('HOME') .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
+vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
 vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
@@ -334,7 +334,7 @@ vim.g['markdown_fenced_languages'] = {
 
 -- set filetypes for unusual files {{{
 vim.api.nvim_create_augroup('unusual_filetypes', { clear = true })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'phtml.html' end })
+vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'php' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.eyaml', callback = function() vim.bo.filetype = 'yaml' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.babelrc', callback = function() vim.bo.filetype = 'json' end })
 vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.php.{sample,dist}', callback = function() vim.bo.filetype = 'php' end })
@@ -905,7 +905,7 @@ require 'lvim.lsp.null-ls.formatters'.setup {
   -- moved to null-ls setup directly because lunarvim won't let me change the command
   -- {
   --   name = 'phpcbf',
-  --   command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead. https://github.com/lunarvim/lunarvim/blob/c18cd3f0a89443d4265f6df8ce12fb89d627f09e/lua/lvim/lsp/null-ls/services.lua#L81
+  --   command = vim.env.HOME .. '/.support/phpcbf-helper.sh', -- damn it... they override the command now. Gotta do it from null-ls instead. https://github.com/lunarvim/lunarvim/blob/c18cd3f0a89443d4265f6df8ce12fb89d627f09e/lua/lvim/lsp/null-ls/services.lua#L81
   --   extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '--warning-severity=0' }, -- do not fix warnings
   --   -- timeout = 20000,
   --   condition = function(utils)
@@ -943,7 +943,7 @@ local did_register_phpcbf
 if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
-      command = vim.fn.getenv('HOME') .. '/.support/phpcbf-helper.sh', -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
+      command = vim.env.HOME .. '/.support/phpcbf-helper.sh', -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
       extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off' }, -- do not fix warnings
       -- condition = function()
       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
@@ -2254,7 +2254,7 @@ plugins.nvim_ts_autotag = {
     'html',
     'javascript',
     'javascriptreact',
-    'phtml.html',
+    'php.html',
     'typescript',
     'typescriptreact',
     'xml',
@@ -2379,7 +2379,7 @@ plugins.persistent_breakpoints = {
 
 -- phpactor_nvim {{{
 local configure_phpactor_nvim = function()
-  local php_bin_path = vim.fn.getenv('HOME') .. '/.asdf/installs/php/8.2.0/bin'
+  local php_bin_path = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin'
   require 'phpactor'.setup {
     lspconfig = { enabled = false },
     install = {
@@ -2897,7 +2897,7 @@ plugins.vim_abolish = {
   'tpope/vim-abolish',
   init = function()
     vim.g.abolish_no_mappings = 1
-    vim.g.abolish_save_file = vim.fn.getenv('LUNARVIM_RUNTIME_DIR') .. '/after/plugin/abolish.vim'
+    vim.g.abolish_save_file = vim.env.LUNARVIM_RUNTIME_DIR .. '/after/plugin/abolish.vim'
   end,
   config = function()
     vim.cmd('Abolish colleciton ollection')
@@ -3078,7 +3078,7 @@ local setup_startify = function()
   vim.g['startify_skiplist'] = { 'COMMIT_EDITMSG', '.DS_Store' } -- disable common but unimportant files
   vim.g['startify_files_number'] = 9 -- recently used
   vim.g['startify_session_persistence'] = 1 -- auto save session on exit like obsession
-  vim.g['startify_session_dir'] = vim.fn.getenv('HOME') .. '/.local/share/lunarvim/session' .. vim.fn.getcwd() -- session dir for each repo
+  vim.g['startify_session_dir'] = vim.env.HOME .. '/.local/share/lunarvim/session' .. vim.fn.getcwd() -- session dir for each repo
   vim.g['startify_change_to_dir'] = 0 -- this feature should not even exist. It is stupid.
 
   -- reorder and whitelist certain groups
@@ -3478,7 +3478,6 @@ lvim.plugins = {
   -- { 'Bekaboo/deadcolumn.nvim', event = 'BufRead', ft = { 'php' } }, -- highlight colorcolumn in red when exceeded
   -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
-  -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
@@ -3561,6 +3560,7 @@ lvim.plugins = {
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php' }, -- sql and regex included
+  { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
