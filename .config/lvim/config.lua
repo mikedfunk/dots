@@ -1036,7 +1036,6 @@ vim.g.navic_silence = true
 
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/674
 lvim.builtin.nvimtree.hide_dotfiles = nil
-lvim.builtin.nvimtree.setup.ignore_buffer_on_setup = nil
 lvim.builtin.nvimtree.ignore = nil
 lvim.builtin.nvimtree.git = {
   enable = true,
