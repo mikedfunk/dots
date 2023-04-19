@@ -158,6 +158,7 @@ local startify_quotes = {
   { "In many ways, the prism of computer science is harmful for the development of information systems.", "", "- David Heinemeier Hansson (DHH)" },
   { "In preparing for battle I have always found that plans are useless, but planning is indispensable.", "", "- Dwight D. Eisenhower" },
   { "In programming, the hard part isn't solving problems, but deciding what problems to solve.", "", "- Paul Graham" },
+  { "In science it often happens that scientists say, \"You know that's a really good argument; my position is mistaken\" ...and you never hear that old view from them again... It happens every day. I cannot recall the last time something like that happened in politics or religion.", "", "- Carl Sagan" },
   { "Incorrect documentation is often worse than no documentation.", "", "- Bertrand Meyer" },
   { "Increasingly, people seem to misinterpret complexity as sophistication, which is baffling -- the incomprehensible should cause suspicion rather than admiration.", "", "- Niklaus Wirth" },
   { "Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. ...[Therefore,] making it easy to read makes it easier to write.", "", "- Robert C. Martin" },
