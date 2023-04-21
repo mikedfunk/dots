@@ -19,10 +19,11 @@ if should_setup_flow and not _G.was_flow_setup then
   -- end
 
   require 'lvim.lsp.manager'.setup('flow', {
-    -- cmd = { 'flow', 'lsp', '--lazy-mode=ide' },
+    cmd = { 'flow', 'lsp', '--lazy-mode=ide' },
+    -- cmd = { 'npx', 'flow-bin', 'lsp' },
     -- cmd = { 'npx', '--no-install', 'flow-bin@0.126.1', 'lsp', '--lazy-mode=ide' },
     -- cmd = { 'npx', 'flow-bin@0.126.1', 'lsp', '--lazy-mode=ide' },
-    cmd = { 'npx', '--no-install', 'flow-bin@0.96.0', 'lsp', '--lazy-mode=ide' },
+    -- cmd = { 'npx', '--no-install', 'flow-bin@0.96.0', 'lsp', '--lazy-mode=ide' },
     -- capabilities = capabilities,
   })
 

@@ -386,11 +386,13 @@ brew "zsh" # awesome bash shell replacement
 # cask "noti" # mac native pushbullet notifications (I use the chrome/firefox extension)
 # cask "onecast" # cast xbox one to mac.
 # cask "openemu" # multi game system emulator
+# cask "orbstack" # docker-for-mac replacement
 # cask "origin" # ea games store
 # cask "osxfuse" # half of tool to mount ssh directories in the finder (useful if working on a shared dev environment) see macfusion for other half
 # cask "pdftotext" # used by ranger to preview pdfs (I don't use ranger these days)
 # cask "playonmac" # run windows apps on mac for free via wine
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
+# cask "postman" # http api client (I use the web interface mostly)
 # cask "postman-cli" # new postman cli runner. Replaces newman.
 # cask "qlcolorcode" # quicklook plugin to provide syntax highlighting to code files (fails to install)
 # cask "qlimagesize" # quicklook plugin (display image size and resolution in the title in preview)
@@ -406,6 +408,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "sidequest" # VR sideload platform for oculus quest (I use the phone version now)
 # cask "skype" # Dad uses skype. Skype web requires chrome. I don't like chrome.
 # cask "slack" # needed for screen sharing features. I mostly use the web app. (managed by my work)
+# cask "sloth" # find what is using files, drectories, sockets, pipes, and devices
 # cask "spectacle" # keyboard window splitter/resizer/mover. Kind of like a lightweight i3 window manager. I use it a lot. (replaced with rectangle - a superset that also snaps to edges by dragging)
 # cask "spotify" # mac native spotify player (I use the web app, but sometimes it gets stuck in an offline state or randomly stops playing)
 # cask "ssh-tunnel-manager" # mac native gui to manage running ssh tunnels (I just put tunnels in launchctl with autossh and forget about them)
@@ -425,6 +428,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
 # cask "wormhole" # interact with your phone screen from your computer
+# cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options
 # cask "xquartz" # needed to install xclip, which is needed to copy text from multitail (I installed all of that, copy still didn't work :/ ) also needed for wine-stable
 # cask "xscreensaver" # shitload of old screensavers... downside is there are so many it slows down selecting Desktop & Screen Saver the first time in System Preferences :/ Upside: it has GLMatrix :)
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
@@ -447,13 +451,9 @@ cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated 
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "nvidia-geforce-now" # game streaming
-cask "orbstack" # docker-for-mac replacement
-cask "postman" # http api client (I use the web interface mostly)
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
-cask "sloth" # find what is using files, drectories, sockets, pipes, and devices
-cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options
 
 # }}}
 

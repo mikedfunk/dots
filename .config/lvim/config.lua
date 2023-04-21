@@ -410,7 +410,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'bashls',
   'cssls',
   'dockerls',
-  'emmet_ls',
   'intelephense',
   'jsonls',
   'lemminx',
@@ -425,6 +424,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
+  -- 'emmet_ls',
   -- 'eslint', -- eslint-lsp (stopped working on node 17.8.0, lsp debug isn't showing any errors)
   -- 'glint', -- typed ember
   -- 'graphql',
@@ -2902,7 +2902,6 @@ plugins.vim_abolish = {
     vim.cmd('Abolish colleciton ollection')
     vim.cmd('Abolish connecitno connection')
     vim.cmd('Abolish conneciton connection')
-    vim.cmd('Abolish couchbsae couchbase')
     vim.cmd('Abolish deafult default')
     vim.cmd('Abolish leagcy legacy')
     vim.cmd('Abolish sectino section')
@@ -3474,13 +3473,10 @@ lvim.plugins = {
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
-  -- { 'Bekaboo/deadcolumn.nvim', event = 'BufRead', ft = { 'php' } }, -- highlight colorcolumn in red when exceeded
-  -- { 'echasnovski/mini.animate', event = 'VimEnter' }, -- animate <c-d>, zz, <c-w>v, etc. (neoscroll does most of this and better)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
-  -- { 'm4xshen/smartcolumn.nvim', opts = { colorcolumn = "80,120" }}, -- only show colorcolumn when it's exceeded (TODO: doesn't work for multiple)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
