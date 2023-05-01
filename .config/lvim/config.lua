@@ -835,6 +835,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'dotenv_linter' }, -- not available in Mason
   -- { name = 'luacheck' },
   { name = 'eslint_d' }, -- until I can get the eslint-lsp to work again
+  { name = 'todo_comments' },
   { name = 'gitlint' },
   {
     name = 'shellcheck',
@@ -3479,6 +3480,7 @@ lvim.plugins = {
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
+  -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   plugins.backseat_nvim, -- ChatGPT stuff!
@@ -3571,7 +3573,6 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}

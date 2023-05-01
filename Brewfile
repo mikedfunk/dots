@@ -438,6 +438,7 @@ brew "zsh" # awesome bash shell replacement
 cask "aerial" # cool apple tv style screensavers
 cask "authy" # desktop 2-factor!
 cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
+cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
@@ -450,6 +451,7 @@ cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
+cask "menubar-colors" # color picker in the menubar
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
