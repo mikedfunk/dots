@@ -24,6 +24,7 @@ Code/saatchi/xdocker/compose.yml
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.envrc
 Code/saatchi/**/.ignore
+Code/saatchi/**/cspell.json
 Code/saatchi/**/.nlsp-settings/*.json
 Code/saatchi/**/.tool-versions
 Code/saatchi/**/.projections.json

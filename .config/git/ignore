@@ -25,12 +25,7 @@ Session.vim
 TAGS
 __LAST__
 coverage
-cscope.files
-cscope.out
-cscope.out.files
-cscope.out.lock
-cscope.out.temp
-ncscope.out.temp
+cspell.json
 nohup.out
 sonar-project.properties
 tags

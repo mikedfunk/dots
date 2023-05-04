@@ -442,7 +442,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'vimls',
 }
 
-lvim.lsp.diagnostics.signs.values[4].text = lvim.icons.diagnostics.Information
 lvim.lsp.document_highlight = true
 
 -- remove toml from skipped filetypes so I can configure taplo
@@ -822,13 +821,29 @@ local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic d
 -- linters {{{
 
 require 'lvim.lsp.null-ls.linters'.setup {
+  -- {
+  --   name = 'codespell',
+  --   -- force the severity to be HINT
+  --   diagnostics_postprocess = function(diagnostic)
+  --     diagnostic.severity = vim.diagnostic.severity.HINT
+  --   end,
+  --   extra_args = { '--ignore-words-list', 'tabe,noice' },
+  -- },
   {
-    name = 'codespell',
+    name = 'cspell',
+    filetypes = {
+      'php',
+      'python',
+      'ruby',
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+    },
     -- force the severity to be HINT
     diagnostics_postprocess = function(diagnostic)
       diagnostic.severity = vim.diagnostic.severity.HINT
     end,
-    extra_args = { '--ignore-words-list', 'tabe,noice' },
   },
   -- { name = 'mypy', condition = function() return vim.fn.executable 'mypy' == 1 end }, -- disabled for ruff instead
   -- { name = 'pycodestyle', condition = function() return vim.fn.executable 'pycodestyle' == 1 end }, -- disabled for ruff instead
@@ -864,18 +879,16 @@ require 'lvim.lsp.null-ls.linters'.setup {
     extra_args = {
       '--memory-limit=200M',
       '--level=9', -- force level 9 for better editor intel
-      -- '--configuration=' .. vim.api.nvim_exec('pwd', true) .. '/phpstan.neon',
     }, -- 40MB is not enough
     condition = function(utils)
       return utils.root_has_file { 'phpstan.neon' }
-      -- return vim.fn.executable('phpstan') == 1 and vim.fn.filereadable 'phpstan.neon' == 1
     end,
   },
   { name = 'php' },
   -- { name = 'rubocop' },
   -- { name = 'spectral' },
   { name = 'sqlfluff', extra_args = { '--dialect', 'mysql' } },
-  -- { name = 'trail_space' },
+  { name = 'trail_space' },
   -- { name = 'vacuum' }, -- openapi linter. Much simpler and more stable than spectral.
   { name = 'zsh' },
 }
@@ -957,16 +970,18 @@ end
 
 -- code actions {{{
 require 'lvim.lsp.null-ls.code_actions'.setup {
+  { name = 'cspell' },
   { name = 'eslint_d' }, -- until I can get eslint-lsp to start working
   { name = 'gitrebase' }, -- just provides helpers to switch pick to fixup, etc.
-  { name = 'refactoring' },
-  { name = 'proselint' }, -- trying this out for markdown
   -- adds a LOT of null-ls noise, not that useful
   {
     name = 'gitsigns',
     condition = function() return is_installed 'gitsigns' end,
     config = { filter_actions = function(title) return title:lower():match("blame") == nil end },
   },
+  { name = 'refactoring' },
+  { name = 'proselint' }, -- trying this out for markdown
+  -- { name = 'ts_node_action' },
 }
 -- }}}
 
@@ -981,6 +996,14 @@ if is_null_ls_installed and not did_register_spell then
   } }
   did_register_spell = true
 end ---@diagnostic disable-line redundant-parameter
+-- }}}
+
+-- hover {{{
+local did_register_printenv
+if is_null_ls_installed and not did_register_printenv then
+  null_ls.register { sources = { null_ls.builtins.hover.printenv } }
+  did_register_printenv = true
+end
 -- }}}
 
 -- }}}
@@ -2795,50 +2818,56 @@ plugins.tmuxline_vim = {
 -- ts-node-action {{{
 plugins.ts_node_action = {
   'CKolkey/ts-node-action',
-  ft = {
-    'php',
-    'lua',
-    'javascript',
-    'typescript',
-    'javascriptreact',
-    'typescriptreact',
-    'python',
-    'ruby',
-  },
+  event = 'BufRead',
+  -- ft = {
+  --   'php',
+  --   'lua',
+  --   'javascript',
+  --   'typescript',
+  --   'javascriptreact',
+  --   'typescriptreact',
+  --   'python',
+  --   'ruby',
+  -- },
   dependencies = 'folke/which-key.nvim',
   config = function()
-    local padding = {
-      [','] = '%s',
-      ['=>'] = ' %s ',
-      ['='] = '%s',
-      ['['] = '%s',
-      [']'] = '%s',
-      ['}'] = '%s',
-      ['{'] = '%s',
-      ['||'] = ' %s ',
-      ['&&'] = ' %s ',
-      ['.'] = ' %s ',
-      ['+'] = ' %s ',
-      ['*'] = ' %s ',
-      ['-'] = ' %s ',
-      ['/'] = ' %s ',
-    }
-    local toggle_multiline = require('ts-node-action.actions.toggle_multiline')(padding)
+    -- local padding = {
+    --   [','] = '%s ',
+    --   ['=>'] = ' %s ',
+    --   ['='] = '%s',
+    --   ['['] = '%s',
+    --   [']'] = '%s',
+    --   ['}'] = '%s',
+    --   ['{'] = '%s',
+    --   ['||'] = ' %s ',
+    --   ['&&'] = ' %s ',
+    --   ['.'] = ' %s ',
+    --   ['+'] = ' %s ',
+    --   ['*'] = ' %s ',
+    --   ['-'] = ' %s ',
+    --   ['/'] = ' %s ',
+    -- }
+    -- local toggle_multiline = require('ts-node-action.actions.toggle_multiline')(padding)
     require 'ts-node-action'.setup {
-      php = {
-        array_creation_expression = toggle_multiline,
-        formal_parameters = toggle_multiline,
-        arguments = toggle_multiline,
-        subscript_expression = toggle_multiline,
-      }
+      -- php = {
+      --   array_creation_expression = toggle_multiline,
+      --   formal_parameters = toggle_multiline,
+      --   arguments = toggle_multiline,
+      --   subscript_expression = toggle_multiline,
+      -- }
     }
-    if not is_installed('which-key') then return end
-    require 'which-key'.register({
-      J = {
-        function() require 'ts-node-action'.node_action() end,
-        'Split/Join'
-      },
-    }, { prefix = 'g' })
+
+    require 'lvim.lsp.null-ls.code_actions'.setup {
+      { name = 'ts_node_action' },
+    }
+
+    -- if not is_installed('which-key') then return end
+    -- require 'which-key'.register({
+    --   J = {
+    --     function() require 'ts-node-action'.node_action() end,
+    --     'Split/Join'
+    --   },
+    -- }, { prefix = 'g' })
   end,
 }
 -- }}}
@@ -3473,9 +3502,9 @@ lvim.plugins = {
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
-  -- plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter (TODO: not available for PHP yet)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
+  -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
@@ -3537,6 +3566,7 @@ lvim.plugins = {
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
+  plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
   plugins.vim_abolish, -- No lazy load. I tried others but this is the only stable one so far (for :S)
@@ -3561,7 +3591,6 @@ lvim.plugins = {
   { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
-  { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence.
