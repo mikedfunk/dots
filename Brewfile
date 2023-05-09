@@ -403,6 +403,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "quicklook-json" # quicklook plugin (preview json)
 # cask "scummvm" # old school
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
+# cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 # cask "shadow" # cloud gaming system https://shadow.tech
 # cask "shottr" # spiffier screenshot app <cmd-shift-2>
 # cask "sidequest" # VR sideload platform for oculus quest (I use the phone version now)
@@ -454,7 +455,7 @@ cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "menubar-colors" # color picker in the menubar
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
-cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
+cask "sequel-ace" # maintained fork of sequel pro
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 
 # }}}
