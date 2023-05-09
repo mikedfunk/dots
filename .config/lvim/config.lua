@@ -379,6 +379,16 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
     border = 'rounded',
   }
 )
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = 'rounded'
+  }
+)
+
+vim.diagnostic.config {
+  float = { border = 'rounded' }
+}
 -- }}}
 
 -- }}}
@@ -3510,6 +3520,7 @@ lvim.plugins = {
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
+  -- { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
