@@ -409,7 +409,8 @@ lvim.format_on_save.timeout = 30000
 
 -- icons {{{
 lvim.icons.git.FileUnstaged = '✎'
-lvim.icons.git.FileUntracked = ''
+-- lvim.icons.git.FileUntracked = '󱙄'
+lvim.icons.git.FileUntracked = '󱃓'
 lvim.icons.git.FileStaged = '✓'
 -- }}}
 
@@ -424,7 +425,6 @@ lvim.icons.git.FileStaged = '✓'
 -- this will GENERATE an ftplugin to run lspconfig setup with no opts!
 -- https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
 lvim.lsp.installer.setup.ensure_installed = {
-  'astro',
   'bashls',
   'cssls',
   'dockerls',
@@ -436,9 +436,9 @@ lvim.lsp.installer.setup.ensure_installed = {
   'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
   'svelte',
   'taplo',
-  'vuels',
   'yamlls',
   'zk',
+  -- 'astro',
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
@@ -458,6 +458,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'sqls' -- just doesn't do anything, is archived
   -- 'tsserver', -- handled by typescript.nvim instead
   -- 'vimls',
+  -- 'vuels',
 }
 
 lvim.lsp.document_highlight = true
@@ -796,23 +797,22 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.cmp.formatting.source_names['buffer'] = ''
 lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
-lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '➒' --  
-lvim.builtin.cmp.formatting.source_names['color_names'] = '(Colors)'
+lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '󰚩' --  ➒
+lvim.builtin.cmp.formatting.source_names['color_names'] = ''
 lvim.builtin.cmp.formatting.source_names['dap'] = ''
 lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
-lvim.builtin.cmp.formatting.source_names['doxygen'] = '@'
-lvim.builtin.cmp.formatting.source_names['emoji'] = ''
+lvim.builtin.cmp.formatting.source_names['doxygen'] = '' -- 󰙆
+lvim.builtin.cmp.formatting.source_names['emoji'] = '' -- 
 lvim.builtin.cmp.formatting.source_names['git'] = ''
 lvim.builtin.cmp.formatting.source_names['luasnip'] = '✄'
-lvim.builtin.cmp.formatting.source_names['marksman'] = '🞋'
-lvim.builtin.cmp.formatting.source_names['nerdfont'] = 'ﯔ'
+lvim.builtin.cmp.formatting.source_names['marksman'] = '󰓾' -- 🞋
+lvim.builtin.cmp.formatting.source_names['nerdfont'] = '󰬴'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp'] = 'ʪ'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp_document_symbol'] = 'ʪ'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp_signature_help'] = 'ʪ'
 lvim.builtin.cmp.formatting.source_names['nvim_lua'] = ''
-lvim.builtin.cmp.formatting.source_names['path'] = ''
-lvim.builtin.cmp.formatting.source_names['path'] = ''
-lvim.builtin.cmp.formatting.source_names['plugins'] = ''
+lvim.builtin.cmp.formatting.source_names['path'] = '󰉋' --  
+lvim.builtin.cmp.formatting.source_names['plugins'] = '' --  
 lvim.builtin.cmp.formatting.source_names['rg'] = ''
 lvim.builtin.cmp.formatting.source_names['tmux'] = ''
 lvim.builtin.cmp.formatting.source_names['treesitter'] = ''
@@ -868,8 +868,9 @@ require 'lvim.lsp.null-ls.linters'.setup {
   -- { name = 'dotenv_linter' }, -- not available in Mason
   -- { name = 'luacheck' },
   { name = 'eslint_d' }, -- until I can get the eslint-lsp to work again
-  { name = 'todo_comments' },
+  -- { name = 'todo_comments' },
   { name = 'gitlint' },
+  { name = 'semgrep' },
   {
     name = 'shellcheck',
     condition = function() return not vim.tbl_contains({'.env', '.env.example'}, vim.fn.expand('%:t')) end,
@@ -1989,7 +1990,7 @@ plugins.nvim_context_vt = {
     ---@return string|nil
     custom_text_handler = function(node)
       if not is_installed 'nvim-treesitter/nvim-treesitter' then return nil end
-      return '↩ ' .. vim.treesitter.query.get_node_text(node, 0)[1]
+      return '↩ ' .. vim.treesitter.get_node_text(node, 0)[1]
     end
   },
 }
