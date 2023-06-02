@@ -434,7 +434,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   'lua_ls', -- aka sumneko_lua
   'ruff_lsp', -- python linter lsp (replaces flake8)
   'sqlls', -- https://github.com/joe-re/sql-language-server/issues/128
-  'svelte',
   'taplo',
   'yamlls',
   'zk',
@@ -456,6 +455,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'ruby_ls', -- using the recommended solargraph instead
   -- 'solargraph',
   -- 'sqls' -- just doesn't do anything, is archived
+  -- 'svelte',
   -- 'tsserver', -- handled by typescript.nvim instead
   -- 'vimls',
   -- 'vuels',
@@ -2789,8 +2789,7 @@ plugins.tmuxline_vim = {
         table.concat({
           '#{cpu_fg_color}#{cpu_icon}#[fg=default]',
           '#{ram_fg_color}#{ram_icon}#[fg=default]',
-          '#{battery_color_charge_fg}#{battery_icon_charge}#[bg=colour236]#[fg=default]',
-          '#{wifi_icon}',
+          '#{battery_color_charge_fg}#[bg=colour236]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour236]#{battery_icon_status}#[fg=default]#{wifi_icon}',
         }, ' '),
         '#(~/.support/tmux-docker-status.sh)',
       },

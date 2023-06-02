@@ -140,7 +140,7 @@ local phpspec_class_snippet = snippet(
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
-  text_node({ '', '', 'use PhpSpec\\ObjectBehavior;', 'use Prophecy\\Argument;', '', '/**', ' * {@inheritDoc}', ' *', ' * ' }),
+  text_node({ '', '', 'use PhpSpec\\ObjectBehavior;', 'use Prophecy\\Argument;', '', '/**', ' * @inheritDoc', ' *', ' * ' }),
   function_node(function(_, snip)
     local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Spec.php', '')
     class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
