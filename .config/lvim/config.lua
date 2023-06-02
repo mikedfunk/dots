@@ -1291,14 +1291,14 @@ plugins.auto_dark_mode = {
 }
 -- }}}
 
---- backseat.nvim {{{
+-- backseat.nvim {{{
 plugins.backseat_nvim = {
   'james1236/backseat.nvim',
   cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
   opts = {
     highlight = { icon = '' },
     additional_instruction = 'Respond as if you are Robert C. Martin',
-    -- openai_model_id = 'gpt-4',
+    -- openai_model_id = 'GPT-4',
   },
 }
 --}}}
@@ -1861,6 +1861,27 @@ plugins.modes_nvim = {
   opts = {
     ignored_filetypes = { 'startify' }
   },
+}
+-- }}}
+
+-- neoai.nvim {{{
+plugins.neoai_nvim = {
+  'Bryley/neoai.nvim',
+  dependencies = { 'MunifTanjim/nui.nvim' },
+  cmd = {
+    'NeoAI',
+    'NeoAIOpen',
+    'NeoAIClose',
+    'NeoAIToggle',
+    'NeoAIContext',
+    'NeoAIContextOpen',
+    'NeoAIContextClose',
+    'NeoAIInject',
+    'NeoAIInjectCode',
+    'NeoAIInjectContext',
+    'NeoAIInjectContextCode',
+  },
+  opts = {},
 }
 -- }}}
 
@@ -3510,6 +3531,7 @@ end
 -- additional plugins {{{
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
+  -- plugins.backseat_nvim, -- ChatGPT stuff!
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
@@ -3531,7 +3553,6 @@ lvim.plugins = {
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
-  plugins.backseat_nvim, -- ChatGPT stuff!
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
@@ -3557,6 +3578,7 @@ lvim.plugins = {
   plugins.mkdx, -- helpful markdown mappings
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   plugins.neo_zoom_lua, -- zoom a window, especially helpful with nvim-dap-ui
+  plugins.neoai_nvim, -- more ChatGPT stuff
   plugins.neodim, -- dim unused functions with lsp and treesitter
   plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
