@@ -425,7 +425,6 @@ lvim.icons.git.FileStaged = '✓'
 -- this will GENERATE an ftplugin to run lspconfig setup with no opts!
 -- https://github.com/LunarVim/LunarVim/blob/30c65cfd74756954779f3ea9d232938e642bc07f/lua/lvim/lsp/templates.lua
 lvim.lsp.installer.setup.ensure_installed = {
-  'bashls',
   'cssls',
   'dockerls',
   'intelephense',
@@ -438,6 +437,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   'yamlls',
   'zk',
   -- 'astro',
+  -- 'bashls',
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
