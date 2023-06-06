@@ -526,6 +526,11 @@ lvim.builtin.bufferline.options.sort_by = 'insert_after_current'
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.bufferline.options.separator_style = 'slant'
 
+-- remove all sidebar headers
+for k, _ in ipairs(lvim.builtin.bufferline.options.offsets) do
+  lvim.builtin.bufferline.options.offsets[k].text = nil
+end
+
 if is_installed('bufferline') then
   lvim.builtin.bufferline.options.groups = lvim.builtin.bufferline.options.groups or {}
   lvim.builtin.bufferline.options.groups.items = lvim.builtin.bufferline.options.groups.items or {}
@@ -1664,6 +1669,38 @@ plugins.dressing_nvim = {
       default_prompt = ' ', --  
     },
   },
+}
+-- }}}
+
+-- edgy.nvim {{{
+plugins.edgy_nvim = {
+  'folke/edgy.nvim',
+  event = 'VeryLazy',
+  opts = {
+    left = {
+      {
+        title = 'Explorer',
+        ft = 'NvimTree',
+        open = 'NvimTreeFindFile',
+        pinned = true,
+        size = { height = 0.7 }
+      },
+      {
+        title = 'Symbols',
+        ft = 'Outline',
+        open = 'SymbolsOutlineOpen',
+        pinned = true,
+        size = { height = 0.3 }
+      },
+      {
+        title = 'UndoTree',
+        ft = 'undotree',
+        open = 'UndotreeShow'
+        -- pinned = true,
+        -- size = { height = 1 }
+      }
+    }
+  }
 }
 -- }}}
 
@@ -2955,7 +2992,7 @@ end
 
 plugins.undotree = {
   'mbbill/undotree',
-  cmd = 'UndotreeToggle',
+  cmd = { 'UndotreeToggle', 'UndotreeShow' },
   init = setup_undotree,
 }
 -- }}}
@@ -3569,6 +3606,7 @@ lvim.plugins = {
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
+  plugins.edgy_nvim, -- finally, a consolidated sidebar plugin!
   plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
