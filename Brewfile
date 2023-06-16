@@ -28,6 +28,7 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 
 # brew {{{
 
+# brew "aicommits" # AI commit message writer
 # brew "angband" # middle-earth themed dungeon crawler (requires java)
 # brew "ansible" # used in some of my company-specific stuff to run ssh commands on multiple servers.
 # brew "ansifilter" # filter out ansi codes. used by tmux-logging tpm plugin.

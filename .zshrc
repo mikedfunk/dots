@@ -164,6 +164,7 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 # evaluated startup commands {{{
 _has mutagen && mutagen daemon start
 _has direnv && _evalcache direnv hook zsh # (evalcache version)
+_has aicommits && aicommits config set OPENAI_KEY="$OPENAI_API_KEY"
 # #slow
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
 
