@@ -76,6 +76,8 @@ manpath=(
 )
 
 path=(
+  # to install groovy-language-server
+  $(brew --prefix openjdk@17)/bin
   # my own scripts
   $HOME/.bin
   # global ruby gems
@@ -205,6 +207,9 @@ export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
 export PSQL_PAGER="pspg"
 
 set PLANTUML_LIMIT_SIZE=8192
+
+# to install groovy-language-server
+export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
 
 # [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh" # this seems to conflict with direnv. Direnv seems to wipe the PATH changes this applies.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
