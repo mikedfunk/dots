@@ -262,7 +262,7 @@ local startify_quotes = {
   { "Software being \"Done\" is like lawn being \"Mowed\".", "", "- Jim Benson" },
   { "Software development is a game of insight, and insight comes to the prepared, rested, relaxed mind.", "", "- Kent Beck" },
   { "Software is hard.", "", "- Donald Knuth" },
-  { "Some folks talk about ending the day with a clean checkin.", "I'm increasingly finding it better to end with a failing test; it helps me regain context the next morning.", "", "- Dave Thomas" },
+  { "Some folks talk about ending the day with a clean check in.", "", "I'm increasingly finding it better to end with a failing test; it helps me regain context the next morning.", "", "- Dave Thomas" },
   { "Some things are better done than described.", "", "Don't fall into the specification spiral - at some point you need to start coding.", "", "- The Pragmatic Programmer" },
   { "Sometimes the problem is to discover what the problem is.", "", " - Gordon Glegg" },
   { "Start when you're ready.", "", "You've been building experience all your life. don't ignore niggling doubts.", "", "- The Pragmatic Programmer" },

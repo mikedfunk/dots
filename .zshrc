@@ -445,7 +445,7 @@ alias psr="phpspecnotify"
 alias psd="phpspec describe"
 alias psw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed\" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction -vvv"
 # phpspec coverage
-psc() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml $@ && open coverage/index.html; }
+psc() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml $@ && open coverage/index.html; }
 # psc-clover() {
 #     php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-clover.yml $@ && node ./clover-to-lcov.js
 #     [[ $? == 0 ]] && noti --message "✅ PhpSpec tests passed" ||

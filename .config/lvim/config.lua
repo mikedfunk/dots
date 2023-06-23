@@ -1587,6 +1587,20 @@ plugins.cmp_treesitter = {
 }
 -- }}}
 
+-- definition-or-references.nvim {{{
+plugins.definition_or_references_nvim = {
+  'KostkaBrukowa/definition-or-references.nvim',
+  dependencies = 'folke/which-key.nvim',
+  event = 'LspAttach',
+  config = function()
+    require 'which-key'.register({
+      d = { function () require("definition-or-references").definition_or_references() end, 'Go to definition or references' },
+    }, { prefix = 'g' })
+  end,
+  opts = {},
+}
+-- }}}
+
 -- dial.nvim {{{
 
 ---@return nil
@@ -3593,6 +3607,7 @@ lvim.plugins = {
   -- plugins.backseat_nvim, -- ChatGPT stuff!
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
+  -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
@@ -3702,6 +3717,7 @@ lvim.plugins = {
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'smjonas/live-command.nvim', event = 'BufRead', config = function ()  require 'live-command'.setup { commands = { Norm = { cmd = 'norm' } } } end }, -- preview norm commands with Norm
+  { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
