@@ -52,7 +52,7 @@ Library/Application Support/Sequel Pro/Data/Favorites.plist
 Notes/**/*.md
 Notes/**/imgs/*
 intelephense/licence.txt
-.aws/config
+.config/aws/config
 .warprc
 .bin/pu-pretty
 .config/multitail/multitail.conf
