@@ -305,6 +305,7 @@ brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-p
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
 brew "wget" # latest version
+brew "xdg-ninja" # shell script to look for opportunities to move config files/folders in the home directory into XDG directories instead
 brew "yadm" # yet another dotfiles manager
 brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zlib" # needed to build php and python

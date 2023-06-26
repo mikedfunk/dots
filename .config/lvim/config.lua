@@ -3413,62 +3413,62 @@ plugins.zk_nvim = {
 -- }}}
 
 -- mappings (including whichkey) and commands {{{
--- lvim.keys.normal_mode['<c-s>'] = ':nohlsearch<cr>'
-lvim.keys.normal_mode['<c-w>t'] = 'mz:tabe %<cr>`z'
-lvim.keys.normal_mode['<c-l>'] = ':silent! call loclisttoggle()<cr>'
+-- lvim.keys.normal_mode['<C-s>'] = ':nohlsearch<cr>'
+lvim.keys.normal_mode['<C-w>t'] = 'mz:tabe %<cr>`z'
+lvim.keys.normal_mode['<c-l>'] = ':silent! call LocListToggle()<CR>'
 
-lvim.builtin.which_key.mappings['e'] = { '<cmd>nvimtreefindfiletoggle<cr>', 'explore file' }
-lvim.builtin.which_key.mappings['e'] = { '<cmd>nvimtreetoggle<cr>', 'explore' }
+lvim.builtin.which_key.mappings['e'] = { '<Cmd>NvimTreeFindFileToggle<CR>', 'Explore File' }
+lvim.builtin.which_key.mappings['E'] = { '<Cmd>NvimTreeToggle<CR>', 'Explore' }
 
-lvim.builtin.which_key.mappings['l']['c'] = { '<cmd>lspsettings buffer<cr>', 'configure lsp' }
-lvim.builtin.which_key.mappings['l']['r'] = { '<cmd>lsprestart<cr>', 'restart lsp' }
+lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Configure LSP' }
+lvim.builtin.which_key.mappings['l']['R'] = { '<Cmd>LspRestart<CR>', 'Restart LSP' }
 
-lvim.builtin.which_key.mappings['b']['d'] = { '<cmd>bd<cr>', 'delete' }
-lvim.builtin.which_key.mappings['b']['p'] = { '<cmd>bufferlinetogglepin<cr>', 'pin/unpin' }
+lvim.builtin.which_key.mappings['b']['d'] = { '<Cmd>bd<CR>', 'Delete' }
+lvim.builtin.which_key.mappings['b']['p'] = { '<Cmd>BufferLineTogglePin<CR>', 'Pin/Unpin' }
 
--- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'goto type definition' }
--- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'incoming calls' }
--- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'outgoing calls' }
+-- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
+-- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
+-- lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'Outgoing calls' }
 
 -- telescope versions of some lsp mappings
-lvim.lsp.buffer_mappings.normal_mode['gr'] = { '<cmd>telescope lsp_references<cr>', 'telescope references' }
-lvim.lsp.buffer_mappings.normal_mode['gd'] = { '<cmd>telescope lsp_definitions<cr>', 'goto definition' }
-lvim.lsp.buffer_mappings.normal_mode['gi'] = { '<cmd>telescope lsp_implementations<cr>', 'goto implementation' }
-lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<cmd>telescope lsp_type_definitions<cr>', 'goto type definition' }
-lvim.lsp.buffer_mappings.normal_mode['go'] = { '<cmd>telescope lsp_incoming_calls<cr>', 'incoming calls' }
-lvim.lsp.buffer_mappings.normal_mode['go'] = { '<cmd>telescope lsp_outgoing_calls<cr>', 'outgoing calls' }
-lvim.builtin.which_key.mappings['l']['d'] = { '<cmd>telescope diagnostics bufnr=0 theme=dropdown<cr>', 'buffer diagnostics' } -- use the dropdown theme
+lvim.lsp.buffer_mappings.normal_mode['gr'] = { '<Cmd>Telescope lsp_references<CR>', 'Telescope References' }
+lvim.lsp.buffer_mappings.normal_mode['gd'] = { '<Cmd>Telescope lsp_definitions<CR>', 'Goto Definition' }
+lvim.lsp.buffer_mappings.normal_mode['gI'] = { '<Cmd>Telescope lsp_implementations<CR>', 'Goto Implementation' }
+lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Goto Type Definition' }
+lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>Telescope lsp_incoming_calls<CR>', 'Incoming Calls' }
+lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>Telescope lsp_outgoing_calls<CR>', 'Outgoing Calls' }
+lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
 
 -- debugger mappings
-lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'debug' }
-lvim.builtin.which_key.vmappings['d']['h'] = { function() require 'dapui'.eval() end, 'eval visual' }
+lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
+lvim.builtin.which_key.vmappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
-lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dapui'.open(); require 'dap'.continue() end, 'start' }
-lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'disconnect' }
-lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'expression breakpoint' }
-lvim.builtin.which_key.mappings['d']['l'] = { function() vim.ui.input({ prompt = 'log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'log on line' }
+lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dapui'.open(); require 'dap'.continue() end, 'Start' }
+lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
+lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
+lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
 lvim.builtin.which_key.mappings['d']['q'] = { function()
   require('dap').close();
   require('dapui').close({ reset = true })
-end, 'quit' }
+end, 'Quit' }
 
-lvim.builtin.which_key.mappings['l']['c'] = { '<cmd>cmpstatus<cr>', 'nvim-cmp status' }
+lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
 
--- lvim.builtin.which_key.mappings['h'] = nil -- i map this in hop.nvim
+-- lvim.builtin.which_key.mappings['h'] = nil -- I map this in hop.nvim
 lvim.builtin.which_key.mappings[';'] = nil
 
--- lvim.builtin.which_key.mappings["g"]['g'].name = 'tig'
+-- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
 local are_diagnostics_visible = true
 local toggle_diagnostics = function()
   are_diagnostics_visible = not are_diagnostics_visible
   if are_diagnostics_visible then vim.diagnostic.show() else vim.diagnostic.hide() end
 end
 
-lvim.builtin.which_key.mappings['l']['t'] = { toggle_diagnostics, 'toggle diagnostics' }
-lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'format' } -- give it more than 1 second (alternative: async=true)
-lvim.builtin.which_key.vmappings['l'] = lvim.builtin.which_key.vmappings['l'] or { name = 'lsp' }
-lvim.builtin.which_key.vmappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'format' } -- give it more than 1 second (alternative: async=true)
+lvim.builtin.which_key.mappings['l']['T'] = { toggle_diagnostics, 'Toggle Diagnostics' }
+lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
+lvim.builtin.which_key.vmappings['l'] = lvim.builtin.which_key.vmappings['l'] or { name = 'LSP' }
+lvim.builtin.which_key.vmappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
 
 -- hover definition {{{
 lvim.lsp.hover_definition = false
@@ -3478,13 +3478,13 @@ lvim.lsp.hover_definition = false
 ---@return nil
 local enable_lsp_hover_definition = function(client_id, bufnr)
   local client_ok, method_supported = pcall(function()
-    return vim.lsp.get_client_by_id(client_id).server_capabilities.hoverprovider
+    return vim.lsp.get_client_by_id(client_id).server_capabilities.hoverProvider
   end)
 
   if not client_ok or not method_supported then return end
 
   vim.api.nvim_create_augroup('lsp_hover_def', { clear = true })
-  vim.api.nvim_create_autocmd('cursorhold', {
+  vim.api.nvim_create_autocmd('CursorHold', {
     group = 'lsp_hover_def',
     desc = 'lsp hover def',
     buffer = bufnr,
@@ -3493,9 +3493,9 @@ local enable_lsp_hover_definition = function(client_id, bufnr)
 end
 
 local toggle_hover_def = function() lvim.lsp.hover_definition = not lvim.lsp.hover_definition end
-lvim.builtin.which_key.mappings['l']['h'] = { toggle_hover_def, 'toggle lsp hover' }
-vim.keymap.set('n', '<c-h>', toggle_hover_def, { noremap = true })
-vim.keymap.set('i', '<c-h>', toggle_hover_def, { noremap = true })
+lvim.builtin.which_key.mappings['l']['H'] = { toggle_hover_def, 'Toggle LSP Hover' }
+vim.keymap.set('n', '<C-h>', toggle_hover_def, { noremap = true })
+vim.keymap.set('i', '<C-h>', toggle_hover_def, { noremap = true })
 -- }}}
 
 -- put cursor at end of text on y and p
@@ -3508,62 +3508,62 @@ lvim.keys.insert_mode['jk'] = nil
 lvim.keys.insert_mode['kj'] = nil
 lvim.keys.insert_mode['jj'] = nil
 
--- wrapped lines goes down/up to next row, rather than next line in file.
+-- Wrapped lines goes down/up to next row, rather than next line in file.
 vim.keymap.set('n', 'j', "v:count ? 'j' : 'gj'", { noremap = true, expr = true })
 vim.keymap.set('n', 'k', "v:count ? 'k' : 'gk'", { noremap = true, expr = true })
 
--- easier horizontal scrolling
-lvim.keys.normal_mode['zl'] = 'zl'
-lvim.keys.normal_mode['zh'] = 'zh'
+-- Easier horizontal scrolling
+lvim.keys.normal_mode['zl'] = 'zL'
+lvim.keys.normal_mode['zh'] = 'zH'
 
 -- stupid f1 help
 lvim.keys.normal_mode['<f1>'] = '<nop>'
 lvim.keys.insert_mode['<f1>'] = '<nop>'
 
-lvim.builtin.which_key.mappings['l']['a'] = { function() vim.lsp.buf.code_action() end, 'code action' } -- slightly prettier
+lvim.builtin.which_key.mappings['l']['a'] = { function() vim.lsp.buf.code_action() end, 'Code Action' } -- slightly prettier
 
 -- visual lsp functions
 lvim.builtin.which_key.vmappings['l'] = {
-  name = 'lsp',
-  a = { ":'<,'>lua vim.lsp.buf.code_action()<cr>", 'code action' },
-  f = { ":'<,'>lua vim.lsp.buf.format()<cr>", 'format' },
+  name = 'LSP',
+  a = { ":'<,'>lua vim.lsp.buf.code_action()<CR>", 'Code Action' },
+  f = { ":'<,'>lua vim.lsp.buf.format()<CR>", 'Format' },
 }
 
 -- diffget for mergetool
 -- (no longer) disabled in favor of akinsho/git-conflict.nvim
-lvim.builtin.which_key.mappings['d'] = {
-  name = 'diffget',
-  l = { '<cmd>diffget loc<cr>', 'use other branch' },
-  r = { '<cmd>diffget rem<cr>', 'use current branch' },
-  u = { '<cmd>diffupdate<cr>', 'update diff' },
+lvim.builtin.which_key.mappings['D'] = {
+  name = 'DiffGet',
+  l = { '<Cmd>diffget LOC<CR>', 'Use other branch' },
+  r = { '<Cmd>diffget REM<CR>', 'Use current branch' },
+  u = { '<Cmd>diffupdate<CR>', 'Update diff' },
 }
 
-lvim.builtin.which_key.mappings['b']['r'] = { '<cmd>telescope oldfiles<cr>', 'recent' }
+lvim.builtin.which_key.mappings['b']['r'] = { '<Cmd>Telescope oldfiles<CR>', 'Recent' }
 
 -- php
 
 ---@return nil
-local php_splitter = function() vim.cmd [[exec "norm! 0/\\s->\<cr>a\<cr>\<esc>"]] end
+local php_splitter = function() vim.cmd [[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]] end
 
 ---@return nil
 local map_php_splitter = function()
   vim.keymap.set('n', ',.', php_splitter, { buffer = vim.api.nvim_get_current_buf(), noremap = true })
 end
 vim.api.nvim_create_augroup('php_splitter', { clear = true })
-vim.api.nvim_create_autocmd('filetype', { pattern = 'php', group = 'php_splitter', callback = map_php_splitter, desc = 'php splitter' })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'php', group = 'php_splitter', callback = map_php_splitter, desc = 'php splitter' })
 
 ---@return nil
 local setup_php_leader_mappings = function()
   if not is_installed('which-key') then return end
   require 'which-key'.register({
-    p = { name = 'php',
-      s = { '<cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>', 'split docblock' },
-      -- x = { '<cmd>norm mv?array(<cr>f(mz%r]`zr[hvfa;d`v<cr>', 'fix array' }, -- todo: doesn't work because i can't type <c-v><enter>, neovim doesn't like it https://github.com/mikedfunk/dotfiles/blob/6800127ba60d66a3de72e7be84e008aa4425a2a2/.vimrc#l767
+    P = { name = 'Php',
+      s = { '<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>', 'Split docblock' },
+      -- x = { '<Cmd>norm mv?array(<CR>f(mz%r]`zr[hvFa;d`v<CR>', 'Fix array' }, -- TODO: doesn't work because I can't type <c-v><enter>, neovim doesn't like it https://github.com/mikedfunk/dotfiles/blob/6800127ba60d66a3de72e7be84e008aa4425a2a2/.vimrc#L767
     }
-  }, { prefix = '<leader>' })
+  }, { prefix = '<Leader>' })
 end
 vim.api.nvim_create_augroup('php_leader_maps', { clear = true })
-vim.api.nvim_create_autocmd('filetype', {
+vim.api.nvim_create_autocmd('FileType', {
   pattern = 'php',
   group = 'php_leader_maps',
   callback = setup_php_leader_mappings,
@@ -3572,45 +3572,45 @@ vim.api.nvim_create_autocmd('filetype', {
 })
 
 -- delete inactive buffers function {{{
--- todo: convert to lua
+-- TODO: convert to lua
 -- @link http://stackoverflow.com/a/7321131/557215
--- vim.api.nvim_exec([[
--- function! s:DeleteInactiveBufs() abort
---     "from tabpagebuflist() help, get a list of all buffers in all tabs
---     let l:tablist = []
---     for l:i in range(tabpagenr('$'))
---         call extend(l:tablist, tabpagebuflist(l:i + 1))
---     endfor
+vim.api.nvim_exec([[
+function! DeleteInactiveBufs() abort
+    "From tabpagebuflist() help, get a list of all buffers in all tabs
+    let l:tablist = []
+    for l:i in range(tabpagenr('$'))
+        call extend(l:tablist, tabpagebuflist(l:i + 1))
+    endfor
 
---     let l:nwipeouts = 0
---     for l:i in range(1, bufnr('$'))
---         if bufexists(l:i) && !getbufvar(l:i,'&mod') && index(l:tablist, l:i) == -1
---         "bufno exists and isn't modified and isn't in the list of buffers open in windows and tabs
---             silent exec 'bwipeout' l:i
---             let l:nwipeouts = l:nwipeouts + 1
---         endif
---     endfor
---     echomsg l:nwipeouts . ' buffer(s) wiped out'
--- endfunction
--- command! bdi :call s:DeleteInactiveBufs()
--- ]], false)
+    let l:nWipeouts = 0
+    for l:i in range(1, bufnr('$'))
+        if bufexists(l:i) && !getbufvar(l:i,'&mod') && index(l:tablist, l:i) == -1
+        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
+            silent exec 'bwipeout' l:i
+            let l:nWipeouts = l:nWipeouts + 1
+        endif
+    endfor
+    echomsg l:nWipeouts . ' buffer(s) wiped out'
+endfunction
+command! Bdi :call DeleteInactiveBufs()
+]], false)
 
--- lvim.builtin.which_key.mappings['b']['i'] = { ':call s:DeleteInactiveBufs()<cr>', 'delete inactive buffers' }
+lvim.builtin.which_key.mappings['b']['i'] = { ':call DeleteInactiveBufs()<CR>', 'Delete Inactive Buffers' }
 -- }}}
 
-lvim.builtin.which_key.mappings['l']['h'] = { function() vim.diagnostic.open_float() end, 'line diagnostic hover' }
+lvim.builtin.which_key.mappings['l']['h'] = { function() vim.diagnostic.open_float() end, 'Line Diagnostic Hover' }
 
 lvim.builtin.which_key.on_config_done = function()
-  -- comment.nvim
+  -- Comment.nvim
   require 'which-key'.register({
-    b = { name = 'comment', c = { 'toggle blockwise comment' } },
-    c = { name = 'comment', c = { 'toggle linewise comment' } },
+    b = { name = 'Comment', c = { 'Toggle blockwise comment' } },
+    c = { name = 'Comment', c = { 'Toggle linewise comment' } },
   }, { prefix = 'g' })
 
-  require 'which-key'.register({ b = { '<cmd>bufferlinecyclenext<cr>', 'next buffer' } }, { prefix = ']' })
-  require 'which-key'.register({ b = { '<cmd>bufferlinecycleprev<cr>', 'previous buffer' } }, { prefix = '[' })
-  require 'which-key'.register({ b = { '<cmd>bufferlinemovenext<cr>', 'move to next buffer' } }, { prefix = ']' })
-  require 'which-key'.register({ b = { '<cmd>bufferlinemoveprev<cr>', 'move to previous buffer' } }, { prefix = '[' })
+  require 'which-key'.register({ b = { '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer' } }, { prefix = ']' })
+  require 'which-key'.register({ b = { '<Cmd>BufferLineCyclePrev<CR>', 'Previous Buffer' } }, { prefix = '[' })
+  require 'which-key'.register({ B = { '<Cmd>BufferLineMoveNext<CR>', 'Move to Next Buffer' } }, { prefix = ']' })
+  require 'which-key'.register({ B = { '<Cmd>BufferLineMovePrev<CR>', 'Move to Previous Buffer' } }, { prefix = '[' })
 end
 
 -- }}}
