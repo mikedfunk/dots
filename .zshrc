@@ -151,7 +151,10 @@ export BAT_THEME="TwoDark"
 _has lvim && export MANPAGER='lvim +Man!'
 # _has nvim && export MANPAGER='nvim -u NONE +Man!'
 
-export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_CACHE_HOME="$HOME"/.cache
 # export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim"
 
 export COMPOSE_HTTP_TIMEOUT=120 # default is 60
@@ -228,6 +231,34 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
 
 export HOMEBREW_NO_ANALYTICS=1
 
+# xdg-ninja (move configs to proper locations) {{{
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+export ASDF_DATA_DIR="${XDG_DATA_HOME}"/asdf
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+# export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export GEM_HOME="${XDG_DATA_HOME}"/gem
+export GEM_SPEC_CACHE="${XDG_CACHE_HOME}"/gem
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GOPATH="$XDG_DATA_HOME"/go
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+# export TERMINFO="$XDG_DATA_HOME"/terminfo
+# export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+# }}}
+
 # disable weird highlighting of pasted text
 # https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
 zle_highlight=('paste:none')
@@ -265,7 +296,7 @@ export PINENTRY_USER_DATA="USE_CURSES=1"
 export FZF_DEFAULT_OPTS="--multi"
 export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
 # }}}
-#
+
 # }}}
 
 # functions and aliases {{{
