@@ -3650,6 +3650,7 @@ lvim.plugins = {
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
+  -- plugins.nvim_spider, -- more natural `w,e,b`
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
@@ -3657,6 +3658,7 @@ lvim.plugins = {
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
+  -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
@@ -3704,7 +3706,6 @@ lvim.plugins = {
   plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
-  plugins.nvim_spider, -- more natural `w,e,b`
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
@@ -3742,7 +3743,6 @@ lvim.plugins = {
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
-  { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php', dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- sql and regex included

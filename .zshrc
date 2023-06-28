@@ -142,6 +142,9 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 autoload -Uz compinit
 compinit
 
+[ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
+[ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
+
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 # _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="TwoDark"
@@ -233,7 +236,7 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # xdg-ninja (move configs to proper locations) {{{
 export ANDROID_HOME="$XDG_DATA_HOME"/android
-export ASDF_DATA_DIR="${XDG_DATA_HOME}"/asdf
+# export ASDF_DATA_DIR="${XDG_DATA_HOME}"/asdf
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
