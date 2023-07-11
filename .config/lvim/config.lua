@@ -275,7 +275,7 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 
 -- use latest node and php version
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
--- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
+vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
 vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
@@ -442,7 +442,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
-  -- 'emmet_ls',
+  -- 'emmet_language_server', -- TODO: enable this once nvim-lspconfig is upgraded
   -- 'eslint', -- eslint-lsp (stopped working on node 17.8.0, lsp debug isn't showing any errors)
   -- 'glint', -- typed ember
   -- 'graphql',
@@ -3751,7 +3751,7 @@ lvim.plugins = {
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence.
+  { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!

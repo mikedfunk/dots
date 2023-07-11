@@ -31,3 +31,4 @@ yous/vanilli.sh # sensible zsh defaults
 zdharma-continuum/fast-syntax-highlighting # colored input but faster
 zsh-users/zsh-autosuggestions # OLD COMMENT: buggy if enabled along with zsh-syntax-highlighting. crashes the shell regularly.
 zsh-users/zsh-completions # do-everything argument completions
+chitoku-k/fzf-zsh-completions # Add zsh fzf completions for git, kubectl, and more
