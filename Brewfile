@@ -19,6 +19,7 @@
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
 tap "buo/cask-upgrade" # for `brew cu`
+tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
 tap "derailed/k9s" # k9s
 tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
@@ -225,6 +226,7 @@ brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/i
 brew "cloc" # count lines of code
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
 brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.)
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "freetds" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
