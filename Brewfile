@@ -130,7 +130,6 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "pandoc" # transform between document formats e.g. markdown <-> pdf (used for inline vim php documentation, which I no longer use)
 # brew "pass" # unix password manager using gpg
 # brew "peco" # interactively filter results and print the filtered version. can be used to print filtered one or e.g. `vim $(dosomething | peco)` (FZF does this)
-# brew "percona-toolkit" # mysql schema migrator among other things. requires java and perl.
 # brew "perl" # for swat cpan package
 # brew "perl-build" # needed for perlenv (which I don't use currently)
 # brew "php-cs-fixer" # fix php code according to configuration
@@ -280,6 +279,7 @@ brew "oniguruma" # needed to build php https://github.com/shivammathur/homebrew-
 brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openssl@1.1" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "pcre2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+brew "percona-toolkit" # mysql schema migrator among other things. requires java and perl.
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864

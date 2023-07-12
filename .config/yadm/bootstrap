@@ -628,6 +628,19 @@ _install_lua_versions () {
 }
 # }}}
 
+# install perl version(s) {{{
+_install_perl_versions () {
+    builtin cd >/dev/null || return
+    _log_info "Installing perl version(s)"
+    asdf plugin add perl
+    ( asdf list perl | grep --quiet 5.38.0 ) || asdf install perl 5.38.0
+
+    asdf global perl 5.38.0
+
+    builtin cd - >/dev/null || return
+}
+# }}}
+
 # install python version(s) {{{
 _install_python_versions () {
     builtin cd >/dev/null || return
@@ -866,6 +879,7 @@ _bootstrap_all () {
     _install_php_versions
     _install_node_versions
     _install_lua_versions
+    _install_perl_versions
     _install_deno_versions
     _install_python_versions
     _update_python_pip_packages
