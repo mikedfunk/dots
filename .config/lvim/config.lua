@@ -2913,32 +2913,32 @@ plugins.todo_comments_nvim = {
 -- tmuxline.vim {{{
 
 -- dark
--- vim.g['tmuxline_theme'] = {
---   a = { '16', '254', 'bold' },
---   b = { '237', '240' },
---   c = { '247', '236'},
---   x = { '250', '232' },
---   y = { '247', '236'},
---   z = { '235', '252' },
---   bg = { '247', '234'},
---   win = { '250', '234' },
---   ['win.dim'] = { '244', '234' },
---   cwin = { '231', '31', 'bold' },
---   ['cwin.dim'] = { '117', '31' },
--- }
+vim.g['tmuxline_theme'] = {
+  a = { '16', '254', 'bold' },
+  b = { '247', '236'},
+  c = { '250', '233' },
+  x = { '250', '233' },
+  y = { '247', '236'},
+  z = { '235', '252' },
+  bg = { '247', '234'},
+  win = { '250', '234' },
+  ['win.dim'] = { '244', '234' },
+  cwin = { '231', '31', 'bold' },
+  ['cwin.dim'] = { '117', '31' },
+}
 
 -- light
-vim.g['tmuxline_theme'] = {
-  a = { '238', '253', 'bold' },
-  b = { '255', '238' },
-  c = { '255', '238'},
-  x = { '255', '238' },
-  y = { '255', '238'},
-  z = { '238', '253' },
-  bg = { '16', '254'},
-  win = { '16', '254' },
-  cwin = { '231', '31', 'bold' },
-}
+-- vim.g['tmuxline_theme'] = {
+--   a = { '238', '253', 'bold' },
+--   b = { '255', '238' },
+--   c = { '255', '236'},
+--   x = { '255', '236' },
+--   y = { '255', '238'},
+--   z = { '238', '253' },
+--   bg = { '16', '254'},
+--   win = { '16', '254' },
+--   cwin = { '231', '31', 'bold' },
+-- }
 
 plugins.tmuxline_vim = {
   'edkolev/tmuxline.vim',
@@ -2946,14 +2946,14 @@ plugins.tmuxline_vim = {
   init = function()
     vim.g['tmuxline_preset'] = {
       a = { '#S' }, -- session name |
-      c = {
+      b = {
         table.concat({
           '#{cpu_fg_color}#{cpu_icon}#[fg=default]',
           '#{ram_fg_color}#{ram_icon}#[fg=default]',
           '#{battery_color_charge_fg}#[bg=colour' .. vim.g.tmuxline_theme.b[2] .. ']#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour'  .. vim.g.tmuxline_theme.b[2] .. ']#{battery_icon_status}#[fg=default]#{wifi_icon}',
         }, ' '),
-        '#(~/.support/tmux-docker-status.sh)',
       },
+      c = { '#(~/.support/tmux-docker-status.sh)' },
       win = { '#I', '#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}' }, -- unselected tab
       cwin = { '#I', '#W#{?window_zoomed_flag, ,}' }, -- current tab
       x = { "#(TZ=Etc/UTC date '+%%R UTC')" }, -- UTC time
@@ -3656,6 +3656,7 @@ lvim.plugins = {
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
+  plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
@@ -3721,7 +3722,6 @@ lvim.plugins = {
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
-  plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
