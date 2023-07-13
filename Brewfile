@@ -117,6 +117,7 @@ tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # brew "mutagen" # docker volume helper - syncs docker volumes on the host machine rather than mounting it.
 # brew "mutagen-compose" # mutagen helper for docker-compose
 # brew "mysql-client" # If I ever need mysql client without mysql on local... downside: it doesn't link automatically - you have to brew link --force even if mysql isn't installed :/
+# brew "mysql-connector-c" # required for percona-tools (renamed to mysql-client)
 # brew "nano" # text editor. This gets the latest version: 2.2.6 rather than 2.2.0 that comes with osx.
 # brew "navi" # cool interactive command helper / cheat sheet
 # brew "ncdu" # interactive du
