@@ -310,6 +310,7 @@ alias news="BROWSER=\"open '%u'\" newsboat"
 alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
+alias mycli="mycli --defaults-group-suffix=_mycli"
 
 alias upgrade-lunarvim="cd ${HOME}/.local/share/lunarvim/lvim && git pull && cd -"
 alias tail-lunarvim-logs="tail -f ${HOME}/.cache/nvim/lvim.log"
