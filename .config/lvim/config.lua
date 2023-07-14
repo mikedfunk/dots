@@ -2215,9 +2215,15 @@ end
 
 plugins.nvim_lightbulb = {
   'kosayoda/nvim-lightbulb',
-  init = function()
-    vim.fn.sign_define('LightBulbSign', { text = '', texthl = 'DiagnosticSignWarn' })
-  end,
+  -- init = function()
+  --   vim.fn.sign_define('LightBulbSign', { text = '', texthl = 'DiagnosticSignWarn' })
+  -- end,
+  opts = {
+    sign = {
+      text = '',
+      hl = 'DiagnosticSignWarn',
+    }
+  }
 }
 -- }}}
 
