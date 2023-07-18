@@ -463,6 +463,8 @@ cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-ace" # maintained fork of sequel pro
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
+cask "tunnelbear" # tunnel to a specific country
+cask "vpn-by-google-one" # google vpn
 
 # }}}
 

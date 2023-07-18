@@ -275,7 +275,7 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 
 -- use latest node and php version
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
-vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
+-- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
 vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
