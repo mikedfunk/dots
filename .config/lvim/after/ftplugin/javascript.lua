@@ -9,3 +9,5 @@ if should_setup_flow and not _G.was_flow_setup then
   require 'lvim.lsp.manager'.setup('flow')
   _G.was_flow_setup = true
 end
+
+require 'lvim.lsp.manager'.setup('emmet_language_server')

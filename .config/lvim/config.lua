@@ -88,7 +88,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'highlight yanked text',
 })
 
--- TODO: set cmdheight to 0 once this issue is fixed https://github.com/nvim-lualine/lualine.nvim/issues/853
 vim.opt.cmdheight = 0 -- height of the bottom line that shows command output. I don't like lvim's default of 2.
 vim.opt.showtabline = 1 -- show tabs only when more than one file
 vim.o.inccommand = 'split' -- preview substitute in neovim `:h inccommand`
@@ -276,6 +275,7 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 -- use latest node and php version
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
+-- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.0.27/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
 vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
@@ -428,6 +428,7 @@ lvim.icons.git.FileStaged = '✓'
 lvim.lsp.installer.setup.ensure_installed = {
   'cssls',
   'dockerls',
+  'emmet_language_server', -- TODO: enable this once nvim-lspconfig is upgraded
   'intelephense',
   'jsonls',
   'lemminx',
@@ -442,7 +443,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- 'cssmodules_ls',
   -- 'denols',
   -- 'emberls',
-  -- 'emmet_language_server', -- TODO: enable this once nvim-lspconfig is upgraded
   -- 'eslint', -- eslint-lsp (stopped working on node 17.8.0, lsp debug isn't showing any errors)
   -- 'glint', -- typed ember
   -- 'graphql',
