@@ -805,6 +805,7 @@ lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
 lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '󰚩' --  ➒
 lvim.builtin.cmp.formatting.source_names['color_names'] = ''
+lvim.builtin.cmp.formatting.source_names["copilot"] = ""
 lvim.builtin.cmp.formatting.source_names['dap'] = ''
 lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
 lvim.builtin.cmp.formatting.source_names['doxygen'] = '' -- 󰙆
@@ -1352,6 +1353,16 @@ plugins.cmp_color_names = {
 }
 -- }}}
 
+-- cmp-copilot {{{
+plugins.cmp_copilot = {
+  "hrsh7th/cmp-copilot",
+  dependencies = 'hrsh7th/nvim-cmp',
+  config = function()
+    table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
+  end,
+}
+-- }}}
+
 -- cmp-dap {{{
 plugins.cmp_dap = {
   'rcarriga/cmp-dap',
@@ -1423,6 +1434,7 @@ plugins.cmp_git = {
 plugins.cmp_nerdfont = {
   'chrisgrieser/cmp-nerdfont',
   event = 'InsertEnter',
+  dependencies = 'hrsh7th/nvim-cmp',
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'nerdfont' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'nerdfont' })
@@ -1445,7 +1457,10 @@ end
 
 plugins.cmp_nvim_lsp_document_symbol = {
   'hrsh7th/cmp-nvim-lsp-document-symbol',
-  dependencies = { 'hrsh7th/nvim-cmp', 'hrsh7th/cmp-cmdline' },
+  dependencies = {
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-cmdline',
+  },
   -- event = 'InsertEnter',
   event = 'CmdlineEnter',
   init = setup_cmp_nvim_lsp_document_symbol
@@ -1583,6 +1598,18 @@ plugins.cmp_treesitter = {
   init = function()
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'treesitter' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'treesitter' })
+  end,
+}
+-- }}}
+
+-- copilot.vim {{{
+plugins.copilot_vim = {
+  "github/copilot.vim",
+  event = "VeryLazy",
+  config = function()
+    -- copilot assume mapped
+    vim.g.copilot_assume_mapped = true
+    vim.g.copilot_no_tab_map = true
   end,
 }
 -- }}}
@@ -3652,7 +3679,9 @@ lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   -- plugins.backseat_nvim, -- ChatGPT stuff!
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
+  -- plugins.cmp_copilot, -- github copilot
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
+  -- plugins.copilot_vim, -- github copilot
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
@@ -3670,7 +3699,6 @@ lvim.plugins = {
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
-  -- { 'sindrets/diffview.nvim', cmd = { 'DiffviewOpen' }, requires = 'nvim-lua/plenary.nvim' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
@@ -3763,6 +3791,7 @@ lvim.plugins = {
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
+  { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen', -- fancy diff view, navigator, and mergetool
   { 'smjonas/live-command.nvim', event = 'BufRead', config = function ()  require 'live-command'.setup { commands = { Norm = { cmd = 'norm' } } } end }, -- preview norm commands with Norm
   { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
