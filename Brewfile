@@ -410,7 +410,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 # cask "shadow" # cloud gaming system https://shadow.tech
-# cask "shottr" # spiffier screenshot app <cmd-shift-2>
+# cask "shottr" # spiffier screenshot app <cmd-shift-2> (not free, nagware)
 # cask "sidequest" # VR sideload platform for oculus quest (I use the phone version now)
 # cask "skype" # Dad uses skype. Skype web requires chrome. I don't like chrome.
 # cask "slack" # needed for screen sharing features. I mostly use the web app. (managed by my work)
@@ -456,6 +456,7 @@ cask "grandperspective" # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
+cask "lofi" # spotify mini mode companion app
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "menubar-colors" # color picker in the menubar
 cask "nvidia-geforce-now" # game streaming

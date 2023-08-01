@@ -346,9 +346,9 @@
 [merge]
     # tool = opendiff
     # tool = vimdiff
-	# tool = nvimdiff3
+	tool = nvimdiff3
     # tool = vim-conflicted
-    tool = diffview
+    # tool = diffview
 
     # shows local, parent, then remote
     # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
@@ -362,6 +362,7 @@
     ; cmd = $EDITOR -f -c Gvdiffsplit! $MERGED
     # cmd = $EDITOR -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "diffview"]
+    # https://www.reddit.com/r/neovim/comments/158zdir/favorite_git_mergetool/jtdn6tf/
     cmd = nvim -f -c \"DiffviewOpen\"
 [mergetool]
     keepBackup = false

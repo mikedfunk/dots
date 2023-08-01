@@ -695,9 +695,42 @@ local dap_component = {
   end,
 }
 
+---@return string
+local ale_linters_and_fixers_component = {
+  function()
+    -- if not is_installed('ale') then return '' end
+    -- local filetype = vim.api.nvim_exec('echo &ft', true)
+    local filetype = vim.bo.filetype
+    if filetype == '' then return '' end
+
+    ---@type table<integer, string>
+    local ale_linters = vim.tbl_map(function(linter) return linter.name end, vim.call('ale#linter#Get', filetype)) ---@diagnostic disable-line assign-mismatch
+    ---@type table<integer, string>
+    local ale_fixers = vim.tbl_flatten({
+      (vim.g['ale_fixers'] or {})[filetype] or {},
+      vim.b[vim.api.nvim_get_current_buf()].ale_fixers or {},
+    })
+    ---@type table<integer, string>
+    local linters_and_fixers = vim.tbl_flatten({ ale_linters, ale_fixers })
+    if #(linters_and_fixers) == 0 then return '' end
+
+    local output = table.remove(linters_and_fixers, 1)
+    if #(linters_and_fixers) > 0 then output = output .. ' +' .. #(linters_and_fixers) end
+
+    local is_ale_checking_buffer = vim.call('ale#engine#IsCheckingBuffer', vim.call('bufnr', ''))
+    if is_ale_checking_buffer == 1 then output = output .. ' …' end
+
+    return output
+  end,
+  -- color = { gui = 'None', fg = require'lvim.core.lualine.colors'.magenta },
+  icon = { '', color = { fg = require 'lvim.core.lualine.colors'.violet } },
+  on_click = function() vim.cmd 'ALEInfo' end,
+}
+
 lvim.builtin.lualine.sections.lualine_x = {
   diagnostics_component,
   lsp_component,
+  ale_linters_and_fixers_component,
   null_ls_component,
   cmp_component,
 }
@@ -884,32 +917,32 @@ require 'lvim.lsp.null-ls.linters'.setup {
   },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
   -- { name = 'checkmake' }, -- makefile linter
-  {
-    name = 'phpcs',
-    timeout = 30000,
-    extra_args = {
-      '--cache',
-      '--warning-severity=3',
-      '-d',
-      'memory_limit=100M',
-      -- '-d',
-      -- 'xebug.mode=off',
-    },
-    condition = function(utils)
-      return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }
-    end,
-  },
-  {
-    name = 'phpstan',
-    timeout = 30000,
-    extra_args = {
-      '--memory-limit=200M',
-      '--level=9', -- force level 9 for better editor intel
-    }, -- 40MB is not enough
-    condition = function(utils)
-      return utils.root_has_file { 'phpstan.neon' }
-    end,
-  },
+  -- {
+  --   name = 'phpcs',
+  --   timeout = 30000,
+  --   extra_args = {
+  --     '--cache',
+  --     '--warning-severity=3',
+  --     '-d',
+  --     'memory_limit=100M',
+  --     -- '-d',
+  --     -- 'xebug.mode=off',
+  --   },
+  --   condition = function(utils)
+  --     return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }
+  --   end,
+  -- },
+  -- {
+  --   name = 'phpstan',
+  --   timeout = 30000,
+  --   extra_args = {
+  --     '--memory-limit=200M',
+  --     '--level=9', -- force level 9 for better editor intel
+  --   }, -- 40MB is not enough
+  --   condition = function(utils)
+  --     return utils.root_has_file { 'phpstan.neon' }
+  --   end,
+  -- },
   { name = 'php' },
   -- { name = 'rubocop' },
   -- { name = 'spectral' },
@@ -1149,11 +1182,20 @@ end
 
 -- vim.api.nvim_create_augroup('incremental_selection_fix', { clear = true })
 -- vim.api.nvim_create_autocmd('cmdwinenter', { pattern = '*', group = 'incremental_selection_fix',
---   command = 'tsbufdisable incremental_selection'
+--   command = 'TSBufDisable incremental_selection'
 -- })
 
 lvim.builtin.treesitter.auto_install = true
 lvim.builtin.treesitter.context_commentstring.config['php'] = '// %s'
+lvim.builtin.treesitter.incremental_selection = {
+  enable = true,
+  keymaps = {
+    init_selection = '<cr>',
+    node_incremental = '<cr>',
+    scope_incremental = false,
+    node_decremental = '<bs>',
+  }
+}
 
 lvim.builtin.treesitter.on_config_done = function()
   -- fancy styled-components queries found on the web
@@ -1288,6 +1330,65 @@ lvim.builtin.which_key.setup.plugins.presets.z = true
 
 -- additional plugin definitions {{{
 local plugins = {}
+
+-- ale {{{
+
+-- Q: Why use ale and not null-ls?
+--
+-- A: I sometimes get zombie processes started upstream by null-ls. It seems
+-- to kill parent tasks when they time out or something, but if those parent
+-- tasks had spawned child tasks, those never get killed but still end up
+-- taking memory indefinitely. This adds up to enough memory that it slows
+-- down my machine significantly. I've had this problem with phpcs, phpstan,
+-- even codespell. An annoying workaround is to occasionally
+-- `kill -9 {parent_task_id}` on the parent task of the zombie prcesses,
+-- but that's a pain in the ass.
+--
+-- If these problems get fixed I will definitely switch!! But until that
+-- happens, ALE is more stable and less problematic for linting with phpcs
+-- and phpstan. I've reproduced these problems on a vanilla lunarvim config.
+
+plugins.ale = {
+  'dense-analysis/ale',
+  dependencies = 'folke/which-key.nvim',
+  -- event = 'BufRead',
+  config = function()
+    vim.g.ale_use_neovim_diagnostics_api = true -- save so much bullshit https://github.com/dense-analysis/ale/pull/4135
+    vim.g.ale_lint_delay = 250
+    vim.g.ale_lint_on_filetype_changed = false
+    vim.g.ale_floating_preview = false -- neovim floating window to preview errors. This combines ale_detail_to_floating_preview and ale_hover_to_floating_preview.
+    vim.g.ale_sign_highlight_linenrs = false
+    vim.g.ale_disable_lsp = true
+    vim.g.ale_echo_cursor = false
+    vim.g.ale_set_highlights = false
+    vim.g.ale_set_loclist = false
+    vim.g.ale_set_signs = false
+    vim.g.ale_linters_explicit = true -- only use configured linters instead of everything
+
+    vim.g.ale_linters = {
+      php = {
+        'phpcs',
+        'phpstan',
+      },
+    }
+
+    vim.g.ale_fixers = {
+      php = {
+        'phpcbf',
+        -- 'php_cs_fixer', -- this is enabled conditionally in the php ftplugin
+      },
+    }
+
+    vim.g.ale_php_phpcs_options = '--warning-severity=3'
+    vim.g.ale_php_phpstan_level = 9
+
+    require 'which-key'.register({
+      F = { function () vim.cmd('ALEFix') end, 'Fix with ALE' },
+    }, { prefix = 'l' })
+  end,
+}
+
+-- }}}
 
 -- auto-dark-mode {{{
 
@@ -3692,17 +3793,19 @@ lvim.plugins = {
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
-  -- { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
+  -- { 'ashfinal/qfview.nvim', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
+  -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
+  plugins.ale, -- older null-ls alternative
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
@@ -3719,7 +3822,7 @@ lvim.plugins = {
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
-  plugins.edgy_nvim, -- finally, a consolidated sidebar plugin!
+  plugins.edgy_nvim, -- finally, a consolidated sidebar plugin! (alternative: https://github.com/stevearc/stickybuf.nvim)
   plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
@@ -3730,7 +3833,7 @@ lvim.plugins = {
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   plugins.neo_zoom_lua, -- zoom a window, especially helpful with nvim-dap-ui
   plugins.neoai_nvim, -- more ChatGPT stuff
-  plugins.neodim, -- dim unused functions with lsp and treesitter
+  plugins.neodim, -- dim unused functions with lsp and treesitter (alternative: https://github.com/askfiy/lsp_extra_dim)
   plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
   plugins.numb_nvim, -- preview jumping to line number
@@ -3771,6 +3874,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
+  { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-tree.lua' } }, -- enable lsp file-based code actions
@@ -3791,7 +3895,7 @@ lvim.plugins = {
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
-  { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen', -- fancy diff view, navigator, and mergetool
+  { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool
   { 'smjonas/live-command.nvim', event = 'BufRead', config = function ()  require 'live-command'.setup { commands = { Norm = { cmd = 'norm' } } } end }, -- preview norm commands with Norm
   { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact

@@ -25,3 +25,10 @@ vim.cmd('hi link phpDocParam phpRegion')
 vim.cmd('hi link phpDocIdentifier phpIdentifier')
 vim.cmd('hi link phpUseNamespaceSeparator Comment') -- Colorize namespace separator in use, extends and implements
 vim.cmd('hi link phpClassNamespaceSeparator Comment')
+
+if vim.fn.filereadable '.php-cs-fixer.php' == 1 then
+  local bufnr = vim.api.nvim_get_current_buf()
+  local fixers = vim.b[bufnr].fixers or vim.g.ale_fixers[vim.bo.filetype] or {}
+  if not vim.tbl_contains(fixers, 'php_cs_fixer') then table.insert(fixers, 'php_cs_fixer') end
+  vim.b[bufnr].ale_fixers = fixers
+end
