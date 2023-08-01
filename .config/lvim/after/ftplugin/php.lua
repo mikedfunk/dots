@@ -27,8 +27,7 @@ vim.cmd('hi link phpUseNamespaceSeparator Comment') -- Colorize namespace separa
 vim.cmd('hi link phpClassNamespaceSeparator Comment')
 
 if vim.fn.filereadable '.php-cs-fixer.php' == 1 then
-  local bufnr = vim.api.nvim_get_current_buf()
-  local fixers = vim.b[bufnr].fixers or vim.g.ale_fixers[vim.bo.filetype] or {}
-  if not vim.tbl_contains(fixers, 'php_cs_fixer') then table.insert(fixers, 'php_cs_fixer') end
-  vim.b[bufnr].ale_fixers = fixers
+  local ale_fixers = vim.b[0].ale_fixers or (vim.g['ale_fixers'] or {})[vim.bo.filetype] or {}
+  if not vim.tbl_contains(ale_fixers, 'php_cs_fixer') then table.insert(ale_fixers, 'php_cs_fixer') end
+  vim.b[0].ale_fixers = ale_fixers
 end

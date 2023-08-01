@@ -702,9 +702,11 @@ local ale_linters_and_fixers_component = {
     -- local filetype = vim.api.nvim_exec('echo &ft', true)
     local filetype = vim.bo.filetype
     if filetype == '' then return '' end
+    local is_ale_installed, linter_details = pcall(vim.call, 'ale#linter#Get', filetype)
+    if not is_ale_installed then return '' end
 
     ---@type table<integer, string>
-    local ale_linters = vim.tbl_map(function(linter) return linter.name end, vim.call('ale#linter#Get', filetype)) ---@diagnostic disable-line assign-mismatch
+    local ale_linters = vim.tbl_map(function(linter) return linter.name end, linter_details) ---@diagnostic disable-line assign-mismatch
     ---@type table<integer, string>
     local ale_fixers = vim.tbl_flatten({
       (vim.g['ale_fixers'] or {})[filetype] or {},
@@ -917,6 +919,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   },
   { name = 'editorconfig_checker', filetypes = { 'editorconfig' } },
   -- { name = 'checkmake' }, -- makefile linter
+  -- moved to ALE to avoid zombie process
   -- {
   --   name = 'phpcs',
   --   timeout = 30000,
@@ -932,6 +935,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   --     return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }
   --   end,
   -- },
+  -- moved to ALE to avoid zombie process
   -- {
   --   name = 'phpstan',
   --   timeout = 30000,
