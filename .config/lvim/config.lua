@@ -698,8 +698,6 @@ local dap_component = {
 ---@return string
 local ale_linters_and_fixers_component = {
   function()
-    -- if not is_installed('ale') then return '' end
-    -- local filetype = vim.api.nvim_exec('echo &ft', true)
     local filetype = vim.bo.filetype
     if filetype == '' then return '' end
     local is_ale_installed, linter_details = pcall(vim.call, 'ale#linter#Get', filetype)
@@ -1358,7 +1356,7 @@ plugins.ale = {
   -- event = 'BufRead',
   config = function()
     vim.g.ale_use_neovim_diagnostics_api = true -- save so much bullshit https://github.com/dense-analysis/ale/pull/4135
-    vim.g.ale_lint_delay = 250
+    vim.g.ale_lint_delay = 100
     vim.g.ale_lint_on_filetype_changed = false
     vim.g.ale_floating_preview = false -- neovim floating window to preview errors. This combines ale_detail_to_floating_preview and ale_hover_to_floating_preview.
     vim.g.ale_sign_highlight_linenrs = false
