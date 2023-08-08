@@ -208,6 +208,7 @@ local startify_quotes = {
   { "Most software today is very much like an Egyptian pyramid with millions of bricks piled on top of each other, with no structural integrity, but just done by brute force and thousands of slaves.", "", "- Alan Kay" },
   { "My goal is to feel better about a project after a year than I did in the starry-eyed beginning, and TDD helps me achieve this.", "", "- Kent Beck" },
   { "Never discourage anyone who continually makes progress, no matter how slow.", "", "- Plato" },
+  { "Never exaggerate your faults. Your friends will attend to that.", "", "- Francis Bacon" },
   { "Nine people can’t make a baby in a month.", "", "- Frederick P. Brooks" },
   { "No matter how far down the wrong road you have gone, turn back now." },
   { "No matter how slick the demo is in rehearsal, when you do it in front of a live audience the probability of a flawless presentation is inversely proportional to the number of people watching, raised to the power of the amount of money involved.", "", "- Mark Gibbs" },

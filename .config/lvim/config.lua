@@ -1381,6 +1381,8 @@ plugins.ale = {
       },
     }
 
+    vim.g.ale_php_phpcbf_executable = vim.env.HOME .. '/.support/phpcbf-helper.sh'
+    vim.g.ale_php_phpcbf_use_global = true
     vim.g.ale_php_phpcs_options = '--warning-severity=3'
     vim.g.ale_php_phpstan_level = 9
 
