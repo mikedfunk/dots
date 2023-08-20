@@ -1041,7 +1041,7 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
     config = { filter_actions = function(title) return title:lower():match("blame") == nil end },
   },
   { name = 'refactoring' },
-  { name = 'proselint' }, -- trying this out for markdown
+  -- { name = 'proselint' }, -- trying this out for markdown
   -- { name = 'ts_node_action' },
 }
 -- }}}
@@ -1125,7 +1125,7 @@ vim.g.navic_silence = true
 
 -- nvim-tree {{{
 
--- https://github.com/kyazdani42/nvim-tree.lua/issues/674
+-- https://github.com/nvim-tree/nvim-tree.lua/issues/674
 lvim.builtin.nvimtree.hide_dotfiles = nil
 lvim.builtin.nvimtree.ignore = nil
 lvim.builtin.nvimtree.git = {
@@ -2326,6 +2326,18 @@ plugins.nvim_hlslens = {
 
     -- vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
   end
+}
+-- }}}
+
+-- nvim-lastplace {{{
+plugins.nvim_lastplace = {
+  'ethanholz/nvim-lastplace',
+  event = 'BufRead',
+  opts = {
+    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+    lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+    lastplace_open_folds = true,
+  },
 }
 -- }}}
 
@@ -3790,6 +3802,7 @@ lvim.plugins = {
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
+  -- plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
   -- plugins.nvim_hlslens, -- spiffy search UI, integrates with sidebar.nvim (it works fine, it's just too much visual kruf for me)
   -- plugins.nvim_spider, -- more natural `w,e,b`
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
@@ -3844,7 +3857,7 @@ lvim.plugins = {
   plugins.nvim_bqf, -- add a preview for quickfix items! works faster with treesitter
   plugins.nvim_context_vt, -- like nvim-biscuits but execution is MUCH better
   plugins.nvim_dap_virtual_text, -- show variable value in virtual text
-  plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
+  plugins.nvim_lastplace, -- open files where you left off. Works!
   plugins.nvim_lightbulb, -- just show a lightbulb in the sign column when a code action is available (forked from kosayoda/nvim-lightbulb to fix an issue with ipairs)
   plugins.nvim_scrollbar, -- right side scrollbar that shows lsp diagnostics and looks good with tokyonight
   plugins.nvim_treesitter_endwise, -- wisely add "end" in lua, ruby, vimscript, etc.
@@ -3881,10 +3894,9 @@ lvim.plugins = {
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
-  { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-tree.lua' } }, -- enable lsp file-based code actions
+  { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'cormacrelf/dark-notify', config = function() require 'dark_notify'.run() end }, -- auto-dark-mode
-  { 'ethanholz/nvim-lastplace', event = 'BufRead', opts = {} }, -- open files where you left off. Works!
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)

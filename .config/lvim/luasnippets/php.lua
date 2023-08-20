@@ -24,6 +24,7 @@ local class_snippet = snippet(
     namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
     -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
     namespace = string.gsub(namespace, '/app', 'Palette')
+    namespace = string.gsub(namespace, '/project/Zed/src/', '')
     namespace = string.gsub(namespace, '/', '\\')
 
     return 'namespace ' .. namespace .. ';'
@@ -114,6 +115,63 @@ local interface_snippet = snippet(
     return 'interface ' .. interface_name
   end, {}),
   text_node({ '', '{', '    ' }),
+  insert_node(0),
+  text_node({ '', '}' }),
+}
+)
+-- }}}
+
+-- phpunit class {{{
+local phpunit_class_snippet = snippet(
+  { trig = 'pucla', name = 'PHPUnit Class', dscr = "Mike's phpunit class with namespace" },
+  {
+  text_node({
+    '<?php',
+    '',
+    'declare(strict_types=1);',
+    '',
+    '',
+  }),
+  function_node(function(_, snip)
+    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
+    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
+    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
+    namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
+    namespace = string.gsub(namespace, '/', '\\')
+
+    return 'namespace ' .. namespace .. ';'
+  end, {}),
+  text_node({ '', '', 'use PHPUnit\\Framework\\TestCase;', 'use Prophecy\\Argument;', '', '/**', ' * @final', ' *', ' * ' }),
+  function_node(function(_, snip)
+    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Test.php', '')
+    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
+      print(vim.inspect(class_under_test))
+    class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
+    class_under_test = string.gsub(class_under_test, '/', '\\')
+
+    return '@see \\' .. class_under_test
+  end, {}),
+  text_node({ '', ' */', '' }),
+  function_node(function(_, snip)
+    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+
+    return 'class ' .. class_name .. ' extends TestCase'
+  end, {}),
+  text_node({ '', '{' }),
+  text_node({ '', '    public function setUp(): void', '    {', '        ' }),
+  insert_node(1),
+  text_node({ '', '    }', '' }),
+  text_node({ '', '    public function it_is_initializable(): void' }),
+  text_node({ '', '    {' }),
+  function_node(function(_, snip)
+    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Test.php', '')
+    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
+    class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
+    class_under_test = string.gsub(class_under_test, '/', '\\')
+
+    return { '', "        $this->shouldHaveType('" .. class_under_test .. "');" }
+  end, {}),
+  text_node({ '', '    }' }),
   insert_node(0),
   text_node({ '', '}' }),
 }
@@ -357,23 +415,24 @@ local method_snippet = snippet({ trig = 'meth', name = 'Method' }, {
 -- }}}
 
 return {
-  class_snippet,
-  artisan_snippet,
-  interface_snippet,
-  phpspec_class_snippet,
-  phpspec_method_snippet,
-  strict_types_snippet,
-  inherit_doc_snippet,
-  palette_log_snippet,
-  legacy_log_snippet,
-  zed_log_snippet,
-  assign_snippet,
   argument_snippet,
+  artisan_snippet,
+  assign_snippet,
+  class_snippet,
   class_var_snippet,
   constant_snippet,
   constructor_snippet,
-  let_snippet,
   getter_snippet,
-  setter_snippet,
+  inherit_doc_snippet,
+  interface_snippet,
+  legacy_log_snippet,
+  let_snippet,
   method_snippet,
+  palette_log_snippet,
+  phpspec_class_snippet,
+  phpspec_method_snippet,
+  phpunit_class_snippet,
+  setter_snippet,
+  strict_types_snippet,
+  zed_log_snippet,
 }

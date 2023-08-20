@@ -224,6 +224,7 @@ brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "cloc" # count lines of code
+brew "cloudflared" # cloudflare CLI
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify

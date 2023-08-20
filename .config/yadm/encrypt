@@ -39,8 +39,13 @@ Code/saatchi/zed/.editorconfig
 # misc {{{
 
 # .aws/credentials
+# .config/lvim/lsp-settings/sqlls.json
+.bin/pu-pretty
 .boto
 .circleci/cli.yml
+.config/aws/config
+.config/multitail/multitail.conf
+.config/sql-language-server/.sqllsrc.json
 .edgerc
 .mailmap
 .mylogin.cnf
@@ -48,14 +53,11 @@ Code/saatchi/zed/.editorconfig
 .private_vars.sh
 .ssh/config
 .ssh/keys
+.support/hosts.json
+.warprc
 Library/Application Support/Sequel Pro/Data/Favorites.plist
 Notes/**/*.md
 Notes/**/imgs/*
 intelephense/licence.txt
-.config/aws/config
-.warprc
-.bin/pu-pretty
-.config/multitail/multitail.conf
-.support/hosts.json
 
 # }}}
