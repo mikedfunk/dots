@@ -8,6 +8,35 @@ local lambda_node = require 'luasnip.extras'.lambda
 local choice_node = luasnip.choice_node
 local repeat_node = require 'luasnip.extras'.rep
 
+-- helpers {{{
+---@param filepath string
+---@return string
+local function get_class_under_test(filepath)
+  local class_under_test = string.gsub(filepath, 'Test.php', '')
+  class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
+    print(vim.inspect(class_under_test))
+  class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
+  class_under_test = string.gsub(class_under_test, '/', '\\')
+
+  return class_under_test
+end
+
+---@param filepath string
+---@param filename string
+---@return string
+local function get_namespace(filepath, filename)
+  local namespace = string.gsub(filepath, '/' .. filename, '')
+  namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
+  -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
+  namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
+  namespace = string.gsub(namespace, '/app', 'Palette')
+  namespace = string.gsub(namespace, '/project/Zed/src/', '')
+  namespace = string.gsub(namespace, '/', '\\')
+
+  return namespace
+end
+-- }}}
+
 -- class {{{
 local class_snippet = snippet(
   { trig = 'cla', name = 'PHP Class', dscr = "Mike's class with namespace" },
@@ -20,12 +49,7 @@ local class_snippet = snippet(
     '',
   }),
   function_node(function(_, snip)
-    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
-    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
-    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-    namespace = string.gsub(namespace, '/app', 'Palette')
-    namespace = string.gsub(namespace, '/project/Zed/src/', '')
-    namespace = string.gsub(namespace, '/', '\\')
+    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
@@ -54,11 +78,7 @@ local artisan_snippet = snippet(
     '',
   }),
   function_node(function(_, snip)
-    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
-    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
-    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-    namespace = string.gsub(namespace, '/app', 'Palette')
-    namespace = string.gsub(namespace, '/', '\\')
+    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
@@ -100,11 +120,7 @@ local interface_snippet = snippet(
     '',
   }),
   function_node(function(_, snip)
-    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
-    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
-    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-    namespace = string.gsub(namespace, '/app', 'Palette')
-    namespace = string.gsub(namespace, '/', '\\')
+    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
@@ -133,21 +149,13 @@ local phpunit_class_snippet = snippet(
     '',
   }),
   function_node(function(_, snip)
-    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
-    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
-    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-    namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
-    namespace = string.gsub(namespace, '/', '\\')
+    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
   text_node({ '', '', 'use PHPUnit\\Framework\\TestCase;', 'use Prophecy\\Argument;', '', '/**', ' * @final', ' *', ' * ' }),
   function_node(function(_, snip)
-    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Test.php', '')
-    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
-      print(vim.inspect(class_under_test))
-    class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
-    class_under_test = string.gsub(class_under_test, '/', '\\')
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
     return '@see \\' .. class_under_test
   end, {}),
@@ -164,10 +172,7 @@ local phpunit_class_snippet = snippet(
   text_node({ '', '    public function it_is_initializable(): void' }),
   text_node({ '', '    {' }),
   function_node(function(_, snip)
-    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Test.php', '')
-    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
-    class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
-    class_under_test = string.gsub(class_under_test, '/', '\\')
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
     return { '', "        $this->shouldHaveType('" .. class_under_test .. "');" }
   end, {}),
@@ -190,20 +195,13 @@ local phpspec_class_snippet = snippet(
     '',
   }),
   function_node(function(_, snip)
-    local namespace = string.gsub(snip.env.TM_FILEPATH, '/' .. snip.env.TM_FILENAME, '')
-    namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
-    -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-    namespace = string.gsub(namespace, '/spec', 'spec\\Palette')
-    namespace = string.gsub(namespace, '/', '\\')
+    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
   text_node({ '', '', 'use PhpSpec\\ObjectBehavior;', 'use Prophecy\\Argument;', '', '/**', ' * @inheritDoc', ' *', ' * ' }),
   function_node(function(_, snip)
-    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Spec.php', '')
-    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
-    class_under_test = string.gsub(class_under_test, '/spec', 'Palette')
-    class_under_test = string.gsub(class_under_test, '/', '\\')
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
     return '@see \\' .. class_under_test
   end, {}),
@@ -217,10 +215,7 @@ local phpspec_class_snippet = snippet(
   text_node({ '', '    public function it_is_initializable(): void' }),
   text_node({ '', '    {' }),
   function_node(function(_, snip)
-    local class_under_test = string.gsub(snip.env.TM_FILEPATH, 'Spec.php', '')
-    class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
-    class_under_test = string.gsub(class_under_test, '/spec', 'Palette')
-    class_under_test = string.gsub(class_under_test, '/', '\\')
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
     return { '', "        $this->shouldHaveType('" .. class_under_test .. "');" }
   end, {}),

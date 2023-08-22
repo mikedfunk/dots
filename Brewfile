@@ -430,6 +430,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
 # cask "virtualbox" # virtual machine software (needed by docker-machine at least)
 # cask "virtualbox-extension-pack" # add-on to do stuff you'll always want... except for docker-machine
+# cask "visual-paradigm-ce" # ide for uml (based on eclipse, ew)
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
 # cask "vlc" # watch the videos I download (switchtd to mpv)
 # cask "webpquicklook" # quicklook plugin (preview webp images)
