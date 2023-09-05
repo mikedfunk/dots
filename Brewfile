@@ -365,13 +365,14 @@ brew "zsh" # awesome bash shell replacement
 # cask "joplin" # desktop joplin (I use the terminal interface)
 # cask "jumpcut" # clipboard manager recommended by Michael Zick (slightly annoying interface) (I now use maccy instead)
 # cask "keeper-password-manager" # password manager used at my work (managed by my work)
-# cask "kidonng/homebrew-malt/vimac" # control mac with vimium-style vi controls (hold space to select, <c-cmd-j> to enter scroll mode) (no longer in brew cask)
+# cask "kidonng/homebrew-malt/vimac" # control mac with vimium-style vi controls (hold space to select, <c-cmd-j> to enter scroll mode) (no longer in brew cask, I use shortcat instead)
 # cask "kitematic" # mac native docker container browser (I just use docker cli tools)
 # cask "kitty" # fast terminal emulator (see iterm2 above for why I switched back to iTerm)
 # cask "lastpass" # desktop lastpass - can use mouseless (switched to BitWarden)
 # cask "launchcontrol" # launchctl gui. (I use lunchy gem instead)
 # cask "lens" # kubernetes management native app
 # cask "licecap" # shitty, simple gif screen capture. OSX used to have this but I think they got rid of the gif exporting :/
+# cask "lofi" # spotify mini mode companion app
 # cask "loom" # yet another screenshot, screencast, etc. service, free up to 5 mins and like 50 most recent screenshots/shares, includes a video corner box, trying it out
 # cask "lunchy" # launchctl cli wrapper. Port of lunchy gem. (Tried this, was missing options, back to gem)
 # cask "macfusion" # other half of tool to mount ssh directories in the finder (see osxfuse)
@@ -426,6 +427,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "synthesia" # piano learning software
 # cask "tableplus" # alternative to sequelpro (paid)
 # cask "transmission" # unleash a torrent of files ;)
+# cask "tunnelbear" # tunnel to a specific country
 # cask "unshaky" # fix double keypress on macbook butterfly keyboard
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
 # cask "virtualbox" # virtual machine software (needed by docker-machine at least)
@@ -458,7 +460,6 @@ cask "grandperspective" # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
-cask "lofi" # spotify mini mode companion app
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "menubar-colors" # color picker in the menubar
 cask "nvidia-geforce-now" # game streaming
@@ -466,7 +467,6 @@ cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-ace" # maintained fork of sequel pro
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
-cask "tunnelbear" # tunnel to a specific country
 cask "vpn-by-google-one" # google vpn
 
 # }}}
