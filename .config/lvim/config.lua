@@ -3800,6 +3800,7 @@ lvim.plugins = {
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
   -- plugins.copilot_vim, -- github copilot
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
+  -- plugins.neodim, -- dim unused functions with lsp and treesitter (alternative: https://github.com/askfiy/lsp_extra_dim)
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
   -- plugins.nvim_femaco_lua, -- edit markdown code blocks with :Femaco (or <leader>me)
@@ -3850,7 +3851,6 @@ lvim.plugins = {
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   plugins.neo_zoom_lua, -- zoom a window, especially helpful with nvim-dap-ui
   plugins.neoai_nvim, -- more ChatGPT stuff
-  plugins.neodim, -- dim unused functions with lsp and treesitter (alternative: https://github.com/askfiy/lsp_extra_dim)
   plugins.neoscroll_nvim, -- smooth scroller. Slower if you have relativenumber on. Animates zz|zt|zb, <c-d>|<c-u>|<c-f>|<c-b>, etc.
   plugins.notifier_nvim, -- notifications in bottom right for nvim and lsp, configurable, unobtrusive
   plugins.numb_nvim, -- preview jumping to line number

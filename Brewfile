@@ -482,5 +482,6 @@ mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
 mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
+mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 
 # }}}
