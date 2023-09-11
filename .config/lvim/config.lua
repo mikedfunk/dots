@@ -3909,6 +3909,7 @@ lvim.plugins = {
   { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
+  { 'piersolenski/telescope-import.nvim', ft = { 'typescript', 'typescriptreact', 'javascript', 'react' }, dependencies = 'nvim-telescope/telescope.nvim' },
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool

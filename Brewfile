@@ -24,6 +24,7 @@ tap "derailed/k9s" # k9s
 tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
+tap "oven-sh/bun" # bun
 
 # }}}
 
@@ -222,6 +223,7 @@ brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials)
 brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
 brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "cloc" # count lines of code
 brew "cloudflared" # cloudflare CLI
