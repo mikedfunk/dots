@@ -148,6 +148,7 @@ local startify_quotes = {
   { "Hope is not a plan.", "", "- Jonathan Rosenberg" },
   { "How much time do you invest in cleaning it? Roughly the same amount of time it took you to write it. And that's the problem - nobody wants to put that effort in. Because they think they're done when it works. You're not done when it works! You're done when it's right.", "", "- Robert C. Martin" },
   { "I love deadlines. I like the whooshing sound they make as they fly by.", "", "- Douglas Adams" },
+  { "I once read that you shouldn't make your code easy to extend. You should make it easy to delete it. The modular design needed to make this happen makes for a very clean code that is easy to read.", "", "https://www.reddit.com/r/programming/comments/16fr39k/7_coding_habits_of_the_best_engineers_i_know/k05zqjk/" },
   { "I think a lot of new programmers like to use advanced data structures and advanced language features as a way of demonstrating their ability. I call it the lion-tamer syndrome. Such demonstrations are impressive, but unless they actually translate into real wins for the project, avoid them.", "", "- Glyn Williams" },
   { "I would rather die of passion than of boredom.", "", "- Vincent Van Gogh" },
   { "I've finally learned what \"upward compatible\" means. It means we get to keep all our old mistakes.", "", "- Linus Torvalds" },

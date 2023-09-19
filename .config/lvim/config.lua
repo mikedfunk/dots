@@ -2150,7 +2150,8 @@ plugins.neoscroll_nvim = {
 plugins.neo_zoom_lua = {
   'nyngwang/NeoZoom.lua',
   dependencies = 'folke/which-key.nvim',
-  ft = { 'dapui_.*', 'dap-repl' },
+  -- ft = { 'dapui_.*', 'dap-repl' },
+  cmd = { 'NeoZoomToggle', 'NeoZoom' },
   init = function()
     require 'which-key'.register({
       z = {
@@ -2995,6 +2996,17 @@ plugins.telescope_dap_nvim = {
 }
 -- }}}
 
+-- telescope-import.nvim {{{
+plugins.telescope_import_nvim = {
+  'piersolenski/telescope-import.nvim',
+  ft = { 'typescript', 'typescriptreact', 'javascript', 'react' },
+  dependencies = 'nvim-telescope/telescope.nvim',
+  config = function ()
+    require 'telescope'.load_extension('import')
+  end,
+}
+-- }}}
+
 -- telescope-lazy.nvim {{{
 plugins.telescope_lazy_nvim = {
   'tsakirist/telescope-lazy.nvim',
@@ -3819,6 +3831,7 @@ lvim.plugins = {
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
+  -- { 'roobert/tabtree.nvim', event = 'VimEnter', opts = {} }, -- use treesitter to jump to various points such as "{()}" in normal mode (only works with certain treesitter queries that are for certain languages)
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
@@ -3875,6 +3888,7 @@ lvim.plugins = {
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
   plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.)
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
+  plugins.telescope_import_nvim, -- use telescope to ts/js import the same as was done before
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
   plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter
@@ -3893,6 +3907,7 @@ lvim.plugins = {
   { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
+  { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = { vt_position = 'end_of_line' } }, -- show virtual text with number of usages
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
@@ -3909,7 +3924,6 @@ lvim.plugins = {
   { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
-  { 'piersolenski/telescope-import.nvim', ft = { 'typescript', 'typescriptreact', 'javascript', 'react' }, dependencies = 'nvim-telescope/telescope.nvim' },
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
   { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool

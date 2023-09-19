@@ -295,6 +295,7 @@ brew "prettier" # javascript and other languages formatter. moved from ~/.config
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
+brew "rain" # aws cli for cloudformation, but useful for the `rain aws-console --service s3` command
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!

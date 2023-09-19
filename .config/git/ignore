@@ -37,3 +37,4 @@ yarn-error.log
 .deptrac.cache
 .tool-versions
 __pycache__
+.jenkinslintrc
