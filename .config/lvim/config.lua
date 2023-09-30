@@ -363,15 +363,15 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
 
 -- automatically jump to the last place you've visited in a file before exiting {{{
 -- https://this-week-in-neovim.org/2023/Jan/02#tips
-vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--   callback = function()
+--     local mark = vim.api.nvim_buf_get_mark(0, '"')
+--     local lcount = vim.api.nvim_buf_line_count(0)
+--     if mark[1] > 0 and mark[1] <= lcount then
+--       pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--     end
+--   end,
+-- })
 -- }}}
 
 -- lsp config {{{
@@ -1065,6 +1065,8 @@ if is_null_ls_installed and not did_register_printenv then
   null_ls.register { sources = { null_ls.builtins.hover.printenv } }
   did_register_printenv = true
 end
+-- }}}
+
 -- }}}
 
 -- }}}

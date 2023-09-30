@@ -82,7 +82,7 @@ path=(
   $HOME/.bin
   # global ruby gems
   $HOME/bin
-  # global python pip packages
+  # global python pip packages (also lazyman)
   $HOME/.local/bin
   # emacs
   # $HOME/.emacs.d/bin

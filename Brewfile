@@ -39,7 +39,7 @@ tap "oven-sh/bun" # bun
 # brew "antigen" # zsh package manager. I switched to ~antibody~ antidote for speed
 # brew "autojump" # used by zsh-autocomplete to display recent directories
 # brew "bandwhich" # top-like tool to see which processes are using the most bandwidth (sudo bandwhich)
-# brew "bash" # for extrakto
+# brew "bash" # for extrakto and lazyman
 # brew "bmon" # bandwidth monitor
 # brew "broot" # use `br` to do something between tree and ls. File browser with lots of vim patterns.
 # brew "browser" # pipe html to a temp file and open in browser e.g. `ls | browser`

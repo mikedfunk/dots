@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # main yadm setup file https://github.com/TheLocehiliosan/yadm
 # vim: set foldmethod=marker ft=sh:
 
@@ -210,6 +210,23 @@ _install_upgrade_lvim_plugins () {
 _update_asdf_plugins () {
     _log_info "Updating asdf plugins"
     asdf plugin update --all
+}
+# }}}
+
+# install lazyman (neovim distribution manager) {{{
+_install_lazyman () {
+    [ -f "$HOME"/.config/nvim-Lazyman/lazyman.sh ] && return
+    _log_info "installing lazyvim"
+    git clone https://github.com/doctorfree/nvim-lazyman "$HOME"/.config/nvim-Lazyman
+}
+# }}}
+
+# install lazyvim (neovim distribution) {{{
+_install_lazyvim () {
+    [ -d "$HOME"/.config/nvim ] && return
+    _log_info "Installing lazyvim"
+    git clone https://github.com/LazyVim/starter "$HOME"/.config/nvim
+    rm -rf "$HOME"/.config/nvim/.git
 }
 # }}}
 
@@ -875,6 +892,8 @@ _bootstrap_all () {
     _install_xcode_command_line_tools
     _install_homebrew_if_its_missing
     _install_update_homebrew_packages
+    # _install_lazyman
+    # _install_lazyvim
     _install_neovim_versions
     _install_php_versions
     _install_node_versions
