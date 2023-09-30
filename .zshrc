@@ -361,15 +361,16 @@ alias y="yadm"
 # compdef y="yadm"
 alias upgrades="yadm bootstrap"
 save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
-alias sdx="save-dotfiles && exit"
-save-dotfiles-without-encryption () { yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+# alias sdx="save-dotfiles && exit"
+# save-dotfiles-without-encryption () { yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
 # alias notes="joplin"
 # alias notes="npx --no-install joplin"
 # alias notes="wd notes && [ -f $(date +%Y-%m-%d).md ] && zk edit $(date +%Y-%m-%d) || zk new --id $(date +%Y-%m-%d) --title $(date +%Y-%m-%d)"
 alias journal="zk journal"
-alias journals="zk edit journals --interactive"
+# alias journals="zk edit journals --interactive"
 # alias search-notes="zk list --match "
 alias notes="zk edit --interactive"
+# alias save-notes="cd $HOME/Notes && git add . && git commit -am 'working' && git push"
 # alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc" # javascript repl for testing javascript wonkiness
 alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude vendor" # enhanced interactive disk usage command
 alias tmux-layout="tmux display-message -p \"#{window_layout}\""

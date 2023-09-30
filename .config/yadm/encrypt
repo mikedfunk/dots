@@ -57,8 +57,8 @@ Code/saatchi/zed/.editorconfig
 .support/hosts.json
 .warprc
 Library/Application Support/Sequel Pro/Data/Favorites.plist
-Notes/**/*.md
-Notes/**/imgs/*
+# Notes/**/*.md
+# Notes/**/imgs/*
 intelephense/licence.txt
 
 # }}}
