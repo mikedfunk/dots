@@ -10,10 +10,10 @@
 .saatchirc
 .support/saatchi/*
 
-Code/saatchi/queries/**/*.sql
-Code/saatchi/queries/**/.sqllsrc.json
-Code/saatchi/uml/**/*.uml
-Code/saatchi/http/**/*.hurl
+# Code/saatchi/queries/**/*.sql
+# Code/saatchi/queries/**/.sqllsrc.json
+# Code/saatchi/uml/**/*.uml
+# Code/saatchi/http/**/*.hurl
 
 .config/smug/work.yml
 
