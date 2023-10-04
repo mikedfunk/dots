@@ -76,6 +76,7 @@ manpath=(
 )
 
 path=(
+  $HOME/.docker/bin
   # to install groovy-language-server
   $(brew --prefix openjdk@17)/bin
   # my own scripts
