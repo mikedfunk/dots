@@ -1721,6 +1721,19 @@ plugins.copilot_vim = {
 }
 -- }}}
 
+-- dark-notify {{{
+plugins.dark_notify = {
+  'cormacrelf/dark-notify',
+  config = function()
+    require 'dark_notify'.run {
+      onchange = function()
+        vim.cmd 'silent! !tmux source ~/.config/tmux/tmux.conf'
+      end,
+    }
+  end
+}
+-- }}}
+
 -- definition-or-references.nvim {{{
 plugins.definition_or_references_nvim = {
   'KostkaBrukowa/definition-or-references.nvim',
@@ -2530,12 +2543,12 @@ local configure_nvim_treesitter_textobjects = function()
   -- hmm, this is not as useful as it looks. It doesn't peek any surrounding
   -- definition well... it just lets you peek the parent class definition
   -- from a function definition.
-  require 'which-key'.register({
-    l = {
-      ['C'] = 'Peek Class Definition',
-      -- ['F'] = 'Peek Function Definition',
-    }
-  }, { prefix = '<Leader>' })
+  -- require 'which-key'.register({
+  --   l = {
+  --     ['C'] = 'Peek Class Definition',
+  --     -- ['F'] = 'Peek Function Definition',
+  --   }
+  -- }, { prefix = '<Leader>' })
 end
 
 plugins.nvim_treesitter_textobjects = {
@@ -3853,6 +3866,7 @@ lvim.plugins = {
   plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
   plugins.cmp_tmux, -- Add a tmux source to nvim-cmp (all text in all tmux windows/panes)
   plugins.cmp_treesitter, -- cmp completion source for treesitter nodes
+  plugins.dark_notify, -- auto-dark-mode
   plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
@@ -3913,7 +3927,6 @@ lvim.plugins = {
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
-  { 'cormacrelf/dark-notify', config = function() require 'dark_notify'.run() end }, -- auto-dark-mode
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)

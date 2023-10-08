@@ -347,7 +347,11 @@ brew "zsh" # awesome bash shell replacement
 # cask "ferdi" # all messaging in one electron app (slack, discord, google voice, android messages, etc.) another approach to this is matrix (riot.im) with "bridges" to other services
 # cask "fig" # indispensable terminal completion helper (2022-04-20 If I type too fast it will mess up character order)
 # cask "figma" # mockups app
+# cask "font-caskaydia-cove-nerd-font" # Microsoft coding font with cursive italics
+# cask "font-commit-mono" # coding font (NOT nerd)
 # cask "font-fira-code-nerd-font"
+# cask "font-maple" # programming font (NOT nerd) with cursive italics
+# cask "font-mononoki-nerd-font" # programming font
 # cask "font-symbols-only-nerd-font" # just the nerd-font symbols
 # cask "freetube" # privacy-friendly and add-free youtube player
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)

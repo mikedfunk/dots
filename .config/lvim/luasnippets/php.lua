@@ -278,6 +278,14 @@ local class_var_snippet = snippet({ trig = 'va', name = 'Class Property' }, {
 })
 -- }}}
 
+-- jd {{{
+local json_decode_snippet = snippet({ trig = 'json_decode', name = 'Json Decode' }, {
+  text_node("\\json_decode("),
+  insert_node(1, ''),
+  text_node("), false, 512, \\JSON_THROW_ON_ERROR);"),
+})
+-- }}}
+
 -- const {{{
 local constant_snippet = snippet({ trig = 'cnst', name = 'Constant' }, {
   choice_node(1, {
@@ -420,6 +428,7 @@ return {
   getter_snippet,
   inherit_doc_snippet,
   interface_snippet,
+  json_decode_snippet,
   legacy_log_snippet,
   let_snippet,
   method_snippet,
