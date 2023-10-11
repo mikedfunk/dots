@@ -32,6 +32,10 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 vim.o.splitkeep = "screen"
 
 vim.o.spellfile = vim.fn.expand(vim.env.LUNARVIM_CONFIG_DIR .. '/spell/en.utf-8.add') -- this is necessary because nvim-treesitter is first in the runtimepath
+vim.o.spelloptions = table.concat({
+  'noplainbuffer',
+  'camel',
+}, ',')
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = 'croqjt'
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
@@ -144,8 +148,8 @@ vim.api.nvim_create_autocmd('WinEnter', {
   command = "if winnr('$') == 1 && getbufvar(winbufnr(winnr()), '&buftype') == 'quickfix' | q | endif",
 })
 
-vim.api.nvim_create_autocmd('QUickFixCmdPost', { pattern = '[^l]*', group = 'last_quickfix', command = 'cwindow' })
-vim.api.nvim_create_autocmd('QUickFixCmdPost', { pattern = 'l*', group = 'last_quickfix', command = 'lwindow' })
+vim.api.nvim_create_autocmd('QuickFixCmdPost', { pattern = '[^l]*', group = 'last_quickfix', command = 'cwindow' })
+vim.api.nvim_create_autocmd('QuickFixCmdPost', { pattern = 'l*', group = 'last_quickfix', command = 'lwindow' })
 
 -- bug: I don't see a way to apply _local_ iabbrevs so if you load a
 -- markdown file it will enable the abbrev in the entire workspace :/
@@ -335,20 +339,20 @@ vim.g['markdown_fenced_languages'] = {
 
 -- set filetypes for unusual files {{{
 vim.api.nvim_create_augroup('unusual_filetypes', { clear = true })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'php' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.eyaml', callback = function() vim.bo.filetype = 'yaml' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.babelrc', callback = function() vim.bo.filetype = 'json' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.php.{sample,dist}', callback = function() vim.bo.filetype = 'php' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '{site,default}.conf', callback = function() vim.bo.filetype = 'nginx' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.editorconfig', callback = function() vim.bo.filetype = 'dosini' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = 'Brewfile', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'php' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.eyaml', callback = function() vim.bo.filetype = 'yaml' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.babelrc', callback = function() vim.bo.filetype = 'json' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.php.{sample,dist}', callback = function() vim.bo.filetype = 'php' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '{site,default}.conf', callback = function() vim.bo.filetype = 'nginx' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.editorconfig', callback = function() vim.bo.filetype = 'dosini' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = 'Brewfile', callback = function() vim.bo.filetype = 'sh' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   group = 'unusual_filetypes',
   pattern = '{' .. table.concat({
     '.curlrc',
@@ -1358,7 +1362,7 @@ plugins.ale = {
   -- event = 'BufRead',
   config = function()
     vim.g.ale_use_neovim_diagnostics_api = true -- save so much bullshit https://github.com/dense-analysis/ale/pull/4135
-    vim.g.ale_lint_delay = 100
+    vim.g.ale_lint_delay = 50
     vim.g.ale_lint_on_filetype_changed = false
     vim.g.ale_floating_preview = false -- neovim floating window to preview errors. This combines ale_detail_to_floating_preview and ale_hover_to_floating_preview.
     vim.g.ale_sign_highlight_linenrs = false
@@ -1387,6 +1391,7 @@ plugins.ale = {
     vim.g.ale_php_phpcbf_use_global = true
     vim.g.ale_php_phpcs_options = '--warning-severity=3'
     vim.g.ale_php_phpstan_level = 9
+    vim.g.ale_php_phpstan_memory_limit = '200M'
 
     require 'which-key'.register({
       F = { function () vim.cmd('ALEFix') end, 'Fix with ALE' },
@@ -1727,7 +1732,7 @@ plugins.dark_notify = {
   config = function()
     require 'dark_notify'.run {
       onchange = function()
-        vim.cmd 'silent! !tmux source ~/.config/tmux/tmux.conf'
+        vim.cmd 'silent! !tmux source ~/.config/tmux/tmux.conf &'
       end,
     }
   end
@@ -3799,6 +3804,7 @@ end
 ---@return nil
 lvim.lsp.on_attach_callback = function(client, bufnr)
   vim.keymap.set('i', '<c-v>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
+  vim.keymap.set('i', '<c-k>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
 
   if client.server_capabilities.document_formatting == true then
     vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr(#{timeout_ms:250})')
@@ -3839,7 +3845,7 @@ lvim.plugins = {
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = { vt_position = 'end_of_line' } }, -- show virtual text with number of usages
-  -- { 'ashfinal/qfview.nvim', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
+  -- { 'ashfinal/qfview.nvim', event = 'UIEnter', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
