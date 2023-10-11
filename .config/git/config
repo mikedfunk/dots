@@ -143,7 +143,7 @@
     # show latest commits on all branches by most recent
     latest = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:relative) %(refname:short)'
     # my go-to log format
-    lg = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    lg = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
     # lg = log --pretty=format:'commit %Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     # log between the last semantic tag and HEAD
     lt = "!git pull && git lg --no-merges $(git semver | grep -v 'v' | tail -n1)..HEAD"
