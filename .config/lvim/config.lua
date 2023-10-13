@@ -2409,8 +2409,15 @@ plugins.nvim_scrollbar = {
         highlight = 'PmenuSel',
       },
       -- marks = {
+      --   Cursor = { text = "" },
+      -- },
+      -- marks = {
       --   Search = { color = colors.orange }, -- doesn't seem to work :/
       -- },
+      excluded_filetypes = {
+        'DressingInput',
+        'TelescopePrompt',
+      },
     })
   end,
 }

@@ -270,6 +270,7 @@ brew "libpq" # needed to build php https://github.com/shivammathur/homebrew-php/
 brew "libsodium" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "libxml2" # needed by php php70 https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "libzip" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "libavif" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "llvm" # used to build php imagick extension properly
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode`

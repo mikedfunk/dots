@@ -255,7 +255,7 @@ _install_php_70 () {
     mkdir -p "${PHP_PATH}"/conf.d
 
     # pickle doesn't work on php 7.0 at all, any version
-
+    pecl channel-update pecl.php.net
     yes "" | pecl install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
     local PHP_ZLIB_DIR
@@ -273,12 +273,12 @@ _install_php_70 () {
 }
 
 _install_php_74 () {
-    ( asdf list php | grep --quiet 7.4.32 ) && return
-    _log_info "installing php 7.4.32"
-    asdf install php 7.4.32
-    asdf global php 7.4.32 || return
+    ( asdf list php | grep --quiet 7.4.33 ) && return
+    _log_info "installing php 7.4.33"
+    PHP_WITHOUT_PCRE_JIT=yes asdf install php 7.4.33
+    asdf global php 7.4.33 || return
 
-    # install php extensions (different set for 7.4.32)
+    # install php extensions (different set for 7.4.33)
     local PHP_PATH
     PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
@@ -301,7 +301,7 @@ _install_php_74 () {
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
     # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    asdf reshim php 7.4.32
+    asdf reshim php 7.4.33
 }
 
 _install_php_80 () {
@@ -386,7 +386,7 @@ _install_php_versions () {
     pushd .
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing php version(s)"
-    ( asdf plugin list | grep -v php ) || asdf plugin add php
+    ( asdf plugin list | grep --quiet php ) || asdf plugin add php
     local INSTALL_PATH="$HOME"/.asdf/plugins/php/bin/install
     # intl fails to install in php 7.0 due to an incompatibility with icu4c latest
     [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-intl/d" "$INSTALL_PATH" )
@@ -451,8 +451,6 @@ _install_php_versions () {
     # For pkg-config to find icu4c you may need to set:
     PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     export PKG_CONFIG_PATH
-    # export LDFLAGS=$(echo "${LDFLAGS}" | sed 's/-L\/lib //g')
-    # export CFLAGS=$(echo "${CFLAGS}" | sed 's/-L\/lib //g')
     # }}}
 
     # configure krb5 (needed to build php) {{{
@@ -596,7 +594,7 @@ _install_php_versions () {
 _install_deno_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing deno version(s)"
-    ( asdf plugin list | grep -v deno ) || asdf plugin add deno
+    ( asdf plugin list | grep --quiet deno ) || asdf plugin add deno
     ( asdf list deno | grep --quiet 1.29.4 ) || asdf install deno 1.29.4
     asdf global deno 1.29.4
 }
@@ -608,7 +606,7 @@ _install_node_versions () {
     _log_info "Installing node version(s)"
     # https://github.com/asdf-vm/asdf-nodejs#problems-with-openpgp-signatures-in-older-versions
     # bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-previous-release-team-keyring'
-    ( asdf plugin list | grep -v nodejs ) || asdf plugin add nodejs
+    ( asdf plugin list | grep --quiet nodejs ) || asdf plugin add nodejs
     # https://github.com/asdf-vm/asdf-nodejs/issues/40#issuecomment-297053730
     # bash "$HOME"/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
@@ -636,7 +634,7 @@ _install_node_versions () {
 _install_lua_versions () {
     builtin cd >/dev/null || return
     _log_info "Installing lua version(s)"
-    ( asdf plugin list | grep -v perl ) || asdf plugin add lua
+    ( asdf plugin list | grep --quiet perl ) || asdf plugin add lua
     ( asdf list lua | grep --quiet 5.4.4 ) || asdf install lua 5.4.4
 
     asdf global lua 5.4.4
@@ -649,7 +647,7 @@ _install_lua_versions () {
 _install_perl_versions () {
     builtin cd >/dev/null || return
     _log_info "Installing perl version(s)"
-    ( asdf plugin list | grep -v perl ) || asdf plugin add perl
+    ( asdf plugin list | grep --quiet perl ) || asdf plugin add perl
     ( asdf list perl | grep --quiet 5.38.0 ) || asdf install perl 5.38.0
 
     asdf global perl 5.38.0
@@ -662,7 +660,7 @@ _install_perl_versions () {
 _install_python_versions () {
     builtin cd >/dev/null || return
     _log_info "Installing python version(s)"
-    ( asdf plugin list | grep -v python ) || asdf plugin add python
+    ( asdf plugin list | grep --quiet python ) || asdf plugin add python
 
     LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
     export LDFLAGS
@@ -696,7 +694,7 @@ _install_python_versions () {
 _install_ruby_versions () {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing ruby version(s)"
-    ( asdf plugin list | grep -v ruby ) || asdf plugin add ruby
+    ( asdf plugin list | grep --quiet ruby ) || asdf plugin add ruby
     # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # zed (compass) - doesn't install on mac but 3.x works
     ( asdf list ruby | grep --quiet 3.1.2 ) || asdf install ruby 3.1.2
     asdf global ruby 3.1.2
@@ -706,10 +704,10 @@ _install_ruby_versions () {
 
 # install erlang version {{{
 _install_erlang_version () {
-    ( asdf plugin list | grep -v "erlang" ) && return
+    ( asdf plugin list | grep --quiet erlang ) && ( asdf list erlang | grep --quiet 23.0 ) && return
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing erland version"
-    ( asdf plugin list | grep -v erlang ) || asdf plugin add erlang
+    ( asdf plugin list | grep --quiet erlang ) || asdf plugin add erlang
     export KERL_CONFIGURE_OPTIONS="--enable-m64-build --disable-debug --without-javac"
     PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
     export PATH
@@ -725,7 +723,7 @@ _install_erlang_version () {
 _install_elixir_version () {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing elixir version"
-    ( asdf plugin list | grep -v elixir ) || asdf plugin add elixir
+    ( asdf plugin list | grep --quiet elixir ) || asdf plugin add elixir
     ( asdf list elixir | grep --quiet 1.10.4-otp-23 ) || asdf install elixir 1.10.4-otp-23
     asdf global elixir 1.10.4-otp-23
     builtin cd - >/dev/null || return
@@ -927,4 +925,5 @@ _bootstrap_all () {
 
 _bootstrap_all
 _log_info "Installation complete"
+
 # }}}
