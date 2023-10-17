@@ -1394,8 +1394,10 @@ plugins.ale = {
     vim.g.ale_php_phpstan_memory_limit = '200M'
 
     require 'which-key'.register({
-      F = { function () vim.cmd('ALEFix') end, 'Fix with ALE' },
-    }, { prefix = 'l' })
+      l = {
+        F = { function () vim.cmd('ALEFix') end, 'Fix with ALE' },
+      }
+    }, { prefix = '<Leader>' })
   end,
 }
 
