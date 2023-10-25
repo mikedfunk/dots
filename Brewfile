@@ -21,6 +21,7 @@
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
 tap "derailed/k9s" # k9s
+tap "grishka/grishka" # neardrop
 tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
@@ -470,6 +471,7 @@ cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated 
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "menubar-colors" # color picker in the menubar
+cask "neardrop" # android nearby devices drop
 cask "nvidia-geforce-now" # game streaming
 cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
