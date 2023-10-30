@@ -3679,6 +3679,7 @@ local enable_lsp_hover_definition = function(client_id, bufnr)
     group = 'lsp_hover_def',
     desc = 'lsp hover def',
     buffer = bufnr,
+    -- local has_floating_window = vim.fn.len(vim.fn.filter(vim.api.nvim_list_wins(), function (_, v) return vim.api.nvim_win_get_config(v).relative ~= '' end)) > 0
     callback = function() if lvim.lsp.hover_definition then vim.lsp.buf.hover() end end, ---@diagnostic disable-line redundant-parameter
   })
 end
