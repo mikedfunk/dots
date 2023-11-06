@@ -302,6 +302,7 @@ brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuec
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
+brew "tailspin" # tail colorizer (usage: "..." | tspin)
 brew "tealdeer" # more consise community man pages (faster than tldr)
 brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti.
 brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep
