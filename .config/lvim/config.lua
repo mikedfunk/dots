@@ -121,7 +121,7 @@ end, vim.api.nvim_create_namespace 'auto_hlsearch')
 
 -- avoids lag when scrolling
 -- https://github.com/vimpostor/vim-tpipeline#how-do-i-update-the-statusline-on-every-cursor-movement
-vim.cmd 'set guicursor='
+-- vim.cmd 'set guicursor='
 
 if vim.fn.executable('ag') == 1 then
   vim.o.grepprg = 'ag --vimgrep'
@@ -812,8 +812,13 @@ lvim.builtin.lualine.sections.lualine_c = {
 -- }}}
 
 -- luasnip {{{
-lvim.builtin.luasnip.build = "make install_jsregexp" -- TODO can't get this to work
+lvim.builtin.luasnip.build = "make install_jsregexp" -- TODO this doesn't work
+-- lvim.builtin.luasnip.update_events = { "TextChanged", "TextChangedI" } -- also not working
 if is_installed('luasnip') then
+  -- show transformations while you type
+  require 'luasnip'.config.setup {
+    update_events = { "TextChanged", "TextChangedI" },
+  }
   -- strangely these aren't mapped by LunarVim. Doesn't work with noremap... i think because it's already mapped by something else
   vim.keymap.set('i', '<C-E>', '<Plug>luasnip-next-choice', {})
   vim.keymap.set('s', '<C-E>', '<Plug>luasnip-next-choice', {})
@@ -876,7 +881,7 @@ lvim.builtin.cmp.mapping['<C-K>'] = lvim.builtin.cmp.mapping['<S-Tab>']
 -- lvim.builtin.cmp.mapping['<C-Y>'] = function() require 'cmp'.mapping.confirm({ select = false }) end -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 -- }}}
 
--- null-ls (TODO: replace, being archived) {{{
+-- null-ls / none-ls {{{
 lvim.lsp.null_ls.setup.debounce = 1000
 lvim.lsp.null_ls.setup.default_timeout = 30000
 local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic disable-line redefined-local
@@ -2004,6 +2009,19 @@ plugins.lsp_inlayhints_on_attach = function(client, bufnr)
   lsp_inlayhints.on_attach(client, bufnr)
   -- vim.cmd 'hi link LspInlayHint Comment'
 end
+-- }}}
+
+-- LuaSnip {{{
+-- not sure if this works
+local luasnip_def = vim.tbl_filter(
+  function (plugin)
+    return plugin[1] == 'L3MON4D3/LuaSnip'
+  end,
+  require('lvim.plugins')
+)[1]
+
+luasnip_def.build = "make install_jsregexp"
+plugins.luasnip = luasnip_def
 -- }}}
 
 -- mason-null-ls.nvim {{{
@@ -3856,9 +3874,9 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
-  -- plugins.backseat_nvim, -- ChatGPT stuff!
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_copilot, -- github copilot
+  -- plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
   -- plugins.copilot_vim, -- github copilot
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
@@ -3877,7 +3895,6 @@ lvim.plugins = {
   -- { 'ashfinal/qfview.nvim', event = 'UIEnter', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
-  -- { 'gpanders/editorconfig.nvim' }, -- standard config for basic editor settings (no lazy load) (apparently no longer needed with neovim 0.9?? https://github.com/neovim/neovim/pull/21633 )
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
@@ -3888,13 +3905,13 @@ lvim.plugins = {
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.ale, -- older null-ls alternative
+  plugins.backseat_nvim, -- ChatGPT stuff!
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
   plugins.cmp_git, -- github source in commit messages for cmp e.g. users, PRs, hashes
-  plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
   plugins.cmp_nerdfont, -- like emoji completion but for nerd font characters
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
   plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
@@ -3912,6 +3929,7 @@ lvim.plugins = {
   plugins.headlines_nvim, -- add markdown highlights
   plugins.incolla_nvim, -- paste images in markdown. configurable. Alternative: https://github.com/img-paste-devs/img-paste.vim
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
+  plugins.luasnip, -- add vscode snippet transformation support
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
   plugins.mkdx, -- helpful markdown mappings
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!

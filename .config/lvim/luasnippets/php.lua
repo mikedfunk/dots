@@ -173,9 +173,9 @@ local phpunit_class_snippet = snippet(
     }
   end),
   function_node(function(_, snip)
-    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
+    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
-    return '@see \\' .. class_under_test
+    return '@see ' .. class_name
   end, {}),
   text_node({ '', ' */', '' }),
   function_node(function(_, snip)
@@ -234,7 +234,7 @@ local phpspec_class_snippet = snippet(
   end),
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
-      local class_name = string.gsub(class_under_test, '^.*\\(.*)$', '%1')
+    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
     return '@see ' .. class_name
   end, {}),
@@ -249,7 +249,7 @@ local phpspec_class_snippet = snippet(
   text_node({ '', '    {' }),
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
-    local class_name = string.gsub(class_under_test, '^.*\\(.*)$', '%1')
+    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
     return { '', "        $this->shouldHaveType(" .. class_name .. "::class);" }
   end, {}),
@@ -390,12 +390,8 @@ local getter_snippet = snippet({ trig = 'gtr', name = 'Getter' }, {
   }),
   text_node(' function get'),
   insert_node(2, 'MyProperty'),
-  text_node('('),
+  text_node('(): '),
   insert_node(3, 'string'),
-  text_node(' $'),
-  lambda_node(lambda_node._1:gsub('%a', string.lower, 1), 2),
-  text_node('): '),
-  lambda_node(lambda_node._1:gsub('%a', string.lower, 1), 3),
   text_node({ '', '' }),
   text_node('    '),
   text_node('return $this->'),
@@ -433,7 +429,7 @@ local setter_snippet = snippet({ trig = 'str', name = 'Setter' }, {
 
 -- meth {{{
 local method_snippet = snippet({ trig = 'meth', name = 'Method' }, {
-  text_node({ '', '' }),
+  text_node({ '', '', }),
   choice_node(1, {
     text_node('public'),
     text_node('protected'),
@@ -453,17 +449,17 @@ local method_snippet = snippet({ trig = 'meth', name = 'Method' }, {
 -- }}}
 
 return {
-  argument_snippet,
+  -- argument_snippet, moved to php.json
   artisan_snippet,
-  assign_snippet,
+  -- assign_snippet, moved to php.json
   class_snippet,
-  class_var_snippet,
+  -- class_var_snippet, moved to php.json
   -- constant_snippet, moved to php.json
   constructor_snippet,
   getter_snippet,
   -- inherit_doc_snippet, moved to php.json
   interface_snippet,
-  json_decode_snippet,
+  -- json_decode_snippet,
   -- legacy_log_snippet, moved to php.json
   let_snippet,
   -- method_snippet, moved to php.json

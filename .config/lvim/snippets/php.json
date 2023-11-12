@@ -47,11 +47,30 @@
   "Method": {
     "prefix": "meth",
     "body": [
+      "",
+      "",
       "${1|public,private,protected|} function ${2:myFunc}($3): ${4:string}",
       "{",
       "    $5",
       "}"
     ]
+  },
+  "Class property": {
+    "prefix": "va",
+    "body": ["${1|private,protected,public|} ${2:MyClass} \\$${2/(.*)/${1:/camelcase}/};"]
+  },
+  "Assign property": {
+    "prefix": "asn",
+    "body": ["\\$this->${1:myProp} = \\$$1"]
+  },
+  "Function argument": {
+    "prefix": "arg",
+    "body": ["${1:MyClass} \\$${1/(.*)/${1:/camelcase}/}"]
+  },
+  "Json decode": {
+    "prefix": "json_decode",
+    "body": ["\\json_decode(\\$${1:myVar}, true, 512, \\JSON_THROW_ON_ERROR);"],
+    "description": "Throws exception on failure"
   },
   "Testing": {
     "prefix": "zyzyzyzy",
