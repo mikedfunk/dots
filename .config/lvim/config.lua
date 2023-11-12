@@ -849,6 +849,7 @@ lvim.builtin.cmp.formatting.source_names['doxygen'] = '' -- 󰙆
 lvim.builtin.cmp.formatting.source_names['emoji'] = '' -- 
 lvim.builtin.cmp.formatting.source_names['git'] = ''
 lvim.builtin.cmp.formatting.source_names['luasnip'] = '✄'
+lvim.builtin.cmp.formatting.source_names['luasnip_choice'] = ''
 lvim.builtin.cmp.formatting.source_names['marksman'] = '󰓾' -- 🞋
 lvim.builtin.cmp.formatting.source_names['nerdfont'] = '󰬴'
 lvim.builtin.cmp.formatting.source_names['nvim_lsp'] = 'ʪ'
@@ -1594,6 +1595,22 @@ plugins.cmp_nvim_lsp_signature_help = {
       -- preselect = require 'cmp'.PreselectMode.None,
     })
   end,
+}
+-- }}}
+
+-- cmp-luasnip-choice {{{
+plugins.cmp_luasnip_choice = {
+  'doxnit/cmp-luasnip-choice',
+  dependencies = 'hrsh7th/nvim-cmp',
+  event = 'InsertEnter',
+  init = function()
+    lvim.builtin.cmp.snippet.expand = function(args)
+      require'luasnip'.lsp_expand(args.body)
+    end
+    if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'luasnip_choice' }) then return end
+    table.insert(lvim.builtin.cmp.sources, { name = 'luasnip_choice' })
+  end,
+  opts = {}
 }
 -- }}}
 
@@ -3875,6 +3892,7 @@ lvim.plugins = {
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
   plugins.cmp_git, -- github source in commit messages for cmp e.g. users, PRs, hashes
+  plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
   plugins.cmp_nerdfont, -- like emoji completion but for nerd font characters
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
   plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
