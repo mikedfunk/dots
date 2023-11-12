@@ -13,9 +13,12 @@ local repeat_node = require 'luasnip.extras'.rep
 ---@return string
 local function get_class_under_test(filepath)
   local class_under_test = string.gsub(filepath, 'Test.php', '')
+  class_under_test = string.gsub(filepath, 'Spec.php', '')
   class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
-    print(vim.inspect(class_under_test))
   class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
+  class_under_test = string.gsub(class_under_test, 'SaatchiArt', 'Palette/SaatchiArt')
+  class_under_test = string.gsub(class_under_test, '/spec/', '')
+  class_under_test = string.gsub(class_under_test, '^/(.*)$', '%1')
   class_under_test = string.gsub(class_under_test, '/', '\\')
 
   return class_under_test
@@ -29,8 +32,9 @@ local function get_namespace(filepath, filename)
   namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
   -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
   namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
-  namespace = string.gsub(namespace, '/app', 'Palette')
+  namespace = string.gsub(namespace, 'SaatchiArt', 'Palette/SaatchiArt')
   namespace = string.gsub(namespace, '/project/Zed/src/', '')
+  namespace = string.gsub(namespace, '^/(.*)$', '%1')
   namespace = string.gsub(namespace, '/', '\\')
 
   return namespace
@@ -153,7 +157,21 @@ local phpunit_class_snippet = snippet(
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
-  text_node({ '', '', 'use PHPUnit\\Framework\\TestCase;', 'use Prophecy\\Argument;', '', '/**', ' * @final', ' *', ' * ' }),
+  function_node(function (_, snip)
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
+    return {
+      '',
+      '',
+      'use PHPUnit\\Framework\\TestCase;',
+      'use Prophecy\\Argument;',
+      'use ' .. class_under_test .. ';',
+      '',
+      '/**',
+      ' * @final',
+      ' *',
+      ' * ',
+    }
+  end),
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
@@ -199,11 +217,26 @@ local phpspec_class_snippet = snippet(
 
     return 'namespace ' .. namespace .. ';'
   end, {}),
-  text_node({ '', '', 'use PhpSpec\\ObjectBehavior;', 'use Prophecy\\Argument;', '', '/**', ' * @inheritDoc', ' *', ' * ' }),
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
+    return {
+      '',
+      '',
+      'use PhpSpec\\ObjectBehavior;',
+      'use Prophecy\\Argument;',
+      'use ' .. class_under_test .. ';',
+      '',
+      '/**',
+      ' * @inheritDoc',
+      ' *',
+      ' * ',
+    }
+  end),
+  function_node(function(_, snip)
+    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
+      local class_name = string.gsub(class_under_test, '^.*\\(.*)$', '%1')
 
-    return '@see \\' .. class_under_test
+    return '@see ' .. class_name
   end, {}),
   text_node({ '', ' */', '' }),
   function_node(function(_, snip)
@@ -216,8 +249,9 @@ local phpspec_class_snippet = snippet(
   text_node({ '', '    {' }),
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
+    local class_name = string.gsub(class_under_test, '^.*\\(.*)$', '%1')
 
-    return { '', "        $this->shouldHaveType('" .. class_under_test .. "');" }
+    return { '', "        $this->shouldHaveType(" .. class_name .. "::class);" }
   end, {}),
   text_node({ '', '    }' }),
   insert_node(0),
@@ -234,15 +268,16 @@ local phpspec_method_snippet = luasnip.parser.parse_snippet(
 public function it_${1:does_something}($2): void
 {
     $3
-}]]
+}]],
+  {}
 )
 -- }}}
 
 local strict_types_snippet = snippet({ trig = 'dst', name = 'Strict Types' }, { text_node({ '', 'declare(strict_types=1);' }) })
 local inherit_doc_snippet = snippet({ trig = 'id', name = 'Inherit Doc' }, { text_node({ '', '/** @inheritDoc */' }) })
-local palette_log_snippet = luasnip.parser.parse_snippet({ trig = 'plg', name = 'Palette Log' }, '\\Log::debug("$1");')
-local legacy_log_snippet = luasnip.parser.parse_snippet({ trig = 'llg', name = 'Legacy Log' }, '\\Zend_Registry::get("file_logger")->debug("$1");')
-local zed_log_snippet = luasnip.parser.parse_snippet({ trig = 'zlg', name = 'Zed Log' }, '\\PalShared_Log::log("$1", "exception.log");')
+local palette_log_snippet = luasnip.parser.parse_snippet({ trig = 'plg', name = 'Palette Log' }, '\\Log::debug("$1");', {})
+local legacy_log_snippet = luasnip.parser.parse_snippet({ trig = 'llg', name = 'Legacy Log' }, '\\Zend_Registry::get("file_logger")->debug("$1");', {})
+local zed_log_snippet = luasnip.parser.parse_snippet({ trig = 'zlg', name = 'Zed Log' }, '\\PalShared_Log::getLogger()->${1|debug,error,critical,info,warning,notice|}("$2", ${3:[]});', {})
 
 -- assign {{{
 local assign_snippet = snippet({ trig = 'asn', name = 'Assign Class Property' }, {
@@ -423,20 +458,20 @@ return {
   assign_snippet,
   class_snippet,
   class_var_snippet,
-  constant_snippet,
+  -- constant_snippet, moved to php.json
   constructor_snippet,
   getter_snippet,
-  inherit_doc_snippet,
+  -- inherit_doc_snippet, moved to php.json
   interface_snippet,
   json_decode_snippet,
-  legacy_log_snippet,
+  -- legacy_log_snippet, moved to php.json
   let_snippet,
-  method_snippet,
-  palette_log_snippet,
+  -- method_snippet, moved to php.json
+  -- palette_log_snippet, moved to php.json
   phpspec_class_snippet,
-  phpspec_method_snippet,
+  -- phpspec_method_snippet, moved to php.json
   phpunit_class_snippet,
   setter_snippet,
-  strict_types_snippet,
-  zed_log_snippet,
+  -- strict_types_snippet, moved to php.json
+  -- zed_log_snippet, moved to php.json
 }

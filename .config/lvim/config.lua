@@ -812,6 +812,7 @@ lvim.builtin.lualine.sections.lualine_c = {
 -- }}}
 
 -- luasnip {{{
+lvim.builtin.luasnip.build = "make install_jsregexp" -- TODO can't get this to work
 if is_installed('luasnip') then
   -- strangely these aren't mapped by LunarVim. Doesn't work with noremap... i think because it's already mapped by something else
   vim.keymap.set('i', '<C-E>', '<Plug>luasnip-next-choice', {})
@@ -1196,15 +1197,16 @@ end
 
 lvim.builtin.treesitter.auto_install = true
 lvim.builtin.treesitter.context_commentstring.config['php'] = '// %s'
-lvim.builtin.treesitter.incremental_selection = {
-  enable = true,
-  keymaps = {
-    init_selection = '<cr>',
-    node_incremental = '<cr>',
-    scope_incremental = false,
-    node_decremental = '<bs>',
-  }
-}
+-- this breaks q:
+-- lvim.builtin.treesitter.incremental_selection = {
+--   enable = true,
+--   keymaps = {
+--     init_selection = '<cr>',
+--     node_incremental = '<cr>',
+--     scope_incremental = false,
+--     node_decremental = '<bs>',
+--   }
+-- }
 
 lvim.builtin.treesitter.on_config_done = function()
   -- fancy styled-components queries found on the web
