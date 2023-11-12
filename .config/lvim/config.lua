@@ -3985,6 +3985,7 @@ lvim.plugins = {
   { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php', dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- sql and regex included
+  { 'gsuuon/tshjkl.nvim', config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
   { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser (now covered by tree-sitter-comment)
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
