@@ -624,22 +624,40 @@ local lsp_component = {
   on_click = function() vim.cmd 'LspInfo' end,
 }
 
-local codeium_component = {
+local codeium_status_component = {
   ---@return string
-  function(_)
-    local success, response = pcall(vim.fn['codeium#GetStatusString'])
-    if not success then return '' end
-    return vim.trim(response)
+  function(_) return '' end,
+  separator = { right = '' },
+  color = function()
+      local color
+      if vim.fn['codeium#Enabled']() then
+        color = require 'lvim.core.lualine.colors'.green
+      else
+        color = require 'lvim.core.lualine.colors'.red
+      end
+
+      return { fg = color }
   end,
-  icon = { '', color = { fg = require 'lvim.core.lualine.colors'.purple } },
-  color = { gui = 'None' },
   on_click = function()
     if vim.fn['codeium#Enabled']() then
       vim.cmd 'CodeiumDisable'
-      return
+    else
+      vim.cmd 'CodeiumEnable'
     end
-
-    vim.cmd 'CodeiumEnable'
+  end,
+}
+local codeium_component = {
+  ---@return string
+  function(_)
+    local response = vim.fn['codeium#GetStatusString']()
+    response = vim.trim(response)
+    if response == 'ON' or response == 'OFF' then return '' end
+    return response
+  end,
+  padding = { left = 0, right = 1 },
+  cond = function()
+    local success, _ = pcall(vim.fn['codeium#GetStatusString'])
+    return success
   end,
 }
 
@@ -826,6 +844,7 @@ lvim.builtin.lualine.sections.lualine_c = {
   dap_component,
   search_count_component, -- useful for cmdheight=0
   macro_component,
+  codeium_status_component,
   codeium_component,
 }
 
