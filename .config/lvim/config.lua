@@ -1429,8 +1429,10 @@ plugins.auto_dark_mode = {
 -- backseat.nvim {{{
 plugins.backseat_nvim = {
   'james1236/backseat.nvim',
-  cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
+  -- cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
   opts = {
+    openapi_api_key = vim.env.OPENAI_API_KEY,
+    openai_model_id = 'gpt-3.5-turbo',
     highlight = { icon = '' },
     additional_instruction = 'Respond as if you are Robert C. Martin',
     -- openai_model_id = 'GPT-4',
@@ -3874,12 +3876,16 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
+  -- plugins.backseat_nvim, -- ChatGPT stuff! (this has stopped working)
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_copilot, -- github copilot
   -- plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
+  -- plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
   -- plugins.copilot_vim, -- github copilot
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
+  -- plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
+  -- plugins.incolla_nvim, -- paste images in markdown. configurable. Alternative: https://github.com/img-paste-devs/img-paste.vim
   -- plugins.neodim, -- dim unused functions with lsp and treesitter (alternative: https://github.com/askfiy/lsp_extra_dim)
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
@@ -3891,21 +3897,26 @@ lvim.plugins = {
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
-  -- { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = { vt_position = 'end_of_line' } }, -- show virtual text with number of usages
+  -- { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
+  -- { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   -- { 'ashfinal/qfview.nvim', event = 'UIEnter', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
+  -- { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
+  -- { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
+  -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
   -- { 'roobert/tabtree.nvim', event = 'VimEnter', opts = {} }, -- use treesitter to jump to various points such as "{()}" in normal mode (only works with certain treesitter queries that are for certain languages)
+  -- { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
+  -- { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.ale, -- older null-ls alternative
-  plugins.backseat_nvim, -- ChatGPT stuff!
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
@@ -3914,20 +3925,17 @@ lvim.plugins = {
   plugins.cmp_git, -- github source in commit messages for cmp e.g. users, PRs, hashes
   plugins.cmp_nerdfont, -- like emoji completion but for nerd font characters
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
-  plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
   plugins.cmp_rg, -- might help to include comments, strings, etc. in other files. This is actually really useful! (makes expensive rg calls regularly, caught in htop)
   plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
   plugins.cmp_tmux, -- Add a tmux source to nvim-cmp (all text in all tmux windows/panes)
   plugins.cmp_treesitter, -- cmp completion source for treesitter nodes
   plugins.dark_notify, -- auto-dark-mode
-  plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
   plugins.edgy_nvim, -- finally, a consolidated sidebar plugin! (alternative: https://github.com/stevearc/stickybuf.nvim)
   plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
-  plugins.incolla_nvim, -- paste images in markdown. configurable. Alternative: https://github.com/img-paste-devs/img-paste.vim
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.luasnip, -- add vscode snippet transformation support
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
@@ -3975,14 +3983,11 @@ lvim.plugins = {
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions. TODO: replace with https://github.com/olimorris/persisted.nvim
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
-  { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
-  { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
+  { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = { vt_position = 'end_of_line' } }, -- show virtual text with number of usages
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
-  { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
-  { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php', dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- sql and regex included
   { 'gsuuon/tshjkl.nvim', config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
@@ -3991,14 +3996,11 @@ lvim.plugins = {
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
-  { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool
   { 'smjonas/live-command.nvim', event = 'BufRead', config = function ()  require 'live-command'.setup { commands = { Norm = { cmd = 'norm' } } } end }, -- preview norm commands with Norm
-  { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis

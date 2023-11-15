@@ -577,13 +577,13 @@ _install_php_versions () {
     # export CFLAGS="-Wno-error ${CFLAGS}"
 
     # legacy, gallery
-    # _install_php_70
+    _install_php_70
     # palette
     _install_php_74
     # zed
-    # _install_php_80
+    _install_php_80
     # global
-    # _install_php_82
+    _install_php_82
     asdf global php 8.2.0
 
     popd || return
@@ -887,40 +887,40 @@ _install_fzf_to_shell () {
 # and run one or more independently. This is extremely useful!!
 
 _bootstrap_all () {
-    # _create_dirs
-    # _install_xcode_command_line_tools
-    # _install_homebrew_if_its_missing
-    # _install_update_homebrew_packages
-    # # _install_lazyman
-    # # _install_lazyvim
-    # _install_neovim_versions
+    _create_dirs
+    _install_xcode_command_line_tools
+    _install_homebrew_if_its_missing
+    _install_update_homebrew_packages
+    # _install_lazyman
+    # _install_lazyvim
+    _install_neovim_versions
     _install_php_versions
-    # _install_node_versions
-    # _install_lua_versions
-    # _install_perl_versions
-    # _install_deno_versions
-    # _install_python_versions
-    # _update_python_pip_packages
-    # _install_ruby_versions
-    # _install_upgrade_akamai
-    # _install_older_kubectl
-    # _install_erlang_version
-    # _install_elixir_version
-    # _set_zsh_as_shell
-    # _install_tmux_plugin_manager
-    # _install_upgrade_tmux_plugins
-    # _install_lunarvim
-    # _install_upgrade_lvim_plugins
-    # _update_antidote_plugins
-    # _apply_hosts_file
-    # # _enable_terminal_text_formattting
-    # _apply_mac_preferences
-    # _start_launch_agents
-    # # _fix_file_size_limit_for_watching_with_entr
-    # _install_fzf_to_shell
-    # _update_asdf_plugins
-    # _fix_delta_syntax_highlighting_for_php
-    # _clear_evalcache
+    _install_node_versions
+    _install_lua_versions
+    _install_perl_versions
+    _install_deno_versions
+    _install_python_versions
+    _update_python_pip_packages
+    _install_ruby_versions
+    _install_upgrade_akamai
+    _install_older_kubectl
+    _install_erlang_version
+    _install_elixir_version
+    _set_zsh_as_shell
+    _install_tmux_plugin_manager
+    _install_upgrade_tmux_plugins
+    _install_lunarvim
+    _install_upgrade_lvim_plugins
+    _update_antidote_plugins
+    _apply_hosts_file
+    # _enable_terminal_text_formattting
+    _apply_mac_preferences
+    _start_launch_agents
+    # _fix_file_size_limit_for_watching_with_entr
+    _install_fzf_to_shell
+    _update_asdf_plugins
+    _fix_delta_syntax_highlighting_for_php
+    _clear_evalcache
 }
 
 _bootstrap_all
