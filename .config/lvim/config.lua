@@ -638,6 +638,10 @@ local codeium_status_component = {
 
       return { fg = color }
   end,
+  cond = function()
+    local success, _ = pcall(vim.fn['codeium#GetStatusString'])
+    return success
+  end,
   on_click = function()
     if vim.fn['codeium#Enabled']() then
       vim.cmd 'CodeiumDisable'
@@ -646,6 +650,7 @@ local codeium_status_component = {
     end
   end,
 }
+
 local codeium_component = {
   ---@return string
   function(_)
@@ -3943,7 +3948,6 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
-  -- plugins.backseat_nvim, -- ChatGPT stuff! (this has stopped working)
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_copilot, -- github copilot
   -- plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
@@ -3984,6 +3988,7 @@ lvim.plugins = {
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.ale, -- older null-ls alternative
+  plugins.backseat_nvim, -- Get suggestions from ChatGPT
   plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
