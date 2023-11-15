@@ -624,6 +624,25 @@ local lsp_component = {
   on_click = function() vim.cmd 'LspInfo' end,
 }
 
+local codeium_component = {
+  ---@return string
+  function(_)
+    local success, response = pcall(vim.fn['codeium#GetStatusString'])
+    if not success then return '' end
+    return vim.trim(response)
+  end,
+  icon = { '', color = { fg = require 'lvim.core.lualine.colors'.purple } },
+  color = { gui = 'None' },
+  on_click = function()
+    if vim.fn['codeium#Enabled']() then
+      vim.cmd 'CodeiumDisable'
+      return
+    end
+
+    vim.cmd 'CodeiumEnable'
+  end,
+}
+
 local null_ls_component = {
   ---@param message string
   ---@return string
@@ -807,6 +826,7 @@ lvim.builtin.lualine.sections.lualine_c = {
   dap_component,
   search_count_component, -- useful for cmdheight=0
   macro_component,
+  codeium_component,
 }
 
 -- }}}
@@ -1739,6 +1759,32 @@ plugins.cmp_treesitter = {
     if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'treesitter' }) then return end
     table.insert(lvim.builtin.cmp.sources, { name = 'treesitter' })
   end,
+}
+-- }}}
+
+-- codeium.vim {{{
+plugins.codeium_vim = {
+  'Exafunction/codeium.vim',
+  dependencies = 'folke/which-key.nvim',
+  event = 'BufEnter',
+  init = function()
+    vim.g.codeium_no_map_tab = 1
+    lvim.builtin.which_key.mappings['l']['O'] = {
+      function()
+        if vim.fn['codeium#Enabled']() == true then
+          vim.cmd 'CodeiumDisable'
+        else
+          vim.cmd 'CodeiumEnable'
+        end
+      end,
+      'Toggle Codeium'
+    }
+  end,
+  config = function()
+    vim.keymap.set('i', '<m-tab>', vim.fn['codeium#Accept'], { noremap = true, expr = true, desc = 'Codeium Accept' })
+    vim.keymap.set('i', '<m-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { noremap = true, expr = true, desc = 'Next Codeium Completion' })
+    vim.keymap.set('i', '<m-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { noremap = true, expr = true, desc = 'Prev Codeium Completion' })
+  end
 }
 -- }}}
 
@@ -3929,6 +3975,7 @@ lvim.plugins = {
   plugins.cmp_tabnine, -- AI completion (can hog memory/cpu)
   plugins.cmp_tmux, -- Add a tmux source to nvim-cmp (all text in all tmux windows/panes)
   plugins.cmp_treesitter, -- cmp completion source for treesitter nodes
+  plugins.codeium_vim, -- like GitHub copilot but free
   plugins.dark_notify, -- auto-dark-mode
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.

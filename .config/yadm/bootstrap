@@ -114,6 +114,7 @@ _pin_homebrew_packages () {
     # brew pin libiconv
     # brew pin libmcrypt
     # brew pin libmemcached
+    brew pin libsodium
     # brew pin openssl
     # brew pin pkg-config
     # brew pin re2c
