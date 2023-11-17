@@ -109,6 +109,8 @@ if vim.fn.filereadable '/usr/share/dict/words' == 1 then vim.opt.dictionary:appe
 -- vim.o.updatetime = 650 -- wait time before CursorHold activation
 vim.o.updatetime = 100 -- wait time before CursorHold activation
 
+vim.cmd 'packadd! cfilter'
+
 -- vim-cool replacement https://www.reddit.com/r/neovim/comments/zc720y/tip_to_manage_hlsearch/iyvcdf0/
 vim.on_key(function(char)
   if vim.fn.mode() == 'n' then
@@ -629,17 +631,20 @@ local codeium_status_component = {
   function(_) return '' end,
   separator = { right = '' },
   color = function()
-      local color
-      if vim.fn['codeium#Enabled']() then
-        color = require 'lvim.core.lualine.colors'.green
-      else
-        color = require 'lvim.core.lualine.colors'.red
-      end
+    local installed, _ = pcall(vim.cmd, 'Codeium')
+    if not installed then return {} end
 
-      return { fg = color }
+    local color
+    if vim.fn['codeium#Enabled']() then
+      color = require 'lvim.core.lualine.colors'.green
+    else
+      color = require 'lvim.core.lualine.colors'.red
+    end
+
+    return { fg = color }
   end,
   cond = function()
-    local success, _ = pcall(vim.fn['codeium#GetStatusString'])
+    local success, _ = pcall(vim.cmd, 'Codeium')
     return success
   end,
   on_click = function()
@@ -661,8 +666,8 @@ local codeium_component = {
   end,
   padding = { left = 0, right = 1 },
   cond = function()
-    local success, _ = pcall(vim.fn['codeium#GetStatusString'])
-    return success
+    local installed, _ = pcall(vim.cmd, 'Codeium')
+    return installed
   end,
 }
 
@@ -3490,7 +3495,10 @@ plugins.vim_lion = {
   'tommcdo/vim-lion',
   event = 'BufRead',
   dependencies = 'folke/which-key.nvim',
-  init = function() vim.g['lion_map_right'] = 'ga' end,
+  init = function()
+    vim.g['lion_map_right'] = 'ga'
+    vim.g['lion_squeeze_spaces'] = true
+  end,
   config = function()
     require 'which-key'.register({
       a = 'Align operator right',
