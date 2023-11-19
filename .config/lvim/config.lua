@@ -4065,7 +4065,7 @@ lvim.plugins = {
   plugins.vim_unimpaired, -- lots of useful, basic keyboard shortcuts
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
-  { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = { vt_position = 'end_of_line' } }, -- show virtual text with number of usages
+  { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = {  request_pending_text= '', vt_position = 'end_of_line' } }, -- show virtual text with number of usages
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
@@ -4086,5 +4086,6 @@ lvim.plugins = {
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
   { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
+  { url = 'https://codeberg.org/esensar/nvim-dev-container', dependencies = 'nvim-treesitter/nvim-treesitter', config = function () require 'devcontainer'.setup({}) end }, -- devcontainer support
 }
 -- }}}

@@ -76,6 +76,8 @@ manpath=(
 )
 
 path=(
+    # kubectl plugin manager (plugins will be installed to this bin)
+  "${KREW_ROOT:-$HOME/.krew}"/bin
   $HOME/.docker/bin
   # to install groovy-language-server
   $(brew --prefix openjdk@17)/bin
@@ -100,7 +102,7 @@ path=(
   # golang executables
   # $(brew --prefix)/opt/go/libexec/bin
   # $HOME/.{pl,nod,py}env/bin # these will be set up by shell integration
-  $HOME/.composer/vendor/bin
+  # $HOME/.composer/vendor/bin
   # $([ -f $HOME/.asdf/shims/gem ] && $HOME/.asdf/shims/gem env home)
   # /usr/{bin,sbin}
   # /{bin,sbin}
@@ -173,6 +175,7 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 # evaluated startup commands {{{
 _has mutagen && mutagen daemon start
 _has direnv && _evalcache direnv hook zsh # (evalcache version)
+# _has pkgx && source <(pkgx --shellcode)
 # _has aicommits && aicommits config set OPENAI_KEY="$OPENAI_API_KEY"
 # #slow
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact

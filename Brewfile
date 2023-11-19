@@ -26,6 +26,7 @@ tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 tap "oven-sh/bun" # bun
+tap "pkgxdev/made" # pkgx
 
 # }}}
 
@@ -290,6 +291,7 @@ brew "percona-toolkit" # mysql schema migrator among other things. requires java
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "pkgx" # like npx for homebrew
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
 brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)

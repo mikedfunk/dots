@@ -31,7 +31,7 @@ local function get_namespace(filepath, filename)
   local namespace = string.gsub(filepath, '/' .. filename, '')
   namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
   -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
-  namespace = string.gsub(namespace, '^/app/(.*)$', '%1')
+  namespace = string.gsub(namespace, '^/app/(.*)$', 'Palette/%1')
   namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
   namespace = string.gsub(namespace, 'SaatchiArt', 'Palette/SaatchiArt')
   namespace = string.gsub(namespace, '/project/Zed/src/', '')

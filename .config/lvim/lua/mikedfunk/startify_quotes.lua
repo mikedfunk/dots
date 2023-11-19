@@ -368,7 +368,7 @@ local startify_quotes = {
   { "When given a choice in an object-oriented design between a containment relationship and an association relationship, choose the containment relationship.", "", "- Object-Oriented Design Heuristics" },
   { "When in doubt, leave it out.", "", "- Joshua Bloch" },
   { "When we focus on building an intuition, we don't need to memorize rules. We can rely on our mental model to come up with the right answer. It's wayyy more practical.", "", "- Josh W. Comeau" }, -- https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
-  { "When you choose not to care about complexity, you're merely pushing it onto other developers in your org. Ops people, your customers, someone. Now they have to work around your assumptions to make sure everything keeps running smoothly.", "", "And nowadays, I'm often that someone, and I'm tired of it.", "", "- fasterthanli.me" },
+  { "When you choose not to care about complexity, you're merely pushing it onto other developers in your org. Ops people, your customers, someone. Now they have to work around your assumptions to make sure everything keeps running smoothly.", "", "- fasterthanli.me" },
   { "When you come across a stumbling block because the code doesn't quite fit anymore, or you notice two things that should really be merged, or anything else at all strikes you as being \"wrong\", don't hesitate to change it. There's no time like the present.", "", "- Andy Hunt, Dave Thomas" },
   { "Why do we make the mess? What drives us to make the mess in the first place? Because we want to go fast.", "", "- Robert C. Martin" },
   { "Why do we never have time to do it right, but always have time to do it over?", "", "- Jack Bergman" },
