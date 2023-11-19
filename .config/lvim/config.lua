@@ -280,7 +280,7 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 
 -- use latest node and php version
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
--- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin:' .. vim.env.PATH
+-- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin:' .. vim.env.PATH
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.0.27/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
@@ -2835,7 +2835,7 @@ plugins.persistent_breakpoints = {
 
 -- phpactor_nvim {{{
 local configure_phpactor_nvim = function()
-  local php_bin_path = vim.env.HOME .. '/.asdf/installs/php/8.2.0/bin'
+  local php_bin_path = vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin'
   require 'phpactor'.setup {
     lspconfig = { enabled = false },
     install = {
@@ -2893,7 +2893,8 @@ local configure_phpactor_nvim = function()
 end
 
 plugins.phpactor_nvim = {
-  'gbprod/phpactor.nvim',
+  -- 'gbprod/phpactor.nvim',
+  'mikedfunk/phpactor.nvim', branch = 'mikedfunk-patch-1', -- fix bug - see https://github.com/gbprod/phpactor.nvim/pull/23
   ft = 'php',
   dependencies = {
     'folke/which-key.nvim',
@@ -3993,6 +3994,7 @@ lvim.plugins = {
   -- { 'tiagovla/scope.nvim', event = 'BufRead' }, -- scope buffers to tabs. This is only useful when I use tabs.
   -- { 'tomiis4/Hypersonic.nvim', cmd = 'Hypersonic' }, -- regex explainer
   -- { 'xiyaowong/virtcolumn.nvim', event = 'BufRead' }, -- line instead of bg color for colorcolumn. Arguable whether this is any better.
+  -- { url = 'https://codeberg.org/esensar/nvim-dev-container', dependencies = 'nvim-treesitter/nvim-treesitter', config = function () require 'devcontainer'.setup({}) end }, -- devcontainer support
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.ale, -- older null-ls alternative
@@ -4039,7 +4041,7 @@ lvim.plugins = {
   plugins.nvim_yati, -- better treesitter support for python and others
   plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.persistent_breakpoints, -- persist breakpoints between sessions
-  plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html
+  plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html (broken)
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
   plugins.refactoring_nvim, -- refactoring plugin with telescope support
   plugins.splitjoin_vim, -- split and join php arrays to/from multiline/single line (gS, gJ) SO USEFUL! (see also: AckslD/nvim-trevJ.lua) TODO: replace with https://github.com/CKolkey/ts-node-action
@@ -4086,6 +4088,5 @@ lvim.plugins = {
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
   { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
-  { url = 'https://codeberg.org/esensar/nvim-dev-container', dependencies = 'nvim-treesitter/nvim-treesitter', config = function () require 'devcontainer'.setup({}) end }, -- devcontainer support
 }
 -- }}}

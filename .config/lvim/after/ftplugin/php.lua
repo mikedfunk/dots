@@ -31,3 +31,12 @@ if vim.fn.filereadable '.php-cs-fixer.php' == 1 then
   if not vim.tbl_contains(ale_fixers, 'php_cs_fixer') then table.insert(ale_fixers, 'php_cs_fixer') end
   vim.b[0].ale_fixers = ale_fixers
 end
+
+-- require 'lvim.lsp.manager'.setup('phpactor', {
+--   filetypes = { 'php', 'phtml.html' },
+--   cmd = {
+--     vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin/php',
+--     vim.fn.stdpath('data') .. '/mason/bin/phpactor',
+--     'language-server'
+--   },
+-- })
