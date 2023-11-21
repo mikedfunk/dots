@@ -281,7 +281,6 @@ vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf'
 -- use latest node and php version
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin:' .. vim.env.PATH
--- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.0.27/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
 vim.keymap.set('o', 'iz', '<Cmd>normal! [zj0v]zk$<CR>', { noremap = true })
@@ -1079,7 +1078,7 @@ if is_null_ls_installed and not did_register_phpcbf then
   null_ls.register { sources = {
     null_ls.builtins.formatting.phpcbf.with {
       command = vim.env.HOME .. '/.support/phpcbf-helper.sh', -- damn it... LunarVim overrides the command now. Gotta do it from null-ls instead.
-      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off' }, -- do not fix warnings
+      extra_args = { '-d', 'memory_limit=60M', '-d', 'xdebug.mode=off', '-w', '--warning-severity=3' },
       -- condition = function()
       --   -- return utils.is_exectuable 'phpcbf' and utils.root_has_file { 'phpcs.xml' }
       --   return vim.fn.executable 'phpcbf' == 1 and vim.fn.filereadable 'phpcs.xml' == 1
