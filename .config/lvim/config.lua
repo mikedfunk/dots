@@ -3728,6 +3728,7 @@ lvim.keys.normal_mode['<C-w>t'] = 'mz:tabe %<cr>`z'
 lvim.keys.normal_mode['<c-l>'] = ':silent! call LocListToggle()<CR>'
 
 lvim.builtin.which_key.mappings['e'] = { '<Cmd>NvimTreeFindFileToggle<CR>', 'Explore File' }
+lvim.builtin.which_key.mappings['m'] = { '<Cmd>silent make<CR>', 'Make' }
 lvim.builtin.which_key.mappings['E'] = { '<Cmd>NvimTreeToggle<CR>', 'Explore' }
 
 lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Configure LSP' }
