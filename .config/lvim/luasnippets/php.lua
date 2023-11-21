@@ -16,8 +16,7 @@ local function get_class_under_test(filepath)
   class_under_test = string.gsub(filepath, 'Spec.php', '')
   class_under_test = string.gsub(class_under_test, vim.api.nvim_exec('pwd', true), '')
   class_under_test = string.gsub(class_under_test, '/project/Zed/tests/src/', '')
-  class_under_test = string.gsub(class_under_test, 'SaatchiArt', 'Palette/SaatchiArt')
-  class_under_test = string.gsub(class_under_test, '/spec/', '')
+  class_under_test = string.gsub(class_under_test, '/spec/', 'Palette/')
   class_under_test = string.gsub(class_under_test, '^/(.*)$', '%1')
   class_under_test = string.gsub(class_under_test, '/', '\\')
 
@@ -32,6 +31,7 @@ local function get_namespace(filepath, filename)
   namespace = string.gsub(namespace, vim.api.nvim_exec('pwd', true), '')
   -- TODO: get SUPER fancy with this and use jq to parse composer.json autoload psr-4, then map that to replacing paths
   namespace = string.gsub(namespace, '^/app/(.*)$', 'Palette/%1')
+  namespace = string.gsub(namespace, '^/spec/(.*)$', 'spec/Palette/%1')
   namespace = string.gsub(namespace, '/project/Zed/tests', 'Tests')
   namespace = string.gsub(namespace, 'SaatchiArt', 'Palette/SaatchiArt')
   namespace = string.gsub(namespace, '/project/Zed/src/', '')
@@ -46,28 +46,60 @@ end
 local class_snippet = snippet(
   { trig = 'cla', name = 'PHP Class', dscr = "Mike's class with namespace" },
   {
-  text_node({
-    '<?php',
-    '',
-    'declare(strict_types=1);',
-    '',
-    '',
-  }),
-  function_node(function(_, snip)
-    local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
+    text_node({
+      '<?php',
+      '',
+      'declare(strict_types=1);',
+      '',
+      '',
+    }),
+    function_node(function(_, snip)
+      local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
-    return 'namespace ' .. namespace .. ';'
-  end, {}),
-  text_node({ '', '', '' }),
-  function_node(function(_, snip)
-    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+      return 'namespace ' .. namespace .. ';'
+    end, {}),
+    text_node({ '', '', '' }),
+    function_node(function(_, snip)
+      local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
-    return 'final class ' .. class_name
-  end, {}),
-  text_node({ '', '{', '    ' }),
-  insert_node(0),
-  text_node({ '', '}' }),
-}
+      return 'final class ' .. class_name
+    end, {}),
+    text_node({ '', '{', '    ' }),
+    insert_node(0),
+    text_node({ '', '}' }),
+  }
+)
+-- }}}
+
+-- controller {{{
+local controller_snippet = snippet(
+  { trig = 'cntr', name = 'PHP Class', dscr = "Mike's controller" },
+  {
+    text_node({
+      '<?php',
+      '',
+      'declare(strict_types=1);',
+      '',
+      '',
+    }),
+    function_node(function(_, snip)
+      local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
+
+      return 'namespace ' .. namespace .. ';'
+    end, {}),
+    text_node({ '', '', '' }),
+    text_node({ 'use Illuminate\\Http\\JsonResponse;', '' }),
+    text_node({ 'use Palette\\Http\\Controllers\\Controller;', '' }),
+    text_node({ '', '' }),
+    function_node(function(_, snip)
+      local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+
+      return 'final class ' .. class_name .. ' extends Controller'
+    end, {}),
+    text_node({ '', '{', '    ' }),
+    insert_node(0),
+    text_node({ '', '}' }),
+  }
 )
 -- }}}
 
@@ -234,10 +266,9 @@ local phpspec_class_snippet = snippet(
     }
   end),
   function_node(function(_, snip)
-    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
-    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+    local class_under_test = string.gsub(snip.env.TM_FILENAME, 'Spec.php', '')
 
-    return '@see ' .. class_name
+    return '@see ' .. class_under_test
   end, {}),
   text_node({ '', ' */', '' }),
   function_node(function(_, snip)
@@ -249,10 +280,9 @@ local phpspec_class_snippet = snippet(
   text_node({ '', '    public function it_is_initializable(): void' }),
   text_node({ '', '    {' }),
   function_node(function(_, snip)
-    local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
-    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+    local class_under_test = string.gsub(snip.env.TM_FILENAME, 'Spec.php', '')
 
-    return { '', "        $this->shouldHaveType(" .. class_name .. "::class);" }
+    return { '', "        $this->shouldHaveType(" .. class_under_test .. "::class);" }
   end, {}),
   text_node({ '', '    }' }),
   insert_node(0),
@@ -454,6 +484,7 @@ return {
   artisan_snippet,
   -- assign_snippet, moved to php.json
   class_snippet,
+  controller_snippet,
   -- class_var_snippet, moved to php.json
   -- constant_snippet, moved to php.json
   constructor_snippet,
