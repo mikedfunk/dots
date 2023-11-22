@@ -454,3 +454,18 @@
     # navigate = true
     # hyperlinks = true
 # }}}
+
+# git-fixup {{{
+[fixup]
+    commit = true
+    menu = fzf --height '60%' \
+        --bind 'tab:toggle-preview' \
+        --preview 'git show --color {+1}' \
+        --preview-window=up:80% \
+        --prompt 'Select commit: '
+# }}}
+
+# git-jump {{{
+[jump]
+    grepCmd = ag --column
+# }}}

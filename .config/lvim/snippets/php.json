@@ -38,7 +38,7 @@
   },
   "Assign property": {
     "prefix": "asn",
-    "body": ["\\$this->$1 = \\$$1;"]
+    "body": ["\\$this->${1:myProp} = \\$$1;"]
   },
   "Const": {
     "prefix": "cnst",
@@ -58,10 +58,6 @@
   "Class property": {
     "prefix": "va",
     "body": ["${1|private,protected,public|} ${2:MyClass} \\$${2/(.*)/${1:/camelcase}/};"]
-  },
-  "Assign property": {
-    "prefix": "asn",
-    "body": ["\\$this->${1:myProp} = \\$$1"]
   },
   "Function argument": {
     "prefix": "arg",

@@ -243,6 +243,7 @@ brew "gettext" # needed to build php
 brew "gh" # new github cli
 brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
+brew "git-fixup" # git commit --fixup helper
 brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 brew "glab" # like gh for gitlab
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
