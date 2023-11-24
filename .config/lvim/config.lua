@@ -100,8 +100,8 @@ vim.o.foldcolumn = 'auto' -- make folds visible left of the sign column. Very co
 -- vim.o.hlsearch = false -- disable auto highlight all search results, this is handled by highlight-current-n
 vim.o.pumblend = 15 -- popup pseudo-transparency
 vim.o.winblend = 15 -- floating window pseudo-transparency
--- vim.o.exrc = true
--- vim.o.secure = true
+vim.o.exrc = true -- TODO: not working
+vim.o.secure = true
 -- vim.o.smartindent = true -- Do smart autoindenting when starting a new line. Absolute must.
 -- vim.o.autoindent = true
 vim.o.laststatus = 3 -- new neovim global statusline
@@ -1174,7 +1174,7 @@ lvim.builtin.dap.on_config_done = function()
   adjust_dap_signs()
 end
 
-require 'saatchiart.plugin_configs'.configure_nvim_dap()
+-- require 'saatchiart.plugin_configs'.configure_nvim_dap()
 
 -- }}}
 
@@ -3735,6 +3735,7 @@ lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Co
 lvim.builtin.which_key.mappings['l']['R'] = { '<Cmd>LspRestart<CR>', 'Restart LSP' }
 
 lvim.builtin.which_key.mappings['b']['d'] = { '<Cmd>bd<CR>', 'Delete' }
+lvim.builtin.which_key.mappings['b']['f'] = { '<Cmd>Telescope buffers initial_mode=insert<CR>', 'Find' }
 lvim.builtin.which_key.mappings['b']['p'] = { '<Cmd>BufferLineTogglePin<CR>', 'Pin/Unpin' }
 
 -- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
@@ -4080,6 +4081,7 @@ lvim.plugins = {
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
+  { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta

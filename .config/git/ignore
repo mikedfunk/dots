@@ -38,3 +38,4 @@ yarn-error.log
 .tool-versions
 __pycache__
 .jenkinslintrc
+.nvim.lua

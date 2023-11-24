@@ -22,6 +22,7 @@ Code/saatchi/gallery/.prettierrc.json
 Code/saatchi/xdocker/compose.yml
 
 Code/saatchi/**/.pre-commit-config.yaml
+Code/saatchi/**/.nvim.lua
 Code/saatchi/**/.jenkinslintrc
 Code/saatchi/**/.envrc
 Code/saatchi/**/.ignore

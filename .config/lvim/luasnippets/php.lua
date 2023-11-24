@@ -59,10 +59,14 @@ local class_snippet = snippet(
       return 'namespace ' .. namespace .. ';'
     end, {}),
     text_node({ '', '', '' }),
+    choice_node(1, {
+      text_node('final '),
+      text_node(''),
+    }),
     function_node(function(_, snip)
       local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
 
-      return 'final class ' .. class_name
+      return 'class ' .. class_name
     end, {}),
     text_node({ '', '{', '    ' }),
     insert_node(0),
