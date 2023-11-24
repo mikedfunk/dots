@@ -2354,7 +2354,11 @@ plugins.nvim_bqf = {
   'kevinhwang91/nvim-bqf',
   branch = 'main',
   event = 'BufRead',
-  config = function() require 'bqf'.setup {} end,
+  config = function() require 'bqf'.setup {
+    should_preview_cb = function(bufnr, _)
+      return vim.api.nvim_buf_get_option(bufnr, 'filetype') ~= 'git'
+    end,
+  } end,
   dependencies = 'nvim-treesitter/nvim-treesitter',
 }
 -- }}}
@@ -3763,6 +3767,7 @@ lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp St
 lvim.builtin.which_key.mappings[';'] = nil
 
 -- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
+lvim.builtin.which_key.mappings['g']['L'] = { '<Cmd>0Gclog<CR>', 'Git File Log' }
 local are_diagnostics_visible = true
 local toggle_diagnostics = function()
   are_diagnostics_visible = not are_diagnostics_visible

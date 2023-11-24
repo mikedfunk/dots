@@ -147,7 +147,6 @@ local startify_quotes = {
   { "Good code is its own best documentation. As you're about to add a comment, ask yourself, \"How can I improve the code so that this comment isn't needed?\"", "", "- Steve McConnell" },
   { "Good design is easier to change than bad design.", "", "A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing.", "", "- The Pragmatic Programmer" },
   { "Good programmers use their brains, but good guidelines save us having to think out every case.", "", "- Francis Glassborow" },
-  { "Google’s biggest DoS attacks come from ourselves—because we have really big systems—although every now and then someone will show up and try to give us a run for our money, but really we’re more capable of hammering ourselves into the ground than anybody else is.", "", "This is true for all systems.", "", "Astrid Atkinson, Engineering for the Long Game" },
   { "Hell isn't other people's code. Hell is your own code from 3 years ago.", "", "- Jeff Atwood" },
   { "Hope is not a plan.", "", "- Jonathan Rosenberg" },
   { "How much time do you invest in cleaning it? Roughly the same amount of time it took you to write it. And that's the problem - nobody wants to put that effort in. Because they think they're done when it works. You're not done when it works! You're done when it's right.", "", "- Robert C. Martin" },
