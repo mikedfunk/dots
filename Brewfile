@@ -422,6 +422,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "quicklook-csv" # quicklook plugin (preview csvs)
 # cask "quicklook-json" # quicklook plugin (preview json)
 # cask "scummvm" # old school
+# cask "sequel-ace" # maintained fork of sequel pro (switched to table plus)
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 # cask "shadow" # cloud gaming system https://shadow.tech
@@ -478,7 +479,6 @@ cask "neardrop" # android nearby devices drop
 cask "nvidia-geforce-now" # game streaming
 cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
-cask "sequel-ace" # maintained fork of sequel pro
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 cask "tableplus" # alternative to sequelpro
 cask "vpn-by-google-one" # google vpn
