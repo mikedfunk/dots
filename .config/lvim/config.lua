@@ -507,30 +507,32 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function() vim.cmd [[silent! hi! link BufferLineFill BufferLineGroupSeparator]] end,
 })
 
--- Bufferline tries to make everything italic. Why?
-lvim.builtin.bufferline.highlights.background = { italic = false }
-lvim.builtin.bufferline.highlights.buffer_selected.italic = false
-lvim.builtin.bufferline.highlights.diagnostic_selected = { italic = false }
-lvim.builtin.bufferline.highlights.hint_selected = { italic = false }
-lvim.builtin.bufferline.highlights.hint_diagnostic_selected = { italic = false }
-lvim.builtin.bufferline.highlights.info_selected = { italic = false }
-lvim.builtin.bufferline.highlights.info_diagnostic_selected = { italic = false }
-lvim.builtin.bufferline.highlights.warning_selected = { italic = false }
-lvim.builtin.bufferline.highlights.warning_diagnostic_selected = { italic = false }
-lvim.builtin.bufferline.highlights.error_selected = { italic = false }
-lvim.builtin.bufferline.highlights.error_diagnostic_selected = { italic = false }
-lvim.builtin.bufferline.highlights.duplicate_selected = { italic = false }
-lvim.builtin.bufferline.highlights.duplicate_visible = { italic = false }
-lvim.builtin.bufferline.highlights.duplicate = { italic = false }
-lvim.builtin.bufferline.highlights.pick_selected = { italic = false }
-lvim.builtin.bufferline.highlights.pick_visible = { italic = false }
-lvim.builtin.bufferline.highlights.pick = { italic = false }
+-- -- Bufferline tries to make everything italic. Why?
+-- moved to no_italic below
+-- lvim.builtin.bufferline.highlights.background = { italic = false }
+-- lvim.builtin.bufferline.highlights.buffer_selected.italic = false
+-- lvim.builtin.bufferline.highlights.diagnostic_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.hint_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.hint_diagnostic_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.info_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.info_diagnostic_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.warning_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.warning_diagnostic_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.error_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.error_diagnostic_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.duplicate_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.duplicate_visible = { italic = false }
+-- lvim.builtin.bufferline.highlights.duplicate = { italic = false }
+-- lvim.builtin.bufferline.highlights.pick_selected = { italic = false }
+-- lvim.builtin.bufferline.highlights.pick_visible = { italic = false }
+-- lvim.builtin.bufferline.highlights.pick = { italic = false }
 
 lvim.builtin.bufferline.options.persist_buffer_sort = true
 lvim.builtin.bufferline.options.hover.enabled = true
 lvim.builtin.bufferline.options.sort_by = 'insert_after_current'
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.bufferline.options.separator_style = 'slant'
+-- lvim.builtin.bufferline.options.numbers = 'ordinal'
 
 -- remove all sidebar headers
 for k, _ in ipairs(lvim.builtin.bufferline.options.offsets) do
@@ -544,10 +546,9 @@ if is_installed('bufferline') then
     lvim.builtin.bufferline.options.groups.items,
     require 'bufferline.groups'.builtin.pinned:with { icon = "" }
   )
+
+  lvim.builtin.bufferline.options.style_preset = require 'bufferline'.style_preset.no_italic
 end
--- lvim.builtin.bufferline.on_config_done = function()
---   vim.o.background = 'light'
--- end
 -- }}}
 
 -- gitsigns.nvim {{{
@@ -581,7 +582,7 @@ lvim.builtin.lualine.extensions = { 'quickfix', 'nvim-tree', 'symbols-outline', 
 
 local components = require 'lvim.core.lualine.components'
 
-components.filetype.on_click = function() vim.cmd 'Telescope filetypes' end
+components.filetype.on_click = function() vim.cmd 'Telescope filetypes theme=get_ivy' end
 
 -- match icons with the ones in the signs column
 local diagnostics_component = components.diagnostics
@@ -1487,16 +1488,6 @@ plugins.backseat_nvim = {
   },
 }
 --}}}
-
--- BufOnly.nvim {{{
-plugins.bufonly_nvim = {
-  'numToStr/BufOnly.nvim',
-  cmd = 'BufOnly',
-  init = function()
-    lvim.builtin.which_key.mappings['b']['o'] = { '<Cmd>BufOnly<CR>', 'Delete All Other Buffers' }
-  end,
-}
--- }}}
 
 --- ccc.nvim {{{
 plugins.ccc_nvim = {
@@ -3735,8 +3726,9 @@ lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Co
 lvim.builtin.which_key.mappings['l']['R'] = { '<Cmd>LspRestart<CR>', 'Restart LSP' }
 
 lvim.builtin.which_key.mappings['b']['d'] = { '<Cmd>bd<CR>', 'Delete' }
-lvim.builtin.which_key.mappings['b']['f'] = { '<Cmd>Telescope buffers initial_mode=insert<CR>', 'Find' }
+lvim.builtin.which_key.mappings['b']['f'] = { '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', 'Find' }
 lvim.builtin.which_key.mappings['b']['p'] = { '<Cmd>BufferLineTogglePin<CR>', 'Pin/Unpin' }
+lvim.builtin.which_key.mappings['b']['o'] = { '<Cmd>BufferLineGroupClose ungrouped<CR>', 'Delete All but Pinned' }
 
 -- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
 -- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
@@ -4001,7 +3993,6 @@ lvim.plugins = {
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
   plugins.ale, -- older null-ls alternative
   plugins.backseat_nvim, -- Get suggestions from ChatGPT
-  plugins.bufonly_nvim, -- close all buffers but the current one
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
   plugins.cmp_dictionary, -- vim dictionary source for cmp
