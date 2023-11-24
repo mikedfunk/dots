@@ -438,7 +438,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "stoplight-studio" # openapi ide. This is cool but you can also just use the web version at https://stoplight.io/p/studio but the desktop app works with local files _and_ automatically mocks local apis with prism - their built-in api mocker (this is really only useful as a fancy local openapi spec editor since even their ci docs generator just hits their api)
 # cask "suspicious-package" # quicklook plugin for mac dmg package inspection (I don't care about inspecting these)
 # cask "synthesia" # piano learning software
-# cask "tableplus" # alternative to sequelpro (paid)
 # cask "transmission" # unleash a torrent of files ;)
 # cask "tunnelbear" # tunnel to a specific country
 # cask "unshaky" # fix double keypress on macbook butterfly keyboard
@@ -481,6 +480,7 @@ cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-ace" # maintained fork of sequel pro
 cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
+cask "tableplus" # alternative to sequelpro
 cask "vpn-by-google-one" # google vpn
 
 # }}}
