@@ -42,6 +42,8 @@ Code/saatchi/zed/.editorconfig
 
 # .aws/credentials
 # .config/lvim/lsp-settings/sqlls.json
+# Notes/**/*.md
+# Notes/**/imgs/*
 .bin/pu-pretty
 .boto
 .circleci/cli.yml
@@ -59,8 +61,6 @@ Code/saatchi/zed/.editorconfig
 .warprc
 Library/Application Support/Sequel Pro/Data/Favorites.plist
 Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
-# Notes/**/*.md
-# Notes/**/imgs/*
 intelephense/licence.txt
 
 # }}}

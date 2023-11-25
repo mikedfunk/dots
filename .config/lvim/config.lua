@@ -2115,6 +2115,18 @@ plugins.mason_null_ls_nvim = {
 }
 -- }}}
 
+-- mini-align {{{
+plugins.mini_align = {
+  'echasnovski/mini.align',
+  event = 'BufRead',
+  version = false,
+  dependencies = 'folke/which-key.nvim',
+  config = function()
+    require 'which-key'.register({ a = 'Align operator right' }, { prefix = 'g' })
+  end
+}
+-- }}}
+
 -- mkdx {{{
 
 ---@return nil
@@ -3159,6 +3171,28 @@ plugins.telescope_lazy_nvim = {
 }
 -- }}}
 
+-- telescope-undo.nvim {{{
+plugins.telescope_undo_nvim = {
+  'debugloop/telescope-undo.nvim',
+  dependencies = 'nvim-telescope/telescope.nvim',
+  keys = {
+    { '<Leader>u', '<Cmd>Telescope undo<CR>', desc = 'Telescope Undo' },
+  },
+  init = function()
+    lvim.builtin.telescope.extensions.undo = {
+      mappings = {
+        i = {
+          ["<cr>"] = require("telescope-undo.actions").restore,
+        },
+      },
+    }
+  end,
+  config = function()
+    require 'telescope'.load_extension 'undo'
+  end,
+}
+-- }}}
+
 -- text-case.nvim {{{
 plugins.text_case_nvim = {
   'johmsalas/text-case.nvim',
@@ -3265,6 +3299,38 @@ plugins.tmuxline_vim = {
 
     vim.cmd 'command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf' -- apply tmuxline settings and snapshot to file
   end,
+}
+-- }}}
+
+-- treesitter-indent-object.nvim {{{
+plugins.treesitter_indent_object_nvim = {
+  "kiyoon/treesitter-indent-object.nvim",
+  keys = {
+    -- {
+    --   "ai",
+    --   function() require'treesitter_indent_object.textobj'.select_indent_outer() end,
+    --   mode = {"x", "o"},
+    --   desc = "Select context-aware indent (outer)",
+    -- },
+    {
+      "ai",
+      function() require'treesitter_indent_object.textobj'.select_indent_outer(true) end,
+      mode = {"x", "o"},
+      desc = "Select context-aware indent (outer, line-wise)",
+    },
+    -- {
+    --   "ii",
+    --   function() require'treesitter_indent_object.textobj'.select_indent_inner() end,
+    --   mode = {"x", "o"},
+    --   desc = "Select context-aware indent (inner, partial range)",
+    -- },
+    {
+      "ii",
+      function() print('test'); require'treesitter_indent_object.textobj'.select_indent_inner(true, 'V') end,
+      mode = {"x", "o"},
+      desc = "Select context-aware indent (inner, entire range) in line-wise visual mode",
+    },
+  },
 }
 -- }}}
 
@@ -3973,8 +4039,12 @@ lvim.plugins = {
   -- plugins.nvim_treesitter_playground, -- dev tool to help identify treesitter nodes and queries
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
+  -- plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
+  -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) TODO: replace with https://github.com/boltlessengineer/smart-tab.nvim
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
+  -- plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
+  -- plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` TODO: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
   -- { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
   -- { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   -- { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = {  request_pending_text= '', vt_position = 'end_of_line' } }, -- show virtual text with number of usages (this slows down the LSP in Zed especially)
@@ -3987,6 +4057,7 @@ lvim.plugins = {
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
+  -- { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
   -- { 'roobert/tabtree.nvim', event = 'VimEnter', opts = {} }, -- use treesitter to jump to various points such as "{()}" in normal mode (only works with certain treesitter queries that are for certain languages)
   -- { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool
@@ -4020,6 +4091,7 @@ lvim.plugins = {
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.luasnip, -- add vscode snippet transformation support
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
+  plugins.mini_align, -- align on operators like => `viiga=` replaces vim-lion
   plugins.mkdx, -- helpful markdown mappings
   plugins.modes_nvim, -- highlight UI elements based on current mode similar to Xcode vim bindings. Indispensable!
   plugins.neo_zoom_lua, -- zoom a window, especially helpful with nvim-dap-ui
@@ -4037,7 +4109,6 @@ lvim.plugins = {
   plugins.nvim_treesitter_textobjects, -- enable some more text objects for functions, classes, etc. also covers vim-swap functionality. (breaks in markdown! something about a bad treesitter query)
   plugins.nvim_ts_autotag, -- automatically close and rename html tags
   plugins.nvim_yati, -- better treesitter support for python and others
-  plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
   plugins.persistent_breakpoints, -- persist breakpoints between sessions
   plugins.phpactor_nvim, -- Vim RPC refactoring plugin https://phpactor.readthedocs.io/en/master/vim-plugin/man.html (broken)
   plugins.range_highlight_nvim, -- live preview cmd ranges e.g. :1,2
@@ -4046,19 +4117,18 @@ lvim.plugins = {
   plugins.statuscol_nvim, -- use new statuscol feature for clickable fold signs, etc.
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar
-  plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) TODO: replace with https://github.com/boltlessengineer/smart-tab.nvim
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
   plugins.telescope_import_nvim, -- use telescope to ts/js import the same as was done before
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
+  plugins.telescope_undo_nvim, -- telescope replacement for undotree
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
+  plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
   plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
-  plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
   plugins.vim_abolish, -- No lazy load. I tried others but this is the only stable one so far (for :S)
   plugins.vim_fugitive, -- git and github integration. I really only need this for GBrowse, Git blame, y<C-g> etc.
   plugins.vim_git, -- Git file mappings and functions (e.g. rebase helpers like R, P, K) and syntax highlighting, etc. I add mappings in my plugin config.
   plugins.vim_jdaddy, --`gqaj` to pretty-print json, `gwaj` to merge the json object in the clipboard with the one under the cursor TODO: remove once I can replace with python -m json.tool from null-ls or whatever
-  plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` TODO: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
   plugins.vim_matchup, -- better %
   plugins.vim_projectionist, -- link tests and classes together, etc. works with per-project .projections.json TODO: replace with https://github.com/gbprod/open-related.nvim or https://github.com/otavioschwanck/telescope-alternate.nvim or https://github.com/rgroli/other.nvim
   plugins.vim_startify, -- I really don't like alpha-nvim. It's handy to have the startify utf-8 box function. And I make use of the startify session segment and commands to have named per-project sessions. TODO: replace with https://github.com/olimorris/persisted.nvim
@@ -4066,17 +4136,16 @@ lvim.plugins = {
   plugins.zk_nvim, -- Zettelkasen notes tool
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
-  { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' } }, -- enable lsp file-based code actions
+  { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' }, config = function() require('lsp-file-operations').setup() end }, -- enable lsp file-based code actions
+  { 'boltlessengineer/smart-tab.nvim', event = 'InsertEnter', opts = {} }, -- replaces tabout.nvim. Tab to move out of parens, brackets, etc. You have to <c-e> from completion first.
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php', dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- sql and regex included
   { 'gsuuon/tshjkl.nvim', config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
-  { 'iamcco/markdown-preview.nvim', ft = 'markdown', build = function() vim.fn['mkdp#util#install']() end }, -- :MarkdownPreview
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser (now covered by tree-sitter-comment)
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
@@ -4085,6 +4154,7 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
+  { 'wallpants/github-preview.nvim', cmd = { 'GithubPreviewStart', 'GithubPreviewToggle', 'GithubPreviewStop' }, opts = {} }, -- markdown preview (replaces iamcco/markdown-preview.nvim)
   { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}

@@ -72,7 +72,7 @@ infopath=(
 manpath=(
   $(brew --prefix)/share/man
   /usr/share/man
-  $manpath
+  ${manpath:-}
 )
 
 path=(
@@ -110,9 +110,8 @@ path=(
   # $(brew --prefix)/opt/icu4c/{bin,sbin}
   # add gnu coreutils before path... this seems a bit heavy-handed :/
   # $(brew --prefix)/opt/coreutils/libexec/gnubin
-  $path
+  ${path:-}
 )
-# echo "PATH:----" $path
 # }}}
 
 # zsh {{{
