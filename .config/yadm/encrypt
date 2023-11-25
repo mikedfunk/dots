@@ -58,7 +58,7 @@ Code/saatchi/zed/.editorconfig
 .support/hosts.json
 .warprc
 Library/Application Support/Sequel Pro/Data/Favorites.plist
-Library/Application Support/com.tinyapp.TablePlus/Data/{Connections,ConnectionGroups}.plist
+Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 # Notes/**/*.md
 # Notes/**/imgs/*
 intelephense/licence.txt
