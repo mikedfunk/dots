@@ -60,13 +60,13 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # https://github.com/denisidoro/navi
 navipath=(
   $HOME/.navi
-  $navipath
+  ${navipath:-}
 )
 
 infopath=(
   $(brew --prefix)/share/info
   /usr/share/info
-  $infopath
+  ${infopath:-}
 )
 
 manpath=(
@@ -121,12 +121,6 @@ path=(
 # autoload -Uz compinit
 # compinit
 
-# https://github.com/machinshin/dotfiles/blob/master/.zshrc#L159-L160
-# Complete the hosts and - last but not least - the remote directories.
-#  $ scp file username@<TAB><TAB>:/<TAB>
-zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
-zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
-
 # https://www.justingarrison.com/blog/2020-05-28-shell-shortcuts/
 bindkey '^q' push-line-or-edit
 # }}}
@@ -142,12 +136,6 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 # }}}
 
 # source additional files and env vars {{{
-# moved here for zsh-users/zsh-completions
-autoload -Uz compinit
-compinit
-
-[ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
-[ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
 
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 # _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -182,9 +170,9 @@ _has direnv && _evalcache direnv hook zsh # (evalcache version)
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
 
 # https://github.com/trapd00r/LS_COLORS
-local DIRCOLORS_CMD="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
-local DIRCOLORS_FILE="$HOME/.dircolors"
-[[ -e "$DIRCOLORS_CMD" && -f "$DIRCOLORS_FILE" ]] && _evalcache "$DIRCOLORS_CMD" -b "$DIRCOLORS_FILE"
+local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
+local dircolors_file="$HOME/.dircolors"
+[[ -e "$dircolors_cmd" && -f "$dircolors_file" ]] && _evalcache "$dircolors_cmd" -b "$dircolors_file"
 # }}}
 
 export LC_CTYPE=en_US.UTF-8 # https://unix.stackexchange.com/a/302418/287898
@@ -210,9 +198,7 @@ export AUTO_NTFY_DONE_IGNORE=(
 # https://www.reddit.com/r/linux/comments/b5n1l5/whats_your_favorite_cli_tool_nobody_knows_about/ejex2pm/
 # export LESSOPEN="| $(brew --prefix)/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
 # alias less="less -R"
-lessc () {
-    rougify highlight $@ | \less -R -M
-}
+lessc () { rougify highlight $@ | \less -R -M }
 export GITWEB_PROJECTROOT="$HOME/Code"
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
 export PSQL_PAGER="pspg"
@@ -226,10 +212,6 @@ export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 builtin setopt aliases # weird, this should have already been done :/
 
-_has kubectl && _evalcache kubectl completion zsh
-# _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
-# _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
-_has akamai && _evalcache akamai --zsh
 # _has starship && _evalcache starship init zsh
 
 # https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
@@ -261,8 +243,6 @@ export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # }}}
@@ -276,13 +256,6 @@ zle_highlight=('paste:none')
 # ServerAliveCountMax instead.
 # https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/
 export AUTOSSH_PORT=0
-
-# Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
-# servers don't like anything *-256color so I need to use screen via ssh
-ssh() { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
-autossh() { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
-
-compdef autossh="ssh"
 
 # https://infosec.mozilla.org/guidelines/openssh#openssh-client
 ssh-add --apple-use-keychain --apple-load-keychain ~/.ssh/keys/* 2>/dev/null # add all keys stored in keychain if they haven't been added yet
@@ -307,6 +280,29 @@ export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
 
 # }}}
 
+# completion {{{
+# moved here for zsh-users/zsh-completions
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
+[ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
+[ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
+
+_has kubectl && _evalcache kubectl completion zsh
+# _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
+# _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
+
+# https://github.com/machinshin/dotfiles/blob/master/.zshrc#L159-L160
+# Complete the hosts and - last but not least - the remote directories.
+#  $ scp file username@<TAB><TAB>:/<TAB>
+zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
+zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
+_has akamai && _evalcache akamai --zsh
+# }}}
+
 # functions and aliases {{{
 
 # misc {{{
@@ -316,6 +312,12 @@ alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias mycli="mycli --defaults-group-suffix=_mycli"
+
+# Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
+# servers don't like anything *-256color so I need to use screen via ssh
+ssh() { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
+autossh() { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
+compdef autossh="ssh"
 
 alias upgrade-lunarvim="cd ${HOME}/.local/share/lunarvim/lvim && git pull && cd -"
 alias tail-lunarvim-logs="tail -f ${HOME}/.cache/nvim/lvim.log"
@@ -358,12 +360,12 @@ alias pso="ps -o pid,command"
 # alias add-keys="ssh-add -K ~/.ssh/keys/githubkey ~/.ssh/keys/bitbucketkey ~/.ssh/keys/saatchiartkey"
 alias art="php artisan"
 alias pc="phing -logger phing.listener.DefaultLogger"
-# compdef pc="phing"
+compdef pc="phing"
 alias pg="phing"
-# compdef pg="phing"
+compdef pg="phing"
 
 alias y="yadm"
-# compdef y="yadm"
+compdef y="yadm"
 alias upgrades="yadm bootstrap"
 save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
 # alias sdx="save-dotfiles && exit"
@@ -620,7 +622,6 @@ zstyle ':completion:*' matcher-list '' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
 
 # https://mastodon.social/@vonheikemen@hachyderm.io/109367664531721862
-autoload -U edit-command-line
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
