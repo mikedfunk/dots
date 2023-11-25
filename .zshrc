@@ -29,18 +29,18 @@ _has() {
 }
 
 # colors {{{
-local BLACK="$(tput setaf 0)"
-local RED="$(tput setaf 1)"
-local GREEN="$(tput setaf 2)"
-local YELLOW="$(tput setaf 3)"
-local BLUE="$(tput setaf 4)"
-local PINK="$(tput setaf 5)"
-local CYAN="$(tput setaf 6)"
-local WHITE="$(tput setaf 7)"
-local NORMAL="$(tput sgr0)"
-local MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
-local LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
-local UNDERLINE="$(tput smul)"
+local -r BLACK="$(tput setaf 0)"
+local -r RED="$(tput setaf 1)"
+local -r GREEN="$(tput setaf 2)"
+local -r YELLOW="$(tput setaf 3)"
+local -r BLUE="$(tput setaf 4)"
+local -r PINK="$(tput setaf 5)"
+local -r CYAN="$(tput setaf 6)"
+local -r WHITE="$(tput setaf 7)"
+local -r NORMAL="$(tput sgr0)"
+local -r MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
+local -r LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
+local -r UNDERLINE="$(tput smul)"
 # }}}
 
 # }}}
@@ -170,8 +170,8 @@ _has direnv && _evalcache direnv hook zsh # (evalcache version)
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
 
 # https://github.com/trapd00r/LS_COLORS
-local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
-local dircolors_file="$HOME/.dircolors"
+local -r dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
+local -r dircolors_file="$HOME/.dircolors"
 [[ -e "$dircolors_cmd" && -f "$dircolors_file" ]] && _evalcache "$dircolors_cmd" -b "$dircolors_file"
 # }}}
 
@@ -582,7 +582,7 @@ pux() {
 
 # xdebug {{{
 xdebug-off() {
-    local ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini")
+    local -r ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini")
     [ -n $ini_file ] && mv ${ini_file}{,_OLD}
 }
 
@@ -609,6 +609,7 @@ ZLE_RPROMPT_INDENT=0
 # }}}
 
 # zsh options {{{
+setopt bang_hist # this was disabled by vanilli.zsh
 
 # fuzzy completion: cd ~/Cde -> ~/Code
 # https://superuser.com/a/815317
