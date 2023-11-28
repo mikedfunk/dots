@@ -29,18 +29,18 @@ _has() {
 }
 
 # colors {{{
-local -r BLACK="$(tput setaf 0)"
-local -r RED="$(tput setaf 1)"
-local -r GREEN="$(tput setaf 2)"
-local -r YELLOW="$(tput setaf 3)"
-local -r BLUE="$(tput setaf 4)"
-local -r PINK="$(tput setaf 5)"
-local -r CYAN="$(tput setaf 6)"
-local -r WHITE="$(tput setaf 7)"
-local -r NORMAL="$(tput sgr0)"
-local -r MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
-local -r LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
-local -r UNDERLINE="$(tput smul)"
+local BLACK="$(tput setaf 0)"
+local RED="$(tput setaf 1)"
+local GREEN="$(tput setaf 2)"
+local YELLOW="$(tput setaf 3)"
+local BLUE="$(tput setaf 4)"
+local PINK="$(tput setaf 5)"
+local CYAN="$(tput setaf 6)"
+local WHITE="$(tput setaf 7)"
+local NORMAL="$(tput sgr0)"
+local MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
+local LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
+local UNDERLINE="$(tput smul)"
 # }}}
 
 # }}}
@@ -169,8 +169,8 @@ _has direnv && _evalcache direnv hook zsh # (evalcache version)
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
 
 # https://github.com/trapd00r/LS_COLORS
-local -r dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
-local -r dircolors_file="$HOME/.dircolors"
+local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
+local dircolors_file="$HOME/.dircolors"
 [[ -e "$dircolors_cmd" && -f "$dircolors_file" ]] && _evalcache "$dircolors_cmd" -b "$dircolors_file"
 # }}}
 
@@ -245,6 +245,7 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # }}}
+# _has inshellisense && inshellisense --shell zsh # check this later - right now it sucks but they are rewriting it
 
 # disable weird highlighting of pasted text
 # https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
@@ -366,7 +367,11 @@ compdef pg="phing"
 alias y="yadm"
 compdef y="yadm"
 alias upgrades="yadm bootstrap"
+
 save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+alias save-notes="wd notes && git add -A && git commit -am 'working' && git push"
+alias save-queries"wd queries && git add -A && git commit -am 'working' && git push"
+
 # alias sdx="save-dotfiles && exit"
 # save-dotfiles-without-encryption () { yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
 # alias notes="joplin"

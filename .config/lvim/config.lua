@@ -895,6 +895,7 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.cmp.formatting.source_names['buffer'] = ''
 lvim.builtin.cmp.formatting.source_names['buffer-lines'] = '≡'
 lvim.builtin.cmp.formatting.source_names['calc'] = ''
+lvim.builtin.cmp.formatting.source_names['cmp_jira'] = ''
 lvim.builtin.cmp.formatting.source_names['cmp_tabnine'] = '󰚩' --  ➒
 lvim.builtin.cmp.formatting.source_names['color_names'] = ''
 lvim.builtin.cmp.formatting.source_names["copilot"] = ""
@@ -903,6 +904,7 @@ lvim.builtin.cmp.formatting.source_names['dictionary'] = ''
 lvim.builtin.cmp.formatting.source_names['doxygen'] = '' -- 󰙆
 lvim.builtin.cmp.formatting.source_names['emoji'] = '' -- 
 lvim.builtin.cmp.formatting.source_names['git'] = ''
+lvim.builtin.cmp.formatting.source_names['jira_issues'] = ''
 lvim.builtin.cmp.formatting.source_names['luasnip'] = '✄'
 lvim.builtin.cmp.formatting.source_names['luasnip_choice'] = ''
 lvim.builtin.cmp.formatting.source_names['marksman'] = '󰓾' -- 🞋
@@ -1593,6 +1595,39 @@ plugins.cmp_git = {
 }
 -- }}}
 
+-- cmp-jira {{{
+plugins.cmp_jira = {
+  -- 'lttr/cmp-jira',
+  'mikedfunk/cmp-jira', -- fork to use basic auth, which is apparently needed for Jira cloud
+  event = 'InsertEnter',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'hrsh7th/nvim-cmp',
+  },
+  init = function()
+    if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'cmp_jira' }) then return end
+    table.insert(lvim.builtin.cmp.sources, { name = 'cmp_jira' })
+  end,
+  opts = {},
+}
+-- }}}
+
+-- cmp-jira-issues.nvim {{{
+plugins.cmp_jira_issues_nvim = {
+  'artem-nefedov/cmp-jira-issues.nvim',
+  event = 'InsertEnter',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'hrsh7th/nvim-cmp',
+  },
+  init = function()
+    if vim.tbl_contains(lvim.builtin.cmp.sources, { name = 'jira_issues' }) then return end
+    table.insert(lvim.builtin.cmp.sources, { name = 'jira_issues' })
+  end,
+  opts = {},
+}
+-- }}}
+
 -- cmp-nerdfont {{{
 plugins.cmp_nerdfont = {
   'chrisgrieser/cmp-nerdfont',
@@ -2059,6 +2094,41 @@ plugins.incolla_nvim = {
       function() require 'incolla'.incolla() end,
       'Paste Image',
     }
+  end,
+}
+-- }}}
+
+-- laravel.nvim {{{
+plugins.laravel_nvim = {
+  "adalessa/laravel.nvim",
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+    "tpope/vim-dotenv",
+    "MunifTanjim/nui.nvim",
+  },
+  cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
+  keys = {
+    { "<leader>va", ":Laravel artisan<cr>" },
+    { "<leader>vr", ":Laravel routes<cr>" },
+    { "<leader>vm", ":Laravel related<cr>" },
+    {
+      "<leader>vt",
+      function()
+        require("laravel.tinker").send_to_tinker()
+      end,
+      mode = "v",
+      desc = "Laravel Application Routes",
+    },
+  },
+  event = { "VeryLazy" },
+  config = function()
+    require("laravel").setup {
+      lsp_server = 'intelephense',
+      environment = {
+        resolver = require "laravel.environment.resolver"(true, true, 'local'),
+      }
+    }
+    require("telescope").load_extension "laravel"
   end,
 }
 -- }}}
@@ -4023,6 +4093,7 @@ lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_copilot, -- github copilot
+  -- plugins.cmp_jira_issues_nvim, -- jira completion
   -- plugins.cmp_luasnip_choice, -- completion for luasnip choice nodes! better than a dedicated keyboard shortcut.
   -- plugins.cmp_nvim_lsp_document_symbol, -- helper to search for document symbols with /@ TODO: not quite working
   -- plugins.cmp_plugins, -- lua-only completion for neovim plugin repos, from github neovim topic!
@@ -4030,6 +4101,7 @@ lvim.plugins = {
   -- plugins.definition_or_references_nvim, -- when on a definition, show references instead of jumping to itself on gd
   -- plugins.dial_nvim, -- extend <c-a> and <c-x> to work on other things too like bools, markdown headers, etc.
   -- plugins.incolla_nvim, -- paste images in markdown. configurable. Alternative: https://github.com/img-paste-devs/img-paste.vim
+  -- plugins.laravel_nvim, -- laravel integration (TODO: our laravel version is too old to work with this)
   -- plugins.neodim, -- dim unused functions with lsp and treesitter (alternative: https://github.com/askfiy/lsp_extra_dim)
   -- plugins.noice_nvim, -- better cmdheight=0 with messages in notice windows, pretty more-prompt, etc. EEK causes all kinds of problems, try again later
   -- plugins.nvim_dap_tab, -- open nvim-dap in a separate tab so it doesn't fuck up my current buffer/split layout (2022-12-22 doesn't do anything :/ )
@@ -4074,6 +4146,7 @@ lvim.plugins = {
   plugins.cmp_dictionary, -- vim dictionary source for cmp
   plugins.cmp_emoji, -- :)
   plugins.cmp_git, -- github source in commit messages for cmp e.g. users, PRs, hashes
+  plugins.cmp_jira, -- jira completion
   plugins.cmp_nerdfont, -- like emoji completion but for nerd font characters
   plugins.cmp_nvim_lsp_signature_help, -- signature help using nvim-cmp. alternative to ray-x/lsp_signature.nvim . MUCH simpler, lighter weight, less buggy
   plugins.cmp_rg, -- might help to include comments, strings, etc. in other files. This is actually really useful! (makes expensive rg calls regularly, caught in htop)
