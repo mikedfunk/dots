@@ -1245,12 +1245,26 @@ local adjust_dap_signs = function()
   -- vim.fn.sign_define('DapStopped', { text = '▶', texthl = 'debugBreakpoint', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' })
 end
 
+local clear_dap_virtual_text = function(_, _)
+  local ok, virtual_text = pcall(require, 'nvim-dap-virtual-text.virtual_text')
+  if not ok then return end
+  virtual_text.clear_virtual_text()
+end
+
+local register_event_listeners = function()
+  require 'dap'.listeners.after['event_terminated']['clear_virtual_text'] = clear_dap_virtual_text
+  require 'dap'.listeners.after['event_exited']['clear_virtual_text'] = clear_dap_virtual_text
+  require 'dap'.listeners.after['disconnect']['clear_virtual_text'] = clear_dap_virtual_text
+  -- require 'dap'.listeners.after['event_stopped']['clear_virtual_text'] = clear_dap_virtual_text
+end
+
 lvim.builtin.dap.on_config_done = function()
   register_dap_adapters()
   adjust_dap_signs()
+  register_event_listeners()
 end
 
--- require 'saatchiart.plugin_configs'.configure_nvim_dap()
+require 'saatchiart.plugin_configs'.configure_nvim_dap()
 
 -- }}}
 
@@ -3958,15 +3972,17 @@ lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=
 
 -- debugger mappings
 lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
-lvim.builtin.which_key.vmappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
+lvim.builtin.which_key.vmappings['d']['v'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
 lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dapui'.open(); require 'dap'.continue() end, 'Start' }
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
 lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
 lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
+lvim.builtin.which_key.mappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Hover' }
 lvim.builtin.which_key.mappings['d']['q'] = { function()
-  require('dap').close();
+  -- require('dap').close();
+  require('dap').terminate();
   require('dapui').close({ reset = true })
 end, 'Quit' }
 
