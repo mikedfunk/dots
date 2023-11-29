@@ -136,6 +136,9 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 
 # source additional files and env vars {{{
 
+# use latest versions of all plugins (if anything breaks, turn this off and sync packages)
+# currently indentline is breaking
+# export LVIM_DEV_MODE=true
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 # _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="TwoDark"
@@ -345,7 +348,9 @@ alias ...="cd ../.."
 alias du="grc --colour=auto /usr/bin/du"
 # https://github.com/sharkdp/vivid/issues/25#issuecomment-450423306
 # _has gls && alias ls="gls --color"
-alias ll='ls -lhGFA'
+_has eza && alias ls="eza"
+# alias ll='ls -lhGFA'
+alias ll='ls -lhFA'
 alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
 alias work="smug start work"
 alias home="smug start home"

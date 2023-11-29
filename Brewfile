@@ -235,6 +235,7 @@ brew "curl" # http cli tool. Included with mac of course, but this gives me the 
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
 brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.)
 brew "entr" # file watcher (I use this a lot in my shell functions)
+brew "eza" # pretty ls replacement
 brew "freetds" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "freetype" # needed to build php
 brew "fzf" # fuzzy file finder `git branch | fzf | xargs git checkout`
@@ -304,6 +305,7 @@ brew "qcachegrind" # like kcachegrind which is useful for profiling php apps wit
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
+brew "snyk-cli" # security tool
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
 brew "tealdeer" # more consise community man pages (faster than tldr)
