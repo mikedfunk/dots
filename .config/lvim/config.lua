@@ -1256,6 +1256,11 @@ local register_event_listeners = function()
   require 'dap'.listeners.after['event_exited']['clear_virtual_text'] = clear_dap_virtual_text
   require 'dap'.listeners.after['disconnect']['clear_virtual_text'] = clear_dap_virtual_text
   -- require 'dap'.listeners.after['event_stopped']['clear_virtual_text'] = clear_dap_virtual_text
+
+  require 'dap'.listeners.after['event_initialized']['open_dapui'] = function() require 'dapui'.open() end
+  require 'dap'.listeners.after['event_terminated']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
+  require 'dap'.listeners.after['event_exited']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
+  require 'dap'.listeners.after['disconnect']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
 end
 
 lvim.builtin.dap.on_config_done = function()
@@ -3975,16 +3980,12 @@ lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or
 lvim.builtin.which_key.vmappings['d']['v'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
-lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dapui'.open(); require 'dap'.continue() end, 'Start' }
+lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dap'.continue() end, 'Start' }
 lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
 lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
 lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
 lvim.builtin.which_key.mappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Hover' }
-lvim.builtin.which_key.mappings['d']['q'] = { function()
-  -- require('dap').close();
-  require('dap').terminate();
-  require('dapui').close({ reset = true })
-end, 'Quit' }
+lvim.builtin.which_key.mappings['d']['q'] = { function() require('dap').terminate() end, 'Quit' }
 
 lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
 
