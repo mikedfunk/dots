@@ -894,6 +894,15 @@ components.spaces.cond = function() return require 'lvim.core.lualine.conditions
 
 components.treesitter.on_click = function() vim.cmd 'TSInstallInfo' end -- doesn't work right
 
+local current_session_component = {
+  function()
+    local session_name, _ = vim.v.this_session:gsub('^(.*/)(.*)$', '%2')
+    return session_name
+  end,
+  cond = function() return vim.v.this_session ~= nil end,
+  icon = { lvim.icons.ui.BookMark, color = { fg = require 'lvim.core.lualine.colors'.cyan } },
+}
+
 -- lualine builtin is not working for some reason
 local search_count_component = {
   function()
@@ -923,6 +932,7 @@ lvim.builtin.lualine.sections.lualine_c = {
   components.diff,
   components.filetype,
   components.treesitter,
+  current_session_component,
   components.spaces,
   dap_component,
   search_count_component, -- useful for cmdheight=0
@@ -1226,9 +1236,23 @@ local register_dap_adapters = function()
   }
 
   -- https://theosteiner.de/debugging-javascript-frameworks-in-neovim
-  dap.adapters.javascript = {
-    type = 'executable',
-    command = 'js-debug-adapter',
+  dap.adapters['pwa-node'] = {
+    -- type = 'executable',
+    -- command = 'js-debug-adapter ${port}',
+    type = 'server',
+    -- host = 'localhost',
+    host = '0.0.0.0',
+    -- host = '127.0.0.1',
+    -- host = '${address}',
+    port = 9229,
+    -- port = '{port}',
+    executable = {
+      command = 'js-debug-adapter',
+      -- command = mason_path .. '/bin/js-debug-adapter',
+      args = { "${port}" },
+      -- command = "node",
+      -- args = { mason_path .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+    },
   }
 
   -- dap.adapters.node2 = {
@@ -1251,16 +1275,26 @@ local clear_dap_virtual_text = function(_, _)
   virtual_text.clear_virtual_text()
 end
 
+local close_dap_ui = function()
+  local ok, dapui = pcall(require, 'dapui')
+  if not ok then return end
+  dapui.close({ reset = true })
+end
+
 local register_event_listeners = function()
   require 'dap'.listeners.after['event_terminated']['clear_virtual_text'] = clear_dap_virtual_text
   require 'dap'.listeners.after['event_exited']['clear_virtual_text'] = clear_dap_virtual_text
   require 'dap'.listeners.after['disconnect']['clear_virtual_text'] = clear_dap_virtual_text
   -- require 'dap'.listeners.after['event_stopped']['clear_virtual_text'] = clear_dap_virtual_text
 
-  require 'dap'.listeners.after['event_initialized']['open_dapui'] = function() require 'dapui'.open() end
-  require 'dap'.listeners.after['event_terminated']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
-  require 'dap'.listeners.after['event_exited']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
-  require 'dap'.listeners.after['disconnect']['close_dapui'] = function() require 'dapui'.close({ reset = true }) end
+  require 'dap'.listeners.after['event_initialized']['open_dapui'] = function()
+    local ok, dapui = pcall(require, 'dapui')
+    if not ok then return end
+    dapui.open()
+  end
+  require 'dap'.listeners.after['event_terminated']['close_dapui'] = close_dap_ui
+  require 'dap'.listeners.after['event_exited']['close_dapui'] = close_dap_ui
+  require 'dap'.listeners.after['disconnect']['close_dapui'] = close_dap_ui
 end
 
 lvim.builtin.dap.on_config_done = function()
@@ -1321,6 +1355,10 @@ lvim.builtin.treesitter.ensure_installed = {
   'regex', -- used by php-enhanced-treesitter
   'sql', -- used by php-enhanced-treesitter
   'vim', -- MUST update from the built-in or my config will cause problems when trying to display
+}
+
+lvim.builtin.treesitter.ignore_install = {
+  'javascriptreact'
 }
 
 lvim.builtin.treesitter.context_commentstring.config.gitconfig = '# %s'
@@ -1575,10 +1613,10 @@ plugins.backseat_nvim = {
   -- cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
   opts = {
     openapi_api_key = vim.env.OPENAI_API_KEY,
-    openai_model_id = 'gpt-3.5-turbo',
+    -- openai_model_id = 'gpt-3.5-turbo',
+    openai_model_id = 'GPT-4',
     highlight = { icon = '' },
     additional_instruction = 'Respond as if you are Robert C. Martin',
-    -- openai_model_id = 'GPT-4',
   },
 }
 --}}}
@@ -2412,7 +2450,16 @@ plugins.neoai_nvim = {
     'NeoAIInjectContext',
     'NeoAIInjectContextCode',
   },
-  opts = {},
+  opts = {
+    models = {
+      {
+        name = "openai",
+        -- model = "gpt-3.5-turbo",
+        model = "gpt-4",
+        params = nil,
+      },
+    },
+  },
 }
 -- }}}
 
@@ -3191,7 +3238,7 @@ plugins.surround_ui_nvim = {
     'folke/which-key.nvim',
   },
   opts = {
-    root_key = 'S'
+    root_key = 'U'
   }
 }
 -- }}}
@@ -3790,7 +3837,8 @@ local setup_startify = function()
   vim.g['startify_skiplist'] = { 'COMMIT_EDITMSG', '.DS_Store' } -- disable common but unimportant files
   vim.g['startify_files_number'] = 9 -- recently used
   vim.g['startify_session_persistence'] = 1 -- auto save session on exit like obsession
-  vim.g['startify_session_dir'] = vim.env.HOME .. '/.local/share/lunarvim/session' .. vim.fn.getcwd() -- session dir for each repo
+  -- vim.g['startify_session_dir'] = vim.env.HOME .. '/.local/share/lunarvim/session' .. vim.fn.getcwd() -- session dir for each repo
+  vim.g['startify_session_dir'] = vim.fn.stdpath('data') .. '/session/' .. vim.fn.getcwd() -- session dir for each repo
   vim.g['startify_change_to_dir'] = 0 -- this feature should not even exist. It is stupid.
 
   -- reorder and whitelist certain groups
@@ -3807,7 +3855,7 @@ local setup_startify = function()
     h = { '<Cmd>Startify<CR>', 'Home' },
     s = { '<Cmd>SSave<CR>', 'Save' },
     l = { '<Cmd>SLoad<CR>', 'Load' },
-    d = { '<Cmd>SDelete<CR>', 'Delete' },
+    d = { '<Cmd>SDelete!<CR>', 'Delete' },
     c = { '<Cmd>SClose<CR>', 'Close' },
   }
   lvim.builtin.which_key.mappings.H = { '<Cmd>Startify<CR>', 'Home' }
@@ -4222,6 +4270,7 @@ lvim.plugins = {
   -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) TODO: replace with https://github.com/boltlessengineer/smart-tab.nvim
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
+  -- plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
   -- plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
   -- plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` TODO: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
   -- { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
@@ -4236,7 +4285,7 @@ lvim.plugins = {
   -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
-  -- { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
+  -- { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
   -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
   -- { 'roobert/tabtree.nvim', event = 'VimEnter', opts = {} }, -- use treesitter to jump to various points such as "{()}" in normal mode (only works with certain treesitter queries that are for certain languages)
   -- { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' }, -- fancy diff view, navigator, and mergetool
@@ -4302,7 +4351,6 @@ lvim.plugins = {
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
   plugins.telescope_undo_nvim, -- telescope replacement for undotree
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope
-  plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
   plugins.ts_node_action, -- Split/Join functions, arrays, objects, etc with the help of treesitter
   plugins.typescript_nvim, -- advanced typescript lsp and null_ls features
   plugins.vim_abolish, -- No lazy load. I tried others but this is the only stable one so far (for :S)
@@ -4326,7 +4374,7 @@ lvim.plugins = {
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
-  { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
+  { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)
   { 'nvim-zh/colorful-winsep.nvim', event = 'BufRead' }, -- just a clearer separator between windows (I don't need this)
   { 'rhysd/committia.vim', ft = 'gitcommit' }, -- prettier commit editor when git brings up the commit editor in vim. Really cool!
   { 'sickill/vim-pasta', event = 'BufRead' }, -- always paste with context-sensitive indenting. Tried this one, had lots of problems: https://github.com/hrsh7th/nvim-pasta
