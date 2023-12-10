@@ -333,6 +333,8 @@ brew "zsh" # awesome bash shell replacement
 # cask "ableton-live-lite" # music production
 # cask "adoptopenjdk" # needed to install akamai cli
 # cask "adoptopenjdk8" # needed for swagger-codegen
+# cask "aerial" # cool apple tv style screensavers
+# cask "alt-tab" # windows-style app switcher (with previews)
 # cask "battle-net" # whoa sweet there's a new mac battle.net app (you need to run the installer: `open /usr/local/Caskroom/battle-net/latest/Battle.net-Setup.app`)
 # cask "beardedspice" # keyboard media controls for media sites. Always seems to be broken :/
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
@@ -342,6 +344,8 @@ brew "zsh" # awesome bash shell replacement
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
 # cask "chromium" # no google tracking for me
 # cask "cold-turkey-blocker" # blocks distracting website access so I can work
+# cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
+# cask "commandq" # quit delayer for all apps
 # cask "discord" # chat
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
@@ -393,6 +397,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "macfusion" # other half of tool to mount ssh directories in the finder (see osxfuse)
 # cask "macgdbp" # xdebug gui client (I use nvim-dap instead)
 # cask "malwarebytes" # ya neva know (company has another antivirus installed)
+# cask "menubar-colors" # color picker in the menubar
 # cask "menubar-stats" # used to show bluetooth headphones battery level in menubar (Doesn't work with my headphones for some reason... and it's $5)
 # cask "microsoft-edge"
 # cask "microsoft/git/git-credential-manager-core" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
@@ -404,6 +409,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "multipass" # "ubuntu LTS on tap" launch instances of ubuntu and initialize them with cloud-init metadata in a matter of seconds. Uses hypervisor or virtualbox behind the scenes.
 # cask "muzzle" # stop notifications while screensharing ( lately it's been incorrectly hiding a lot of notifications when I'm not even in zoom :/ Also Zoom added this feature )
 # cask "mysql-shell" # new shell for mysql8
+# cask "neardrop" # android nearby devices drop
 # cask "ngrok" # securely expose your local site to the internet and inspect and repeat traffic
 # cask "noti" # mac native pushbullet notifications (I use the chrome/firefox extension)
 # cask "onecast" # cast xbox one to mac.
@@ -428,6 +434,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 # cask "shadow" # cloud gaming system https://shadow.tech
+# cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 # cask "shottr" # spiffier screenshot app <cmd-shift-2> (not free, nagware)
 # cask "sidequest" # VR sideload platform for oculus quest (I use the phone version now)
 # cask "skype" # Dad uses skype. Skype web requires chrome. I don't like chrome.
@@ -459,8 +466,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-# https://github.com/sindresorhus/quick-look-plugins
-cask "aerial" # cool apple tv style screensavers
 cask "authy" # desktop 2-factor!
 cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
@@ -476,12 +481,9 @@ cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
-cask "menubar-colors" # color picker in the menubar
-cask "neardrop" # android nearby devices drop
 cask "nvidia-geforce-now" # game streaming
 cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
-cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 cask "tableplus" # alternative to sequelpro
 cask "vpn-by-google-one" # google vpn
 
