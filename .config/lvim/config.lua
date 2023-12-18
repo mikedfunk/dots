@@ -339,9 +339,22 @@ vim.g['markdown_fenced_languages'] = {
 -- }}}
 
 -- set filetypes for unusual files {{{
+-- vim.filetype.add { pattern = { ['.+%.phtml'] = 'php' } }
+-- vim.filetype.add { pattern = { ['.+%.blade%.php'] = 'blade.php' } }
+-- vim.filetype.add { pattern = { ['.+%.eyaml%.php'] = 'yaml' } }
+-- vim.filetype.add { pattern = { ['%.babelrc'] = 'json' } }
+-- vim.filetype.add { pattern = { ['%.php%.(sample|dist)'] = 'php' } }
+-- vim.filetype.add { pattern = { ['{site,default}.conf'] = 'nginx' } }
+-- vim.filetype.add { pattern = { ['.editorconfig'] = 'dosini' } }
+-- vim.filetype.add { pattern = { ['{Brewfile,.sshrc,.tigrc,.envrc,.env}'] = 'sh' } }
+-- vim.filetype.add { pattern = { ['.env.*'] = 'sh' } }
+-- vim.filetype.add { pattern = { ['*.{cnf,hurl}'] = 'dosini' } }
+-- vim.filetype.add { pattern = { ['.spacemacs'] = 'lisp' } }
+-- vim.filetype.add { pattern = { ['.{curlrc,gitignore,gitattributes,hgignore,jshintignore}'] = 'conf' } }
+
 vim.api.nvim_create_augroup('unusual_filetypes', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'php' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.blade.php', callback = function() vim.bo.filetype = 'blade.php' end })
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.blade.php', callback = function() vim.bo.filetype = 'blade.php' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.eyaml', callback = function() vim.bo.filetype = 'yaml' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.babelrc', callback = function() vim.bo.filetype = 'json' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.php.{sample,dist}', callback = function() vim.bo.filetype = 'php' end })
@@ -1364,6 +1377,7 @@ lvim.builtin.treesitter.ignore_install = {
 
 lvim.builtin.treesitter.context_commentstring.config.gitconfig = '# %s'
 lvim.builtin.treesitter.context_commentstring.config.sql = '-- %s'
+lvim.builtin.treesitter.context_commentstring.config.php = '// %s'
 
 for _, filetype in pairs({
   'php',
@@ -1383,7 +1397,6 @@ end
 -- })
 
 lvim.builtin.treesitter.auto_install = true
-lvim.builtin.treesitter.context_commentstring.config['php'] = '// %s'
 -- this breaks q:
 -- lvim.builtin.treesitter.incremental_selection = {
 --   enable = true,
@@ -1408,6 +1421,15 @@ lvim.builtin.treesitter.on_config_done = function()
   --   ['>'] = { name = 'Swap Next' },
   --   ['<'] = { name = 'Swap Previous' },
   -- }, { prefix = 'g' })
+
+  require 'nvim-treesitter.parsers'.get_parser_configs().blade = {
+    install_info = {
+      url = "https://github.com/EmranMR/tree-sitter-blade",
+      files = {"src/parser.c"},
+      branch = "main",
+    },
+    filetype = 'blade',
+  }
 end
 
 -- }}}
@@ -1614,8 +1636,8 @@ plugins.backseat_nvim = {
   -- cmd = { 'Backseat', 'BackseatAsk', 'BackseatClear', 'BackseatClearLine' },
   opts = {
     openapi_api_key = vim.env.OPENAI_API_KEY,
-    -- openai_model_id = 'gpt-3.5-turbo',
-    openai_model_id = 'GPT-4',
+    openai_model_id = 'gpt-3.5-turbo',
+    -- openai_model_id = 'GPT-4',
     highlight = { icon = '' },
     additional_instruction = 'Respond as if you are Robert C. Martin',
   },
@@ -2455,8 +2477,8 @@ plugins.neoai_nvim = {
     models = {
       {
         name = "openai",
-        -- model = "gpt-3.5-turbo",
-        model = "gpt-4",
+        model = "gpt-3.5-turbo",
+        -- model = "gpt-4",
         params = nil,
       },
     },
@@ -3787,10 +3809,11 @@ plugins.vim_matchup = {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   init = function()
     lvim.builtin.treesitter.matchup.enable = true
-    -- vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-    vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
-    -- vim.g.matchup_matchparen_deferred = 1
-    -- vim.g.matchup_matchparen_hi_surround_always = 1
+    vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    -- vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
+    vim.g.matchup_matchparen_deferred = 1
+    vim.g.matchup_matchparen_hi_surround_always = 1
+    vim.g.matchup_surround_enabled = 1
   end,
 }
 -- }}}
@@ -4100,6 +4123,38 @@ vim.keymap.set('n', '<C-h>', toggle_hover_def, { noremap = true })
 vim.keymap.set('i', '<C-h>', toggle_hover_def, { noremap = true })
 -- }}}
 
+-- Define an autocmd group for the blade workaround {{{
+-- https://github.com/kauffinger/lazyvim/blob/e060b5503b87118a7ad164faed38dff3ec408f3e/lua/config/autocmds.lua#L5
+-- TODO: this workaround does not work
+local augroup_blade = vim.api.nvim_create_augroup("lsp_blade_workaround", { clear = true })
+
+-- Autocommand to temporarily change 'blade' filetype to 'php' when opening for LSP server activation
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup_blade,
+  pattern = "*.blade.php",
+  callback = function()
+    vim.bo.filetype = "php"
+  end,
+})
+
+-- Additional autocommand to switch back to 'blade' after LSP has attached
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup_blade,
+  pattern = "*.blade.php",
+  callback = function(args)
+    vim.schedule(function()
+      -- Check if the attached client is 'intelephense'
+      for _, client in ipairs(vim.lsp.get_active_clients()) do
+        if client.name == "intelephense" and client.attached_buffers[args.buf] then
+          vim.api.nvim_buf_set_option(args.buf, "filetype", "blade")
+          break
+        end
+      end
+    end)
+  end,
+})
+-- }}}
+
 -- put cursor at end of text on y and p
 lvim.keys.visual_mode['y'] = 'y`]'
 lvim.keys.visual_mode['p'] = 'p`]'
@@ -4283,7 +4338,6 @@ lvim.plugins = {
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   -- { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
-  -- { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
   -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
   -- { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
@@ -4373,6 +4427,7 @@ lvim.plugins = {
   { 'gsuuon/tshjkl.nvim', config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
   { 'itchyny/vim-highlighturl', event = 'BufRead' }, -- just visually highlight urls like in a browser (now covered by tree-sitter-comment)
   { 'jghauser/mkdir.nvim', event = 'BufRead', config = function() require 'mkdir' end }, -- automatically create missing directories on save
+  { 'jwalton512/vim-blade', event = 'VimEnter' }, -- old school laravel blade syntax
   { 'kylechui/nvim-surround', event = 'BufRead', opts = {} }, -- alternative to vim-surround and vim-sandwich
   { 'martinda/Jenkinsfile-vim-syntax', event = 'VimEnter' }, -- Jenkinsfile syntax highlighting
   { 'michaeljsmith/vim-indent-object', event = 'BufRead' }, -- select in indentation level e.g. vii. I use this very frequently. TODO: replace with https://github.com/kiyoon/treesitter-indent-object.nvim (replaced with chrisgrieser/nvim-various-textobjs)

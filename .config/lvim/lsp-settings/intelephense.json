@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/tamago324/nlsp-settings.nvim/main/schemas/_generated/intelephense.json",
   "flags": { "debounce_text_changes": 500 },
+  "filetypes": [ "php", "blade" ],
   "intelephense": {
     "environment": {
       "phpVersion": "7.4.7",
@@ -14,8 +15,9 @@
     "phpdoc": { "classTemplate": { "tags": {} } },
     "rename": { "namespaceMode": "all" },
     "telemetry": { "enabled": false },
+    "filetypes": [ "php", "blade" ],
     "files": {
-      "associations": [ "*.php", "*.phtml" ],
+      "associations": [ "*.php", "*.phtml", "*.blade.php" ],
       "exclude": [
         "**/.git/**",
         "**/.DS_Store/**",
