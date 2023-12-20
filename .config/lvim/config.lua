@@ -2459,30 +2459,48 @@ plugins.modes_nvim = {
 -- neoai.nvim {{{
 plugins.neoai_nvim = {
   'Bryley/neoai.nvim',
-  dependencies = { 'MunifTanjim/nui.nvim' },
-  cmd = {
-    'NeoAI',
-    'NeoAIOpen',
-    'NeoAIClose',
-    'NeoAIToggle',
-    'NeoAIContext',
-    'NeoAIContextOpen',
-    'NeoAIContextClose',
-    'NeoAIInject',
-    'NeoAIInjectCode',
-    'NeoAIInjectContext',
-    'NeoAIInjectContextCode',
-  },
-  opts = {
-    models = {
-      {
-        name = "openai",
-        model = "gpt-3.5-turbo",
-        -- model = "gpt-4",
-        params = nil,
+  dependencies = { 'MunifTanjim/nui.nvim', 'folke/which-key.nvim' },
+  event = 'BufRead',
+  -- cmd = {
+  --   'NeoAI',
+  --   'NeoAIOpen',
+  --   'NeoAIClose',
+  --   'NeoAIToggle',
+  --   'NeoAIContext',
+  --   'NeoAIContextOpen',
+  --   'NeoAIContextClose',
+  --   'NeoAIInject',
+  --   'NeoAIInjectCode',
+  --   'NeoAIInjectContext',
+  --   'NeoAIInjectContextCode',
+  -- },
+  config = function()
+    require 'neoai'.setup {
+      models = {
+        {
+          name = "openai",
+          -- model = "gpt-3.5-turbo",
+          model = "gpt-4",
+          params = nil,
+        },
       },
-    },
-  },
+    }
+
+    require 'which-key'.register({
+      a = {
+        name = 'AI',
+        c = { '<Cmd>NeoAIToggle<CR>', 'Chat UI' },
+        a = { '<Cmd>NeoAIContext<CR>', 'Context UI' },
+      },
+    }, { prefix = '<Leader>' })
+
+    require 'which-key'.register({
+      a = {
+        name = 'AI',
+        a = { '<Cmd>NeoAIContext<CR>', 'Context UI' },
+      },
+    }, { prefix = '<Leader>', mode = 'v' })
+  end
 }
 -- }}}
 
@@ -4302,6 +4320,7 @@ end
 -- having every plugin definition on one line makes it easy to comment out unused plugins and sort alphabetically.
 lvim.plugins = {
   -- plugins.auto_dark_mode, -- auto switch color schemes, etc. based on macOS dark mode setting (better than cormacrelf/dark-notify)
+  -- plugins.backseat_nvim, -- Get suggestions from ChatGPT
   -- plugins.cmp_color_names, -- css color names like SteelBlue, etc.
   -- plugins.cmp_copilot, -- github copilot
   -- plugins.cmp_jira_issues_nvim, -- jira completion
@@ -4323,12 +4342,12 @@ lvim.plugins = {
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
-  -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) TODO: replace with https://github.com/boltlessengineer/smart-tab.nvim
+  -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) (replaced with https://github.com/boltlessengineer/smart-tab.nvim)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
-  -- plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes TODO: replace with https://github.com/debugloop/telescope-undo.nvim ?
-  -- plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` TODO: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
+  -- plugins.undotree, -- show a sidebar with branching undo history so you can redo on a different branch of changes (replaced with https://github.com/debugloop/telescope-undo.nvim)
+  -- plugins.vim_lion, -- align on operators like => like easy-align but works better `viiga=` (replaced with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md)
   -- { 'HampusHauffman/block.nvim', cmd = { 'Block', 'BlockOn', 'BlockOff' }, opts = {}, dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- increased contrast for each treesitter block of code
   -- { 'LinArcX/telescope-env.nvim', event = 'VimEnter', dependencies = 'nvim-telescope/telescope.nvim', config = function() require 'telescope'.load_extension 'env' end }, -- telescope source for env vars
   -- { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = {  request_pending_text= '', vt_position = 'end_of_line' } }, -- show virtual text with number of usages (this slows down the LSP in Zed especially)
@@ -4339,7 +4358,7 @@ lvim.plugins = {
   -- { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
   -- { 'jinh0/eyeliner.nvim', event = 'BufRead', opts = { highlight_on_key = true, dim = true } }, -- fFtT highlighter
   -- { 'lewis6991/foldsigns.nvim', event = 'BufRead', opts = {} }, -- show the most important sign hidden by a fold in the fold sign column (been crashing nvim lately)
-  -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO is this any better? https://github.com/smoka7/multicursors.nvim
+  -- { 'mg979/vim-visual-multi', event = 'BufRead' }, -- multiple cursors with <c-n>, <c-up|down>, shift-arrow. Q to deselect. q to skip current and get next occurrence. TODO: is this any better? https://github.com/smoka7/multicursors.nvim
   -- { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' }, -- show current node at top of buffer
   -- { 'romgrk/nvim-treesitter-context', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead', opts = {} }, -- show current context at the top of the page (function, if block, etc.) (I don't really need this any more with nvim-navic)
   -- { 'roobert/tabtree.nvim', event = 'VimEnter', opts = {} }, -- use treesitter to jump to various points such as "{()}" in normal mode (only works with certain treesitter queries that are for certain languages)
@@ -4350,8 +4369,7 @@ lvim.plugins = {
   -- { url = 'https://codeberg.org/esensar/nvim-dev-container', dependencies = 'nvim-treesitter/nvim-treesitter', config = function () require 'devcontainer'.setup({}) end }, -- devcontainer support
   -- { url = 'https://gitlab.com/itaranto/plantuml.nvim' }, -- plantuml previews
   -- { url = 'https://gitlab.com/yorickpeterse/nvim-pqf.git', event = 'BufRead', config = function() require 'pqf'.setup {} end }, -- prettier quickfix _line_ format (looks worse now)
-  plugins.ale, -- older null-ls alternative
-  plugins.backseat_nvim, -- Get suggestions from ChatGPT
+  plugins.ale, -- older null-ls alternative. Used for certain cli tools that time out in null-ls.
   plugins.ccc_nvim, -- color picker, colorizer, etc.
   plugins.cmp_dap, -- completion source for dap stuff
   plugins.cmp_dictionary, -- vim dictionary source for cmp
@@ -4368,7 +4386,7 @@ lvim.plugins = {
   plugins.dark_notify, -- auto-dark-mode
   plugins.document_color_nvim, -- tailwind color previewing
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
-  plugins.edgy_nvim, -- finally, a consolidated sidebar plugin! (alternative: https://github.com/stevearc/stickybuf.nvim)
+  plugins.edgy_nvim, -- finally, a consolidated sidebar plugin! By Folke (alternative: https://github.com/stevearc/stickybuf.nvim)
   plugins.fold_preview_nvim, -- preview with h, open with h again
   plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
