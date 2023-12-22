@@ -1,4 +1,4 @@
-local is_installed = require 'mikedfunk.helpers'.is_installed
+-- local is_installed = require 'mikedfunk.helpers'.is_installed
 
 -- if is_installed('treesitter') then
 --   vim.wo.foldmethod = 'expr'

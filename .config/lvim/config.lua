@@ -4020,16 +4020,19 @@ plugins.zk_nvim = {
     lvim.builtin.which_key.vmappings['z'] = {
       name = 'Zettelkasten',
       s = { ":'<,'>ZkMatch<CR>", 'Search' },
-      t = { ":'<,'>ZkNewFromTitleSelection { dir = 'general' }<CR>", 'New from Title' },
-      c = { ":'<,'>ZkNewFromContentSelection { dir = 'general' }<CR>", 'New from Content' },
+      -- t = { ":'<,'>ZkNewFromTitleSelection { dir = 'general' }<CR>", 'New from Title' },
+      t = { ":'<,'>ZkNewFromTitleSelection<CR>", 'New from Title' },
+      -- c = { ":'<,'>ZkNewFromContentSelection { dir = 'general' }<CR>", 'New from Content' },
+      c = { ":'<,'>ZkNewFromContentSelection<CR>", 'New from Content' },
     }
 
     -- vim.api.nvim_create_augroup('zk_conceal', { clear = true })
     -- vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'zk_conceal', callback = setup_zk_conceal })
   end,
-  -- config = function()
-  --   require 'zk'.setup()
-  -- end
+  config = function()
+    -- starts language server
+    require 'zk'.setup()
+  end
 }
 -- }}}
 
@@ -4342,7 +4345,6 @@ lvim.plugins = {
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
-  -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) (replaced with https://github.com/boltlessengineer/smart-tab.nvim)
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
@@ -4353,6 +4355,7 @@ lvim.plugins = {
   -- { 'Wansmer/symbol-usage.nvim', event = 'BufReadPre', opts = {  request_pending_text= '', vt_position = 'end_of_line' } }, -- show virtual text with number of usages (this slows down the LSP in Zed especially)
   -- { 'ashfinal/qfview.nvim', event = 'UIEnter', opts = {} }, -- successor to nvim-pqf (This is like vim-lion for the quickfix. It pushes the right-most content way over, so I can't see as much of it.)
   -- { 'axelvc/template-string.nvim', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } }, -- tiny plugin to convert literal strings to dynamic strings
+  -- { 'boltlessengineer/smart-tab.nvim', event = 'InsertEnter', opts = {} }, -- replaces tabout.nvim. Tab to move out of parens, brackets, etc. You have to <c-e> from completion first. (Doesn't indent if the element on the line is a treesitter node)
   -- { 'esneider/YUNOcommit.vim', event = 'BufRead' }, -- u save lot but no commit. y u no commit?
   -- { 'folke/flash.nvim', event = 'BufRead', opts = {} }, -- easymotion-like clone by folke
   -- { 'fourjay/vim-hurl', event = 'VimEnter' }, -- hurl filetype and fold expression
@@ -4419,6 +4422,7 @@ lvim.plugins = {
   plugins.statuscol_nvim, -- use new statuscol feature for clickable fold signs, etc.
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar TODO: replace with https://github.com/hedyhli/outline.nvim
+  plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) (alternative: https://github.com/boltlessengineer/smart-tab.nvim)
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
   plugins.telescope_import_nvim, -- use telescope to ts/js import the same as was done before
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
@@ -4438,7 +4442,6 @@ lvim.plugins = {
   { 'LiadOz/nvim-dap-repl-highlights', dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' }, opts = {} }, -- dap REPL syntax highlighting (problem with auto insert mode)
   { 'aklt/plantuml-syntax', event = 'VimEnter' }, -- plantuml filetype
   { 'antosha417/nvim-lsp-file-operations', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' }, config = function() require('lsp-file-operations').setup() end }, -- enable lsp file-based code actions
-  { 'boltlessengineer/smart-tab.nvim', event = 'InsertEnter', opts = {} }, -- replaces tabout.nvim. Tab to move out of parens, brackets, etc. You have to <c-e> from completion first.
   { 'felipec/vim-sanegx', keys = 'gx' }, -- open url with gx (alternative: https://github.com/chrishrb/gx.nvim)
   { 'fpob/nette.vim', event = 'VimEnter' }, -- syntax file for .neon format (not in polyglot as of 2021-03-26)
   { 'gbprod/php-enhanced-treesitter.nvim', branch = 'main', ft = 'php', dependencies = { 'nvim-treesitter/nvim-treesitter' } }, -- sql and regex included
