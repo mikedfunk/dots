@@ -2214,6 +2214,18 @@ plugins.fold_preview_nvim = {
 
 -- }}}
 
+-- github-preview.nvim {{{
+plugins.github_preview_nvim = {
+  'wallpants/github-preview.nvim',
+  ft = 'markdown',
+  keys = {
+    { '<Leader>mp', '<Cmd>GithubPreviewToggle<CR>', { noremap = true, desc = "Preview Markdown" } },
+  },
+  cmd = { 'GithubPreviewStart', 'GithubPreviewToggle', 'GithubPreviewStop' },
+  opts = {},
+}
+-- }}}
+
 -- goto-breakpoints.nvim {{{
 plugins.goto_breakpoints_nvim = {
   'ofirgall/goto-breakpoints.nvim',
@@ -2234,6 +2246,20 @@ plugins.headlines_nvim = {
   'lukas-reineke/headlines.nvim',
   ft = 'markdown',
   opts = { markdown = { fat_headlines = false } },
+}
+-- }}}
+
+-- img-clip.nvim {{{
+plugins.img_clip_nvim = {
+  "HakonHarnes/img-clip.nvim",
+  event = "BufEnter",
+  ft = 'markdown',
+  opts = {
+    relative_to_current_file = true,
+  },
+  keys = {
+    { "<Leader>mv", "<Cmd>PasteImage<CR>", desc = "Paste clipboard image" },
+  },
 }
 -- }}}
 
@@ -2261,11 +2287,11 @@ plugins.laravel_nvim = {
   },
   cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
   keys = {
-    { "<leader>va", ":Laravel artisan<cr>" },
-    { "<leader>vr", ":Laravel routes<cr>" },
-    { "<leader>vm", ":Laravel related<cr>" },
+    { "<Leader>va", "<Cmd>Laravel artisan<CR>" },
+    { "<Leader>vr", "<Cmd>Laravel routes<CR>" },
+    { "<Leader>vm", "<Cmd>Laravel related<CR>" },
     {
-      "<leader>vt",
+      "<Leader>vt",
       function()
         require("laravel.tinker").send_to_tinker()
       end,
@@ -2366,10 +2392,9 @@ end
 
 ---@return nil
 local configure_mkdx = function()
-  vim.api.nvim_create_augroup('mkdx_map', { clear = true })
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'markdown',
-    group = 'mkdx_map',
+    group = vim.api.nvim_create_augroup('mkdx_map', { clear = true }),
     callback = function() vim.keymap.set('n', '<cr>', '<Plug>(mkdx-checkbox-prev-n)', { buffer = true, noremap = true }) end,
   })
 
@@ -2377,56 +2402,56 @@ local configure_mkdx = function()
 
   require 'which-key'.register({
     m = {
-      name = 'Markdown',
-      ["'"] = { name = 'Quote Toggle' },
-      ['-'] = { name = '↓ Checkbox State' },
-      ['<Leader>'] = { name = '↓ Checkbox State' },
-      ['='] = { name = '↑ Checkbox State' },
-      ['/'] = { name = 'Italic' },
-      ['['] = { name = '↑ Header' },
-      [']'] = { name = '↓ Header' },
-      ['`'] = { name = 'Code Block' },
-      b = { name = 'Bold' },
-      I = { name = 'TOC Quickfix' },
-      i = { name = 'TOC Upsert' },
-      j = { name = 'Jump to Header' },
-      k = { name = '<kbd>' },
-      L = { name = 'Links Quickfix' },
-      s = { name = 'Strikethrough' },
-      t = { name = 'Checkbox Toggle' },
+      'Markdown',
+      ["'"] = 'Quote Toggle',
+      ['-'] = '↓ Checkbox State',
+      ['<Leader>'] = '↓ Checkbox State',
+      ['='] = '↑ Checkbox State',
+      ['/'] = 'Italic',
+      ['['] = '↑ Header',
+      [']'] = '↓ Header',
+      ['`'] = 'Code Block',
+      b = 'Bold',
+      I = 'TOC Quickfix',
+      i = 'TOC Upsert',
+      j = 'Jump to Header',
+      k = '<kbd>',
+      L = 'Links Quickfix',
+      s = 'Strikethrough',
+      t = 'Checkbox Toggle',
       l = {
-        name = 'List',
-        l = { name = 'List Toggle' },
-        n = { name = 'Link Wrap' },
-        t = { name = 'Checklist Toggle' },
+        'List',
+        l = 'List Toggle',
+        n = 'Link Wrap',
+        t = 'Checklist Toggle',
       }
     }
   }, { prefix = '<Leader>' })
 
   require 'which-key'.register({
     m = {
-      name = 'Markdown',
-      ["'"] = { name = 'Quote Toggle' },
-      ['-'] = { name = '↓ Checkbox State' },
-      ['='] = { name = '↑ Checkbox State' },
-      ['/'] = { name = 'Italic' },
-      ['['] = { name = '↑ Header' },
-      [']'] = { name = '↓ Header' },
-      ['`'] = { name = 'Code Block' },
-      [','] = { name = 'Tableize' },
-      b = { name = 'Bold' },
-      I = { name = 'TOC Quickfix' },
-      i = { name = 'TOC Upsert' },
-      j = { name = 'Jump to Header' },
-      k = { name = '<kbd>' },
-      L = { name = 'Links Quickfix' },
-      s = { name = 'Strikethrough' },
-      t = { name = 'Checkbox Toggle' },
+      'Markdown',
+      ["'"] = 'Quote Toggle',
+      ['-'] = '↓ Checkbox State',
+      ['='] = '↑ Checkbox State',
+      ['/'] = 'Italic',
+      ['['] = '↑ Header',
+      [']'] = '↓ Header',
+      ['`'] = 'Code Block',
+      [','] = 'Tableize',
+      b = 'Bold',
+      I = 'TOC Quickfix',
+      i = 'TOC Upsert',
+      j = 'Jump to Header',
+      k = '<kbd>',
+      L = 'Links Quickfix',
+      s = 'Strikethrough',
+      t = 'Checkbox Toggle',
       l = {
-        name = 'List',
-        l = { name = 'List Toggle' },
-        n = { name = 'Link Wrap' },
-        t = { name = 'Checklist Toggle' },
+        'List',
+        l = 'List Toggle',
+        n = 'Link Wrap',
+        t = 'Checklist Toggle',
       }
     }
   }, { prefix = '<Leader>', mode = 'v' })
@@ -2434,8 +2459,29 @@ end
 
 plugins.mkdx = {
   'SidOfc/mkdx',
+  dependencies = 'folke/which-key.nvim', -- this overrides ft... I think because which-key needs to be loaded _before_ something
   ft = 'markdown',
-  -- dependencies = 'folke/which-key.nvim', -- this overrides ft... I think because which-key needs to be loaded _before_ something
+  keys = {
+    { "<Leader>m'", desc = 'Quote Toggle' },
+    { '<Leader>m-', desc = '↓ Checkbox State' },
+    { '<Leader>m=', desc = '↑ Checkbox State' },
+    { '<Leader>m/', desc = 'Italic' },
+    { '<Leader>m[', desc = '↑ Header' },
+    { '<Leader>m]', desc = '↓ Header' },
+    { '<Leader>m`', desc = 'Code Block' },
+    { '<Leader>m,', desc = 'Tableize' },
+    { '<Leader>mb', desc = 'Bold' },
+    { '<Leader>mI', desc = 'TOC Quickfix' },
+    { '<Leader>mi', desc = 'TOC Upsert' },
+    { '<Leader>mj', desc = 'Jump to Header' },
+    { '<Leader>mk', desc = '<kbd>'  },
+    { '<Leader>mL', desc = 'Links Quickfix' },
+    { '<Leader>ms', desc = 'Strikethrough' },
+    { '<Leader>mt', desc = 'Checkbox Toggle' },
+    { 'Leader>mll', desc = 'List Toggle' },
+    { 'Leader>mln', desc = 'Link Wrap' },
+    { 'Leader>mlt', desc = 'Checklist Toggle' },
+  },
   init = setup_mkdx,
   config = configure_mkdx,
 }
@@ -4391,8 +4437,10 @@ lvim.plugins = {
   plugins.dressing_nvim, -- spiff up vim.ui.select, etc.
   plugins.edgy_nvim, -- finally, a consolidated sidebar plugin! By Folke (alternative: https://github.com/stevearc/stickybuf.nvim)
   plugins.fold_preview_nvim, -- preview with h, open with h again
+  plugins.github_preview_nvim, -- markdown preview (replaces iamcco/markdown-preview.nvim)
   plugins.goto_breakpoints_nvim, -- keymaps to go to next/prev breakpoint
   plugins.headlines_nvim, -- add markdown highlights
+  plugins.img_clip_nvim, -- paste or drag images into markdown
   plugins.lsp_inlayhints_nvim, -- cool virtual text type hints (not yet supported by any language servers I use except sumneko_lua )
   plugins.luasnip, -- add vscode snippet transformation support
   plugins.mason_null_ls_nvim, -- automatic installation and setup for null-ls via mason
@@ -4459,7 +4507,6 @@ lvim.plugins = {
   { 'tpope/vim-apathy', ft = { 'lua', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'python' } }, -- tweak built-in vim features to allow jumping to javascript (and others like lua) module location with gf TODO: breaking with javascriptreact
   { 'tpope/vim-cucumber', event = 'VimEnter' }, -- gherkin filetype syntax highlighting (erroring out)
   { 'tpope/vim-eunuch', cmd = { 'Mkdir', 'Remove', 'Rename' } }, -- directory shortcuts TODO: replace with https://github.com/chrisgrieser/nvim-ghengis
-  { 'wallpants/github-preview.nvim', cmd = { 'GithubPreviewStart', 'GithubPreviewToggle', 'GithubPreviewStop' }, opts = {} }, -- markdown preview (replaces iamcco/markdown-preview.nvim)
   { 'ziontee113/icon-picker.nvim', cmd = { 'IconPickerYank', 'IconPickerInsert', 'IconPickerNormal' }, dependencies = 'stevearc/dressing.nvim', opts = { disable_legacy_commands = true } }, -- find font characters, symbols, nerd font icons, and emojis
 }
 -- }}}
