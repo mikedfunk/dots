@@ -13,7 +13,7 @@ end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{blade.php,coffee,css,feature,html,xml,js,jsx,json,less,phtml,rake,rb,scss,yaml,eyaml,yml,babelrc,vue,neon,cfg,rest,lua,pu,plantuml,uml,hurl,conf,sql}]
+[*.{blade.php,coffee,css,feature,html,xml,js,jsx,json,less,phtml,rake,rb,scss,yaml,eyaml,yml,babelrc,vue,neon,cfg,rest,lua,pu,plantuml,uml,hurl,conf}]
 indent_size = 2
 
 [Makefile]
