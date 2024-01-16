@@ -279,7 +279,8 @@ vim.api.nvim_create_autocmd('FileType', { pattern = 'lua', group = 'lua_gf', cal
 vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf', callback = enable_lua_gf, desc = 'lua gf' })
 
 -- use latest node and php version
-vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
+-- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
+vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/20.8.0/bin:' .. vim.env.PATH -- cspell only works on node 18+
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin:' .. vim.env.PATH
 
 -- Fold Textobject Maps: {{{
@@ -363,7 +364,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_file
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = 'Brewfile', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
@@ -4391,6 +4392,8 @@ lvim.plugins = {
   -- plugins.nvim_ufo, -- fancy folds
   -- plugins.nvim_various_textobjs, -- indent object and others (don't work as well as vim-indent-object)
   -- plugins.org_bullets, -- spiffy bullet icons and todo icons, adapted for use in markdown files
+  -- plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) (alternative: https://github.com/boltlessengineer/smart-tab.nvim)
+  -- plugins.telescope_import_nvim, -- use telescope to ts/js import the same as was done before
   -- plugins.text_case_nvim, -- lua replacement for vim-abolish, reword.nvim, and vim-camelsnek. DO NOT USE :'<'>Subs ! It does not just work on the visual selection!
   -- plugins.tmuxline_vim, -- tmux statusline generator (enable when generating)
   -- plugins.treesitter_indent_object_nvim, -- select in indentation level e.g. vii. I use this very frequently. Replaces vim-indent-object. Use with indent-blankline to preview what you're going to select.
@@ -4470,9 +4473,7 @@ lvim.plugins = {
   plugins.statuscol_nvim, -- use new statuscol feature for clickable fold signs, etc.
   plugins.surround_ui_nvim, -- which-key mappings for nvim-surround
   plugins.symbols_outline_nvim, -- alternative to aerial and vista.vim - show file symbols in sidebar TODO: replace with https://github.com/hedyhli/outline.nvim
-  plugins.tabout_nvim, -- tab to move out of parens, brackets, etc. Trying this out. You have to <c-e> from completion first. (I just don't use it.) (alternative: https://github.com/boltlessengineer/smart-tab.nvim)
   plugins.telescope_dap_nvim, -- helpful dap stuff like variables and breakpoints
-  plugins.telescope_import_nvim, -- use telescope to ts/js import the same as was done before
   plugins.telescope_lazy_nvim, -- telescope source for lazy.nvim plugins
   plugins.telescope_undo_nvim, -- telescope replacement for undotree
   plugins.todo_comments_nvim, -- prettier todo, etc. comments, sign column indicators, and shortcuts to find them all in lsp-trouble or telescope

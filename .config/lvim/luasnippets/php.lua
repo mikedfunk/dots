@@ -210,9 +210,9 @@ local phpunit_class_snippet = snippet(
     }
   end),
   function_node(function(_, snip)
-    local class_name = string.gsub(snip.env.TM_FILENAME, '.php', '')
+      local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
-    return '@see ' .. class_name
+    return '@see ' .. class_under_test
   end, {}),
   text_node({ '', ' */', '' }),
   function_node(function(_, snip)
@@ -229,7 +229,7 @@ local phpunit_class_snippet = snippet(
   function_node(function(_, snip)
     local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
-    return { '', "        $this->shouldHaveType('" .. class_under_test .. "');" }
+    return { '', "        self::assertInstanceOf('" .. class_under_test .. "');" }
   end, {}),
   text_node({ '', '    }' }),
   insert_node(0),

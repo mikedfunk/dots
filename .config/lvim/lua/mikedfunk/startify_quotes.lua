@@ -251,7 +251,7 @@ local startify_quotes = {
   { "Programs, like people, get old. We can’t prevent ageing, but we can understand its causes, limit its effects and reverse some of the damage.", "", "- Mario Fusco" },
   { "Prototype to learn.", "", "Prototyping is a learning experience. Its value lies not in the code you produce, but in the lessons you learn.", "", "- The Pragmatic Programmer" },
   { "Provide options, don't make lame excuses.", "", "Instead of excuses, provide options. Don't say it can't be done; explain what can be done.", "", "- The Pragmatic Programmer" },
-  { "Pushing for a lower dev estimate is like negotiating better weather with a meteorologist." , "", "Björn Brynjar Jónsson" },
+  { "Pushing [a developer] for a lower dev estimate is like negotiating better weather with a meteorologist." , "", "- Björn Brynjar Jónsson" },
   { "Question: How does a large software project get to be one year late?", "", "Answer: One day at a time!" },
   { "Rarely is anyone thanked for the work they did to prevent the disaster that didn't happen.", "", "- Mikko Hypponen" },
   { "Ready, fire, aim: the fast approach to software development. Ready, aim, aim, aim, aim: the slow approach to software development.", "", "- Anonymous" },
@@ -289,7 +289,7 @@ local startify_quotes = {
   { "Testing leads to failure, and failure leads to understanding.", "", "- Burt Rutan" },
   { "Testing shows the presence, not the absence of bugs.", "", "- Edsger W Dijkstra" },
   { "The Programmer's Creed: We do these things not because they are easy, but because we thought they were going to be easy.", "", "- @Pinboard" },
-  { "The Three Laws of TDD:", "(1) You may not write production code until you have written a failing unit test.", "(2) You may not write more of a unit test than is sufficient to fail, and not compiling is failing.", "(3) You may not write more production code than is sufficient to pass the currently failing test.", "", "- Robert C. Martin" },
+  { "The Three Laws of TDD:", "", "(1) You may not write production code until you have written a failing unit test.", "(2) You may not write more of a unit test than is sufficient to fail, and not compiling is failing.", "(3) You may not write more production code than is sufficient to pass the currently failing test.", "", "- Robert C. Martin" },
   { "The absence of limitations is the enemy of art.", "", "- Orson Welles" },
   { "The art of programming is the art of organizing complexity, of mastering multitude and avoiding its bastard chaos as effectively as possible.", "", "- E.W. Dijkstra" },
   { "The best learners are the people who push through the discomfort of being objectively bad at something.", "", "- Tommy Collison" },
@@ -393,6 +393,7 @@ local startify_quotes = {
   { "You never finish a program, you just stop working on it." },
   { "Your code will eventually have its assumptions challenged and stop working.", "", "- /u/the7key" },
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
+  { "Pull requests should be as small as possible and as large as necessary", "", "- Unknown" },
 }
 
 return startify_quotes

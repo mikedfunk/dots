@@ -315,6 +315,8 @@ alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias mycli="mycli --defaults-group-suffix=_mycli"
+alias k="kubectl"
+compdef k="kubectl"
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh
