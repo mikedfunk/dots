@@ -3,6 +3,7 @@
 local is_installed = require 'mikedfunk.helpers'.is_installed
 
 -- send hurl request {{{
+-- TODO: replace with https://github.com/jellydn/hurl.nvim
 -- command Exec set splitright | vnew | set filetype=sh | read !sh #
 local send_hurl_request = function()
   local file_path = vim.fn.expand('%')

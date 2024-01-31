@@ -719,8 +719,8 @@ local codeium_status_component = {
   function(_) return '' end,
   separator = { right = '' },
   color = function()
-    local installed, _ = pcall(vim.cmd, 'Codeium')
-    if not installed then return {} end
+    -- local installed, _ = pcall(vim.cmd, 'Codeium')
+    -- if not installed then return {} end
 
     local color
     if vim.fn['codeium#Enabled']() then
@@ -731,10 +731,10 @@ local codeium_status_component = {
 
     return { fg = color }
   end,
-  cond = function()
-    local success, _ = pcall(vim.cmd, 'Codeium')
-    return success
-  end,
+  -- cond = function()
+  --   local success, _ = pcall(vim.cmd, 'Codeium')
+  --   return success
+  -- end,
   on_click = function()
     if vim.fn['codeium#Enabled']() then
       vim.cmd 'CodeiumDisable'
@@ -1156,7 +1156,27 @@ require 'lvim.lsp.null-ls.formatters'.setup {
       return utils.root_has_file { '.php-cs-fixer.php' }
     end,
   },
-  { name = 'prettier' }, -- had problems with prettierd for some reason
+  {
+    name = 'prettier',
+    condition = function(utils)
+      -- phew! https://prettier.io/docs/en/configuration.html
+      return utils.root_has_file {
+        'prettier.config.js',
+        '.prettierrc',
+        '.prettierrc.json',
+        '.prettierrc.yml',
+        '.prettierrc.yaml',
+        '.prettierrc.json5',
+        '.prettierrc.js',
+        'prettierrc.config.js',
+        '.prettierrc.mjs',
+        'prettierconfig.mjs',
+        '.prettierrc.cjs',
+        'prettier.config.cjs',
+        '.prettierrc.toml',
+      }
+    end
+  }, -- had problems with prettierd for some reason
   {
     name = 'rustywind', -- organizes tailwind classes
     condition = function(utils)

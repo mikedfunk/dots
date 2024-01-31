@@ -223,6 +223,7 @@ brew "autoconf" # needed to build some php70 libs from source https://github.com
 brew "autoconf@2.69" # needed to build asdf erlang
 brew "automake" # needed for building php
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
+brew "aws-sam-cli" # local lambda CLI
 brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials)
 brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
