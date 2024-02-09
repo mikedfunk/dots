@@ -1,7 +1,15 @@
 return {
   'andymass/vim-matchup',
-  event = 'CursorMoved',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  -- event = 'CursorMoved',
+  ft = {
+    'ruby',
+    'lua',
+    'zsh',
+    'bash',
+    'php',
+    'python',
+  }, -- everything but javascript. It's failing there.
   init = function()
     lvim.builtin.treesitter.matchup.enable = true
     vim.g.matchup_matchparen_offscreen = { method = 'popup' }

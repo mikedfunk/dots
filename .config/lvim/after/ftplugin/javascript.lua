@@ -12,7 +12,8 @@ if not should_setup_flow then
 end
 
 if should_setup_flow and not _G.was_flow_setup then
-  vim.bo.filetype = 'javascriptreact'
+  -- this is causing problems with treesitter
+  -- vim.bo.filetype = 'javascriptreact'
   require 'lvim.lsp.manager'.setup('flow')
   _G.was_flow_setup = true
 end
