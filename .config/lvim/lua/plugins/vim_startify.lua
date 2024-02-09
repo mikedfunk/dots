@@ -1,4 +1,4 @@
-local startify_quotes = {
+local my_startify_quotes = {
   -- 1. https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
   -- 2. and some more from https://defprogramming.com
   -- 3. some more quotes from @codewisdom@twitter.com
@@ -397,4 +397,56 @@ local startify_quotes = {
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
 }
 
-return startify_quotes
+---@return nil
+local setup_startify = function()
+  -- doesn't work since it's full screen
+  -- table.insert(lvim.builtin.bufferline.options.offsets, {
+  --   filetype = 'startify',
+  --   highlight = 'PanelHeading',
+  --   padding = 1,
+  --   text = 'Startify'
+  -- })
+
+  vim.g['ascii'] = {}
+  vim.g['startify_custom_header'] = 'map(g:ascii + startify#fortune#boxed(), "\\"   \\".v:val")'
+  vim.g['startify_custom_header_quotes'] = my_startify_quotes
+  vim.g['startify_fortune_use_unicode'] = 1
+  vim.g['startify_relative_path'] = 1
+  vim.g['startify_use_env'] = 1 -- use $HOME instead of full path for instance
+
+  vim.g['startify_enable_special'] = 0 -- show empty buffer and quit
+  vim.g['startify_enable_unsafe'] = 1 -- speeds up startify but sacrifices some accuracy
+  vim.g['startify_session_sort'] = 1 -- sort descending by last used
+  vim.cmd [[let g:startify_custom_indices = map(range(1,100), 'string(v:val)')]] -- start at 1
+  vim.g['startify_skiplist'] = { 'COMMIT_EDITMSG', '.DS_Store' } -- disable common but unimportant files
+  vim.g['startify_files_number'] = 9 -- recently used
+  vim.g['startify_session_persistence'] = 1 -- auto save session on exit like obsession
+  -- vim.g['startify_session_dir'] = vim.env.HOME .. '/.local/share/lunarvim/session' .. vim.fn.getcwd() -- session dir for each repo
+  vim.g['startify_session_dir'] = vim.fn.stdpath('data') .. '/session/' .. vim.fn.getcwd() -- session dir for each repo
+  vim.g['startify_change_to_dir'] = 0 -- this feature should not even exist. It is stupid.
+
+  -- reorder and whitelist certain groups
+  vim.g['startify_lists'] = {
+    { type = 'sessions',  header = { '   Sessions' } },
+    { type = 'dir',       header = { '   Recent in ' .. vim.fn.getcwd() } },
+    { type = 'bookmarks', header = { '   Bookmarks' } },
+  }
+
+  require 'saatchiart.plugin_configs'.configure_startify_bookmarks()
+
+  lvim.builtin.which_key.mappings.S = {
+    name = 'Session',
+    h = { '<Cmd>Startify<CR>', 'Home' },
+    s = { '<Cmd>SSave<CR>', 'Save' },
+    l = { '<Cmd>SLoad<CR>', 'Load' },
+    d = { '<Cmd>SDelete!<CR>', 'Delete' },
+    c = { '<Cmd>SClose<CR>', 'Close' },
+  }
+  lvim.builtin.which_key.mappings.H = { '<Cmd>Startify<CR>', 'Home' }
+end
+
+return {
+  'mhinz/vim-startify',
+  -- event = 'VimEnter',
+  init = setup_startify,
+}

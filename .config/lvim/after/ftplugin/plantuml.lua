@@ -1,6 +1,6 @@
 -- vim: set foldmethod=marker:
 
-local is_installed = require 'mikedfunk.helpers'.is_installed
+local is_installed = require 'helpers'.is_installed
 
 -- view uml diagram in browser {{{
 

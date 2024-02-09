@@ -1,6 +1,6 @@
 -- vim: set fdm=marker:
 
-local is_installed = require 'mikedfunk.helpers'.is_installed
+local is_installed = require 'helpers'.is_installed
 
 -- send hurl request {{{
 -- TODO: replace with https://github.com/jellydn/hurl.nvim

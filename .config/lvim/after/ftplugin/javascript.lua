@@ -1,4 +1,4 @@
-local is_installed = require 'mikedfunk.helpers'.is_installed
+local is_installed = require 'helpers'.is_installed
 
 -- local pwd = vim.api.nvim_exec('pwd', true)
 -- if pwd:match '/Code/saatchi/.*' then vim.bo.filetype = 'javascriptreact' end

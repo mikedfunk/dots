@@ -15,11 +15,4 @@ function M.is_installed(module)
   return is_module_installed
 end
 
----@param plugin string
----@return boolean
-function M.is_plugin_installed(plugin)
-  return packer_plugins and packer_plugins[plugin]
-  -- and packer_plugins[plugin].loaded
-end
-
 return M
