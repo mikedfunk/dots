@@ -151,6 +151,7 @@ local startify_quotes = {
   { "Hell isn't other people's code. Hell is your own code from 3 years ago.", "", "- Jeff Atwood" },
   { "Hope is not a plan.", "", "- Jonathan Rosenberg" },
   { "How much time do you invest in cleaning it? Roughly the same amount of time it took you to write it. And that's the problem - nobody wants to put that effort in. Because they think they're done when it works. You're not done when it works! You're done when it's right.", "", "- Robert C. Martin" },
+  { "I believe the hard part of building software to be the specification, design, and testing of this conceptual construct, not the labor of representing it and testing the fidelity of the representation.", "", "- Fred Brooks, No Silver Bullet, 1986" },
   { "I love deadlines. I like the whooshing sound they make as they fly by.", "", "- Douglas Adams" },
   { "I think a lot of new programmers like to use advanced data structures and advanced language features as a way of demonstrating their ability. I call it the lion-tamer syndrome. Such demonstrations are impressive, but unless they actually translate into real wins for the project, avoid them.", "", "- Glyn Williams" },
   { "I would rather die of passion than of boredom.", "", "- Vincent Van Gogh" },
@@ -251,6 +252,7 @@ local startify_quotes = {
   { "Programs, like people, get old. We can’t prevent ageing, but we can understand its causes, limit its effects and reverse some of the damage.", "", "- Mario Fusco" },
   { "Prototype to learn.", "", "Prototyping is a learning experience. Its value lies not in the code you produce, but in the lessons you learn.", "", "- The Pragmatic Programmer" },
   { "Provide options, don't make lame excuses.", "", "Instead of excuses, provide options. Don't say it can't be done; explain what can be done.", "", "- The Pragmatic Programmer" },
+  { "Pull requests should be as small as possible and as large as necessary", "", "- Unknown" },
   { "Pushing [a developer] for a lower dev estimate is like negotiating better weather with a meteorologist." , "", "- Björn Brynjar Jónsson" },
   { "Question: How does a large software project get to be one year late?", "", "Answer: One day at a time!" },
   { "Rarely is anyone thanked for the work they did to prevent the disaster that didn't happen.", "", "- Mikko Hypponen" },
@@ -393,7 +395,6 @@ local startify_quotes = {
   { "You never finish a program, you just stop working on it." },
   { "Your code will eventually have its assumptions challenged and stop working.", "", "- /u/the7key" },
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
-  { "Pull requests should be as small as possible and as large as necessary", "", "- Unknown" },
 }
 
 return startify_quotes

@@ -1380,6 +1380,8 @@ if not vim.tbl_contains(lvim.builtin.nvimtree.setup.filters.custom, '\\.null-ls*
 -- nvim-treesitter {{{
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { 'php' } -- needed to make non-treesitter indent work
 
+vim.g.skip_ts_context_commentstring_module = true
+
 lvim.builtin.treesitter.ensure_installed = {
   'comment',
   'lua', -- update to latest

@@ -388,6 +388,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "kidonng/homebrew-malt/vimac" # control mac with vimium-style vi controls (hold space to select, <c-cmd-j> to enter scroll mode) (no longer in brew cask, I use shortcat instead)
 # cask "kitematic" # mac native docker container browser (I just use docker cli tools)
 # cask "kitty" # fast terminal emulator (see iterm2 above for why I switched back to iTerm)
+# cask "krisp": # software mic noise reduction (requires google calendar access :thumbsdown:)
 # cask "lastpass" # desktop lastpass - can use mouseless (switched to BitWarden)
 # cask "launchcontrol" # launchctl gui. (I use lunchy gem instead)
 # cask "lens" # kubernetes management native app
