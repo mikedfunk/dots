@@ -107,34 +107,6 @@ end
 lvim.builtin.which_key.mappings['l']['C'] = { toggle_contextive, 'Toggle Contextive' }
 -- }}}
 
--- auto hover definition {{{
-lvim.lsp.hover_definition = false
-
----@param client_id integer
----@param bufnr integer
----@return nil
-local enable_lsp_hover_definition = function(client_id, bufnr)
-  local client_ok, method_supported = pcall(function()
-    return vim.lsp.get_client_by_id(client_id).server_capabilities.hoverProvider
-  end)
-
-  if not client_ok or not method_supported then return end
-
-  vim.api.nvim_create_autocmd('CursorHold', {
-    group = vim.api.nvim_create_augroup('lsp_hover_def', { clear = true }),
-    desc = 'lsp hover def',
-    buffer = bufnr,
-    -- local has_floating_window = vim.fn.len(vim.fn.filter(vim.api.nvim_list_wins(), function (_, v) return vim.api.nvim_win_get_config(v).relative ~= '' end)) > 0
-    callback = function() if lvim.lsp.hover_definition then vim.lsp.buf.hover() end end, ---@diagnostic disable-line redundant-parameter
-  })
-end
-
-local toggle_hover_def = function() lvim.lsp.hover_definition = not lvim.lsp.hover_definition end
-lvim.builtin.which_key.mappings['l']['H'] = { toggle_hover_def, 'Toggle LSP Hover' }
-vim.keymap.set('n', '<C-h>', toggle_hover_def, { noremap = true })
-vim.keymap.set('i', '<C-h>', toggle_hover_def, { noremap = true })
--- }}}
-
 -- put cursor at end of text on y and p
 lvim.keys.visual_mode['y'] = 'y`]'
 lvim.keys.visual_mode['p'] = 'p`]'
