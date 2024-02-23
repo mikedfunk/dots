@@ -3,7 +3,7 @@ return {
   event = 'BufRead',
   dependencies = 'folke/which-key.nvim',
   init = function()
-    lvim.builtin.which_key.mappings['l']['o'] = { '<Cmd>SymbolsOutline<CR>', 'Symbols Outline' }
+    vim.keymap.set('n', '<leader>lo', '<Cmd>SymbolsOutline<CR>', { noremap = true, desc = 'Symbols Outline' })
     local heading_options = {
       filetype = 'Outline',
       highlight = 'PanelHeading',

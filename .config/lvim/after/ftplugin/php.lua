@@ -4,8 +4,11 @@
 -- vim.g.php_syntax_extensions_enabled = { "bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib" }
 vim.g.php_syntax_extensions_enabled = {}
 
-vim.api.nvim_create_augroup('php_textwidth', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'php', group = 'php_textwidth', callback = function() vim.api.nvim_buf_set_option(0, 'textwidth', 80) end })
+vim.api.nvim_buf_set_option(0, 'textwidth', 80)
+
+local php_splitter = function() vim.cmd [[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]] end
+vim.keymap.set('n', ',.', php_splitter, { noremap = true, buffer = true, desc = 'Split PHP' })
+vim.keymap.set('n', '<Leader>Ps', '<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>', { noremap = true, buffer = true, desc = 'Split Docblock' })
 
 -- php settings https://github.com/StanAngeloff/php.vim/blob/master/syntax/php.vim#L35-L67 {{{
 vim.g['php_version_id'] = 70414 -- value of PHP_VERSION_ID constant (7.4)

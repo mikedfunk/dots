@@ -9,18 +9,9 @@ return {
   -- },
   dependencies = { 'mfussenegger/nvim-dap' },
   init = function()
-    lvim.builtin.which_key.mappings['d']['t'] = {
-      function() require 'persistent-breakpoints.api'.toggle_breakpoint() end,
-      'Toggle Breakpoint',
-    }
-    lvim.builtin.which_key.mappings['d']['X'] = {
-      function() require 'persistent-breakpoints.api'.clear_all_breakpoints() end,
-      'Clear All Breakpoints',
-    }
-    lvim.builtin.which_key.mappings['d']['e'] = {
-      function() require 'persistent-breakpoints.api'.set_conditional_breakpoint() end,
-      'Expression Breakpoint',
-    }
+    vim.keymap.set('n', '<leader>dt', function() require 'persistent-breakpoints.api'.toggle_breakpoint() end, { noremap = true, desc = 'Toggle Breakpoint' })
+    vim.keymap.set('n', '<leader>dX', function() require 'persistent-breakpoints.api'.clear_all_breakpoints() end, { noremap = true, desc = 'Clear All Breakpoints' })
+    vim.keymap.set('n', '<leader>de', function() require 'persistent-breakpoints.api'.set_conditional_breakpoint() end, { noremap = true, desc = 'Expression Breakpoint' })
   end,
   opts = { load_breakpoints_event = { 'BufReadPost' } },
 }

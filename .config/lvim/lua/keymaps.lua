@@ -1,7 +1,5 @@
 -- vim: set foldmethod=marker:
 
-local is_installed = require 'helpers'.is_installed
-
 -- Close current window and all its floating subwindows https://github.com/neovim/neovim/issues/11440 {{{
 
 ---@return nil
@@ -32,63 +30,87 @@ vim.keymap.set('x', 'az', '<Cmd>normal! [zo]z$<CR>', { noremap = true })
 -- }}}
 
 -- lvim.keys.normal_mode['<C-s>'] = ':nohlsearch<cr>'
-lvim.keys.normal_mode['<C-w>t'] = 'mz:tabe %<cr>`z'
-lvim.keys.normal_mode['<c-l>'] = ':silent! call LocListToggle()<CR>'
+vim.keymap.set('n', '<C-w>t', 'mz:tabe %<cr>`z', { noremap = true, desc = 'Open in new tab' })
+vim.keymap.set('n', '<C-l>', ':silent! call LocListToggle()<CR>', { noremap = true, desc = 'Toggle Location List' })
 
-lvim.builtin.which_key.mappings['e'] = { '<Cmd>NvimTreeFindFileToggle<CR>', 'Explore File' }
-lvim.builtin.which_key.mappings['m'] = { '<Cmd>silent make<CR>', 'Make' }
-lvim.builtin.which_key.mappings['E'] = { '<Cmd>NvimTreeToggle<CR>', 'Explore' }
+vim.keymap.set('n', '<leader>e', '<Cmd>NvimTreeFindFileToggle<CR>', { noremap = true, desc = 'Explore File' })
+vim.keymap.set('n', '<leader>m', '<Cmd>silent make<CR>', { noremap = true, desc = 'Make' })
+vim.keymap.set('n', '<leader>E', '<Cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Expore' })
 
-lvim.builtin.which_key.mappings['l']['c'] = { '<Cmd>LspSettings buffer<CR>', 'Configure LSP' }
-lvim.builtin.which_key.mappings['l']['R'] = { '<Cmd>LspRestart<CR>', 'Restart LSP' }
+vim.keymap.set('n', '<leader>lc', '<Cmd>LspSettings buffer<CR>', { noremap = true, desc = 'Configure LSP' })
+vim.keymap.set('n', '<leader>lR', '<Cmd>LspRestart<CR>', { noremap = true, desc = 'Restart LSP' })
 
-lvim.builtin.which_key.mappings['b']['d'] = { '<Cmd>bd<CR>', 'Delete' }
-lvim.builtin.which_key.mappings['b']['f'] = { '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', 'Find' }
-lvim.builtin.which_key.mappings['b']['p'] = { '<Cmd>BufferLineTogglePin<CR>', 'Pin/Unpin' }
-lvim.builtin.which_key.mappings['b']['o'] = { '<Cmd>BufferLineGroupClose ungrouped<CR>', 'Delete All but Pinned' }
+vim.keymap.set('n', '<leader>bd', '<Cmd>bd<CR>', { noremap = true, desc = 'Delete' })
+vim.keymap.set('n', '<leader>bf', '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', { noremap = true, desc = 'Find' })
+vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', { noremap = true, desc = 'Pin/Unpin' })
+vim.keymap.set('n', '<leader>bo', '<Cmd>BufferLineGroupClose ungrouped<CR>', { noremap = true, desc = 'Delete All but Pinned' })
 
 -- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
 -- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
 -- lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'Outgoing calls' }
 
--- telescope versions of some lsp mappings
-lvim.lsp.buffer_mappings.normal_mode['gr'] = { '<Cmd>Telescope lsp_references<CR>', 'Telescope References' }
-lvim.lsp.buffer_mappings.normal_mode['gd'] = { '<Cmd>Telescope lsp_definitions<CR>', 'Goto Definition' }
-lvim.lsp.buffer_mappings.normal_mode['gI'] = { '<Cmd>Telescope lsp_implementations<CR>', 'Goto Implementation' }
-lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Goto Type Definition' }
-lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>Telescope lsp_incoming_calls<CR>', 'Incoming Calls' }
-lvim.lsp.buffer_mappings.normal_mode['gO'] = { '<Cmd>Telescope lsp_outgoing_calls<CR>', 'Outgoing Calls' }
-lvim.builtin.which_key.mappings['l']['d'] = { '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', 'Buffer Diagnostics' } -- use the dropdown theme
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
+  pattern = "*",
+  callback = function(args)
+    local bufnr = args.buf
+    -- telescope versions of some lsp mappings
+    vim.keymap.set('n', '<leader>gr', '<Cmd>Telescope lsp_references<CR>', { noremap = true, buffer = bufnr, desc = 'Telescope References' })
+    vim.keymap.set('n', '<leader>gd', '<Cmd>Telescope lsp_definitions<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Definition' })
+    vim.keymap.set('n', '<leader>gI', '<Cmd>Telescope lsp_implementations<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Implementation' })
+    vim.keymap.set('n', '<leader>gt', '<Cmd>Telescope lsp_type_definitions<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Type Definition' })
+    vim.keymap.set('n', '<leader>go', '<Cmd>Telescope lsp_incoming_calls<CR>', { noremap = true, buffer = bufnr, desc = 'Incoming Calls' })
+    vim.keymap.set('n', '<leader>gO', '<Cmd>Telescope lsp_outgoing_calls<CR>', { noremap = true, buffer = bufnr, desc = 'Outgoing Calls' })
+    -- vim.keymap.set('n', '<leader>lD', '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', { noremap = true, buffer = bufnr, desc = 'Buffer Diagnostics' })
+    vim.keymap.set('i', '<c-v>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
+    vim.keymap.set('i', '<c-k>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
+    vim.keymap.set('n', '<leader>lh', function() vim.diagnostic.open_float() end, { noremap = true, buffer = bufnr, desc = 'Line Diagnostic Hover' })
+  end,
+})
 
 -- debugger mappings
 lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
-lvim.builtin.which_key.vmappings['d']['v'] = { function() require 'dapui'.eval() end, 'Eval Visual' }
+vim.keymap.set('v', '<leader>dv', function() require 'dapui'.eval() end, { noremap = true, desc = 'Eval Visual' })
 
 lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
-lvim.builtin.which_key.mappings['d']['s'] = { function() require 'dap'.continue() end, 'Start' }
-lvim.builtin.which_key.mappings['d']['d'] = { function() require 'dap'.disconnect() end, 'Disconnect' }
-lvim.builtin.which_key.mappings['d']['e'] = { function() vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(input) require 'dap'.set_breakpoint(input) end) end, 'Expression Breakpoint' }
-lvim.builtin.which_key.mappings['d']['L'] = { function() vim.ui.input({ prompt = 'Log point message: ' }, function(input) require 'dap'.set_breakpoint(nil, nil, input) end) end, 'Log on line' }
-lvim.builtin.which_key.mappings['d']['h'] = { function() require 'dapui'.eval() end, 'Eval Hover' }
-lvim.builtin.which_key.mappings['d']['q'] = { function() require('dap').terminate() end, 'Quit' }
+vim.keymap.set('n', '<leader>ds', function() require 'dap'.continue() end, { noremap = true, desc = 'Start' })
+vim.keymap.set('n', '<leader>dd', function() require 'dap'.disconnect() end, { noremap = true, desc = 'Disconnect' })
 
-lvim.builtin.which_key.mappings['L']['C'] = { '<Cmd>CmpStatus<CR>', 'Nvim-Cmp Status' }
+vim.keymap.set('n', '<leader>de', function()
+  vim.ui.input(
+    { prompt = 'Breakpoint condition: ' },
+    function(input) require 'dap'.set_breakpoint(input) end
+  )
+end, { noremap = true, desc = 'Expression Breakpoint' })
+
+vim.keymap.set('n', '<leader>dL', function()
+  vim.ui.input(
+    { prompt = 'Log point message: ' },
+    function(input) require 'dap'.set_breakpoint(nil, nil, input) end
+  )
+end, { noremap = true, desc = 'Log on Line' })
+
+vim.keymap.set('n', '<leader>dh', function() require 'dapui'.eval() end, { noremap = true, desc = 'Eval Hover' })
+vim.keymap.set('n', '<leader>dq', function() require('dap').terminate() end, { noremap = true, desc = 'Quit' })
+
+vim.keymap.set('n', '<leader>LC', '<Cmd>CmpStatus<CR>', { noremap = true, desc = 'Nvim-Cmp Status' })
 
 -- lvim.builtin.which_key.mappings['h'] = nil -- I map this in hop.nvim
 lvim.builtin.which_key.mappings[';'] = nil
 
 -- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
-lvim.builtin.which_key.mappings['g']['L'] = { '<Cmd>0Gclog<CR>', 'Git File Log' }
+vim.keymap.set('n', '<leader>gL', '<Cmd>0Gclog<CR>', { noremap = true, desc = 'Git File Log' })
+
 local are_diagnostics_visible = true
 local toggle_diagnostics = function()
   are_diagnostics_visible = not are_diagnostics_visible
-  if are_diagnostics_visible then vim.diagnostic.show() else vim.diagnostic.hide() end
+  if are_diagnostics_visible then vim.diagnostic.disable() else vim.diagnostic.enable() end
 end
+vim.keymap.set('n', '<leader>lT', toggle_diagnostics, { noremap = true, desc = 'Toggle Diagnostics' })
 
-lvim.builtin.which_key.mappings['l']['T'] = { toggle_diagnostics, 'Toggle Diagnostics' }
-lvim.builtin.which_key.mappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
+vim.keymap.set('n', '<leader>lf', function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, { noremap = true, desc = 'Format' })
 lvim.builtin.which_key.vmappings['l'] = lvim.builtin.which_key.vmappings['l'] or { name = 'LSP' }
-lvim.builtin.which_key.vmappings['l']['f'] = { function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, 'Format' } -- give it more than 1 second (alternative: async=true)
+vim.keymap.set('v', '<leader>lf', function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, { noremap = true, desc = 'Format' })
 
 -- toggle contextive LSP {{{
 local toggle_contextive = function()
@@ -104,13 +126,13 @@ local toggle_contextive = function()
   vim.cmd 'LspStart contextive'
 end
 
-lvim.builtin.which_key.mappings['l']['C'] = { toggle_contextive, 'Toggle Contextive' }
+vim.keymap.set('n', '<leader>lC', toggle_contextive, { noremap = true, desc = 'Toggle Contextive' })
 -- }}}
 
 -- put cursor at end of text on y and p
-lvim.keys.visual_mode['y'] = 'y`]'
-lvim.keys.visual_mode['p'] = 'p`]'
-lvim.keys.normal_mode['p'] = 'p`]'
+vim.keymap.set('v', 'y', 'y`]', { noremap = true, desc = 'Cursor at end' })
+vim.keymap.set('v', 'p', 'p`]', { noremap = true, desc = 'Cursor at end' })
+vim.keymap.set('n', 'p', 'p`]', { noremap = true, desc = 'Cursor at end' })
 
 -- disable alt esc
 lvim.keys.insert_mode['jk'] = nil
@@ -122,63 +144,24 @@ vim.keymap.set('n', 'j', "v:count ? 'j' : 'gj'", { noremap = true, expr = true }
 vim.keymap.set('n', 'k', "v:count ? 'k' : 'gk'", { noremap = true, expr = true })
 
 -- Easier horizontal scrolling
-lvim.keys.normal_mode['zl'] = 'zL'
-lvim.keys.normal_mode['zh'] = 'zH'
+vim.keymap.set('n', 'zl', 'zL', { noremap = true, desc = 'Scroll Right' })
+vim.keymap.set('n', 'zh', 'zH', { noremap = true, desc = 'Scroll Left' })
 
 -- stupid f1 help
 lvim.keys.normal_mode['<f1>'] = '<nop>'
 lvim.keys.insert_mode['<f1>'] = '<nop>'
 
-lvim.builtin.which_key.mappings['l']['a'] = { function() vim.lsp.buf.code_action() end, 'Code Action' } -- slightly prettier
-
--- visual lsp functions
-lvim.builtin.which_key.vmappings['l'] = {
-  name = 'LSP',
-  a = { ":'<,'>lua vim.lsp.buf.code_action()<CR>", 'Code Action' },
-  f = { ":'<,'>lua vim.lsp.buf.format()<CR>", 'Format' },
-}
+vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { noremap = true, desc = 'Code Action' })
+vim.keymap.set('v', '<leader>la', function() vim.lsp.buf.code_action() end, { noremap = true, desc = 'Code Action' })
 
 -- diffget for mergetool
 -- (no longer) disabled in favor of akinsho/git-conflict.nvim
-lvim.builtin.which_key.mappings['D'] = {
-  name = 'DiffGet',
-  l = { '<Cmd>diffget LOC<CR>', 'Use other branch' },
-  r = { '<Cmd>diffget REM<CR>', 'Use current branch' },
-  u = { '<Cmd>diffupdate<CR>', 'Update diff' },
-}
+lvim.builtin.which_key.mappings['D'] = { name = 'DiffGet' }
+vim.keymap.set('v', '<leader>Dl', '<Cmd>diffget LOC<CR>', { noremap = true, desc = 'Use other branch' })
+vim.keymap.set('v', '<leader>Dr', '<Cmd>diffget REM<CR>', { noremap = true, desc = 'Use current branch' })
+vim.keymap.set('v', '<leader>Du', '<Cmd>diffupdate<CR>', { noremap = true, desc = 'Update diff' })
 
-lvim.builtin.which_key.mappings['b']['r'] = { '<Cmd>Telescope oldfiles<CR>', 'Recent' }
-
--- php
-
----@return nil
-local php_splitter = function() vim.cmd [[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]] end
-
----@return nil
-local map_php_splitter = function()
-  vim.keymap.set('n', ',.', php_splitter, { buffer = vim.api.nvim_get_current_buf(), noremap = true })
-end
-vim.api.nvim_create_augroup('php_splitter', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'php', group = 'php_splitter', callback = map_php_splitter, desc = 'php splitter' })
-
----@return nil
-local setup_php_leader_mappings = function()
-  if not is_installed('which-key') then return end
-  require 'which-key'.register({
-    P = { name = 'Php',
-      s = { '<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>', 'Split docblock' },
-      -- x = { '<Cmd>norm mv?array(<CR>f(mz%r]`zr[hvFa;d`v<CR>', 'Fix array' }, -- TODO: doesn't work because I can't type <c-v><enter>, neovim doesn't like it https://github.com/mikedfunk/dotfiles/blob/6800127ba60d66a3de72e7be84e008aa4425a2a2/.vimrc#L767
-    }
-  }, { prefix = '<Leader>' })
-end
-vim.api.nvim_create_augroup('php_leader_maps', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'php',
-  group = 'php_leader_maps',
-  callback = setup_php_leader_mappings,
-  once = true,
-  desc = 'php leader maps',
-})
+vim.keymap.set('v', '<leader>br', '<Cmd>Telescope oldfiles<CR>', { noremap = true, desc = 'Recent' })
 
 -- delete inactive buffers function {{{
 -- TODO: convert to lua
@@ -204,10 +187,8 @@ endfunction
 command! Bdi :call DeleteInactiveBufs()
 ]], false)
 
-lvim.builtin.which_key.mappings['b']['i'] = { ':call DeleteInactiveBufs()<CR>', 'Delete Inactive Buffers' }
+vim.keymap.set('n', '<leader>bi', ':call DeleteInactiveBufs()<CR>', { noremap = true, desc = 'Delete Inactive Buffers' })
 -- }}}
-
-lvim.builtin.which_key.mappings['l']['h'] = { function() vim.diagnostic.open_float() end, 'Line Diagnostic Hover' }
 
 lvim.builtin.which_key.on_config_done = function()
   -- Comment.nvim

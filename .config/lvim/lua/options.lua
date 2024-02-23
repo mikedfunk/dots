@@ -116,93 +116,14 @@ vim.o.sessionoptions = table.concat({
   'globals',
 }, ',')
 
--- if the last window is a quickfix, close it
-vim.api.nvim_create_augroup('last_quickfix', { clear = true })
-vim.api.nvim_create_autocmd('WinEnter', {
-  pattern = '*',
-  group = 'last_quickfix',
-  command = "if winnr('$') == 1 && getbufvar(winbufnr(winnr()), '&buftype') == 'quickfix' | q | endif",
-})
-
-vim.api.nvim_create_autocmd('QuickFixCmdPost', { pattern = '[^l]*', group = 'last_quickfix', command = 'cwindow' })
-vim.api.nvim_create_autocmd('QuickFixCmdPost', { pattern = 'l*', group = 'last_quickfix', command = 'lwindow' })
-
 -- bug: I don't see a way to apply _local_ iabbrevs so if you load a
 -- markdown file it will enable the abbrev in the entire workspace :/
-
--- comment format (for filetypes that don't have a treesitter parser)
-vim.api.nvim_create_augroup('comment_formats', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'dosini,haproxy,neon,gitconfig', group = 'comment_formats', callback = function() vim.o.commentstring = '# %s' end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'plantuml', group = 'comment_formats', callback = function() vim.o.commentstring = "' %s" end })
-
--- open quickfix in vsplit, tab, split
-vim.api.nvim_create_augroup('quickfix_splits', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 's', '<C-w><Enter>', { buffer = true }) end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 'v', '<C-w><Enter><C-w>L', { buffer = true }) end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', callback = function() vim.keymap.set('n', 't', '<C-w><Enter><C-w>T', { buffer = true }) end })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'qf', group = 'quickfix_splits', command = 'wincmd J' })
-
-vim.api.nvim_create_augroup('show_defs', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'vim',
-  group = 'show_defs',
-  callback = function()
-    vim.keymap.set('n', 'K', '<Esc>:help <C-R><C-W><CR>', { noremap = true, silent = true, buffer = true })
-  end,
-})
--- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<Cmd>SymbolsOutline<CR>', { noremap = true })
--- web-based documentation with shift-K
--- https://www.reddit.com/r/vim/comments/3oo1e0/has_anyone_found_a_way_to_make_k_useful/
--- NOTE: keywordprg is not invoked silently, so you will get 'press enter to continue'
--- also I tried to make this fancy and use filetype but neovim doesn't like it
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'zsh,bash,sh',
-  group = 'show_defs',
-  command = 'setlocal keywordprg=devdocs\\ bash',
-})
 
 -- show vert lines at the psr-2 suggested column limits
 vim.o.colorcolumn = table.concat({
   80,
   120
 }, ',')
-
--- only show colorcolumn when over {{{
--- (like https://github.com/m4xshen/smartcolumn.nvim but works for multiple)
-
--- --- @param colorcolumn integer
--- --- @return boolean
--- local function is_a_line_over_colorcolumn(colorcolumn)
---   local max_column = 0
---   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
---   for _, line in pairs(lines) do
---     max_column = math.max(max_column, vim.fn.strdisplaywidth(line))
---   end
-
---   return max_column > colorcolumn
--- end
-
--- local colorcolumns = { 80, 120 }
--- local function enable_colorcolumns_if_over()
---   local enabled_colorcolumns = {}
---   for _, colorcolumn in ipairs(colorcolumns) do
---     if is_a_line_over_colorcolumn(colorcolumn) then
---       table.insert(enabled_colorcolumns, colorcolumn)
---     end
---   end
-
---   if enabled_colorcolumns ~= {} then
---     vim.wo.colorcolumn = table.concat(enabled_colorcolumns, ',')
---   end
--- end
-
--- vim.api.nvim_create_augroup('color_column_over', { clear = true })
--- vim.api.nvim_create_autocmd('CursorHold', {
---   group = 'color_column_over',
---   callback = enable_colorcolumns_if_over,
---   desc = 'enable colorcolumns if over',
--- })
--- }}}
 
 -- prettier hidden chars. turn on with :set list or yol (different symbols)
 vim.o.listchars = table.concat({
@@ -242,16 +163,6 @@ local disabled_built_ins = {
 }
 for _, plugin in pairs(disabled_built_ins) do vim.g['loaded_' .. plugin] = 1 end
 
-local enable_lua_gf = function()
-  if not vim.o.ft == 'lua' then return end
-  if not vim.fn.isdirectory 'lua' == 1 then return end
-  vim.opt_local.path:prepend('lua')
-end
-
-vim.api.nvim_create_augroup('lua_gf', { clear = true })
-vim.api.nvim_create_autocmd('FileType', { pattern = 'lua', group = 'lua_gf', callback = enable_lua_gf, desc = 'lua gf' })
-vim.api.nvim_create_autocmd('DirChanged', { pattern = 'window', group = 'lua_gf', callback = enable_lua_gf, desc = 'lua gf' })
-
 -- use latest node and php version
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
 vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/20.8.0/bin:' .. vim.env.PATH -- cspell only works on node 18+
@@ -282,61 +193,6 @@ vim.g['markdown_fenced_languages'] = {
   'typescriptreact',
   'xml',
 }
--- }}}
-
--- set filetypes for unusual files {{{
--- vim.filetype.add { pattern = { ['.+%.phtml'] = 'php' } }
--- vim.filetype.add { pattern = { ['.+%.blade%.php'] = 'blade.php' } }
--- vim.filetype.add { pattern = { ['.+%.eyaml%.php'] = 'yaml' } }
--- vim.filetype.add { pattern = { ['%.babelrc'] = 'json' } }
--- vim.filetype.add { pattern = { ['%.php%.(sample|dist)'] = 'php' } }
--- vim.filetype.add { pattern = { ['{site,default}.conf'] = 'nginx' } }
--- vim.filetype.add { pattern = { ['.editorconfig'] = 'dosini' } }
--- vim.filetype.add { pattern = { ['{Brewfile,.sshrc,.tigrc,.envrc,.env}'] = 'sh' } }
--- vim.filetype.add { pattern = { ['.env.*'] = 'sh' } }
--- vim.filetype.add { pattern = { ['*.{cnf,hurl}'] = 'dosini' } }
--- vim.filetype.add { pattern = { ['.spacemacs'] = 'lisp' } }
--- vim.filetype.add { pattern = { ['.{curlrc,gitignore,gitattributes,hgignore,jshintignore}'] = 'conf' } }
-
-vim.api.nvim_create_augroup('unusual_filetypes', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.phtml', callback = function() vim.bo.filetype = 'php' end })
--- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.blade.php', callback = function() vim.bo.filetype = 'blade.php' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.eyaml', callback = function() vim.bo.filetype = 'yaml' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.babelrc', callback = function() vim.bo.filetype = 'json' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.php.{sample,dist}', callback = function() vim.bo.filetype = 'php' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '{site,default}.conf', callback = function() vim.bo.filetype = 'nginx' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.editorconfig', callback = function() vim.bo.filetype = 'dosini' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = 'Brewfile', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.sshrc', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.tigrc', callback = function() vim.bo.filetype = 'gitconfig' end })
--- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.{env,env.*}', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '*.{cnf,hurl}', callback = function() vim.bo.filetype = 'dosini' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.spacemacs', callback = function() vim.bo.filetype = 'lisp' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { group = 'unusual_filetypes', pattern = '.envrc', callback = function() vim.bo.filetype = 'sh' end })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = 'unusual_filetypes',
-  pattern = '{' .. table.concat({
-    '.curlrc',
-    '.gitignore',
-    '.gitattributes',
-    '.hgignore',
-    '.jshintignore',
-  }, ',') .. '}',
-  callback = function() vim.bo.filetype = 'conf' end
-})
--- }}}
-
--- automatically jump to the last place you've visited in a file before exiting {{{
--- https://this-week-in-neovim.org/2023/Jan/02#tips
--- vim.api.nvim_create_autocmd('BufReadPost', {
---   callback = function()
---     local mark = vim.api.nvim_buf_get_mark(0, '"')
---     local lcount = vim.api.nvim_buf_line_count(0)
---     if mark[1] > 0 and mark[1] <= lcount then
---       pcall(vim.api.nvim_win_set_cursor, 0, mark)
---     end
---   end,
--- })
 -- }}}
 
 -- lsp config {{{
