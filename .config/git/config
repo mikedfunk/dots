@@ -14,7 +14,7 @@
 [http]
 	sslVerify = false
 [help]
-    autocorrect = 1
+	autocorrect = 10
 [user]
     email = mike@mikefunk.com
     name = Mike Funk
@@ -44,7 +44,15 @@
 [mailmap]
     file = ~/.mailmap
 [init]
-    defaultBranch = master
+	defaultBranch = main
+# prevent corruption https://jvns.ca/blog/2024/02/16/popular-git-config-options/#diff-algorithm-histogram
+[transfer]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
+# sort tags by date https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+[tag]
+    sort = taggerdate
 # }}}
 
 # Aliases {{{
@@ -270,7 +278,7 @@
     untracked = cyan
     ui = true
 [commit]
-    verbose = true
+	verbose = true
 [format]
     # sets the git log format to be one line
     # pretty = '%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
@@ -305,6 +313,8 @@
     # https://github.com/dandavison/delta
     # pager = delta --diff-so-fancy
     pager = ~/.support/delta-helper.sh
+    # reduce lag in CLI git status (but breaks nvim plugin update)
+	# fsmonitor = true
     # pager = delta --dark --syntax-theme='Monokai Extended Dark' --
 	# askPass =
     # use tig as git pager
@@ -338,7 +348,10 @@
     compactionHeuristic = 1
 	tool = nvimdiff3
     # https://github.com/dandavison/delta#--color-moved-support
-    colorMoved = default
+	colorMoved = default
+	algorithm = histogram
+	context = 10
+	colorMovedWS = allow-indentation-change
 [diftool "nvimdiff3"]
     ; path = nvim
     path = lvim
@@ -377,6 +390,7 @@
 
 # rebasing, squashing, pushing, fetching {{{
 [branch]
+	sort = -committerdate
     # this breaks git flow hotfix finish. Just use git purr or sync to rebase.
     # autosetuprebase = always
     # This just implicitly sets up a tracking branch when you `git branch` or `git checkout -b`. Same as `--track`.
@@ -391,7 +405,7 @@
     # master/develop when pushing the branch without also pushing lightweight
     # tags.
     followTag = true
-    autoSetupRemote = true
+	autoSetupRemote = true
 [pull]
     rebase = true
 [rerere]
@@ -399,6 +413,7 @@
     # autoupdate = true
 [fetch]
     prune = true
+	fsckobjects = true
 [sequence]
     # https://github.com/MitMaro/git-interactive-rebase-tool
     # editor = interactive-rebase-tool

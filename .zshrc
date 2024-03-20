@@ -136,6 +136,7 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 
 # source additional files and env vars {{{
 
+export FLOX_DISABLE_METRICS=true
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
 # export LVIM_DEV_MODE=true
