@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.builtin.telescope.defaults.prompt_prefix = ' ' .. lvim.icons.ui.Search .. ' ' -- ⌕ 
 lvim.builtin.telescope.defaults.winblend = vim.o.winblend -- pseudo-transparency
 lvim.builtin.telescope.defaults.mappings.i['<Esc>'] = lvim.builtin.telescope.defaults.mappings.i['<C-c>'] -- disable normal mode

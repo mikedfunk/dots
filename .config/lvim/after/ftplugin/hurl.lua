@@ -1,7 +1,5 @@
 -- vim: set fdm=marker:
 
-local is_installed = require 'helpers'.is_installed
-
 -- send hurl request {{{
 -- TODO: replace with https://github.com/jellydn/hurl.nvim
 -- command Exec set splitright | vnew | set filetype=sh | read !sh #
@@ -19,8 +17,9 @@ local send_hurl_request = function()
   vim.cmd('wincmd w')
 end
 
-if is_installed('which-key') then
-  require 'which-key'.register({
+local is_whichkey_installed, whichkey = pcall(require, 'which-key')
+if is_whichkey_installed then
+  whichkey.register({
     h = {
       name = 'Hurl',
       s = { send_hurl_request, 'Send' },

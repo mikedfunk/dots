@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'tsakirist/telescope-lazy.nvim',
   dependencies = 'nvim-telescope/telescope.nvim',

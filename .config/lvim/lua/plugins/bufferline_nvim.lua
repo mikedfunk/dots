@@ -1,5 +1,4 @@
-local is_installed = require 'helpers'.is_installed
-
+-- TODO: rewrite without lvim global object
 lvim.builtin.bufferline.active = true -- bufferline.nvim
 vim.cmd [[hi! default link PanelHeading BufferLineTabSelected]]
 vim.api.nvim_create_augroup('bufferline_fill_fix', { clear = true })
@@ -40,7 +39,8 @@ for k, _ in ipairs(lvim.builtin.bufferline.options.offsets) do
   lvim.builtin.bufferline.options.offsets[k].text = nil
 end
 
-if is_installed('bufferline') then
+local is_bufferline_installed, _ = pcall(require, 'bufferline')
+if is_bufferline_installed then
   lvim.builtin.bufferline.options.groups = lvim.builtin.bufferline.options.groups or {}
   lvim.builtin.bufferline.options.groups.items = lvim.builtin.bufferline.options.groups.items or {}
   table.insert(

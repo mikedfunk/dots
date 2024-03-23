@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'mvllow/modes.nvim',
   event = 'BufRead',

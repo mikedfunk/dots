@@ -16,8 +16,7 @@
 return {
   'dense-analysis/ale',
   init = function()
-    lvim.keys.normal_mode['l'] = lvim.keys.normal_mode['l'] or {}
-    lvim.keys.normal_mode['l']['F'] = { '<Cmd>ALEFix<CR>', 'Fix with ALE' }
+    vim.keymap.set('n', '<leader>lF', '<Cmd>ALEFix<CR>', { noremap = true, desc = 'Fix with ALE' })
   end,
   -- event = 'BufRead',
   config = function()

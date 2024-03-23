@@ -1,6 +1,5 @@
 -- vim: set foldmethod=marker:
-local is_installed = require 'helpers'.is_installed
-
+-- TODO: rewrite without lvim global object
 lvim.lsp.null_ls.setup.debounce = 1000
 lvim.lsp.null_ls.setup.default_timeout = 30000
 local is_null_ls_installed, null_ls = pcall(require, 'null-ls') ---@diagnostic disable-line redefined-local
@@ -188,7 +187,10 @@ require 'lvim.lsp.null-ls.code_actions'.setup {
   -- adds a LOT of null-ls noise, not that useful
   {
     name = 'gitsigns',
-    condition = function() return is_installed 'gitsigns' end,
+    condition = function()
+      local is_gitsigns_installed, _ = pcall(require, 'gitsigns')
+      return is_gitsigns_installed
+    end,
     config = { filter_actions = function(title) return title:lower():match("blame") == nil end },
   },
   { name = 'refactoring' },

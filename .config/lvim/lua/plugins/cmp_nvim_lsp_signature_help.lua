@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'hrsh7th/cmp-nvim-lsp-signature-help',
   dependencies = 'hrsh7th/nvim-cmp',

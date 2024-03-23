@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { 'php' } -- needed to make non-treesitter indent work
 
 vim.g.skip_ts_context_commentstring_module = true
@@ -59,8 +60,9 @@ lvim.builtin.treesitter.on_config_done = function()
   -- treesitter_styled_components.queries()
 
   -- THIS BREAKS gg because the shortcuts are already defined in nvim_treesitter_textobjects
-  -- if not is_installed('which-key') then return end
-  -- require 'which-key'.register({
+  -- local is_whichkey_installed, whichkey = pcall(require, 'which-key')
+  -- if not is_whichkey_installed then return end
+  -- whichkey.register({
   --   ['>'] = { name = 'Swap Next' },
   --   ['<'] = { name = 'Swap Previous' },
   -- }, { prefix = 'g' })

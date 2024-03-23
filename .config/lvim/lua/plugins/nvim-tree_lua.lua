@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 -- https://github.com/nvim-tree/nvim-tree.lua/issues/674
 lvim.builtin.nvimtree.hide_dotfiles = nil
 lvim.builtin.nvimtree.ignore = nil

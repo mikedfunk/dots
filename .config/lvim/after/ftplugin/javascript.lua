@@ -1,11 +1,10 @@
-local is_installed = require 'helpers'.is_installed
-
 -- local pwd = vim.api.nvim_exec('pwd', true)
 -- if pwd:match '/Code/saatchi/.*' then vim.bo.filetype = 'javascriptreact' end
 
 require 'lvim.lsp.manager'.setup('emmet_language_server')
 
-local should_setup_flow = require 'saatchiart.plugin_configs'.should_setup_flow() and is_installed 'lspconfig'
+local is_lspconfig_installed, _ = pcall(require, 'lspconfig')
+local should_setup_flow = require 'saatchiart.plugin_configs'.should_setup_flow() and is_lspconfig_installed
 
 if not should_setup_flow then
   require 'lvim.lsp.manager'.setup('tsserver')

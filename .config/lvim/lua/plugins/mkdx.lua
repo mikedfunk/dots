@@ -1,5 +1,3 @@
-local is_installed = require 'helpers'.is_installed
-
 ---@return nil
 local setup_mkdx = function()
   vim.g['mkdx#settings'] = {
@@ -20,7 +18,8 @@ local configure_mkdx = function()
     callback = function() vim.keymap.set('n', '<cr>', '<Plug>(mkdx-checkbox-prev-n)', { buffer = true, noremap = true }) end,
   })
 
-  if not is_installed('which-key') then return end
+  local is_whichkey_installed, _ = pcall(require, 'which-key')
+  if not is_whichkey_installed then return end
 
   require 'which-key'.register({
     m = {

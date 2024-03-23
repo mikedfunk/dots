@@ -1,8 +1,5 @@
-local is_installed = require 'helpers'.is_installed
-
 ---@return nil
 local configure_vim_unimpaired = function()
-  if not is_installed('which-key') then return end
   require 'which-key'.register({
     ['<space>'] = 'Add line below',
     a = 'Next file',

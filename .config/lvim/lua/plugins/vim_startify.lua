@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 local my_startify_quotes = {
   -- 1. https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
   -- 2. and some more from https://defprogramming.com

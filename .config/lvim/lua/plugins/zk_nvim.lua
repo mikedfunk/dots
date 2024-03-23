@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 -- local setup_zk_conceal = function()
 --   vim.cmd [[
 --   " markdownWikiLink is a new region

@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'CKolkey/ts-node-action',
   event = 'BufRead',
@@ -43,8 +44,9 @@ return {
       { name = 'ts_node_action' },
     }
 
-    -- if not is_installed('which-key') then return end
-    -- require 'which-key'.register({
+    -- local is_whichkey_installed, whichkey = pcall(require, 'which-key')
+    -- if not is_whichkey_installed then return end
+    -- whichkey.register({
     --   J = {
     --     function() require 'ts-node-action'.node_action() end,
     --     'Split/Join'

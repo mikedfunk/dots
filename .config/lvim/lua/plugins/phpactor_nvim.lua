@@ -1,4 +1,3 @@
-local is_installed = require 'helpers'.is_installed
 local mason_path = vim.fn.stdpath('data') .. '/mason'
 
 local configure_phpactor_nvim = function()
@@ -12,8 +11,6 @@ local configure_phpactor_nvim = function()
       composer_bin = php_bin_path .. '/composer',
     }
   }
-  if not is_installed('which-key') then return end
-
   require 'which-key'.register({
     r = {
       name = 'Refactor',

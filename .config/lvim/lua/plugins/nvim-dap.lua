@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.builtin.dap.active = true -- nvim-dap
 -- require 'dap'.set_log_level('DEBUG') -- debug dap: tail -f ~/.cache/nvim/dap.log
 

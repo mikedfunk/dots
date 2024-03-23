@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'andymass/vim-matchup',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },

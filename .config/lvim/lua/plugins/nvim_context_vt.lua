@@ -1,13 +1,11 @@
-local is_installed = require 'helpers'.is_installed
-
 return {
   'haringsrob/nvim_context_vt',
   event = 'BufRead',
+  dependencies = 'nvim-treesitter/nvim-treesitter',
   opts = {
     ---@param node table
-    ---@return string|nil
+    ---@return string
     custom_text_handler = function(node)
-      if not is_installed 'nvim-treesitter/nvim-treesitter' then return nil end
       return '↩ ' .. vim.treesitter.get_node_text(node, 0)[1]
     end
   },

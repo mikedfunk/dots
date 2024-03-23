@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'Exafunction/codeium.vim',
   dependencies = 'folke/which-key.nvim',

@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'andersevenrud/cmp-tmux',
   dependencies = 'hrsh7th/nvim-cmp',

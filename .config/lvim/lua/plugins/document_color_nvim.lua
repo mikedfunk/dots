@@ -1,6 +1,4 @@
 -- tailwind color previewing
-local is_installed = require 'helpers'.is_installed
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("document_color_lspattach", { clear = true }),
   pattern = "*",
@@ -8,7 +6,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client.server_capabilities.colorProvider then return end
-    if not is_installed('document-color') then return end
+    local is_document_color_installed, _ = pcall(require, 'document-color')
+    if not is_document_color_installed then return end
 
     require('document-color').buf_attach(bufnr)
   end

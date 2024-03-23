@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 -- lvim.builtin.which_key.opts.nowait = false
 -- lvim.builtin.which_key.vopts.nowait = false
 lvim.builtin.which_key.setup.icons.group = ' '

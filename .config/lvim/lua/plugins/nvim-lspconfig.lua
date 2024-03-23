@@ -1,5 +1,8 @@
 -- vim: set foldmethod=marker:
+-- TODO: rewrite without lvim global object
+
 -- lvim.lsp.installer.setup.automatic_installation = { exclude = { 'phpactor' } }
+
 -- NOTE: this is not just ensure installed, if these have language server
 -- configs it will try to set them up as language servers. This is not what
 -- I want for phpactor for instance. You must use the same keys as from

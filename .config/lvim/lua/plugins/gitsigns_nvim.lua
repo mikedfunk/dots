@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.builtin.gitsigns.opts.yadm.enable = true
 
 -- consistency with nvim-tree and makes more sense than the default

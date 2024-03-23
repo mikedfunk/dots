@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.colorscheme = 'tokyonight'
 lvim.builtin.lualine.options.theme = 'tokyonight'
 lvim.builtin.theme.name = 'tokyonight'

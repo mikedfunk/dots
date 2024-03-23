@@ -1,6 +1,6 @@
--- local is_installed = require 'helpers'.is_installed
+-- local is_treesitter_installed, _ = pcall(require, 'treesitter')
 
--- if is_installed('treesitter') then
+-- if is_treesitter_installed then
 --   vim.wo.foldmethod = 'expr'
 --   vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- end

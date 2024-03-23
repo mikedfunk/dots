@@ -1,5 +1,3 @@
-local is_installed = require 'helpers'.is_installed
-
 ---@return nil
 local setup_nvim_treesitter_objects = function()
   -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
@@ -55,8 +53,6 @@ local setup_nvim_treesitter_objects = function()
 end
 
 local configure_nvim_treesitter_textobjects = function()
-  if not is_installed('which-key') then return end
-
   require 'which-key'.register({
     [']'] = 'Next Method',
     ['['] = 'End of Next Method',

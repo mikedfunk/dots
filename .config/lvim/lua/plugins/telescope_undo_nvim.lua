@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'debugloop/telescope-undo.nvim',
   dependencies = 'nvim-telescope/telescope.nvim',

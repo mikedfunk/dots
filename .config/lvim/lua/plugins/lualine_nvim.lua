@@ -1,5 +1,4 @@
-local is_installed = require 'helpers'.is_installed
-
+-- TODO: rewrite without lvim global object
 lvim.builtin.lualine.active = true
 lvim.builtin.lualine.style = 'default'
 lvim.builtin.lualine.options.disabled_filetypes = { 'startify', 'TelescopePrompt' }
@@ -106,7 +105,8 @@ local null_ls_component = {
     end
     local buf_client_names = {}
 
-    if is_installed('null-ls') then
+    local is_null_ls_installed, _ = pcall(require, 'null-ls')
+    if is_null_ls_installed then
       for _, source in pairs(require 'null-ls.sources'.get_available(vim.bo.filetype)) do
         table.insert(buf_client_names, source.name)
       end
@@ -124,7 +124,10 @@ local null_ls_component = {
   end,
   color = { gui = 'None' --[[, fg = require"lvim.core.lualine.colors".purple]] },
   icon = { '', color = { fg = require 'lvim.core.lualine.colors'.purple } },
-  cond = function() return is_installed 'null-ls' and require 'lvim.core.lualine.conditions'.hide_in_width() end,
+  cond = function()
+    local is_null_ls_installed, _ = pcall(require, 'null-ls')
+    return is_null_ls_installed and require 'lvim.core.lualine.conditions'.hide_in_width()
+  end,
   on_click = function() require 'null-ls.info'.show_window { border = 'rounded' } end,
 }
 
@@ -153,7 +156,10 @@ local cmp_component = {
     return output
   end,
   icon = { '', color = { fg = require 'lvim.core.lualine.colors'.green } },
-  cond = function() return is_installed 'cmp' and require 'lvim.core.lualine.conditions'.hide_in_width() end,
+  cond = function()
+    local is_cmp_installed, _ = pcall(require, 'cmp')
+    return is_cmp_installed and require 'lvim.core.lualine.conditions'.hide_in_width()
+  end,
   on_click = function() vim.cmd 'CmpStatus' end,
 }
 

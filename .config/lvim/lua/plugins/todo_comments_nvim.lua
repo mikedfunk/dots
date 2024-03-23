@@ -1,8 +1,9 @@
-local is_installed = require 'helpers'.is_installed
-
 return {
   'folke/todo-comments.nvim',
-  dependencies = 'nvim-lua/plenary.nvim',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'folke/which-key.nvim',
+  },
   event = 'BufRead',
   opts = {
     -- highlight = {
@@ -14,7 +15,6 @@ return {
     -- }
   },
   init = function()
-    if not is_installed('which-key') then return end
     require 'which-key'.register({ s = { T = { '<Cmd>TodoTelescope<CR>', 'Todos' } } }, { prefix = '<leader>' })
   end
 }

@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'chrisgrieser/cmp-nerdfont',
   event = 'InsertEnter',

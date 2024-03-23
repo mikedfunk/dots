@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'nvim-telescope/telescope-dap.nvim',
   dependencies = {

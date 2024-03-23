@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'simrat39/symbols-outline.nvim',
   event = 'BufRead',

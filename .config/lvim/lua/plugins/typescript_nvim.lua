@@ -1,7 +1,5 @@
 -- TODO: replace, being archived
 
-local is_installed = require 'helpers'.is_installed
-
 return {
   'jose-elias-alvarez/typescript.nvim',
   dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
@@ -14,7 +12,8 @@ return {
   config = function()
     local capabilities = require 'lvim.lsp'.common_capabilities()
 
-    if is_installed('ufo') then
+    local is_ufo_installed, _ = pcall(require, 'ufo')
+    if is_ufo_installed then
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true

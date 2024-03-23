@@ -1,13 +1,9 @@
-local is_installed = require 'helpers'.is_installed
-
 -- vim.cmd('command! -nargs=1 Browse !open <args>') -- allow GBrowse to work without netrw installed. It's not perfect.
 
 ---@return nil
 local configure_fugitive = function()
   vim.cmd('command! -nargs=1 Browse OpenBrowser <args>') -- allow GBrowse to work with open-browser.nvim instead of netrw
   -- vim.api.nvim_set_keymap('n', 'y<c-g>', ':<C-U>call setreg(v:register, fugitive#Object(@%))<CR>', { noremap = true, silent = true }) -- work around an issue preventing lazy loading with y<c-g> from working
-
-  if not is_installed('which-key') then return end
 
   require 'which-key'.register({ g = { G = { '<Cmd>Git<CR>', 'Fugitive' } } }, { prefix = '<Leader>' })
 

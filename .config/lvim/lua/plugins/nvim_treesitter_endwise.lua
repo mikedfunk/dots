@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'RRethy/nvim-treesitter-endwise',
   -- event = 'BufRead',

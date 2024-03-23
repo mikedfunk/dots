@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'tpope/vim-projectionist',
   event = 'BufRead',

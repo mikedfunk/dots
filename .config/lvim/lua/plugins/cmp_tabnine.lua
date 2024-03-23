@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 return {
   'tzachar/cmp-tabnine',
   dependencies = 'hrsh7th/nvim-cmp',

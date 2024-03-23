@@ -1,7 +1,5 @@
 -- vim: set foldmethod=marker:
 
-local is_installed = require 'helpers'.is_installed
-
 -- view uml diagram in browser {{{
 
 ---@return nil
@@ -21,8 +19,9 @@ local refresh_uml_image = function()
   -- vim.cmd('echom "UML diagram reloaded"')
 end
 
-if is_installed('which-key') then
-  require 'which-key'.register({
+local is_whichkey_installed, which_key = pcall(require, 'which-key')
+if is_whichkey_installed then
+  which_key.register({
     i = {
       name = 'Image',
       o = { open_uml_image, 'Open' },

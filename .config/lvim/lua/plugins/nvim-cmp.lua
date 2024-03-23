@@ -1,3 +1,4 @@
+-- TODO: rewrite without lvim global object
 lvim.builtin.cmp.cmdline.enable = true
 
 -- table.insert(lvim.builtin.cmp.cmdline.options[2].sources, { name = 'nvim_lsp_document_symbol' })
