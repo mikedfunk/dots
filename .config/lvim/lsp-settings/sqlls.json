@@ -1,0 +1,11 @@
+{
+  "sqlLanguageServer.lint.rules": {
+    "align-column-to-the-first": "off",
+    "column-new-line": "off",
+    "linebreak-after-clause-keyword": "off",
+    "reserved-word-case": "off",
+    "space-surrounding-operators": "off",
+    "where-clause-new-line": "off",
+    "align-where-clause-to-the-first": "off"
+  }
+}

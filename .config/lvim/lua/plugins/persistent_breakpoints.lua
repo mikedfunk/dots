@@ -1,4 +1,3 @@
--- persistent-breakpoints {{{
 return {
   'Weissle/persistent-breakpoints.nvim',
   -- ft = {
@@ -15,4 +14,3 @@ return {
   end,
   opts = { load_breakpoints_event = { 'BufReadPost' } },
 }
--- }}}
