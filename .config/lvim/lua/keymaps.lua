@@ -34,8 +34,10 @@ vim.keymap.set('n', '<C-w>t', 'mz:tabe %<cr>`z', { noremap = true, desc = 'Open 
 vim.keymap.set('n', '<C-l>', ':silent! call LocListToggle()<CR>', { noremap = true, desc = 'Toggle Location List' })
 
 vim.keymap.set('n', '<leader>e', '<Cmd>NvimTreeFindFileToggle<CR>', { noremap = true, desc = 'Explore File' })
+-- lvim.builtin.which_key.mappings['e'] = { 'Expore File' }
 vim.keymap.set('n', '<leader>m', '<Cmd>silent make<CR>', { noremap = true, desc = 'Make' })
-vim.keymap.set('n', '<leader>E', '<Cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Expore' })
+-- vim.keymap.set('n', '<leader>E', '<Cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Expore' })
+-- lvim.builtin.which_key.mappings['E'] = { 'Explore' }
 
 vim.keymap.set('n', '<leader>lc', '<Cmd>LspSettings buffer<CR>', { noremap = true, desc = 'Configure LSP' })
 vim.keymap.set('n', '<leader>lR', '<Cmd>LspRestart<CR>', { noremap = true, desc = 'Restart LSP' })
@@ -56,23 +58,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     -- telescope versions of some lsp mappings
     vim.keymap.set('n', '<leader>gr', '<Cmd>Telescope lsp_references<CR>', { noremap = true, buffer = bufnr, desc = 'Telescope References' })
+    require 'which-key'.register({ gr = { 'Telescope References' } })
     vim.keymap.set('n', '<leader>gd', '<Cmd>Telescope lsp_definitions<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Definition' })
-    vim.keymap.set('n', '<leader>gI', '<Cmd>Telescope lsp_implementations<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Implementation' })
-    vim.keymap.set('n', '<leader>gt', '<Cmd>Telescope lsp_type_definitions<CR>', { noremap = true, buffer = bufnr, desc = 'Goto Type Definition' })
+    require 'which-key'.register({ gd = { 'Go to Definition' } })
+    vim.keymap.set('n', '<leader>gI', '<Cmd>Telescope lsp_implementations<CR>', { noremap = true, buffer = bufnr, desc = 'Go to Implementation' })
+    require 'which-key'.register({ gI = { 'Go to Implementation' } })
+    vim.keymap.set('n', '<leader>gt', '<Cmd>Telescope lsp_type_definitions<CR>', { noremap = true, buffer = bufnr, desc = 'Go to Type Definition' })
+    require 'which-key'.register({ gt = { 'Go to Type Definition' } })
     vim.keymap.set('n', '<leader>go', '<Cmd>Telescope lsp_incoming_calls<CR>', { noremap = true, buffer = bufnr, desc = 'Incoming Calls' })
+    require 'which-key'.register({ go = { 'Incoming Calls' } })
     vim.keymap.set('n', '<leader>gO', '<Cmd>Telescope lsp_outgoing_calls<CR>', { noremap = true, buffer = bufnr, desc = 'Outgoing Calls' })
+    require 'which-key'.register({ gO = { 'Outgoing Calls' } })
     -- vim.keymap.set('n', '<leader>lD', '<Cmd>Telescope diagnostics bufnr=0 theme=dropdown<CR>', { noremap = true, buffer = bufnr, desc = 'Buffer Diagnostics' })
     vim.keymap.set('i', '<c-v>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
     vim.keymap.set('i', '<c-k>', function() vim.lsp.buf.signature_help() end, { buffer = bufnr, noremap = true })
     vim.keymap.set('n', '<leader>lh', function() vim.diagnostic.open_float() end, { noremap = true, buffer = bufnr, desc = 'Line Diagnostic Hover' })
+    require 'which-key'.register({ lh = { 'Line Diagnostic Hover' } })
   end,
 })
 
 -- debugger mappings
-lvim.builtin.which_key.vmappings['d'] = lvim.builtin.which_key.vmappings['d'] or { name = 'Debug' }
 vim.keymap.set('v', '<leader>dv', function() require 'dapui'.eval() end, { noremap = true, desc = 'Eval Visual' })
 
-lvim.builtin.which_key.mappings['d'] = lvim.builtin.which_key.mappings['d'] or {}
 vim.keymap.set('n', '<leader>ds', function() require 'dap'.continue() end, { noremap = true, desc = 'Start' })
 vim.keymap.set('n', '<leader>dd', function() require 'dap'.disconnect() end, { noremap = true, desc = 'Disconnect' })
 
@@ -96,7 +103,6 @@ vim.keymap.set('n', '<leader>dq', function() require('dap').terminate() end, { n
 vim.keymap.set('n', '<leader>LC', '<Cmd>CmpStatus<CR>', { noremap = true, desc = 'Nvim-Cmp Status' })
 
 -- lvim.builtin.which_key.mappings['h'] = nil -- I map this in hop.nvim
-lvim.builtin.which_key.mappings[';'] = nil
 
 -- lvim.builtin.which_key.mappings["g"]['g'].name = 'Tig'
 vim.keymap.set('n', '<leader>gL', '<Cmd>0Gclog<CR>', { noremap = true, desc = 'Git File Log' })
@@ -109,7 +115,6 @@ end
 vim.keymap.set('n', '<leader>lT', toggle_diagnostics, { noremap = true, desc = 'Toggle Diagnostics' })
 
 vim.keymap.set('n', '<leader>lf', function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, { noremap = true, desc = 'Format' })
-lvim.builtin.which_key.vmappings['l'] = lvim.builtin.which_key.vmappings['l'] or { name = 'LSP' }
 vim.keymap.set('v', '<leader>lf', function() require 'lvim.lsp.utils'.format { timeout_ms = 30000 } end, { noremap = true, desc = 'Format' })
 
 -- toggle contextive LSP {{{
@@ -154,14 +159,15 @@ lvim.keys.insert_mode['<f1>'] = '<nop>'
 vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { noremap = true, desc = 'Code Action' })
 vim.keymap.set('v', '<leader>la', function() vim.lsp.buf.code_action() end, { noremap = true, desc = 'Code Action' })
 
--- diffget for mergetool
+-- diffget for mergetool {{{
 -- (no longer) disabled in favor of akinsho/git-conflict.nvim
-lvim.builtin.which_key.mappings['D'] = { name = 'DiffGet' }
 vim.keymap.set('v', '<leader>Dl', '<Cmd>diffget LOC<CR>', { noremap = true, desc = 'Use other branch' })
 vim.keymap.set('v', '<leader>Dr', '<Cmd>diffget REM<CR>', { noremap = true, desc = 'Use current branch' })
-vim.keymap.set('v', '<leader>Du', '<Cmd>diffupdate<CR>', { noremap = true, desc = 'Update diff' })
 
-vim.keymap.set('v', '<leader>br', '<Cmd>Telescope oldfiles<CR>', { noremap = true, desc = 'Recent' })
+vim.keymap.set('n', '<leader>Du', '<Cmd>diffupdate<CR>', { noremap = true, desc = 'Update diff' })
+-- }}}
+
+vim.keymap.set('n', '<leader>br', '<Cmd>Telescope oldfiles<CR>', { noremap = true, desc = 'Recent' })
 
 -- delete inactive buffers function {{{
 -- TODO: convert to lua
@@ -190,15 +196,8 @@ command! Bdi :call DeleteInactiveBufs()
 vim.keymap.set('n', '<leader>bi', ':call DeleteInactiveBufs()<CR>', { noremap = true, desc = 'Delete Inactive Buffers' })
 -- }}}
 
-lvim.builtin.which_key.on_config_done = function()
-  -- Comment.nvim
-  require 'which-key'.register({
-    b = { name = 'Comment', c = { 'Toggle blockwise comment' } },
-    c = { name = 'Comment', c = { 'Toggle linewise comment' } },
-  }, { prefix = 'g' })
-
-  require 'which-key'.register({ b = { '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer' } }, { prefix = ']' })
-  require 'which-key'.register({ b = { '<Cmd>BufferLineCyclePrev<CR>', 'Previous Buffer' } }, { prefix = '[' })
-  require 'which-key'.register({ B = { '<Cmd>BufferLineMoveNext<CR>', 'Move to Next Buffer' } }, { prefix = ']' })
-  require 'which-key'.register({ B = { '<Cmd>BufferLineMovePrev<CR>', 'Move to Previous Buffer' } }, { prefix = '[' })
-end
+vim.keymap.set('n', ']b', '<Cmd>BufferLineCycleNext<CR>', { noremap = true, desc = 'Next Buffer' })
+vim.keymap.set('n', '[b', '<Cmd>BufferLineCyclePrev<CR>', { noremap = true, desc = 'Previous Buffer' })
+vim.keymap.set('n', ']B', '<Cmd>BufferLineMoveNext<CR>', { noremap = false, desc = 'Move to Next Buffer' })
+vim.keymap.set('n', '[B', '<Cmd>BufferLineMovePrev<CR>', { noremap = false, desc = 'Move to Previous Buffer' })
+-- see ../plugins/which-key_nvim.lua for which-key hints, but not mappings
