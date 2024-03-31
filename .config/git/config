@@ -49,6 +49,7 @@
     repo = /Users/mikefunk/Code/saatchi/palette
     repo = /Users/mikefunk/Code/saatchi/easel
     repo = /Users/mikefunk/Code/saatchi/legacy
+	repo = /Users/mikefunk/Code/saatchi/zed
 [init]
 	defaultBranch = main
 # prevent corruption https://jvns.ca/blog/2024/02/16/popular-git-config-options/#diff-algorithm-histogram
@@ -374,6 +375,7 @@
     # diff3 includes the ||||||| markers to give context, allowing us to deduce whether a change was an addition or a deletion.
     # conflictstyle = diff3
     conflictstyle = zdiff3
+    autostash = true
 [mergetool "nvimdiff3"]
     # path = nvim
     # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
@@ -404,6 +406,8 @@
 [rebase]
     # autosquash = true
     autostash = true
+    # https://adamj.eu/tech/2022/10/15/how-to-rebase-stacked-git-branches/
+    updateRefs = true
 [push]
     default = current
     # push any missing _annotated_ tags related to this branch to remote when
@@ -411,6 +415,7 @@
     # master/develop when pushing the branch without also pushing lightweight
     # tags.
     followTag = true
+    # https://adamj.eu/tech/2022/10/31/git-how-to-automatically-create-upstream-branches/
 	autoSetupRemote = true
 [pull]
     rebase = true

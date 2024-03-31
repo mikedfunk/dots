@@ -15,8 +15,10 @@
 
 return {
   'dense-analysis/ale',
+  dependencies = { 'folke/which-key.nvim' },
   init = function()
     vim.keymap.set('n', '<leader>lF', '<Cmd>ALEFix<CR>', { noremap = true, desc = 'Fix with ALE' })
+    require 'which-key'.register({ lF = { 'Fix with ALE' } })
   end,
   -- event = 'BufRead',
   config = function()

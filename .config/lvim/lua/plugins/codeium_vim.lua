@@ -13,5 +13,6 @@ return {
     vim.keymap.set('i', '<m-x>', vim.fn['codeium#Clear'], { noremap = true, expr = true, desc = 'Codeium Clear' })
     vim.keymap.set('i', '<m-i>', vim.fn['codeium#Complete'], { noremap = true, expr = true, desc = 'Codeium Complete' })
     vim.keymap.set('n', '<leader>lO', function() if vim.fn['codeium#Enabled']() == true then vim.cmd 'CodeiumDisable' else vim.cmd 'CodeiumEnable' end end, { noremap = true, desc = 'Toggle Codeium' })
+    require 'which-key'.register({ lO = { 'Toggle Codeium' } })
   end
 }

@@ -5,6 +5,7 @@ return {
   dependencies = 'folke/which-key.nvim',
   init = function()
     vim.keymap.set('n', '<leader>lo', '<Cmd>SymbolsOutline<CR>', { noremap = true, desc = 'Symbols Outline' })
+    require 'which-key'.register({ lo = { 'Symbols Outline' } })
     local heading_options = {
       filetype = 'Outline',
       highlight = 'PanelHeading',
