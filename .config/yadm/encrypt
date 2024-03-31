@@ -7,8 +7,10 @@
 # leafgroup {{{
 
 .config/lvim/lua/saatchiart/plugin_configs.lua
+.config/git/config-saatchi
 .saatchirc
 .support/saatchi/*
+.config/git/saatchi
 
 # Code/saatchi/queries/**/*.sql
 # Code/saatchi/queries/**/.sqllsrc.json

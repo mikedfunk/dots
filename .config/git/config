@@ -23,6 +23,8 @@
     browser = open
 [instaweb]
     httpd = webrick
+[includeIf "gitdir/i:~/Code/saatchi/"]
+    path = ~/.config/git/config-saatchi
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
@@ -43,6 +45,10 @@
     # templatedir = ~/.git_template
 [mailmap]
     file = ~/.mailmap
+[maintenance]
+    repo = /Users/mikefunk/Code/saatchi/palette
+    repo = /Users/mikefunk/Code/saatchi/easel
+    repo = /Users/mikefunk/Code/saatchi/legacy
 [init]
 	defaultBranch = main
 # prevent corruption https://jvns.ca/blog/2024/02/16/popular-git-config-options/#diff-algorithm-histogram

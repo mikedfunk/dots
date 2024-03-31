@@ -43,7 +43,8 @@ vim.keymap.set('n', '<leader>lc', '<Cmd>LspSettings buffer<CR>', { noremap = tru
 vim.keymap.set('n', '<leader>lR', '<Cmd>LspRestart<CR>', { noremap = true, desc = 'Restart LSP' })
 
 vim.keymap.set('n', '<leader>bd', '<Cmd>bd<CR>', { noremap = true, desc = 'Delete' })
-vim.keymap.set('n', '<leader>bf', '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', { noremap = true, desc = 'Find' })
+-- vim.keymap.set('n', '<leader>bf', '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', { noremap = true, desc = 'Find' })
+lvim.builtin.which_key.mappings.b.f = { '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', 'Find' }
 vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', { noremap = true, desc = 'Pin/Unpin' })
 vim.keymap.set('n', '<leader>bo', '<Cmd>BufferLineGroupClose ungrouped<CR>', { noremap = true, desc = 'Delete All but Pinned' })
 
