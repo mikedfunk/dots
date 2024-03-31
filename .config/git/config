@@ -158,14 +158,14 @@
     # show latest commits on all branches by most recent
     latest = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:relative) %(refname:short)'
     # my go-to log format
-    lg = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
+    lg = log --use-mailmap --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
     # lg = log --pretty=format:'commit %Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     # log between the last semantic tag and HEAD
     lt = "!git pull && git lg --no-merges $(git semver | grep -v 'v' | tail -n1)..HEAD"
     # lgdate = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'
-    ld = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' develop..HEAD --no-merges
-    lm = log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' master..HEAD --no-merges
-    lmn = "!git log --pretty=format:'%h - %s (%cr) <%an>' master..HEAD --no-merges | pbcopy"
+    ld = log --use-mailmap --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' develop..HEAD --no-merges
+    lm = log --use-mailmap --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' master..HEAD --no-merges
+    lmn = "!git log --use-mailmap --pretty=format:'%h - %s (%cr) <%an>' master..HEAD --no-merges | pbcopy"
     # graphy log format with the visual branching on the left
     # lol = log --graph --decorate --pretty=oneline --abbrev-commit
     # lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -342,8 +342,8 @@
 
 # interactive settings {{{
 # https://github.com/dandavison/delta/issues/1114
-[add.interactive]
-    useBuiltin = false
+# [add.interactive]
+#     useBuiltin = false
 [interactive]
     diffFilter = delta --color-only
 # }}}
