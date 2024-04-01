@@ -31,7 +31,7 @@ vim.keymap.set('x', 'az', '<Cmd>normal! [zo]z$<CR>', { noremap = true })
 
 -- lvim.keys.normal_mode['<C-s>'] = ':nohlsearch<cr>'
 vim.keymap.set('n', '<C-w>t', 'mz:tabe %<cr>`z', { noremap = true, desc = 'Open in new tab' })
-vim.keymap.set('n', '<C-l>', ':silent! call LocListToggle()<CR>', { noremap = true, desc = 'Toggle Location List' })
+-- vim.keymap.set('n', '<C-l>', ':silent! call LocListToggle()<CR>', { noremap = true, desc = 'Toggle Location List' })
 
 -- lvim.builtin.which_key.mappings['e'] = { 'Expore File' }
 vim.keymap.set('n', '<leader>m', '<Cmd>silent make<CR>', { noremap = true, desc = 'Make' })
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- debugger mappings
+-- debugger mappings {{{
 vim.keymap.set('v', '<leader>dv', function() require 'dapui'.eval() end, { noremap = true, desc = 'Eval Visual' })
 
 vim.keymap.set('n', '<leader>ds', function() require 'dap'.continue() end, { noremap = true, desc = 'Start' })
@@ -94,6 +94,7 @@ end, { noremap = true, desc = 'Log on Line' })
 
 vim.keymap.set('n', '<leader>dh', function() require 'dapui'.eval() end, { noremap = true, desc = 'Eval Hover' })
 vim.keymap.set('n', '<leader>dq', function() require('dap').terminate() end, { noremap = true, desc = 'Quit' })
+-- }}}
 
 vim.keymap.set('n', '<leader>LC', '<Cmd>CmpStatus<CR>', { noremap = true, desc = 'Nvim-Cmp Status' })
 
@@ -161,8 +162,6 @@ vim.keymap.set('v', '<leader>Dr', '<Cmd>diffget REM<CR>', { noremap = true, desc
 
 vim.keymap.set('n', '<leader>Du', '<Cmd>diffupdate<CR>', { noremap = true, desc = 'Update diff' })
 -- }}}
-
-vim.keymap.set('n', '<leader>br', '<Cmd>Telescope oldfiles<CR>', { noremap = true, desc = 'Recent' })
 
 -- delete inactive buffers function {{{
 -- TODO: convert to lua
