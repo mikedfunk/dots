@@ -26,6 +26,8 @@ lvim.builtin.which_key.on_config_done = function()
     c = { name = 'Comment', c = { 'Toggle linewise comment' } },
   }, { prefix = 'g' })
 
+  require 'which-key'.register({ bp = { 'Pin/Unpin' } })
+  require 'which-key'.register({ bo = { 'Delete All but Pinned' } })
   require 'which-key'.register({ b = { 'Next Buffer' } }, { prefix = ']' })
   require 'which-key'.register({ b = { 'Previous Buffer' } }, { prefix = '[' })
   require 'which-key'.register({ B = { 'Move to Next Buffer' } }, { prefix = ']' })
@@ -38,6 +40,8 @@ lvim.builtin.which_key.on_config_done = function()
   require 'which-key'.register({ dL = { 'Log on Line' } })
   require 'which-key'.register({ dh = { 'Eval Hover' } })
   require 'which-key'.register({ dq = { 'Quit' } })
+
+  require 'which-key'.register({ e = { 'Explore File' } })
 
   require 'which-key'.register({ LC = { 'Nvim-Cmp Status' } })
 

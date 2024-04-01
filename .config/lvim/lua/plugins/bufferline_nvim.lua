@@ -1,5 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
+  deps = { "folke/which-key.nvim" },
   config = function()
     lvim.builtin.bufferline.active = true -- bufferline.nvim
     vim.cmd [[hi! default link PanelHeading BufferLineTabSelected]]
@@ -33,5 +34,11 @@ return {
     )
 
     lvim.builtin.bufferline.options.style_preset = require 'bufferline'.style_preset.no_italic
+    vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', { noremap = true, desc = 'Pin/Unpin' })
+    vim.keymap.set('n', '<leader>bo', '<Cmd>BufferLineGroupClose ungrouped<CR>', { noremap = true, desc = 'Delete All but Pinned' })
+    vim.keymap.set('n', ']b', '<Cmd>BufferLineCycleNext<CR>', { noremap = true, desc = 'Next Buffer' })
+    vim.keymap.set('n', '[b', '<Cmd>BufferLineCyclePrev<CR>', { noremap = true, desc = 'Previous Buffer' })
+    vim.keymap.set('n', ']B', '<Cmd>BufferLineMoveNext<CR>', { noremap = false, desc = 'Move to Next Buffer' })
+    vim.keymap.set('n', '[B', '<Cmd>BufferLineMovePrev<CR>', { noremap = false, desc = 'Move to Previous Buffer' })
   end,
 }

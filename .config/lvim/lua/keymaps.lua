@@ -33,20 +33,14 @@ vim.keymap.set('x', 'az', '<Cmd>normal! [zo]z$<CR>', { noremap = true })
 vim.keymap.set('n', '<C-w>t', 'mz:tabe %<cr>`z', { noremap = true, desc = 'Open in new tab' })
 vim.keymap.set('n', '<C-l>', ':silent! call LocListToggle()<CR>', { noremap = true, desc = 'Toggle Location List' })
 
-vim.keymap.set('n', '<leader>e', '<Cmd>NvimTreeFindFileToggle<CR>', { noremap = true, desc = 'Explore File' })
 -- lvim.builtin.which_key.mappings['e'] = { 'Expore File' }
 vim.keymap.set('n', '<leader>m', '<Cmd>silent make<CR>', { noremap = true, desc = 'Make' })
 -- vim.keymap.set('n', '<leader>E', '<Cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Expore' })
 -- lvim.builtin.which_key.mappings['E'] = { 'Explore' }
 
-vim.keymap.set('n', '<leader>lc', '<Cmd>LspSettings buffer<CR>', { noremap = true, desc = 'Configure LSP' })
-vim.keymap.set('n', '<leader>lR', '<Cmd>LspRestart<CR>', { noremap = true, desc = 'Restart LSP' })
-
 vim.keymap.set('n', '<leader>bd', '<Cmd>bd<CR>', { noremap = true, desc = 'Delete' })
 -- vim.keymap.set('n', '<leader>bf', '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', { noremap = true, desc = 'Find' })
 lvim.builtin.which_key.mappings.b.f = { '<Cmd>Telescope buffers initial_mode=insert sort_mru=true<CR>', 'Find' }
-vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', { noremap = true, desc = 'Pin/Unpin' })
-vim.keymap.set('n', '<leader>bo', '<Cmd>BufferLineGroupClose ungrouped<CR>', { noremap = true, desc = 'Delete All but Pinned' })
 
 -- lvim.lsp.buffer_mappings.normal_mode['gt'] = { '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' }
 -- lvim.lsp.buffer_mappings.normal_mode['go'] = { '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' }
@@ -197,8 +191,4 @@ command! Bdi :call DeleteInactiveBufs()
 vim.keymap.set('n', '<leader>bi', ':call DeleteInactiveBufs()<CR>', { noremap = true, desc = 'Delete Inactive Buffers' })
 -- }}}
 
-vim.keymap.set('n', ']b', '<Cmd>BufferLineCycleNext<CR>', { noremap = true, desc = 'Next Buffer' })
-vim.keymap.set('n', '[b', '<Cmd>BufferLineCyclePrev<CR>', { noremap = true, desc = 'Previous Buffer' })
-vim.keymap.set('n', ']B', '<Cmd>BufferLineMoveNext<CR>', { noremap = false, desc = 'Move to Next Buffer' })
-vim.keymap.set('n', '[B', '<Cmd>BufferLineMovePrev<CR>', { noremap = false, desc = 'Move to Previous Buffer' })
 -- see ../plugins/which-key_nvim.lua for which-key hints, but not mappings
