@@ -64,8 +64,6 @@ lvim.builtin.which_key.on_config_done = function()
   require 'which-key'.register({ br = { 'Recent' } })
   require 'which-key'.register({ bd = { 'Delete' } })
   require 'which-key'.register({ bf = { 'Find' } })
-  require 'which-key'.register({ bp = { 'Pin/Unpin' } })
-  require 'which-key'.register({ bo = { 'Delete All but Pinned' } })
 
   require 'which-key'.register({ m = { 'Make' } })
   require 'which-key'.register({ D = { 'DiffGet' } })
