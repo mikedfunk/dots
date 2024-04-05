@@ -354,7 +354,7 @@ alias du="grc --colour=auto /usr/bin/du"
 # _has gls && alias ls="gls --color"
 _has eza && alias ls="eza"
 # alias ll='ls -lhGFA'
-alias ll='ls -lhFA'
+alias ll='ls -lhA --classify=auto'
 alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
 alias work="smug start work"
 alias home="smug start home"
