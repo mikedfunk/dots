@@ -52,7 +52,7 @@ require 'lvim.lsp.null-ls.linters'.setup {
   --     '-d',
   --     'memory_limit=100M',
   --     -- '-d',
-  --     -- 'xebug.mode=off',
+  --     -- 'xdebug.mode=off',
   --   },
   --   condition = function(utils)
   --     return vim.fn.executable 'phpcs' == 1 and utils.root_has_file { 'phpcs.xml' }

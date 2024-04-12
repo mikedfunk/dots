@@ -1,11 +1,12 @@
 {
   "sqlLanguageServer.lint.rules": {
-    "align-column-to-the-first": "off",
-    "column-new-line": "off",
-    "linebreak-after-clause-keyword": "off",
-    "reserved-word-case": "off",
-    "space-surrounding-operators": "off",
-    "where-clause-new-line": "off",
-    "align-where-clause-to-the-first": "off"
+    "align-column-to-the-first": "warn",
+    "column-new-line": "warn",
+    "linebreak-after-clause-keyword": "warn",
+    "reserved-word-case": ["off", "lower"],
+    "space-surrounding-operators": ["error", "always"],
+    "where-clause-new-line": "warn",
+    "align-where-clause-to-the-first": "warn",
+    "require-as-to-rename-column": "warn"
   }
 }

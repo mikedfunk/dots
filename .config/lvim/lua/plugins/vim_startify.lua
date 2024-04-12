@@ -352,6 +352,7 @@ local my_startify_quotes = {
   { "Think about your work.", "", "Turn off the autopilot and take control. Constantly critique and appraise your work.", "", "- The Pragmatic Programmer" },
   { "Think deeply about things. Don’t just go along because that’s the way things are or that’s what your friends say. Consider the effects, consider the alternatives, but most importantly, just think.", "", "- Aaron Swartz" },
   { "Think twice, code once." },
+  { "Three strikes, then refactor.", "", "- Martin Fowler" },
   { "To be a programmer is to develop a carefully managed relationship with error. There’s no getting around it. You either make your accommodations with failure, or the work will become intolerable.", "", "- Ellen Ullman" },
   { "To come up with thoughtful commits, consider the following:", "", "- Why have I made these changes?", "- What effect have my changes made?", "- Why was the change needed?", "- What are the changes in reference to?", "", "- Natalie Pina " },
   { "To iterate is human, to recurse divine.", "", "- L. Peter Deutsch" },
@@ -380,6 +381,7 @@ local my_startify_quotes = {
   { "When we focus on building an intuition, we don't need to memorize rules. We can rely on our mental model to come up with the right answer. It's wayyy more practical.", "", "- Josh W. Comeau" }, -- https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
   { "When you choose not to care about complexity, you're merely pushing it onto other developers in your org. Ops people, your customers, someone. Now they have to work around your assumptions to make sure everything keeps running smoothly.", "", "- fasterthanli.me" },
   { "When you come across a stumbling block because the code doesn't quite fit anymore, or you notice two things that should really be merged, or anything else at all strikes you as being \"wrong\", don't hesitate to change it. There's no time like the present.", "", "- Andy Hunt, Dave Thomas" },
+  { "When you need to make a change, first make the change easy, then make the change.", "", "- Kent Beck" },
   { "Why do we make the mess? What drives us to make the mess in the first place? Because we want to go fast.", "", "- Robert C. Martin" },
   { "Why do we never have time to do it right, but always have time to do it over?", "", "- Jack Bergman" },
   { "Why is programming fun?", "", "First is the sheer joy of making things.", "", "Second is the pleasure of making things that are useful to other people.", "", "Third is the fascination of fashioning complex puzzle-like objects of interlocking moving parts and watching them work in subtle cycles.", "", "Fourth is the joy of always learning, which springs from the non-repeating nature of the task.", "", "Finally, there is the delight of working in such a tractable medium. The programmer, like the poet, works only slightly removed from pure thought-stuff.", "", "- Fred Brooks: The Mythical Man-Month" },

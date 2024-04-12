@@ -2,7 +2,7 @@
 
 return {
   'jose-elias-alvarez/typescript.nvim',
-  dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
+  dependencies = { 'nvimtools/none-ls.nvim' },
   -- dependencies = { 'jose-elias-alvarez/null-ls.nvim', 'kevinhwang91/nvim-ufo' },
   ft = {
     -- 'javascript',

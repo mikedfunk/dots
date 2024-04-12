@@ -1,8 +1,8 @@
 return {
   'jayp0521/mason-null-ls.nvim',
   dependencies = {
-    'null-ls.nvim',
-    'mason.nvim',
+    'nvimtools/none-ls.nvim',
+    'williamboman/mason.nvim',
   },
   opts = {
     -- automatic_setup = true, -- I use lunarvim's lsp module to do the same thing as this feature.
