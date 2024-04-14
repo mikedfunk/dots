@@ -20,7 +20,7 @@ Light mode:
 
 - [Yadm bootstrap file - script to install/upgrade everything](.config/yadm/bootstrap)
 - [Homebrew packages, casks, and mac store apps](Brewfile)
-- [Lazyvim config](.config/nvim/lazy.lua)
+- [Lazyvim config](.config/nvim/lua/config/lazy.lua)
 - Luasnip php snippets: [lua](.config/nvim/luasnippets/php.lua) and [json](.config/nvim/snippets/php.json)
 - [Zshrc](.zshrc), [Zsh plugins](.zsh_plugins.txt)
 - [P10k prompt config](.p10k.zsh)
