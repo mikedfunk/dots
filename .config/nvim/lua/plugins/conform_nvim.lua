@@ -1,5 +1,6 @@
 return {
   "stevearc/conform.nvim",
+  lazy = false, -- easy way to get configured formatters in lualine before saving
   opts = {
     format = {
       timeout_ms = 20000,

@@ -29,7 +29,9 @@ return {
         flow = {},
         tsserver = {
           root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
-          enabled = vim.fn.filereadable("tsconfig.json") == 1 or vim.fn.filereadable("jsconfig.json") == 1,
+          enabled = vim.fs.find({ "jsconfig.json", "tsconfig.json" }, { path = vim.fn.expand("%"), upward = true })[1]
+            ~= nil,
+          -- enabled = vim.fn.filereadable("tsconfig.json") == 1 or vim.fn.filereadable("jsconfig.json") == 1,
         },
         phpactor = { enabled = false },
       },
