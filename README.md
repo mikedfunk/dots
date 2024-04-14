@@ -6,7 +6,7 @@
 curl https://raw.githubusercontent.com/mikedfunk/dots/master/install.sh | sh
 ```
 
-My Bash, Neovim ([LunarVim](https://www.lunarvim.org)), Git, and other dotfiles. Managed by [yadm](https://thelocehiliosan.github.io/yadm/docs).
+My Bash, Neovim ([LazyVim](https://www.lazyvim.org)), Git, and other dotfiles. Managed by [yadm](https://thelocehiliosan.github.io/yadm/docs).
 
 Dark mode:
 
@@ -20,9 +20,8 @@ Light mode:
 
 - [Yadm bootstrap file - script to install/upgrade everything](.config/yadm/bootstrap)
 - [Homebrew packages, casks, and mac store apps](Brewfile)
-- [Lunarvim config](.config/lvim/config.lua)
-- Luasnip php snippets: [lua](.config/lvim/luasnippets/php.lua) and [json](.config/lvim/snippets/php.json)
-- [Collection of engineering quotes](.config/lvim/lua/plugins/vim_startify.lua)
+- [Lazyvim config](.config/nvim/lazy.lua)
+- Luasnip php snippets: [lua](.config/nvim/luasnippets/php.lua) and [json](.config/nvim/snippets/php.json)
 - [Zshrc](.zshrc), [Zsh plugins](.zsh_plugins.txt)
 - [P10k prompt config](.p10k.zsh)
 - [Git config](.config/git/config), [Tig config](.config/tig/config)

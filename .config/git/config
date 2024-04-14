@@ -297,8 +297,7 @@
 # Core settings {{{
 [core]
     # editor = vim
-    ; editor = nvim
-    editor = lvim
+    editor = nvim
     ; editor = $EDITOR
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     trustctime = false
@@ -360,8 +359,7 @@
 	context = 10
 	colorMovedWS = allow-indentation-change
 [diftool "nvimdiff3"]
-    ; path = nvim
-    path = lvim
+    path = nvim
     ; path = $EDITOR
 [merge]
     # tool = opendiff
@@ -388,8 +386,7 @@
 [mergetool]
     keepBackup = false
     prompt = false
-    ; path = "nvim"
-    path = lvim
+    path = nvim
     ; path = $EDITOR
 [pager]
     # this lets you skip to the next/prev file with `n` and `N`

@@ -1,8 +1,0 @@
-{
-  "flags": { "debounce_text_changes": 500 },
-  "yaml": {
-    "schemas": {
-      "https://json.schemastore.org/pre-commit-config.json": ".pre-commit-config.yaml"
-    }
-  }
-}

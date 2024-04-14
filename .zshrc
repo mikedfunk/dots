@@ -139,14 +139,12 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 export FLOX_DISABLE_METRICS=true
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
-# export LVIM_DEV_MODE=true
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 # _has bat && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="TwoDark"
 # use `gO` to open a quickfox with a table of contents!
 # _has nvim && export MANPAGER='nvim +colo\ base16-heetch +Man!'
-# _has lvim && export MANPAGER='lvim +colo\ base16-heetch +Man!'
-_has lvim && export MANPAGER='lvim +Man!'
+_has nvim && export MANPAGER='nvim +Man!'
 # _has nvim && export MANPAGER='nvim -u NONE +Man!'
 
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -325,9 +323,6 @@ compdef k="kubectl"
 ssh() { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
 autossh() { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
 compdef autossh="ssh"
-
-alias upgrade-lunarvim="cd ${HOME}/.local/share/lunarvim/lvim && git pull && cd -"
-alias tail-lunarvim-logs="tail -f ${HOME}/.cache/nvim/lvim.log"
 
 # https://www.youtube.com/watch?v=Wl7CDe9jsuo&feature=youtu.be
 alias mv="mv -iv"
@@ -531,17 +526,11 @@ alias pipu="pip-review --local --auto"
 # }}}
 
 # neovim {{{
-# alias nvim="lvim" # lunarvim.org
-# alias v="nvim"
-alias v="lvim"
-# compdef v="nvim"
-compdef v="vim"
-# alias vim="nvim"
-alias vim="lvim"
-# compdef vim="nvim"
-compdef lvim=vim
-# export EDITOR=nvim # aww yeah
-export EDITOR=lvim # aww yeah
+alias v="nvim"
+compdef v="nvim"
+alias vim="nvim"
+compdef vim="nvim"
+export EDITOR=nvim # aww yeah
 # useful for mc
 export VIEWER="bat --paging=always"
 export LANG=en_US.UTF-8

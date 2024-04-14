@@ -1,0 +1,158 @@
+{
+  "lspconfig": {
+    "intelephense": {
+      "environment": {
+        "phpVersion": "7.4.7",
+        "shortOpenTag": false
+      },
+      "diagnostics": {
+        "enable": true,
+        "run": "onSave"
+      },
+      "completion": {
+        "fullyQualifyGlobalConstantsAndFunctions": true,
+        "insertUseDeclaration": true
+      },
+      "phpdoc": {
+        "classTemplate": {
+          "tags": {}
+        }
+      },
+      "rename": {
+        "namespaceMode": "all"
+      },
+      "telemetry": {
+        "enabled": false
+      },
+      "files": {
+        "associations": [
+          "*.php",
+          "*.phtml",
+          "*.blade.php"
+        ],
+        "exclude": [
+          "**/.git/**",
+          "**/.DS_Store/**",
+          "**/node_modules/**",
+          "**/storage/**",
+          "**/vendor/**/{Tests,tests,Test,test,Spec,spec,Specs,specs}/**",
+          "**/.history/**",
+          "**/vendor/**/vendor/**",
+          "**/coverage/**",
+          ".php-cs-fixer.php",
+          "**/.null-ls_*"
+        ]
+      },
+      "stubs": [
+        "apache",
+        "bcmath",
+        "bz2",
+        "calendar",
+        "com_dotnet",
+        "Core",
+        "ctype",
+        "curl",
+        "date",
+        "dba",
+        "dom",
+        "enchant",
+        "exif",
+        "FFI",
+        "fileinfo",
+        "filter",
+        "fpm",
+        "ftp",
+        "gd",
+        "gettext",
+        "gmp",
+        "hash",
+        "iconv",
+        "imap",
+        "imagick",
+        "intl",
+        "json",
+        "ldap",
+        "libxml",
+        "mbstring",
+        "memcached",
+        "meta",
+        "mysqli",
+        "oci8",
+        "odbc",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_ibm",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "Phar",
+        "posix",
+        "pspell",
+        "random",
+        "readline",
+        "Reflection",
+        "session",
+        "shmop",
+        "SimpleXML",
+        "snmp",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "sqlite3",
+        "standard",
+        "superglobals",
+        "sysvmsg",
+        "sysvsem",
+        "sysvshm",
+        "tidy",
+        "tokenizer",
+        "xml",
+        "xmlreader",
+        "xmlrpc",
+        "xmlwriter",
+        "xsl",
+        "Zend OPcache",
+        "zip",
+        "zlib"
+      ]
+    },
+    "tsserver": {
+      "typescript": {
+        "inlayHints": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true
+        }
+      },
+      "javascript": {
+        "inlayHints": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    },
+    "yamlls": {
+      "flags": {
+        "debounce_text_changes": 500
+      },
+      "yaml": {
+        "schemas": {
+          "https://json.schemastore.org/pre-commit-config.json": ".pre-commit-config.yaml"
+        }
+      }
+    }
+  }
+}
