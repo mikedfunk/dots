@@ -21,11 +21,12 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    lazy = false, -- easy way to get configured formatters in lualine before saving
+    ---@class ConformOpts
     opts = {
       format = {
         timeout_ms = 20000,
       },
+      ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
         javascript = {
           "eslint", -- eslint_d just will not use local eslint. complains about rules
@@ -69,9 +70,11 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
+    ---@type table<string,table>
     opts = {
       linters_by_ft = {
         php = {
+          "phpstan",
           "phpcs",
           "cspell",
         },
@@ -84,6 +87,10 @@ return {
         },
       },
       linters = {
+        phpstan = {
+          "--memory-limit=200M",
+          "--level=9",
+        },
         phpcs = {
           -- This doesn't work because the parser expects stdin :/
           -- stdin = false,
@@ -99,6 +106,18 @@ return {
             "-",
           },
         },
+      },
+    },
+  },
+  {
+    "kosayoda/nvim-lightbulb",
+    opts = {
+      autocmd = {
+        enabled = true,
+      },
+      sign = {
+        text = "",
+        hl = "DiagnosticSignWarn",
       },
     },
   },

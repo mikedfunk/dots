@@ -28,6 +28,11 @@ return {
 
     opts.formatting.fields = { "kind", "abbr", "menu" }
 
+    opts.window = vim.tbl_deep_extend("force", opts.window or {}, {
+      completion = require("cmp").config.window.bordered(),
+      documentation = require("cmp").config.window.bordered(),
+    })
+
     opts.formatting.format = function(entry, item)
       local icons = require("lazyvim.config").icons.kinds
 
