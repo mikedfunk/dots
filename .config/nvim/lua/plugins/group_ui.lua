@@ -44,6 +44,14 @@ return {
       },
     },
   },
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      style = "night",
+      lualine_bold = true, -- bold headers for each section header
+      day_brightness = 0.15, -- high contrast but colorful
+    },
+  },
   -- {
   --   "echasnovski/mini.starter",
   --   dependencies = { "rubiin/fortune.nvim", config = true },
