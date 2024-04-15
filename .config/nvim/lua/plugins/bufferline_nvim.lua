@@ -14,15 +14,6 @@ return {
             require("bufferline.groups").builtin.pinned:with({ icon = "" }),
           },
         },
-        -- symbols-outline.nvim
-        offsets = {
-          {
-            filetype = "Outline",
-            highlight = "PanelHeading",
-            padding = 1,
-            text = "Symbols",
-          },
-        },
       },
     })
   end,
