@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("n", "y<c-g>", function()
-  local path = "./" .. vim.fn.expand("%")
+  local path = vim.fn.expand("%:~:.")
   vim.fn.setreg("+", path)
   vim.notify('Copied "' .. path .. '" to the clipboard')
 end, { noremap = true, desc = "Copy path" })
