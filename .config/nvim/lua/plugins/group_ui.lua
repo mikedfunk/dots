@@ -2,18 +2,16 @@ return {
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        options = {
-          persist_buffer_sort = true,
-          hover = { enabled = true },
-          sort_by = "insert_after_current",
-          always_show_bufferline = true,
-          style_preset = require("bufferline").style_preset.no_italic,
-          separator_style = "slant",
-          groups = {
-            items = {
-              require("bufferline.groups").builtin.pinned:with({ icon = "" }),
-            },
+      opts.options = vim.tbl_deep_extend("force", opts.options, {
+        persist_buffer_sort = true,
+        hover = { enabled = true },
+        sort_by = "insert_after_current",
+        always_show_bufferline = true,
+        style_preset = require("bufferline").style_preset.no_italic,
+        separator_style = "slant",
+        groups = {
+          items = {
+            require("bufferline.groups").builtin.pinned:with({ icon = "" }),
           },
         },
       })
@@ -38,7 +36,7 @@ return {
   {
     "folke/noice.nvim",
     opts = {
-      -- ---@type NoicePresets
+      ---@type NoicePresets
       presets = {
         lsp_doc_border = true,
       },
@@ -46,6 +44,7 @@ return {
   },
   {
     "folke/tokyonight.nvim",
+    ---@type Config
     opts = {
       style = "night",
       lualine_bold = true, -- bold headers for each section header
@@ -58,4 +57,12 @@ return {
       require("dark_notify").run()
     end,
   },
+  {
+    "mvllow/modes.nvim",
+    event = "VeryLazy",
+    opts = {
+      ignored_filetypes = { "starter" },
+    },
+  },
+  { "itchyny/vim-highlighturl", event = "BufRead" },
 }
