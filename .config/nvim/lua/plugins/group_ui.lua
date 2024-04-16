@@ -65,4 +65,19 @@ return {
     },
   },
   { "itchyny/vim-highlighturl", event = "BufRead" },
+  {
+    "petertriho/nvim-scrollbar",
+    event = "VeryLazy",
+    opts = {
+      handle = {
+        highlight = "PmenuSel",
+      },
+      excluded_filetypes = {
+        "DressingInput",
+        "TelescopePrompt",
+        "starter",
+        "lspinfo",
+      },
+    },
+  },
 }
