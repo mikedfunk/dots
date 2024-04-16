@@ -52,12 +52,10 @@ return {
       day_brightness = 0.15, -- high contrast but colorful
     },
   },
-  -- {
-  --   "echasnovski/mini.starter",
-  --   dependencies = { "rubiin/fortune.nvim", config = true },
-  --   opts = function(_, opts)
-  --     local fortune = require("fortune").get_fortune()
-  --     opts.footer = table.concat(fortune, "\n")
-  --   end,
-  -- },
+  {
+    "cormacrelf/dark-notify",
+    config = function()
+      require("dark_notify").run()
+    end,
+  },
 }
