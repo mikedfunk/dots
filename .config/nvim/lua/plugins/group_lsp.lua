@@ -18,6 +18,7 @@ return {
         cssls = {},
         -- cucumber_language_server = {}, -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
         docker_compose_language_service = {},
+        -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
         dockerls = {},
         flow = {},
         jsonls = {},
@@ -58,29 +59,15 @@ return {
       },
       ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
-        astro = { "prettier" },
-        blade = {
-          "blade-formatter",
-          "rustywind",
-        },
-        css = { "prettier" },
-        html = { "prettier" },
-        javascript = {
-          "eslint", -- eslint_d just will not use local eslint. complains about rules
-          "prettier",
-          "rustywind",
-        },
-        javascriptreact = { "prettier" },
+        -- NOTE: prettier is handled by a lazyvim extra in ../config/lazy.lua
+        blade = { "blade-formatter", "rustywind" },
+        javascript = { "prettier", "rustywind" }, -- prettier wasn't included for javascript in the lazyvim extra :/
         markdown = { "cbfmt" },
-        php = {
-          "phpcbf",
-          "php_cs_fixer",
-        },
+        php = { "phpcbf", "php_cs_fixer" },
         python = { "black" },
         sql = { "sqlfluff" },
-        svelte = { "prettier" },
-        typescript = { "eslint", "prettier", "rustywind" },
-        typescriptreact = { "eslint", "prettier", "rustywind" },
+        typescript = { "rustywind" },
+        typescriptreact = { "rustywind" },
       },
       formatters = {
         phpcbf = {
@@ -115,16 +102,9 @@ return {
       linters_by_ft = {
         editorconfig = { "editorconfig-checker" },
         gitcommit = { "gitlint" },
-        javascript = {
-          "eslint", -- eslint_d just will not use local eslint. complains about rules
-          "cspell",
-        },
+        javascript = { "cspell" },
         make = { "checkmake" },
-        php = {
-          "phpstan",
-          "phpcs",
-          "cspell",
-        },
+        php = { "phpstan", "phpcs", "cspell" },
         python = { "isort" },
         sql = { "sqlfluff" },
       },
@@ -182,7 +162,6 @@ return {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "editorconfig-checker",
-        -- "eslint_d",
         "gitlint",
         "isort",
         "json-lsp",
