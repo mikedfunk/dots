@@ -12,7 +12,6 @@ return {
 
     ensure_installed = {
       "comment",
-      "dockerfile",
       "lua", -- update to latest
       "luadoc",
       "jsdoc",
@@ -21,7 +20,6 @@ return {
       "regex",
       "sql",
       "vim",
-      "vimdoc",
     },
   },
 }

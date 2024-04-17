@@ -26,6 +26,10 @@ return {
     table.insert(opts.sources, { name = "rg", max_item_count = 10 })
     table.insert(opts.sources, { name = "tmux", max_item_count = 10 })
 
+    opts.mapping["<CR>"] = require("cmp").mapping.confirm({ select = false })
+    opts.preselect = require("cmp").PreselectMode.None
+    opts.completion.completeopt = "menu,menuone,noselect"
+
     opts.formatting.fields = { "kind", "abbr", "menu" }
 
     opts.window = vim.tbl_deep_extend("force", opts.window or {}, {
