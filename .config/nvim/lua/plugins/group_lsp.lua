@@ -3,19 +3,44 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = function(_, opts)
+      -- vim.lsp.start({
+      --   name = "semgrep",
+      --   cmd = { "semgrep", "lsp" },
+      --   root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
+      -- })
+
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
+        cssls = {},
+        -- cucumber_language_server = {}, -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
+        docker_compose_language_service = {},
+        dockerls = {},
         flow = {},
+        jsonls = {},
+        lemminx = {},
+        -- nginx_language_server = {},
+        phpactor = { enabled = false },
+        ruff_lsp = {},
+        -- snyk_ls = {
+        --   init_options = {
+        --     token = os.getenv("SNYK_TOKEN"),
+        --     enableTrustedFoldersFeature = "false",
+        --     enableTelemetry = "false",
+        --     activateSnykCodeQuality = "true",
+        --     organization = "leaf-saatchiart",
+        --     -- automaticAuthentication = "false",
+        --     -- authenticationMethod = "token",
+        --   },
+        -- },
+        sqlls = {},
+        tailwindcss = {
+          root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
+        },
+        taplo = {},
         tsserver = {
           root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
           single_file_support = false,
-          -- enabled = vim.fs.find({ "jsconfig.json", "tsconfig.json" }, { path = vim.fn.expand("%"), upward = true })[1]
-          --   ~= nil,
         },
-        tailwindcss = {
-          root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
-          -- enabled = vim.fs.find({ "tailwind.config.js" }, { path = vim.fn.expand("%"), upward = true })[1] ~= nil,
-        },
-        phpactor = { enabled = false },
+        yamlls = {},
       })
     end,
   },
@@ -28,9 +53,17 @@ return {
       },
       ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
+        blade = {
+          "blade-formatter",
+          "rustywind",
+        },
         javascript = {
           "eslint", -- eslint_d just will not use local eslint. complains about rules
           "prettier",
+          "rustywind",
+        },
+        markdown = {
+          "cbfmt",
         },
         php = {
           "phpcbf",
@@ -69,21 +102,37 @@ return {
     },
   },
   {
+
     "mfussenegger/nvim-lint",
     ---@type table<string,table>
     opts = {
       linters_by_ft = {
-        php = {
-          "phpstan",
-          "phpcs",
-          "cspell",
+        editorconfig = {
+          "editorconfig-checker",
+        },
+        gitcommit = {
+          "gitlint",
         },
         javascript = {
           "eslint", -- eslint_d just will not use local eslint. complains about rules
           "cspell",
         },
+        make = {
+          "checkmake",
+        },
+        php = {
+          "phpstan",
+          "phpcs",
+          "cspell",
+        },
+        python = {
+          "isort",
+        },
         sql = {
           "sqlfluff",
+        },
+        yaml = {
+          -- "actionlint",
         },
       },
       linters = {
@@ -118,6 +167,42 @@ return {
       sign = {
         text = "",
         hl = "DiagnosticSignWarn",
+      },
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ui = {
+        border = "rounded",
+      },
+      ensure_installed = {
+        -- "actionlint",
+        "black",
+        "blade-formatter",
+        "cbfmt",
+        "checkmake",
+        "css-lsp",
+        "cspell",
+        -- "cucumber-language-server", -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
+        "docker-compose-language-service",
+        "dockerfile-language-server",
+        "editorconfig-checker",
+        -- "eslint_d",
+        "gitlint",
+        "isort",
+        "json-lsp",
+        "lemminx",
+        -- "nginx-language-server",
+        "php-cs-fixer",
+        "ruff-lsp",
+        "rustywind",
+        -- "snyk-ls",
+        "sqlfluff",
+        "sqlls",
+        "tailwindcss-language-server",
+        "taplo",
+        "yaml-language-server",
       },
     },
   },

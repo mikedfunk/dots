@@ -40,6 +40,16 @@ return {
       presets = {
         lsp_doc_border = true,
       },
+      -- https://github.com/folke/noice.nvim/discussions/364
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            find = "snyk",
+          },
+          opts = { skip = true },
+        },
+      },
     },
   },
   {

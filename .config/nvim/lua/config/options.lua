@@ -220,3 +220,9 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 -- }}}
+
+vim.filetype.add({ pattern = { ["compose%.yml"] = "yaml.docker-compose" } })
+vim.filetype.add({ pattern = { ["docker-compose%.yml"] = "yaml.docker-compose" } })
+vim.filetype.add({ pattern = { ["%.babelrc"] = "json" } })
+vim.filetype.add({ pattern = { ["Dockerfile-.*"] = "dockerfile" } })
+vim.filetype.add({ pattern = { ["Dockerfile%..*"] = "dockerfile" } })

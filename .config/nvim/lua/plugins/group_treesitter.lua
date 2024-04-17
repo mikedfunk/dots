@@ -9,5 +9,19 @@ return {
     indent = { enable = false }, -- use yati instead
     endwise = { enable = true },
     yati = { enable = true },
+
+    ensure_installed = {
+      "comment",
+      "dockerfile",
+      "lua", -- update to latest
+      "luadoc",
+      "jsdoc",
+      "markdown_inline",
+      "phpdoc",
+      "regex",
+      "sql",
+      "vim",
+      "vimdoc",
+    },
   },
 }
