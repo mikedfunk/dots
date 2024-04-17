@@ -40,6 +40,12 @@ return {
       presets = {
         lsp_doc_border = true,
       },
+      ---@class NoiceConfigViews
+      -- views = {
+      --   notify = {
+      --     backend = "notify_send",
+      --   },
+      -- },
       -- https://github.com/folke/noice.nvim/discussions/364
       routes = {
         {

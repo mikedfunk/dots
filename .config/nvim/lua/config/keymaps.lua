@@ -15,3 +15,6 @@ end, { noremap = true, desc = "Code Action" })
 vim.keymap.set("i", "<c-v>", function()
   vim.lsp.buf.signature_help()
 end, { noremap = true, desc = "Signature help" })
+
+vim.keymap.set("n", "go", "<Cmd>Telescope lsp_incoming_calls<CR>", { noremap = true, desc = "Incoming Calls" })
+vim.keymap.set("n", "gO", "<Cmd>Telescope lsp_outgoing_calls<CR>", { noremap = true, desc = "Outgoing Calls" })

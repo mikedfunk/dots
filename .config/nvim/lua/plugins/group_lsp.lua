@@ -4,6 +4,11 @@ return {
     ---@class PluginLspOpts
     opts = function(_, opts)
       -- vim.lsp.start({
+      --   name = "contextive",
+      --   cmd = { "Contextive.LanguageServer" },
+      --   root_dir = vim.fs.dirname(vim.fs.find({ ".contextive" }, { upward = true })[1]),
+      -- })
+      -- vim.lsp.start({
       --   name = "semgrep",
       --   cmd = { "semgrep", "lsp" },
       --   root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
@@ -172,6 +177,7 @@ return {
         "checkmake",
         "css-lsp",
         "cspell",
+        -- "contextive",
         -- "cucumber-language-server", -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
         "docker-compose-language-service",
         "dockerfile-language-server",
