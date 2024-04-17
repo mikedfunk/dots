@@ -7,3 +7,7 @@ vim.keymap.set("n", "y<c-g>", function()
   vim.fn.setreg("+", path)
   vim.notify('Copied "' .. path .. '" to the clipboard')
 end, { noremap = true, desc = "Copy path" })
+
+vim.keymap.set("n", "<leader>ca", function()
+  vim.lsp.buf.code_action()
+end, { noremap = true, desc = "Code Action" })
