@@ -53,28 +53,29 @@ return {
       },
       ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
+        astro = { "prettier" },
         blade = {
           "blade-formatter",
           "rustywind",
         },
+        css = { "prettier" },
+        html = { "prettier" },
         javascript = {
           "eslint", -- eslint_d just will not use local eslint. complains about rules
           "prettier",
           "rustywind",
         },
-        markdown = {
-          "cbfmt",
-        },
+        javascriptreact = { "prettier" },
+        markdown = { "cbfmt" },
         php = {
           "phpcbf",
           "php_cs_fixer",
         },
-        python = {
-          "black",
-        },
-        sql = {
-          "sqlfluff",
-        },
+        python = { "black" },
+        sql = { "sqlfluff" },
+        svelte = { "prettier" },
+        typescript = { "eslint", "prettier", "rustywind" },
+        typescriptreact = { "eslint", "prettier", "rustywind" },
       },
       formatters = {
         phpcbf = {
@@ -107,33 +108,20 @@ return {
     ---@type table<string,table>
     opts = {
       linters_by_ft = {
-        editorconfig = {
-          "editorconfig-checker",
-        },
-        gitcommit = {
-          "gitlint",
-        },
+        editorconfig = { "editorconfig-checker" },
+        gitcommit = { "gitlint" },
         javascript = {
           "eslint", -- eslint_d just will not use local eslint. complains about rules
           "cspell",
         },
-        make = {
-          "checkmake",
-        },
+        make = { "checkmake" },
         php = {
           "phpstan",
           "phpcs",
           "cspell",
         },
-        python = {
-          "isort",
-        },
-        sql = {
-          "sqlfluff",
-        },
-        yaml = {
-          -- "actionlint",
-        },
+        python = { "isort" },
+        sql = { "sqlfluff" },
       },
       linters = {
         phpstan = {
