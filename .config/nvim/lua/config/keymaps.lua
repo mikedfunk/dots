@@ -11,3 +11,7 @@ end, { noremap = true, desc = "Copy path" })
 vim.keymap.set("n", "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { noremap = true, desc = "Code Action" })
+
+vim.keymap.set("i", "<c-v>", function()
+  vim.lsp.buf.signature_help()
+end, { noremap = true, desc = "Signature help" })

@@ -18,13 +18,16 @@ return {
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
+    -- set nvim_lsp to top priority
+    opts.sources[1].priority = 1000
+
     table.insert(opts.sources, { name = "nvim_lsp_signature_help" })
     table.insert(opts.sources, { name = "treesitter" })
-    table.insert(opts.sources, { name = "emoji", max_item_count = 5 })
+    table.insert(opts.sources, { name = "emoji" })
     table.insert(opts.sources, { name = "cmp_jira" })
-    table.insert(opts.sources, { name = "nerdfont", max_item_count = 5 })
-    table.insert(opts.sources, { name = "rg", max_item_count = 10 })
-    table.insert(opts.sources, { name = "tmux", max_item_count = 10 })
+    table.insert(opts.sources, { name = "nerdfont" })
+    table.insert(opts.sources, { name = "rg", max_item_count = 5 })
+    table.insert(opts.sources, { name = "tmux", max_item_count = 5 })
 
     opts.mapping["<CR>"] = require("cmp").mapping.confirm({ select = false })
     opts.preselect = require("cmp").PreselectMode.None
