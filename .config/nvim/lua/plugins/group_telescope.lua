@@ -19,6 +19,14 @@ return {
       },
     })
 
+    opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+      mappings = {
+        i = {
+          ["<Esc>"] = "close",
+        },
+      },
+    })
+
     require("telescope").load_extension("undo")
   end,
 }
