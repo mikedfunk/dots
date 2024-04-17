@@ -98,4 +98,22 @@ return {
       },
     },
   },
+  {
+    "nvimdev/dashboard-nvim",
+    dependencies = {
+      {
+        "rubiin/fortune.nvim",
+        opts = {
+          display_format = "mixed",
+        },
+      },
+    },
+    opts = {
+      config = {
+        footer = function()
+          return require("fortune").get_fortune()
+        end,
+      },
+    },
+  },
 }
