@@ -61,10 +61,18 @@ return {
     "mvllow/modes.nvim",
     event = "VeryLazy",
     opts = {
-      ignored_filetypes = { "starter" },
+      ignored_filetypes = {
+        "DressingInput",
+        "TelescopePrompt",
+        "starter",
+        "lspinfo",
+      },
     },
   },
-  { "itchyny/vim-highlighturl", event = "BufRead" },
+  {
+    "itchyny/vim-highlighturl",
+    event = "VeryLazy",
+  },
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
