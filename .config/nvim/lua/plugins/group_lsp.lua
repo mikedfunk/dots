@@ -62,7 +62,7 @@ return {
         -- NOTE: prettier is handled by a lazyvim extra in ../config/lazy.lua
         blade = { "blade-formatter", "rustywind" },
         javascript = { "prettier", "rustywind" }, -- prettier wasn't included for javascript in the lazyvim extra :/
-        markdown = { "cbfmt" },
+        -- markdown = { "cbfmt" },
         php = { "phpcbf", "php_cs_fixer" },
         python = { "black" },
         sql = { "sqlfluff" },
@@ -153,7 +153,7 @@ return {
         -- "actionlint",
         "black",
         "blade-formatter",
-        "cbfmt",
+        -- "cbfmt",
         "checkmake",
         "css-lsp",
         "cspell",
@@ -166,6 +166,7 @@ return {
         "isort",
         "json-lsp",
         "lemminx",
+        "markdownlint",
         -- "nginx-language-server",
         "php-cs-fixer",
         "ruff-lsp",

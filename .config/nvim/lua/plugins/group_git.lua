@@ -34,4 +34,11 @@ return {
     "rhysd/committia.vim",
     ft = "gitcommit",
   },
+  {
+    "FabijanZulj/blame.nvim",
+    opts = {},
+    keys = {
+      { "<leader>gb", "<Cmd>BlameToggle<CR>", desc = "Toggle Blame", noremap = true },
+    },
+  },
 }
