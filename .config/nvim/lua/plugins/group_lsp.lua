@@ -15,6 +15,7 @@ return {
       -- })
 
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
+        -- biome = {},
         cssls = {},
         -- cucumber_language_server = {}, -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
         docker_compose_language_service = {},
@@ -53,46 +54,63 @@ return {
   {
     "stevearc/conform.nvim",
     ---@class ConformOpts
-    opts = {
-      format = {
-        timeout_ms = 20000,
-      },
-      ---@type table<string, conform.FormatterUnit[]>
-      formatters_by_ft = {
-        -- NOTE: prettier is handled by a lazyvim extra in ../config/lazy.lua
-        blade = { "blade-formatter", "rustywind" },
-        javascript = { "prettier", "rustywind" }, -- prettier wasn't included for javascript in the lazyvim extra :/
-        -- markdown = { "cbfmt" },
-        php = { "phpcbf", "php_cs_fixer" },
-        python = { "black" },
-        sql = { "sqlfluff" },
-        typescript = { "rustywind" },
-        typescriptreact = { "rustywind" },
-      },
-      formatters = {
-        phpcbf = {
-          prepend_args = {
-            "--cache",
-            "--warning-severity=3",
-            "-d",
-            "memory_limit=100M",
-            "-d",
-            "xdebug.mode=off",
+    opts = function(_, opts)
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+      opts = vim.tbl_deep_extend("force", opts, {
+        format = {
+          timeout_ms = 20000,
+        },
+        ---@type table<string, conform.FormatterUnit[]>
+        formatters_by_ft = {
+          -- markdown = { "cbfmt" },
+          ["typescript.tsx"] = { "biome" },
+          astro = { "biome" },
+          blade = { "blade-formatter", "rustywind" },
+          javascript = { "prettier", "biome", "rustywind" }, -- prettier wasn't included for javascript in the lazyvim extra :/
+          javascriptreact = { "biome" },
+          json = { "biome" },
+          jsonc = { "biome" },
+          php = { "phpcbf", "php_cs_fixer" },
+          python = { "black" },
+          sql = { "sqlfluff" },
+          svelte = { "biome" },
+          typescript = { "biome", "rustywind" },
+          typescriptreact = { "biome", "rustywind" },
+          vue = { "biome" },
+        },
+        formatters = {
+          -- biome = {
+          --   inherit = false,
+          --   command = "biome",
+          --   args = { "format", "$FILENAME", "&&", "biome", "check", "--apply", "$FILENAME" },
+          -- },
+          phpcbf = {
+            prepend_args = {
+              "--cache",
+              "--warning-severity=3",
+              "-d",
+              "memory_limit=100m",
+              "-d",
+              "xdebug.mode=off",
+            },
+          },
+          php_cs_fixer = {
+            cwd = require("conform.util").root_file({ ".php-cs-fixer.php" }),
+            require_cwd = true,
+          },
+          prettier = {
+            cwd = require("conform.util").root_file({ ".prettierrc.yml", ".prettierrc.json" }),
+            require_cwd = true,
+          },
+          sqlfluff = {
+            prepend_args = { "--dialect", "mysql" },
           },
         },
-        php_cs_fixer = {
-          condition = function(ctx)
-            return vim.fs.find({ ".php-cs-fixer.php" }, { path = ctx.filename, upward = true })[1]
-          end,
-        },
-        sqlfluff = {
-          prepend_args = {
-            "--dialect",
-            "mysql",
-          },
-        },
-      },
-    },
+      })
+
+      return opts
+    end,
   },
   {
 
@@ -100,13 +118,22 @@ return {
     ---@type table<string,table>
     opts = {
       linters_by_ft = {
+        -- ["typescript.tsx"] = { "biomejs" },
+        astro = { "biomejs" },
         editorconfig = { "editorconfig-checker" },
         gitcommit = { "gitlint" },
-        javascript = { "cspell" },
+        javascript = { "biomejs", "cspell" },
+        javascriptreact = { "biomejs" },
+        json = { "biomejs" },
+        jsonc = { "biomejs" },
         make = { "checkmake" },
         php = { "phpstan", "phpcs", "cspell" },
         python = { "isort" },
         sql = { "sqlfluff" },
+        svelte = { "biomejs" },
+        typescript = { "biomejs" },
+        typescriptreact = { "biomejs" },
+        vue = { "biomejs" },
       },
       linters = {
         phpstan = {
@@ -153,6 +180,7 @@ return {
         -- "actionlint",
         "black",
         "blade-formatter",
+        "biome",
         -- "cbfmt",
         "checkmake",
         "css-lsp",
