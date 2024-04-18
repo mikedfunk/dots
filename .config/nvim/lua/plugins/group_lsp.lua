@@ -15,7 +15,7 @@ return {
       -- })
 
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
-        -- biome = {},
+        biome = {}, -- https://github.com/biomejs/biome/discussions/87#discussioncomment-6891432
         cssls = {},
         -- cucumber_language_server = {}, -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
         docker_compose_language_service = {},
@@ -57,59 +57,65 @@ return {
     opts = function(_, opts)
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-      opts = vim.tbl_deep_extend("force", opts, {
-        format = {
-          timeout_ms = 20000,
-        },
-        ---@type table<string, conform.FormatterUnit[]>
-        formatters_by_ft = {
-          -- markdown = { "cbfmt" },
-          ["typescript.tsx"] = { "biome" },
-          astro = { "biome" },
-          blade = { "blade-formatter", "rustywind" },
-          javascript = { "prettier", "biome", "rustywind" }, -- prettier wasn't included for javascript in the lazyvim extra :/
-          javascriptreact = { "biome" },
-          json = { "biome" },
-          jsonc = { "biome" },
-          php = { "phpcbf", "php_cs_fixer" },
-          python = { "black" },
-          sql = { "sqlfluff" },
-          svelte = { "biome" },
-          typescript = { "biome", "rustywind" },
-          typescriptreact = { "biome", "rustywind" },
-          vue = { "biome" },
-        },
-        formatters = {
-          -- biome = {
-          --   inherit = false,
-          --   command = "biome",
-          --   args = { "format", "$FILENAME", "&&", "biome", "check", "--apply", "$FILENAME" },
-          -- },
-          phpcbf = {
-            prepend_args = {
-              "--cache",
-              "--warning-severity=3",
-              "-d",
-              "memory_limit=100m",
-              "-d",
-              "xdebug.mode=off",
-            },
-          },
-          php_cs_fixer = {
-            cwd = require("conform.util").root_file({ ".php-cs-fixer.php" }),
-            require_cwd = true,
-          },
-          prettier = {
-            cwd = require("conform.util").root_file({ ".prettierrc.yml", ".prettierrc.json" }),
-            require_cwd = true,
-          },
-          sqlfluff = {
-            prepend_args = { "--dialect", "mysql" },
-          },
-        },
+      opts.format = vim.tbl_deep_extend("force", opts.format, {
+        timeout_ms = 20000,
       })
 
-      return opts
+      -- what a pain in the ass. If I don't use list_extend here, it will
+      -- _override_ the previous list, not append to it. This list was already
+      -- added to by extras.prettier.
+      opts.formatters_by_ft.blade =
+        vim.list_extend(opts.formatters_by_ft.blade or {}, { "blade-formatter", "rustywind" })
+      opts.formatters_by_ft.javascript = vim.list_extend(opts.formatters_by_ft.javascript or {}, { "rustywind" })
+      opts.formatters_by_ft.javascriptreact =
+        vim.list_extend(opts.formatters_by_ft.javascriptreact or {}, { "rustywind" })
+      opts.formatters_by_ft.php = vim.list_extend(opts.formatters_by_ft.php or {}, { "phpcbf", "php_cs_fixer" })
+      opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, { "black" })
+      opts.formatters_by_ft.sql = vim.list_extend(opts.formatters_by_ft.sql or {}, { "sqlfluff" })
+      opts.formatters_by_ft.svelte = vim.list_extend(opts.formatters_by_ft.svelte or {}, { "rustywind" })
+      opts.formatters_by_ft.typescript = vim.list_extend(opts.formatters_by_ft.typescript or {}, { "rustywind" })
+      opts.formatters_by_ft.typescriptreact =
+        vim.list_extend(opts.formatters_by_ft.typescriptreact or {}, { "rustywind" })
+      opts.formatters_by_ft.vue = vim.list_extend(opts.formatters_by_ft.vue or {}, { "rustywind" })
+
+      ---@type table<string, conform.FormatterUnit[]>
+      opts.formatters = vim.tbl_deep_extend("force", opts.formatters, {
+        phpcbf = {
+          prepend_args = {
+            "--cache",
+            "--warning-severity=3",
+            "-d",
+            "memory_limit=100m",
+            "-d",
+            "xdebug.mode=off",
+          },
+        },
+        php_cs_fixer = {
+          cwd = require("conform.util").root_file({ ".php-cs-fixer.php" }),
+          require_cwd = true,
+        },
+        prettier = {
+          cwd = require("conform.util").root_file({
+            -- O_O
+            ".prettierrc",
+            ".prettierrc.yaml",
+            ".prettierrc.yml",
+            ".prettierrc.json",
+            ".prettierrc.json5",
+            ".prettierrc.js",
+            ".prettierrc.mjs",
+            ".prettierrc.cjs",
+            "prettier.config.js",
+            "prettier.config.mjs",
+            "prettier.config.cjs",
+            ".prettierrc.toml",
+          }),
+          require_cwd = true,
+        },
+        sqlfluff = {
+          prepend_args = { "--dialect", "mysql" },
+        },
+      })
     end,
   },
   {
@@ -118,22 +124,13 @@ return {
     ---@type table<string,table>
     opts = {
       linters_by_ft = {
-        -- ["typescript.tsx"] = { "biomejs" },
-        astro = { "biomejs" },
         editorconfig = { "editorconfig-checker" },
         gitcommit = { "gitlint" },
-        javascript = { "biomejs", "cspell" },
-        javascriptreact = { "biomejs" },
-        json = { "biomejs" },
-        jsonc = { "biomejs" },
+        javascript = { "cspell" },
         make = { "checkmake" },
         php = { "phpstan", "phpcs", "cspell" },
         python = { "isort" },
         sql = { "sqlfluff" },
-        svelte = { "biomejs" },
-        typescript = { "biomejs" },
-        typescriptreact = { "biomejs" },
-        vue = { "biomejs" },
       },
       linters = {
         phpstan = {
@@ -197,6 +194,7 @@ return {
         "markdownlint",
         -- "nginx-language-server",
         "php-cs-fixer",
+        "prettierd",
         "ruff-lsp",
         "rustywind",
         -- "snyk-ls",
