@@ -15,6 +15,7 @@ return {
       "andersevenrud/cmp-tmux",
       branch = "main",
     },
+    -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     -- "onsails/lspkind.nvim",
   },
   ---@param opts cmp.ConfigSchema
