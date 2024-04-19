@@ -6,17 +6,15 @@
 
 # leafgroup {{{
 
-.config/lvim/lua/saatchiart/plugin_configs.lua
-.config/git/config-saatchi
 .saatchirc
 .support/saatchi/*
-.config/git/saatchi
 
 # Code/saatchi/queries/**/*.sql
 # Code/saatchi/queries/**/.sqllsrc.json
 # Code/saatchi/uml/**/*.uml
 # Code/saatchi/http/**/*.hurl
 
+.config/git/config-saatchi
 .config/smug/work.yml
 
 Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
@@ -24,12 +22,12 @@ Code/saatchi/gallery/.prettierrc.json
 Code/saatchi/xdocker/compose.yml
 
 Code/saatchi/**/.pre-commit-config.yaml
+Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.nvim.lua
 Code/saatchi/**/.jenkinslintrc
 Code/saatchi/**/.envrc
 Code/saatchi/**/.ignore
 Code/saatchi/**/cspell.json
-Code/saatchi/**/.nlsp-settings/*.json
 Code/saatchi/**/.tool-versions
 Code/saatchi/**/.projections.json
 Code/saatchi/**/.php-cs-fixer.php
@@ -43,11 +41,7 @@ Code/saatchi/zed/.editorconfig
 # misc {{{
 
 # .aws/credentials
-# .config/lvim/lsp-settings/sqlls.json
-# Notes/**/*.md
-# Notes/**/imgs/*
-.bin/pu-pretty
-.boto
+# .boto
 .circleci/cli.yml
 .config/aws/config
 .config/multitail/multitail.conf
@@ -57,11 +51,10 @@ Code/saatchi/zed/.editorconfig
 .mylogin.cnf
 .netrc
 .private_vars.sh
-.ssh/config
-.ssh/keys
+.ssh/{config,keys}
 .support/hosts.json
 .warprc
-Library/Application Support/Sequel Pro/Data/Favorites.plist
+Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 intelephense/licence.txt
 
