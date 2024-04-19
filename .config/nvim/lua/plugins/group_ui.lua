@@ -160,4 +160,11 @@ return {
       })
     end,
   },
+  {
+    "nyngwang/NeoZoom.lua",
+    cmd = { "NeoZoomToggle", "NeoZoom" },
+    keys = {
+      { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
+    },
+  },
 }
