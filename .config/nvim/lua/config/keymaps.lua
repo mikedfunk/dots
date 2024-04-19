@@ -13,9 +13,11 @@ vim.keymap.set("n", "gO", "<Cmd>Telescope lsp_outgoing_calls<CR>", { noremap = t
 
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR><Esc>", { noremap = true, desc = "Save File" })
 
-vim.keymap.set(
-  "n",
-  "<c-q>",
-  "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'",
-  { expr = true, silent = true, noremap = true, desc = "Toggle Quickfix" }
-)
+vim.keymap.set("n", "<c-q>", function()
+  if vim.fn.empty(vim.fn.filter(vim.fn.getwininfo(), "v:val.quickfix")) == 1 then
+    vim.cmd("copen")
+  else
+    vim.cmd("cclose")
+    vim.cmd("TroubleClose")
+  end
+end, { noremap = true, desc = "Toggle Quickfix" })
