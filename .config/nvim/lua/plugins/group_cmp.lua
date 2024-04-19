@@ -19,6 +19,9 @@ return {
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
+    opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
+      entries = { follow_cursor = true },
+    })
     -- set nvim_lsp to top priority
     opts.sources[1].priority = 1000
 

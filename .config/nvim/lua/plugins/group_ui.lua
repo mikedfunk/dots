@@ -131,10 +131,32 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
+  { "JosefLitos/colorizer.nvim", config = true },
+  -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   ---@type TailwindTools.Option
+  --   opts = {
+  --     document_color = { kind = "background" },
+  --     conceal = { enabled = true },
+  --   },
+  -- },
   {
-    -- color picker and hex colorizer
-    "uga-rosa/ccc.nvim",
-    event = "VeryLazy",
-    config = true,
+    "themaxmarchuk/tailwindcss-colors.nvim",
+    module = "tailwindcss-colors",
+    config = function()
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("tailwind_colors_lspattach", { clear = true }),
+        pattern = "*",
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if client and client.name == "tailwindcss" then
+            require("tailwindcss-colors").buf_attach(args.buf)
+          end
+        end,
+      })
+    end,
   },
 }
