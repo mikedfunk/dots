@@ -10,11 +10,13 @@ My Bash, Neovim ([LazyVim](https://www.lazyvim.org)), Git, and other dotfiles. M
 
 Dark mode:
 
-![Screen Shot 2022-04-12 at 8 52 24 PM](https://user-images.githubusercontent.com/661038/163096875-7340f006-2855-4dd1-ba67-9f514317d328.png)
+<img width="2560" alt="Screenshot 2024-04-19 at 11 58 58 AM" src="https://github.com/mikedfunk/dots/assets/661038/1339be46-bd53-4c19-9ae2-b879aad1878d">
+
 
 Light mode:
 
-![Screen Shot 2022-04-12 at 8 52 55 PM](https://user-images.githubusercontent.com/661038/163096859-651baedc-8bb2-4f4d-96d7-62e320346f80.png)
+<img width="2560" alt="Screenshot 2024-04-19 at 11 59 16 AM" src="https://github.com/mikedfunk/dots/assets/661038/67825b45-9ffb-4d98-82f7-0fcc211bb5fd">
+
 
 ## Key files, annotated
 
@@ -25,4 +27,4 @@ Light mode:
 - [Zshrc](.zshrc), [Zsh plugins](.zsh_plugins.txt)
 - [P10k prompt config](.p10k.zsh)
 - [Git config](.config/git/config), [Tig config](.config/tig/config)
-- [Tmux config and tmux plugins](.tmux.conf), [Home smug layout](.config/smug/home.yml)
+- [Tmux config and tmux plugins](.config/tmux/tmux.conf), [Home smug layout](.config/smug/home.yml)
