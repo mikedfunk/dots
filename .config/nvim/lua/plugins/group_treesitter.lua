@@ -6,12 +6,23 @@ return {
     { "yioneko/nvim-yati", version = "*" },
     { "yorickpeterse/nvim-tree-pairs", config = true },
   },
+  ---@type TSConfig
   opts = {
     auto_install = true,
+
+    -- these are just to make the schema happy
+    sync_install = false,
+    ignore_install = {},
+    modules = {},
 
     indent = { enable = false }, -- use yati instead
     endwise = { enable = true },
     yati = { enable = true },
+
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1742
+    highlight = {
+      additional_vim_regex_highlighting = { "php" },
+    },
 
     ensure_installed = {
       "comment",
