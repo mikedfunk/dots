@@ -7,6 +7,8 @@ return {
     { "yorickpeterse/nvim-tree-pairs", config = true },
   },
   opts = {
+    auto_install = true,
+
     indent = { enable = false }, -- use yati instead
     endwise = { enable = true },
     yati = { enable = true },
@@ -23,7 +25,6 @@ return {
       "vim",
     },
 
-    -- TODO: not working
     textobjects = {
 
       -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#textobjects-lsp-interop
@@ -31,8 +32,8 @@ return {
         enable = true,
         border = "rounded",
         peek_definition_code = {
-          ["<leader>F"] = "@function.outer",
-          ["<leader>C"] = "@class.outer",
+          ["<leader>pf"] = "@function.outer",
+          ["<leader>pc"] = "@class.outer",
         },
       },
 
@@ -46,17 +47,15 @@ return {
           ac = "@class.outer",
           ic = "@class.inner",
         },
-
-        -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
-        swap = {
-          enable = true,
-          swap_next = { ["g>"] = "@parameter.inner" },
-          swap_previous = { ["g<"] = "@parameter.inner" },
-        },
-        move = {
-          set_jumps = true,
-        },
       },
+
+      -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
+      swap = {
+        enable = true,
+        swap_next = { ["g>"] = "@parameter.inner" },
+        swap_previous = { ["g<"] = "@parameter.inner" },
+      },
+      move = { set_jumps = true },
     },
   },
 }
