@@ -131,7 +131,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
-  { "JosefLitos/colorizer.nvim", config = true },
+  { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
+  { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
   -- {
   --   "luckasRanarison/tailwind-tools.nvim",
@@ -145,7 +146,7 @@ return {
   {
     "themaxmarchuk/tailwindcss-colors.nvim",
     module = "tailwindcss-colors",
-    config = function()
+    init = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("tailwind_colors_lspattach", { clear = true }),
         pattern = "*",

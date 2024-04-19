@@ -22,5 +22,41 @@ return {
       "sql",
       "vim",
     },
+
+    -- TODO: not working
+    textobjects = {
+
+      -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#textobjects-lsp-interop
+      lsp_interop = {
+        enable = true,
+        border = "rounded",
+        peek_definition_code = {
+          ["<leader>F"] = "@function.outer",
+          ["<leader>C"] = "@class.outer",
+        },
+      },
+
+      -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          af = "@function.outer",
+          ["if"] = "@function.inner",
+          ac = "@class.outer",
+          ic = "@class.inner",
+        },
+
+        -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
+        swap = {
+          enable = true,
+          swap_next = { ["g>"] = "@parameter.inner" },
+          swap_previous = { ["g<"] = "@parameter.inner" },
+        },
+        move = {
+          set_jumps = true,
+        },
+      },
+    },
   },
 }
