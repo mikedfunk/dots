@@ -4,7 +4,7 @@
 # https://github.com/TheLocehiliosan/yadm/blob/master/yadm.md#encryption
 # vim: set foldmethod=marker filetype=conf:
 
-# leafgroup {{{
+# Saatchi Art {{{
 
 .saatchirc
 .support/saatchi/*
