@@ -18,6 +18,15 @@ windows:
       - commands: [bundle install && bundle exec jekyll serve --watch]
       - commands: [ts]
 
+  - name: remix-checkout
+    root: ~/Code/saatchi/remix-checkout
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [bun dev]
+      - commands: [ts]
+
   # - name: nextjs
   #   root: ~/Code/test/nextjs-blog
   #   manual: true
@@ -52,9 +61,15 @@ windows:
     layout: main-horizontal
     commands: [v]
     panes:
-      - commands: [docker compose --project-directory=$HOME/Code/saatchi/xdocker up mysql.db -d && docker compose up]
+      - commands:
+          [
+            docker compose --project-directory=$HOME/Code/saatchi/xdocker up mysql.db -d && docker compose up,
+          ]
       - commands: [puw]
-      - commands: [while true; do docker compose exec paint.fpm php artisan tinker; sleep 1; done]
+      - commands:
+          [
+            while true; do docker compose exec paint.fpm php artisan tinker; sleep 1; done,
+          ]
       - commands: [ts]
 
   - name: brush
@@ -65,7 +80,10 @@ windows:
     panes:
       - commands: [docker compose up brush.node --force-recreate]
       - commands: [vitest]
-      - commands: [while true; do docker compose exec brush.node node --experimental-repl-await -i; sleep 5; done]
+      - commands:
+          [
+            while true; do docker compose exec brush.node node --experimental-repl-await -i; sleep 5; done,
+          ]
       - commands: [ts]
 
   - name: nginx

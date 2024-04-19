@@ -12,3 +12,10 @@ vim.keymap.set("n", "go", "<Cmd>Telescope lsp_incoming_calls<CR>", { noremap = t
 vim.keymap.set("n", "gO", "<Cmd>Telescope lsp_outgoing_calls<CR>", { noremap = true, desc = "Outgoing Calls" })
 
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR><Esc>", { noremap = true, desc = "Save File" })
+
+vim.keymap.set(
+  "n",
+  "<c-q>",
+  "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'",
+  { expr = true, silent = true, noremap = true, desc = "Toggle Quickfix" }
+)

@@ -40,6 +40,8 @@ return {
         -- },
         sqlls = {},
         tailwindcss = {
+          -- https://www.reddit.com/r/neovim/comments/1c784zq/tailwindcss_unusable_inotify_max_events_does/l068l30/
+          -- capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = false } } },
           root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
         },
         taplo = {},

@@ -202,6 +202,7 @@ tap "pkgxdev/made" # pkgx
 # brew "w3m" # full color image previewer for ranger (but doesn't work in tmux)
 # brew "wifi-password" # get your current wifi password quickly without mucking about with keychain access (install if needed)
 # brew "xdebug-osx" # xdebug toggler for homebrew php (which I don't currently use)
+# brew "xdg-ninja" # shell script to look for opportunities to move config files/folders in the home directory into XDG directories instead
 # brew "xmlto" # convert xml to other formats because fuck xml
 # brew "xq" # jq is to json what xq is to xml/html
 # brew "yamllint" # used by vim-ale
@@ -321,7 +322,6 @@ brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-p
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
 brew "wget" # latest version
-brew "xdg-ninja" # shell script to look for opportunities to move config files/folders in the home directory into XDG directories instead
 brew "yadm" # yet another dotfiles manager
 brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zlib" # needed to build php and python
@@ -344,7 +344,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
 # cask "chromium" # no google tracking for me
-# cask "cold-turkey-blocker" # blocks distracting website access so I can work
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
 # cask "discord" # chat
@@ -432,7 +431,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "quicklook-csv" # quicklook plugin (preview csvs)
 # cask "quicklook-json" # quicklook plugin (preview json)
 # cask "scummvm" # old school
-# cask "sequel-ace" # maintained fork of sequel pro (switched to table plus)
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
 # cask "shadow" # cloud gaming system https://shadow.tech
@@ -450,6 +448,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "stoplight-studio" # openapi ide. This is cool but you can also just use the web version at https://stoplight.io/p/studio but the desktop app works with local files _and_ automatically mocks local apis with prism - their built-in api mocker (this is really only useful as a fancy local openapi spec editor since even their ci docs generator just hits their api)
 # cask "suspicious-package" # quicklook plugin for mac dmg package inspection (I don't care about inspecting these)
 # cask "synthesia" # piano learning software
+# cask "tableplus" # alternative to sequelpro
 # cask "transmission" # unleash a torrent of files ;)
 # cask "tunnelbear" # tunnel to a specific country
 # cask "unshaky" # fix double keypress on macbook butterfly keyboard
@@ -459,6 +458,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "visual-paradigm-ce" # ide for uml (based on eclipse, ew)
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
 # cask "vlc" # watch the videos I download (switchtd to mpv)
+# cask "vpn-by-google-one" # google vpn
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
 # cask "wormhole" # interact with your phone screen from your computer
@@ -470,6 +470,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "authy" # desktop 2-factor!
 cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
+cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
@@ -486,8 +487,7 @@ cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "nvidia-geforce-now" # game streaming
 cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
-cask "tableplus" # alternative to sequelpro
-cask "vpn-by-google-one" # google vpn
+cask "sequel-ace" # maintained fork of sequel pro (switched to table plus)
 
 # }}}
 
