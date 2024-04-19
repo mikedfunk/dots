@@ -6,6 +6,7 @@
   "blame.nvim": { "branch": "main", "commit": "b713e4a9679164027e7f4d2131a0d0e62cfa4a36" },
   "bufferline.nvim": { "branch": "main", "commit": "64e2c5def50dfd6b6f14d96a45fa3d815a4a1eef" },
   "catppuccin": { "branch": "main", "commit": "a1439ad7c584efb3d0ce14ccb835967f030450fe" },
+  "ccc.nvim": { "branch": "main", "commit": "1283eef5494c092a047baa34ed3e667f3cb2715e" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-emoji": { "branch": "main", "commit": "e8398e2adf512a03bb4e1728ca017ffeac670a9f" },
   "cmp-jira": { "branch": "main", "commit": "bb39d8110c4e9dcabfc0fe71ab42ba9140c2b39c" },
@@ -99,8 +100,8 @@
   "vim-pasta": { "branch": "master", "commit": "2b786703eef9f82ae7a56f3de4ee43e1e5efaaa5" },
   "vim-projectionist": { "branch": "master", "commit": "729f3630a4c19e52e1fd825802d2a1659daeaf48" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
+  "vim-sanegx": { "branch": "master", "commit": "e97c10401d781199ba1aecd07790d0771314f3f5" },
   "vim-startuptime": { "branch": "master", "commit": "ac2cccb5be617672add1f4f3c0a55ce99ba34e01" },
-  "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "yanky.nvim": { "branch": "main", "commit": "7c5cbf0122ff2dfbb6a92f14885894f65949cc8b" },
   "zk-nvim": { "branch": "main", "commit": "e2b6d62b18a88249016bf917d4e5bb0e417ac974" }

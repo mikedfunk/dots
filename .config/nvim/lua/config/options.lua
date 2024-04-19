@@ -226,3 +226,5 @@ vim.filetype.add({ pattern = { ["docker-compose%.yml"] = "yaml.docker-compose" }
 vim.filetype.add({ pattern = { ["%.babelrc"] = "json" } })
 vim.filetype.add({ pattern = { ["Dockerfile-.*"] = "dockerfile" } })
 vim.filetype.add({ pattern = { ["Dockerfile%..*"] = "dockerfile" } })
+vim.filetype.add({ pattern = { [".env"] = "sh" } })
+vim.filetype.add({ pattern = { [".env.example"] = "sh" } })

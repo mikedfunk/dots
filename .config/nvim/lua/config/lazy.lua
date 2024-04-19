@@ -22,6 +22,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
+    -- { import = "lazyvim.plugins.extras.editor.trouble-v3" },
     { import = "lazyvim.plugins.extras.editor.mini-move" },
     -- { import = "lazyvim.plugins.extras.util.project" },
     -- { import = "lazyvim.plugins.extras.editor.harpoon2" },

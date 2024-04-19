@@ -15,6 +15,7 @@ return {
       "andersevenrud/cmp-tmux",
       branch = "main",
     },
+    -- "onsails/lspkind.nvim",
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
@@ -40,6 +41,12 @@ return {
       documentation = require("cmp").config.window.bordered(),
     })
 
+    -- opts.formatting.format = require("lspkind").cmp_format({
+    --   symbol_map = require("lazyvim.config").icons.kinds,
+    --   mode = "symbol_text",
+    -- })
+
+    -- poor man's lspkind
     opts.formatting.format = function(entry, item)
       local icons = require("lazyvim.config").icons.kinds
 
@@ -47,8 +54,82 @@ return {
         item.kind = icons[item.kind] .. item.kind
       end
 
+      -- use icons for source names {{{
       local source_names = opts.formatting.source_names or {}
-      item.menu = source_names[entry.source.name] or string.format("(%s)", entry.source.name)
+      source_names = vim.tbl_extend("force", source_names, {
+        buffer = "",
+        ["buffer-lines"] = "≡",
+        calc = "",
+        cmp_jira = "",
+        cmp_tabnine = "󰚩", --  ➒,
+        color_names = "",
+        copilot = "",
+        dap = "",
+        dictionary = "",
+        doxygen = "", -- 󰙆
+        emoji = "", -- 
+        git = "",
+        jira_issues = "",
+        luasnip = "✄",
+        luasnip_choice = "",
+        marksman = "󰓾", -- 🞋
+        nerdfont = "󰬴",
+        nvim_lsp = "ʪ",
+        nvim_lsp_document_symbol = "ʪ",
+        nvim_lsp_signature_help = "ʪ",
+        nvim_lua = "",
+        path = "󰉋", --  
+        plugins = "", --  
+        rg = "",
+        tmux = "",
+        treesitter = "",
+        vsnip = "✄",
+        zk = "",
+      })
+
+      item.menu = source_names[entry.source.name] or string.format("[%s]", entry.source.name)
+      -- }}}
+
+      -- create and assign highlights with different foreground colors for each source {{{
+      local all_colors = require("tokyonight.colors").setup()
+      local colors = {
+        all_colors.blue,
+        all_colors.blue0,
+        all_colors.blue1,
+        all_colors.blue2,
+        all_colors.blue5,
+        all_colors.blue6,
+        -- all_colors.blue7,
+        all_colors.cyan,
+        all_colors.green,
+        all_colors.green1,
+        all_colors.green2,
+        all_colors.magenta,
+        all_colors.magenta2,
+        all_colors.orange,
+        all_colors.purple,
+        all_colors.red,
+        all_colors.red1,
+        all_colors.teal,
+        all_colors.yellow,
+      }
+
+      local i = 0
+
+      for source_name, _ in pairs(source_names) do
+        i = i + 1
+
+        if not colors[i] then
+          i = 1
+        end
+
+        local color = colors[i]
+
+        vim.api.nvim_set_hl(0, "CmpItemKind_" .. source_name, { fg = color })
+      end
+
+      item.kind_hl_group = "CmpItemKind_" .. entry.source.name
+      -- }}}
 
       return item
     end

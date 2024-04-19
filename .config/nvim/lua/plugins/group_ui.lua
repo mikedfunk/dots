@@ -131,22 +131,10 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
-  -- {
-  --   "nvim-neo-tree/neo-tree.nvim",
-  --   opts = {
-  --     filesystem = {
-  --       -- fucking follow_current_file doesn't work half the time
-  --       use_libuv_file_watcher = true,
-  --     },
-  --   },
-  --   keys = {
-  --     {
-  --       "<leader>e",
-  --       -- this reveals more consistently but focuses on the the current file's
-  --       -- parent dir :/ Stil doesn't always work.
-  --       "<cmd>Neotree reveal %% toggle<cr>",
-  --       desc = "Explorer Neotree (reveal)",
-  --     },
-  --   },
-  -- },
+  {
+    -- color picker and hex colorizer
+    "uga-rosa/ccc.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
 }
