@@ -21,7 +21,10 @@ return {
         docker_compose_language_service = {},
         -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
         dockerls = {},
-        flow = {},
+        flow = {
+          cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
+            or { "npx", "flow", "lsp" },
+        },
         jsonls = {},
         lemminx = {},
         -- nginx_language_server = {},

@@ -20,6 +20,7 @@ return {
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
+    opts.experimental = { ghost_text = false }
     opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
       entries = { follow_cursor = true },
     })

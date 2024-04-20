@@ -404,7 +404,7 @@
     # autosquash = true
     autostash = true
     # https://adamj.eu/tech/2022/10/15/how-to-rebase-stacked-git-branches/
-    updateRefs = true
+    # updateRefs = true
 [push]
     default = current
     # push any missing _annotated_ tags related to this branch to remote when

@@ -14,10 +14,19 @@ vim.keymap.set("n", "gO", "<Cmd>Telescope lsp_outgoing_calls<CR>", { noremap = t
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR><Esc>", { noremap = true, desc = "Save File" })
 
 vim.keymap.set("n", "<c-q>", function()
+  if package.loaded["trouble"] and require("trouble").is_open() then
+    require("trouble").close()
+    vim.cmd("cclose")
+
+    return
+  end
+
   if vim.fn.empty(vim.fn.filter(vim.fn.getwininfo(), "v:val.quickfix")) == 1 then
     vim.cmd("copen")
   else
     vim.cmd("cclose")
-    vim.cmd("TroubleClose")
   end
 end, { noremap = true, desc = "Toggle Quickfix" })
+
+vim.keymap.set("n", "[B", "<Cmd>BufferLineMovePrev<CR>", { noremap = true, desc = "Move Buffer Left" })
+vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc = "Move Buffer Right" })

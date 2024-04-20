@@ -144,6 +144,9 @@ return {
   --   },
   -- },
   {
+    -- what I like about this one is that it only enables when a tailwind LSP
+    -- is attached. It's also not buggy and simple - background color for the
+    -- document _only_.
     "themaxmarchuk/tailwindcss-colors.nvim",
     module = "tailwindcss-colors",
     init = function()
@@ -166,5 +169,14 @@ return {
     keys = {
       { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
     },
+  },
+  {
+    -- this expects the extra lazyvim.plugins.extras.ui.mini-animate to be
+    -- enabled in lazy.lua. It just tweaks the timing.
+    "echasnovski/mini.animate",
+    opts = function(_, opts)
+      opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
+      opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
+    end,
   },
 }
