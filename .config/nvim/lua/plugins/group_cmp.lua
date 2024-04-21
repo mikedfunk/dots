@@ -15,6 +15,12 @@ return {
       "andersevenrud/cmp-tmux",
       branch = "main",
     },
+    {
+      "uga-rosa/cmp-dictionary",
+      opts = {
+        paths = { "/usr/share/dict/words" },
+      },
+    },
     -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     -- "onsails/lspkind.nvim",
   },
@@ -24,14 +30,22 @@ return {
     opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
       entries = { follow_cursor = true },
     })
+
+    local no_comments_or_text = function(entry, _)
+      return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+        and not require("cmp").config.context.in_syntax_group("Comment")
+    end
+
     -- set nvim_lsp to top priority
     opts.sources[1].priority = 1000
+    opts.sources[1].entry_filter = no_comments_or_text
 
-    table.insert(opts.sources, { name = "nvim_lsp_signature_help" })
-    table.insert(opts.sources, { name = "treesitter" })
+    table.insert(opts.sources, { name = "nvim_lsp_signature_help", entry_filter = no_comments_or_text })
+    table.insert(opts.sources, { name = "treesitter", entry_filter = no_comments_or_text })
     table.insert(opts.sources, { name = "emoji" })
     table.insert(opts.sources, { name = "cmp_jira" })
     table.insert(opts.sources, { name = "nerdfont" })
+    table.insert(opts.sources, { name = "dictionary", keyword_length = 2, max_item_count = 5 })
     table.insert(opts.sources, { name = "rg", max_item_count = 5 })
     table.insert(opts.sources, { name = "tmux", max_item_count = 5 })
 
