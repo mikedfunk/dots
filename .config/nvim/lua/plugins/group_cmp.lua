@@ -21,6 +21,7 @@ return {
         paths = { "/usr/share/dict/words" },
       },
     },
+    { "petertriho/cmp-git", config = true }, -- expects GITHUB_API_TOKEN env var to be set
     -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     -- "onsails/lspkind.nvim",
   },
@@ -44,6 +45,7 @@ return {
     table.insert(opts.sources, { name = "treesitter", entry_filter = no_comments_or_text })
     table.insert(opts.sources, { name = "emoji" })
     table.insert(opts.sources, { name = "cmp_jira" })
+    table.insert(opts.sources, { name = "git" })
     table.insert(opts.sources, { name = "nerdfont" })
     table.insert(opts.sources, { name = "dictionary", keyword_length = 2, max_item_count = 5 })
     table.insert(opts.sources, { name = "rg", max_item_count = 5 })
