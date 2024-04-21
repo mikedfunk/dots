@@ -79,6 +79,7 @@ path=(
   $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
   "${KREW_ROOT:-$HOME/.krew}"/bin
+  $HOME/.yarn/bin
   $HOME/.docker/bin
   # to install groovy-language-server
   $(brew --prefix openjdk@17)/bin
