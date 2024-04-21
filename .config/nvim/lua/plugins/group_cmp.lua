@@ -11,17 +11,18 @@ return {
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = {},
     },
-    {
-      "andersevenrud/cmp-tmux",
-      branch = "main",
-    },
+    { "andersevenrud/cmp-tmux", branch = "main" },
     {
       "uga-rosa/cmp-dictionary",
       opts = {
         paths = { "/usr/share/dict/words" },
       },
     },
-    { "petertriho/cmp-git", config = true }, -- expects GITHUB_API_TOKEN env var to be set
+    {
+      "petertriho/cmp-git",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = true,
+    }, -- expects GITHUB_API_TOKEN env var to be set
     -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     -- "onsails/lspkind.nvim",
   },
@@ -33,8 +34,11 @@ return {
     })
 
     local no_comments_or_text = function(entry, _)
-      return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
-        and not require("cmp").config.context.in_syntax_group("Comment")
+      local is_comment = require("cmp").config.context
+        and require("cmp").config.context.in_syntax_group
+        and require("cmp").config.context.in_syntax_group("Comment")
+
+      return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text" and not is_comment
     end
 
     -- set nvim_lsp to top priority

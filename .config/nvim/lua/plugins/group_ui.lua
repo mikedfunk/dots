@@ -1,4 +1,10 @@
 return {
+  -- {
+  --   -- doesn't work. Tmux problem?
+  --   "soulis-1256/eagle.nvim",
+  --   branch = "main",
+  --   config = true,
+  -- },
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
@@ -156,6 +162,7 @@ return {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+          -- if client and client.server_capabilities.colorProvider then
           if client and client.name == "tailwindcss" then
             require("tailwindcss-colors").buf_attach(args.buf)
           end
@@ -163,6 +170,24 @@ return {
       })
     end,
   },
+  -- {
+  --   -- disabled because of https://github.com/mrshmllow/document-color.nvim/issues/2#issuecomment-1316637640
+  --   "mrshmllow/document-color.nvim",
+  --   module = "document-color",
+  --   init = function()
+  --     vim.api.nvim_create_autocmd("LspAttach", {
+  --       group = vim.api.nvim_create_augroup("document_color_lspattach", { clear = true }),
+  --       pattern = "*",
+  --       callback = function(args)
+  --         local client = vim.lsp.get_client_by_id(args.data.client_id)
+  --
+  --         if client and client.server_capabilities.colorProvider then
+  --           require("document-color").buf_attach(args.buf)
+  --         end
+  --       end,
+  --     })
+  --   end,
+  -- },
   {
     "nyngwang/NeoZoom.lua",
     cmd = { "NeoZoomToggle", "NeoZoom" },
@@ -178,5 +203,39 @@ return {
       opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
       opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
     end,
+    {
+      "nvim-zh/colorful-winsep.nvim",
+      event = { "WinNew" },
+      config = true,
+    },
+    {
+      "anuvyklack/fold-preview.nvim",
+      dependencies = { "anuvyklack/keymap-amend.nvim" },
+      event = "VeryLazy",
+      opts = {
+        auto = 400,
+        border = "rounded",
+        -- default_keybindings = false,
+      },
+    },
+  },
+  {
+    "smjonas/live-command.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("live-command").setup({
+        commands = {
+          Norm = { cmd = "norm" },
+        },
+      })
+    end,
+  },
+  {
+    "nacro90/numb.nvim",
+    event = "CmdlineEnter",
+    opts = {
+      show_numbers = true, -- Enable 'number' for the window while peeking
+      show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+    },
   },
 }

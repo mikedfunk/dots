@@ -1,4 +1,14 @@
 return {
+  -- TODO: not working
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   dependencies = { "mason.nvim", "davidmh/cspell.nvim" },
+  --   opts = function(_, opts)
+  --     opts.sources = vim.list_extend(opts.sources or {}, {
+  --       require("cspell").code_actions,
+  --     })
+  --   end,
+  -- },
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
@@ -211,14 +221,5 @@ return {
       },
     },
   },
-  -- TODO: not working
-  -- {
-  --   "nvimtools/none-ls.nvim",
-  --   dependencies = { "mason.nvim", "davidmh/cspell.nvim" },
-  --   opts = function(_, opts)
-  --     opts.sources = vim.list_extend(opts.sources or {}, {
-  --       require("cspell").code_actions,
-  --     })
-  --   end,
-  -- },
+  { "antosha417/nvim-lsp-file-operations", config = true },
 }

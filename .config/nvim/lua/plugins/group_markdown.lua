@@ -90,4 +90,13 @@ return {
       require("zk").setup()
     end,
   },
+  {
+    "wallpants/github-preview.nvim",
+    ft = "markdown",
+    cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
+    keys = {
+      { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", { noremap = true, desc = "Preview Markdown" } },
+    },
+    opts = {},
+  },
 }
