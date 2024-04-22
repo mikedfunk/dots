@@ -95,7 +95,7 @@ return {
     ft = "markdown",
     cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
     keys = {
-      { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", { noremap = true, desc = "Preview Markdown" } },
+      { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", noremap = true, desc = "Preview Markdown" },
     },
     opts = {},
   },

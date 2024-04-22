@@ -38,7 +38,7 @@ return {
     "FabijanZulj/blame.nvim",
     opts = {},
     keys = {
-      { "<leader>gb", "<Cmd>BlameToggle<CR>", desc = "Toggle Blame", noremap = true },
+      { "<leader>gb", "<Cmd>BlameToggle<CR>", noremap = true, desc = "Toggle Blame" },
     },
   },
 }
