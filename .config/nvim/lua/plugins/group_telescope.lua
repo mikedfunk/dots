@@ -24,6 +24,12 @@ return {
         mappings = {
           i = {
             ["<Esc>"] = "close",
+            -- flip these mappings - defaults are counter-intuitive
+            ["<C-n>"] = require("telescope.actions").cycle_history_next,
+            ["<C-p>"] = require("telescope.actions").cycle_history_prev,
+
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
           },
         },
       })

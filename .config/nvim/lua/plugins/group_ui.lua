@@ -1,4 +1,5 @@
 return {
+  -- { "luukvbaal/statuscol.nvim", config = true },
   -- {
   --   -- doesn't work. Tmux problem?
   --   "soulis-1256/eagle.nvim",
@@ -103,6 +104,7 @@ return {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
     opts = {
+      handlers = { gitsigns = true },
       handle = {
         highlight = "PmenuSel",
       },
@@ -210,12 +212,11 @@ return {
     },
     {
       "anuvyklack/fold-preview.nvim",
-      dependencies = { "anuvyklack/keymap-amend.nvim" },
       event = "VeryLazy",
       opts = {
         auto = 400,
         border = "rounded",
-        -- default_keybindings = false,
+        default_keybindings = false,
       },
     },
   },

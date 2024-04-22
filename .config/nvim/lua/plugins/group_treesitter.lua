@@ -1,6 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
+    { "gsuuon/tshjkl.nvim", config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
     { "RRethy/nvim-treesitter-endwise", ft = { "ruby", "lua", "zsh", "bash" } },
     { "gbprod/php-enhanced-treesitter.nvim", ft = { "php" } },
     { "yioneko/nvim-yati", version = "*" },
