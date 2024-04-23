@@ -7,6 +7,22 @@ return {
   -- },
   { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   {
+    "folke/twilight.nvim",
+    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+    opts = {},
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+        },
+      },
+    },
+  },
+  {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
       opts.options = vim.tbl_deep_extend("force", opts.options, {

@@ -18,6 +18,13 @@ return {
       -- },
       -- https://github.com/folke/noice.nvim/discussions/364
       routes = {
+        -- {
+        --   filter = {
+        --     event = "notify",
+        --     find = "No information available",
+        --   },
+        --   opts = { skip = true },
+        -- },
         {
           filter = {
             event = "lsp",
