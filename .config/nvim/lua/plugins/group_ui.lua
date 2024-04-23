@@ -1,11 +1,11 @@
 return {
-  -- { "luukvbaal/statuscol.nvim", config = true },
   -- {
-  --   -- doesn't work. Tmux problem?
+  --   -- doesn't work. Tmux problem? https://github.com/soulis-1256/eagle.nvim/issues/17
   --   "soulis-1256/eagle.nvim",
   --   branch = "main",
   --   config = true,
   -- },
+  { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
@@ -27,17 +27,13 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      window = {
-        border = "rounded",
-      },
+      window = { border = "rounded" },
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      ui = {
-        border = "rounded",
-      },
+      ui = { border = "rounded" },
     },
   },
   {

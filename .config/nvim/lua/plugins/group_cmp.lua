@@ -4,7 +4,7 @@ return {
     "hrsh7th/cmp-emoji",
     "lukas-reineke/cmp-rg",
     "chrisgrieser/cmp-nerdfont",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
+    -- "hrsh7th/cmp-nvim-lsp-signature-help",
     "ray-x/cmp-treesitter",
     {
       "mikedfunk/cmp-jira",

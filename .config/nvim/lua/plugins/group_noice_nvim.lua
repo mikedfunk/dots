@@ -20,7 +20,7 @@ return {
       routes = {
         {
           filter = {
-            event = "msg_show",
+            event = "lsp",
             find = "snyk",
           },
           opts = { skip = true },

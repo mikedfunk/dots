@@ -47,8 +47,6 @@ return {
         --     enableTelemetry = "false",
         --     activateSnykCodeQuality = "true",
         --     organization = "leaf-saatchiart",
-        --     -- automaticAuthentication = "false",
-        --     -- authenticationMethod = "token",
         --   },
         -- },
         sqlls = {},

@@ -8,6 +8,14 @@ return {
           { "<Leader>U", "<Cmd>Telescope undo<CR>", desc = "Telescope Undo" },
         },
       },
+      -- {
+      --   "someone-stole-my-name/yaml-companion.nvim",
+      --   dependencies = {
+      --     "neovim/nvim-lspconfig",
+      --     "nvim-lua/plenary.nvim",
+      --   },
+      --   config = true,
+      -- },
     },
     opts = function(_, opts)
       opts.extensions = vim.tbl_deep_extend("force", opts.extensions or {}, {
@@ -35,6 +43,7 @@ return {
       })
 
       require("telescope").load_extension("undo")
+      -- require("telescope").load_extension("yaml_schema")
     end,
   },
 }
