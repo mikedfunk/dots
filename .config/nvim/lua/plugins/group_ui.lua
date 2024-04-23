@@ -41,31 +41,6 @@ return {
     },
   },
   {
-    "folke/noice.nvim",
-    opts = {
-      ---@type NoicePresets
-      presets = {
-        lsp_doc_border = true,
-      },
-      ---@class NoiceConfigViews
-      -- views = {
-      --   notify = {
-      --     backend = "notify_send",
-      --   },
-      -- },
-      -- https://github.com/folke/noice.nvim/discussions/364
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            find = "snyk",
-          },
-          opts = { skip = true },
-        },
-      },
-    },
-  },
-  {
     "folke/tokyonight.nvim",
     ---@type Config
     opts = {

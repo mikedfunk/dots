@@ -41,4 +41,37 @@ return {
       { "<leader>gb", "<Cmd>BlameToggle<CR>", noremap = true, desc = "Toggle Blame" },
     },
   },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    lazy = false,
+    keys = {
+      { "<Leader>gxo", "<Plug>(git-conflict-ours)", desc = "Resolve ours conflict" },
+      { "<Leader>gxt", "<Plug>(git-conflict-theirs)", desc = "Resolve theirs conflict" },
+      { "<Leader>gxb", "<Plug>(git-conflict-both)", desc = "Resolve both conflict" },
+      { "<Leader>gxn", "<Plug>(git-conflict-none)", desc = "Resolve none conflict" },
+      { "<Leader>gxq", "<Cmd>GitConflictListQf<CR>", desc = "List conflicts" },
+      { "]x", "<Plug>(git-conflict-prev-conflict)", desc = "Previous conflict" },
+      { "[x", "<Plug>(git-conflict-next-conflict)", desc = "Next conflict" },
+    },
+    opts = {
+      default_mappings = false,
+      disable_diagnostics = true,
+      list_opener = "Trouble quickfix",
+    },
+    -- opts = function(_, opts)
+    --   vim.api.nvim_create_autocmd("User", {
+    --     group = vim.api.nvim_create_augroup("git_conflict", { clear = true }),
+    --     pattern = "GitConflictDetected",
+    --     command = "GitConflictListQf",
+    --     desc = "List conflicts",
+    --   })
+    --
+    --   return vim.tbl_deep_extend("force", opts, {
+    --     default_mappings = false,
+    --     disable_diagnostics = true,
+    --     -- list_opener = "Trouble quickfix",
+    --   })
+    -- end,
+  },
 }

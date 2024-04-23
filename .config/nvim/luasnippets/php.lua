@@ -1,12 +1,12 @@
 -- vim:set foldmethod=marker:
 local luasnip = require("luasnip")
-local snippet = luasnip.snippet
-local text_node = luasnip.text_node
-local insert_node = luasnip.insert_node
-local function_node = luasnip.function_node
-local lambda_node = require("luasnip.extras").lambda
-local choice_node = luasnip.choice_node
-local repeat_node = require("luasnip.extras").rep
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+local f = luasnip.function_node
+local l = require("luasnip.extras").lambda
+local c = luasnip.choice_node
+local r = require("luasnip.extras").rep
 
 -- helpers {{{
 ---@param filepath string
@@ -43,155 +43,155 @@ end
 -- }}}
 
 -- class {{{
-local class_snippet = snippet({ trig = "cla", name = "PHP Class", dscr = "Mike's class with namespace" }, {
-  text_node({
+local class_snippet = s({ trig = "cla", name = "PHP Class", dscr = "Mike's class with namespace" }, {
+  t({
     "<?php",
     "",
     "declare(strict_types=1);",
     "",
     "",
   }),
-  function_node(function(_, snip)
+  f(function(_, snip)
     local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return "namespace " .. namespace .. ";"
   end, {}),
-  text_node({ "", "", "" }),
-  choice_node(1, {
-    text_node("final "),
-    text_node(""),
+  t({ "", "", "" }),
+  c(1, {
+    t("final "),
+    t(""),
   }),
-  function_node(function(_, snip)
+  f(function(_, snip)
     local class_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
     return "class " .. class_name
   end, {}),
-  text_node({ "", "{", "    " }),
-  insert_node(0),
-  text_node({ "", "}" }),
+  t({ "", "{", "    " }),
+  i(0),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- controller {{{
-local controller_snippet = snippet({ trig = "cntr", name = "PHP Class", dscr = "Mike's controller" }, {
-  text_node({
+local controller_snippet = s({ trig = "cntr", name = "PHP Class", dscr = "Mike's controller" }, {
+  t({
     "<?php",
     "",
     "declare(strict_types=1);",
     "",
     "",
   }),
-  function_node(function(_, snip)
+  f(function(_, snip)
     local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return "namespace " .. namespace .. ";"
   end, {}),
-  text_node({ "", "", "" }),
-  text_node({ "use Illuminate\\Http\\JsonResponse;", "" }),
-  text_node({ "use Palette\\Http\\Controllers\\Controller;", "" }),
-  text_node({ "", "" }),
-  function_node(function(_, snip)
+  t({ "", "", "" }),
+  t({ "use Illuminate\\Http\\JsonResponse;", "" }),
+  t({ "use Palette\\Http\\Controllers\\Controller;", "" }),
+  t({ "", "" }),
+  f(function(_, snip)
     local class_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
     return "final class " .. class_name .. " extends Controller"
   end, {}),
-  text_node({ "", "{", "    " }),
-  insert_node(0),
-  text_node({ "", "}" }),
+  t({ "", "{", "    " }),
+  i(0),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- artisan command {{{
-local artisan_snippet = snippet(
+local artisan_snippet = s(
   { trig = "art", name = "Laravel artisan command", dscr = "Laravel artisan command with namespace" },
   {
-    text_node({
+    t({
       "<?php",
       "",
       "declare(strict_types=1);",
       "",
       "",
     }),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
       return "namespace " .. namespace .. ";"
     end, {}),
-    text_node({ "", "", "" }),
-    text_node({ "use Illuminate\\Console\\Command;" }),
-    text_node({ "", "", "" }),
-    function_node(function(_, snip)
+    t({ "", "", "" }),
+    t({ "use Illuminate\\Console\\Command;" }),
+    t({ "", "", "" }),
+    f(function(_, snip)
       local class_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
       return "class " .. class_name .. " extends Command"
     end, {}),
-    text_node({ "", "{", "    " }),
-    text_node({ "/** @inheritDoc */", "    protected $signature = '" }),
-    insert_node(1, "one-timers:do-something"),
-    text_node({ " {--dry-run}';", "", "" }),
-    text_node({ "    /** @inheritDoc */", "    protected $description = '" }),
-    insert_node(2, "Does something"),
-    text_node({ "';", "", "" }),
-    text_node({ "    /** @inheritDoc */", "" }),
-    text_node({ "    public function handle()", "    {", "" }),
-    text_node({
+    t({ "", "{", "    " }),
+    t({ "/** @inheritDoc */", "    protected $signature = '" }),
+    i(1, "one-timers:do-something"),
+    t({ " {--dry-run}';", "", "" }),
+    t({ "    /** @inheritDoc */", "    protected $description = '" }),
+    i(2, "Does something"),
+    t({ "';", "", "" }),
+    t({ "    /** @inheritDoc */", "" }),
+    t({ "    public function handle()", "    {", "" }),
+    t({
       "        if ($this->option('dry-run')) {",
       "            $this->info('Dry run only, no changes will be made');",
       "        }",
       "",
       "",
     }),
-    text_node({ "        " }),
-    insert_node(3),
-    text_node({ "", "    }" }),
-    text_node({ "", "}" }),
+    t({ "        " }),
+    i(3),
+    t({ "", "    }" }),
+    t({ "", "}" }),
   }
 )
 -- }}}
 
 -- interface {{{
-local interface_snippet = snippet({ trig = "inte", name = "PHP Interface", dscr = "Mike's interface with namespace" }, {
-  text_node({
+local interface_snippet = s({ trig = "inte", name = "PHP Interface", dscr = "Mike's interface with namespace" }, {
+  t({
     "<?php",
     "",
     "declare(strict_types=1);",
     "",
     "",
   }),
-  function_node(function(_, snip)
+  f(function(_, snip)
     local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
     return "namespace " .. namespace .. ";"
   end, {}),
-  text_node({ "", "", "" }),
-  function_node(function(_, snip)
+  t({ "", "", "" }),
+  f(function(_, snip)
     local interface_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
     return "interface " .. interface_name
   end, {}),
-  text_node({ "", "{", "    " }),
-  insert_node(0),
-  text_node({ "", "}" }),
+  t({ "", "{", "    " }),
+  i(0),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- phpunit class {{{
-local phpunit_class_snippet = snippet(
+local phpunit_class_snippet = s(
   { trig = "pucla", name = "PHPUnit Class", dscr = "Mike's phpunit class with namespace" },
   {
-    text_node({
+    t({
       "<?php",
       "",
       "declare(strict_types=1);",
       "",
       "",
     }),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
       return "namespace " .. namespace .. ";"
     end, {}),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
       return {
         "",
@@ -206,52 +206,52 @@ local phpunit_class_snippet = snippet(
         " * ",
       }
     end),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
       return "@see " .. class_under_test
     end, {}),
-    text_node({ "", " */", "" }),
-    function_node(function(_, snip)
+    t({ "", " */", "" }),
+    f(function(_, snip)
       local class_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
       return "class " .. class_name .. " extends TestCase"
     end, {}),
-    text_node({ "", "{" }),
-    text_node({ "", "    public function setUp(): void", "    {", "        " }),
-    insert_node(1),
-    text_node({ "", "    }", "" }),
-    text_node({ "", "    public function it_is_initializable(): void" }),
-    text_node({ "", "    {" }),
-    function_node(function(_, snip)
+    t({ "", "{" }),
+    t({ "", "    public function setUp(): void", "    {", "        " }),
+    i(1),
+    t({ "", "    }", "" }),
+    t({ "", "    public function it_is_initializable(): void" }),
+    t({ "", "    {" }),
+    f(function(_, snip)
       local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
 
       return { "", "        self::assertInstanceOf('" .. class_under_test .. "');" }
     end, {}),
-    text_node({ "", "    }" }),
-    insert_node(0),
-    text_node({ "", "}" }),
+    t({ "", "    }" }),
+    i(0),
+    t({ "", "}" }),
   }
 )
 -- }}}
 
 -- phpspec class {{{
-local phpspec_class_snippet = snippet(
+local phpspec_class_snippet = s(
   { trig = "pscla", name = "PhpSpec Class", dscr = "Mike's phpspec class with namespace" },
   {
-    text_node({
+    t({
       "<?php",
       "",
       "declare(strict_types=1);",
       "",
       "",
     }),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local namespace = get_namespace(snip.env.TM_FILEPATH, snip.env.TM_FILENAME)
 
       return "namespace " .. namespace .. ";"
     end, {}),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local class_under_test = get_class_under_test(snip.env.TM_FILEPATH)
       return {
         "",
@@ -266,28 +266,28 @@ local phpspec_class_snippet = snippet(
         " * ",
       }
     end),
-    function_node(function(_, snip)
+    f(function(_, snip)
       local class_under_test = string.gsub(snip.env.TM_FILENAME, "Spec.php", "")
 
       return "@see " .. class_under_test
     end, {}),
-    text_node({ "", " */", "" }),
-    function_node(function(_, snip)
+    t({ "", " */", "" }),
+    f(function(_, snip)
       local class_name = string.gsub(snip.env.TM_FILENAME, ".php", "")
 
       return "final class " .. class_name .. " extends ObjectBehavior"
     end, {}),
-    text_node({ "", "{" }),
-    text_node({ "", "    public function it_is_initializable(): void" }),
-    text_node({ "", "    {" }),
-    function_node(function(_, snip)
+    t({ "", "{" }),
+    t({ "", "    public function it_is_initializable(): void" }),
+    t({ "", "    {" }),
+    f(function(_, snip)
       local class_under_test = string.gsub(snip.env.TM_FILENAME, "Spec.php", "")
 
       return { "", "        $this->shouldHaveType(" .. class_under_test .. "::class);" }
     end, {}),
-    text_node({ "", "    }" }),
-    insert_node(0),
-    text_node({ "", "}" }),
+    t({ "", "    }" }),
+    i(0),
+    t({ "", "}" }),
   }
 )
 -- }}}
@@ -305,11 +305,8 @@ public function it_${1:does_something}($2): void
 )
 -- }}}
 
-local strict_types_snippet = snippet(
-  { trig = "dst", name = "Strict Types" },
-  { text_node({ "", "declare(strict_types=1);" }) }
-)
-local inherit_doc_snippet = snippet({ trig = "id", name = "Inherit Doc" }, { text_node({ "", "/** @inheritDoc */" }) })
+local strict_types_snippet = s({ trig = "dst", name = "Strict Types" }, { t({ "", "declare(strict_types=1);" }) })
+local inherit_doc_snippet = s({ trig = "id", name = "Inherit Doc" }, { t({ "", "/** @inheritDoc */" }) })
 local palette_log_snippet = luasnip.parser.parse_snippet(
   { trig = "plg", name = "Palette Log" },
   '\\Log::debug("$1");',
@@ -327,171 +324,171 @@ local zed_log_snippet = luasnip.parser.parse_snippet(
 )
 
 -- assign {{{
-local assign_snippet = snippet({ trig = "asn", name = "Assign Class Property" }, {
-  text_node("$this->"),
-  insert_node(1, "prop"),
-  text_node(" = $"),
-  repeat_node(1),
-  text_node(";"),
+local assign_snippet = s({ trig = "asn", name = "Assign Class Property" }, {
+  t("$this->"),
+  i(1, "prop"),
+  t(" = $"),
+  r(1),
+  t(";"),
 })
 -- }}}
 
 -- arg {{{
-local argument_snippet = snippet({ trig = "arg", name = "Function Argument" }, {
-  text_node(""),
-  insert_node(1, "MyClass"),
-  text_node(" $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 1),
+local argument_snippet = s({ trig = "arg", name = "Function Argument" }, {
+  t(""),
+  i(1, "MyClass"),
+  t(" $"),
+  l(l._1:gsub("%a", string.lower, 1), 1),
 })
 -- }}}
 
 -- var {{{
-local class_var_snippet = snippet({ trig = "va", name = "Class Property" }, {
-  choice_node(1, {
-    text_node("private"),
-    text_node("protected"),
-    text_node("public"),
+local class_var_snippet = s({ trig = "va", name = "Class Property" }, {
+  c(1, {
+    t("private"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" "),
-  insert_node(2, "MyClass"),
-  text_node(" $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node({ ";" }),
+  t(" "),
+  i(2, "MyClass"),
+  t(" $"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t({ ";" }),
 })
 -- }}}
 
 -- jd {{{
-local json_decode_snippet = snippet({ trig = "json_decode", name = "Json Decode" }, {
-  text_node("\\json_decode("),
-  insert_node(1, ""),
-  text_node(", true, 512, \\JSON_THROW_ON_ERROR);"),
+local json_decode_snippet = s({ trig = "json_decode", name = "Json Decode" }, {
+  t("\\json_decode("),
+  i(1, ""),
+  t(", true, 512, \\JSON_THROW_ON_ERROR);"),
 })
 -- }}}
 
 -- const {{{
-local constant_snippet = snippet({ trig = "cnst", name = "Constant" }, {
-  choice_node(1, {
-    text_node("private"),
-    text_node("protected"),
-    text_node("public"),
+local constant_snippet = s({ trig = "cnst", name = "Constant" }, {
+  c(1, {
+    t("private"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" const "),
-  insert_node(2, "MY_CONST"),
-  text_node(" = "),
-  insert_node(3, "'my value'"),
-  text_node({ ";" }),
+  t(" const "),
+  i(2, "MY_CONST"),
+  t(" = "),
+  i(3, "'my value'"),
+  t({ ";" }),
 })
 -- }}}
 
 -- cstr {{{
-local constructor_snippet = snippet({ trig = "cstr", name = "Constructor" }, {
-  text_node({ "", "" }),
-  choice_node(1, {
-    text_node("public"),
-    text_node("protected"),
-    text_node("public"),
+local constructor_snippet = s({ trig = "cstr", name = "Constructor" }, {
+  t({ "", "" }),
+  c(1, {
+    t("public"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" function __construct("),
-  text_node({ "", "" }),
-  text_node("    "),
-  insert_node(2, "MyClass"),
-  text_node(" $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node({ "", ") {", "" }),
-  text_node("    "),
-  text_node("$this->"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node(" = $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node(";"),
-  text_node({ "", "}" }),
+  t(" function __construct("),
+  t({ "", "" }),
+  t("    "),
+  i(2, "MyClass"),
+  t(" $"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t({ "", ") {", "" }),
+  t("    "),
+  t("$this->"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t(" = $"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t(";"),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- let {{{
-local let_snippet = snippet({ trig = "let", name = "Phpspec Let" }, {
-  text_node(""),
-  text_node("public function let("),
-  text_node({ "", "" }),
-  text_node("    "),
-  insert_node(1, "MyClass"),
-  text_node(" $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 1),
-  text_node({ "", "): void {", "" }),
-  text_node("    "),
-  text_node("$this->beConstructedWith("),
-  text_node({ "", "        $" }),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 1),
-  text_node({ "", "    );" }),
-  text_node({ "", "}", "" }),
+local let_snippet = s({ trig = "let", name = "Phpspec Let" }, {
+  t(""),
+  t("public function let("),
+  t({ "", "" }),
+  t("    "),
+  i(1, "MyClass"),
+  t(" $"),
+  l(l._1:gsub("%a", string.lower, 1), 1),
+  t({ "", "): void {", "" }),
+  t("    "),
+  t("$this->beConstructedWith("),
+  t({ "", "        $" }),
+  l(l._1:gsub("%a", string.lower, 1), 1),
+  t({ "", "    );" }),
+  t({ "", "}", "" }),
 })
 -- }}}
 
 -- gtr {{{
-local getter_snippet = snippet({ trig = "gtr", name = "Getter" }, {
-  text_node({ "", "" }),
-  choice_node(1, {
-    text_node("public"),
-    text_node("protected"),
-    text_node("public"),
+local getter_snippet = s({ trig = "gtr", name = "Getter" }, {
+  t({ "", "" }),
+  c(1, {
+    t("public"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" function get"),
-  insert_node(2, "MyProperty"),
-  text_node("(): "),
-  insert_node(3, "string"),
-  text_node({ "", "" }),
-  text_node("    "),
-  text_node("return $this->"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node(";"),
-  text_node({ "", "}" }),
+  t(" function get"),
+  i(2, "MyProperty"),
+  t("(): "),
+  i(3, "string"),
+  t({ "", "" }),
+  t("    "),
+  t("return $this->"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t(";"),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- str {{{
-local setter_snippet = snippet({ trig = "str", name = "Setter" }, {
-  text_node({ "", "" }),
-  choice_node(1, {
-    text_node("public"),
-    text_node("protected"),
-    text_node("public"),
+local setter_snippet = s({ trig = "str", name = "Setter" }, {
+  t({ "", "" }),
+  c(1, {
+    t("public"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" function set"),
-  insert_node(2, "MyProperty"),
-  text_node("("),
-  insert_node(3, "string"),
-  text_node(" $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node("): void"),
-  text_node({ "", "{", "" }),
-  text_node("    "),
-  text_node("$this->"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node(" = $"),
-  lambda_node(lambda_node._1:gsub("%a", string.lower, 1), 2),
-  text_node(";"),
-  text_node({ "", "}" }),
+  t(" function set"),
+  i(2, "MyProperty"),
+  t("("),
+  i(3, "string"),
+  t(" $"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t("): void"),
+  t({ "", "{", "" }),
+  t("    "),
+  t("$this->"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t(" = $"),
+  l(l._1:gsub("%a", string.lower, 1), 2),
+  t(";"),
+  t({ "", "}" }),
 })
 -- }}}
 
 -- meth {{{
-local method_snippet = snippet({ trig = "meth", name = "Method" }, {
-  text_node({ "", "" }),
-  choice_node(1, {
-    text_node("public"),
-    text_node("protected"),
-    text_node("public"),
+local method_snippet = s({ trig = "meth", name = "Method" }, {
+  t({ "", "" }),
+  c(1, {
+    t("public"),
+    t("protected"),
+    t("public"),
   }),
-  text_node(" function "),
-  insert_node(2, "myMethod"),
-  text_node("("),
-  insert_node(3),
-  text_node("): "),
-  insert_node(4, "void"),
-  text_node({ "", "{", "" }),
-  text_node("    "),
-  insert_node(5),
-  text_node({ "", "}" }),
+  t(" function "),
+  i(2, "myMethod"),
+  t("("),
+  i(3),
+  t("): "),
+  i(4, "void"),
+  t({ "", "{", "" }),
+  t("    "),
+  i(5),
+  t({ "", "}" }),
 })
 -- }}}
 
