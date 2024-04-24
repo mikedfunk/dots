@@ -57,7 +57,7 @@ return {
   },
   {
     "mickael-menu/zk-nvim",
-    dependencies = { "folke/which-key.nvim" },
+    dependencies = { "folke/which-key.nvim", "nvim-treesitter/nvim-treesitter" },
     ft = "markdown",
     branch = "main",
     init = function()
@@ -85,14 +85,20 @@ return {
       -- vim.api.nvim_create_augroup('zk_conceal', { clear = true })
       -- vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'zk_conceal', callback = setup_zk_conceal })
     end,
-    config = function()
-      -- starts language server
-      require("zk").setup()
-    end,
+    config = true,
+    -- TODO:
+    -- require("nvim-treesitter.configs").setup({
+    --   -- ...
+    --   highlight = {
+    --     -- ...
+    --     additional_vim_regex_highlighting = { "markdown" }
+    --   },
+    -- })
   },
   {
     "wallpants/github-preview.nvim",
     ft = "markdown",
+    lazy = true,
     cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
     keys = {
       { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", noremap = true, desc = "Preview Markdown" },

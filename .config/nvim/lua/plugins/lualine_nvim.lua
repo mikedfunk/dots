@@ -10,7 +10,15 @@ return {
     table.insert(opts.sections.lualine_c, 2, git_diff_component)
     table.insert(opts.sections.lualine_x, 5, diagnostics_component)
 
-    opts.options.disabled_filetypes.winbar = { "dashboard", "lazy", "alpha" }
+    opts.options.disabled_filetypes.winbar = {
+      "DressingInput",
+      "TelescopePrompt",
+      "alpha",
+      "dashboard",
+      "lazy",
+      "lspinfo",
+      "starter",
+    }
 
     -- opts.winbar = {
     --   lualine_b = {
