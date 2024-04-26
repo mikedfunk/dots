@@ -31,9 +31,11 @@ return {
         docker_compose_language_service = {},
         -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
         dockerls = {},
+        emmet_language_server = {},
         flow = {
           cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
             or { "npx", "flow", "lsp" },
+          filetypes = { "javascript", "javascriptreact", "javascript.jsx" },
         },
         jsonls = {},
         lemminx = {},
@@ -200,6 +202,7 @@ return {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "editorconfig-checker",
+        "emmet-language-server",
         "gitlint",
         "isort",
         "json-lsp",

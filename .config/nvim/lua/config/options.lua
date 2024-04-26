@@ -20,6 +20,7 @@ vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
 vim.o.relativenumber = true -- relative line numbers
 vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
+vim.o.scrolloff = 15
 
 -- turn off relativenumber in insert mode and others {{{
 local norelative_events = { "InsertEnter", "WinLeave", "FocusLost" }

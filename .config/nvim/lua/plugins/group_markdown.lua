@@ -85,7 +85,11 @@ return {
       -- vim.api.nvim_create_augroup('zk_conceal', { clear = true })
       -- vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'zk_conceal', callback = setup_zk_conceal })
     end,
-    config = true,
+    -- opts or config = true will not work, it can't find the module
+    config = function()
+      -- starts language server
+      require("zk").setup()
+    end,
     -- TODO:
     -- require("nvim-treesitter.configs").setup({
     --   -- ...

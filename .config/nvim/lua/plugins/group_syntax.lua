@@ -4,4 +4,5 @@ return {
   { "aklt/plantuml-syntax", event = "VimEnter" },
   { "jwalton512/vim-blade", event = "VimEnter" },
   { "tpope/vim-cucumber", event = "VimEnter" },
+  { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
 }

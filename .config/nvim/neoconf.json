@@ -1,5 +1,11 @@
 {
   "lspconfig": {
+    "emmet_languagege_server": {
+      "include_languages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+      }
+    },
     "intelephense": {
       "environment": {
         "phpVersion": "7.4.7",

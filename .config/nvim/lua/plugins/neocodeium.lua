@@ -57,7 +57,7 @@ return {
         end,
         on_click = function()
           if package.loaded["neocodeium"] then
-            vim.cmd("Neocodeium toggle")
+            vim.cmd("NeoCodeium toggle")
           end
         end,
       }

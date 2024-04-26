@@ -135,54 +135,15 @@ return {
   { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
   { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   ---@type TailwindTools.Option
-  --   opts = {
-  --     document_color = { kind = "background" },
-  --     conceal = { enabled = true },
-  --   },
-  -- },
   {
-    -- what I like about this one is that it only enables when a tailwind LSP
-    -- is attached. It's also not buggy and simple - background color for the
-    -- document _only_.
-    "themaxmarchuk/tailwindcss-colors.nvim",
-    module = "tailwindcss-colors",
-    init = function()
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("tailwind_colors_lspattach", { clear = true }),
-        pattern = "*",
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-          -- if client and client.server_capabilities.colorProvider then
-          if client and client.name == "tailwindcss" then
-            require("tailwindcss-colors").buf_attach(args.buf)
-          end
-        end,
-      })
-    end,
+    "luckasRanarison/tailwind-tools.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ---@type TailwindTools.Option
+    opts = {
+      document_color = { kind = "background" }, -- or inline
+      conceal = { enabled = true },
+    },
   },
-  -- {
-  --   -- disabled because of https://github.com/mrshmllow/document-color.nvim/issues/2#issuecomment-1316637640
-  --   "mrshmllow/document-color.nvim",
-  --   module = "document-color",
-  --   init = function()
-  --     vim.api.nvim_create_autocmd("LspAttach", {
-  --       group = vim.api.nvim_create_augroup("document_color_lspattach", { clear = true }),
-  --       pattern = "*",
-  --       callback = function(args)
-  --         local client = vim.lsp.get_client_by_id(args.data.client_id)
-  --
-  --         if client and client.server_capabilities.colorProvider then
-  --           require("document-color").buf_attach(args.buf)
-  --         end
-  --       end,
-  --     })
-  --   end,
-  -- },
   {
     "nyngwang/NeoZoom.lua",
     cmd = { "NeoZoomToggle", "NeoZoom" },

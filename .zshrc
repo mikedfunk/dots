@@ -136,7 +136,8 @@ ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ro
 # }}}
 
 # source additional files and env vars {{{
-
+# for newsboat
+export BROWSER="open %u"
 export FLOX_DISABLE_METRICS=true
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
@@ -310,8 +311,6 @@ _has akamai && _evalcache akamai --zsh
 # functions and aliases {{{
 
 # misc {{{
-# alias news="BROWSER=\"echo '%u' | pbcopy\" newsboat" # when opening links, just copy to clipboard
-alias news="BROWSER=\"open '%u'\" newsboat"
 alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
