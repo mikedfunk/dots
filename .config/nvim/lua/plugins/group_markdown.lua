@@ -109,4 +109,12 @@ return {
     },
     opts = {},
   },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>m"] = { name = "Markdown" },
+      },
+    },
+  },
 }

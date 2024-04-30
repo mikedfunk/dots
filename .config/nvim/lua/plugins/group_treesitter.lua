@@ -56,8 +56,8 @@ return {
         enable = true,
         border = "rounded",
         peek_definition_code = {
-          ["<leader>pf"] = "@function.outer",
-          ["<leader>pc"] = "@class.outer",
+          ["<leader>Pf"] = "@function.outer",
+          ["<leader>Pc"] = "@class.outer",
         },
       },
 
@@ -80,6 +80,16 @@ return {
         swap_previous = { ["g<"] = "@parameter.inner" },
       },
       move = { set_jumps = true },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>P"] = { name = "Peek" },
+        ["g>"] = { name = "Swap Next" },
+        ["g<"] = { name = "Swap Previous" },
+      },
     },
   },
 }

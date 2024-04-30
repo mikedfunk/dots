@@ -340,7 +340,7 @@ mysql-web-server () {
 # tip: curl ping.gg to set up a pingdom-style alert
 shorten-url () { curl -s http://tinyurl.com/api-create.php?url=$1; }
 
-cd () { builtin cd "$@" && ls -FAG; } # auto ls on cd
+cd () { builtin cd "$@" && ls -F -A -G; } # auto ls on cd
 alias ..="cd .."
 alias ...="cd ../.."
 # _has lsd && alias ls="lsd" # fancy ls augmentation (disabled because it's missing flags that ls _has >:(  )
@@ -367,6 +367,13 @@ alias pc="phing -logger phing.listener.DefaultLogger"
 compdef pc="phing"
 alias pg="phing"
 compdef pg="phing"
+
+k9s () {
+    defaults read -g AppleInterfaceStyle &>/dev/null
+    local skin_file=$([ $? -eq 0 ] && echo "$HOME/.config/k9s/skins/skin_dark.yaml" || echo "$HOME/.config/k9s/skins/skin_light.yaml")
+    command cp "$skin_file" "$HOME/.config/k9s/skins/skin.yaml"
+    command k9s $@
+}
 
 alias y="yadm"
 compdef y="yadm"

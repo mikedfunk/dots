@@ -193,4 +193,23 @@ return {
       show_cursorline = true, -- Enable 'cursorline' for the window while peeking
     },
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      {
+        "eldritch-theme/eldritch.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+      },
+    },
+    opts = {
+      options = { theme = "eldritch" },
+    },
+  },
+  {
+    "LazyVim/LazyVim",
+    dependencies = { "eldritch-theme/eldritch.nvim" },
+    opts = { colorscheme = "eldritch" },
+  },
 }

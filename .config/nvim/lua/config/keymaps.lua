@@ -30,3 +30,6 @@ end, { noremap = true, desc = "Toggle Quickfix" })
 
 vim.keymap.set("n", "[B", "<Cmd>BufferLineMovePrev<CR>", { noremap = true, desc = "Move Buffer Left" })
 vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc = "Move Buffer Right" })
+
+vim.keymap.del("n", "H")
+vim.keymap.del("n", "L")
