@@ -56,6 +56,7 @@ return {
         lsp_interop = {
           enable = true,
           border = "rounded",
+          -- TODO: Can't seem to which-key this
           peek_definition_code = {
             ["<leader>Pf"] = "@function.outer",
             ["<leader>Pc"] = "@class.outer",
@@ -77,20 +78,11 @@ return {
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
         swap = {
           enable = true,
+          -- TODO: Can't seem to which-key this
           swap_next = { ["g>"] = "@parameter.inner" },
           swap_previous = { ["g<"] = "@parameter.inner" },
         },
         move = { set_jumps = true },
-      },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>P"] = { name = "Peek" },
-        ["g>"] = { name = "Swap Next" },
-        ["g<"] = { name = "Swap Previous" },
       },
     },
   },

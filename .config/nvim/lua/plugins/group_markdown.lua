@@ -74,11 +74,11 @@ return {
       require("which-key").register({
         z = {
           name = "Zettelkasten",
-          s = { ":'<,'>ZkMatch<CR>", "Search" },
+          s = { "<cmd>'<,'>ZkMatch<CR>", "Search" },
           -- t = { ":'<,'>ZkNewFromTitleSelection { dir = 'general' }<CR>", 'New from Title' },
-          t = { ":'<,'>ZkNewFromTitleSelection<CR>", "New from Title" },
+          t = { "<cmd>'<,'>ZkNewFromTitleSelection<CR>", "New from Title" },
           -- c = { ":'<,'>ZkNewFromContentSelection { dir = 'general' }<CR>", 'New from Content' },
-          c = { ":'<,'>ZkNewFromContentSelection<CR>", "New from Content" },
+          c = { "<cmd>'<,'>ZkNewFromContentSelection<CR>", "New from Content" },
         },
       }, { prefix = "<leader>", mode = "v" })
 
@@ -102,19 +102,15 @@ return {
   {
     "wallpants/github-preview.nvim",
     ft = "markdown",
-    lazy = true,
     cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
     keys = {
       { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", noremap = true, desc = "Preview Markdown" },
     },
+    init = function()
+      require("which-key").register({
+        m = { name = "Markdown" },
+      }, { prefix = "<leader>" })
+    end,
     opts = {},
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>m"] = { name = "Markdown" },
-      },
-    },
   },
 }
