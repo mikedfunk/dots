@@ -24,24 +24,17 @@ return {
       --   root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
       -- })
 
+      -- NOTE: This is only needed if you need to change options or you are
+      -- using a local version of a language server. If it's installed with
+      -- Mason, ensure_installed below is enough.
+      -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
-        biome = {}, -- https://github.com/biomejs/biome/discussions/87#discussioncomment-6891432
-        cssls = {},
-        -- cucumber_language_server = {}, -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
-        docker_compose_language_service = {},
-        -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
-        dockerls = {},
-        emmet_language_server = {},
         flow = {
           cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
             or { "npx", "flow", "lsp" },
           filetypes = { "javascript", "javascriptreact", "javascript.jsx" },
         },
-        jsonls = {},
-        lemminx = {},
-        -- nginx_language_server = {},
         phpactor = { enabled = false },
-        ruff_lsp = {},
         -- snyk_ls = {
         --   init_options = {
         --     token = os.getenv("SNYK_TOKEN"),
@@ -51,18 +44,15 @@ return {
         --     organization = "leaf-saatchiart",
         --   },
         -- },
-        sqlls = {},
         tailwindcss = {
           -- https://www.reddit.com/r/neovim/comments/1c784zq/tailwindcss_unusable_inotify_max_events_does/l068l30/
           -- capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = false } } },
           root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
         },
-        taplo = {},
         tsserver = {
           root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
           single_file_support = false,
         },
-        yamlls = {},
       })
     end,
   },

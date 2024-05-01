@@ -95,7 +95,7 @@ return {
     "mvllow/modes.nvim",
     event = "VeryLazy",
     opts = {
-      ignored_filetypes = {
+      ignore_filetypes = {
         "DressingInput",
         "TelescopePrompt",
         "alpha",
@@ -154,6 +154,7 @@ return {
   },
   { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
   { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
+  { "nvim-zh/colorful-winsep.nvim", event = "WinNew", config = true },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
   {
     "luckasRanarison/tailwind-tools.nvim",
@@ -176,14 +177,20 @@ return {
     -- enabled in lazy.lua. It just tweaks the timing.
     "echasnovski/mini.animate",
     opts = function(_, opts)
+      -- speed it up
       opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
       opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
     end,
   },
   {
-    "nvim-zh/colorful-winsep.nvim",
-    event = { "WinNew" },
-    config = true,
+    "echasnovski/mini.indentscope",
+    opts = {
+      draw = {
+        -- speed it up
+        delay = 50,
+        animation = require("mini.indentscope").gen_animation.cubic({ duration = 70, unit = "total" }),
+      },
+    },
   },
   {
     "anuvyklack/fold-preview.nvim",
@@ -227,6 +234,14 @@ return {
   --     options = { theme = "eldritch" },
   --   },
   -- },
+  {
+    "haringsrob/nvim_context_vt",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      prefix = "↩ ",
+    },
+  },
   {
     "LazyVim/LazyVim",
     dependencies = { "eldritch-theme/eldritch.nvim" },
