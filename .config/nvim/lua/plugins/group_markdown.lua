@@ -61,6 +61,7 @@ return {
     ft = "markdown",
     branch = "main",
     init = function()
+      -- TODO: move this to keys
       require("which-key").register({
         z = {
           name = "Zettelkasten",
@@ -101,16 +102,17 @@ return {
   },
   {
     "wallpants/github-preview.nvim",
+    dependencies = {
+      {
+        "folke/which-key.nvim",
+        opts = { defaults = { ["<leader>m"] = { name = "+markdown" } } },
+      },
+    },
     ft = "markdown",
     cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
     keys = {
       { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", noremap = true, desc = "Preview Markdown" },
     },
-    init = function()
-      require("which-key").register({
-        m = { name = "Markdown" },
-      }, { prefix = "<leader>" })
-    end,
     opts = {},
   },
 }

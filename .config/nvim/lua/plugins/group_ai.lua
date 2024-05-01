@@ -69,12 +69,13 @@ return {
   },
   {
     "Bryley/neoai.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    init = function()
-      require("which-key").register({
-        a = { name = "AI" },
-      }, { prefix = "<leader>" })
-    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "folke/which-key.nvim",
+        opts = { defaults = { ["<leader>a"] = { name = "+ai" } } },
+      },
+    },
     -- expects OPENAI_API_KEY env var to be set
     opts = {
       models = {
@@ -103,14 +104,6 @@ return {
       { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
       { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
       { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>a"] = { name = "AI" },
-      },
     },
   },
 }
