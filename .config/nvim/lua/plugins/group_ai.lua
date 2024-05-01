@@ -9,6 +9,7 @@ return {
           silent = true,
         },
         keys = {
+          { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
             "<c-g>",
             function()

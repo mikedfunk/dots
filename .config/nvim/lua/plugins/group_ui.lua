@@ -9,14 +9,17 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    opts = {},
+    keys = {
+      { "<leader>uz", "<Cmd>Twilight<CR>", noremap = true, desc = "Twilight" },
+    },
+    config = true,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       filesystem = {
         filtered_items = {
-          visible = true,
+          -- visible = true,
           hide_dotfiles = false,
         },
       },
@@ -73,7 +76,7 @@ return {
   },
   {
     "cormacrelf/dark-notify",
-    config = function()
+    config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
         onchange = function()
           vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
@@ -139,10 +142,11 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
-  { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
   { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   { "nvim-zh/colorful-winsep.nvim", event = "WinNew", config = true },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
+  -- { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
+  { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
   {
     "luckasRanarison/tailwind-tools.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
