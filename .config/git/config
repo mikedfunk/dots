@@ -190,7 +190,7 @@
     prc = "!gh pr create"
     # PR fuzzy search
     prf = "!f() { gh pr list | fzf | head -n 1 | cut -c 1- | awk '{print $1}' | xargs hub pr show; }; f"
-    pro = "!hub pr show"
+    pro = "!gh pr view --web"
     ps = push
     # pull and update submodules... i hate submodules...
     pup = !git pull --recurse-submodules && git submodule update
