@@ -315,7 +315,7 @@ _has akamai && _evalcache akamai --zsh
 alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
-alias mycli="mycli --defaults-group-suffix=_mycli"
+alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt config option stopped working :/
 alias k="kubectl"
 compdef k="kubectl"
 

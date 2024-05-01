@@ -158,6 +158,7 @@ return {
     keys = {
       { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
     },
+    opts = {},
   },
   {
     -- this expects the extra lazyvim.plugins.extras.ui.mini-animate to be
@@ -229,6 +230,7 @@ return {
       prefix = "↩ ",
     },
   },
+  { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
   {
     "LazyVim/LazyVim",
     dependencies = { "eldritch-theme/eldritch.nvim" },

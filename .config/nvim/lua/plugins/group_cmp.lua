@@ -121,6 +121,7 @@ return {
         rg = "",
         tmux = "",
         treesitter = "",
+        ["vim-dadbod-completion"] = "",
         vsnip = "✄",
         zk = "",
       })
