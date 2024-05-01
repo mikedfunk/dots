@@ -213,4 +213,12 @@ return {
     },
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
+  {
+    "Wansmer/symbol-usage.nvim",
+    event = "LspAttach", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    opts = {
+      ---@type 'above'|'end_of_line'|'textwidth'|'signcolumn' `above` by default
+      vt_position = "end_of_line",
+    },
+  },
 }

@@ -237,7 +237,11 @@ return {
   { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
   {
     "LazyVim/LazyVim",
-    dependencies = { "eldritch-theme/eldritch.nvim" },
+    -- dependencies = {
+    --   "RRethy/base16-nvim",
+    --   "eldritch-theme/eldritch.nvim",
+    --   { "mawkler/modicator.nvim", dependencies = { "folke/tokyonight.nvim" }, opts = {} },
+    -- },
     opts = { colorscheme = "tokyonight" },
   },
 }
