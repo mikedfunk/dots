@@ -40,18 +40,8 @@ return {
       })
     end,
   },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      window = { border = "rounded" },
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      ui = { border = "rounded" },
-    },
-  },
+  { "folke/which-key.nvim", opts = { window = { border = "rounded" } } },
+  { "LazyVim/LazyVim", opts = { ui = { border = "rounded" } } },
   {
     "folke/tokyonight.nvim",
     ---@type Config
@@ -106,10 +96,7 @@ return {
       },
     },
   },
-  {
-    "itchyny/vim-highlighturl",
-    event = "VeryLazy",
-  },
+  { "itchyny/vim-highlighturl", event = "VeryLazy" },
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
@@ -245,7 +232,6 @@ return {
   {
     "LazyVim/LazyVim",
     dependencies = { "eldritch-theme/eldritch.nvim" },
-    -- opts = { colorscheme = "eldritch" },
     opts = { colorscheme = "tokyonight" },
   },
 }

@@ -57,39 +57,42 @@ return {
   },
   {
     "mickael-menu/zk-nvim",
-    dependencies = { "folke/which-key.nvim", "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "folke/which-key.nvim",
+        opts = { defaults = { ["<leader>z"] = { name = "+zettelkasten" } } },
+      },
+      "nvim-treesitter/nvim-treesitter",
+    },
     ft = "markdown",
     branch = "main",
-    init = function()
-      -- TODO: move this to keys
-      require("which-key").register({
-        z = {
-          name = "Zettelkasten",
-          n = { '<Cmd>ZkNew { title = vim.fn.input("Title: ") }<CR>', "New" },
-          o = { '<Cmd>ZkNotes { sort = { "modified" } }<CR>', "Open" },
-          t = { "<Cmd>ZkTags<CR>", "Tags" },
-          s = { '<Cmd>ZkNotes { sort = { "modified" }, match = vim.fn.input("Search: ") }<CR>', "Search" },
-        },
-      }, { prefix = "<leader>" })
+    keys = {
+      { "<leader>zn", '<Cmd>ZkNew { title = vim.fn.input("Title: ") }<CR>', noremap = true, desc = "New" },
+      { "<leader>zo", '<Cmd>ZkNotes { sort = { "modified" } }<CR>', noremap = true, desc = "Open" },
+      { "<leader>zt", "<Cmd>ZkTags<CR>", noremap = true, desc = "Tags" },
+      {
+        "<leader>zs",
+        '<Cmd>ZkNotes { sort = { "modified" }, match = vim.fn.input("Search: ") }<CR>',
+        noremap = true,
+        desc = "Search",
+      },
 
-      require("which-key").register({
-        z = {
-          name = "Zettelkasten",
-          s = { "<cmd>'<,'>ZkMatch<CR>", "Search" },
-          -- t = { ":'<,'>ZkNewFromTitleSelection { dir = 'general' }<CR>", 'New from Title' },
-          t = { "<cmd>'<,'>ZkNewFromTitleSelection<CR>", "New from Title" },
-          -- c = { ":'<,'>ZkNewFromContentSelection { dir = 'general' }<CR>", 'New from Content' },
-          c = { "<cmd>'<,'>ZkNewFromContentSelection<CR>", "New from Content" },
-        },
-      }, { prefix = "<leader>", mode = "v" })
-
-      -- vim.api.nvim_create_augroup('zk_conceal', { clear = true })
-      -- vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', group = 'zk_conceal', callback = setup_zk_conceal })
-    end,
+      { "<leader>zs", "<cmd>'<,'>ZkMatch<CR>", noremap = true, desc = "Search", mode = "v" },
+      { "<leader>zt", "<cmd>'<,'>ZkNewFromTitleSelection<CR>", noremap = true, desc = "New from Title", mode = "v" },
+      {
+        "<leader>zc",
+        "<cmd>'<,'>ZkNewFromContentSelection<CR>",
+        noremap = true,
+        desc = "New from Content",
+        mode = "v",
+      },
+    },
     -- opts or config = true will not work, it can't find the module
     config = function()
       -- starts language server
-      require("zk").setup()
+      require("zk").setup({
+        picker = "telescope",
+      })
     end,
     -- TODO:
     -- require("nvim-treesitter.configs").setup({
