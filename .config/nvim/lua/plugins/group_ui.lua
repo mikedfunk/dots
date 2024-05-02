@@ -27,37 +27,38 @@ return {
     },
     -- try to force reveal the current file, which is buggy as hell. This makes
     -- it slightly more likely to work.
-    keys = function(_, keys)
-      for k, key in ipairs(keys) do
-        if key[1] == "<leader>fe" then
-          keys[k] = {
-            "<leader>fe",
-            function()
-              require("neo-tree.command").execute({
-                toggle = true,
-                reveal = true, -- added
-                dir = LazyVim.root(),
-              })
-            end,
-            desc = "Explorer NeoTree (Root Dir)",
-          }
-        end
-
-        if key[1] == "<leader>fE" then
-          keys[k] = {
-            "<leader>fE",
-            function()
-              require("neo-tree.command").execute({
-                toggle = true,
-                reveal = true, -- added
-                dir = vim.uv.cwd(),
-              })
-            end,
-            desc = "Explorer NeoTree (cwd)",
-          }
-        end
-      end
-    end,
+    -- EDIT: no it doesn't, it tries to cd to the dir above the current file
+    -- keys = function(_, keys)
+    --   for k, key in ipairs(keys) do
+    --     if key[1] == "<leader>e" then
+    --       keys[k] = {
+    --         "<leader>e",
+    --         function()
+    --           require("neo-tree.command").execute({
+    --             toggle = true,
+    --             reveal = true, -- added
+    --             dir = LazyVim.root(),
+    --           })
+    --         end,
+    --         desc = "Explorer NeoTree (Root Dir)",
+    --       }
+    --     end
+    --
+    --     if key[1] == "<leader>E" then
+    --       keys[k] = {
+    --         "<leader>E",
+    --         function()
+    --           require("neo-tree.command").execute({
+    --             toggle = true,
+    --             reveal = true, -- added
+    --             dir = vim.uv.cwd(),
+    --           })
+    --         end,
+    --         desc = "Explorer NeoTree (cwd)",
+    --       }
+    --     end
+    --   end
+    -- end,
   },
   {
     "akinsho/bufferline.nvim",
