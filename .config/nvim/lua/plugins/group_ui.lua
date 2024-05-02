@@ -5,7 +5,8 @@ return {
   --   branch = "main",
   --   config = true,
   -- },
-  { "SmiteshP/nvim-navic", opts = { separator = "  " } },
+  -- { "SmiteshP/nvim-navic", opts = { separator = "  " } },
+  -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
@@ -24,6 +25,39 @@ return {
         },
       },
     },
+    -- try to force reveal the current file, which is buggy as hell. This makes
+    -- it slightly more likely to work.
+    keys = function(_, keys)
+      for k, key in ipairs(keys) do
+        if key[1] == "<leader>fe" then
+          keys[k] = {
+            "<leader>fe",
+            function()
+              require("neo-tree.command").execute({
+                toggle = true,
+                reveal = true, -- added
+                dir = LazyVim.root(),
+              })
+            end,
+            desc = "Explorer NeoTree (Root Dir)",
+          }
+        end
+
+        if key[1] == "<leader>fE" then
+          keys[k] = {
+            "<leader>fE",
+            function()
+              require("neo-tree.command").execute({
+                toggle = true,
+                reveal = true, -- added
+                dir = vim.uv.cwd(),
+              })
+            end,
+            desc = "Explorer NeoTree (cwd)",
+          }
+        end
+      end
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -234,6 +268,7 @@ return {
       prefix = "↩ ",
     },
   },
+  { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
   {
     "LazyVim/LazyVim",

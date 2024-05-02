@@ -9,7 +9,7 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 -- https://github.com/luukvbaal/stabilize.nvim
 vim.o.splitkeep = "screen"
 
-vim.o.spellfile = vim.fn.expand("~/.config/nvim/spell/en.utf-8.add") -- this is necessary because nvim-treesitter is first in the runtimepath
+vim.o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add" -- this is necessary because nvim-treesitter is first in the runtimepath
 vim.o.spelloptions = table.concat({
   "noplainbuffer",
   "camel",

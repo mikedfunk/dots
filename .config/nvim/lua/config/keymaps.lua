@@ -33,3 +33,11 @@ vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc 
 
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
+
+-- vim.keymap.set("n", "<leader>fe", function()
+--   if vim.bo.filetype == "neo-tree" then
+--     vim.cmd("norm q")
+--   else
+--     vim.cmd("Neotree reveal_file=%")
+--   end
+-- end, { remap = true, desc = "Explorer NeoTree (Root dir)" })

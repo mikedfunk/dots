@@ -174,6 +174,9 @@ return {
   },
   {
     "williamboman/mason.nvim",
+    -- dependencies = {
+    --   { "zapling/mason-lock.nvim", config = true }, -- doesn't work - error
+    -- },
     opts = {
       ui = {
         border = "rounded",
@@ -213,12 +216,5 @@ return {
     },
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
-  {
-    "Wansmer/symbol-usage.nvim",
-    event = "LspAttach", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-    opts = {
-      ---@type 'above'|'end_of_line'|'textwidth'|'signcolumn' `above` by default
-      vt_position = "end_of_line",
-    },
-  },
+  -- { "Wansmer/symbol-usage.nvim", event = "LspAttach", opts = { vt_position = "end_of_line" } }, -- buggy - breaks on dropbar
 }
