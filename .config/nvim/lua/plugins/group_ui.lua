@@ -17,48 +17,77 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      filesystem = {
-        filtered_items = {
-          -- visible = true,
-          hide_dotfiles = false,
+    -- trying switching back to good old nerd-tree instead
+    enabled = false,
+    -- opts = { filesystem = { filtered_items = { hide_dotfiles = false } } },
+  },
+  -- Q: ARE YOU CRAZY? NERDTREE INSTEAD OF NEO-TREE?
+  -- A: STOP YELLING. Neo-tree has a nasty bug where it won't focus on the
+  -- current file in "large" directories. In my case it's all of them. My only
+  -- workaround is to switch back to the buffer, then switch back to neo-tree.
+  -- This is a pain when I'm in a right split. I also had bugs with nvim-tree,
+  -- so I'm going old-school and using NERDTree for now.
+  {
+    "preservim/nerdtree",
+    dependencies = {
+      {
+        "folke/edgy.nvim",
+        opts = {
+          left = {
+            { ft = "nerdtree", title = "NerdTree" },
+          },
         },
       },
+      -- this shit is all too slow, I have a need for speed
+      -- {
+      --   "tiagofumo/vim-nerdtree-syntax-highlight",
+      --   init = function()
+      --     -- https://github.com/tiagofumo/vim-nerdtree-syntax-highlight?tab=readme-ov-file#mitigating-lag-issues
+      --     -- vim.g.NERDTreeLimitedSyntax = 1
+      --     vim.g.NERDTreeSyntaxDisableDefaultExtensions = 1
+      --     vim.g.NERDTreeSyntaxDisableDefaultExactMatches = 1
+      --     vim.g.NERDTreeSyntaxDisableDefaultPatternMatches = 1
+      --     vim.g.NERDTreeSyntaxEnabledExtensions = { "c", "h", "c++", "cpp", "php", "rb", "js", "css", "html" } -- enabled extensions with default colors
+      --     vim.g.NERDTreeSyntaxEnabledExactMatches = { "node_modules", "favicon.ico" } -- enabled exact matches with default colors
+      --     vim.g.NERDTreeHighlightCursorline = 0
+      --   end,
+      -- },
+      -- "ryanoasis/vim-devicons",
+      -- {
+      --   "Xuyuanp/nerdtree-git-plugin",
+      --   init = function()
+      --     vim.g.NERDTreeGitStatusConcealBrackets = 1
+      --
+      --     vim.g.NERDTreeGitStatusIndicatorMapCustom = {
+      --       Modified = string.gsub(require("lazyvim.config").icons.git.modified, "%s+", ""),
+      --       Staged = string.gsub(require("lazyvim.config").icons.git.added, "%s+", ""),
+      --       Untracked = "󱃓",
+      --       Renamed = "󰛂",
+      --       Unmerged = "",
+      --       Deleted = string.gsub(require("lazyvim.config").icons.git.removed, "%s+", ""),
+      --       Dirty = "✎",
+      --       Ignored = "◌",
+      --       Clean = "✓",
+      --       Unknown = "󱃓",
+      --     }
+      --   end,
+      -- },
     },
-    -- try to force reveal the current file, which is buggy as hell. This makes
-    -- it slightly more likely to work.
-    -- EDIT: no it doesn't, it tries to cd to the dir above the current file
-    -- keys = function(_, keys)
-    --   for k, key in ipairs(keys) do
-    --     if key[1] == "<leader>e" then
-    --       keys[k] = {
-    --         "<leader>e",
-    --         function()
-    --           require("neo-tree.command").execute({
-    --             toggle = true,
-    --             reveal = true, -- added
-    --             dir = LazyVim.root(),
-    --           })
-    --         end,
-    --         desc = "Explorer NeoTree (Root Dir)",
-    --       }
-    --     end
-    --
-    --     if key[1] == "<leader>E" then
-    --       keys[k] = {
-    --         "<leader>E",
-    --         function()
-    --           require("neo-tree.command").execute({
-    --             toggle = true,
-    --             reveal = true, -- added
-    --             dir = vim.uv.cwd(),
-    --           })
-    --         end,
-    --         desc = "Explorer NeoTree (cwd)",
-    --       }
-    --     end
-    --   end
-    -- end,
+    keys = {
+      {
+        "<leader>e",
+        function()
+          -- this function is empty in the lua interface for some reason
+          if vim.api.nvim_exec2("echo g:NERDTree.IsOpen()", { output = true }).output == "1" then
+            vim.cmd("NERDTreeToggle")
+          else
+            vim.cmd("NERDTreeFind")
+          end
+        end,
+        noremap = true,
+        desc = "Toggle NERDTree",
+      },
+    },
   },
   {
     "akinsho/bufferline.nvim",
