@@ -1,6 +1,8 @@
 return {
   "chrisgrieser/nvim-various-textobjs",
-  -- lazy = false,
   event = "VeryLazy",
-  opts = { useDefaultKeymaps = true },
+  opts = {
+    useDefaultKeymaps = true,
+    disabledKeymaps = { "gc" }, -- interferes with v gc
+  },
 }
