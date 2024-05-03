@@ -105,6 +105,8 @@ return {
       { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
       { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
       { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
+      { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
+      { "<Leader>ag", desc = "NeoAI Commit Message" },
     },
   },
 }
