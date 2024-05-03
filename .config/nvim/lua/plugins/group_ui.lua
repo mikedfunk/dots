@@ -107,12 +107,14 @@ return {
 
           if _G.is_in_nerdtree then
             vim.cmd("NoiceDisable")
+            -- require("noice.ui").disable()
 
             return
           end
 
           if was_in_nerdtree and not _G.is_in_nerdtree then
             vim.cmd("NoiceEnable")
+            -- require("noice.ui").enable()
           end
         end,
         desc = "noice toggle for nerdtree",
