@@ -21,12 +21,14 @@ return {
     enabled = false,
     -- opts = { filesystem = { filtered_items = { hide_dotfiles = false } } },
   },
-  -- Q: ARE YOU CRAZY? NERDTREE INSTEAD OF NEO-TREE?
-  -- A: STOP YELLING. Neo-tree has a nasty bug where it won't focus on the
-  -- current file in "large" directories. In my case it's all of them. My only
-  -- workaround is to switch back to the buffer, then switch back to neo-tree.
-  -- This is a pain when I'm in a right split. I also had bugs with nvim-tree,
-  -- so I'm going old-school and using NERDTree for now.
+  -- Q: Why use nerd-tree instead of neo-tree?
+  -- A: Neo-tree has a nasty bug where it won't focus on the current file in
+  -- "large" directories. In my case it's all of them. My only workaround is to
+  -- switch back to the buffer, then switch back to neo-tree. This is a pain
+  -- when I'm in a right split. I also can't scroll right - it has this shitty
+  -- right fade-out feature so I can't see the full file name. I also had bugs
+  -- with nvim-tree, so I'm going old-school and using NERDTree for now. I also
+  -- don't use the buffers or git sections of neo-tree.
   {
     "preservim/nerdtree",
     dependencies = {
@@ -34,7 +36,12 @@ return {
         "folke/edgy.nvim",
         opts = {
           left = {
-            { ft = "nerdtree", title = "NerdTree" },
+            {
+              ft = "nerdtree",
+              title = "NerdTree",
+              pinned = true,
+              open = "NERDTreeFind",
+            },
           },
         },
       },
@@ -73,6 +80,7 @@ return {
       --   end,
       -- },
     },
+    cmd = { "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus", "NERDTree" },
     keys = {
       {
         "<leader>e",
@@ -88,6 +96,28 @@ return {
         desc = "Toggle NERDTree",
       },
     },
+    init = function()
+      -- disable noice in nerdtree so I can use the menu
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("nerdtree_no_noice", { clear = true }),
+        pattern = "*",
+        callback = function()
+          local was_in_nerdtree = _G.is_in_nerdtree
+          _G.is_in_nerdtree = vim.bo.filetype == "nerdtree"
+
+          if _G.is_in_nerdtree then
+            vim.cmd("NoiceDisable")
+
+            return
+          end
+
+          if was_in_nerdtree and not _G.is_in_nerdtree then
+            vim.cmd("NoiceEnable")
+          end
+        end,
+        desc = "noice toggle for nerdtree",
+      })
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -300,6 +330,7 @@ return {
   },
   { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
+  { "b0o/incline.nvim", opts = { hide = { only_win = true } } },
   {
     "LazyVim/LazyVim",
     -- dependencies = {
