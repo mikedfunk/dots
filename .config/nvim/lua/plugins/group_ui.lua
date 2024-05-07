@@ -245,6 +245,11 @@ return {
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
   {
     "luckasRanarison/tailwind-tools.nvim",
+    ft = {
+      "javascriptreact",
+      "typescriptreact",
+      "html",
+    },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ---@type TailwindTools.Option
     opts = {

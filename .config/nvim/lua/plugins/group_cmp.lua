@@ -93,13 +93,13 @@ return {
         all_colors.yellow,
       }
 
-      local source_names = opts.formatting.source_names or {}
-      source_names = vim.tbl_extend("force", source_names, {
+      local kinds = require("lazyvim.config").icons.kinds or {}
+      kinds = vim.tbl_extend("force", kinds, {
         buffer = "",
         ["buffer-lines"] = "≡",
         calc = "",
         cmp_jira = "",
-        cmp_tabnine = "󰚩", --  ➒,
+        cmp_tabnine = "󰚩", --  ➒
         color_names = "",
         copilot = "",
         dap = "",
@@ -128,7 +128,7 @@ return {
 
       local i = 0
 
-      for source_name, _ in pairs(source_names) do
+      for kind, _ in pairs(kinds) do
         i = i + 1
 
         if not colors[i] then
@@ -137,7 +137,7 @@ return {
 
         local color = colors[i]
 
-        vim.api.nvim_set_hl(0, "CmpItemKind_" .. source_name, { fg = color })
+        vim.api.nvim_set_hl(0, "CmpItemKind_" .. kind, { fg = color })
       end
 
       item.kind_hl_group = "CmpItemKind_" .. entry.source.name
@@ -153,7 +153,7 @@ return {
       end
 
       -- use icons for source names
-      item.menu = source_names[entry.source.name] or string.format("[%s]", entry.source.name)
+      item.menu = kinds[entry.source.name] or string.format("[%s]", entry.source.name)
 
       return item
     end

@@ -4,8 +4,8 @@ return {
     dependencies = {
       { "gsuuon/tshjkl.nvim", config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
       { "RRethy/nvim-treesitter-endwise", ft = { "ruby", "lua", "zsh", "bash" } },
-      { "gbprod/php-enhanced-treesitter.nvim", ft = { "php" } },
-      { "yioneko/nvim-yati", version = "*" },
+      -- { "gbprod/php-enhanced-treesitter.nvim", ft = { "php" } }, -- exploded recently with tons of bugs
+      -- { "yioneko/nvim-yati", version = "*" },
       {
         "andymass/vim-matchup",
         init = function()
@@ -29,7 +29,7 @@ return {
 
       indent = { enable = false }, -- use yati instead
       endwise = { enable = true },
-      yati = { enable = true, disable = { "jsx" } },
+      -- yati = { enable = true, disable = { "jsx" } },
       matchup = { enable = true },
 
       -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1742

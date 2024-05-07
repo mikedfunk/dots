@@ -34,6 +34,10 @@ vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc 
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
 
+vim.keymap.set("i", "<c-space", function()
+  return require("cmp.config.mapping").complete()
+end, { noremap = true, desc = "Complete" })
+
 -- vim.keymap.set("n", "<leader>fe", function()
 --   if vim.bo.filetype == "neo-tree" then
 --     vim.cmd("norm q")
