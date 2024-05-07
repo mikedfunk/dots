@@ -97,6 +97,10 @@ return {
       },
     },
     init = function()
+      vim.g.NERDTreeDirArrowExpandable = ""
+      vim.g.NERDTreeDirArrowCollapsible = ""
+      vim.g.NERDTreeQuitOnOpen = 1
+
       -- disable noice in nerdtree so I can use the menu
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("nerdtree_no_noice", { clear = true }),
