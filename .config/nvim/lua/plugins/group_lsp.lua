@@ -71,16 +71,18 @@ return {
       -- added to by extras.prettier.
       opts.formatters_by_ft.blade =
         vim.list_extend(opts.formatters_by_ft.blade or {}, { "blade-formatter", "rustywind" })
-      opts.formatters_by_ft.javascript = vim.list_extend(opts.formatters_by_ft.javascript or {}, { "rustywind" })
+      opts.formatters_by_ft.javascript =
+        vim.list_extend(opts.formatters_by_ft.javascript or {}, { "rustywind", "eslint" })
       opts.formatters_by_ft.javascriptreact =
-        vim.list_extend(opts.formatters_by_ft.javascriptreact or {}, { "rustywind" })
+        vim.list_extend(opts.formatters_by_ft.javascriptreact or {}, { "rustywind", "eslint" })
       opts.formatters_by_ft.php = vim.list_extend(opts.formatters_by_ft.php or {}, { "phpcbf", "php_cs_fixer" })
       opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, { "black" })
       opts.formatters_by_ft.sql = vim.list_extend(opts.formatters_by_ft.sql or {}, { "sqlfluff" })
       opts.formatters_by_ft.svelte = vim.list_extend(opts.formatters_by_ft.svelte or {}, { "rustywind" })
-      opts.formatters_by_ft.typescript = vim.list_extend(opts.formatters_by_ft.typescript or {}, { "rustywind" })
+      opts.formatters_by_ft.typescript =
+        vim.list_extend(opts.formatters_by_ft.typescript or {}, { "rustywind", "eslint" })
       opts.formatters_by_ft.typescriptreact =
-        vim.list_extend(opts.formatters_by_ft.typescriptreact or {}, { "rustywind" })
+        vim.list_extend(opts.formatters_by_ft.typescriptreact or {}, { "rustywind", "eslint" })
       opts.formatters_by_ft.vue = vim.list_extend(opts.formatters_by_ft.vue or {}, { "rustywind" })
 
       ---@type table<string, conform.FormatterUnit[]>
@@ -131,7 +133,10 @@ return {
       linters_by_ft = {
         editorconfig = { "editorconfig-checker" },
         gitcommit = { "gitlint" },
-        javascript = { "cspell" },
+        javascript = { "cspell", "eslint" },
+        javascriptreact = { "cspell", "eslint" },
+        typescript = { "cspell", "eslint" },
+        typescriptreact = { "cspell", "eslint" },
         make = { "checkmake" },
         php = { "phpstan", "phpcs", "cspell" },
         python = { "isort" },

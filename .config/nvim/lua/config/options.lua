@@ -177,8 +177,9 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 -- use latest node and php version
--- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/nodejs/17.8.0/bin:' .. vim.env.PATH
-vim.env.PATH = vim.env.HOME .. "/.asdf/installs/nodejs/20.8.0/bin:" .. vim.env.PATH -- cspell only works on node 18+
+-- NOTE: this will be reset during mason install
+-- vim.env.PATH = vim.env.HOME .. "/.asdf/installs/nodejs/20.8.0/bin:" .. vim.env.PATH -- cspell only works on node 18+
+-- vim.env.PATH = vim.api.nvim_exec("!brew --prefix node", true) .. "/bin:" .. vim.env.PATH
 -- vim.env.PATH = vim.env.HOME .. '/.asdf/installs/php/8.2.12/bin:' .. vim.env.PATH
 
 -- vim-markdown (builtin) {{{
