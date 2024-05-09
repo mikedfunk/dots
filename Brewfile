@@ -336,6 +336,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "adoptopenjdk8" # needed for swagger-codegen
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
+# cask "authy" # desktop 2-factor!
 # cask "battle-net" # whoa sweet there's a new mac battle.net app (you need to run the installer: `open /usr/local/Caskroom/battle-net/latest/Battle.net-Setup.app`)
 # cask "beardedspice" # keyboard media controls for media sites. Always seems to be broken :/
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
@@ -468,7 +469,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-cask "authy" # desktop 2-factor!
 cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs

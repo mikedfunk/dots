@@ -9,14 +9,23 @@
 # }}}
 
 # helper functions {{{
-_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; "${@:2}"; }
-_log_error() { echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"; "${@:2}"; }
-_log_notice() { echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"; "${@:2}"; }
+_log_info() {
+    echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"
+    "${@:2}"
+}
+_log_error() {
+    echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"
+    "${@:2}"
+}
+_log_notice() {
+    echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"
+    "${@:2}"
+}
 _has() { type "$1" &>/dev/null; }
 # }}}
 
 # create dirs {{{
-_create_dirs () {
+_create_dirs() {
     _log_info "Creating any missing home directories"
     [[ -d "$HOME/Code" ]] || mkdir "$HOME/Code"
 }
@@ -66,7 +75,7 @@ _create_dirs () {
 
 # install xcode command line tools {{{
 # needed for a variety of things including phpenv (zlib), CommandLineTools below, sshpass
-_install_xcode_command_line_tools () {
+_install_xcode_command_line_tools() {
     _log_info "Installing xcode command line tools"
     xcode-select --install || true
     # /System/Library/CoreServices/Install Command Line Developer Tools.app
@@ -74,7 +83,7 @@ _install_xcode_command_line_tools () {
 # }}}
 
 # install homebrew if it's missing {{{
-_install_homebrew_if_its_missing () {
+_install_homebrew_if_its_missing() {
     _has brew && return
     _log_info "Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -82,14 +91,14 @@ _install_homebrew_if_its_missing () {
 # }}}
 
 # install/update homebrew packages {{{
-_install_update_homebrew_packages () {
+_install_update_homebrew_packages() {
     [ -e "$HOME"/Brewfile ] || return
     _log_info "Installing/upgrading homebrew packages"
     cd || return
-    brew update # update homebrew itself and the list of brew package versions
-    brew bundle # install/upgrade from ~/Brewfile
-    brew upgrade         # upgrade all homebrew packages
-    brew upgrade --cask  # upgrade all homebrew casks
+    brew update         # update homebrew itself and the list of brew package versions
+    brew bundle         # install/upgrade from ~/Brewfile
+    brew upgrade        # upgrade all homebrew packages
+    brew upgrade --cask # upgrade all homebrew casks
     # brew cleanup         # remove outdated versions and dead symlinks from the homebrew prefix. WARNING this could break dependencies if low level libs are not pinned!!
     # brew bundle cleanup --force # remove brew packages not in ~/Brewfile
     _pin_homebrew_packages
@@ -102,7 +111,7 @@ _install_update_homebrew_packages () {
 # pin homebrew packages {{{
 # I no longer do this - instead I avoid `brew cleanup` and hope I don't run out of storage :/
 # I unpinned everything and icu4c broke for some reason. I'll add anything to this list that actually breaks.
-_pin_homebrew_packages () {
+_pin_homebrew_packages() {
     _log_info "Pinning brew packages that need pinning"
     # brew pin bison
     # brew pin bzip2
@@ -125,17 +134,17 @@ _pin_homebrew_packages () {
 # }}}
 
 # akamai {{{
-_install_upgrade_akamai () {
+_install_upgrade_akamai() {
     _has akamai && return
     _log_info "Updating akamai commands"
-    ( akamai list | grep --quiet purge ) || akamai install purge
+    (akamai list | grep --quiet purge) || akamai install purge
     akamai update
 }
 # }}}
 
 # install kubectl (specific version) {{{
-_install_older_kubectl () {
-    _has kubectl && ( kubectl version --client | grep 1.17.17 ) && return
+_install_older_kubectl() {
+    _has kubectl && (kubectl version --client | grep 1.17.17) && return
     _log_info "Installing kubectl 1.17.17"
     _has kubectl && rm "$(which kubectl)"
     builtin cd /usr/local/bin || return
@@ -147,7 +156,7 @@ _install_older_kubectl () {
 # }}}
 
 # set zsh as shell {{{
-_set_zsh_as_shell () {
+_set_zsh_as_shell() {
     if [[ $(grep "$(brew --prefix)/bin/zsh" /etc/shells -c) == 0 ]]; then
         _log_info "Installing homebrew zsh to /etc/shells"
         sudo /bin/sh -c "echo $(brew --prefix)/bin/zsh >> /etc/shells"
@@ -160,7 +169,7 @@ _set_zsh_as_shell () {
 # }}}
 
 # install tmux plugin manager {{{
-_install_tmux_plugin_manager () {
+_install_tmux_plugin_manager() {
     [[ -d "$HOME"/.tmux/plugins/tpm ]] && return
     _log_info "Installing tmux plugin manager. Upgrade packages with \`<c-a>U\`."
     git clone https://github.com/tmux-plugins/tpm "$HOME"/.tmux/plugins/tpm
@@ -168,7 +177,7 @@ _install_tmux_plugin_manager () {
 # }}}
 
 # install/update tmux plugins {{{
-_install_upgrade_tmux_plugins () {
+_install_upgrade_tmux_plugins() {
     _log_info "Install/upgrade tmux plugins"
     "$HOME"/.tmux/plugins/tpm/bin/install_plugins
     "$HOME"/.tmux/plugins/tpm/bin/update_plugins all
@@ -178,7 +187,7 @@ _install_upgrade_tmux_plugins () {
 # Vim (LunarVim) {{{
 
 # install/upgrade lunarvim {{{
-_install_lunarvim () {
+_install_lunarvim() {
     _has lvim && return
     _log_info "Installing LunarVim"
     # https://www.lunarvim.org/01-installing.html#prerequisites
@@ -189,7 +198,7 @@ _install_lunarvim () {
 # }}}
 
 # install/upgrade lvim plugins {{{
-_install_upgrade_lvim_plugins () {
+_install_upgrade_lvim_plugins() {
     _log_info "Installing/upgrading lunarvim plugins"
     lvim +LvimUpdate +qall
     # lvim +LspInstall intelephense +qall
@@ -208,14 +217,14 @@ _install_upgrade_lvim_plugins () {
 # }}}
 
 # update asdf plugins {{{
-_update_asdf_plugins () {
+_update_asdf_plugins() {
     _log_info "Updating asdf plugins"
     asdf plugin update --all
 }
 # }}}
 
 # install lazyman (neovim distribution manager) {{{
-_install_lazyman () {
+_install_lazyman() {
     [ -f "$HOME"/.config/nvim-Lazyman/lazyman.sh ] && return
     _log_info "installing lazyvim"
     git clone https://github.com/doctorfree/nvim-lazyman "$HOME"/.config/nvim-Lazyman
@@ -223,7 +232,7 @@ _install_lazyman () {
 # }}}
 
 # install lazyvim (neovim distribution) {{{
-_install_lazyvim () {
+_install_lazyvim() {
     [ -d "$HOME"/.config/nvim ] && return
     _log_info "Installing lazyvim"
     git clone https://github.com/LazyVim/starter "$HOME"/.config/nvim
@@ -232,8 +241,8 @@ _install_lazyvim () {
 # }}}
 
 # install neovim version(s) {{{
-_install_neovim_versions () {
-    ( asdf list neovim | grep --quiet stable ) && return
+_install_neovim_versions() {
+    (asdf list neovim | grep --quiet stable) && return
     _log_info "installing neovim stable"
     asdf install neovim stable
     asdf global neovim stable
@@ -244,8 +253,8 @@ _install_neovim_versions () {
 # install php versions {{{
 
 # holy shit it works
-_install_php_70 () {
-    ( asdf list php | grep --quiet 7.0.26 ) && return
+_install_php_70() {
+    (asdf list php | grep --quiet 7.0.26) && return
     _log_info "installing php 7.0.26"
     asdf install php 7.0.26
     asdf global php 7.0.26 || return
@@ -257,15 +266,15 @@ _install_php_70 () {
 
     # pickle doesn't work on php 7.0 at all, any version
     pecl channel-update pecl.php.net
-    yes "" | pecl install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
+    yes "" | pecl install pcs-beta && (echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini)
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
     local PHP_ZLIB_DIR
     PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | pecl install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini )
-    yes "" | pecl install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini )
-    yes "" | pecl install xdebug-2.8.1 && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini )
-    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+    yes "" | pecl install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini)
+    yes "" | pecl install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
+    yes "" | pecl install xdebug-2.8.1 && (echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
@@ -273,8 +282,8 @@ _install_php_70 () {
     asdf reshim php 7.0.26
 }
 
-_install_php_74 () {
-    ( asdf list php | grep --quiet 7.4.32 ) && return
+_install_php_74() {
+    (asdf list php | grep --quiet 7.4.32) && return
     _log_info "installing php 7.4.32"
     asdf install php 7.4.32
     asdf global php 7.4.32 || return
@@ -288,16 +297,16 @@ _install_php_74 () {
     wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
     chmod +x "${PICKLE}"
 
-    yes "" | "${PICKLE}" install pcs-beta && ( echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini )
+    yes "" | "${PICKLE}" install pcs-beta && (echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini)
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
     local PHP_ZLIB_DIR
     PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini )
-    yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini )
+    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini)
+    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
     # latest xdebug 3.2 is php 8.0+ only
-    yes "" | "${PICKLE}" install xdebug@3.1.5 && ( echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini )
-    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+    yes "" | "${PICKLE}" install xdebug@3.1.5 && (echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
@@ -305,9 +314,9 @@ _install_php_74 () {
     asdf reshim php 7.4.32
 }
 
-_install_php_80 () {
+_install_php_80() {
     # I would have installed 28 but for some reason asdf is getting a bad archive when trying to decompress
-    ( asdf list php | grep --quiet "8.0.27" ) && return
+    (asdf list php | grep --quiet "8.0.27") && return
     _log_info "installing php 8.0.27"
     asdf install php 8.0.27
     asdf global php 8.0.27 || return
@@ -325,18 +334,18 @@ _install_php_80 () {
     local PHP_ZLIB_DIR
     PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
-    yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
+    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
+    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
     _xdebug_config() {
-        cat << 'END_HEREDOC'
+        cat <<'END_HEREDOC'
 zend_extension="xdebug.so"
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 END_HEREDOC
     }
-    yes "" | "${PICKLE}" install xdebug && ( _xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini )
-    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
@@ -344,8 +353,8 @@ END_HEREDOC
     # asdf reshim php "8.0.37"
 }
 
-_install_php_82 () {
-    ( asdf list php | grep --quiet "8.2.12" ) && return
+_install_php_82() {
+    (asdf list php | grep --quiet "8.2.12") && return
     _log_info "installing php 8.2.12"
     asdf install php 8.2.12
     asdf global php 8.2.12 || return
@@ -363,18 +372,18 @@ _install_php_82 () {
     local PHP_ZLIB_DIR
     PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && ( echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini )
-    yes "" | "${PICKLE}" install imagick && ( echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini )
+    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
+    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
     _xdebug_config() {
-        cat << 'END_HEREDOC'
+        cat <<'END_HEREDOC'
 zend_extension="xdebug.so"
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 END_HEREDOC
     }
-    yes "" | "${PICKLE}" install xdebug && ( _xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini )
-    echo 'phar.readonly = false' > "${PHP_PATH}"/conf.d/05_phar.ini
+    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
@@ -383,14 +392,14 @@ END_HEREDOC
 }
 
 # https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
-_install_php_versions () {
+_install_php_versions() {
     pushd .
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing php version(s)"
-    ( asdf plugin list | grep --quiet php ) || asdf plugin add php
+    (asdf plugin list | grep --quiet php) || asdf plugin add php
     local INSTALL_PATH="$HOME"/.asdf/plugins/php/bin/install
     # intl fails to install in php 7.0 due to an incompatibility with icu4c latest
-    [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-intl/d" "$INSTALL_PATH" )
+    [ -f "$INSTALL_PATH" ] && (sed -i '' "/--enable-intl/d" "$INSTALL_PATH")
     # gd fails to install in php 8.0
     # [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-gd/d" "$INSTALL_PATH" )
 
@@ -595,31 +604,31 @@ _install_php_versions () {
 _install_deno_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing deno version(s)"
-    ( asdf plugin list | grep --quiet deno ) || asdf plugin add deno
-    ( asdf list deno | grep --quiet 1.29.4 ) || asdf install deno 1.29.4
+    (asdf plugin list | grep --quiet deno) || asdf plugin add deno
+    (asdf list deno | grep --quiet 1.29.4) || asdf install deno 1.29.4
     asdf global deno 1.29.4
 }
 # }}}
 
 # install node version(s) {{{
-_install_node_versions () {
+_install_node_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing node version(s)"
     # https://github.com/asdf-vm/asdf-nodejs#problems-with-openpgp-signatures-in-older-versions
     # bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-previous-release-team-keyring'
-    ( asdf plugin list | grep --quiet nodejs ) || asdf plugin add nodejs
+    (asdf plugin list | grep --quiet nodejs) || asdf plugin add nodejs
     # https://github.com/asdf-vm/asdf-nodejs/issues/40#issuecomment-297053730
     # bash "$HOME"/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
     # legacy, gallery:
-    ( asdf list nodejs | grep --quiet 9.11.2 ) || asdf install nodejs 9.11.2
+    (asdf list nodejs | grep --quiet 9.11.2) || asdf install nodejs 9.11.2
     # legacy react:
-    ( asdf list nodejs | grep --quiet 12.22.7 ) || asdf install nodejs 12.22.7
+    (asdf list nodejs | grep --quiet 12.22.7) || asdf install nodejs 12.22.7
     # zed
-    ( asdf list nodejs | grep --quiet 6.7.0 ) || asdf install nodejs 6.7.0
+    (asdf list nodejs | grep --quiet 6.7.0) || asdf install nodejs 6.7.0
     # easel: NOTE: npm will not work on this node version!
-    ( asdf list nodejs | grep --quiet 15.4.0 ) || asdf install nodejs 15.4.0
-    ( asdf list nodejs | grep --quiet latest ) || asdf install nodejs latest
+    (asdf list nodejs | grep --quiet 15.4.0) || asdf install nodejs 15.4.0
+    (asdf list nodejs | grep --quiet latest) || asdf install nodejs latest
 
     asdf global nodejs latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
@@ -632,11 +641,11 @@ _install_node_versions () {
 
 # install lua version(s) {{{
 # needed for luarocks, which is needed by luacheck
-_install_lua_versions () {
+_install_lua_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing lua version(s)"
-    ( asdf plugin list | grep --quiet perl ) || asdf plugin add lua
-    ( asdf list lua | grep --quiet 5.4.4 ) || asdf install lua 5.4.4
+    (asdf plugin list | grep --quiet perl) || asdf plugin add lua
+    (asdf list lua | grep --quiet 5.4.4) || asdf install lua 5.4.4
 
     asdf global lua 5.4.4
 
@@ -645,11 +654,11 @@ _install_lua_versions () {
 # }}}
 
 # install perl version(s) {{{
-_install_perl_versions () {
+_install_perl_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing perl version(s)"
-    ( asdf plugin list | grep --quiet perl ) || asdf plugin add perl
-    ( asdf list perl | grep --quiet 5.38.0 ) || asdf install perl 5.38.0
+    (asdf plugin list | grep --quiet perl) || asdf plugin add perl
+    (asdf list perl | grep --quiet 5.38.0) || asdf install perl 5.38.0
 
     asdf global perl 5.38.0
 
@@ -658,10 +667,10 @@ _install_perl_versions () {
 # }}}
 
 # install python version(s) {{{
-_install_python_versions () {
+_install_python_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing python version(s)"
-    ( asdf plugin list | grep --quiet python ) || asdf plugin add python
+    (asdf plugin list | grep --quiet python) || asdf plugin add python
 
     LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
     export LDFLAGS
@@ -684,55 +693,55 @@ _install_python_versions () {
     # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
     # ( asdf list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && asdf install python 3.7.10 )
     # api tests and ui tests:
-    ( asdf list python | grep --quiet 3.8.15 ) || ( _log_info "installing python 3.8.15" && asdf install python 3.8.15 )
+    (asdf list python | grep --quiet 3.8.15) || (_log_info "installing python 3.8.15" && asdf install python 3.8.15)
     # global and legacy react:
-    ( asdf list python | grep --quiet 3.10.1 ) || ( _log_info "installing python 3.10.1" && asdf install python 3.10.1 && asdf install python 2.7.18 && asdf global python 3.10.1 2.7.18 )
+    (asdf list python | grep --quiet 3.10.1) || (_log_info "installing python 3.10.1" && asdf install python 3.10.1 && asdf install python 2.7.18 && asdf global python 3.10.1 2.7.18)
     builtin cd - >/dev/null || return
 }
 # }}}
 
 # install ruby version(s) {{{
-_install_ruby_versions () {
+_install_ruby_versions() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing ruby version(s)"
-    ( asdf plugin list | grep --quiet ruby ) || asdf plugin add ruby
+    (asdf plugin list | grep --quiet ruby) || asdf plugin add ruby
     # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # zed (compass) - doesn't install on mac but 3.x works
-    ( asdf list ruby | grep --quiet 3.1.2 ) || asdf install ruby 3.1.2
+    (asdf list ruby | grep --quiet 3.1.2) || asdf install ruby 3.1.2
     asdf global ruby 3.1.2
     builtin cd - >/dev/null || return
 }
 # }}}
 
 # install erlang version {{{
-_install_erlang_version () {
-    ( asdf plugin list | grep --quiet erlang ) && ( asdf list erlang | grep --quiet 23.0 ) && return
+_install_erlang_version() {
+    (asdf plugin list | grep --quiet erlang) && (asdf list erlang | grep --quiet 23.0) && return
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing erland version"
-    ( asdf plugin list | grep --quiet erlang ) || asdf plugin add erlang
+    (asdf plugin list | grep --quiet erlang) || asdf plugin add erlang
     export KERL_CONFIGURE_OPTIONS="--enable-m64-build --disable-debug --without-javac"
     PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
     export PATH
     export MACOSX_DEPLOYMENT_TARGET=10.4
     export SYSTEM_VERSION_COMPAT=1
-    ( asdf list erlang | grep --quiet 23.0 ) || asdf install erlang 23.0
+    (asdf list erlang | grep --quiet 23.0) || asdf install erlang 23.0
     asdf global erlang 23.0
     builtin cd - >/dev/null || return
 }
 # }}}
 
 # install elixir version {{{
-_install_elixir_version () {
+_install_elixir_version() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing elixir version"
-    ( asdf plugin list | grep --quiet elixir ) || asdf plugin add elixir
-    ( asdf list elixir | grep --quiet 1.10.4-otp-23 ) || asdf install elixir 1.10.4-otp-23
+    (asdf plugin list | grep --quiet elixir) || asdf plugin add elixir
+    (asdf list elixir | grep --quiet 1.10.4-otp-23) || asdf install elixir 1.10.4-otp-23
     asdf global elixir 1.10.4-otp-23
     builtin cd - >/dev/null || return
 }
 # }}}
 
 # update python pip packages {{{
-_update_python_pip_packages () {
+_update_python_pip_packages() {
     _log_info "Installing/upgrading pip3 packages"
     pip install --upgrade pip
     pip install --upgrade neovim --user # neovim uses this pip/python version
@@ -740,17 +749,17 @@ _update_python_pip_packages () {
 # }}}
 
 # antidote (zsh plugin manager) {{{
-_update_antidote_plugins () {
+_update_antidote_plugins() {
     _log_info "Updating antidote plugins"
-    ( brew list | grep antidote > /dev/null ) \
-        && source "$(brew --prefix antidote)"/share/antidote/antidote.zsh \
-        && antidote load
+    (brew list | grep antidote >/dev/null) &&
+        source "$(brew --prefix antidote)"/share/antidote/antidote.zsh &&
+        antidote load
     antidote update --bundles # update all packages
 }
 # }}}
 
 # apply hosts file {{{
-_apply_hosts_file () {
+_apply_hosts_file() {
     _log_info "Syncing hosts file"
     sudo hostess apply "$HOME/.support/hosts.json"
 }
@@ -759,7 +768,7 @@ _apply_hosts_file () {
 # enable terminal text formatting {{{
 # e.g. italics, curly underscore, etc.
 # https://github.com/tmux/tmux/issues/3218#issue-1265998468
-_enable_terminal_text_formattting () {
+_enable_terminal_text_formattting() {
     _log_info "Enabling terminal text formatting"
     "$(brew --prefix)"/Cellar/ncurses/6.3/bin/infocmp -x tmux-256color >tmux-256color.terminfo
     tic -x "$HOME/.support/tmux-256color.terminfo"
@@ -771,7 +780,10 @@ _enable_terminal_text_formattting () {
 
 # Mac preferences {{{
 # https://www.reddit.com/r/MacOS/comments/9ijy88/font_antialiasing_on_mojave/?utm_content=title&utm_medium=front&utm_source=reddit&utm_name=MacOS
-_apply_mac_preferences () {
+_apply_mac_preferences() {
+    # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
+    defaults write -g NSWindowShouldDragOnGesture -bool true
+
     defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
     _log_info "Setting general mac preferences"
@@ -840,7 +852,7 @@ _apply_mac_preferences () {
 # launchctl jobs {{{
 # debug launchd jobs https://stackoverflow.com/q/6337513/557215
 # use this form to easily generate a launchd plist: http://launched.zerowidth.com/
-_start_launch_agents () {
+_start_launch_agents() {
     _log_info "Starting launch agents"
     # let's use lunchy instead of launchctl! https://github.com/eddiezane/lunchy
     lunchy start --write mike.saatchi-tunnel.autossh
@@ -851,7 +863,7 @@ _start_launch_agents () {
 # fix file size limit for watching with entr {{{
 # http://entrproject.org/limits.html
 # DO NOT DO THIS it seems to cause the CrowdStrike memory leak!!!
-_fix_file_size_limit_for_watching_with_entr () {
+_fix_file_size_limit_for_watching_with_entr() {
     [ -f /Library/LaunchDaemons/limit.maxfiles.plist ] && return
     _log_info "Installing max files limit fixer for watching with entr"
     builtin cd /Library/LaunchDaemons || return
@@ -862,13 +874,13 @@ _fix_file_size_limit_for_watching_with_entr () {
 
 # fix delta syntax highlighting for php {{{
 # https://github.com/dandavison/delta/issues/162#issuecomment-625952288
-_fix_delta_syntax_highlighting_for_php () {
+_fix_delta_syntax_highlighting_for_php() {
     _has bat && _log_info "fixing delta syntax highlighting for php" && bat cache --build
 }
 # }}}
 
 # clear evalcache {{{
-_clear_evalcache () {
+_clear_evalcache() {
     _log_info "Clearing evalcache"
     # This is what _evalcache_clear does
     rm -f "$ZSH_EVALCACHE_DIR"/init-*.sh
@@ -876,7 +888,7 @@ _clear_evalcache () {
 # }}}
 
 # install fzf to shell {{{
-_install_fzf_to_shell () {
+_install_fzf_to_shell() {
     [ -f ~/.fzf.zsh ] && return
     _log_info "Installing fzf to shell"
     "$(brew --prefix)"/opt/fzf/install
@@ -887,7 +899,7 @@ _install_fzf_to_shell () {
 # this way I can still source this file but comment out these function calls
 # and run one or more independently. This is extremely useful!!
 
-_bootstrap_all () {
+_bootstrap_all() {
     _create_dirs
     _install_xcode_command_line_tools
     _install_homebrew_if_its_missing

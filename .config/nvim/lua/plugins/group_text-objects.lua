@@ -14,7 +14,7 @@ return {
     event = "VeryLazy",
     opts = {
       useDefaultKeymaps = true,
-      disabledKeymaps = { "gc" }, -- interferes with v gc
+      disabledKeymaps = { "gc", "gw" },
     },
   },
 }

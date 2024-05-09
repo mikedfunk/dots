@@ -18,8 +18,13 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- trying switching back to good old nerd-tree instead
-    enabled = false,
-    -- opts = { filesystem = { filtered_items = { hide_dotfiles = false } } },
+    -- enabled = false,
+    opts = {
+      filesystem = {
+        filtered_items = { hide_dotfiles = false },
+        use_libuv_file_watcher = true,
+      },
+    },
   },
   -- Q: Why use nerd-tree instead of neo-tree?
   -- A: Neo-tree has a nasty bug where it won't focus on the current file in
@@ -29,102 +34,102 @@ return {
   -- right fade-out feature so I can't see the full file name. I also had bugs
   -- with nvim-tree, so I'm going old-school and using NERDTree for now. I also
   -- don't use the buffers or git sections of neo-tree.
-  {
-    "preservim/nerdtree",
-    dependencies = {
-      {
-        "folke/edgy.nvim",
-        opts = {
-          left = {
-            {
-              ft = "nerdtree",
-              title = "NerdTree",
-              pinned = true,
-              open = "NERDTreeFind",
-            },
-          },
-        },
-      },
-      -- this shit is all too slow, I have a need for speed
-      -- {
-      --   "tiagofumo/vim-nerdtree-syntax-highlight",
-      --   init = function()
-      --     -- https://github.com/tiagofumo/vim-nerdtree-syntax-highlight?tab=readme-ov-file#mitigating-lag-issues
-      --     -- vim.g.NERDTreeLimitedSyntax = 1
-      --     vim.g.NERDTreeSyntaxDisableDefaultExtensions = 1
-      --     vim.g.NERDTreeSyntaxDisableDefaultExactMatches = 1
-      --     vim.g.NERDTreeSyntaxDisableDefaultPatternMatches = 1
-      --     vim.g.NERDTreeSyntaxEnabledExtensions = { "c", "h", "c++", "cpp", "php", "rb", "js", "css", "html" } -- enabled extensions with default colors
-      --     vim.g.NERDTreeSyntaxEnabledExactMatches = { "node_modules", "favicon.ico" } -- enabled exact matches with default colors
-      --     vim.g.NERDTreeHighlightCursorline = 0
-      --   end,
-      -- },
-      -- "ryanoasis/vim-devicons",
-      -- {
-      --   "Xuyuanp/nerdtree-git-plugin",
-      --   init = function()
-      --     vim.g.NERDTreeGitStatusConcealBrackets = 1
-      --
-      --     vim.g.NERDTreeGitStatusIndicatorMapCustom = {
-      --       Modified = string.gsub(require("lazyvim.config").icons.git.modified, "%s+", ""),
-      --       Staged = string.gsub(require("lazyvim.config").icons.git.added, "%s+", ""),
-      --       Untracked = "󱃓",
-      --       Renamed = "󰛂",
-      --       Unmerged = "",
-      --       Deleted = string.gsub(require("lazyvim.config").icons.git.removed, "%s+", ""),
-      --       Dirty = "✎",
-      --       Ignored = "◌",
-      --       Clean = "✓",
-      --       Unknown = "󱃓",
-      --     }
-      --   end,
-      -- },
-    },
-    cmd = { "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus", "NERDTree" },
-    keys = {
-      {
-        "<leader>e",
-        function()
-          -- this function is empty in the lua interface for some reason
-          if vim.api.nvim_exec2("echo g:NERDTree.IsOpen()", { output = true }).output == "1" then
-            vim.cmd("NERDTreeToggle")
-          else
-            vim.cmd("NERDTreeFind")
-          end
-        end,
-        noremap = true,
-        desc = "Toggle NERDTree",
-      },
-    },
-    init = function()
-      vim.g.NERDTreeDirArrowExpandable = ""
-      vim.g.NERDTreeDirArrowCollapsible = ""
-      vim.g.NERDTreeQuitOnOpen = 1
-
-      -- disable noice in nerdtree so I can use the menu
-      vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("nerdtree_no_noice", { clear = true }),
-        pattern = "*",
-        callback = function()
-          local was_in_nerdtree = _G.is_in_nerdtree
-          _G.is_in_nerdtree = vim.bo.filetype == "nerdtree"
-
-          if _G.is_in_nerdtree then
-            vim.cmd("NoiceDisable")
-            -- require("noice.ui").disable()
-
-            return
-          end
-
-          if was_in_nerdtree and not _G.is_in_nerdtree then
-            vim.cmd("NoiceEnable")
-            -- require("noice.ui").enable()
-          end
-        end,
-        desc = "noice toggle for nerdtree",
-      })
-    end,
-  },
+  -- {
+  --   "preservim/nerdtree",
+  --   dependencies = {
+  --     {
+  --       "folke/edgy.nvim",
+  --       opts = {
+  --         left = {
+  --           {
+  --             ft = "nerdtree",
+  --             title = "NerdTree",
+  --             pinned = true,
+  --             open = "NERDTreeFind",
+  --           },
+  --         },
+  --       },
+  --     },
+  --     -- this shit is all too slow, I have a need for speed
+  --     -- {
+  --     --   "tiagofumo/vim-nerdtree-syntax-highlight",
+  --     --   init = function()
+  --     --     -- https://github.com/tiagofumo/vim-nerdtree-syntax-highlight?tab=readme-ov-file#mitigating-lag-issues
+  --     --     -- vim.g.NERDTreeLimitedSyntax = 1
+  --     --     vim.g.NERDTreeSyntaxDisableDefaultExtensions = 1
+  --     --     vim.g.NERDTreeSyntaxDisableDefaultExactMatches = 1
+  --     --     vim.g.NERDTreeSyntaxDisableDefaultPatternMatches = 1
+  --     --     vim.g.NERDTreeSyntaxEnabledExtensions = { "c", "h", "c++", "cpp", "php", "rb", "js", "css", "html" } -- enabled extensions with default colors
+  --     --     vim.g.NERDTreeSyntaxEnabledExactMatches = { "node_modules", "favicon.ico" } -- enabled exact matches with default colors
+  --     --     vim.g.NERDTreeHighlightCursorline = 0
+  --     --   end,
+  --     -- },
+  --     -- "ryanoasis/vim-devicons",
+  --     -- {
+  --     --   "Xuyuanp/nerdtree-git-plugin",
+  --     --   init = function()
+  --     --     vim.g.NERDTreeGitStatusConcealBrackets = 1
+  --     --
+  --     --     vim.g.NERDTreeGitStatusIndicatorMapCustom = {
+  --     --       Modified = string.gsub(require("lazyvim.config").icons.git.modified, "%s+", ""),
+  --     --       Staged = string.gsub(require("lazyvim.config").icons.git.added, "%s+", ""),
+  --     --       Untracked = "󱃓",
+  --     --       Renamed = "󰛂",
+  --     --       Unmerged = "",
+  --     --       Deleted = string.gsub(require("lazyvim.config").icons.git.removed, "%s+", ""),
+  --     --       Dirty = "✎",
+  --     --       Ignored = "◌",
+  --     --       Clean = "✓",
+  --     --       Unknown = "󱃓",
+  --     --     }
+  --     --   end,
+  --     -- },
+  --   },
+  --   cmd = { "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus", "NERDTree" },
+  --   keys = {
+  --     {
+  --       "<leader>e",
+  --       function()
+  --         -- this function is empty in the lua interface for some reason
+  --         if vim.api.nvim_exec2("echo g:NERDTree.IsOpen()", { output = true }).output == "1" then
+  --           vim.cmd("NERDTreeToggle")
+  --         else
+  --           vim.cmd("NERDTreeFind")
+  --         end
+  --       end,
+  --       noremap = true,
+  --       desc = "Toggle NERDTree",
+  --     },
+  --   },
+  --   init = function()
+  --     vim.g.NERDTreeDirArrowExpandable = ""
+  --     vim.g.NERDTreeDirArrowCollapsible = ""
+  --     vim.g.NERDTreeQuitOnOpen = 1
+  --
+  --     -- disable noice in nerdtree so I can use the menu
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       group = vim.api.nvim_create_augroup("nerdtree_no_noice", { clear = true }),
+  --       pattern = "*",
+  --       callback = function()
+  --         local was_in_nerdtree = _G.is_in_nerdtree
+  --         _G.is_in_nerdtree = vim.bo.filetype == "nerdtree"
+  --
+  --         if _G.is_in_nerdtree then
+  --           vim.cmd("NoiceDisable")
+  --           -- require("noice.ui").disable()
+  --
+  --           return
+  --         end
+  --
+  --         if was_in_nerdtree and not _G.is_in_nerdtree then
+  --           vim.cmd("NoiceEnable")
+  --           -- require("noice.ui").enable()
+  --         end
+  --       end,
+  --       desc = "noice toggle for nerdtree",
+  --     })
+  --   end,
+  -- },
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)

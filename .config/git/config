@@ -220,7 +220,7 @@
         && git checkout - > /dev/null 2>&1 \
         && git fetch --tags > /dev/null 2>&1 \
         && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
-        && LOG=$(git lg \"$LAST_SEMVER\"..develop --no-merges) \
+        && LOG=$(git log --oneline \"$LAST_SEMVER\"..develop --no-merges) \
         && [ -n \"$LOG\" ] \
         && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
         || echo \"Safe to merge, no release is in progress.\"
