@@ -337,10 +337,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "authy" # desktop 2-factor!
-# cask "battle-net" # whoa sweet there's a new mac battle.net app (you need to run the installer: `open /usr/local/Caskroom/battle-net/latest/Battle.net-Setup.app`)
-# cask "beardedspice" # keyboard media controls for media sites. Always seems to be broken :/
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
-# cask "bubo" # menubar app that lets you use media and bluetooth keys with spotify web in chrome (but not in firefox, boo!)
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
@@ -456,10 +453,8 @@ brew "zsh" # awesome bash shell replacement
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
 # cask "virtualbox" # virtual machine software (needed by docker-machine at least)
 # cask "virtualbox-extension-pack" # add-on to do stuff you'll always want... except for docker-machine
-# cask "visual-paradigm-ce" # ide for uml (based on eclipse, ew)
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
 # cask "vlc" # watch the videos I download (switchtd to mpv)
-# cask "vpn-by-google-one" # google vpn
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
 # cask "wormhole" # interact with your phone screen from your computer
@@ -501,7 +496,7 @@ mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menub
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
-mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
+# mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Session - Pomodoro Focus Timer", id: 1521432881
 

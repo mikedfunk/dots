@@ -1,3 +1,10 @@
+---@param key nil|table<string>
+---@param values table<string>
+---@return table<string>
+local function addTo(key, values)
+  return vim.list_extend(key or {}, values)
+end
+
 return {
   -- TODO: not working
   -- {
@@ -69,21 +76,19 @@ return {
       -- what a pain in the ass. If I don't use list_extend here, it will
       -- _override_ the previous list, not append to it. This list was already
       -- added to by extras.prettier.
-      opts.formatters_by_ft.blade =
-        vim.list_extend(opts.formatters_by_ft.blade or {}, { "blade-formatter", "rustywind" })
-      opts.formatters_by_ft.javascript =
-        vim.list_extend(opts.formatters_by_ft.javascript or {}, { "rustywind", "eslint" })
-      opts.formatters_by_ft.javascriptreact =
-        vim.list_extend(opts.formatters_by_ft.javascriptreact or {}, { "rustywind", "eslint" })
-      opts.formatters_by_ft.php = vim.list_extend(opts.formatters_by_ft.php or {}, { "phpcbf", "php_cs_fixer" })
-      opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, { "black" })
-      opts.formatters_by_ft.sql = vim.list_extend(opts.formatters_by_ft.sql or {}, { "sqlfluff" })
-      opts.formatters_by_ft.svelte = vim.list_extend(opts.formatters_by_ft.svelte or {}, { "rustywind" })
-      opts.formatters_by_ft.typescript =
-        vim.list_extend(opts.formatters_by_ft.typescript or {}, { "rustywind", "eslint" })
-      opts.formatters_by_ft.typescriptreact =
-        vim.list_extend(opts.formatters_by_ft.typescriptreact or {}, { "rustywind", "eslint" })
-      opts.formatters_by_ft.vue = vim.list_extend(opts.formatters_by_ft.vue or {}, { "rustywind" })
+      local fmt = opts.formatters_by_ft
+      opts.formatters_by_ft = vim.tbl_deep_extend("force", opts.formatters_by_ft, {
+        blade = addTo(fmt.blade, { "blade-formatter", "rustywind" }),
+        javascript = addTo(fmt.javascript, { "rustywind" }),
+        javascriptreact = addTo(fmt.javascriptreact, { "rustywind" }),
+        php = addTo(fmt.php, { "phpcbf", "php_cs_fixer" }),
+        python = addTo(fmt.python, { "black" }),
+        sql = addTo(fmt.sql, { "sqlfluff" }),
+        svelte = addTo(fmt.svelte, { "rustywind" }),
+        typescript = addTo(fmt.typescript, { "rustywind" }),
+        typescriptreact = addTo(fmt.typescriptreact, { "rustywind" }),
+        vue = addTo(fmt.vue, { "rustywind" }),
+      })
 
       ---@type table<string, conform.FormatterUnit[]>
       opts.formatters = vim.tbl_deep_extend("force", opts.formatters, {
@@ -128,42 +133,47 @@ return {
   {
 
     "mfussenegger/nvim-lint",
-    ---@type table<string,table>
-    opts = {
-      linters_by_ft = {
-        editorconfig = { "editorconfig-checker" },
-        gitcommit = { "gitlint" },
-        javascript = { "cspell", "eslint" },
-        javascriptreact = { "cspell", "eslint" },
-        typescript = { "cspell", "eslint" },
-        typescriptreact = { "cspell", "eslint" },
-        make = { "checkmake" },
-        php = { "phpstan", "phpcs", "cspell" },
-        python = { "isort" },
-        sql = { "sqlfluff" },
-      },
-      linters = {
-        phpstan = {
-          "--memory-limit=200M",
-          "--level=9",
+    opts = function(_, opts)
+      local lnt = opts.linters_by_ft
+
+      return vim.tbl_deep_extend("force", opts, {
+        linters_by_ft = {
+          editorconfig = addTo(lnt.editorconfig, { "editorconfig-checker" }),
+          gitcommit = addTo(lnt.gitcommit, { "gitlint" }),
+          javascript = addTo(lnt.javascript, { "cspell" }),
+          javascriptreact = addTo(lnt.javascriptreact, { "cspell" }),
+          typescript = addTo(lnt.typescript, { "cspell" }),
+          typescriptreact = addTo(lnt.typescriptreact, { "cspell" }),
+          make = addTo(lnt.make, { "checkmake" }),
+          php = addTo(lnt.php, { "phpstan", "phpcs", "cspell" }),
+          python = addTo(lnt.python, { "isort" }),
+          sql = addTo(lnt.sql, { "sqlfluff" }),
         },
-        phpcs = {
-          -- This doesn't work because the parser expects stdin :/
-          -- stdin = false,
-          args = {
-            "-q",
-            "--report=json",
-            "--cache",
-            "--warning-severity=3",
-            "-d",
-            "memory_limit=100M",
-            "-d",
-            "xdebug.mode=off",
-            "-",
+        linters = {
+          phpstan = {
+            args = {
+              "--memory-limit=200M",
+              "--level=9",
+            },
+          },
+          phpcs = {
+            -- This doesn't work because the parser expects stdin :/
+            -- stdin = false,
+            args = {
+              "-q",
+              "--report=json",
+              "--cache",
+              "--warning-severity=3",
+              "-d",
+              "memory_limit=100M",
+              "-d",
+              "xdebug.mode=off",
+              "-",
+            },
           },
         },
-      },
-    },
+      })
+    end,
   },
   {
     "kosayoda/nvim-lightbulb",

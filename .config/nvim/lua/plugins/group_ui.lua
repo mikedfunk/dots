@@ -25,6 +25,19 @@ return {
         use_libuv_file_watcher = true,
       },
     },
+    -- keys = {
+    --   {
+    --     "<leader>e",
+    --     function()
+    --       -- TODO: error: mark has invalid line number
+    --       vim.cmd("norm mZ")
+    --       vim.cmd("Neotree")
+    --       vim.cmd("norm `Z")
+    --       vim.cmd("Neotree reveal")
+    --     end,
+    --     desc = "Show Neotree",
+    --   },
+    -- },
   },
   -- Q: Why use nerd-tree instead of neo-tree?
   -- A: Neo-tree has a nasty bug where it won't focus on the current file in
