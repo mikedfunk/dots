@@ -208,7 +208,6 @@ return {
         "editorconfig-checker",
         "emmet-language-server",
         "gitlint",
-        "harper-ls", -- TODO: not in nvim-lspconfig yet
         "isort",
         "json-lsp",
         "lemminx",
@@ -226,6 +225,7 @@ return {
         -- "cbfmt",
         -- "contextive",
         -- "cucumber-language-server", -- https://github.com/tree-sitter/tree-sitter-typescript/issues/244
+        -- "harper-ls", -- TODO: not in nvim-lspconfig yet
         -- "nginx-language-server",
         -- "snyk-ls",
       },

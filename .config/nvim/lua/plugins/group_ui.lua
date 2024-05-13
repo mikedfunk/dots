@@ -241,9 +241,14 @@ return {
     "nvimdev/dashboard-nvim",
     dependencies = {
       {
-        "rubiin/fortune.nvim",
+        "mikedfunk/fortune.nvim",
+        -- dir = vim.fn.expand("~/Code/fortune.nvim"),
         opts = {
           display_format = "mixed",
+          custom_quotes = {
+            short = {},
+            long = require("config.programming_quotes").quotes,
+          },
         },
       },
     },
