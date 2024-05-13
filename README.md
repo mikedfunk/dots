@@ -10,13 +10,11 @@ My Bash, Neovim ([LazyVim](https://www.lazyvim.org)), Git, and other dotfiles. M
 
 Dark mode:
 
-<img width="2560" alt="Screenshot 2024-04-19 at 11 58 58 AM" src="https://github.com/mikedfunk/dots/assets/661038/1339be46-bd53-4c19-9ae2-b879aad1878d">
-
+<img width="2560" alt="Screenshot 2024-05-13 at 1 49 13 PM" src="https://github.com/mikedfunk/dots/assets/661038/16bb53de-46d5-4f90-a0ed-3d198b391642">
 
 Light mode:
 
-<img width="2560" alt="Screenshot 2024-04-19 at 11 59 16 AM" src="https://github.com/mikedfunk/dots/assets/661038/67825b45-9ffb-4d98-82f7-0fcc211bb5fd">
-
+<img width="2560" alt="Screenshot 2024-05-13 at 1 49 43 PM" src="https://github.com/mikedfunk/dots/assets/661038/e54a29ae-d6bc-4e8e-95f5-19bc968d192c">
 
 ## Key files, annotated
 
