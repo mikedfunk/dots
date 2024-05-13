@@ -29,7 +29,7 @@
   "dressing.nvim": { "branch": "master", "commit": "5162edb1442a729a885c45455a07e9a89058be2f" },
   "edgy.nvim": { "branch": "main", "commit": "de79b7d92a5979cd71a9a1d8b6282515345e5055" },
   "fold-preview.nvim": { "branch": "main", "commit": "b7920cb0aba2b48a6b679bff45f98c3ebc0f0b89" },
-  "fortune.nvim": { "branch": "master", "commit": "686e4bede2b7663dd4d3770ee30b2bb8d622de0e" },
+  "fortune.nvim": { "branch": "master", "commit": "b4e129c2660def15ef151893095d48828c505e69" },
   "friendly-snippets": { "branch": "main", "commit": "3e9a3f5a0cfcef1741e352c37bda4e82e5eb846a" },
   "git-conflict.nvim": { "branch": "main", "commit": "4c8e252b87d54d944c1e56bfb477f78b6fdaf661" },
   "github-preview.nvim": { "branch": "main", "commit": "4e30d9eeeabc2750e184b9140059ba38ce7b87b0" },
