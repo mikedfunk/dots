@@ -292,16 +292,16 @@ return {
     },
     opts = {},
   },
-  {
-    -- this expects the extra lazyvim.plugins.extras.ui.mini-animate to be
-    -- enabled in lazy.lua. It just tweaks the timing.
-    "echasnovski/mini.animate",
-    opts = function(_, opts)
-      -- speed it up
-      opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
-      opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
-    end,
-  },
+  -- {
+  --   -- this expects the extra lazyvim.plugins.extras.ui.mini-animate to be
+  --   -- enabled in lazy.lua. It just tweaks the timing.
+  --   "echasnovski/mini.animate",
+  --   opts = function(_, opts)
+  --     -- speed it up
+  --     opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
+  --     opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
+  --   end,
+  -- },
   {
     "echasnovski/mini.indentscope",
     opts = {

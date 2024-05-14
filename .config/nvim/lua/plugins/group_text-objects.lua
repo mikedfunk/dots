@@ -14,7 +14,17 @@ return {
     event = "VeryLazy",
     opts = {
       useDefaultKeymaps = true,
-      disabledKeymaps = { "gc", "gw" },
+      disabledKeymaps = { "gc", "gw", "ai", "ii", "aI", "iI" },
+    },
+  },
+  { "michaeljsmith/vim-indent-object" },
+  {
+    "echasnovski/mini.indentscope",
+    opts = {
+      mappings = {
+        object_scope = "ic",
+        object_scope_with_border = "iC",
+      },
     },
   },
 }
