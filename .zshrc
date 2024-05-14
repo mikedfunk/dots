@@ -368,6 +368,7 @@ alias pc="phing -logger phing.listener.DefaultLogger"
 compdef pc="phing"
 alias pg="phing"
 compdef pg="phing"
+alias news="BROWSER='open %u' newsboat"
 
 k9s () {
     defaults read -g AppleInterfaceStyle &>/dev/null
