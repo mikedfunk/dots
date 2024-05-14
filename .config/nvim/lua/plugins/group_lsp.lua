@@ -196,6 +196,16 @@ return {
       ui = {
         border = "rounded",
       },
+      -- TODO: empty this out. Instead, setup things in nvim-lint, conform,
+      -- nvim-dap, and lspconfig. Then if they are not installed, automatically
+      -- install them with these packages:
+      --
+      -- [ ] https://github.com/rshkarin/mason-nvim-lint
+      -- [ ] https://github.com/LittleEndianRoot/mason-conform
+      -- [X] https://github.com/williamboman/mason-lspconfig.nvim
+      -- [X] https://github.com/jay-babu/mason-nvim-dap.nvim
+      --
+      -- Alternative that I don't like: https://github.com/Frostplexx/mason-bridge.nvim
       ensure_installed = {
         "biome",
         "black",
