@@ -152,6 +152,9 @@ return {
         linters = {
           phpstan = {
             args = {
+              "analyze",
+              "--error-format=json",
+              "--no-progress",
               "--memory-limit=200M",
               "--level=9",
             },
