@@ -238,7 +238,7 @@ return {
     },
   },
   {
-    "nvimdev/dashboard-nvim",
+    "echasnovski/mini.starter",
     dependencies = {
       {
         "mikedfunk/fortune.nvim",
@@ -252,14 +252,72 @@ return {
         },
       },
     },
-    opts = {
-      config = {
-        footer = function()
-          return require("fortune").get_fortune()
+    -- copy/paste the lazy config but move the stats to the header and use
+    -- fortune.nvim for the footer
+    config = function(_, config)
+      -- close Lazy and re-open when starter is ready
+      if vim.o.filetype == "lazy" then
+        vim.cmd.close()
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "MiniStarterOpened",
+          callback = function()
+            require("lazy").show()
+          end,
+        })
+      end
+
+      local starter = require("mini.starter")
+      starter.setup(config)
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        callback = function(ev)
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          local pad_header = string.rep(" ", 18)
+          starter.config.header = starter.config.header
+            .. "\n\n"
+            .. pad_header
+            .. "⚡ Neovim loaded "
+            .. stats.count
+            .. " plugins in "
+            .. ms
+            .. "ms"
+
+          local pad_footer = string.rep(" ", 10)
+          starter.config.footer = pad_footer .. table.concat(require("fortune").get_fortune(), "\n" .. pad_footer)
+
+          -- INFO: based on @echasnovski's recommendation (thanks a lot!!!)
+          if vim.bo[ev.buf].filetype == "starter" then
+            pcall(starter.refresh)
+          end
         end,
-      },
-    },
+      })
+    end,
   },
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   dependencies = {
+  --     {
+  --       "mikedfunk/fortune.nvim",
+  --       -- dir = vim.fn.expand("~/Code/fortune.nvim"),
+  --       opts = {
+  --         display_format = "mixed",
+  --         custom_quotes = {
+  --           short = {},
+  --           long = require("config.programming_quotes").quotes,
+  --         },
+  --       },
+  --     },
+  --   },
+  --   opts = {
+  --     config = {
+  --       footer = function()
+  --         return require("fortune").get_fortune()
+  --       end,
+  --     },
+  --   },
+  -- },
   {
     "kevinhwang91/nvim-bqf",
     dependencies = { "nvim-treesitter/nvim-treesitter" },

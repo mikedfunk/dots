@@ -15,7 +15,7 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
+    { import = "lazyvim.plugins.extras.ui.mini-starter" },
     { import = "lazyvim.plugins.extras.lang.helm" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -35,7 +35,6 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- { import = "lazyvim.plugins.extras.coding.codeium" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
-    { import = "lazyvim.plugins.extras.coding.mini-ai" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.ui.edgy" },

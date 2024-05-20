@@ -3,7 +3,9 @@ return {
     "MeanderingProgrammer/markdown.nvim",
     opts = {
       bullets = { "•", "", "♦", "⋄" },
-      checkbox = { unchecked = "󰄱", checked = "" },
+      checkbox = { unchecked = "󰄱 ", checked = " " },
+      -- checkbox = { unchecked = "□ ", checked = "▣ " },
+      -- checkbox = { unchecked = "󰄱 ", checked = " " },
     },
   },
   -- {
