@@ -241,8 +241,9 @@ return {
     "echasnovski/mini.starter",
     dependencies = {
       {
-        "mikedfunk/fortune.nvim",
+        -- "mikedfunk/fortune.nvim",
         -- dir = vim.fn.expand("~/Code/fortune.nvim"),
+        "rubiin/fortune.nvim",
         opts = {
           display_format = "mixed",
           custom_quotes = {
