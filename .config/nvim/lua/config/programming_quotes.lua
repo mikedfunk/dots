@@ -354,7 +354,7 @@ M.quotes = {
   { "Think twice, code once." },
   { "Three strikes, then refactor.", "", "- Martin Fowler" },
   { "To be a programmer is to develop a carefully managed relationship with error. There’s no getting around it. You either make your accommodations with failure, or the work will become intolerable.", "", "- Ellen Ullman" },
-  { "To come up with thoughtful commits, consider the following:", "", "- Why have I made these changes?", "- What effect have my changes made?", "- Why was the change needed?", "- What are the changes in reference to?", "", "- Natalie Pina " },
+  { "To come up with thoughtful commits, consider the following:", "", "* Why have I made these changes?", "* What effect have my changes made?", "* Why was the change needed?", "* What are the changes in reference to?", "", "- Natalie Pina " },
   { "To iterate is human, to recurse divine.", "", "- L. Peter Deutsch" },
   { "To me programming is more than an important practical art. It is also a gigantic undertaking in the foundations of knowledge.", "", "- Grace Hopper" },
   { "To truly learn, one must open their mind with humility and be willing to admit ignorance." },

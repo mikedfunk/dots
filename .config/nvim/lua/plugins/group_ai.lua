@@ -48,7 +48,7 @@ return {
     opts = function(_, opts)
       local neocodeium_status_component = {
         function()
-          return ""
+          return "󱐋" -- ⚡
         end,
         color = function()
           local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium.options").options.enabled

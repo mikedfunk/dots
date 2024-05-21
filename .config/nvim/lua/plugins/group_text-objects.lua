@@ -1,14 +1,14 @@
 return {
-  {
-    "whatyouhide/vim-textobj-xmlattr",
-    ft = {
-      "jsx",
-      "javascriptreact",
-      "typescriptreact",
-      "html",
-      "xml",
-    },
-  },
+  -- {
+  --   "whatyouhide/vim-textobj-xmlattr",
+  --   ft = {
+  --     "jsx",
+  --     "javascriptreact",
+  --     "typescriptreact",
+  --     "html",
+  --     "xml",
+  --   },
+  -- },
   {
     "chrisgrieser/nvim-various-textobjs",
     event = "VeryLazy",

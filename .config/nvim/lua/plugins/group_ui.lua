@@ -217,7 +217,8 @@ return {
       },
     },
   },
-  { "itchyny/vim-highlighturl", event = "VeryLazy" },
+  -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
+  { "rubiin/highlighturl.nvim", event = "VeryLazy" },
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
@@ -252,6 +253,10 @@ return {
           },
         },
       },
+      {
+        "MaximilianLloyd/ascii.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
+      },
     },
     -- copy/paste the lazy config but move the stats to the header and use
     -- fortune.nvim for the footer
@@ -276,6 +281,9 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           local pad_header = string.rep(" ", 18)
+          local pad_header_ascii = string.rep(" ", 13)
+          starter.config.header = pad_header_ascii
+            .. table.concat(require("ascii").art.planets.planets.saturn, "\n" .. pad_header_ascii)
           starter.config.header = starter.config.header
             .. "\n\n"
             .. pad_header

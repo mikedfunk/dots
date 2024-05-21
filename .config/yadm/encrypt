@@ -47,6 +47,7 @@ Code/saatchi/zed/.editorconfig
 .config/aws/config
 .config/multitail/multitail.conf
 .config/sql-language-server/.sqllsrc.json
+.local/share/db_ui/connections.json
 .edgerc
 .mailmap
 .mylogin.cnf

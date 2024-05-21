@@ -25,7 +25,7 @@ return {
     }, -- expects GITHUB_API_TOKEN env var to be set
     { "windwp/nvim-autopairs", opts = {} }, -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
     -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
-    "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
+    -- "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
