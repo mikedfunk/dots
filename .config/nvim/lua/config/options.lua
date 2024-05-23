@@ -96,14 +96,14 @@ vim.o.updatetime = 100 -- wait time before CursorHold activation
 vim.cmd("packadd! cfilter")
 
 -- vim-cool replacement https://www.reddit.com/r/neovim/comments/zc720y/tip_to_manage_hlsearch/iyvcdf0/
-vim.on_key(function(char)
-  if vim.fn.mode() == "n" then
-    local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
-    if vim.opt.hlsearch:get() ~= new_hlsearch then
-      vim.opt.hlsearch = new_hlsearch
-    end
-  end
-end, vim.api.nvim_create_namespace("auto_hlsearch"))
+-- vim.on_key(function(char)
+--   if vim.fn.mode() == "n" then
+--     local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+--     if vim.opt.hlsearch:get() ~= new_hlsearch then
+--       vim.opt.hlsearch = new_hlsearch
+--     end
+--   end
+-- end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- avoids lag when scrolling
 -- https://github.com/vimpostor/vim-tpipeline#how-do-i-update-the-statusline-on-every-cursor-movement
