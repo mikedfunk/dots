@@ -1,11 +1,11 @@
 return {
+  -- doesn't work. Tmux problem? https://github.com/soulis-1256/eagle.nvim/issues/17
   -- {
-  --   -- doesn't work. Tmux problem? https://github.com/soulis-1256/eagle.nvim/issues/17
   --   "soulis-1256/eagle.nvim",
   --   branch = "main",
   --   config = true,
   -- },
-  -- { "SmiteshP/nvim-navic", opts = { separator = "  " } },
+  { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
   {
     "folke/twilight.nvim",
@@ -15,134 +15,6 @@ return {
     },
     config = true,
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    -- trying switching back to good old nerd-tree instead
-    -- enabled = false,
-    opts = {
-      filesystem = {
-        filtered_items = { hide_dotfiles = false },
-        use_libuv_file_watcher = true,
-      },
-    },
-    -- keys = {
-    --   {
-    --     "<leader>e",
-    --     function()
-    --       -- TODO: error: mark has invalid line number
-    --       vim.cmd("norm mZ")
-    --       vim.cmd("Neotree")
-    --       vim.cmd("norm `Z")
-    --       vim.cmd("Neotree reveal")
-    --     end,
-    --     desc = "Show Neotree",
-    --   },
-    -- },
-  },
-  -- Q: Why use nerd-tree instead of neo-tree?
-  -- A: Neo-tree has a nasty bug where it won't focus on the current file in
-  -- "large" directories. In my case it's all of them. My only workaround is to
-  -- switch back to the buffer, then switch back to neo-tree. This is a pain
-  -- when I'm in a right split. I also can't scroll right - it has this shitty
-  -- right fade-out feature so I can't see the full file name. I also had bugs
-  -- with nvim-tree, so I'm going old-school and using NERDTree for now. I also
-  -- don't use the buffers or git sections of neo-tree.
-  -- {
-  --   "preservim/nerdtree",
-  --   dependencies = {
-  --     {
-  --       "folke/edgy.nvim",
-  --       opts = {
-  --         left = {
-  --           {
-  --             ft = "nerdtree",
-  --             title = "NerdTree",
-  --             pinned = true,
-  --             open = "NERDTreeFind",
-  --           },
-  --         },
-  --       },
-  --     },
-  --     -- this shit is all too slow, I have a need for speed
-  --     -- {
-  --     --   "tiagofumo/vim-nerdtree-syntax-highlight",
-  --     --   init = function()
-  --     --     -- https://github.com/tiagofumo/vim-nerdtree-syntax-highlight?tab=readme-ov-file#mitigating-lag-issues
-  --     --     -- vim.g.NERDTreeLimitedSyntax = 1
-  --     --     vim.g.NERDTreeSyntaxDisableDefaultExtensions = 1
-  --     --     vim.g.NERDTreeSyntaxDisableDefaultExactMatches = 1
-  --     --     vim.g.NERDTreeSyntaxDisableDefaultPatternMatches = 1
-  --     --     vim.g.NERDTreeSyntaxEnabledExtensions = { "c", "h", "c++", "cpp", "php", "rb", "js", "css", "html" } -- enabled extensions with default colors
-  --     --     vim.g.NERDTreeSyntaxEnabledExactMatches = { "node_modules", "favicon.ico" } -- enabled exact matches with default colors
-  --     --     vim.g.NERDTreeHighlightCursorline = 0
-  --     --   end,
-  --     -- },
-  --     -- "ryanoasis/vim-devicons",
-  --     -- {
-  --     --   "Xuyuanp/nerdtree-git-plugin",
-  --     --   init = function()
-  --     --     vim.g.NERDTreeGitStatusConcealBrackets = 1
-  --     --
-  --     --     vim.g.NERDTreeGitStatusIndicatorMapCustom = {
-  --     --       Modified = string.gsub(require("lazyvim.config").icons.git.modified, "%s+", ""),
-  --     --       Staged = string.gsub(require("lazyvim.config").icons.git.added, "%s+", ""),
-  --     --       Untracked = "󱃓",
-  --     --       Renamed = "󰛂",
-  --     --       Unmerged = "",
-  --     --       Deleted = string.gsub(require("lazyvim.config").icons.git.removed, "%s+", ""),
-  --     --       Dirty = "✎",
-  --     --       Ignored = "◌",
-  --     --       Clean = "✓",
-  --     --       Unknown = "󱃓",
-  --     --     }
-  --     --   end,
-  --     -- },
-  --   },
-  --   cmd = { "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus", "NERDTree" },
-  --   keys = {
-  --     {
-  --       "<leader>e",
-  --       function()
-  --         -- this function is empty in the lua interface for some reason
-  --         if vim.api.nvim_exec2("echo g:NERDTree.IsOpen()", { output = true }).output == "1" then
-  --           vim.cmd("NERDTreeToggle")
-  --         else
-  --           vim.cmd("NERDTreeFind")
-  --         end
-  --       end,
-  --       noremap = true,
-  --       desc = "Toggle NERDTree",
-  --     },
-  --   },
-  --   init = function()
-  --     vim.g.NERDTreeDirArrowExpandable = ""
-  --     vim.g.NERDTreeDirArrowCollapsible = ""
-  --     vim.g.NERDTreeQuitOnOpen = 1
-  --
-  --     -- disable noice in nerdtree so I can use the menu
-  --     vim.api.nvim_create_autocmd("FileType", {
-  --       group = vim.api.nvim_create_augroup("nerdtree_no_noice", { clear = true }),
-  --       pattern = "*",
-  --       callback = function()
-  --         local was_in_nerdtree = _G.is_in_nerdtree
-  --         _G.is_in_nerdtree = vim.bo.filetype == "nerdtree"
-  --
-  --         if _G.is_in_nerdtree then
-  --           vim.cmd("NoiceDisable")
-  --           -- require("noice.ui").disable()
-  --
-  --           return
-  --         end
-  --
-  --         if was_in_nerdtree and not _G.is_in_nerdtree then
-  --           vim.cmd("NoiceEnable")
-  --           -- require("noice.ui").enable()
-  --         end
-  --       end,
-  --       desc = "noice toggle for nerdtree",
-  --     })
-  --   end,
-  -- },
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
@@ -164,35 +36,6 @@ return {
   { "folke/which-key.nvim", opts = { window = { border = "rounded" } } },
   { "LazyVim/LazyVim", opts = { ui = { border = "rounded" } } },
   {
-    "folke/tokyonight.nvim",
-    ---@type Config
-    opts = {
-      style = "night",
-      lualine_bold = true, -- bold headers for each section header
-      day_brightness = 0.15, -- high contrast but colorful
-
-      -- jack up all saturation, default is too dull!
-      on_colors = function(colors)
-        local hsluv = require("tokyonight.hsluv")
-        local multiplier = 1.6
-
-        for k, v in pairs(colors) do
-          if type(v) == "string" and v ~= "NONE" then
-            local hsv = hsluv.hex_to_hsluv(v)
-            hsv[2] = hsv[2] * multiplier > 100 and 100 or hsv[2] * multiplier
-            colors[k] = hsluv.hsluv_to_hex(hsv)
-          elseif type(v) == "table" then
-            for kk, vv in pairs(v) do
-              local hsv = hsluv.hex_to_rgb(vv)
-              hsv[2] = hsv[2] * multiplier > 100 and 100 or hsv[2] * multiplier
-              colors[k][kk] = hsluv.rgb_to_hex(hsv)
-            end
-          end
-        end
-      end,
-    },
-  },
-  {
     "cormacrelf/dark-notify",
     config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
@@ -201,21 +44,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "mvllow/modes.nvim",
-    event = "VeryLazy",
-    opts = {
-      ignore_filetypes = {
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "dashboard",
-        "lazy",
-        "lspinfo",
-        "starter",
-      },
-    },
   },
   -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
@@ -242,8 +70,6 @@ return {
     "echasnovski/mini.starter",
     dependencies = {
       {
-        -- "mikedfunk/fortune.nvim",
-        -- dir = vim.fn.expand("~/Code/fortune.nvim"),
         "rubiin/fortune.nvim",
         opts = {
           display_format = "mixed",
@@ -252,10 +78,6 @@ return {
             long = require("config.programming_quotes").quotes,
           },
         },
-      },
-      {
-        "MaximilianLloyd/ascii.nvim",
-        dependencies = { "MunifTanjim/nui.nvim" },
       },
     },
     -- copy/paste the lazy config but move the stats to the header and use
@@ -281,10 +103,19 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           local pad_header = string.rep(" ", 18)
-          local pad_header_ascii = string.rep(" ", 13)
+          local pad_header_ascii = string.rep(" ", 6)
+          local header_ascii = {
+            " ██████   █████                   █████   █████  ███                 ",
+            "░░██████ ░░███                   ░░███   ░░███  ░░░                  ",
+            " ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  ",
+            " ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ ",
+            " ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ ",
+            " ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ ",
+            " █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████",
+            "░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ ",
+          }
           starter.config.header = pad_header_ascii
-            .. table.concat(require("ascii").art.planets.planets.saturn, "\n" .. pad_header_ascii)
-          starter.config.header = starter.config.header
+            .. table.concat(header_ascii, "\n" .. pad_header_ascii)
             .. "\n\n"
             .. pad_header
             .. "⚡ Neovim loaded "
@@ -304,53 +135,12 @@ return {
       })
     end,
   },
-  -- {
-  --   "nvimdev/dashboard-nvim",
-  --   dependencies = {
-  --     {
-  --       "mikedfunk/fortune.nvim",
-  --       -- dir = vim.fn.expand("~/Code/fortune.nvim"),
-  --       opts = {
-  --         display_format = "mixed",
-  --         custom_quotes = {
-  --           short = {},
-  --           long = require("config.programming_quotes").quotes,
-  --         },
-  --       },
-  --     },
-  --   },
-  --   opts = {
-  --     config = {
-  --       footer = function()
-  --         return require("fortune").get_fortune()
-  --       end,
-  --     },
-  --   },
-  -- },
   {
     "kevinhwang91/nvim-bqf",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
-  { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   { "nvim-zh/colorful-winsep.nvim", event = "WinNew", config = true },
-  -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
-  -- { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
-  { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    ft = {
-      "javascriptreact",
-      "typescriptreact",
-      "html",
-    },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ---@type TailwindTools.Option
-    opts = {
-      document_color = { kind = "background" }, -- or inline
-      conceal = { enabled = true },
-    },
-  },
   {
     "nyngwang/NeoZoom.lua",
     cmd = { "NeoZoomToggle", "NeoZoom" },
@@ -379,66 +169,153 @@ return {
       },
     },
   },
-  {
-    "anuvyklack/fold-preview.nvim",
-    event = "VeryLazy",
-    opts = {
-      auto = 400,
-      border = "rounded",
-      default_keybindings = false,
-    },
-  },
-  {
-    "smjonas/live-command.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("live-command").setup({
-        commands = {
-          Norm = { cmd = "norm" },
-        },
-      })
-    end,
-  },
-  {
-    "nacro90/numb.nvim",
-    event = "CmdlineEnter",
-    opts = {
-      show_numbers = true, -- Enable 'number' for the window while peeking
-      show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-    },
-  },
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   dependencies = {
-  --     {
-  --       "eldritch-theme/eldritch.nvim",
-  --       lazy = false,
-  --       priority = 1000,
-  --       opts = {},
-  --     },
-  --   },
-  --   opts = {
-  --     options = { theme = "eldritch" },
-  --   },
-  -- },
-  {
-    "haringsrob/nvim_context_vt",
-    event = "VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      prefix = "↩ ",
-    },
-  },
   { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
   { "b0o/incline.nvim", opts = { hide = { only_win = true } } },
   {
-    "LazyVim/LazyVim",
-    -- dependencies = {
-    --   "RRethy/base16-nvim",
-    --   "eldritch-theme/eldritch.nvim",
-    --   { "mawkler/modicator.nvim", dependencies = { "folke/tokyonight.nvim" }, opts = {} },
-    -- },
-    opts = { colorscheme = "tokyonight" },
+    "folke/noice.nvim",
+    dependencies = {
+      { "smjonas/inc-rename.nvim", config = true },
+    },
+    opts = {
+      ---@type NoicePresets
+      presets = {
+        lsp_doc_border = true,
+        inc_rename = true,
+      },
+      ---@class NoiceConfigViews
+      -- views = {
+      --   notify = {
+      --     backend = "notify_send",
+      --   },
+      -- },
+      -- https://github.com/folke/noice.nvim/discussions/364
+      routes = {
+        {
+          filter = {
+            event = "notify",
+            find = "No information available",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "lsp",
+            find = "snyk",
+          },
+          opts = { skip = true },
+        },
+      },
+    },
+  },
+  {
+    "edkolev/tmuxline.vim",
+    init = function()
+      local function set_tmuxline_theme()
+        if vim.o.background == "dark" then
+          vim.g["tmuxline_theme"] = {
+            a = { "16", "254", "bold" },
+            b = { "247", "236" },
+            c = { "250", "233" },
+            x = { "250", "233" },
+            y = { "247", "236" },
+            z = { "235", "252" },
+            bg = { "247", "234" },
+            win = { "250", "234" },
+            ["win.dim"] = { "244", "234" },
+            cwin = { "231", "31", "bold" },
+            ["cwin.dim"] = { "117", "31" },
+          }
+          vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf") -- apply tmuxline settings and snapshot to file
+
+          return
+        end
+
+        vim.g["tmuxline_theme"] = {
+          a = { "238", "253", "bold" },
+          b = { "255", "238" },
+          c = { "255", "236" },
+          x = { "255", "236" },
+          y = { "255", "238" },
+          z = { "238", "253" },
+          bg = { "16", "254" },
+          win = { "16", "254" },
+          cwin = { "231", "31", "bold" },
+        }
+        vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-light.conf") -- apply tmuxline settings and snapshot to file
+      end
+      set_tmuxline_theme()
+
+      vim.api.nvim_create_autocmd("OptionSet", {
+        group = vim.api.nvim_create_augroup("set_tmuxline_theme", { clear = true }),
+        pattern = "background",
+        callback = set_tmuxline_theme,
+        desc = "set tmuxline theme",
+      })
+
+      vim.g["tmuxline_preset"] = {
+        a = { "#S" }, -- session name |
+        b = {
+          table.concat({
+            "#{cpu_fg_color}#{cpu_icon}#[fg=default]",
+            "#{ram_fg_color}#{ram_icon}#[fg=default]",
+            ("#{battery_color_charge_fg}#[bg=colour%s]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour%s]#{battery_icon_status}#[fg=default]"):format(
+              vim.g.tmuxline_theme.b[2],
+              vim.g.tmuxline_theme.b[2]
+            ),
+            -- .. "#{wifi_icon}",
+          }, " "),
+        },
+        c = { "#(~/.support/tmux-docker-status.sh)" },
+        win = { "#I", "#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}" }, -- unselected tab
+        cwin = { "#I", "#W#{?window_zoomed_flag, ,}" }, -- current tab
+        x = { "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}" }, -- UTC time
+        y = {
+          "#(TZ=Etc/UTC date '+%%R UTC')",
+          "%l:%M %p", -- local time
+        },
+        z = { "%a", "%b %d" }, -- local date
+      }
+    end,
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      -- local navic_component = table.remove(opts.sections.lualine_c, #opts.sections.lualine_c)
+      -- table.remove(opts.sections.lualine_c, #opts.sections.lualine_c) -- filename component
+      local diagnostics_component = table.remove(opts.sections.lualine_c, 2)
+
+      local git_diff_component = table.remove(opts.sections.lualine_x, 5)
+
+      table.insert(opts.sections.lualine_c, 2, git_diff_component)
+      table.insert(opts.sections.lualine_x, 5, diagnostics_component)
+
+      opts.options.disabled_filetypes.winbar = {
+        "DressingInput",
+        "TelescopePrompt",
+        "alpha",
+        "dashboard",
+        "lazy",
+        "lspinfo",
+        "starter",
+      }
+
+      -- opts.winbar = {
+      --   lualine_b = {
+      --     { "filename" },
+      --   },
+      --   lualine_c = {
+      --     navic_component,
+      --   },
+      -- }
+
+      opts.sections.lualine_y = {
+        { "progress" },
+      }
+
+      opts.sections.lualine_z = {
+        { "location" },
+      }
+    end,
   },
 }
