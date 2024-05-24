@@ -308,12 +308,6 @@ return {
     },
     {
       "tpope/vim-abolish",
-      dependencies = {
-        {
-          "folke/which-key.nvim",
-          opts = { defaults = { ["<leader>cR"] = { name = "+coerce" } } },
-        },
-      },
       init = function()
         vim.g.abolish_no_mappings = 1
       end,
@@ -330,11 +324,14 @@ return {
         vim.cmd("iabbrev willREturn willReturn")
         vim.cmd("iabbrev willTHrow willThrow")
 
+        vim.keymap.set("n", "<leader>cR", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+        vim.keymap.set("v", "<leader>cR", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+
         vim.keymap.set(
           "n",
-          "<leader>cR",
+          "<leader>cW",
           "<Plug>(abolish-coerce-word)",
-          { noremap = true, silent = true, desc = "Coerce Word" }
+          { noremap = true, silent = true, desc = "Coerce word" }
         )
       end,
     },
