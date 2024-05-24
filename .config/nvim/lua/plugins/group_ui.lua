@@ -60,6 +60,7 @@ return {
         "TelescopePrompt",
         "alpha",
         "dashboard",
+        "harpoon",
         "lazy",
         "lspinfo",
         "starter",

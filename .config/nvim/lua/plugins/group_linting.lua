@@ -101,11 +101,8 @@ return {
             },
           },
           phpcs = {
-            -- phpcs ships with default rules that change from version to version
-            cmd = "./vendor/bin/phpcs",
-            -- This doesn't work because the parser expects stdin :/
-            -- stdin = false,
             args = {
+              -- works together with stdin-path fix above
               function()
                 return "--stdin-path=" .. vim.fn.expand("%")
               end,
