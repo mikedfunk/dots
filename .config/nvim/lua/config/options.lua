@@ -21,6 +21,7 @@ vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
 vim.o.relativenumber = true -- relative line numbers
 vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
 vim.o.scrolloff = 15
+vim.g.vimsyn_embed = "alpPrj" -- Highlight embedded languages in the strings when working in augroups, lua, perl, python, ruby, and javascript
 
 -- turn off relativenumber in insert mode and others {{{
 local norelative_events = { "InsertEnter", "WinLeave", "FocusLost" }

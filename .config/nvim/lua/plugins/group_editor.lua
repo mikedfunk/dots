@@ -44,6 +44,18 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    -- https://github.com/pysan3/neo-tree.nvim/blob/v4-dev/MIGRATION-v4.md#setup-lazy-for-devs
+    -- branch = "v4-dev",
+    -- dir = vim.fn.expand("~/Code/neo-tree.nvim"),
+    -- version = false,
+    -- dependencies = {
+    --   { "nvim-lua/plenary.nvim" },
+    --   { "MunifTanjim/nui.nvim" },
+    --   { "3rd/image.nvim" },
+    --   { "pysan3/pathlib.nvim" },
+    --   { "nvim-neotest/nvim-nio" },
+    --   { "nvim-tree/nvim-web-devicons" },
+    -- },
     opts = {
       filesystem = {
         filtered_items = { hide_dotfiles = false },
