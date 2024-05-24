@@ -74,14 +74,17 @@ return {
     },
   },
   {
+    -- "zapling/mason-lock.nvim",
+    "mikedfunk/mason-lock.nvim",
+    config = true,
+    dependencies = {
+      "williamboman/mason.nvim",
+    },
+  }, -- doesn't work - error
+  {
     "williamboman/mason.nvim",
-    -- dependencies = {
-    --   { "zapling/mason-lock.nvim", config = true }, -- doesn't work - error
-    -- },
     opts = {
-      ui = {
-        border = "rounded",
-      },
+      ui = { border = "rounded" },
     },
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
