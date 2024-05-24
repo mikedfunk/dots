@@ -16,6 +16,10 @@ return {
           vim.g.matchup_surround_enabled = 1
         end,
       },
+      {
+        "folke/which-key.nvim",
+        opts = { defaults = { ["<leader>P"] = { name = "+peek" } } },
+      },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
     ---@type TSConfig
@@ -27,7 +31,7 @@ return {
       ignore_install = {},
       modules = {},
 
-      indent = { enable = false }, -- use yati instead
+      indent = { enable = false }, -- use yati instead or just disable it
       endwise = { enable = true },
       -- yati = { enable = true, disable = { "jsx" } },
       matchup = { enable = true },

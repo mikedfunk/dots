@@ -14,10 +14,11 @@ return {
       --   root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
       -- })
 
-      -- NOTE: This is only needed if you need to change options or you are
-      -- using a local version of a language server. If it's installed with
-      -- Mason, ensure_installed below is enough.
-      -- NOTE: eslint is handled by a lazyvim extra in ../config/lazy.lua
+      -- NOTE: set up all servers we will use and do not put them in
+      -- `ensure_installed`. `mason-lspconfig.nvim` will automatically install
+      -- them.
+      --
+      -- NOTE: eslint and prettier are handled by a lazyvim extra in ../config/lazy.lua
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
         contextive = {
           root_dir = require("lspconfig.util").root_pattern(".contextive"),
@@ -77,9 +78,7 @@ return {
     -- "zapling/mason-lock.nvim",
     "mikedfunk/mason-lock.nvim",
     config = true,
-    dependencies = {
-      "williamboman/mason.nvim",
-    },
+    dependencies = { "williamboman/mason.nvim" },
   }, -- doesn't work - error
   {
     "williamboman/mason.nvim",
@@ -88,5 +87,6 @@ return {
     },
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
-  -- { "Wansmer/symbol-usage.nvim", event = "LspAttach", opts = { vt_position = "end_of_line" } }, -- buggy - breaks on dropbar
+  -- Buggy and slow when lots of usages. Breaks on dropbar.
+  -- { "Wansmer/symbol-usage.nvim", event = "LspAttach", opts = { vt_position = "end_of_line" } },
 }
