@@ -8,40 +8,6 @@ return {
       -- checkbox = { unchecked = "󰄱 ", checked = " " },
     },
   },
-  -- {
-  --   "lukas-reineke/headlines.nvim",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   ft = { "markdown", "norg", "rmd", "org" },
-  --   -- opts = {
-  --   --   markdown = { fat_headlines = false },
-  --   --   norg = { fat_headlines = false },
-  --   --   rmd = { fat_headlines = false },
-  --   --   org = { fat_headlines = false },
-  --   -- },
-  --   opts = function(_, opts)
-  --     for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
-  --       opts[ft] = {
-  --         fat_headlines = false,
-  --         headline_highlights = {},
-  --         -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
-  --         bullets = {},
-  --       }
-  --       for i = 1, 6 do
-  --         local hl = "Headline" .. i
-  --         vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
-  --         table.insert(opts[ft].headline_highlights, hl)
-  --       end
-  --     end
-  --     return opts
-  --   end,
-  --   config = function(_, opts)
-  --     -- PERF: schedule to prevent headlines slowing down opening a file
-  --     vim.schedule(function()
-  --       require("headlines").setup(opts)
-  --       require("headlines").refresh()
-  --     end)
-  --   end,
-  -- },
   {
     "SidOfc/mkdx",
     ft = "markdown",
