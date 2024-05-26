@@ -20,9 +20,9 @@ return {
       --
       -- NOTE: eslint lsp is handled by a lazyvim extra in ../config/lazy.lua
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
-        contextive = {
-          root_dir = require("lspconfig.util").root_pattern(".contextive"),
-        },
+        -- contextive = {
+        --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
+        -- },
         cucumber_language_server = {},
         flow = {
           -- cmd = { "bunx", "flow", "lsp" },
