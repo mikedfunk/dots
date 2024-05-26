@@ -18,15 +18,16 @@ return {
       -- `ensure_installed`. `mason-lspconfig.nvim` will automatically install
       -- them.
       --
-      -- NOTE: eslint and prettier are handled by a lazyvim extra in ../config/lazy.lua
+      -- NOTE: eslint lsp is handled by a lazyvim extra in ../config/lazy.lua
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
         contextive = {
           root_dir = require("lspconfig.util").root_pattern(".contextive"),
         },
         cucumber_language_server = {},
         flow = {
-          cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
-            or { "npx", "flow", "lsp" },
+          -- cmd = { "bunx", "flow", "lsp" },
+          -- cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
+          --   or { "npx", "flow", "lsp" },
           filetypes = { "javascript", "javascriptreact", "javascript.jsx" },
         },
         phpactor = { enabled = false },
