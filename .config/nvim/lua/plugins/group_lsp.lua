@@ -3,34 +3,26 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = function(_, opts)
-      -- vim.lsp.start({
-      --   name = "contextive",
-      --   cmd = { "Contextive.LanguageServer" },
-      --   root_dir = vim.fs.dirname(vim.fs.find({ ".contextive" }, { upward = true })[1]),
-      -- })
-      -- vim.lsp.start({
-      --   name = "semgrep",
-      --   cmd = { "semgrep", "lsp" },
-      --   root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
-      -- })
-
-      -- NOTE: set up all servers we will use and do not put them in
+      -- NOTE: set up all servers we will use and do *not* put them in
       -- `ensure_installed`. `mason-lspconfig.nvim` will automatically install
       -- them.
       --
       -- NOTE: eslint lsp is handled by a lazyvim extra in ../config/lazy.lua
       opts.servers = vim.tbl_deep_extend("force", opts.servers, {
+        biome = {},
         -- contextive = {
         --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
         -- },
+        cssls = {},
         cucumber_language_server = {},
-        flow = {
-          -- cmd = { "bunx", "flow", "lsp" },
-          -- cmd = vim.fn.filereadable("./node_modules/.bin/flow") == 1 and { "npm", "exec", "flow", "lsp" }
-          --   or { "npx", "flow", "lsp" },
-          filetypes = { "javascript", "javascriptreact", "javascript.jsx" },
-        },
+        flow = {},
         phpactor = { enabled = false },
+        docker_compose_language_service = {},
+        dockerls = {},
+        emmet_language_server = {},
+        jsonls = {},
+        lemminx = {},
+        ruff_lsp = {},
         -- snyk_ls = {
         --   init_options = {
         --     token = os.getenv("SNYK_TOKEN"),
@@ -40,25 +32,15 @@ return {
         --     organization = "leaf-saatchiart",
         --   },
         -- },
+        sqlls = {},
         tailwindcss = {
-          -- https://www.reddit.com/r/neovim/comments/1c784zq/tailwindcss_unusable_inotify_max_events_does/l068l30/
-          -- capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = false } } },
           root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
         },
+        taplo = {},
         tsserver = {
           root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
           single_file_support = false,
         },
-        biome = {},
-        cssls = {},
-        jsonls = {},
-        docker_compose_language_service = {},
-        dockerls = {},
-        emmet_language_server = {},
-        lemminx = {},
-        ruff_lsp = {},
-        sqlls = {},
-        taplo = {},
         yamlls = {},
       })
     end,
@@ -66,9 +48,7 @@ return {
   {
     "kosayoda/nvim-lightbulb",
     opts = {
-      autocmd = {
-        enabled = true,
-      },
+      autocmd = { enabled = true },
       sign = {
         text = "",
         hl = "DiagnosticSignWarn",
@@ -80,7 +60,7 @@ return {
     "mikedfunk/mason-lock.nvim",
     config = true,
     dependencies = { "williamboman/mason.nvim" },
-  }, -- doesn't work - error
+  },
   {
     "williamboman/mason.nvim",
     opts = {

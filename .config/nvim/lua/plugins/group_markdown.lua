@@ -31,7 +31,7 @@ return {
     end,
   },
   {
-    "mickael-menu/zk-nvim",
+    "zk-org/zk-nvim",
     dependencies = {
       {
         "folke/which-key.nvim",

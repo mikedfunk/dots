@@ -21,7 +21,7 @@
   "isort": "5.13.2",
   "js-debug-adapter": "v1.89.0",
   "json-lsp": "4.10.0",
-  "lemminx": "0.26.1",
+  "lemminx": "0.27.0",
   "lua-language-server": "3.9.1",
   "markdownlint": "0.40.0",
   "php-cs-fixer": "v3.57.2",
