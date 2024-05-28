@@ -94,24 +94,23 @@ return {
           all_colors.yellow,
         }
 
-        local kinds = require("lazyvim.config").icons.kinds or {}
-        kinds = vim.tbl_extend("force", kinds, {
+        local kinds = vim.tbl_extend("force", require("lazyvim.config").icons.kinds, {
           buffer = "",
           ["buffer-lines"] = "≡",
           calc = "",
           cmp_jira = "",
-          cmp_tabnine = "󰚩", --  ➒
+          cmp_tabnine = "➒", --  󰚩
           color_names = "",
-          copilot = "",
+          copilot = "", -- 
           dap = "",
           dictionary = "",
           doxygen = "", -- 󰙆
-          emoji = "", -- 
-          git = "",
+          emoji = "☻", --  
+          git = "", -- 
           jira_issues = "",
-          luasnip = "✄",
+          luasnip = "", -- ✄ ✂
           luasnip_choice = "",
-          marksman = "󰓾", -- 🞋
+          marksman = "", -- 🞋 󰓾
           nerdfont = "󰬴",
           nvim_lsp = "ʪ",
           nvim_lsp_document_symbol = "ʪ",
@@ -119,11 +118,12 @@ return {
           nvim_lua = "",
           path = "󰉋", --  
           plugins = "", --  
-          rg = "",
+          rg = "", -- 
+          snippets = "",
           tmux = "",
           treesitter = "",
           ["vim-dadbod-completion"] = "",
-          vsnip = "✄",
+          vsnip = "",
           zk = "",
         })
 
@@ -150,7 +150,10 @@ return {
         local icons = require("lazyvim.config").icons.kinds
 
         if icons[item.kind] then
-          item.kind = icons[item.kind] .. item.kind
+          -- item.kind = icons[item.kind] .. item.kind
+          item.kind = icons[item.kind]
+        else
+          item.kind = string.format("[%s]", item.kind)
         end
 
         -- use icons for source names
