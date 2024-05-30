@@ -22,6 +22,7 @@ vim.o.relativenumber = true -- relative line numbers
 vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
 vim.o.scrolloff = 15
 vim.g.vimsyn_embed = "alpPrj" -- Highlight embedded languages in the strings when working in augroups, lua, perl, python, ruby, and javascript
+vim.cmd("hi link mysql sql")
 
 -- turn off relativenumber in insert mode and others {{{
 local norelative_events = { "InsertEnter", "WinLeave", "FocusLost" }

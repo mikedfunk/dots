@@ -23,7 +23,7 @@
   "json-lsp": "4.10.0",
   "lemminx": "0.27.0",
   "lua-language-server": "3.9.1",
-  "markdownlint": "0.40.0",
+  "markdownlint": "0.41.0",
   "php-cs-fixer": "v3.57.2",
   "php-debug-adapter": "v1.34.0",
   "phpcbf": "3.10.1",
@@ -41,6 +41,7 @@
   "tailwindcss-language-server": "0.0.16",
   "taplo": "0.8.1",
   "typescript-language-server": "4.3.3",
+  "vtsls": "0.2.3",
   "yaml-language-server": "1.14.0",
 
 }
