@@ -172,7 +172,13 @@ return {
   },
   { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
-  { "b0o/incline.nvim", opts = { hide = { only_win = true } } },
+  {
+    "b0o/incline.nvim",
+    opts = {
+      hide = { only_win = true },
+      window = { winhighlight = { active = { Normal = "IncSearch" } } },
+    },
+  },
   {
     "folke/noice.nvim",
     dependencies = {

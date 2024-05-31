@@ -145,7 +145,11 @@ return {
         -- }}}
 
         -- use tailwind highlight colors (must come before changing kind)
-        item = require("tailwind-tools.cmp").lspkind_format(entry, item)
+        local ok, tailwind_tools = pcall(require, "tailwind-tools.cmp")
+
+        if ok then
+          item = tailwind_tools.lspkind_format(entry, item)
+        end
 
         local icons = require("lazyvim.config").icons.kinds
 
