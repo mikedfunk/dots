@@ -19,8 +19,6 @@ return {
         cucumber_language_server = {},
         flow = {},
         phpactor = { enabled = false },
-        docker_compose_language_service = {},
-        dockerls = {},
         emmet_language_server = {},
         jsonls = {},
         lemminx = {},
