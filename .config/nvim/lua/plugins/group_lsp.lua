@@ -3,8 +3,12 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = function(_, opts)
-      opts.diagnostics = { virtual_text = { prefix = "icons" } }
-      opts.capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = false } } }
+      opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities or {}, {
+        workspace = {
+          didChangeWatchedFiles = { dynamicRegistration = false },
+        },
+      })
+
       -- NOTE: set up all servers we will use and do *not* put them in
       -- `ensure_installed`. `mason-lspconfig.nvim` will automatically install
       -- them.
