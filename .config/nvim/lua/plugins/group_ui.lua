@@ -176,7 +176,7 @@ return {
   {
     "folke/noice.nvim",
     dependencies = {
-      { "smjonas/inc-rename.nvim", config = true },
+      { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true },
     },
     opts = {
       ---@type NoicePresets

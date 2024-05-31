@@ -54,24 +54,24 @@ return {
       { "[x", "<Cmd>GitConflictPrevConflict<CR>", desc = "Previous conflict" },
       { "]x", "<Cmd>GitConflictNextConflict<CR>", desc = "Next conflict" },
     },
-    opts = {
-      default_mappings = false,
-      disable_diagnostics = true,
-      list_opener = "Trouble quickfix",
-    },
-    -- opts = function(_, opts)
-    --   vim.api.nvim_create_autocmd("User", {
-    --     group = vim.api.nvim_create_augroup("git_conflict", { clear = true }),
-    --     pattern = "GitConflictDetected",
-    --     command = "GitConflictListQf",
-    --     desc = "List conflicts",
-    --   })
-    --
-    --   return vim.tbl_deep_extend("force", opts, {
-    --     default_mappings = false,
-    --     disable_diagnostics = true,
-    --     -- list_opener = "Trouble quickfix",
-    --   })
-    -- end,
+    -- opts = {
+    --   default_mappings = false,
+    --   disable_diagnostics = true,
+    --   list_opener = "Trouble quickfix",
+    -- },
+    opts = function(_, opts)
+      vim.api.nvim_create_autocmd("User", {
+        group = vim.api.nvim_create_augroup("git_conflict", { clear = true }),
+        pattern = "GitConflictDetected",
+        command = "GitConflictListQf",
+        desc = "List conflicts",
+      })
+
+      return vim.tbl_deep_extend("force", opts, {
+        default_mappings = false,
+        disable_diagnostics = true,
+        -- list_opener = "Trouble quickfix",
+      })
+    end,
   },
 }

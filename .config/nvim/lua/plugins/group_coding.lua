@@ -386,4 +386,5 @@ return {
       return opts
     end,
   },
+  -- { "justinsgithub/wezterm-types" },
 }
