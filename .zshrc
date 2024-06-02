@@ -449,21 +449,36 @@ alias play-alter-aeon="telnet alteraeon.com 23" # :)
 # phpunit {{{
 alias pu="phpunitnotify"
 
-# Public: phpunit coverage
-puc() { pu --coverage-html=./coverage $@ && open coverage/index.html; }
-# alias puc-clover="pu --coverage-clover=./coverage/clover.xml "
+# phpunit coverage
+puc-html() { pu --coverage-html=./coverage $@ && open coverage/index.html; }
+alias puc='pu --coverage-cobertura="coverage/cobertura.xml"'
 alias puf="pu --filter="
 
-# Public: phpunit watch
+# phpunit watch
 puw() {
     noglob ag -l -g \
         '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests|spec|domain|adapter)/.*\.php' \
         | entr -cr \
-        phpdbg -qrr \
+        php \
         -dmemory_limit=2048M \
         -ddisplay_errors=on \
         ./vendor/bin/phpunit \
         --colors=always \
+        $@
+}
+
+# phpunit coverage watch
+pucw() {
+    noglob ag -l -g \
+        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests|spec|domain|adapter)/.*\.php' \
+        | entr -cr \
+        php \
+        -dmemory_limit=2048M \
+        -ddisplay_errors=on \
+        -dxdebug.mode=coverage \
+        ./vendor/bin/phpunit \
+        --colors=always \
+        --coverage-cobertura="coverage/cobertura.xml" \
         $@
 }
 
@@ -505,17 +520,9 @@ alias psr="phpspecnotify"
 alias psd="phpspec describe"
 alias psw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed\" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction -vvv"
 # phpspec coverage
-# psc() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml $@ && open coverage/index.html; }
-psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml $@ && open coverage/index.html; }
+psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
 alias psc="php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
-alias psw-cov="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed\" php -dxdebug.mode=coverage -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml --no-code-generation -vvv"
-# psc-clover() {
-#     php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-clover.yml $@ && node ./clover-to-lcov.js
-#     [[ $? == 0 ]] && noti --message "✅ PhpSpec tests passed" ||
-#         noti --message "❌ PhpSpec tests failed"
-# }
-# phpspec watch with a "pretty" formatter
-alias psw-pretty="psw --format=pretty "
+alias pscw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed and coverage generated\" php -dxdebug.mode=coverage -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml --no-code-generation -vvv"
 # }}}
 
 # pytest {{{

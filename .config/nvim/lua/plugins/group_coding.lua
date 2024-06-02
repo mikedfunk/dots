@@ -394,7 +394,24 @@ return {
   {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
-    config = true,
+    opts = {
+      auto_reload = true,
+      lcov_file = "coverage/lcov.info",
+    },
+    keys = {
+      {
+        "<leader>tc",
+        function()
+          if require("coverage.signs").is_enabled() then
+            require("coverage").clear()
+          else
+            require("coverage").load(true)
+          end
+        end,
+        desc = "Toggle coverage",
+        noremap = true,
+      },
+    },
   },
   -- needed for nvim-coverage. Requires `brew install luajit`
   {
