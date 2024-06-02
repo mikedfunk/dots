@@ -26,7 +26,6 @@ Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.nvim.lua
 Code/saatchi/**/.lazy.lua
-Code/saatchi/**/.jenkinslintrc
 Code/saatchi/**/.envrc
 Code/saatchi/**/.ignore
 Code/saatchi/**/cspell.json

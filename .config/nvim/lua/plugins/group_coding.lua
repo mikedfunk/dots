@@ -394,10 +394,17 @@ return {
   {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
-    opts = {
-      auto_reload = true,
-      lcov_file = "coverage/lcov.info",
-    },
+    opts = function()
+      local colors = require("tokyonight.colors").setup()
+      return {
+        highlights = {
+          covered = { fg = colors.green },
+          uncovered = { fg = colors.red },
+        },
+        auto_reload = true,
+        lcov_file = "coverage/lcov.info",
+      }
+    end,
     keys = {
       {
         "<leader>tc",
