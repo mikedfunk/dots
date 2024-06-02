@@ -20,6 +20,7 @@
 Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
 Code/saatchi/gallery/.prettierrc.json
 Code/saatchi/xdocker/compose.yml
+Code/saatchi/palette/phpspec-coverage**.yml
 
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.neoconf.json
