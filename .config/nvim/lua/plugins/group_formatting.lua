@@ -11,22 +11,21 @@ return {
   -- everything up to run in the order it requires. 🤷
   -- {
   --   "LittleEndianRoot/mason-conform",
-  --   opts = {},
   --   dependencies = {
   --     "stevearc/conform.nvim",
   --     dependencies = "williamboman/mason.nvim",
   --   },
+  --   opts = {},
   -- },
   {
     "stevearc/conform.nvim",
+    -- NOTE: workaround: see above comment about mason-conform which I would rather use
     dependencies = {
       "williamboman/mason.nvim",
       opts = function(_, opts)
         opts.ensure_installed = vim.list_extend(opts.ensure_installed, {
           "blade-formatter",
           "black",
-          "isort",
-          "phpcbf",
           "php-cs-fixer",
           "rustywind",
           "sqlfluff",
@@ -50,7 +49,7 @@ return {
         javascript = addTo(fmt.javascript, { "rustywind" }),
         javascriptreact = addTo(fmt.javascriptreact, { "rustywind" }),
         php = addTo(fmt.php, { "phpcbf", "php_cs_fixer" }),
-        python = addTo(fmt.python, { "black", "isort" }),
+        python = addTo(fmt.python, { "black" }),
         sql = addTo(fmt.sql, { "sqlfluff" }),
         svelte = addTo(fmt.svelte, { "rustywind" }),
         typescript = addTo(fmt.typescript, { "rustywind" }),

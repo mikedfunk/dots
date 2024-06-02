@@ -22,10 +22,11 @@ return {
         cssls = {},
         cucumber_language_server = {},
         flow = {},
-        phpactor = { enabled = false },
+        intelephense = {},
         emmet_language_server = {},
         jsonls = {},
         lemminx = {},
+        phpactor = { enabled = false },
         ruff_lsp = {},
         -- snyk_ls = {
         --   init_options = {
