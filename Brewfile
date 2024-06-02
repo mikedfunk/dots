@@ -278,6 +278,7 @@ brew "libsodium" # needed to build php https://github.com/shivammathur/homebrew-
 brew "libxml2" # needed by php php70 https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "libzip" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "llvm" # used to build php imagick extension properly
+brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugin
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode`
 brew "memcached" # needed by php70 memcached pecl extension

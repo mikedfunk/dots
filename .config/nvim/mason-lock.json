@@ -28,6 +28,7 @@
   "markdownlint": "0.41.0",
   "php-cs-fixer": "v3.58.1",
   "php-debug-adapter": "v1.34.0",
+  "phpcs": "3.10.1",
   "phpstan": "1.11.3",
   "prettier": "3.3.0",
   "ruff-lsp": "0.0.53",

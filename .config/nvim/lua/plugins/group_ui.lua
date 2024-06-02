@@ -176,7 +176,7 @@ return {
     "b0o/incline.nvim",
     opts = {
       hide = { only_win = true },
-      window = { winhighlight = { active = { Normal = "IncSearch" } } },
+      window = { winhighlight = { active = { Normal = "CursorLineSign" } } },
     },
   },
   {

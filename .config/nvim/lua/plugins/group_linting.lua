@@ -101,6 +101,7 @@ return {
             },
           },
           phpcs = {
+            cmd = "./vendor/bin/phpcs",
             args = {
               -- works together with stdin-path fix above
               function()
