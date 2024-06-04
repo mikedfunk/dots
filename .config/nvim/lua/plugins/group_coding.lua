@@ -393,7 +393,10 @@ return {
   -- { "justinsgithub/wezterm-types" },
   {
     "andythigpen/nvim-coverage",
-    dependencies = "nvim-lua/plenary.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/tokyonight.nvim",
+    },
     opts = function()
       local colors = require("tokyonight.colors").setup()
       return {
@@ -402,7 +405,7 @@ return {
           uncovered = { fg = colors.red },
         },
         auto_reload = true,
-        lcov_file = "coverage/lcov.info",
+        lcov_file = "./coverage/lcov.info",
       }
     end,
     keys = {
@@ -415,7 +418,7 @@ return {
             require("coverage").load(true)
           end
         end,
-        desc = "Toggle coverage",
+        desc = "Toggle Coverage",
         noremap = true,
       },
     },
