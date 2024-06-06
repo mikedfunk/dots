@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-```
+```sh
 curl https://raw.githubusercontent.com/mikedfunk/dots/master/install.sh | sh
 ```
 
