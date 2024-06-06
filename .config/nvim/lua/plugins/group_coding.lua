@@ -296,7 +296,6 @@ return {
       "html",
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ---@type TailwindTools.Option
     opts = {
       document_color = { kind = "background" }, -- or inline
       conceal = { enabled = true },
@@ -396,6 +395,13 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "folke/tokyonight.nvim",
+      {
+        -- needed for nvim-coverage PHP cobertura parser. Requires `brew install luajit`
+        "vhyrro/luarocks.nvim",
+        opts = {
+          rocks = { "lua-xmlreader" },
+        },
+      },
     },
     opts = function()
       local colors = require("tokyonight.colors").setup()
@@ -423,12 +429,10 @@ return {
       },
     },
   },
-  -- needed for nvim-coverage. Requires `brew install luajit`
   {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    opts = { rocks = {
-      "lua-xmlreader",
-    } },
+    "idanarye/nvim-impairative",
+    config = function()
+      require("impairative.replicate-unimpaired")()
+    end,
   },
 }

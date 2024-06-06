@@ -181,14 +181,9 @@ return {
   },
   {
     "folke/noice.nvim",
-    dependencies = {
-      { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true },
-    },
     opts = {
-      ---@type NoicePresets
       presets = {
         lsp_doc_border = true,
-        inc_rename = true,
       },
       ---@class NoiceConfigViews
       -- views = {
