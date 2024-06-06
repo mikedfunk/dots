@@ -2,6 +2,9 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+vim.keymap.set("n", "+", "<C-a>", { noremap = true, desc = "Increment" })
+vim.keymap.set("n", "-", "<C-x>", { noremap = true, desc = "Decrement" })
+
 vim.keymap.set("n", "y<c-g>", function()
   local path = vim.fn.expand("%:~:.")
   vim.fn.setreg("+", path)

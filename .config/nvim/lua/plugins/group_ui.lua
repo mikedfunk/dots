@@ -180,6 +180,12 @@ return {
     },
   },
   {
+    "rcarriga/nvim-notify",
+    opts = {
+      timeout = 10000, -- how long the notification stays on the screen
+    },
+  },
+  {
     "folke/noice.nvim",
     opts = {
       presets = {
