@@ -553,7 +553,7 @@ export EDITOR=nvim # aww yeah
 # useful for mc
 export VIEWER="bat --paging=always"
 export LANG=en_US.UTF-8
-KEYTIMEOUT=1 # no vim delay entering normal mode
+# KEYTIMEOUT=1 # no vim delay entering normal mode (but breaks fzf-git)
 # }}}
 
 # docker {{{

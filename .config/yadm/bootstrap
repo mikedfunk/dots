@@ -223,30 +223,13 @@ _update_asdf_plugins() {
 }
 # }}}
 
-# install lazyman (neovim distribution manager) {{{
-_install_lazyman() {
-    [ -f "$HOME"/.config/nvim-Lazyman/lazyman.sh ] && return
-    _log_info "installing lazyvim"
-    git clone https://github.com/doctorfree/nvim-lazyman "$HOME"/.config/nvim-Lazyman
-}
-# }}}
-
-# install lazyvim (neovim distribution) {{{
-_install_lazyvim() {
-    [ -d "$HOME"/.config/nvim ] && return
-    _log_info "Installing lazyvim"
-    git clone https://github.com/LazyVim/starter "$HOME"/.config/nvim
-    rm -rf "$HOME"/.config/nvim/.git
-}
-# }}}
-
 # install neovim version(s) {{{
 _install_neovim_versions() {
     (asdf list neovim | grep --quiet stable) && return
     _log_info "installing neovim stable"
     asdf install neovim stable
     asdf global neovim stable
-    asdf install neovim nightly # but don't activate it by default
+    # asdf install neovim nightly # but don't activate it by default
 }
 # }}}
 
@@ -904,8 +887,6 @@ _bootstrap_all() {
     _install_xcode_command_line_tools
     _install_homebrew_if_its_missing
     _install_update_homebrew_packages
-    # _install_lazyman
-    # _install_lazyvim
     _install_neovim_versions
     _install_php_versions
     _install_node_versions

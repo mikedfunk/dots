@@ -15,7 +15,9 @@
 # zdharma-continuum/zsh-startify # like vim-startify for zsh (neat, but doesn't really help)
 # zsh-users/zsh-history-substring-search # up arrow after typing part of command (not needed with fzf reverse i-search)
 # zsh-users/zsh-syntax-highlighting # colored input... replaced with fast-syntax-highlighting below
+# robbyrussell/oh-my-zsh path:plugins/per-directory-history # press <c-g> to toggle between local and global history
 chitoku-k/fzf-zsh-completions # Add zsh fzf completions for git, kubectl, and more
+junegunn/fzf-git.sh # fzf git helper <c-g><c-f>, etc.
 marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
 mroth/evalcache # speeds up subsequent runs of eval init functions. if you make a change just call `_evalcache_clear`.
 robbyrussell/oh-my-zsh path:lib/functions.zsh # some dependencies for oh-my-zsh plugins
@@ -25,7 +27,6 @@ robbyrussell/oh-my-zsh path:plugins/colorize # Plugin for highlighting file cont
 robbyrussell/oh-my-zsh path:plugins/command-not-found # suggest packages to install if command not found
 robbyrussell/oh-my-zsh path:plugins/gitfast # fix git completion issues https://unix.stackexchange.com/a/204308 downside: this also adds a TON of gxx aliases https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/gitfast it also adds MORE git aliases and functions from the main git plugin https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 robbyrussell/oh-my-zsh path:plugins/jira # simple command-line tool that just opens jira on different pages. No fancy shit.
-robbyrussell/oh-my-zsh path:plugins/per-directory-history # press <c-g> to toggle between local and global history
 robbyrussell/oh-my-zsh path:plugins/vi-mode
 robbyrussell/oh-my-zsh path:plugins/wd/wd.plugin.zsh # warp directory
 romkatv/powerlevel10k # zsh prompt theme (see ~/.p10k.zsh)

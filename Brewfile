@@ -11,10 +11,12 @@
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
 # tap "dbcli/tap" # litecli
+# tap "homebrew/cask" # brew cask
 # tap "jetbrains/utils" # qodana
 # tap "mutagen-io/mutagen"
 # tap "nextdns/tap" # nextdns
 # tap "pokanop/pokanop" # nostromo
+# tap "saulpw/vd" # visidata
 # tap "universal-ctags/universal-ctags" # universal-ctags
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
@@ -22,7 +24,6 @@ tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
 tap "derailed/k9s" # k9s
 tap "grishka/grishka" # neardrop
-tap "homebrew/cask" # brew cask
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 tap "oven-sh/bun" # bun
@@ -198,6 +199,7 @@ tap "pkgxdev/made" # pkgx
 # brew "urlview" # used by <prefix>u tmux urlview plugin
 # brew "vim" # macvim requires xcode. This also allows you to get vim 8 without using a separate tap. (switched back to neovim)
 # brew "virtualhost".sh # (crappy) virtualhost management script
+# brew "visidata" # funky csv viewer
 # brew "vit" # ncurses taskwarrior interface - like tig for taskwarrior (This is cool but I don't really use taskwarrior anymore. Freeform daily task list with notes are more helpful to me.)
 # brew "w3m" # full color image previewer for ranger (but doesn't work in tmux)
 # brew "wifi-password" # get your current wifi password quickly without mucking about with keychain access (install if needed)
