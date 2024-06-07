@@ -172,6 +172,7 @@ M.quotes = {
   { "I believe the hard part of building software to be the specification, design, and testing of this conceptual construct, not the labor of representing it and testing the fidelity of the representation.", "", "- Fred Brooks, No Silver Bullet, 1986" },
   { "I don’t have a problem with someone using their talents to become successful, I just don’t think the highest calling is success. Things like freedom and the expansion of knowledge are beyond success, beyond the personal. Personal success is not wrong, but it is limited in importance, and once you have enough of it it is a shame to keep striving for that, instead of for truth, beauty, or justice.", "", "- Richard Stallman" },
   { "I love deadlines. I like the whooshing sound they make as they fly by.", "", "- Douglas Adams" },
+  { "I really think a champion is defined not by their wins, but how they can recover when they fall.", "", "- Serena Williams" },
   { "I think a lot of new programmers like to use advanced data structures and advanced language features as a way of demonstrating their ability. I call it the lion-tamer syndrome. Such demonstrations are impressive, but unless they actually translate into real wins for the project, avoid them.", "", "- Glyn Williams" },
   { "I would rather die of passion than of boredom.", "", "- Vincent Van Gogh" },
   { "I'm not a great programmer. I'm just a good programmer with great habits.", "", "- Kent Beck" },
