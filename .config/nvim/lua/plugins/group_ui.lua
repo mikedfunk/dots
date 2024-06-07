@@ -182,7 +182,7 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 10000, -- how long the notification stays on the screen
+      timeout = 5000, -- how long the notification stays on the screen
     },
   },
   {

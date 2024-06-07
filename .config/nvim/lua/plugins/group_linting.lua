@@ -89,6 +89,7 @@ return {
           make = addTo(lnt.make, { "checkmake" }),
           php = addTo(lnt.php, { "phpstan", "phpcs", "cspell" }),
           sql = addTo(lnt.sql, { "sqlfluff" }),
+          mysql = addTo(lnt.sql, { "sqlfluff" }),
         },
         linters = {
           phpstan = {

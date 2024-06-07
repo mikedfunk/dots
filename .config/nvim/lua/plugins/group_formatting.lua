@@ -92,9 +92,6 @@ return {
           }),
           require_cwd = true,
         },
-        sqlfluff = {
-          prepend_args = { "--dialect", "mysql" },
-        },
       })
     end,
   },

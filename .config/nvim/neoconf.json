@@ -135,6 +135,11 @@
         ]
       }
     },
+    "sqlls": {
+      "sqlLanguageServer.lint.rules": {
+        "reserved-word-case": "lower"
+      }
+    },
     "vtsls": {
       "vtsls.autoUseWorkspaceTsdk": true
     },

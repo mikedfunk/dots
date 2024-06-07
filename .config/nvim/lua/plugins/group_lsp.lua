@@ -42,6 +42,10 @@ return {
           root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
         },
         taplo = {},
+        tsserver = {
+          root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
+          single_file_support = false,
+        },
         vtsls = {
           root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
           single_file_support = false,
