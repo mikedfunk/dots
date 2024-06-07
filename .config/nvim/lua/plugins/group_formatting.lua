@@ -22,15 +22,15 @@ return {
     -- NOTE: workaround: see above comment about mason-conform which I would rather use
     dependencies = {
       "williamboman/mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = vim.list_extend(opts.ensure_installed, {
+      opts_extend = { "ensure_installed" },
+      opts = {
+        ensure_installed = {
           "blade-formatter",
           "black",
           "php-cs-fixer",
           "rustywind",
-          "sqlfluff",
-        })
-      end,
+        },
+      },
     },
     ---@class ConformOpts
     opts = function(_, opts)
@@ -50,7 +50,6 @@ return {
         javascriptreact = addTo(fmt.javascriptreact, { "rustywind" }),
         php = addTo(fmt.php, { "phpcbf", "php_cs_fixer" }),
         python = addTo(fmt.python, { "black" }),
-        sql = addTo(fmt.sql, { "sqlfluff" }),
         svelte = addTo(fmt.svelte, { "rustywind" }),
         typescript = addTo(fmt.typescript, { "rustywind" }),
         typescriptreact = addTo(fmt.typescriptreact, { "rustywind" }),

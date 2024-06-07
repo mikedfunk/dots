@@ -9,11 +9,6 @@
 .saatchirc
 .support/saatchi/*
 
-# Code/saatchi/queries/**/*.sql
-# Code/saatchi/queries/**/.sqllsrc.json
-# Code/saatchi/uml/**/*.uml
-# Code/saatchi/http/**/*.hurl
-
 .config/git/config-saatchi
 .config/smug/work.yml
 
@@ -47,7 +42,7 @@ Code/saatchi/zed/.editorconfig
 .config/aws/config
 .config/multitail/multitail.conf
 .config/sql-language-server/.sqllsrc.json
-.local/share/db_ui/connections.json
+.local/share/nvim/dadbod_ui/connections.json
 .edgerc
 .mailmap
 .mylogin.cnf
