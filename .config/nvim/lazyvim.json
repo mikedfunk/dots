@@ -2,6 +2,7 @@
   "extras": [
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.mini-surround",
+    "lazyvim.plugins.extras.coding.neogen",
     "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.dial",
@@ -18,6 +19,7 @@
     "lazyvim.plugins.extras.lang.go",
     "lazyvim.plugins.extras.lang.helm",
     "lazyvim.plugins.extras.lang.json",
+    "lazyvim.plugins.extras.lang.php",
     "lazyvim.plugins.extras.lang.ruby",
     "lazyvim.plugins.extras.lang.sql",
     "lazyvim.plugins.extras.lang.tailwind",
@@ -35,7 +37,7 @@
     "lazyvim.plugins.extras.util.dot"
   ],
   "news": {
-    "NEWS.md": "5950"
+    "NEWS.md": "6077"
   },
   "version": 6
 }
