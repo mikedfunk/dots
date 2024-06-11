@@ -48,7 +48,6 @@ return {
         blade = addTo(fmt.blade, { "blade-formatter", "rustywind" }),
         javascript = addTo(fmt.javascript, { "rustywind" }),
         javascriptreact = addTo(fmt.javascriptreact, { "rustywind" }),
-        php = addTo(fmt.php, { "phpcbf", "php_cs_fixer" }),
         python = addTo(fmt.python, { "black" }),
         svelte = addTo(fmt.svelte, { "rustywind" }),
         typescript = addTo(fmt.typescript, { "rustywind" }),

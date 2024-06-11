@@ -41,7 +41,7 @@ return {
         end
 
         if not vim.startswith(output, "{") then
-          vim.notify(output)
+          -- vim.notify(output)
           return {}
         end
 
@@ -87,7 +87,7 @@ return {
           typescriptreact = addTo(lnt.typescriptreact, { "cspell" }),
           markdown = addTo(lnt.markdown, { "markdownlint" }),
           make = addTo(lnt.make, { "checkmake" }),
-          php = addTo(lnt.php, { "phpstan", "phpcs", "cspell" }),
+          php = addTo(lnt.php, { "phpstan", "cspell" }),
         },
         linters = {
           phpstan = {
