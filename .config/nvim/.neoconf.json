@@ -1,4 +1,11 @@
 {
+  "lspconfig": {
+    "lua_ls": {
+      "Lua.diagnostics.globals": [
+        "vim"
+      ]
+    }
+  },
   "neodev": {
     "library": {
       "enabled": true,
