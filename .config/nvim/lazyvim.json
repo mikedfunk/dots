@@ -20,7 +20,6 @@
     "lazyvim.plugins.extras.lang.helm",
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.php",
-    "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.ruby",
     "lazyvim.plugins.extras.lang.sql",
     "lazyvim.plugins.extras.lang.tailwind",

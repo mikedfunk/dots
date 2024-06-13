@@ -352,7 +352,7 @@ M.quotes = {
   { "The best programs are written so that computing machines can perform them quickly and so that human beings can understand them clearly. A programmer is ideally an essayist who works with traditional aesthetic and literary forms as well as mathematical concepts, to communicate the way that an algorithm works and to convince a reader that the results will be correct.", "", "- Donald Knuth" },
   { "The best reaction to “this is confusing, where are the docs” is to rewrite the feature to make it less confusing, not write more docs.", "", "- Jeff Atwood" },
   { "The best way to get the right answer on the internet is not to ask a question; it's to post the wrong answer.", "", "- Cunningham's Law" },
-  { "The best way to have a good idea is to have a lot of ideas.", "", " -Linus Pauling" },
+  { "The best way to have a good idea is to have a lot of ideas.", "", " - Linus Pauling" },
   { "The best way to prepare [to be a programmer] is to write programs, and to study great programs that other people have written. In my case, I went to the garbage cans at the Computer Science Center and fished out listings of their operating system.", "", "- Bill Gates" },
   { "The biggest issue on software teams is making sure everyone understands what everyone else is doing.", "", "- Martin Fowler" },
   { "The central enemy of reliability is complexity.", "", "- Daniel Geer" },

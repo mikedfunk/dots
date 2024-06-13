@@ -30,7 +30,7 @@
   "phpcs": "3.10.1",
   "phpstan": "1.11.4",
   "prettier": "3.3.2",
-  "pyright": "1.1.366",
+  "pyright": "1.1.367",
   "ruff-lsp": "0.0.53",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
