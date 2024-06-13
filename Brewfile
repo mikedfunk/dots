@@ -472,6 +472,7 @@ cask "cold-turkey-blocker" # blocks distracting website access so I can work. ta
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
+cask "flameshot" # another screenshot app, easier and free! <s-cmd-x> to screenshot, "s" to rectangle, "a" to arrow, <cmd-c> to copy and close. MacOS screenshot preview is so much slower - can't keep annotation controls open, keyboard shortcuts don't work, have to manually cancel saving after copying.
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
