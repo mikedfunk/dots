@@ -184,38 +184,6 @@ _install_upgrade_tmux_plugins() {
 }
 # }}}
 
-# Vim (LunarVim) {{{
-
-# install/upgrade lunarvim {{{
-_install_lunarvim() {
-    _has lvim && return
-    _log_info "Installing LunarVim"
-    # https://www.lunarvim.org/01-installing.html#prerequisites
-    # LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
-    bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-
-}
-# }}}
-
-# install/upgrade lvim plugins {{{
-_install_upgrade_lvim_plugins() {
-    _log_info "Installing/upgrading lunarvim plugins"
-    lvim +LvimUpdate +qall
-    # lvim +LspInstall intelephense +qall
-    # lvim +LspInstall sumneko_lua +qall
-    # lvim +LspInstall pyright +qall
-    # lvim +LspInstall flow@0.96.0 +qall
-    # lvim +LspInstall flow@0.126.1 +qall
-    # lvim +LspInstall emmet_ls --update +qall
-    lvim +TSUpdate +qall
-    # lvim +PackerSync +qall
-    # lvim +PackerCompile +qall
-    echo ''
-}
-# }}}
-
-# }}}
-
 # update asdf plugins {{{
 _update_asdf_plugins() {
     _log_info "Updating asdf plugins"
@@ -389,177 +357,120 @@ _install_php_versions() {
     # configure flags and paths for homebrew tools (I probably don't need to configure all of these) {{{
 
     # configure bison {{{
-    PATH="$(brew --prefix bison)/bin:${PATH}"
-    export PATH
+    export PATH="$(brew --prefix bison)/bin:${PATH}"
     # For compilers to find bison you may need to set:
-    LDFLAGS="-L$(brew --prefix bison)/lib ${LDFLAGS}"
-    export LDFLAGS
+    export LDFLAGS="-L$(brew --prefix bison)/lib ${LDFLAGS}"
     # }}}
 
     # configure bzip2 {{{
-    PATH="$(brew --prefix bzip2)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export PATH="$(brew --prefix bzip2)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
     # }}}
 
     # configure curl {{{
-    PATH="$(brew --prefix curl)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix curl)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix curl)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix curl)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix curl)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix curl)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix curl)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix curl)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure freetype {{{
-    PKG_CONFIG_PATH="-I$(brew --prefix freetype)/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH="-I$(brew --prefix freetype)/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure gettext {{{
-    PATH="$(brew --prefix gettext)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix gettext)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix gettext)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export PATH="$(brew --prefix gettext)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix gettext)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix gettext)/include ${CPPFLAGS}"
     # }}}
 
     # configure icu4c (needed for php intl extension) {{{
     # If you need to have icu4c first in your PATH run:
-    PATH="$(brew --prefix icu4c)/bin:${PATH}"
-    PATH="$(brew --prefix icu4c)/bin:${PATH}"
-    PATH="$(brew --prefix icu4c)/sbin:${PATH}"
-    export PATH
+    export PATH="$(brew --prefix icu4c)/bin:${PATH}"
+    export PATH="$(brew --prefix icu4c)/bin:${PATH}"
+    export PATH="$(brew --prefix icu4c)/sbin:${PATH}"
     # For compilers to find icu4c you may need to set:
-    LDFLAGS="-L$(brew --prefix icu4c)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix icu4c)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export LDFLAGS="-L$(brew --prefix icu4c)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix icu4c)/include ${CPPFLAGS}"
     # For pkg-config to find icu4c you may need to set:
-    PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure krb5 (needed to build php) {{{
-    PATH="$(brew --prefix krb5)/bin:${PATH}"
-    PATH="$(brew --prefix krb5)/sbin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix krb5)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix krb5)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix krb5)/bin:${PATH}"
+    export PATH="$(brew --prefix krb5)/sbin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix krb5)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix krb5)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure libiconv (needed to build php) {{{
-    PATH="$(brew --prefix libiconv)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libiconv)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libiconv)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export PATH="$(brew --prefix libiconv)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libiconv)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libiconv)/include ${CPPFLAGS}"
     # }}}
 
     # configure libedit (needed to build php) {{{
-    LDFLAGS="-L$(brew --prefix libedit)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libedit)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export LDFLAGS="-L$(brew --prefix libedit)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libedit)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure libjpeg (needed to build php) {{{
-    PATH="$(brew --prefix libjpeg)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libjpeg)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libjpeg)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix libjpeg)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libjpeg)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libjpeg)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure libmcrypt (needed to build php) {{{
-    PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
     # }}}
 
     # configure libpng (needed to build php) {{{
-    PATH="$(brew --prefix libpng)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libpng)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libpng)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix libpng)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix libpng)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libpng)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libpng)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libpng)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure libxml2 (needed to build php) {{{
-    PATH="$(brew --prefix libxml2)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libxml2)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libxml2)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix libxml2)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix libxml2)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libxml2)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libxml2)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libxml2)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure libzip (needed to build php) {{{
-    PATH="$(brew --prefix libzip)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix libzip)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix libzip)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix libzip)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix libzip)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix libzip)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix libzip)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix libzip)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure openssl@1.1 {{{
-    PATH="$(brew --prefix openssl@1.1)/bin:${PATH}"
-    export PATH
+    export PATH="$(brew --prefix openssl@1.1)/bin:${PATH}"
     # For compilers to find openssl@1.1 you may need to set:
-    LDFLAGS="-L$(brew --prefix openssl@1.1)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix openssl@1.1)/include ${CPPFLAGS}"
-    export CPPFLAGS
+    export LDFLAGS="-L$(brew --prefix openssl@1.1)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix openssl@1.1)/include ${CPPFLAGS}"
     # For pkg-config to find openssl@1.1 you may need to set:
-    PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure postgresql {{{
-    PATH="$(brew --prefix postgresql@14)/bin:${PATH}"
-    export PATH
-    LDFLAGS="-L$(brew --prefix postgresql@14)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix postgresql@14)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix postgresql@14)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export PATH="$(brew --prefix postgresql@14)/bin:${PATH}"
+    export LDFLAGS="-L$(brew --prefix postgresql@14)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix postgresql@14)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix postgresql@14)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # configure zlib (needed to build php) {{{
-    LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    export PKG_CONFIG_PATH
+    export LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
+    export PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
 
     # }}}
@@ -900,11 +811,8 @@ _bootstrap_all() {
     _install_older_kubectl
     _install_erlang_version
     _install_elixir_version
-    _set_zsh_as_shell
     _install_tmux_plugin_manager
     _install_upgrade_tmux_plugins
-    _install_lunarvim
-    _install_upgrade_lvim_plugins
     _update_antidote_plugins
     _apply_hosts_file
     # _enable_terminal_text_formattting
