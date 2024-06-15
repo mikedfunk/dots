@@ -7,9 +7,15 @@
     },
     "emmet_language_server": {
       "emmet": {
-        "include_languages": {
+        "includeLanguages": {
           "javascript": "javascriptreact",
           "typescript": "typescriptreact"
+        },
+        "syntaxProfiles": {
+          "jsx": {
+            "self_closing_tag": true,
+            "filters": "bem"
+          }
         }
       }
     },

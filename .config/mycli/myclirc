@@ -25,7 +25,7 @@ multi_line = False
 destructive_warning = True
 
 # log_file location.
-log_file = ~/.mycli.log
+log_file = ~/.local/share/mycli/mycli.log
 
 # Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
 # and "DEBUG".
@@ -33,7 +33,7 @@ log_level = INFO
 
 # Log every query and its results to a file. Enable this by uncommenting the
 # line below.
-# audit_log = ~/.mycli-audit.log
+# audit_log = ~/.local/share/mycli/mycli-audit.log
 
 # Timing of sql statments and table rendering.
 timing = True

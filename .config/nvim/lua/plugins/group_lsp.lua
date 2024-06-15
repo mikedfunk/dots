@@ -23,7 +23,17 @@ return {
         cucumber_language_server = {},
         flow = {},
         intelephense = {},
-        emmet_language_server = {},
+        emmet_language_server = {
+          filetypes = {
+            "html",
+            "css",
+            "scss",
+            "javascript", -- added
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+          },
+        },
         jsonls = {},
         lemminx = {},
         phpactor = { enabled = false },

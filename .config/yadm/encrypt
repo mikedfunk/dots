@@ -39,7 +39,7 @@ Code/saatchi/zed/.editorconfig
 # .aws/credentials
 # .boto
 .circleci/cli.yml
-.config/aws/config
+.aws/config
 .config/multitail/multitail.conf
 .config/sql-language-server/.sqllsrc.json
 .local/share/nvim/dadbod_ui/connections.json

@@ -150,11 +150,13 @@ export BAT_THEME="TwoDark"
 _has nvim && export MANPAGER='nvim +Man!'
 # _has nvim && export MANPAGER='nvim -u NONE +Man!'
 
+export XDG_RUNTIME_DIR="$TMPDIR"
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_STATE_HOME="$HOME"/.local/state
 export XDG_CACHE_HOME="$HOME"/.cache
 # export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim"
+
 
 export COMPOSE_HTTP_TIMEOUT=120 # default is 60
 export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
@@ -162,7 +164,6 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
 [ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
-[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1103
 ( antidote list | grep dim-an/cod > /dev/null ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
 
 # evaluated startup commands {{{
@@ -213,7 +214,8 @@ set PLANTUML_LIMIT_SIZE=8192
 export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
 
 # [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh" # this seems to conflict with direnv. Direnv seems to wipe the PATH changes this applies.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
 # [[ -f $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh ]] && source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 builtin setopt aliases # weird, this should have already been done :/
 
@@ -227,28 +229,38 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
 export HOMEBREW_NO_ANALYTICS=1
 
 # xdg-ninja (move configs to proper locations) {{{
-export ANDROID_HOME="$XDG_DATA_HOME"/android
+
+# export ANDROID_HOME="$XDG_DATA_HOME"/android
+# export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 # export ASDF_DATA_DIR="${XDG_DATA_HOME}"/asdf
-export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
-export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+# export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+# export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+# export TERMINFO="$XDG_DATA_HOME"/terminfo
+# export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
+export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 export GEM_HOME="${XDG_DATA_HOME}"/gem
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}"/gem
-export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
-# export TERMINFO="$XDG_DATA_HOME"/terminfo
-# export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
-export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
-export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
-export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
-export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
-export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export MYCLI_HISTFILE="$XDG_DATA_HOME/mycli/history"
+export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+unset AWS_SHARED_CREDENTIALS_FILE AWS_CONFIG_FILE
 
 # }}}
 # _has inshellisense && inshellisense --shell zsh # check this later - right now it sucks but they are rewriting it
@@ -313,6 +325,8 @@ _has akamai && _evalcache akamai --zsh
 
 # misc {{{
 alias info="info --vi-keys" # info -> pinfo is like top -> htop
+alias pinfo='pinfo --rcfile=$HOME/.config/pinfo/pinforc'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt config option stopped working :/
@@ -627,6 +641,7 @@ xdebug-on() {
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
 # _has cod && source <(cod init $$ zsh) # does not work well on arm64
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1103
 # }}}
 
 # zsh options {{{
