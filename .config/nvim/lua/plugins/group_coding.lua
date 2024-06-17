@@ -435,4 +435,9 @@ return {
       require("impairative.replicate-unimpaired")()
     end,
   },
+  {
+    "Redoxahmii/json-to-types.nvim",
+    build = "sh install.sh npm",
+    commands = { "ConvertJSONtoLang", "ConvertJSONtoLangBuffer" },
+  },
 }
