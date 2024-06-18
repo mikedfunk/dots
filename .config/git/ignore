@@ -40,3 +40,4 @@ sonar-project.properties
 tags
 tags*
 yarn-error.log
+cobertura.xml
