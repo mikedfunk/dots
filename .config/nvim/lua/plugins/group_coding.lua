@@ -19,11 +19,6 @@ return {
           paths = { "/usr/share/dict/words" },
         },
       },
-      {
-        "petertriho/cmp-git",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = true,
-      }, -- expects GITHUB_API_TOKEN env var to be set
       { "windwp/nvim-autopairs", opts = {} }, -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
       -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
       -- "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
