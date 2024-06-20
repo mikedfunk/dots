@@ -233,3 +233,6 @@ vim.filetype.add({ pattern = { ["Dockerfile%..*"] = "dockerfile" } })
 vim.filetype.add({ pattern = { [".env"] = "sh" } })
 vim.filetype.add({ pattern = { [".env.example"] = "sh" } })
 vim.filetype.add({ pattern = { [".sqlfluff"] = "dosini" } })
+
+-- https://www.lazyvim.org/extras/lang/php#options
+vim.g.lazyvim_php_lsp = "intelephense"

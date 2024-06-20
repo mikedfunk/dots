@@ -11,6 +11,9 @@ vim.keymap.set("n", "y<c-g>", function()
   vim.notify('Copied "' .. path .. '" to the clipboard')
 end, { noremap = true, desc = "Copy path" })
 
+vim.keymap.set("n", "zl", "20l", { noremap = true, desc = "Move right 20" })
+vim.keymap.set("n", "zh", "20h", { noremap = true, desc = "Move left 20" })
+
 vim.keymap.set("n", "go", "<Cmd>Telescope lsp_incoming_calls<CR>", { noremap = true, desc = "Incoming Calls" })
 vim.keymap.set("n", "gO", "<Cmd>Telescope lsp_outgoing_calls<CR>", { noremap = true, desc = "Outgoing Calls" })
 

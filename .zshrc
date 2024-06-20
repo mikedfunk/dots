@@ -206,7 +206,7 @@ export AUTO_NTFY_DONE_IGNORE=(
 lessc () { rougify highlight $@ | \less -R -M }
 export GITWEB_PROJECTROOT="$HOME/Code"
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
-export PSQL_PAGER="pspg"
+export PSQL_PAGER="pspg --clipboard-app=3"
 
 set PLANTUML_LIMIT_SIZE=8192
 
@@ -332,6 +332,7 @@ alias be="bundle exec"
 alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt config option stopped working :/
 alias k="kubectl"
 compdef k="kubectl"
+alias pspg="pspg --clipboard-app=3"
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh

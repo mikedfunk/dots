@@ -22,7 +22,6 @@ return {
         cssls = {},
         cucumber_language_server = {},
         flow = {},
-        intelephense = {},
         emmet_language_server = {
           filetypes = {
             "html",
@@ -36,7 +35,6 @@ return {
         },
         jsonls = {},
         lemminx = {},
-        phpactor = { enabled = false },
         -- snyk_ls = {
         --   init_options = {
         --     token = os.getenv("SNYK_TOKEN"),
