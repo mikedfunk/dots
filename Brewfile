@@ -55,6 +55,7 @@ tap "pkgxdev/made" # pkgx
 # brew "colortail" # tail with support for colors (I use multitail)
 # brew "composer" # php dependency management (now installed via phpenv)
 # brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems.
+# brew "csvq" # jq for csv
 # brew "ctags" # allows jumping to function/class definitions, etc. in vim (I use universal-ctags)
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "desk" # shell workspace manager. (I use direnv instead)

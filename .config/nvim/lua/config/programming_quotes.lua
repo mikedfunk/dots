@@ -282,7 +282,7 @@ M.quotes = {
   { "No, you can’t force other people to change. You can, however, change just about everything else. And usually, that’s enough.", "", "- Aaron Swartz" },
   { "Not all change is an improvement, but all improvement requires change.", "", "- Larry Garfield" },
   { "Not all eyes that notice bugs in Open Source code belong to saints who will report or repair them in the interest of the public good.", "", "- Martin Fowler" },
-  { "Nothing is more permanent than a temporary solution.", "", "- Albert Einstein" },
+  { "Nothing is more permanent than a temporary solution.", "", "- Russian Proverb" },
   { "Now I'm a pretty lazy person and am prepared to work quite hard in order to avoid work.", "", "- Martin Fowler" },
   { "Object-oriented programming is an exceptionally bad idea which could only have originated in California.", "", "- Edsger W. Dijkstra" },
   { "Observe that for the programmer, as for the chef, the urgency of the patron may govern the scheduled completion of the task, but it cannot govern the actual completion. An omelette, promised in two minutes, may appear to be progressing nicely. But when it has not set in two minutes, the customer has two choices - wait or eat it raw. Software customers have had the same choices.", "", "- Fred Brooks" },
