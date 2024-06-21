@@ -1,9 +1,9 @@
 {
   "bash-language-server": "5.4.0",
-  "biome": "1.8.1",
+  "biome": "1.8.2",
   "black": "24.4.2",
   "checkmake": "0.2.2",
-  "cspell": "8.9.0",
+  "cspell": "8.9.1",
   "css-lsp": "4.10.0",
   "cucumber-language-server": "1.6.0",
   "delve": "v1.22.1",
@@ -15,7 +15,7 @@
   "gitlint": "0.19.1",
   "gofumpt": "v0.6.0",
   "goimports": "v0.22.0",
-  "gopls": "v0.15.3",
+  "gopls": "v0.16.0",
   "hadolint": "v2.12.0",
   "helm-ls": "v0.0.17",
   "intelephense": "1.10.4",
@@ -42,7 +42,7 @@
   "stylua": "v0.20.0",
   "tailwindcss-language-server": "0.0.16",
   "taplo": "0.8.1",
-  "vtsls": "0.2.3",
+  "vtsls": "0.2.4",
   "vue-language-server": "2.0.21",
   "yaml-language-server": "1.15.0"
 }
