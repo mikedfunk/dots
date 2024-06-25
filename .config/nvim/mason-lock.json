@@ -40,9 +40,9 @@
   "sqlfluff": "3.0.7",
   "sqlls": "1.7.0",
   "stylua": "v0.20.0",
-  "tailwindcss-language-server": "0.0.16",
+  "tailwindcss-language-server": "0.0.17",
   "taplo": "0.8.1",
   "vtsls": "0.2.4",
-  "vue-language-server": "2.0.21",
+  "vue-language-server": "2.0.22",
   "yaml-language-server": "1.15.0"
 }

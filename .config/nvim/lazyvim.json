@@ -33,8 +33,7 @@
     "lazyvim.plugins.extras.ui.mini-indentscope",
     "lazyvim.plugins.extras.ui.mini-starter",
     "lazyvim.plugins.extras.ui.treesitter-context",
-    "lazyvim.plugins.extras.util.dot",
-    "lazyvim.plugins.extras.util.octo"
+    "lazyvim.plugins.extras.util.dot"
   ],
   "news": {
     "NEWS.md": "6077"
