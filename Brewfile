@@ -20,6 +20,7 @@
 # tap "universal-ctags/universal-ctags" # universal-ctags
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
+tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
 tap "derailed/k9s" # k9s
@@ -217,6 +218,7 @@ tap "pkgxdev/made" # pkgx
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "akamai" # interact with akamai caching
+brew "algolia" # search cli
 brew "antidote" # zsh plugin system like antigen but faster
 brew "apr" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "apr-util" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1

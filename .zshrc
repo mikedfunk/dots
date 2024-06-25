@@ -309,6 +309,7 @@ compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 [ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
 
 _has kubectl && _evalcache kubectl completion zsh
+_has algolia && _evalcache algolia completion zsh
 # _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
 # _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
 
