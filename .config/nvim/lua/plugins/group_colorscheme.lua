@@ -16,15 +16,17 @@ return {
             local multiplier = 1.6
 
             for k, v in pairs(colors) do
-              if type(v) == "string" and v ~= "NONE" then
+              if type(v) == "string" and v ~= "NONE" and (k == "fg" or k == "bg" or k == "sp") then
                 local hsv = hsluv.hex_to_hsluv(v)
                 hsv[2] = hsv[2] * multiplier > 100 and 100 or hsv[2] * multiplier
                 colors[k] = hsluv.hsluv_to_hex(hsv)
               elseif type(v) == "table" then
                 for kk, vv in pairs(v) do
-                  local hsv = hsluv.hex_to_rgb(vv)
-                  hsv[2] = hsv[2] * multiplier > 100 and 100 or hsv[2] * multiplier
-                  colors[k][kk] = hsluv.rgb_to_hex(hsv)
+                  if type(vv) == "string" and vv ~= "NONE" and (kk == "fg" or kk == "bg" or kk == "sp") then
+                    local hsv = hsluv.hex_to_rgb(vv)
+                    hsv[2] = hsv[2] * multiplier > 100 and 100 or hsv[2] * multiplier
+                    colors[k][kk] = hsluv.rgb_to_hex(hsv)
+                  end
                 end
               end
             end
