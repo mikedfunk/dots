@@ -151,6 +151,8 @@ return {
         if icons[item.kind] then
           -- item.kind = icons[item.kind] .. item.kind
           item.kind = icons[item.kind]
+        elseif item.kind == nil then
+          item.kind = ""
         else
           item.kind = string.format("[%s]", item.kind)
         end

@@ -1,10 +1,10 @@
 return {
   -- doesn't work. Tmux problem? https://github.com/soulis-1256/eagle.nvim/issues/17
-  -- {
-  --   "soulis-1256/eagle.nvim",
-  --   branch = "main",
-  --   config = true,
-  -- },
+  {
+    "soulis-1256/eagle.nvim",
+    branch = "main",
+    config = true,
+  },
   { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
   {
@@ -37,6 +37,7 @@ return {
   { "LazyVim/LazyVim", opts = { ui = { border = "rounded" } } },
   {
     "cormacrelf/dark-notify",
+    lazy = false,
     config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
         onchange = function()
@@ -47,6 +48,15 @@ return {
   },
   -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
+  {
+    "lewis6991/gitsigns.nvim",
+    dependencies = { "seanbreckenridge/gitsigns-yadm.nvim" },
+    opts = {
+      _on_attach_pre = function(_, callback)
+        require("gitsigns-yadm").yadm_signs(callback)
+      end,
+    },
+  },
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
@@ -68,7 +78,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.starter",
+    "nvimdev/dashboard-nvim",
     dependencies = {
       {
         "rubiin/fortune.nvim",
@@ -81,59 +91,70 @@ return {
         },
       },
     },
-    -- copy/paste the lazy config but move the stats to the header and use
-    -- fortune.nvim for the footer
-    config = function(_, config)
-      -- close Lazy and re-open when starter is ready
+    -- copy/paste from lazyvim config except for header and footer
+    opts = function()
+      local logo = {
+        " ██████   █████                   █████   █████  ███                 ",
+        "░░██████ ░░███                   ░░███   ░░███  ░░░                  ",
+        " ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  ",
+        " ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ ",
+        " ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ ",
+        " ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ ",
+        " █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████",
+        "░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ ",
+      }
+
+      logo = vim.list_extend(vim.split(string.rep("\n", 8), "\n"), logo)
+      local stats = require("lazy").stats()
+      local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms", "" })
+
+      local opts = {
+        theme = "doom",
+        hide = {
+          -- this is taken care of by lualine
+          -- enabling this messes up the actual laststatus setting after loading a file
+          statusline = false,
+        },
+        config = {
+          header = logo,
+          -- stylua: ignore
+          center = {
+            { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
+            { action = "ene | startinsert",                              desc = " New File",        icon = " ", key = "n" },
+            { action = 'lua LazyVim.pick("oldfiles")()',                 desc = " Recent Files",    icon = " ", key = "r" },
+            { action = 'lua LazyVim.pick("live_grep")()',                desc = " Find Text",       icon = " ", key = "g" },
+            { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
+            { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
+            { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
+            { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
+            { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
+          },
+          footer = function()
+            return require("fortune").get_fortune()
+          end,
+        },
+      }
+
+      for _, button in ipairs(opts.config.center) do
+        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+        button.key_format = "  %s"
+      end
+
+      -- open dashboard after closing lazy
       if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "MiniStarterOpened",
+        vim.api.nvim_create_autocmd("WinClosed", {
+          pattern = tostring(vim.api.nvim_get_current_win()),
+          once = true,
           callback = function()
-            require("lazy").show()
+            vim.schedule(function()
+              vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+            end)
           end,
         })
       end
 
-      local starter = require("mini.starter")
-      starter.setup(config)
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
-        callback = function(ev)
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          local pad_header = string.rep(" ", 18)
-          local pad_header_ascii = string.rep(" ", 6)
-          local header_ascii = {
-            " ██████   █████                   █████   █████  ███                 ",
-            "░░██████ ░░███                   ░░███   ░░███  ░░░                  ",
-            " ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  ",
-            " ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ ",
-            " ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ ",
-            " ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ ",
-            " █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████",
-            "░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ ",
-          }
-          starter.config.header = pad_header_ascii
-            .. table.concat(header_ascii, "\n" .. pad_header_ascii)
-            .. "\n\n"
-            .. pad_header
-            .. "⚡ Neovim loaded "
-            .. stats.count
-            .. " plugins in "
-            .. ms
-            .. "ms"
-
-          local pad_footer = string.rep(" ", 10)
-          starter.config.footer = pad_footer .. table.concat(require("fortune").get_fortune(), "\n" .. pad_footer)
-
-          -- INFO: based on @echasnovski's recommendation (thanks a lot!!!)
-          if vim.bo[ev.buf].filetype == "starter" then
-            pcall(starter.refresh)
-          end
-        end,
-      })
+      return opts
     end,
   },
   {
