@@ -2,20 +2,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
-    opts = function(_, opts)
-      opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities or {}, {
-        workspace = {
-          didChangeWatchedFiles = { dynamicRegistration = false },
-        },
-      })
-
-      -- NOTE: set up all servers we will use and do *not* put them in
-      -- `ensure_installed`. `mason-lspconfig.nvim` will automatically install
-      -- them.
-      --
-      -- NOTE: eslint lsp is handled by a lazyvim extra in ../config/lazy.lua
-      opts.servers = vim.tbl_deep_extend("force", opts.servers, {
-        biome = {},
+    opts = {
+      servers = {
+        -- biome = {},
         -- contextive = {
         --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
         -- },
@@ -46,20 +35,20 @@ return {
         -- },
         sqlls = {},
         tailwindcss = {
-          root_dir = require("lspconfig.util").root_pattern("tailwind.config.js"),
+          root_dir = function(pattern)
+            return require("lspconfig.util").root_pattern("tailwind.config.js")(pattern)
+          end,
         },
         taplo = {},
-        -- tsserver = {
-        --   root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
-        --   single_file_support = false,
-        -- },
         vtsls = {
-          root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json"),
+          root_dir = function(pattern)
+            return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(pattern)
+          end,
           single_file_support = false,
         },
         yamlls = {},
-      })
-    end,
+      },
+    },
   },
   {
     "kosayoda/nvim-lightbulb",

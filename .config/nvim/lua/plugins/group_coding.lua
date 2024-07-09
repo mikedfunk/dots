@@ -294,13 +294,13 @@ return {
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
-      document_color = { kind = "background" }, -- or inline
+      document_color = { kind = "background" }, -- "inline"|"background"|"foreground"
       conceal = { enabled = true },
     },
   },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
   -- { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
-  { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
+  -- { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
   { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   {
     "haringsrob/nvim_context_vt",
