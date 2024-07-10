@@ -4,7 +4,7 @@ return {
     ---@class PluginLspOpts
     opts = {
       servers = {
-        -- biome = {},
+        biome = {},
         -- contextive = {
         --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
         -- },
