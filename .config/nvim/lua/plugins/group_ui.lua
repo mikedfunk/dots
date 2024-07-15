@@ -33,7 +33,7 @@ return {
       })
     end,
   },
-  { "folke/which-key.nvim", opts = { window = { border = "rounded" } } },
+  { "folke/which-key.nvim", opts = { win = { border = "rounded" } } },
   { "LazyVim/LazyVim", opts = { ui = { border = "rounded" } } },
   {
     "cormacrelf/dark-notify",

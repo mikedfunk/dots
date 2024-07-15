@@ -2,10 +2,10 @@ return {
   {
     "MeanderingProgrammer/markdown.nvim",
     opts = {
-      bullets = { "•", "", "⬩", "⋄" },
-      checkbox = { unchecked = "󰄱 ", checked = " " },
-      -- checkbox = { unchecked = "□ ", checked = "▣ " },
-      -- checkbox = { unchecked = "󰄱 ", checked = " " },
+      bullet = { icons = { "•", "", "⬩", "⋄" } },
+      checkbox = { unchecked = { icon = "󰄱 " }, checked = { icon = " " } },
+      -- checkbox = { unchecked = { icon = "□ " }, checked = { icon = "▣ " } },
+      -- checkbox = { unchecked = { icon = "󰄱 " }, checked = { icon = " " } },
     },
   },
   {
@@ -44,7 +44,7 @@ return {
     dependencies = {
       {
         "folke/which-key.nvim",
-        opts = { defaults = { ["<leader>z"] = { name = "+zettelkasten" } } },
+        opts = { spec = { ["<leader>z"] = { name = "+zettelkasten" } } },
       },
       "nvim-treesitter/nvim-treesitter",
     },
@@ -93,7 +93,7 @@ return {
       {
         "folke/which-key.nvim",
         opts = {
-          defaults = {
+          spec = {
             ["<leader>m"] = "+markdown",
             ["<leader>m'"] = "Toggle quote",
             ["<leader>m/"] = "Italic",

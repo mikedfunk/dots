@@ -18,7 +18,7 @@ return {
       },
       {
         "folke/which-key.nvim",
-        opts = { defaults = { ["<leader>P"] = "+peek" } },
+        opts = { spec = { ["<leader>P"] = "+peek" } },
       },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },

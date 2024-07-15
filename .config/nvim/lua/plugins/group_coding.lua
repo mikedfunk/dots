@@ -240,7 +240,7 @@ return {
       "MunifTanjim/nui.nvim",
       {
         "folke/which-key.nvim",
-        opts = { defaults = { ["<leader>a"] = { name = "+ai" } } },
+        opts = { spec = { ["<leader>a"] = { name = "+ai" } } },
       },
     },
     -- expects OPENAI_API_KEY env var to be set
@@ -357,7 +357,7 @@ return {
     dependencies = {
       {
         "folke/which-key.nvim",
-        opts = { defaults = { ["<leader>A"] = { name = "+alternate" } } },
+        opts = { spec = { ["<leader>A"] = { name = "+alternate" } } },
       },
     },
     lazy = false,
