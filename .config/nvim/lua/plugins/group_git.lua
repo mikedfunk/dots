@@ -60,12 +60,12 @@ return {
     --   list_opener = "Trouble quickfix",
     -- },
     opts = function(_, opts)
-      vim.api.nvim_create_autocmd("User", {
-        group = vim.api.nvim_create_augroup("git_conflict", { clear = true }),
-        pattern = "GitConflictDetected",
-        command = "GitConflictListQf",
-        desc = "List conflicts",
-      })
+      -- vim.api.nvim_create_autocmd("User", {
+      --   group = vim.api.nvim_create_augroup("git_conflict", { clear = true }),
+      --   pattern = "GitConflictDetected",
+      --   command = "GitConflictListQf",
+      --   desc = "List conflicts",
+      -- })
 
       return vim.tbl_deep_extend("force", opts, {
         default_mappings = false,

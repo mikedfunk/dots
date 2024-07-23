@@ -23,7 +23,7 @@ return {
     ---@class ConformOpts
     opts = function(_, opts)
       -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-      opts.format.timeout_ms = 20000
+      opts.format = vim.tbl_deep_extend('force', opts.format or {}, { timeout_ms = 20000 })
       opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, {
         "black",
       })
