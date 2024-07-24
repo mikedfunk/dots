@@ -13,7 +13,8 @@ vim.keymap.set(
   "<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>",
   { noremap = true, buffer = true, desc = "Split Docblock" }
 )
-require("which-key").register({ Ps = { "Split Docblock" } })
+-- require("which-key").register({ Ps = { "Split Docblock" } })
+require("which-key").add({ { "<leader>Ps", desc = "Split Docblock" } })
 
 -- improve php highlights {{{
 vim.cmd("hi link phpDocTags phpDefine")
