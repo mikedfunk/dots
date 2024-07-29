@@ -25,6 +25,7 @@
           "phpVersion": "7.4.7",
           "shortOpenTag": false
         },
+        "compatibility.preferPsalmPhpstanPrefixedAnnotations": "phpstan",
         "diagnostics": {
           "enable": true,
           "run": "onSave"

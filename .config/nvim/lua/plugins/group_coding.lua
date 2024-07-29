@@ -342,15 +342,10 @@ return {
   { "tpope/vim-apathy", event = "VeryLazy" },
   { "sickill/vim-pasta", event = "BufRead" },
   {
-    -- TODO: switch to https://github.com/Wansmer/treesj ?
-    "AndrewRadev/splitjoin.vim",
-    branch = "main",
+    -- Alternative: https://github.com/Wansmer/treesj and AndrewRadev/splitjoin.vim
+    "echasnovski/mini.splitjoin",
     event = "VeryLazy",
-    init = function()
-      vim.g["splitjoin_php_method_chain_full"] = 1
-      vim.g["splitjoin_quiet"] = 1
-      -- vim.g['splitjoin_trailing_comma'] = require 'saatchiart.plugin_configs'.should_enable_trailing_commas() and 1 or 0
-    end,
+    opts = {},
   },
   {
     "tpope/vim-projectionist",
