@@ -50,6 +50,7 @@ Code/saatchi/zed/.editorconfig
 .netrc
 .private_vars.sh
 .ssh/{config,keys}
+.kube/config
 .support/hosts.json
 .warprc
 Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
