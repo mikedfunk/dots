@@ -44,6 +44,7 @@ M.quotes = {
   { "A program that produces incorrect results twice as fast is infinitely slower.", "", "- John Ousterhout" },
   { "A programming language is for thinking about programs, not for expressing programs you've already thought of. It should be a pencil, not a pen.", "", "- Paul Graham" },
   { "A ship in port is safe, but that is not what ships are for. Sail out to sea and do new things.", "", "- Grace Hopper" },
+  { "A smooth sea never made a skilled sailor", "", "- Franklin D. Roosevelt" },
   { "A test is the first user of your code.", "", "Use its feedback to guide you what to do.", "", "- The Pragmatic Programmer" },
   { "A typical software project can present more opportunities to learn from mistakes than some people get in a lifetime.", "", "- Steve McConnell" },
   { "Abstraction is not about vagueness, it is about being precise at a new semantic level.", "", "- Rob Pike" },
