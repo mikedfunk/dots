@@ -20,6 +20,7 @@
 # tap "universal-ctags/universal-ctags" # universal-ctags
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
+tap "abhinav/tap" # git-spice
 tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
@@ -252,6 +253,7 @@ brew "gh" # new github cli
 brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
+brew "git-spice" # stacked PR manager
 brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 brew "glab" # like gh for gitlab
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1

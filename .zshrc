@@ -318,7 +318,10 @@ _has algolia && _evalcache algolia completion zsh
 #  $ scp file username@<TAB><TAB>:/<TAB>
 zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
 zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
+
 _has akamai && _evalcache akamai --zsh
+[ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
+
 # }}}
 
 # functions and aliases {{{
@@ -333,6 +336,9 @@ alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt 
 alias k="kubectl"
 compdef k="kubectl"
 alias pspg="pspg --clipboard-app=3"
+# use git-spice without conflicting cli. gs is already used by ghostscript, which is a dependency of imagemagick
+gsp() { $(brew --prefix git-spice)/bin/gs $@; }
+compdef gsp="gs"
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh

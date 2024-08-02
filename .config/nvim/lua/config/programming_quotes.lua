@@ -4,6 +4,7 @@ M.quotes = {
   -- 2. and some more from https://defprogramming.com
   -- 3. some more quotes from @codewisdom@twitter.com
   -- 4. https://programming-quotesapi.vercel.app/api/random
+  -- 5. https://www.reddit.com/r/quotes/
   -- { "'select' isn't broken.", "", "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application.", "", "- The Pragmatic Programmer" },
   -- { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
   -- { "All loops are infinite ones for faulty RAM modules." },
