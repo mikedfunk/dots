@@ -257,6 +257,7 @@ _install_php_74() {
     yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
     # latest xdebug 3.2 is php 8.0+ only
     yes "" | "${PICKLE}" install xdebug@3.1.5 && (echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini)
+    yes "" | "${PICKLE}" install intl && (echo 'zend_extension="intl.so"' >"${PHP_PATH}"/conf.d/06_intl.ini)
     echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages

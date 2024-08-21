@@ -152,8 +152,6 @@ vim.opt.list = false
 vim.cmd("highlight! Comment cterm=italic, gui=italic") -- italic comments https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
 vim.cmd("highlight! Special cterm=italic, gui=italic")
 
--- vim.lsp.set_log_level("debug") -- enable lsp debug logging - you can open the log with :lua vim.cmd('e'..vim.lsp.get_log_path()) or tail -f ~/.local/state/nvim/lsp.log
-
 -- https://www.reddit.com/r/neovim/comments/opipij/guide_tips_and_tricks_to_reduce_startup_and/
 local disabled_built_ins = {
   "netrw",
@@ -212,6 +210,7 @@ vim.g["markdown_fenced_languages"] = {
 -- }}}
 
 -- lsp config {{{
+-- vim.lsp.set_log_level("debug") -- enable lsp debug logging - you can open the log with :lua vim.cmd('e'..vim.lsp.get_log_path()) or tail -f ~/.local/state/nvim/lsp.log
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
@@ -219,6 +218,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = "rounded",
 })
+
+-- vim.lsp.inlay_hint.enable()
 
 vim.diagnostic.config({
   float = { border = "rounded" },

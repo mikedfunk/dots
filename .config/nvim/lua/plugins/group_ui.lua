@@ -192,7 +192,30 @@ return {
     },
   },
   { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
-  { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
+  -- { "AstroNvim/astrocommunity", import = "astrocommunity.split-and-window.mini-map" },
+  {
+    "Isrothy/neominimap.nvim",
+    lazy = false,
+    init = function()
+      vim.g.neominimap = {
+        auto_enable = false,
+        excluded_filetypes = {
+          "DressingInput",
+          "TelescopePrompt",
+          "alpha",
+          "dashboard",
+          "harpoon",
+          "lazy",
+          "lspinfo",
+          "starter",
+          "help",
+        },
+      }
+    end,
+    keys = {
+      { "<leader>um", "<Cmd>Neominimap toggle<CR>", desc = "Toggle Minimap" },
+    },
+  },
   {
     "b0o/incline.nvim",
     opts = {

@@ -25,6 +25,11 @@
           "phpVersion": "7.4.7",
           "shortOpenTag": false
         },
+        "codeLens.implementations.enable": true,
+        "codeLens.overrides.enable": true,
+        "codeLens.parent.enable": true,
+        "codeLens.references.enable": true,
+        "codeLens.usages.enable": true,
         "compatibility.preferPsalmPhpstanPrefixedAnnotations": "phpstan",
         "diagnostics": {
           "enable": true,
