@@ -327,8 +327,8 @@ return {
         vim.cmd("iabbrev willREturn willReturn")
         vim.cmd("iabbrev willTHrow willThrow")
 
-        vim.keymap.set("n", "<leader>cR", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
-        vim.keymap.set("v", "<leader>cR", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+        vim.keymap.set("n", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+        vim.keymap.set("v", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
 
         vim.keymap.set(
           "n",
