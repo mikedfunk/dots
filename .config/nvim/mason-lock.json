@@ -33,9 +33,9 @@
   "phpcs": "3.10.2",
   "phpstan": "1.12.1",
   "prettier": "3.3.3",
-  "pyright": "1.1.378",
-  "rubocop": "1.66.0",
-  "ruby-lsp": "0.17.16",
+  "pyright": "1.1.379",
+  "rubocop": "1.66.1",
+  "ruby-lsp": "0.17.17",
   "ruff": "0.6.3",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
@@ -47,6 +47,6 @@
   "tailwindcss-language-server": "0.0.24",
   "taplo": "0.9.3",
   "vtsls": "0.2.5",
-  "yaml-language-server": "1.15.0",
-
+  "vue-language-server": "2.1.6",
+  "yaml-language-server": "1.15.0"
 }

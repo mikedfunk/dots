@@ -517,12 +517,10 @@ _install_node_versions() {
 
     # legacy, gallery:
     (asdf list nodejs | grep --quiet 9.11.2) || asdf install nodejs 9.11.2
-    # legacy react:
-    (asdf list nodejs | grep --quiet 12.22.7) || asdf install nodejs 12.22.7
     # zed
     (asdf list nodejs | grep --quiet 6.7.0) || asdf install nodejs 6.7.0
-    # easel: NOTE: npm will not work on this node version!
-    (asdf list nodejs | grep --quiet 15.4.0) || asdf install nodejs 15.4.0
+    # easel
+    (asdf list nodejs | grep --quiet 21.7.3) || asdf install nodejs 21.7.3
     (asdf list nodejs | grep --quiet latest) || asdf install nodejs latest
 
     asdf global nodejs latest
