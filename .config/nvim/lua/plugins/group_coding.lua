@@ -21,7 +21,7 @@ return {
       },
       { "windwp/nvim-autopairs", opts = {} }, -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
       -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
-      "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
+      -- "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -140,11 +140,11 @@ return {
         -- }}}
 
         -- use tailwind highlight colors (must come before changing kind)
-        local ok, tailwind_tools = pcall(require, "tailwind-tools.cmp")
-
-        if ok then
-          item = tailwind_tools.lspkind_format(entry, item)
-        end
+        -- local ok, tailwind_tools = pcall(require, "tailwind-tools.cmp")
+        --
+        -- if ok then
+        --   item = tailwind_tools.lspkind_format(entry, item)
+        -- end
 
         local icons = require("lazyvim.config").icons.kinds
 
@@ -234,47 +234,47 @@ return {
       table.insert(opts.sections.lualine_x, neocodeium_status_component)
     end,
   },
-  {
-    "Bryley/neoai.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      {
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>a", group = "+ai" } } },
-      },
-    },
-    -- expects OPENAI_API_KEY env var to be set
-    opts = {
-      models = {
-        {
-          name = "openai",
-          -- model = "gpt-3.5-turbo",
-          model = "gpt-4",
-          params = nil,
-        },
-      },
-    },
-    cmd = {
-      "NeoAI",
-      "NeoAIOpen",
-      "NeoAIClose",
-      "NeoAIToggle",
-      "NeoAIContext",
-      "NeoAIContextOpen",
-      "NeoAIContextClose",
-      "NeoAIInject",
-      "NeoAIInjectCode",
-      "NeoAIInjectContext",
-      "NeoAIInjectContextCode",
-    },
-    keys = {
-      { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
-      { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
-      { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
-      { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
-      { "<Leader>ag", desc = "NeoAI Commit Message" },
-    },
-  },
+  -- {
+  --   "Bryley/neoai.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     {
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --     },
+  --   },
+  --   -- expects OPENAI_API_KEY env var to be set
+  --   opts = {
+  --     models = {
+  --       {
+  --         name = "openai",
+  --         -- model = "gpt-3.5-turbo",
+  --         model = "gpt-4",
+  --         params = nil,
+  --       },
+  --     },
+  --   },
+  --   cmd = {
+  --     "NeoAI",
+  --     "NeoAIOpen",
+  --     "NeoAIClose",
+  --     "NeoAIToggle",
+  --     "NeoAIContext",
+  --     "NeoAIContextOpen",
+  --     "NeoAIContextClose",
+  --     "NeoAIInject",
+  --     "NeoAIInjectCode",
+  --     "NeoAIInjectContext",
+  --     "NeoAIInjectContextCode",
+  --   },
+  --   keys = {
+  --     { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
+  --     { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
+  --     { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
+  --     { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
+  --     { "<Leader>ag", desc = "NeoAI Commit Message" },
+  --   },
+  -- },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -285,19 +285,19 @@ return {
       })
     end,
   },
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    ft = {
-      "javascriptreact",
-      "typescriptreact",
-      "html",
-    },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      document_color = { kind = "background" }, -- "inline"|"background"|"foreground"
-      conceal = { enabled = true },
-    },
-  },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   ft = {
+  --     "javascriptreact",
+  --     "typescriptreact",
+  --     "html",
+  --   },
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = {
+  --     document_color = { kind = "background" }, -- "inline"|"background"|"foreground"
+  --     conceal = { enabled = true },
+  --   },
+  -- },
   -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
   -- { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
   -- { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },

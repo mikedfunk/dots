@@ -23,7 +23,7 @@ return {
     ---@class ConformOpts
     opts = function(_, opts)
       -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-      opts.default_format_opts = vim.tbl_deep_extend('force', opts.default_format_opts or {}, { timeout_ms = 20000 })
+      opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, { timeout_ms = 20000 })
       opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, {
         "black",
       })
@@ -66,5 +66,10 @@ return {
         require_cwd = true,
       }
     end,
+  },
+  {
+    "ChrisLetter/cspell-ignore",
+    opts = { cspell_path = "./cspell.json" },
+    commands = { "CspellIgnore" },
   },
 }

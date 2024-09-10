@@ -5,12 +5,6 @@ return {
       "LiadOz/nvim-dap-repl-highlights",
       dependencies = {
         "mfussenegger/nvim-dap",
-        {
-          "nvim-treesitter/nvim-treesitter",
-          opts = {
-            ensure_installed = { "dap_repl" },
-          },
-        },
       },
       config = true,
     },

@@ -8,6 +8,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
+  concurrency = 8, -- https://github.com/AstroNvim/AstroNvim/issues/2402#issuecomment-1859258140
   ui = {
     border = "rounded",
   },

@@ -19,8 +19,8 @@
   "goimports": "v0.24.0",
   "gopls": "v0.16.1",
   "hadolint": "v2.12.0",
-  "helm-ls": "v0.0.22",
-  "intelephense": "1.12.5",
+  "helm-ls": "v0.1.0",
+  "intelephense": "1.12.6",
   "isort": "5.13.2",
   "js-debug-adapter": "v1.93.0",
   "json-lsp": "4.10.0",
@@ -31,12 +31,11 @@
   "php-debug-adapter": "v1.35.0",
   "phpactor": "2024.06.30.0",
   "phpcs": "3.10.2",
-  "phpstan": "1.12.1",
+  "phpstan": "1.12.3",
   "prettier": "3.3.3",
   "pyright": "1.1.379",
   "rubocop": "1.66.1",
   "ruby-lsp": "0.17.17",
-  "ruff": "0.6.3",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.9.0",
@@ -48,5 +47,6 @@
   "taplo": "0.9.3",
   "vtsls": "0.2.5",
   "vue-language-server": "2.1.6",
-  "yaml-language-server": "1.15.0"
+  "yaml-language-server": "1.15.0",
+
 }
