@@ -214,10 +214,14 @@ return {
     opts = function(_, opts)
       local neocodeium_status_component = {
         function()
-          return "󱐋" -- ⚡
+          return "󱐋" -- ⚡ 󰲋 󰲌
+          -- local on = "󰲋"
+          -- local off = "󰲌"
+          -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
+          -- return is_neocodeium_enabled and on or off
         end,
         color = function()
-          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium.options").options.enabled
+          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
           local colors = require("tokyonight.colors").setup()
 
           return {
