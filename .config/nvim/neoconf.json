@@ -44,12 +44,8 @@
             "tags": {}
           }
         },
-        "rename": {
-          "namespaceMode": "all"
-        },
-        "telemetry": {
-          "enabled": false
-        },
+        "rename.namespaceMode": "all",
+        "telemetry.enabled": false,
         "files": {
           "associations": [
             "*.php",

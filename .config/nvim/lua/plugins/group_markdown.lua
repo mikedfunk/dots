@@ -109,6 +109,7 @@ return {
             { "<leader>mL", desc = "Quickfix links" },
             { "<leader>ms", desc = "Strikethrough" },
             { "<leader>mt", desc = "Toggle checkbox" },
+
             { "<leader>ml", group = "+list" },
             { "<leader>mll", desc = "Toggle list" },
             { "<leader>mln", desc = "Wrap link" },
