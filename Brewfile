@@ -12,6 +12,7 @@
 # tap "codekitchen/pipeline" # pipeline
 # tap "dbcli/tap" # litecli
 # tap "homebrew/cask" # brew cask
+# tap "jannis-baum/tap" # vivify
 # tap "jetbrains/utils" # qodana
 # tap "mutagen-io/mutagen"
 # tap "nextdns/tap" # nextdns
@@ -204,6 +205,7 @@ tap "pkgxdev/made" # pkgx
 # brew "virtualhost".sh # (crappy) virtualhost management script
 # brew "visidata" # funky csv viewer
 # brew "vit" # ncurses taskwarrior interface - like tig for taskwarrior (This is cool but I don't really use taskwarrior anymore. Freeform daily task list with notes are more helpful to me.)
+# brew "vivify" # simple markdown previewer. Requires tap.
 # brew "w3m" # full color image previewer for ranger (but doesn't work in tmux)
 # brew "wifi-password" # get your current wifi password quickly without mucking about with keychain access (install if needed)
 # brew "xdebug-osx" # xdebug toggler for homebrew php (which I don't currently use)

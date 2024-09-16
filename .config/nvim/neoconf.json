@@ -25,27 +25,42 @@
           "phpVersion": "7.4.7",
           "shortOpenTag": false
         },
-        "codeLens.implementations.enable": true,
-        "codeLens.overrides.enable": true,
-        "codeLens.parent.enable": true,
-        "codeLens.references.enable": true,
-        "codeLens.usages.enable": true,
-        "compatibility.preferPsalmPhpstanPrefixedAnnotations": "phpstan",
-        "diagnostics": {
-          "enable": true,
-          "run": "onSave"
+        "codeLens": {
+          "implementations": {
+            "enable": true
+          },
+          "overrides": {
+            "enable": true
+          },
+          "parent": {
+            "enable": true
+          },
+          "references": {
+            "enable": true
+          },
+          "usages": {
+            "enable": true
+          }
+        },
+        "compatibility": {
+          "preferPsalmPhpstanPrefixedAnnotations": "phpstan"
         },
         "completion": {
           "fullyQualifyGlobalConstantsAndFunctions": true,
-          "insertUseDeclaration": true
+          "insertUseDeclaration": true,
+          "suggestObjectOperatorStaticMethods": false
         },
         "phpdoc": {
           "classTemplate": {
             "tags": {}
           }
         },
-        "rename.namespaceMode": "all",
-        "telemetry.enabled": false,
+        "rename": {
+          "namespaceMode": "all"
+        },
+        "telemetry": {
+          "enabled": false
+        },
         "files": {
           "associations": [
             "*.php",
@@ -144,12 +159,18 @@
       }
     },
     "sqlls": {
-      "sqlLanguageServer.lint.rules": {
-        "reserved-word-case": "lower"
+      "sqlLanguageServer": {
+        "lint": {
+          "rules": {
+            "reserved-word-case": "lower"
+          }
+        }
       }
     },
     "vtsls": {
-      "vtsls.autoUseWorkspaceTsdk": true
+      "vtsls": {
+        "autoUseWorkspaceTsdk": true
+      }
     },
     "yamlls": {
       "flags": {

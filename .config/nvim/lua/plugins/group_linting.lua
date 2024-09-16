@@ -17,6 +17,7 @@ return {
         vim.tbl_deep_extend("force", require("mason-nvim-lint.mapping").nvimlint_to_package, {
           checkmake = "checkmake",
           ["editorconfig-checker"] = "editorconfig-checker",
+          ["markdownlint-cli2"] = "markdownlint-cli2",
           gitlint = "gitlint",
         })
     end,

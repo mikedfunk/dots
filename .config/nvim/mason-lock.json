@@ -26,7 +26,10 @@
   "json-lsp": "4.10.0",
   "lemminx": "0.27.1",
   "lua-language-server": "3.10.6",
+  "markdown-toc": "1.2.0",
   "markdownlint": "0.41.0",
+  "markdownlint-cli2": "0.14.0",
+  "marksman": "2023-12-09",
   "nginx-language-server": "0.8.0",
   "php-cs-fixer": "v3.64.0",
   "php-debug-adapter": "v1.35.0",
@@ -49,5 +52,6 @@
   "taplo": "0.9.3",
   "vtsls": "0.2.5",
   "vue-language-server": "2.1.6",
-  "yaml-language-server": "1.15.0"
+  "yaml-language-server": "1.15.0",
+  "zk": "v0.14.1"
 }
