@@ -22,7 +22,6 @@ return {
       },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
-    ---@type TSConfig
     opts = {
       auto_install = true,
 

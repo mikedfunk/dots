@@ -174,6 +174,12 @@ return {
         opts = {
           silent = true,
         },
+        dependencies = {
+          {
+            "folke/which-key.nvim",
+            opts = { spec = { { "<leader>a", group = "+ai" } } },
+          },
+        },
         keys = {
           { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
@@ -244,7 +250,7 @@ return {
   --     "MunifTanjim/nui.nvim",
   --     {
   --       "folke/which-key.nvim",
-  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --       opts = { spec = { { "<leader>a", group = "+AI" } } },
   --     },
   --   },
   --   -- expects OPENAI_API_KEY env var to be set
@@ -283,11 +289,7 @@ return {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end,
+    opts = {},
   },
   -- {
   --   "luckasRanarison/tailwind-tools.nvim",
@@ -345,12 +347,8 @@ return {
   },
   { "tpope/vim-apathy", event = "VeryLazy" },
   { "sickill/vim-pasta", event = "BufRead" },
-  {
-    -- Alternative: https://github.com/Wansmer/treesj and AndrewRadev/splitjoin.vim
-    "echasnovski/mini.splitjoin",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- Alternative: https://github.com/Wansmer/treesj and AndrewRadev/splitjoin.vim
+  { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
   {
     "tpope/vim-projectionist",
     dependencies = {
@@ -382,8 +380,32 @@ return {
 
       table.insert(opts.groups.markdown, checkboxes)
 
+      opts.dials_by_ft.php = "php"
+      opts.groups.php = opts.groups.php or {}
+
+      table.insert(opts.groups.php, augend.constant.new({ elements = { "public", "private", "protected" } }))
+      table.insert(opts.groups.php, augend.constant.new({ elements = { "abstract", "final" } }))
+      table.insert(
+        opts.groups.php,
+        augend.constant.new({
+          elements = { "&&", "||" },
+          word = false,
+          cyclic = true,
+        })
+      )
+      table.insert(
+        opts.groups.php,
+        augend.constant.new({ elements = { "true", "false" }, word = false, cyclic = true })
+      )
+      table.insert(opts.groups.php, augend.integer.alias.decimal)
+      table.insert(opts.groups.php, augend.date.alias["%Y-%m-%d"])
+
       return opts
     end,
+    keys = {
+      -- simple hack to force lazy load of Dial first
+      { "<CR>", "<Cmd>norm <C-a><CR>", noremap = true, desc = "Dial" },
+    },
   },
   -- { "justinsgithub/wezterm-types" },
   {

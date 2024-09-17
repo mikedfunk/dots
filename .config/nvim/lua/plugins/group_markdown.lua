@@ -1,19 +1,16 @@
 return {
-  {
-    "epilande/checkbox-cycle.nvim",
-    ft = "markdown",
-    opts = { states = { "[ ]", "[x]", "[-]" } },
-    keys = {
-      { "<CR>", "<Cmd>CheckboxCycleNext<CR>", desc = "Checkbox Next", ft = { "markdown" }, mode = { "n", "v" } },
-    },
-  },
+  -- Doesn't work (mkdp#install() not found). Just use one that works instead.
   { "iamcco/markdown-preview.nvim", enabled = false },
   {
     "wallpants/github-preview.nvim",
+    dependencies = {
+      "folke/which-key.nvim",
+      opts = { spec = { { "<leader>m", group = "+markdown" } } },
+    },
     ft = "markdown",
     cmd = { "GithubPreviewStart", "GithubPreviewToggle", "GithubPreviewStop" },
     keys = {
-      { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", noremap = true, desc = "Preview Markdown" },
+      { "<Leader>mp", "<Cmd>GithubPreviewToggle<CR>", buffer = true, noremap = true, desc = "Preview Markdown" },
     },
     opts = {},
   },
