@@ -173,6 +173,7 @@ return {
         event = "VeryLazy",
         opts = {
           silent = true,
+          -- show_label = false,
         },
         dependencies = {
           {
@@ -183,7 +184,7 @@ return {
         keys = {
           { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
-            "<c-g>",
+            "<a-f>",
             function()
               require("neocodeium").accept()
             end,
@@ -191,7 +192,23 @@ return {
             desc = "Codeium Accept",
           },
           {
-            "<c-;>",
+            "<a-w>",
+            function()
+              require("neocodeium").accept_word()
+            end,
+            mode = "i",
+            desc = "Codeium Accept Word",
+          },
+          {
+            "<a-l>",
+            function()
+              require("neocodeium").accept_line()
+            end,
+            mode = "i",
+            desc = "Codeium Accept Line",
+          },
+          {
+            "<a-n>",
             function()
               require("neocodeium").cycle(1)
             end,
@@ -199,7 +216,7 @@ return {
             desc = "Next Codeium Completion",
           },
           {
-            "<c-,>",
+            "<a-p>",
             function()
               require("neocodeium").cycle(-1)
             end,
@@ -207,7 +224,7 @@ return {
             desc = "Prev Codeium Completion",
           },
           {
-            "<c-x>",
+            "<a-c>",
             function()
               require("neocodeium").clear()
             end,
@@ -403,8 +420,7 @@ return {
       return opts
     end,
     keys = {
-      -- simple hack to force lazy load of Dial first
-      { "<CR>", "<Cmd>norm <C-a><CR>", noremap = true, desc = "Dial" },
+      { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
     },
   },
   -- { "justinsgithub/wezterm-types" },

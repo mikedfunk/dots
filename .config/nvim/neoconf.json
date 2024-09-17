@@ -26,19 +26,7 @@
           "shortOpenTag": false
         },
         "codeLens": {
-          "implementations": {
-            "enable": true
-          },
-          "overrides": {
-            "enable": true
-          },
-          "parent": {
-            "enable": true
-          },
           "references": {
-            "enable": true
-          },
-          "usages": {
             "enable": true
           }
         },

@@ -1,10 +1,4 @@
 return {
-  -- doesn't work. Tmux problem? https://github.com/soulis-1256/eagle.nvim/issues/17
-  {
-    "soulis-1256/eagle.nvim",
-    branch = "main",
-    config = true,
-  },
   { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
   {
