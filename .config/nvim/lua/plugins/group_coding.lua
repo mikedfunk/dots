@@ -21,7 +21,6 @@ return {
       },
       { "windwp/nvim-autopairs", opts = {} }, -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
       -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
-      -- "luckasRanarison/tailwind-tools.nvim", -- this is also defined in group_ui.lua
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -44,7 +43,10 @@ return {
       opts.sources[1].priority = 1000
       -- opts.sources[1].entry_filter = no_comments_or_text -- this breaks emmet-language-server
 
-      table.insert(opts.sources, { name = "nvim_lsp_signature_help", entry_filter = no_comments_or_text })
+      -- table.insert(opts.sources, { name = "nvim_lsp_signature_help", entry_filter = no_comments_or_text })
+      -- table.insert(opts.sources, { name = "dap-repl"})
+      -- table.insert(opts.sources, { name = "dapui_watches"})
+      -- table.insert(opts.sources, { name = "dapui_hover"})
       table.insert(opts.sources, { name = "treesitter", entry_filter = no_comments_or_text })
       table.insert(opts.sources, { name = "emoji" })
       table.insert(opts.sources, { name = "cmp_jira" })
@@ -250,47 +252,6 @@ return {
       table.insert(opts.sections.lualine_x, neocodeium_status_component)
     end,
   },
-  -- {
-  --   "Bryley/neoai.nvim",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     {
-  --       "folke/which-key.nvim",
-  --       opts = { spec = { { "<leader>a", group = "+AI" } } },
-  --     },
-  --   },
-  --   -- expects OPENAI_API_KEY env var to be set
-  --   opts = {
-  --     models = {
-  --       {
-  --         name = "openai",
-  --         -- model = "gpt-3.5-turbo",
-  --         model = "gpt-4",
-  --         params = nil,
-  --       },
-  --     },
-  --   },
-  --   cmd = {
-  --     "NeoAI",
-  --     "NeoAIOpen",
-  --     "NeoAIClose",
-  --     "NeoAIToggle",
-  --     "NeoAIContext",
-  --     "NeoAIContextOpen",
-  --     "NeoAIContextClose",
-  --     "NeoAIInject",
-  --     "NeoAIInjectCode",
-  --     "NeoAIInjectContext",
-  --     "NeoAIInjectContextCode",
-  --   },
-  --   keys = {
-  --     { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
-  --     { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
-  --     { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
-  --     { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
-  --     { "<Leader>ag", desc = "NeoAI Commit Message" },
-  --   },
-  -- },
   {
     "kylechui/nvim-surround",
     version = "*",
@@ -306,35 +267,6 @@ return {
       prefix = "↩ ",
     },
   },
-  -- {
-  --   "tpope/vim-abolish",
-  --   init = function()
-  --     vim.g.abolish_no_mappings = 1
-  --   end,
-  --   config = function()
-  --     vim.cmd("Abolish colleciton collection")
-  --     vim.cmd("Abolish connecitno connection")
-  --     vim.cmd("Abolish conneciton connection")
-  --     vim.cmd("Abolish deafult default")
-  --     vim.cmd("Abolish leagcy legacy")
-  --     vim.cmd("Abolish sectino section")
-  --     vim.cmd("Abolish seleciton selection")
-  --     vim.cmd("Abolish striketrough strikethrough")
-  --     vim.cmd("iabbrev shouldREturn shouldReturn")
-  --     vim.cmd("iabbrev willREturn willReturn")
-  --     vim.cmd("iabbrev willTHrow willThrow")
-  --
-  --     vim.keymap.set("n", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
-  --     vim.keymap.set("v", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
-  --
-  --     vim.keymap.set(
-  --       "n",
-  --       "<leader>cW",
-  --       "<Plug>(abolish-coerce-word)",
-  --       { noremap = true, silent = true, desc = "Coerce word" }
-  --     )
-  --   end,
-  -- },
   { "tpope/vim-apathy", event = "VeryLazy" },
   { "sickill/vim-pasta", event = "BufRead" },
   { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
@@ -402,7 +334,6 @@ return {
       { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
     },
   },
-  -- { "justinsgithub/wezterm-types" },
   {
     "andythigpen/nvim-coverage",
     dependencies = {
@@ -448,11 +379,6 @@ return {
       require("impairative.replicate-unimpaired")()
     end,
   },
-  -- {
-  --   "Redoxahmii/json-to-types.nvim",
-  --   build = "sh install.sh npm",
-  --   commands = { "ConvertJSONtoLang", "ConvertJSONtoLangBuffer" },
-  -- },
   {
     "ChrisLetter/cspell-ignore",
     opts = { cspell_path = "./cspell.json" },

@@ -150,7 +150,7 @@ bind generic gfrs @git frs "%(prompt Enter release version: )"
 # github flow
 bind generic gfs !git checkout develop && git pull && git checkout -b feature/"%(prompt Enter feature branch name: )"
 bind generic ghs !git checkout develop && git pull && git checkout -b hotfix/"%(prompt Enter hotfix branch name: )"
-bind generic grc @git rc "%(prompt Enter release version: )"
+bind generic grc !git rc "%(prompt Enter release version: )"
 
 bind generic gld !git ld
 bind generic glm !git lm

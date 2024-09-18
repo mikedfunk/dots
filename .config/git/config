@@ -204,7 +204,7 @@
     rbs = rebase --skip
     rba = rebase --abort
     # release create (useful for github-flow)
-    rc = "!f() { git checkout develop && git pull && gh release create $1 --generate-notes; }; f"
+    rc = "!f() { git checkout develop && git pull && gh release create $1 --generate-notes && gh release ls --limit=1; }; f"
     # rebase interactively on to the upstream to this branch
     ready = rebase -i @{u}
     rh = reset --hard
