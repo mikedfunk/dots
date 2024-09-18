@@ -30,6 +30,8 @@ return {
         entries = { follow_cursor = true },
       })
 
+      ---@param entry cmp.Entry
+      ---@return boolean
       local no_comments_or_text = function(entry, _)
         local is_comment = require("cmp").config.context
           and require("cmp").config.context.in_syntax_group
@@ -139,25 +141,8 @@ return {
         item.kind_hl_group = "CmpItemKind_" .. entry.source.name
         -- }}}
 
-        -- use tailwind highlight colors (must come before changing kind)
-        -- local ok, tailwind_tools = pcall(require, "tailwind-tools.cmp")
-        --
-        -- if ok then
-        --   item = tailwind_tools.lspkind_format(entry, item)
-        -- end
-
         local icons = require("lazyvim.config").icons.kinds
-
-        if icons[item.kind] then
-          -- item.kind = icons[item.kind] .. item.kind
-          item.kind = icons[item.kind]
-        elseif item.kind == nil then
-          item.kind = ""
-        else
-          item.kind = string.format("[%s]", item.kind)
-        end
-
-        -- use icons for source names
+        item.kind = icons[item.kind] or (item.kind == nil and "" or string.format("[%s]", item.kind))
         item.menu = kinds[entry.source.name] or string.format("[%s]", entry.source.name)
 
         return item
@@ -234,6 +219,10 @@ return {
         },
       },
     },
+    ---@class LuaLineOpts
+    ---@field sections table
+    ---
+    ---@param opts LuaLineOpts
     opts = function(_, opts)
       local neocodeium_status_component = {
         function()
@@ -304,26 +293,10 @@ return {
   -- },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "VeryLazy",
     opts = {},
   },
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   ft = {
-  --     "javascriptreact",
-  --     "typescriptreact",
-  --     "html",
-  --   },
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   opts = {
-  --     document_color = { kind = "background" }, -- "inline"|"background"|"foreground"
-  --     conceal = { enabled = true },
-  --   },
-  -- },
-  -- { "brenoprata10/nvim-highlight-colors", opts = { enable_tailwind = true } },
-  -- { "JosefLitos/colorizer.nvim", event = "VeryLazy", config = true },
-  -- { "NvChad/nvim-colorizer.lua", event = "VeryLazy", opts = {} },
   { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   {
     "haringsrob/nvim_context_vt",
@@ -332,39 +305,38 @@ return {
     opts = {
       prefix = "↩ ",
     },
-    {
-      "tpope/vim-abolish",
-      init = function()
-        vim.g.abolish_no_mappings = 1
-      end,
-      config = function()
-        vim.cmd("Abolish colleciton collection")
-        vim.cmd("Abolish connecitno connection")
-        vim.cmd("Abolish conneciton connection")
-        vim.cmd("Abolish deafult default")
-        vim.cmd("Abolish leagcy legacy")
-        vim.cmd("Abolish sectino section")
-        vim.cmd("Abolish seleciton selection")
-        vim.cmd("Abolish striketrough strikethrough")
-        vim.cmd("iabbrev shouldREturn shouldReturn")
-        vim.cmd("iabbrev willREturn willReturn")
-        vim.cmd("iabbrev willTHrow willThrow")
-
-        vim.keymap.set("n", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
-        vim.keymap.set("v", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
-
-        vim.keymap.set(
-          "n",
-          "<leader>cW",
-          "<Plug>(abolish-coerce-word)",
-          { noremap = true, silent = true, desc = "Coerce word" }
-        )
-      end,
-    },
   },
+  -- {
+  --   "tpope/vim-abolish",
+  --   init = function()
+  --     vim.g.abolish_no_mappings = 1
+  --   end,
+  --   config = function()
+  --     vim.cmd("Abolish colleciton collection")
+  --     vim.cmd("Abolish connecitno connection")
+  --     vim.cmd("Abolish conneciton connection")
+  --     vim.cmd("Abolish deafult default")
+  --     vim.cmd("Abolish leagcy legacy")
+  --     vim.cmd("Abolish sectino section")
+  --     vim.cmd("Abolish seleciton selection")
+  --     vim.cmd("Abolish striketrough strikethrough")
+  --     vim.cmd("iabbrev shouldREturn shouldReturn")
+  --     vim.cmd("iabbrev willREturn willReturn")
+  --     vim.cmd("iabbrev willTHrow willThrow")
+  --
+  --     vim.keymap.set("n", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+  --     vim.keymap.set("v", "<leader>ce", "<Plug>(abolish-coerce)", { noremap = true, silent = true, desc = "Coerce" })
+  --
+  --     vim.keymap.set(
+  --       "n",
+  --       "<leader>cW",
+  --       "<Plug>(abolish-coerce-word)",
+  --       { noremap = true, silent = true, desc = "Coerce word" }
+  --     )
+  --   end,
+  -- },
   { "tpope/vim-apathy", event = "VeryLazy" },
   { "sickill/vim-pasta", event = "BufRead" },
-  -- Alternative: https://github.com/Wansmer/treesj and AndrewRadev/splitjoin.vim
   { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
   {
     "tpope/vim-projectionist",
@@ -402,6 +374,13 @@ return {
 
       table.insert(opts.groups.php, augend.constant.new({ elements = { "public", "private", "protected" } }))
       table.insert(opts.groups.php, augend.constant.new({ elements = { "abstract", "final" } }))
+      table.insert(
+        opts.groups.php,
+        augend.case.new({
+          types = { "camelCase", "PascalCase", "snake_case", "kebab-case", "SCREAMING_SNAKE_CASE" },
+          cyclic = true,
+        })
+      )
       table.insert(
         opts.groups.php,
         augend.constant.new({
@@ -458,8 +437,8 @@ return {
             require("coverage").load(true)
           end
         end,
-        desc = "Toggle Coverage",
         noremap = true,
+        desc = "Toggle Coverage",
       },
     },
   },
@@ -469,9 +448,33 @@ return {
       require("impairative.replicate-unimpaired")()
     end,
   },
+  -- {
+  --   "Redoxahmii/json-to-types.nvim",
+  --   build = "sh install.sh npm",
+  --   commands = { "ConvertJSONtoLang", "ConvertJSONtoLangBuffer" },
+  -- },
   {
-    "Redoxahmii/json-to-types.nvim",
-    build = "sh install.sh npm",
-    commands = { "ConvertJSONtoLang", "ConvertJSONtoLangBuffer" },
+    "ChrisLetter/cspell-ignore",
+    opts = { cspell_path = "./cspell.json" },
+    commands = { "CspellIgnore" },
+  },
+  {
+    "jellydn/hurl.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    ft = "hurl",
+    -- keys = {
+    --   -- Run API request
+    --   { "<leader>A", "<cmd>HurlRunner<CR>", desc = "Run All requests" },
+    --   { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "Run Api request" },
+    --   { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "Run Api request to entry" },
+    --   { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "Hurl Toggle Mode" },
+    --   { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "Run Api in verbose mode" },
+    --   -- Run Hurl request in visual mode
+    --   { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
+    -- },
   },
 }

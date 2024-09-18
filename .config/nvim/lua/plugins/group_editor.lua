@@ -65,15 +65,6 @@ return {
   },
   { "wsdjeg/vim-fetch" }, -- go to file including line number e.g. stack trace
   {
-    "smjonas/live-command.nvim",
-    cmd = "Norm",
-    opts = {
-      commands = {
-        Norm = { cmd = "norm" },
-      },
-    },
-  },
-  {
     "ziontee113/icon-picker.nvim",
     dependencies = "stevearc/dressing.nvim",
     cmd = { "IconPickerYank", "IconPickerInsert", "IconPickerNormal" },
@@ -149,40 +140,40 @@ return {
   { "fpob/nette.vim", event = "VimEnter" },
   { "martinda/Jenkinsfile-vim-syntax", event = "VimEnter" },
   { "aklt/plantuml-syntax", event = "VimEnter" },
-  { "jwalton512/vim-blade", event = "VimEnter" },
+  -- { "jwalton512/vim-blade", event = "VimEnter" },
   { "tpope/vim-cucumber", event = "VimEnter" },
   { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
-  {
-    "stevearc/profile.nvim",
-    config = function()
-      local should_profile = os.getenv("NVIM_PROFILE")
-      if should_profile then
-        require("profile").instrument_autocmds()
-        if should_profile:lower():match("^start") then
-          require("profile").start("*")
-        else
-          require("profile").instrument("*")
-        end
-      end
-
-      local function toggle_profile()
-        local prof = require("profile")
-        if prof.is_recording() then
-          prof.stop()
-          vim.ui.input(
-            { prompt = "Save profile to:", completion = "file", default = "profile.json" },
-            function(filename)
-              if filename then
-                prof.export(filename)
-                vim.notify(string.format("Wrote %s", filename))
-              end
-            end
-          )
-        else
-          prof.start("*")
-        end
-      end
-      vim.keymap.set("", "<f1>", toggle_profile)
-    end,
-  },
+  -- {
+  --   "stevearc/profile.nvim",
+  --   config = function()
+  --     local should_profile = os.getenv("NVIM_PROFILE")
+  --     if should_profile then
+  --       require("profile").instrument_autocmds()
+  --       if should_profile:lower():match("^start") then
+  --         require("profile").start("*")
+  --       else
+  --         require("profile").instrument("*")
+  --       end
+  --     end
+  --
+  --     local function toggle_profile()
+  --       local prof = require("profile")
+  --       if prof.is_recording() then
+  --         prof.stop()
+  --         vim.ui.input(
+  --           { prompt = "Save profile to:", completion = "file", default = "profile.json" },
+  --           function(filename)
+  --             if filename then
+  --               prof.export(filename)
+  --               vim.notify(string.format("Wrote %s", filename))
+  --             end
+  --           end
+  --         )
+  --       else
+  --         prof.start("*")
+  --       end
+  --     end
+  --     vim.keymap.set("", "<f1>", toggle_profile)
+  --   end,
+  -- },
 }

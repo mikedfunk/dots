@@ -75,7 +75,7 @@ return {
       end
       -- }}}
 
-      opts.linters_by_ft.fish = nil -- There is no such nvim-lint linter as "fish"
+      opts.linters_by_ft.fish = nil -- BUGFIX: There is no such nvim-lint linter as "fish"
       local lnt = opts.linters_by_ft
 
       return vim.tbl_deep_extend("force", opts, {

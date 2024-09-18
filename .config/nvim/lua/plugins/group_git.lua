@@ -10,6 +10,7 @@ return {
       vim.cmd("command! -nargs=1 Browse OpenBrowser <args>") -- allow GBrowse to work with open-browser.nvim instead of netrw
     end,
   },
+  -- this is only used for shortcuts in git interactive rebase
   {
     "tpope/vim-git",
     ft = "gitrebase",

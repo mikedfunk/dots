@@ -1,6 +1,4 @@
 return {
-  -- Doesn't work (mkdp#install() not found). Just use one that works instead.
-  { "iamcco/markdown-preview.nvim", enabled = false },
   {
     "wallpants/github-preview.nvim",
     dependencies = {
@@ -14,5 +12,5 @@ return {
     },
     opts = {},
   },
-  { "bullets-vim/bullets.vim", event = "VeryLazy", ft = "markdown" },
+  { "bullets-vim/bullets.vim", ft = "markdown" },
 }

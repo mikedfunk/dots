@@ -20,13 +20,12 @@ return {
         "black",
       } },
     },
-    ---@class ConformOpts
+    ---@param opts conform.setupOpts
     opts = function(_, opts)
       -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, { timeout_ms = 20000 })
-      opts.formatters_by_ft.python = vim.list_extend(opts.formatters_by_ft.python or {}, {
-        "black",
-      })
+      opts.formatters_by_ft.python = opts.formatters_by_ft.python or {}
+      table.insert(opts.formatters_by_ft.python, "black")
       opts.formatters_by_ft.php = { "phpcbf", "php_cs_fixer" }
 
       -- fix some formatters
@@ -66,10 +65,5 @@ return {
         require_cwd = true,
       }
     end,
-  },
-  {
-    "ChrisLetter/cspell-ignore",
-    opts = { cspell_path = "./cspell.json" },
-    commands = { "CspellIgnore" },
   },
 }
