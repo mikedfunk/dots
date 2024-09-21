@@ -28,3 +28,11 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
   end,
   desc = "Hide cursor line",
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "composer.json" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+  desc = "Do NOT autoformat composer.json! It will fuck it up",
+})

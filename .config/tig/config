@@ -188,6 +188,18 @@ bind generic gsv !git semver
 bind generic gcim !git canimerge
 bind generic gcm !?git cleanmerged
 bind generic gmt !git mergetool
+# git spice (stacked PR management)
+bind generic gSS !git spice branch split
+bind generic gSr @git spice stack restack
+# (pneumonic: publish)
+bind generic gSp !git spice stack submit
+# (pneumonic: new)
+bind generic gSn !git spice branch create "%(prompt Enter branch name: )"
+bind generic gSc !git spice branch checkout
+# (pneumonic: graft)
+bind generic gSg !git spice upstack onto
+bind generic gSe !git spice stack edit
+bind generic gSt @git spice branch track
 
 # Go back to the previous view state
 bind generic <C-O> back

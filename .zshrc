@@ -338,8 +338,10 @@ alias k="kubectl"
 compdef k="kubectl"
 alias pspg="pspg --clipboard-app=3"
 # use git-spice without conflicting cli. gs is already used by ghostscript, which is a dependency of imagemagick
-gsp() { $(brew --prefix git-spice)/bin/gs $@; }
-compdef gsp="gs"
+# ^moved to ~/.bin/git-spice
+# gsp() { $(brew --prefix git-spice)/bin/gs $@; }
+# compdef gsp="gs"
+compdef git-spice="gs"
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh

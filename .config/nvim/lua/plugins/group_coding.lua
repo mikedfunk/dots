@@ -294,6 +294,7 @@ return {
       local augend = require("dial.augend")
 
       local checkboxes = augend.constant.new({
+        -- pattern_regexp = "\\[.]\\s", -- TODO: doesn't work
         elements = { "[ ]", "[X]", "[-]" },
         word = false,
         cyclic = true,

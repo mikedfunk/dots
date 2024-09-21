@@ -29,6 +29,7 @@ tap "derailed/k9s" # k9s
 tap "grishka/grishka" # neardrop
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
+tap "lihaoyun6/tap" # quickrecorder
 tap "oven-sh/bun" # bun
 tap "pkgxdev/made" # pkgx
 
@@ -270,7 +271,7 @@ brew "icu4c" # needed for php70-intl extension (it seems this is included with n
 brew "imagemagick" # image transformation tool - needed by php imagemagick extension (latest version needed to install host machine pecl imagick php extension)
 brew "jq" # simple json pretty-printer `echo '{"my" => "json"}' | jq .` (Used in some of my shell functions)
 brew "k9s" # handy kubernetes dashboard `k9s -n develop`
-brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for VirtualBox
+brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for minikube via VirtualBox
 brew "krb5" # needed to build php
 brew "kubecolor" # kubectl with colors
 brew "less" # huh, there's a newer version of less available
@@ -316,6 +317,7 @@ brew "prettier" # javascript and other languages formatter. moved from ~/.config
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
+brew "quickrecorder" # menubar video recorder
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
@@ -350,6 +352,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "authy" # desktop 2-factor!
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
+# cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
@@ -464,8 +467,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "tunnelbear" # tunnel to a specific country
 # cask "unshaky" # fix double keypress on macbook butterfly keyboard
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
-# cask "virtualbox" # virtual machine software (needed by docker-machine at least)
-# cask "virtualbox-extension-pack" # add-on to do stuff you'll always want... except for docker-machine
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
 # cask "vlc" # watch the videos I download (switchtd to mpv)
 # cask "webpquicklook" # quicklook plugin (preview webp images)
@@ -477,7 +478,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "firefox" # I use firefox for my home profile
@@ -496,6 +496,7 @@ cask "nvidia-geforce-now" # game streaming
 cask "openjdk@17" # Needed for groovy-language-server
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
 cask "sequel-ace" # maintained fork of sequel pro (switched to table plus)
+cask "virtualbox" # virtual machine software (needed by docker-machine at least)
 
 # }}}
 

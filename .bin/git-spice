@@ -1,0 +1,3 @@
+#!/bin/bash
+# who thought it would be a good idea to link this as gs? This overlaps with ghostscript which is needed for imagemagick and others.
+"$(brew --prefix git-spice)/bin/gs" "$@"

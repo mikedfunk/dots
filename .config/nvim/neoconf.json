@@ -26,8 +26,20 @@
           "shortOpenTag": false
         },
         "codeLens": {
+          "implementations": {
+            "enable": false
+          },
+          "overrides": {
+            "enable": false
+          },
+          "parent": {
+            "enable": false
+          },
           "references": {
-            "enable": true
+            "enable": false
+          },
+          "usages": {
+            "enable": false
           }
         },
         "compatibility": {

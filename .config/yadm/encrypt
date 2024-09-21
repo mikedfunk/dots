@@ -12,9 +12,6 @@
 .config/git/config-saatchi
 .config/smug/work.yml
 
-Code/saatchi/legacy/{.eslintrc.js,phpstan_bootstrap.php}
-Code/saatchi/gallery/.prettierrc.json
-Code/saatchi/xdocker/compose.yml
 Code/saatchi/palette/phpspec-coverage**.yml
 
 Code/saatchi/**/.pre-commit-config.yaml
@@ -27,6 +24,7 @@ Code/saatchi/**/cspell.json
 Code/saatchi/**/.tool-versions
 Code/saatchi/**/.projections.json
 Code/saatchi/**/.php-cs-fixer.php
+Code/saatchi/**/.gitlint
 
 Library/LaunchAgents/mike.saatchi-tunnel.autossh.plist
 Code/saatchi/{zed,gallery,legacy}/phpstan.neon
