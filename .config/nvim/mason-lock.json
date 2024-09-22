@@ -4,6 +4,8 @@
   "black": "24.8.0",
   "checkmake": "0.2.2",
   "cspell": "8.14.4",
+  "css-lsp": "4.10.0",
+  "cssmodules-language-server": "1.4.1",
   "cucumber-language-server": "1.6.0",
   "debugpy": "1.8.5",
   "delve": "v1.23.0",

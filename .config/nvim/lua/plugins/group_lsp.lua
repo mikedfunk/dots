@@ -9,7 +9,10 @@ return {
         -- contextive = {
         --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
         -- },
-        -- cssls = {},
+        cssls = {
+          filetypes = { "css" },
+        },
+        cssmodules_ls = {},
         cucumber_language_server = {},
         flow = {},
         emmet_language_server = {
