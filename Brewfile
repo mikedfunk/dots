@@ -256,6 +256,7 @@ brew "gh" # new github cli
 brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
+brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
 brew "git-spice" # stacked PR manager
 brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 brew "glab" # like gh for gitlab

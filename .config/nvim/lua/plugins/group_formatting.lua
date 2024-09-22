@@ -28,7 +28,7 @@ return {
       opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, { timeout_ms = 20000 })
       opts.formatters_by_ft.python = opts.formatters_by_ft.python or {}
       table.insert(opts.formatters_by_ft.python, "black")
-      opts.formatters_by_ft.php = { "phpcbf", "php_cs_fixer" }
+      opts.formatters_by_ft.php = { "php_cs_fixer", "phpcbf" }
 
       -- fix some formatters
       opts.formatters.phpcbf = {
