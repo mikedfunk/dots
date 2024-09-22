@@ -100,6 +100,7 @@ path=(
   # rust cargo packages
   # $HOME/.cargo/bin
   # golang packages
+  "$GOPATH"/bin
   # $HOME/go/bin
   # golang executables
   # $(brew --prefix)/opt/go/libexec/bin
@@ -537,6 +538,10 @@ compdef g="git"
 alias ts="tig status"
 alias td="tig develop.."
 # alias tm="tig master.."
+# }}}
+
+# go test {{{
+alias gtw="noglob ag -l -g '.*\\.go' | entr -cr noti --message \"✅ Go tests passed\" go test"
 # }}}
 
 # phpspec {{{

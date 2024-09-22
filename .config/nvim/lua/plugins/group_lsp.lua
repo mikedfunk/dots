@@ -76,5 +76,10 @@ return {
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
   -- Buggy and slow when lots of usages. Breaks on dropbar.
-  -- { "Wansmer/symbol-usage.nvim", event = "LspAttach", opts = { vt_position = "end_of_line" } },
+  {
+    "Wansmer/symbol-usage.nvim",
+    enabled = false,
+    event = "LspAttach",
+    opts = { vt_position = "end_of_line" },
+  },
 }

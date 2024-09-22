@@ -1,7 +1,7 @@
 return {
   -- TODO: I can't get this to work. It can't find any mason packages. I'll
   -- have to add these in mason ensure_installed instead. I'm setting
-  -- everything up to run in the order it requires. 🤷
+  -- everything up to run in the order it requires. 🤷 last checked 2024-09-21
   -- {
   --   "LittleEndianRoot/mason-conform",
   --   dependencies = {
@@ -16,9 +16,11 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       opts_extend = { "ensure_installed" },
-      opts = { ensure_installed = {
-        "black",
-      } },
+      opts = {
+        ensure_installed = {
+          "black",
+        },
+      },
     },
     ---@param opts conform.setupOpts
     opts = function(_, opts)
@@ -30,6 +32,8 @@ return {
 
       -- fix some formatters
       opts.formatters.phpcbf = {
+        -- ALWAYS use local version because it is tightly coupled to the
+        -- default _rules_ it comes with.
         command = "./vendor/bin/phpcbf",
         prepend_args = {
           "--cache",
@@ -38,10 +42,13 @@ return {
           "memory_limit=100m",
           "-d",
           "xdebug.mode=off",
+          "-d",
+          "zend.enable_gc=0",
         },
       }
 
       opts.formatters.php_cs_fixer = {
+        -- command = "php -d zend.enable_gc=0 -d xdebug.mode=off -d memory_limit=100m php-cs-fixer",
         cwd = require("conform.util").root_file({ ".php-cs-fixer.php" }),
         require_cwd = true,
       }

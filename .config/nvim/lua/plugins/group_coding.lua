@@ -171,7 +171,7 @@ return {
         keys = {
           { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
-            "<a-f>",
+            "<a-cr>",
             function()
               require("neocodeium").accept()
             end,
