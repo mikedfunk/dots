@@ -47,6 +47,15 @@ windows:
       - commands: [./pocketbase serve]
       - commands: [ts]
 
+  - name: go-with-tests
+    root: ~/Code/test/go-with-tests
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [gtw]
+      - commands: [ts]
+
   # - name: neotest
   #   root: ~/Code/neotest-phpspec
   #   manual: true

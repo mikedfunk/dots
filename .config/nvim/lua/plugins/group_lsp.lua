@@ -9,7 +9,7 @@ return {
         -- contextive = {
         --   root_dir = require("lspconfig.util").root_pattern(".contextive"),
         -- },
-        cssls = {},
+        -- cssls = {},
         cucumber_language_server = {},
         flow = {},
         emmet_language_server = {
@@ -34,6 +34,7 @@ return {
         --     organization = "leaf-saatchiart",
         --   },
         -- },
+        somesass_ls = {},
         sqlls = {},
         tailwindcss = {
           root_dir = function(pattern)

@@ -4,7 +4,6 @@
   "black": "24.8.0",
   "checkmake": "0.2.2",
   "cspell": "8.14.4",
-  "css-lsp": "4.10.0",
   "cucumber-language-server": "1.6.0",
   "debugpy": "1.8.5",
   "delve": "v1.23.0",
@@ -39,12 +38,15 @@
   "phpcs": "3.10.3",
   "phpstan": "1.12.4",
   "prettier": "3.3.3",
+  "pyright": "1.1.381",
   "rubocop": "1.66.1",
   "ruby-lsp": "0.18.1",
+  "ruff": "0.6.7",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.9.0",
   "solargraph": "0.50.0",
+  "some-sass-language-server": "1.8.3",
   "sqlfluff": "3.2.0",
   "sqlls": "1.7.0",
   "stylua": "v0.20.0",
@@ -53,6 +55,5 @@
   "vtsls": "0.2.6",
   "vue-language-server": "2.1.6",
   "yaml-language-server": "1.15.0",
-  "zk": "v0.14.1",
-
+  "zk": "v0.14.1"
 }
