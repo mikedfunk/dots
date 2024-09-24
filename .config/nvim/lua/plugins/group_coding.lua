@@ -249,8 +249,10 @@ return {
           return "ʪ " .. tostring(#get_lsp_client_names())
         end,
         color = function()
-          local colors = require("tokyonight.colors").setup()
-          return { fg = #get_lsp_client_names() > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+          return {
+            fg = #get_lsp_client_names() > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg,
+            gui = "None",
+          }
         end,
         on_click = function()
           vim.cmd("LspInfo")
@@ -265,8 +267,7 @@ return {
         end,
         color = function()
           local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
-          local colors = require("tokyonight.colors").setup()
-          return { fg = #formatters > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+          return { fg = #formatters > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg, gui = "None" }
         end,
         cond = function()
           return package.loaded["conform"] ~= nil
@@ -285,9 +286,7 @@ return {
         end,
         color = function()
           local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
-          local colors = require("tokyonight.colors").setup()
-
-          return { fg = #linters > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+          return { fg = #linters > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg, gui = "None" }
         end,
         cond = function()
           return package.loaded["lint"] ~= nil
@@ -307,10 +306,8 @@ return {
         end,
         color = function()
           local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
-          local colors = require("tokyonight.colors").setup()
-
           return {
-            fg = is_neocodeium_enabled and colors.green or colors.error,
+            fg = is_neocodeium_enabled and LazyVim.ui.fg("DiagnosticOk").fg or LazyVim.ui.fg("DiagnosticError").fg,
           }
         end,
         on_click = function()
@@ -423,11 +420,10 @@ return {
       },
     },
     opts = function()
-      local colors = require("tokyonight.colors").setup()
       return {
         highlights = {
-          covered = { fg = colors.green },
-          uncovered = { fg = colors.red },
+          covered = { fg = LazyVim.ui.fg("DiagnosticOk").fg },
+          uncovered = { fg = LazyVim.ui.fg("DiagnosticError").fg },
         },
         auto_reload = true,
         lcov_file = "./coverage/lcov.info",
