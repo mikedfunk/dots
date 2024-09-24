@@ -25,9 +25,9 @@ return {
     ---@param opts conform.setupOpts
     opts = function(_, opts)
       -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-      opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, { timeout_ms = 20000 })
+      opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, { timeout_ms = 30000 })
       opts.formatters_by_ft.python = opts.formatters_by_ft.python or {}
-      table.insert(opts.formatters_by_ft.python, "black")
+      table.insert(opts.formatters_by_ft.python, "black") ---@diagnostic disable-line: param-type-mismatch
       opts.formatters_by_ft.php = { "php_cs_fixer", "phpcbf" }
 
       -- fix some formatters
@@ -37,7 +37,8 @@ return {
         command = "./vendor/bin/phpcbf",
         prepend_args = {
           "--cache",
-          "--warning-severity=3",
+          "--warning-severity=3", -- fix warnings up to severity 3
+          -- "--warning-severity=0", -- do not fix warnings
           "-d",
           "memory_limit=100m",
           "-d",

@@ -226,6 +226,77 @@ return {
     ---
     ---@param opts LuaLineOpts
     opts = function(_, opts)
+      local get_lsp_client_names = function()
+        local buf_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+        ---@type string[]
+        local buf_client_names = {}
+
+        for _, client in pairs(buf_clients) do
+          if client.name ~= "null-ls" then
+            table.insert(buf_client_names, client.name)
+          end
+        end
+
+        ---@type string[]
+        buf_client_names = vim.fn.uniq(buf_client_names) ---@diagnostic disable-line missing-parameter
+        return buf_client_names
+      end
+
+      local lsp_status_component = {
+        ---@return string
+        function()
+          return "ʪ " .. tostring(#get_lsp_client_names())
+        end,
+        color = function()
+          local colors = require("tokyonight.colors").setup()
+          return { fg = #get_lsp_client_names() > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+        end,
+        on_click = function()
+          vim.cmd("LspInfo")
+        end,
+      }
+
+      local conform_nvim_component = {
+        ---@return string
+        function()
+          local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
+          return " " .. tostring(#formatters)
+        end,
+        color = function()
+          local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
+          local colors = require("tokyonight.colors").setup()
+          return { fg = #formatters > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+        end,
+        cond = function()
+          return package.loaded["conform"] ~= nil
+        end,
+        on_click = function()
+          vim.cmd("LazyFormatInfo")
+        end,
+      }
+
+      local nvim_lint_component = {
+        ---@return string
+        function()
+          local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
+
+          return " " .. tostring(#linters)
+        end,
+        color = function()
+          local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
+          local colors = require("tokyonight.colors").setup()
+
+          return { fg = #linters > 0 and colors.dark3 or colors.fg_dark, gui = "None" }
+        end,
+        cond = function()
+          return package.loaded["lint"] ~= nil
+        end,
+        on_click = function()
+          print(vim.inspect(require("lint").linters_by_ft[vim.bo.ft] or {}))
+        end,
+      }
+
       local neocodeium_status_component = {
         function()
           return "󱐋" -- ⚡ 󰲋 󰲌
@@ -239,7 +310,7 @@ return {
           local colors = require("tokyonight.colors").setup()
 
           return {
-            fg = is_neocodeium_enabled and colors.green or colors.red,
+            fg = is_neocodeium_enabled and colors.green or colors.error,
           }
         end,
         on_click = function()
@@ -250,6 +321,9 @@ return {
       }
 
       table.insert(opts.sections.lualine_x, neocodeium_status_component)
+      table.insert(opts.sections.lualine_x, conform_nvim_component)
+      table.insert(opts.sections.lualine_x, nvim_lint_component)
+      table.insert(opts.sections.lualine_x, lsp_status_component)
     end,
   },
   {
@@ -295,7 +369,7 @@ return {
 
       local checkboxes = augend.constant.new({
         -- pattern_regexp = "\\[.]\\s", -- TODO: doesn't work
-        elements = { "[ ]", "[X]", "[-]" },
+        elements = { "[ ]", "[x]", "[-]" },
         word = false,
         cyclic = true,
       })
@@ -403,5 +477,14 @@ return {
     --   -- Run Hurl request in visual mode
     --   { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
     -- },
+  },
+  {
+    "mawkler/demicolon.nvim",
+    keys = { ";", ",", "t", "f", "T", "F", "]", "[", "]d", "[d" }, -- Uncomment this to lazy load
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    opts = {},
   },
 }

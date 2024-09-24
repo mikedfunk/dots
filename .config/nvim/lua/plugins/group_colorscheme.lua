@@ -14,7 +14,7 @@ return {
           on_colors = function(colors)
             local hsluv = require("tokyonight.hsluv")
             -- local hue_shift = 1.00 -- +: purple, -: green
-            local saturation_multiplier = 1.90
+            local saturation_multiplier = 2.50
 
             for k, v in pairs(colors) do
               if type(v) == "string" and v ~= "NONE" then

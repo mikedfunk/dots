@@ -111,11 +111,14 @@ return {
               "-q",
               "--report=json",
               "--cache",
-              "--warning-severity=3",
+              "--warning-severity=3", -- fix warnings up to severity 3
+              -- "--warning-severity=0", -- do not fix warnings
               "-d",
               "memory_limit=100M",
               "-d",
               "xdebug.mode=off",
+              "-d",
+              "zend.enable_gc=0",
               "-",
             },
           },
