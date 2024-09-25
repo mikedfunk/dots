@@ -91,7 +91,11 @@ return {
           php = addTo(lnt.php, { "phpstan", "cspell" }),
         },
         linters = {
+          -- phpstan is file-based and cannot be read from stdin, so it is not
+          -- only slow, it blocks the neovim UI while nvim-lint ("the async
+          -- linter") is running it.
           phpstan = {
+            cmd = "phpstan",
             args = {
               "analyze",
               "--error-format=json",
