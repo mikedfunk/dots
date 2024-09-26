@@ -139,6 +139,7 @@ return {
       vim.g.ale_echo_cursor = 0
       vim.g.ale_hover_cursor = 0
       vim.g.ale_set_loclist = 0
+      vim.g.ale_set_signs = 0
       vim.g.ale_linters_explicit = 1
       vim.g.ale_linters = { php = { "phpstan" } }
       vim.g.ale_php_phpstan_level = 9

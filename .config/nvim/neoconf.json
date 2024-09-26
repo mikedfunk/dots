@@ -36,7 +36,7 @@
             "enable": false
           },
           "references": {
-            "enable": false
+            "enable": true
           },
           "usages": {
             "enable": false
