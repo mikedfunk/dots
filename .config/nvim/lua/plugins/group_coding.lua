@@ -259,16 +259,26 @@ return {
         end,
       }
 
+      ---@return string[]
+      local function get_formatters()
+        local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
+        for _, formatter in ipairs(vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}) do
+          if not vim.tbl_contains(formatters, formatter) then ---@diagnostic disable-line param-type-mismatch
+            table.insert(formatters, formatter) ---@diagnostic disable-line param-type-mismatch
+          end
+        end
+
+        return formatters ---@diagnostic disable-line param-type-mismatch
+      end
+
       local conform_nvim_component = {
         ---@return string
         function()
-          local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
-          return " " .. tostring(#formatters)
+          return " " .. tostring(#get_formatters())
         end,
         color = function()
-          local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
           return {
-            fg = #formatters > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            fg = #get_formatters() > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
             gui = "None",
           }
         end,
@@ -280,17 +290,26 @@ return {
         end,
       }
 
+      ---@return string[]
+      local function get_linters()
+        local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
+        for _, linter in ipairs(vim.g.ale_linters and vim.g.ale_linters[vim.bo.ft] or {}) do
+          if not vim.tbl_contains(linters, linter) then
+            table.insert(linters, linter)
+          end
+        end
+
+        return linters
+      end
+
       local nvim_lint_component = {
         ---@return string
         function()
-          local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
-
-          return " " .. tostring(#linters)
+          return " " .. tostring(#get_linters())
         end,
         color = function()
-          local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
           return {
-            fg = #linters > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            fg = #get_linters() > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
             gui = "None",
           }
         end,
@@ -298,7 +317,7 @@ return {
           return package.loaded["lint"] ~= nil
         end,
         on_click = function()
-          print(vim.inspect(require("lint").linters_by_ft[vim.bo.ft] or {}))
+          print(vim.inspect(get_linters()))
         end,
       }
 
