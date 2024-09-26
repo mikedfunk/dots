@@ -250,7 +250,7 @@ return {
         end,
         color = function()
           return {
-            fg = #get_lsp_client_names() > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg,
+            fg = #get_lsp_client_names() > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
             gui = "None",
           }
         end,
@@ -267,7 +267,10 @@ return {
         end,
         color = function()
           local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
-          return { fg = #formatters > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg, gui = "None" }
+          return {
+            fg = #formatters > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            gui = "None",
+          }
         end,
         cond = function()
           return package.loaded["conform"] ~= nil
@@ -286,7 +289,10 @@ return {
         end,
         color = function()
           local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
-          return { fg = #linters > 0 and LazyVim.ui.fg("Special").fg or LazyVim.ui.fg("Comment").fg, gui = "None" }
+          return {
+            fg = #linters > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            gui = "None",
+          }
         end,
         cond = function()
           return package.loaded["lint"] ~= nil
@@ -298,7 +304,7 @@ return {
 
       local neocodeium_status_component = {
         function()
-          return "󱐋" -- ⚡ 󰲋 󰲌
+          return "󰚩" -- 󱐋 ⚡ 󰲋 󰲌
           -- local on = "󰲋"
           -- local off = "󰲌"
           -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
@@ -307,7 +313,8 @@ return {
         color = function()
           local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
           return {
-            fg = is_neocodeium_enabled and LazyVim.ui.fg("DiagnosticOk").fg or LazyVim.ui.fg("DiagnosticError").fg,
+            fg = is_neocodeium_enabled and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            -- fg = is_neocodeium_enabled and LazyVim.ui.fg("DiagnosticOk").fg or LazyVim.ui.fg("DiagnosticError").fg,
           }
         end,
         on_click = function()
@@ -315,12 +322,15 @@ return {
             vim.cmd("NeoCodeium toggle")
           end
         end,
+        cond = function()
+          return package.loaded["neocodeium"] ~= nil
+        end,
       }
 
       table.insert(opts.sections.lualine_x, neocodeium_status_component)
-      table.insert(opts.sections.lualine_x, conform_nvim_component)
-      table.insert(opts.sections.lualine_x, nvim_lint_component)
       table.insert(opts.sections.lualine_x, lsp_status_component)
+      table.insert(opts.sections.lualine_x, nvim_lint_component)
+      table.insert(opts.sections.lualine_x, conform_nvim_component)
     end,
   },
   {

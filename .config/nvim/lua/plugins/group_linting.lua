@@ -88,7 +88,8 @@ return {
           typescriptreact = addTo(lnt.typescriptreact, { "cspell" }),
           markdown = addTo(lnt.markdown, { "markdownlint" }),
           make = addTo(lnt.make, { "checkmake" }),
-          php = addTo(lnt.php, { "phpstan", "cspell" }),
+          php = addTo(lnt.php, { "cspell" }),
+          -- php = addTo(lnt.php, { "phpstan", "cspell" }), -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
         },
         linters = {
           -- phpstan is file-based and cannot be read from stdin, so it is not
@@ -128,6 +129,21 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    -- this is ONLY for slow phpstan level 9.
+    "dense-analysis/ale",
+    ft = { "php" },
+    init = function()
+      vim.g.ale_echo_cursor = 0
+      vim.g.ale_hover_cursor = 0
+      vim.g.ale_set_loclist = 0
+      vim.g.ale_linters_explicit = 1
+      vim.g.ale_linters = { php = { "phpstan" } }
+      vim.g.ale_php_phpstan_level = 9
+      vim.g.ale_php_phpstan_memory_limit = "200M"
+      vim.g.ale_php_phpstan_use_global = 1
     end,
   },
 }
