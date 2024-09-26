@@ -261,7 +261,7 @@ return {
 
       ---@return string[]
       local function get_formatters()
-        local formatters = require("conform").formatters_by_ft[vim.bo.ft] or {}
+        local formatters = { unpack(require("conform").formatters_by_ft[vim.bo.ft] or {}) } ---@diagnostic disable-line param-type-mismatch
         for _, formatter in ipairs(vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}) do
           if not vim.tbl_contains(formatters, formatter) then ---@diagnostic disable-line param-type-mismatch
             table.insert(formatters, formatter) ---@diagnostic disable-line param-type-mismatch
@@ -292,7 +292,7 @@ return {
 
       ---@return string[]
       local function get_linters()
-        local linters = require("lint").linters_by_ft[vim.bo.ft] or {}
+        local linters = { unpack(require("lint").linters_by_ft[vim.bo.ft] or {}) }
         for _, linter in ipairs(vim.g.ale_linters and vim.g.ale_linters[vim.bo.ft] or {}) do
           if not vim.tbl_contains(linters, linter) then
             table.insert(linters, linter)

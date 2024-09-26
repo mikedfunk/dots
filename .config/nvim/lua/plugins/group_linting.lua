@@ -136,12 +136,15 @@ return {
     "dense-analysis/ale",
     ft = { "php" },
     init = function()
-      vim.g.ale_echo_cursor = 0
-      vim.g.ale_hover_cursor = 0
       vim.g.ale_set_loclist = 0
       vim.g.ale_set_signs = 0
+      vim.g.ale_echo_cursor = 0
+      vim.g.ale_disable_lsp = 1
+      vim.g.ale_hover_cursor = 0
+
       vim.g.ale_lint_delay = 0
       vim.g.ale_linters_explicit = 1
+
       vim.g.ale_linters = { php = { "phpstan" } }
       vim.g.ale_php_phpstan_level = 9
       vim.g.ale_php_phpstan_memory_limit = "200M"
