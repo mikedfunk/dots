@@ -323,7 +323,7 @@ return {
 
       local neocodeium_status_component = {
         function()
-          return "󰚩" -- 󱐋 ⚡ 󰲋 󰲌
+          return "󰌵" -- 󱐋 ⚡ 󰲋 󰲌󰚩
           -- local on = "󰲋"
           -- local off = "󰲌"
           -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
@@ -502,14 +502,5 @@ return {
     --   -- Run Hurl request in visual mode
     --   { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
     -- },
-  },
-  {
-    "mawkler/demicolon.nvim",
-    keys = { ";", ",", "t", "f", "T", "F", "]", "[", "]d", "[d" }, -- Uncomment this to lazy load
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    opts = {},
   },
 }
