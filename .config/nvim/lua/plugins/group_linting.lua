@@ -149,6 +149,9 @@ return {
       vim.g.ale_php_phpstan_level = 9
       vim.g.ale_php_phpstan_memory_limit = "200M"
       vim.g.ale_php_phpstan_use_global = 1
+
+      -- vim.g.ale_fixers = { php = {"php_cs_fixer", "phpcbf" } }
+      -- vim.g.ale_php_phpcbf_options = "--warning-severity=3"
     end,
   },
 }
