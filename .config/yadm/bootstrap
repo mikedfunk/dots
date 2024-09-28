@@ -10,14 +10,17 @@
 
 # helper functions {{{
 _log_info() {
+    # icon, bold, colors
     echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"
     "${@:2}"
 }
 _log_error() {
+    # icon, bold, colors
     echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"
     "${@:2}"
 }
 _log_notice() {
+    # icon, bold, colors
     echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"
     "${@:2}"
 }
@@ -29,16 +32,6 @@ _create_dirs() {
     _log_info "Creating any missing home directories"
     [[ -d "$HOME/Code" ]] || mkdir "$HOME/Code"
 }
-# }}}
-
-# clone repos {{{
-
-# _log_info "Cloning repos"
-# mkdir -p "$HOME/Code"
-# builtin cd "$HOME/Code"
-# [[ -d "$HOME/Code/mikedfunk.github.io" ]] || git clone git@github.com:mikedfunk/mikedfunk.github.io.git
-# builtin cd -
-
 # }}}
 
 # decrypt yadm files {{{
@@ -70,7 +63,7 @@ _create_dirs() {
 # password entries. But really this should only happen once - when the code has
 # not been cloned. This seems like the right approach.
 #
-# TODO add .git/config/exclude for each codebase to yadm
+# TODO add .git/config/exclude for each codebase to yadm?
 # }}}
 
 # install xcode command line tools {{{
@@ -95,13 +88,12 @@ _install_update_homebrew_packages() {
     [ -e "$HOME"/Brewfile ] || return
     _log_info "Installing/upgrading homebrew packages"
     cd || return
-    brew update         # update homebrew itself and the list of brew package versions
+    # brew update         # update homebrew itself and the list of brew package versions
     brew bundle         # install/upgrade from ~/Brewfile
     brew upgrade        # upgrade all homebrew packages
     brew upgrade --cask # upgrade all homebrew casks
     # brew cleanup         # remove outdated versions and dead symlinks from the homebrew prefix. WARNING this could break dependencies if low level libs are not pinned!!
     # brew bundle cleanup --force # remove brew packages not in ~/Brewfile
-    _pin_homebrew_packages
     brew unlink node
     cd - || return
 }
@@ -109,8 +101,6 @@ _install_update_homebrew_packages() {
 # }}}
 
 # pin homebrew packages {{{
-# I no longer do this - instead I avoid `brew cleanup` and hope I don't run out of storage :/
-# I unpinned everything and icu4c broke for some reason. I'll add anything to this list that actually breaks.
 _pin_homebrew_packages() {
     _log_info "Pinning brew packages that need pinning"
     # brew pin bison
@@ -134,25 +124,12 @@ _pin_homebrew_packages() {
 # }}}
 
 # akamai {{{
-_install_upgrade_akamai() {
-    _has akamai && return
+_upgrade_akamai_and_install_missing() {
+    _has akamai || return
     _log_info "Updating akamai commands"
     (akamai list | grep --quiet purge) || akamai install purge
     akamai update
 }
-# }}}
-
-# install kubectl (specific version) {{{
-_install_older_kubectl() {
-    _has kubectl && (kubectl version --client | grep 1.17.17) && return
-    _log_info "Installing kubectl 1.17.17"
-    _has kubectl && rm "$(which kubectl)"
-    builtin cd /usr/local/bin || return
-    curl -LO "https://dl.k8s.io/release/v1.17.17/bin/darwin/amd64/kubectl" # there's no ARM version
-    chmod +x kubectl
-    builtin cd - || return
-}
-
 # }}}
 
 # set zsh as shell {{{
@@ -203,36 +180,6 @@ _install_neovim_versions() {
 
 # install php versions {{{
 
-# holy shit it works
-_install_php_70() {
-    (asdf list php | grep --quiet 7.0.26) && return
-    _log_info "installing php 7.0.26"
-    asdf install php 7.0.26
-    asdf global php 7.0.26 || return
-
-    # install php extensions (different set for 7.0.26)
-    local PHP_PATH
-    PHP_PATH="$(asdf where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    # pickle doesn't work on php 7.0 at all, any version
-    pecl channel-update pecl.php.net
-    yes "" | pecl install pcs-beta && (echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini)
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local PHP_ZLIB_DIR
-    PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    yes "" | pecl install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini)
-    yes "" | pecl install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
-    yes "" | pecl install xdebug-2.8.1 && (echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    asdf reshim php 7.0.26
-}
-
 _install_php_74() {
     (asdf list php | grep --quiet 7.4.32) && return
     _log_info "installing php 7.4.32"
@@ -240,8 +187,7 @@ _install_php_74() {
     asdf global php 7.4.32 || return
 
     # install php extensions (different set for 7.4.32)
-    local PHP_PATH
-    PHP_PATH="$(asdf where php)"
+    local -r PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
     local PICKLE="${PHP_PATH}"/pickle.phar
@@ -250,8 +196,7 @@ _install_php_74() {
 
     yes "" | "${PICKLE}" install pcs-beta && (echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini)
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local PHP_ZLIB_DIR
-    PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
     yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini)
     yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
@@ -274,8 +219,7 @@ _install_php_80() {
     asdf global php 8.0.27 || return
 
     # install php extensions (different set for 8.0.27)
-    local PHP_PATH
-    PHP_PATH="$(asdf where php)"
+    local -r PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
     local PICKLE="${PHP_PATH}"/pickle.phar
@@ -283,8 +227,7 @@ _install_php_80() {
     chmod +x "${PICKLE}"
 
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local PHP_ZLIB_DIR
-    PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
     yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
     yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
@@ -312,8 +255,7 @@ _install_php_82() {
     asdf global php 8.2.12 || return
 
     # install php extensions (different set for 8.2.12)
-    local PHP_PATH
-    PHP_PATH="$(asdf where php)"
+    local -r PHP_PATH="$(asdf where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
     local PICKLE="${PHP_PATH}"/pickle.phar
@@ -321,8 +263,7 @@ _install_php_82() {
     chmod +x "${PICKLE}"
 
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local PHP_ZLIB_DIR
-    PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
     yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
     yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
@@ -343,19 +284,9 @@ END_HEREDOC
     # asdf reshim php "8.2.12"
 }
 
-# https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
-_install_php_versions() {
-    pushd .
-    builtin cd "$HOME" >/dev/null || return
-    _log_info "Installing php version(s)"
-    (asdf plugin list | grep --quiet php) || asdf plugin add php
-    local INSTALL_PATH="$HOME"/.asdf/plugins/php/bin/install
-    # intl fails to install in php 7.0 due to an incompatibility with icu4c latest
-    [ -f "$INSTALL_PATH" ] && (sed -i '' "/--enable-intl/d" "$INSTALL_PATH")
-    # gd fails to install in php 8.0
-    # [ -f "$INSTALL_PATH" ] && ( sed -i '' "/--enable-gd/d" "$INSTALL_PATH" )
-
-    # configure flags and paths for homebrew tools (I probably don't need to configure all of these) {{{
+# internal: configure flags and paths for homebrew tools {{{
+_configure_flags_and_paths_for_homebrew_tools() {
+    # I probably don't need to configure all of these
 
     # configure bison {{{
     export PATH="$(brew --prefix bison)/bin:${PATH}"
@@ -473,21 +404,24 @@ _install_php_versions() {
     export CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
     export PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:${PKG_CONFIG_PATH}"
     # }}}
+}
+# }}}
 
-    # }}}
+# https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
+_install_php_versions() {
+    pushd .
+    builtin cd "$HOME" >/dev/null || return
+    _log_info "Installing php version(s)"
+    (asdf plugin list | grep --quiet php) || asdf plugin add php
+
+    _configure_flags_and_paths_for_homebrew_tools
 
     # change implicit function declaration to warning instead of error
     # https://bugs.php.net/bug.php?id=80171
-    export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
-    # export CFLAGS="-Wno-error ${CFLAGS}"
+    # export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
 
-    # legacy, gallery
-    _install_php_70
-    # palette
     _install_php_74
-    # zed
     _install_php_80
-    # global
     _install_php_82
     asdf global php 8.2.12
 
@@ -515,12 +449,13 @@ _install_node_versions() {
     # https://github.com/asdf-vm/asdf-nodejs/issues/40#issuecomment-297053730
     # bash "$HOME"/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
-    # legacy, gallery:
+    # L, G
     (asdf list nodejs | grep --quiet 9.11.2) || asdf install nodejs 9.11.2
-    # zed
+    # Z
     (asdf list nodejs | grep --quiet 6.7.0) || asdf install nodejs 6.7.0
-    # easel
+    # E
     (asdf list nodejs | grep --quiet 21.7.3) || asdf install nodejs 21.7.3
+    # global
     (asdf list nodejs | grep --quiet latest) || asdf install nodejs latest
 
     asdf global nodejs latest
@@ -565,30 +500,24 @@ _install_python_versions() {
     _log_info "Installing python version(s)"
     (asdf plugin list | grep --quiet python) || asdf plugin add python
 
-    LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:$PKG_CONFIG_PATH"
-    export PKG_CONFIG_PATH
+    _configure_flags_and_paths_for_homebrew_tools
 
-    LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
-    export LDFLAGS
-    CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
-    export CPPFLAGS
-    PATH="$(brew --prefix bzip2)/bin:$PATH"
-    export PATH
-
-    # imgproc:
+    # I:
     # https://github.com/danhper/asdf-python/issues/98
-    # imgproc uses 3.7.3. It won't install on macos but 3.7.10 will.
+    # I uses 3.7.3. It won't install on macos but 3.7.10 will.
     # https://github.com/pyenv/pyenv/issues/1740#issuecomment-986082691
     # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
     # ( asdf list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && asdf install python 3.7.10 )
     # api tests and ui tests:
-    (asdf list python | grep --quiet 3.8.15) || (_log_info "installing python 3.8.15" && asdf install python 3.8.15)
-    # global and legacy react:
-    (asdf list python | grep --quiet 3.10.1) || (_log_info "installing python 3.10.1" && asdf install python 3.10.1 && asdf install python 2.7.18 && asdf global python 3.10.1 2.7.18)
+    (asdf list python | grep --quiet 3.8.15) ||
+        (_log_info "installing python 3.8.15" &&
+            asdf install python 3.8.15)
+    # global
+    (asdf list python | grep --quiet 3.10.1) ||
+        (_log_info "installing python 3.10.1" &&
+            asdf install python 3.10.1 &&
+            asdf install python 2.7.18 &&
+            asdf global python 3.10.1 2.7.18)
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -598,7 +527,7 @@ _install_ruby_versions() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing ruby version(s)"
     (asdf plugin list | grep --quiet ruby) || asdf plugin add ruby
-    # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # zed (compass) - doesn't install on mac but 3.x works
+    # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # Z (compass) - doesn't install on mac but 3.x works
     (asdf list ruby | grep --quiet 3.1.2) || asdf install ruby 3.1.2
     asdf global ruby 3.1.2
     builtin cd - >/dev/null || return
@@ -644,10 +573,10 @@ _update_python_pip_packages() {
 # antidote (zsh plugin manager) {{{
 _update_antidote_plugins() {
     _log_info "Updating antidote plugins"
-    (brew list | grep antidote >/dev/null) &&
-        source "$(brew --prefix antidote)"/share/antidote/antidote.zsh &&
-        antidote load
-    antidote update --bundles # update all packages
+    if (brew list | grep antidote >/dev/null); then
+        local -r ANTIDOTE_ZSH_FILE="$(brew --prefix antidote)"/share/antidote/antidote.zsh
+        zsh -c "source $ANTIDOTE_ZSH_FILE && antidote load && antidote update --bundles" # update all packages
+    fi
 }
 # }}}
 
@@ -748,8 +677,8 @@ _apply_mac_preferences() {
 _start_launch_agents() {
     _log_info "Starting launch agents"
     # let's use lunchy instead of launchctl! https://github.com/eddiezane/lunchy
-    lunchy start --write mike.saatchi-tunnel.autossh
-    # lunchy start --write mike.saatchi-proxy.autossh
+    # lunchy start --write launched.mike.saatchi-tunnel.autossh # write is throwing an error for some reason
+    lunchy start launched.mike.saatchi-tunnel.autossh
 }
 # }}}
 
@@ -797,23 +726,23 @@ _bootstrap_all() {
     _install_xcode_command_line_tools
     _install_homebrew_if_its_missing
     _install_update_homebrew_packages
+    _pin_homebrew_packages
     _install_neovim_versions
     _install_php_versions
     _install_node_versions
     _install_lua_versions
-    _install_perl_versions
+    # _install_perl_versions
     _install_deno_versions
     _install_python_versions
     _update_python_pip_packages
     _install_ruby_versions
-    _install_upgrade_akamai
-    _install_older_kubectl
+    _upgrade_akamai_and_install_missing
     _install_erlang_version
     _install_elixir_version
     _install_tmux_plugin_manager
     _install_upgrade_tmux_plugins
     _update_antidote_plugins
-    _apply_hosts_file
+    # _apply_hosts_file
     # _enable_terminal_text_formattting
     _apply_mac_preferences
     _start_launch_agents

@@ -323,7 +323,7 @@ return {
 
       local neocodeium_status_component = {
         function()
-          return "󰌵" -- 󱐋 ⚡ 󰲋 󰲌󰚩
+          return "󰌶" --  󱙺 󰌵 󱐋 ⚡ 󰲋 󰲌󰚩 
           -- local on = "󰲋"
           -- local off = "󰲌"
           -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
@@ -380,6 +380,12 @@ return {
     },
     lazy = false,
     -- event = "BufRead",
+    commands = {
+      "A",
+      "AV",
+      "AS",
+      "AT",
+    },
     keys = {
       { "<leader>Aa", "<Cmd>A<CR>", noremap = true, desc = "Alternate file" },
       { "<leader>Av", "<Cmd>AV<CR>", noremap = true, desc = "Alternate vsplit" },

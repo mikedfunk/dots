@@ -26,7 +26,7 @@ Code/saatchi/**/.projections.json
 Code/saatchi/**/.php-cs-fixer.php
 Code/saatchi/**/.gitlint
 
-Library/LaunchAgents/mike.saatchi-tunnel.autossh.plist
+Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 Code/saatchi/{zed,gallery,legacy}/phpstan.neon
 Code/saatchi/zed/.editorconfig
 
@@ -36,22 +36,22 @@ Code/saatchi/zed/.editorconfig
 
 # .aws/credentials
 # .boto
+# .local/share/nvim/dadbod_ui/connections.json
+# Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 .aws/config
 .circleci/cli.yml
 .config/algolia/config.toml
 .config/multitail/multitail.conf
 .config/sql-language-server/.sqllsrc.json
 .edgerc
-.local/share/nvim/dadbod_ui/connections.json
+.kube/config
 .mailmap
 .mylogin.cnf
 .netrc
 .private_vars.sh
 .ssh/{config,keys}
-.kube/config
 .support/hosts.json
 .warprc
-Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 intelephense/licence.txt
 
