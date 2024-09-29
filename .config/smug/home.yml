@@ -1,4 +1,4 @@
-session: " Home"
+session: "󰋜 Home"
 windows:
   - name: config
     root: ~/.config/yadm

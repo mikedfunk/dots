@@ -1,4 +1,11 @@
 return {
+  -- this is included with lazyvim, I'm just changing an option
+  {
+    "echasnovski/mini.pairs",
+    opts = {
+      modes = { command = false },
+    },
+  },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -19,7 +26,16 @@ return {
           paths = { "/usr/share/dict/words" },
         },
       },
-      { "windwp/nvim-autopairs", opts = {} }, -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
+      {
+        -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
+        "windwp/nvim-autopairs",
+        opts_extend = { "disabled_filetype" },
+        opts = {
+          disabled_filetype = {
+            "noice",
+          },
+        },
+      },
       -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     },
     ---@param opts cmp.ConfigSchema

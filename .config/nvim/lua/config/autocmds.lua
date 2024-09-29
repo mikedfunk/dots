@@ -36,3 +36,11 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
   desc = "Do NOT autoformat composer.json! It will fuck it up",
 })
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+  pattern = { "dosini" },
+  callback = function()
+    vim.bo.commentstring = "# %s"
+  end,
+  desc = "dosini commentstring",
+})

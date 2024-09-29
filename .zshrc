@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 # zsh config
 # vim: set foldmethod=marker ft=zsh:
 
@@ -7,6 +7,9 @@
 # https://til.hashrocket.com/posts/alk38eeu8r-use-fc-to-fix-commands-in-the-shell
 # ctrl-z won't work? remove ~/.zsh/log/jog.lock
 # This is documented with tomdoc.sh style https://github.com/tests-always-included/tomdoc.sh
+#
+# https://blog.mattclemente.com/2020/06/26/oh-my-zsh-slow-to-load/#a-note-on-profiling-with-zsh%2Fzprof
+# zmodload zsh/zprof
 # }}}
 
 # p10k instant prompt (must be first) {{{
@@ -26,6 +29,11 @@ fi
 # Internal: Whether a command is available
 _has() {
     type "$1" &>/dev/null
+}
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
 # colors {{{
@@ -124,15 +132,22 @@ path=(
 
 # https://www.justingarrison.com/blog/2020-05-28-shell-shortcuts/
 bindkey '^q' push-line-or-edit
+# https://github.com/getantidote/use-omz?tab=readme-ov-file#differences
+ZSH_DISABLE_COMPFIX=true
 # }}}
 
 # load antidote zsh plugins (#slow) {{{
-# make oh-my-zsh plugins work with antidote... this is kind of crazy
-ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 
-( brew list | grep antidote > /dev/null ) \
-    && source $(brew --prefix antidote)/share/antidote/antidote.zsh \
-    && antidote load
+if brew list | grep --quiet antidote; then
+    source $(brew --prefix antidote)/share/antidote/antidote.zsh
+
+    if [ -z "$ZSH" ] && ( antidote list | grep --quiet ohmyzsh/ohmyzsh ); then
+        # make oh-my-zsh plugins work with antidote
+        ZSH=$(antidote path ohmyzsh/ohmyzsh)
+    fi
+
+    antidote load
+fi
 # zsh plugins are in ~/.zsh_plugins.txt
 # }}}
 
@@ -168,7 +183,7 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 ( antidote list | grep dim-an/cod > /dev/null ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
 
 # evaluated startup commands {{{
-_has mutagen && mutagen daemon start
+# _has mutagen && mutagen daemon start
 _has direnv && _evalcache direnv hook zsh # (evalcache version)
 # _has pkgx && source <(pkgx --shellcode)
 # _has aicommits && aicommits config set OPENAI_KEY="$OPENAI_API_KEY"
@@ -223,7 +238,8 @@ builtin setopt aliases # weird, this should have already been done :/
 # _has starship && _evalcache starship init zsh
 
 # https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
-_has navi && _evalcache navi widget zsh
+# _has navi && _evalcache navi widget zsh
+
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
 [[ -f "$HOME"/.iterm2_shell_integration.zsh ]] && source "$HOME"/.iterm2_shell_integration.zsh
 
@@ -300,17 +316,18 @@ export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
 
 # completion {{{
 # moved here for zsh-users/zsh-completions
-autoload -Uz compinit
-compinit
+# this can be commented out due to https://github.com/mattmc3/ez-compinit
+# autoload -Uz compinit
+# compinit
 
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+# zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
-[ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
-[ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
+# [ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
+# [ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
 
 _has kubectl && _evalcache kubectl completion zsh
-_has algolia && _evalcache algolia completion zsh
+# _has algolia && _evalcache algolia completion zsh
 # _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
 # _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
 
@@ -320,8 +337,8 @@ _has algolia && _evalcache algolia completion zsh
 zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
 zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 
-_has akamai && _evalcache akamai --zsh
-[ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
+# _has akamai && _evalcache akamai --zsh
+# [ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
 
 # }}}
 
@@ -346,8 +363,8 @@ compdef git-spice="gs"
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh
-ssh() { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
-autossh() { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
+ssh () { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
+autossh () { LC_SSH_ALIAS=$1 $(brew --prefix)/bin/autossh $@; }
 compdef autossh="ssh"
 
 # https://www.youtube.com/watch?v=Wl7CDe9jsuo&feature=youtu.be
@@ -429,7 +446,7 @@ wf () { wd $(wd list | gsed '1d' | fzf | gsed -E 's/^ +(\w+).*$/\1/'); }
 export CLICOLOR=1 # ls colors by default
 
 # pretty-print PATH with line breaks
-pretty-path() { tr : '\n' <<<"$PATH"; }
+pretty-path () { tr : '\n' <<<"$PATH"; }
 # alias vit="vim +TW" # until vit gets its act together
 # alias tree="alder" # colorized tree from npm (I colorize tree with "lsd" now so this is not needed)
 # https://unix.stackexchange.com/a/293608/287898
@@ -652,11 +669,11 @@ xdebug-on() {
 # ensure the tmux term exists, otherwise some stuff like ncurses apps (e.g. tig) might break. This is very fast.
 [ -f "$HOME/.support/tmux-256color.terminfo" ] && tic -x "$HOME/.support/tmux-256color.terminfo" &>/dev/null
 [ -f "$HOME/.support/tmux.terminfo" ] && tic -x "$HOME/.support/tmux.terminfo" &>/dev/null
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fuzzy finder - installed via yadm bootstrap
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fuzzy finder - installed via yadm bootstrap (still from homebrew)
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
 # _has cod && source <(cod init $$ zsh) # does not work well on arm64
-[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1103
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1104
 # }}}
 
 # zsh options {{{
@@ -684,23 +701,28 @@ PROMPT_EOL_MARK=''
 # cdr {{{
 # https://github.com/willghatch/zsh-cdr/blob/master/cdr.plugin.zsh
 # this also enables zsh-autocomplete recent directories `cdr <Tab>`
-if [[ -z "$ZSH_CDR_DIR" ]]; then
-    ZSH_CDR_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/zsh-cdr
-fi
-
-mkdir -p $ZSH_CDR_DIR
-autoload -Uz chpwd_recent_dirs cdr
-autoload -U add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-file $ZSH_CDR_DIR/recent-dirs
-zstyle ':chpwd:*' recent-dirs-max 1000
-# fall through to cd
-zstyle ':chpwd:*' recent-dirs-default yes
+# if [[ -z "$ZSH_CDR_DIR" ]]; then
+#     ZSH_CDR_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/zsh-cdr
+# fi
+#
+# mkdir -p $ZSH_CDR_DIR
+# autoload -Uz chpwd_recent_dirs cdr
+# autoload -U add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
+# zstyle ':chpwd:*' recent-dirs-file $ZSH_CDR_DIR/recent-dirs
+# zstyle ':chpwd:*' recent-dirs-max 1000
+# # fall through to cd
+# zstyle ':chpwd:*' recent-dirs-default yes
 # }}}
 
 # }}}
 
 # zsh plugins config {{{
+
+# powerlevel10k {{{
+# https://getantidote.github.io/usage#plugins-file
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
+# }}}
 
 # zsh-autocomplete {{{
 # so chatty
@@ -734,7 +756,7 @@ zstyle ':notify:*' success-sound 'default'
 # zstyle ':notify:*' blacklist-regex 'v|lvim|vim'
 # }}}
 
-# oh-mhy-zsh-jira {{{
+# oh-my-zsh-jira {{{
 # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/jira
 export JIRA_DEFAULT_ACTION='dashboard'
 # }}}

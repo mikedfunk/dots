@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 get_smug_windows() {
-    local files=$(ls "$HOME"/.config/smug | grep '.yml')
-
-    for file in $files; do
-        local session=$(echo $file | sed 's/.yml//')
-        local windows=$(cat "$HOME"/.config/smug/"$file" | yq '.windows[].name' -)
+    local session windows
+    for file in ~/.config/smug/*.yml; do
+        session=$(basename "$file" | sed 's/.yml//')
+        windows=$(yq '.windows[].name' - <"$file")
 
         for window in $windows; do
             echo "$session:$window"
@@ -15,4 +13,4 @@ get_smug_windows() {
     done
 }
 
-smug $(get_smug_windows | fzf --tmux 20%,20% | awk '{print $1}') --attach >/dev/null 2>&1
+smug "$(get_smug_windows | fzf --tmux 20%,20% | awk '{print $1}')" --attach >/dev/null 2>&1
