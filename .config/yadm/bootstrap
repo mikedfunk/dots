@@ -734,11 +734,11 @@ _bootstrap_all() {
     # _install_perl_versions
     _install_deno_versions
     _install_python_versions
-    _update_python_pip_packages
+    # _update_python_pip_packages
     _install_ruby_versions
     _upgrade_akamai_and_install_missing
-    _install_erlang_version
-    _install_elixir_version
+    # _install_erlang_version
+    # _install_elixir_version
     _install_tmux_plugin_manager
     _install_upgrade_tmux_plugins
     _update_antidote_plugins
