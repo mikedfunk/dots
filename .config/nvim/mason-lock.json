@@ -43,11 +43,12 @@
   "pyright": "1.1.382",
   "rubocop": "1.66.1",
   "ruby-lsp": "0.18.3",
+  "ruff": "0.6.8",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.9.0",
   "solargraph": "0.50.0",
-  "some-sass-language-server": "1.8.3",
+  "some-sass-language-server": "2.0.1",
   "sqlfluff": "3.2.0",
   "sqlls": "1.7.0",
   "stylua": "v0.20.0",
@@ -56,6 +57,5 @@
   "vtsls": "0.2.6",
   "vue-language-server": "2.1.6",
   "yaml-language-server": "1.15.0",
-  "zk": "v0.14.1",
-
+  "zk": "v0.14.1"
 }

@@ -180,7 +180,9 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
 [ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
-( antidote list | grep dim-an/cod > /dev/null ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
+
+# cod: error: server returned error: Binary was compiled with 'CGO_ENABLED=0', go-sqlite3 requires cgo to work. This is a stub
+# ( antidote list | grep --quiet dim-an/cod ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
 
 # evaluated startup commands {{{
 # _has mutagen && mutagen daemon start
@@ -759,6 +761,10 @@ zstyle ':notify:*' success-sound 'default'
 # oh-my-zsh-jira {{{
 # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/jira
 export JIRA_DEFAULT_ACTION='dashboard'
+# }}}
+
+# zsh-vi-mode {{{
+ZVM_CURSOR_STYLE_ENABLED=false
 # }}}
 
 # }}}
