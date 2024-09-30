@@ -134,6 +134,12 @@ path=(
 bindkey '^q' push-line-or-edit
 # https://github.com/getantidote/use-omz?tab=readme-ov-file#differences
 ZSH_DISABLE_COMPFIX=true
+
+# https://github.com/mattmc3/ez-compinit?tab=readme-ov-file#how-do-i-customize-it
+# cache completion sources
+# DON'T FORGET if you add a completion source to comment this out or it won't show up for a day!!
+# NOTE: cache file is at ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump by default (and I don't currently change it)
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 # }}}
 
 # load antidote zsh plugins (#slow) {{{

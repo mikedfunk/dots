@@ -3,10 +3,11 @@ return {
   {
     "echasnovski/mini.pairs",
     opts = {
-      modes = { command = false },
+      modes = { command = false }, -- do not auto-pair in command or search mode
     },
   },
   {
+    -- add some completion sources
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
@@ -15,6 +16,7 @@ return {
       -- "hrsh7th/cmp-nvim-lsp-signature-help",
       "ray-x/cmp-treesitter",
       {
+        -- change Jira authentication from oauth to basic auth (API key). Remove debug print.
         "mikedfunk/cmp-jira",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
@@ -26,16 +28,11 @@ return {
           paths = { "/usr/share/dict/words" },
         },
       },
-      {
-        -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
-        "windwp/nvim-autopairs",
-        opts_extend = { "disabled_filetype" },
-        opts = {
-          disabled_filetype = {
-            "noice",
-          },
-        },
-      },
+      -- {
+      --   -- autoindent on enter in html https://github.com/LazyVim/LazyVim/discussions/1832#discussioncomment-7349902
+      --   "windwp/nvim-autopairs",
+      --   opts = {},
+      -- },
       -- { "rcarriga/cmp-dap", dependencies = { "mfussenegger/nvim-dap" } },
     },
     ---@param opts cmp.ConfigSchema
@@ -169,9 +166,11 @@ return {
     end,
   },
   {
+    -- add some lualine components to display some more things in the statusline
     "nvim-lualine/lualine.nvim",
     dependencies = {
       {
+        -- main config for neocodeium AI completion. Nested under lualine because I also add a lualine component.
         "monkoose/neocodeium",
         event = "VeryLazy",
         opts = {
@@ -180,6 +179,7 @@ return {
         },
         dependencies = {
           {
+            -- add AI section to which-key
             "folke/which-key.nvim",
             opts = { spec = { { "<leader>a", group = "+ai" } } },
           },
@@ -237,9 +237,9 @@ return {
         },
       },
     },
+    ---Add some lualine components
     ---@class LuaLineOpts
     ---@field sections table
-    ---
     ---@param opts LuaLineOpts
     opts = function(_, opts)
       local get_lsp_client_names = function()
@@ -277,14 +277,27 @@ return {
 
       ---@return string[]
       local function get_formatters()
-        local formatters = { unpack(require("conform").formatters_by_ft[vim.bo.ft] or {}) } ---@diagnostic disable-line param-type-mismatch
-        for _, formatter in ipairs(vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}) do
-          if not vim.tbl_contains(formatters, formatter) then ---@diagnostic disable-line param-type-mismatch
-            table.insert(formatters, formatter) ---@diagnostic disable-line param-type-mismatch
+        ---@class OneFormatter
+        ---@field name string
+        ---@type OneFormatter[]
+        local raw_enabled_formatters, _ = require("conform").list_formatters_to_run()
+        ---@type string[]
+        local formatters = {}
+
+        for _, formatter in ipairs(raw_enabled_formatters) do
+          table.insert(formatters, formatter.name)
+        end
+
+        ---@type string[]
+        local ale_fixers = vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}
+
+        for _, formatter in ipairs(ale_fixers) do
+          if not vim.tbl_contains(formatters, formatter) then
+            table.insert(formatters, formatter)
           end
         end
 
-        return formatters ---@diagnostic disable-line param-type-mismatch
+        return formatters
       end
 
       local conform_nvim_component = {

@@ -82,6 +82,9 @@ return {
           end,
           require_cwd = true,
         },
+        stylua = {
+          require_cwd = true,
+        },
       },
     },
     -- opts = function(_, opts) ---@diagnostic disable-line assign-type-mismatch
