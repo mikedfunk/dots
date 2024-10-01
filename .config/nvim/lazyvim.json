@@ -24,7 +24,6 @@
     "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.ruby",
     "lazyvim.plugins.extras.lang.sql",
-    "lazyvim.plugins.extras.lang.tailwind",
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.lang.yaml",
