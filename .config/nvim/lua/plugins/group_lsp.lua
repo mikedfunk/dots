@@ -40,14 +40,21 @@ return {
         somesass_ls = {},
         sqlls = {},
         tailwindcss = {
-          root_dir = function(pattern)
-            return require("lspconfig.util").root_pattern("tailwind.config.js")(pattern)
+          root_dir = function(startpath)
+            return require("lspconfig.util").root_pattern(
+              "tailwind.config.js",
+              "tailwind.config.cjs",
+              "tailwind.config.mjs",
+              "tailwind.config.ts",
+              "tailwind.config.cts",
+              "tailwind.config.mts"
+            )(startpath)
           end,
         },
         taplo = {},
         vtsls = {
-          root_dir = function(pattern)
-            return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(pattern)
+          root_dir = function(startpath)
+            return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(startpath)
           end,
           single_file_support = false,
         },
@@ -87,4 +94,10 @@ return {
   --   event = "LspAttach",
   --   opts = { vt_position = "end_of_line" },
   -- },
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    opts = {},
+  },
 }

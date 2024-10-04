@@ -107,6 +107,7 @@ tap "pkgxdev/made" # pkgx
 # brew "jsawk" # parse json in bash
 # brew "jsonlint" # used by vim ale to lint json
 # brew "keychain" # manage ssh agent and adding keys to it automatically. (I don't use this now that I have an ssh config directive to store passphrases for ssh agent in my osx keychain, which is different from this project's "keychain". Confusing, I know.)
+# brew "kiota" # microsoft API client from OpenAPI generator for a variety of languages (very outdated, using asdf version instead)
 # brew "kubectx" # quick way to switch contexts with a fzf picker
 # brew "kubernetes-cli" # already installed via brew cask install docker
 # brew "lastpass-cli" # TODO move all of my cli private_stuff over to lastpass
