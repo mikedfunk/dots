@@ -1,12 +1,4 @@
 -- vim: set foldmethod=marker:
-
----@param key nil|table<string>
----@param values table<string>
----@return table<string>
-local function addTo(key, values)
-  return vim.list_extend(key or {}, values)
-end
-
 return {
   {
     -- automatically install nvim-lint packages that are configured
@@ -28,7 +20,7 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
-    opts = function(_, opts)
+    config = function(_, opts)
       -- fix phpcs linter to allow --stdin-path=... {{{
       require("lint.linters.phpcs").parser = function(output, _)
         local severities = {
@@ -75,61 +67,72 @@ return {
       end
       -- }}}
 
-      opts.linters_by_ft.fish = nil -- BUGFIX: There is no such nvim-lint linter as "fish"
-      local lnt = opts.linters_by_ft
-
-      return vim.tbl_deep_extend("force", opts, {
-        linters_by_ft = {
-          editorconfig = addTo(lnt.editorconfig, { "editorconfig-checker" }),
-          gitcommit = addTo(lnt.gitcommit, { "gitlint" }),
-          javascript = addTo(lnt.javascript, { "cspell" }),
-          javascriptreact = addTo(lnt.javascriptreact, { "cspell" }),
-          typescript = addTo(lnt.typescript, { "cspell" }),
-          typescriptreact = addTo(lnt.typescriptreact, { "cspell" }),
-          markdown = addTo(lnt.markdown, { "markdownlint" }),
-          make = addTo(lnt.make, { "checkmake" }),
-          php = addTo(lnt.php, { "cspell" }),
-          -- php = addTo(lnt.php, { "phpstan", "cspell" }), -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
-        },
-        linters = {
-          -- phpstan is file-based and cannot be read from stdin, so it is not
-          -- only slow, it blocks the neovim UI while nvim-lint ("the async
-          -- linter") is running it.
-          phpstan = {
-            cmd = "phpstan",
-            args = {
-              "analyze",
-              "--error-format=json",
-              "--no-progress",
-              "--memory-limit=200M",
-              "--level=9",
-            },
-          },
-          phpcs = {
-            cmd = "./vendor/bin/phpcs",
-            args = {
-              -- works together with stdin-path fix above
-              function()
-                return "--stdin-path=" .. vim.fn.expand("%")
-              end,
-              -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/phpcs.lua
-              "-q",
-              "--report=json",
-              "--cache",
-              "--warning-severity=3", -- fix warnings up to severity 3
-              -- "--warning-severity=0", -- do not fix warnings
-              "-d",
-              "memory_limit=100M",
-              "-d",
-              "xdebug.mode=off",
-              "-d",
-              "zend.enable_gc=0",
-              "-",
-            },
-          },
-        },
-      })
+      local lazy_config = require("lazyvim.plugins.linting")[1].config
+      lazy_config(_, opts)
     end,
+    opts_extend = {
+      "linters_by_ft.editorconfig",
+      "linters_by_ft.gitcommit",
+      "linters_by_ft.javascript",
+      "linters_by_ft.javascriptreact",
+      "linters_by_ft.typescript",
+      "linters_by_ft.typescriptreact",
+      "linters_by_ft.markdown",
+      "linters_by_ft.make",
+      "linters_by_ft.php",
+    },
+    opts = {
+      linters_by_ft = {
+        fish = {}, -- BUGFIX: There is no such nvim-lint linter as "fish"
+        editorconfig = { "editorconfig-checker" },
+        gitcommit = { "gitlint" },
+        javascript = { "cspell" },
+        javascriptreact = { "cspell" },
+        typescript = { "cspell" },
+        typescriptreact = { "cspell" },
+        markdown = { "markdownlint" },
+        make = { "checkmake" },
+        php = { "cspell" },
+        -- php = { "cspell", "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
+      },
+      linters = {
+        -- phpstan is file-based and cannot be read from stdin, so it is not
+        -- only slow, it blocks the neovim UI while nvim-lint ("the async
+        -- linter") is running it.
+        -- phpstan = {
+        --   cmd = "phpstan",
+        --   args = {
+        --     "analyze",
+        --     "--error-format=json",
+        --     "--no-progress",
+        --     "--memory-limit=200M",
+        --     "--level=9",
+        --   },
+        -- },
+        phpcs = {
+          cmd = "./vendor/bin/phpcs",
+          args = {
+            -- works together with stdin-path fix above
+            function()
+              return "--stdin-path=" .. vim.fn.expand("%")
+            end,
+            -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/phpcs.lua
+            "-q",
+            "--report=json",
+            "--cache",
+            "--warning-severity=3", -- show warnings from severity 3 up to the max of 5
+            -- "--warning-severity=0", -- do not show warnings, same as -n
+            "-d",
+            "memory_limit=100M",
+            "-d",
+            "xdebug.mode=off",
+            "-d",
+            "zend.enable_gc=0",
+            "-",
+          },
+        },
+      },
+    },
   },
   {
     -- this is ONLY for slow phpstan level 9.

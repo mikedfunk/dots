@@ -330,9 +330,25 @@ return {
       -- local navic_component = table.remove(opts.sections.lualine_c, #opts.sections.lualine_c)
       -- table.remove(opts.sections.lualine_c, #opts.sections.lualine_c) -- filename component
       local diagnostics_component = table.remove(opts.sections.lualine_c, 2)
-
       local git_diff_component = table.remove(opts.sections.lualine_x, 5)
 
+      -- not sure if this is worth it... I have to run it in a timer to avoid exceeding my rate limit
+      -- local checks_text = ""
+      -- local github_checks_component = {
+      --   ---@return string
+      --   function()
+      --     local cmd = { "gh", "pr", "checks", "--json", "state", "--jq", ".[].state" }
+      --     vim.system(cmd, { text = true }, function(obj)
+      --       if obj.code == 0 then
+      --         checks_text = " "
+      --           .. obj.stdout:gsub("\n", ""):gsub("FAILURE", "F"):gsub("SUCCESS", "."):gsub("IN_PROGRESS", "")
+      --       end
+      --     end)
+      --     return checks_text
+      --   end,
+      -- }
+      --
+      -- table.insert(opts.sections.lualine_c, 2, github_checks_component)
       table.insert(opts.sections.lualine_c, 2, git_diff_component)
       table.insert(opts.sections.lualine_x, 5, diagnostics_component)
 

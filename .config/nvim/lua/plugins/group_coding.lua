@@ -10,9 +10,9 @@ return {
     -- add some completion sources
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-emoji", -- trigger with :\w
       "lukas-reineke/cmp-rg",
-      "chrisgrieser/cmp-nerdfont",
+      "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
       -- "hrsh7th/cmp-nvim-lsp-signature-help",
       "ray-x/cmp-treesitter",
       {
@@ -37,7 +37,7 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      opts.experimental = { ghost_text = false }
+      opts.experimental = { ghost_text = false } -- this conflicts with codeium and similar
       opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
         entries = { follow_cursor = true },
       })

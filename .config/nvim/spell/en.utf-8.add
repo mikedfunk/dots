@@ -271,3 +271,6 @@ Atmos
 Elasticache
 healthchecks
 Transactionally
+foreach
+zend
+urldecode
