@@ -604,13 +604,11 @@ _enable_terminal_text_formattting() {
 
 # Mac preferences {{{
 # https://www.reddit.com/r/MacOS/comments/9ijy88/font_antialiasing_on_mojave/?utm_content=title&utm_medium=front&utm_source=reddit&utm_name=MacOS
+# also https://github.com/Jaycedam/mac-setup/blob/aeaec15052a0bed52a5853b0b50be27fd6e42418/modules/preferences.sh
 _apply_mac_preferences() {
-    # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
-    defaults write -g NSWindowShouldDragOnGesture -bool true
-
-    defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-
     _log_info "Setting general mac preferences"
+    defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+    defaults write -g NSWindowShouldDragOnGesture -bool true                 # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
     defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Disable “natural” (Lion-style) scrolling
     defaults write com.apple.dock orientation -string 'left'                 # dock on left side
     defaults write com.apple.dock "autohide" -bool true                      # Autohide
@@ -623,8 +621,7 @@ _apply_mac_preferences() {
     defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40 # Increase sound quality for Bluetooth headphones/headsets
     defaults write com.apple.screensaver askForPassword -int 1                          # Require password immediately after sleep or screen saver begins
     defaults write com.apple.screensaver askForPasswordDelay -int 0
-    # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `Flwv` # Use column view in all Finder windows by default
-    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"                   # Use column view in all Finder windows by default. Other view modes: `icnv`, `Nlsv`, `Flwv`
     defaults write com.apple.Finder AppleShowAllFiles true                                # show hidden files in finder
     defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true                     # Show file extensions
     chflags nohidden ~/Library                                                            # Show the ~/Library folder

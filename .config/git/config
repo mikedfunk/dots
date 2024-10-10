@@ -218,8 +218,6 @@
     canimerge = !git checkout develop > /dev/null 2>&1 \
         && git pull --autostash > /dev/null 2>&1 \
         && git checkout - > /dev/null 2>&1 \
-        && git fetch --tags > /dev/null 2>&1 \
-        && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
         && LOG=$(git log --oneline \"$LAST_SEMVER\"..develop --no-merges) \
         && [ -n \"$LOG\" ] \
         && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
@@ -396,10 +394,10 @@
 # rebasing, squashing, pushing, fetching {{{
 [branch]
 	sort = -committerdate
-    # this breaks git flow hotfix finish. Just use git purr or sync to rebase.
-    # autosetuprebase = always
-    # This just implicitly sets up a tracking branch when you `git branch` or `git checkout -b`. Same as `--track`.
-    # autosetupmerge = always
+    # this breaks git flow hotfix finish. Just use git purr or sync to rebase. Tells git pull to rebase instead of merge.
+    # autoSetupRebase = always
+    # This just implicitly sets up a tracking branch when you `git branch` or `git checkout -b`. Same as `--track`. It's not necessary with autoSetupRemote.
+    # autoSetupMerge = always
 [rebase]
     # autosquash = true
     autostash = true
@@ -422,7 +420,7 @@
 [fetch]
     prune = true
 	fsckobjects = true
-[sequence]
+# [sequence]
     # https://github.com/MitMaro/git-interactive-rebase-tool
     # editor = interactive-rebase-tool
 # }}}
@@ -491,6 +489,13 @@
 # git-jump {{{
 [jump]
     grepCmd = ag --column
+# }}}
+
+# git-spice {{{
+[spice "branchCreate"]
+    commit = false
+[spice "submit"]
+    navigationComment = multiple
 # }}}
 
 # git-secrets {{{

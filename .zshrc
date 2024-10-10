@@ -182,7 +182,7 @@ export XDG_CACHE_HOME="$HOME"/.cache
 
 export COMPOSE_HTTP_TIMEOUT=120 # default is 60
 export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
-[ -f ~/.private_vars.sh ] && source ~/.private_vars.sh # where I store my secret env vars
+[ -f "$HOME"/.private_vars.sh ] && source "$HOME"/.private_vars.sh # where I store my secret env vars
 [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
 [ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
@@ -677,7 +677,7 @@ xdebug-on() {
 # ensure the tmux term exists, otherwise some stuff like ncurses apps (e.g. tig) might break. This is very fast.
 [ -f "$HOME/.support/tmux-256color.terminfo" ] && tic -x "$HOME/.support/tmux-256color.terminfo" &>/dev/null
 [ -f "$HOME/.support/tmux.terminfo" ] && tic -x "$HOME/.support/tmux.terminfo" &>/dev/null
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fuzzy finder - installed via yadm bootstrap (still from homebrew)
+[ -f "$HOME"/.fzf.zsh ] && source "$HOME"/.fzf.zsh # fuzzy finder - installed via yadm bootstrap (still from homebrew)
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
 # _has cod && source <(cod init $$ zsh) # does not work well on arm64
