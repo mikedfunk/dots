@@ -13,17 +13,17 @@ return {
   {
     "stevearc/conform.nvim",
     -- NOTE: workaround: see above comment about mason-conform which I would rather use
-    dependencies = {
-      "williamboman/mason.nvim",
-      opts_extend = { "ensure_installed" },
-      opts = {
-        ensure_installed = {
-          "black",
-        },
-      },
-    },
+    -- dependencies = {
+    --   "williamboman/mason.nvim",
+    --   opts_extend = { "ensure_installed" },
+    --   opts = {
+    --     ensure_installed = {
+    --       "black", -- moved to lazy extra
+    --     },
+    --   },
+    -- },
     opts_extend = {
-      "formatters_by_ft.python",
+      -- "formatters_by_ft.python",
       "formatters_by_ft.php",
       "formatters.phpcbf.prepend_args",
     },
@@ -34,7 +34,7 @@ return {
         async = true,
       },
       formatters_by_ft = {
-        python = { "black" },
+        -- python = { "black" }, -- moved to lazy extra
         php = { "phpcbf" },
       },
       formatters = {

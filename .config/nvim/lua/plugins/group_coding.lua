@@ -352,7 +352,8 @@ return {
 
       local neocodeium_status_component = {
         function()
-          return "󰌶" --  󱙺 󰌵 󱐋 ⚡ 󰲋 󰲌󰚩 
+          return LazyVim.config.icons.kinds.Codeium
+          -- return "󰌶" --  󱙺 󰌵 󱐋 ⚡ 󰲋 󰲌󰚩 
           -- local on = "󰲋"
           -- local off = "󰲌"
           -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0

@@ -611,37 +611,31 @@ _apply_mac_preferences() {
     defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
     _log_info "Setting general mac preferences"
-    # Disable “natural” (Lion-style) scrolling
-    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-    # dock on left side
-    defaults write com.apple.dock orientation -string 'left'
-    # mac dark mode
-    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
-    # graphite color theme
-    defaults write NSGlobalDomain AppleAquaColorVariant -int 6
-    # disable dashboard
-    defaults write com.apple.dashboard dashboard-enabled-state -int 1
-    # Disable press-and-hold for keys in favor of key repeat
-    # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-    # Set a blazingly fast keyboard repeat rate
-    # defaults write NSGlobalDomain KeyRepeat -int 1
+    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Disable “natural” (Lion-style) scrolling
+    defaults write com.apple.dock orientation -string 'left'                 # dock on left side
+    defaults write com.apple.dock "autohide" -bool true                      # Autohide
+    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'         # mac dark mode
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6               # graphite color theme
+    defaults write com.apple.dashboard dashboard-enabled-state -int 1        # disable dashboard
+    # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false # Disable press-and-hold for keys in favor of key repeat
+    # defaults write NSGlobalDomain KeyRepeat -int 1 # Set a blazingly fast keyboard repeat rate
     # defaults write NSGlobalDomain InitialKeyRepeat -int 10
-    # Increase sound quality for Bluetooth headphones/headsets
-    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
-    # Require password immediately after sleep or screen saver begins
-    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40 # Increase sound quality for Bluetooth headphones/headsets
+    defaults write com.apple.screensaver askForPassword -int 1                          # Require password immediately after sleep or screen saver begins
     defaults write com.apple.screensaver askForPasswordDelay -int 0
-    # Use column view in all Finder windows by default
-    # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `Flwv`
+    # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `Flwv` # Use column view in all Finder windows by default
     defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
-    # show hidden files in finder
-    defaults write com.apple.Finder AppleShowAllFiles true
-    # Show the ~/Library folder
-    chflags nohidden ~/Library
-    # Chrome - Disable the all too sensitive backswipe on Magic Mouse
-    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+    defaults write com.apple.Finder AppleShowAllFiles true                                # show hidden files in finder
+    defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true                     # Show file extensions
+    chflags nohidden ~/Library                                                            # Show the ~/Library folder
+    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false # Chrome - Disable the all too sensitive backswipe on Magic Mouse
     defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
     defaults write com.apple.screencapture location ~/Screenshots
+    defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf" # Search scope current folder
+    defaults write com.apple.AdLib.plist allowApplePersonalizedAdvertising -bool false
+    defaults write com.apple.AdLib.plist allowIdentifierForAdvertising -bool false
+    defaults write com.apple.AdLib.plist personalizedAdsMigrated -bool false
+    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false # disables "corrects spelling automatically"
 
     killall Dock
     killall Finder

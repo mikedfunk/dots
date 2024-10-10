@@ -26,19 +26,19 @@
         },
         "codeLens": {
           "implementations": {
-            "enable": false
+            "enable": true
           },
           "overrides": {
-            "enable": false
+            "enable": true
           },
           "parent": {
-            "enable": false
+            "enable": true
           },
           "references": {
             "enable": true
           },
           "usages": {
-            "enable": false
+            "enable": true
           }
         },
         "completion": {
