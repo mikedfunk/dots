@@ -9,10 +9,10 @@ return {
   },
   {
     -- add some completion sources
+    -- "hrsh7th/nvim-cmp",
     -- https://github.com/LazyVim/LazyVim/discussions/4549
     "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
-    -- "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji", -- trigger with :\w
       "lukas-reineke/cmp-rg",
@@ -179,6 +179,26 @@ return {
         event = "VeryLazy",
         opts = {
           silent = true,
+          filter = function(bufnr)
+            local excluded_filetypes = {
+              "TelescopePrompt",
+              "DressingInput",
+              "NvimTree",
+              "TelescopeResults",
+              "alpha",
+              "dashboard",
+              "harpoon",
+              "lazy",
+              "lspinfo",
+              "starter",
+            }
+
+            if vim.tbl_contains(excluded_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr })) then
+              return false
+            end
+
+            return true
+          end,
           -- show_label = false,
         },
         dependencies = {

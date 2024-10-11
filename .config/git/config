@@ -215,13 +215,24 @@
     rsh = reset --soft HEAD^
     # show tags sorted by semantic version e.g. 3.1.0, 3.2.0, 3.10.0
     semver = !git fetch --tags && ( git tag --sort=v:refname | grep -E \"^\\d+\\.\\d+\\.\\d+$\" )
-    canimerge = !git checkout develop > /dev/null 2>&1 \
-        && git pull --autostash > /dev/null 2>&1 \
-        && git checkout - > /dev/null 2>&1 \
+    # canimerge = !git checkout develop > /dev/null 2>&1 \
+    #     && git pull --autostash > /dev/null 2>&1 \
+    #     && git checkout - > /dev/null 2>&1 \
+    #     && git fetch --tags > /dev/null 2>&1 \
+    #     && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
+    #     && LOG=$(git log --oneline \"$LAST_SEMVER\"..develop --no-merges) \
+    #     && [ -n \"$LOG\" ] \
+    #     && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
+    #     || echo \"Safe to merge, no release is in progress.\"
+    canimerge = !git checkout develop >/dev/null \
+        && git pull --autostash >/dev/null \
+        && git checkout - >/dev/null \
+        && git fetch --tags > /dev/null \
+        && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
         && LOG=$(git log --oneline \"$LAST_SEMVER\"..develop --no-merges) \
         && [ -n \"$LOG\" ] \
-        && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
-        || echo \"Safe to merge, no release is in progress.\"
+        && echo \"\\n$(tput setaf 1)$(tput rev)$(tput bold) \\xE2\\x9C\\x97 NOT SAFE TO MERGE! $(tput sgr0)\\n\\n${LOG}\\n\" \
+        || echo \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\xE2\\x9C\\x93 Safe to merge, no release is in progress.$(tput sgr0)\\n\"
     # save a stash with "git stash save my_stash_name"
     # search for a stash by saved description e.g. "git sshow my_stash_name"
     sshow = "!f() { git stash show stash^{/$*} -p; }; f"
