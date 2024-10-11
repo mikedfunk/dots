@@ -1,3 +1,4 @@
+---@return LazyPluginSpec[]
 return {
   -- this is included with lazyvim, I'm just changing an option
   {
@@ -8,7 +9,10 @@ return {
   },
   {
     -- add some completion sources
-    "hrsh7th/nvim-cmp",
+    -- https://github.com/LazyVim/LazyVim/discussions/4549
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji", -- trigger with :\w
       "lukas-reineke/cmp-rg",
