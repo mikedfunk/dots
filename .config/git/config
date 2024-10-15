@@ -229,10 +229,10 @@
         && git checkout - >/dev/null \
         && git fetch --tags > /dev/null \
         && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
-        && LOG=$(git log --oneline \"$LAST_SEMVER\"..develop --no-merges) \
+        && LOG=$(git log --use-mailmap --pretty=format:'%h - %s (%cr) <%aN>' \"$LAST_SEMVER\"..develop --no-merges) \
         && [ -n \"$LOG\" ] \
         && echo \"\\n$(tput setaf 1)$(tput rev)$(tput bold) \\xE2\\x9C\\x97 NOT SAFE TO MERGE! $(tput sgr0)\\n\\n${LOG}\\n\" \
-        || echo \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\xE2\\x9C\\x93 Safe to merge, no release is in progress.$(tput sgr0)\\n\"
+        || echo \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\xE2\\x9C\\x93 Safe to merge, no release is in progress. $(tput sgr0)\\n\"
     # save a stash with "git stash save my_stash_name"
     # search for a stash by saved description e.g. "git sshow my_stash_name"
     sshow = "!f() { git stash show stash^{/$*} -p; }; f"
@@ -244,7 +244,7 @@
     st = status -sb
     # show all of my commits since yesterday
     # I use npm git-standup now instead
-    # standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author mike.funk@internetbrands.com
+    # standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author "Mike Funk"
     stash-staged = "!f() { git stash --keep-index && git stash push -m \"staged\" --keep-index && git stash pop stash@{1}; }; f"
     stash-unapply = !git stash show -p | git apply -R
     synchd = "!f() { echo \"Syncing current branch with develop\" && git checkout develop && git pull -r && git checkout - && git rebase develop; }; f"

@@ -5,6 +5,7 @@ M.quotes = {
   -- 3. some more quotes from @codewisdom@twitter.com
   -- 4. https://programming-quotesapi.vercel.app/api/random
   -- 5. https://www.reddit.com/r/quotes/
+  -- 6. https://www.cs.yale.edu/homes/perlis-alan/quotes.html
   -- { "'select' isn't broken.", "", "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application.", "", "- The Pragmatic Programmer" },
   -- { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
   -- { "All loops are infinite ones for faulty RAM modules." },
@@ -116,7 +117,7 @@ M.quotes = {
   { "Creativity comes from applying things you learn in other fields to the field you work in.", "", "- Aaron Swartz" },
   { "Critically analyze what you read and hear.", "", "Don't be swayed by vendors, media hype, or dogma. Analyze information in terms of you and your project.", "", "- The Pragmatic Programmer" },
   { "DRY - Don't Repeat Yourself.", "", "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.", "", "- The Pragmatic Programmer" },
-  { "Dealing with failure is easy: Work hard to improve.", "", " - Alan Perlis" },
+  { "Dealing with failure is easy: Work hard to improve. Success is also easy to handle: You've solved the wrong problem. Work hard to improve.", "", " - Alan Perlis" },
   { "Debugging becomes significantly easier if you first admit that you are the problem.", "", "- William Laeder" },
   { "Debugging is like being the detective in a crime movie where you are also the murderer.", "", "- Filipe Fortes" },
   { "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", "", "- Kernighan's law (Brian Kernighan)" },
@@ -142,6 +143,7 @@ M.quotes = {
   { "Don't document the problem, fix it.", "", "- Atli Björgvin Oddsson" },
   { "Don't even start considering solutions until you understand the problem. Your goal should be to \"solve\" the problem mostly within the problem domain, not the solution domain.", "", "- Oz Nova" },
   { "Don't gather requirements. Dig for them.", "", "Requirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.", "", "- The Pragmatic Programmer" },
+  { "Don't have good ideas if you aren't willing to be responsible for them.", "", "- Alan Perlis" },
   { "Don't let anyone rob you of your imagination, your creativity, or your curiosity. It's your place in the world; it's your life. Go on and do all you can with it, and make it the life you want to live.", "", "- Mae Jemison" },
   { "Don't live with broken windows.", "", "Fix bad designs, wrong decisions, and poor code when you see them.", "", "- Andy Hunt and Dave Thomas" },
   { "Don't panic when debugging.", "", "Take a deep breath and think about what could be causing the bug.", "", "- The Pragmatic Programmer" },
@@ -244,6 +246,7 @@ M.quotes = {
   { "It is better to do the right problem the wrong way than the wrong problem the right way.", "", "- Richard Hamming" },
   { "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures.", "", "- Alan Perlis" },
   { "It is easier to change the specification to fit the program than vice versa.", "", "- Alan Perlis" },
+  { "It is easier to write an incorrect program than understand a correct one. (in other words, it is sometimes helpful to just write it wrong so that you can understand how to write it right)", "", "- Alan Perlis" },
   { "It is foolish to answer a question that you do not understand. It is sad to work for an end that you do not desire.", "", "- George Pólya" },
   { "It is hard to write a simple definition of something as varied as hacking, but I think what these activities have in common is playfulness, cleverness, and exploration. Thus, hacking means exploring the limits of what is possible, in a spirit of playful cleverness. Activities that display playful cleverness have \"hack value\".", "", "- Richard Stallman" },
   { "It seems to me to be important to distinguish a good idea from poor implementations of it.", "", "- Ron Jeffries" },

@@ -30,11 +30,11 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "composer.json" },
+  pattern = { "composer.json", "programming_quotes.lua" },
   callback = function()
     vim.b.autoformat = false
   end,
-  desc = "Do NOT autoformat composer.json! It will fuck it up",
+  desc = "dont autoformat these",
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
@@ -43,4 +43,12 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
     vim.bo.commentstring = "# %s"
   end,
   desc = "dosini commentstring",
+})
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+  pattern = { "plantuml" },
+  callback = function()
+    vim.bo.commentstring = "' %s"
+  end,
+  desc = "plantuml commentstring",
 })
