@@ -77,11 +77,12 @@ tap "pkgxdev/made" # pkgx
 # brew "fd" # prettier alternative to find that respects gitignore (haven't used it yet)
 # brew "flow" # flowtype for javascript. Moved from ~/.config/yarn/global/package.json
 # brew "fpp" # facebook path picker. Used with tmux-fpp to easily open files in an editor. (I don't use it)
-# brew "fx" # json funagler used by some of my shell functions
+# brew "fx" # json funagler used by some of my shell functions (switched to jq)
 # brew "git-absorb" # fixup helper
 # brew "git-extras" # adds some cool additional git commands (conflicts with npm git-standup)
 # brew "git-flow" # adds first class git commands for the git-flow workflow (I use avh version below)
 # brew "git-flow-avh" # adds first class git commands for the git-flow workflow. This version will delete remote feature, release, and hotfix branches on finishing.
+# brew "git-gui" # gitk. Really not necessary.
 # brew "github-keygen" # simpler way to generate a github ssh key
 # brew "gitlab-gem" # gitlab cli
 # brew "global" # gnu global tags aka gtags. More powerful than ctags but has a different interface with a learning curve. Also depends on ctags which conflicts with universal-ctags.
@@ -201,6 +202,7 @@ tap "pkgxdev/made" # pkgx
 # brew "toot" # mastodon cli client
 # brew "trash" # a trash can for the terminal
 # brew "trash-cli" # a trash can for the terminal
+# brew "tree-sitter" # for some reason lunarvim expects this to exist when opening a gitignore file 🤷
 # brew "universal-ctags", args: ["HEAD"] # tag creator for use by vim to navigate by symbols. head only. See here for jansson https://github.com/liuchengxu/vista.vim#other-tips
 # brew "urlview" # used by <prefix>u tmux urlview plugin
 # brew "vim" # macvim requires xcode. This also allows you to get vim 8 without using a separate tap. (switched back to neovim)
@@ -332,7 +334,6 @@ brew "tidy-html5" # needed to build php https://github.com/shivammathur/homebrew
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "tmux", args: ["HEAD"] # terminal multiplexer similar to screen. (HEAD fixes a bug with splits in nvim)
 brew "tree" # display file/folder hierarchies in a visual tree format
-brew "tree-sitter" # for some reason lunarvim expects this to exist when opening a gitignore file 🤷
 brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
@@ -358,6 +359,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
 # cask "chromium" # no google tracking for me
+# cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
 # cask "discord" # chat
@@ -377,9 +379,11 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-caskaydia-cove-nerd-font" # Microsoft coding font with cursive italics
 # cask "font-commit-mono" # coding font (NOT nerd)
 # cask "font-fira-code-nerd-font"
+# cask "font-iosevka-nerd-font" # Tall, narrow programming font
 # cask "font-maple" # programming font (NOT nerd) with cursive italics
 # cask "font-mononoki-nerd-font" # programming font
 # cask "font-symbols-only-nerd-font" # just the nerd-font symbols
+# cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 # cask "freetube" # privacy-friendly and add-free youtube player
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)
 # cask "glance" # all-in-one quicklook app that works with dark mode (abandoned - switch to glamce-chamburr)
@@ -389,6 +393,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "gpg-suite" # allows adding GPG passphrase to keychain
 # cask "haptickey" # give haptic feedback on touchpad when pressing the touchbar
 # cask "helium" # android backup without root (doesn't seem to work, but the chrome app does)
+# cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 # cask "http-toolkit" # kind of like charles or wireshark, but with support for docker. (docker support seems to be coming soon)
 # cask "httpie" # postman alternative
 # cask "https://raw.githubusercontent.com/popcorn-official/popcorn-desktop/development/casks/popcorn-time.rb" # popcorn time!
@@ -445,6 +450,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "qlstephen" # quicklook plugin (preview plain text files without or with unknown file extension e.g. README, CHANGELOG)
 # cask "quicklook-csv" # quicklook plugin (preview csvs)
 # cask "quicklook-json" # quicklook plugin (preview json)
+# cask "quickrecorder" # menubar video recorder
 # cask "scummvm" # old school
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
@@ -479,26 +485,22 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
-cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
-cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
-cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
+cask "jordanbaird-ice" # menubar tool similar to hiddenbar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "nvidia-geforce-now" # game streaming
-cask "quickrecorder" # menubar video recorder
-cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle.
-cask "sequel-ace" # maintained fork of sequel pro (switched to table plus)
-cask "virtualbox" # virtual machine software (needed by docker-machine at least)
+cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
+cask "sequel-ace" # maintained fork of sequel pro see also table-plus
+cask "virtualbox" # virtual machine software
 
 # }}}
 
@@ -506,14 +508,14 @@ cask "virtualbox" # virtual machine software (needed by docker-machine at least)
 
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
+# mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 # mas "PdaNet for Android", id: 1542657021 # get around tethering restrictions on my carrier
+# mas "Session - Pomodoro Focus Timer", id: 1521432881
+# mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
-# mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
-mas "Timkee", id: 1670602751 # Jira time tracking menubar app
-# mas "Session - Pomodoro Focus Timer", id: 1521432881
 
 # }}}
