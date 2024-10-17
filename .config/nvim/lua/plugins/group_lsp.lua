@@ -94,10 +94,10 @@ return {
   --   event = "LspAttach",
   --   opts = { vt_position = "end_of_line" },
   -- },
-  {
-    "zeioth/garbage-day.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- {
+  --   "zeioth/garbage-day.nvim",
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
 }

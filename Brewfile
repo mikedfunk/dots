@@ -486,6 +486,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
+cask "deskpad" # cool virtual display for screen sharing
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-jetbrains-mono-nerd-font"
