@@ -670,8 +670,8 @@ _apply_mac_preferences() {
 _start_launch_agents() {
     _log_info "Starting launch agents"
     # let's use lunchy instead of launchctl! https://github.com/eddiezane/lunchy
-    # lunchy start --write launched.mike.saatchi-tunnel.autossh # write is throwing an error for some reason
-    lunchy start launched.mike.saatchi-tunnel.autossh
+    (lunchy status launched.mike.saatchi-tunnel.autossh | grep --quiet launched.mike.saatchi-tunnel.autossh) && return
+    lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
 # }}}
 
