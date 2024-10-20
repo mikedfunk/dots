@@ -41,7 +41,7 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      opts.experimental = { ghost_text = false } -- this conflicts with codeium and similar
+      -- opts.experimental = { ghost_text = false } -- this conflicts with codeium and similar
       opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
         entries = { follow_cursor = true },
       })
@@ -117,7 +117,8 @@ return {
           cmp_jira = "",
           cmp_tabnine = "➒", --  󰚩
           color_names = "",
-          copilot = "", -- 
+          codeium = LazyVim.config.icons.kinds.Codeium,
+          copilot = LazyVim.config.icons.kinds.Copilot, --  
           dap = "",
           dictionary = "",
           doxygen = "", -- 󰙆
@@ -132,7 +133,7 @@ return {
           nvim_lsp_document_symbol = "ʪ",
           nvim_lsp_signature_help = "ʪ",
           nvim_lua = "",
-          path = "󰉋", --  
+          path = LazyVim.config.icons.kinds.Folder, -- "󰉋", --  
           plugins = "", --  
           rg = "", -- 
           snippets = "",

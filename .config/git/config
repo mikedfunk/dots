@@ -224,12 +224,10 @@
     #     && [ -n \"$LOG\" ] \
     #     && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
     #     || echo \"Safe to merge, no release is in progress.\"
-    canimerge = !git checkout develop >/dev/null \
-        && git pull --autostash >/dev/null \
-        && git checkout - >/dev/null \
-        && git fetch --tags > /dev/null \
+    canimerge = !git pull --autostash >/dev/null \
+        && git fetch --tags >/dev/null \
         && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
-        && LOG=$(git log --use-mailmap --pretty=format:'%h - %s (%cr) <%aN>' \"$LAST_SEMVER\"..develop --no-merges) \
+        && LOG=$(git log --use-mailmap --pretty=format:'%h - %s (%cr) <%aN>' \"$LAST_SEMVER\"..origin/develop --no-merges) \
         && [ -n \"$LOG\" ] \
         && echo \"\\n$(tput setaf 1)$(tput rev)$(tput bold) \\xE2\\x9C\\x97 NOT SAFE TO MERGE! $(tput sgr0)\\n\\n${LOG}\\n\" \
         || echo \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\xE2\\x9C\\x93 Safe to merge, no release is in progress. $(tput sgr0)\\n\"

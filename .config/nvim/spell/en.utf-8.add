@@ -276,3 +276,6 @@ zend
 urldecode
 docblocks
 multibyte
+phpcs
+ruleset
+Slevomat

@@ -97,8 +97,9 @@ return {
       },
       linters = {
         -- phpstan is file-based and cannot be read from stdin, so it is not
-        -- only slow, it blocks the neovim UI while nvim-lint ("the async
-        -- linter") is running it.
+        -- only slow (on level 9), it blocks the neovim UI while nvim-lint
+        -- ("the async linter") is running it. My shitty workaround for now is
+        -- to use ALE instead for PHPStan ONLY.
         -- phpstan = {
         --   cmd = "phpstan",
         --   args = {
@@ -110,6 +111,7 @@ return {
         --   },
         -- },
         phpcs = {
+          -- force to use vendor version to ensure ruleset compatibility
           cmd = "./vendor/bin/phpcs",
           args = {
             -- works together with stdin-path fix above
@@ -135,7 +137,7 @@ return {
     },
   },
   {
-    -- this is ONLY for slow phpstan level 9.
+    -- this is ONLY for slow phpstan level 9. See comment above.
     "dense-analysis/ale",
     ft = { "php" },
     init = function()
