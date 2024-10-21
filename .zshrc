@@ -84,6 +84,7 @@ manpath=(
 )
 
 path=(
+  $(brew --prefix mysql-client@8.0)/bin
   $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
   "${KREW_ROOT:-$HOME/.krew}"/bin

@@ -47,7 +47,7 @@
   "ruff": "0.7.0",
   "rustywind": "0.22.0",
   "shellcheck": "v0.10.0",
-  "shfmt": "v3.9.0",
+  "shfmt": "v3.10.0",
   "solargraph": "0.50.0",
   "some-sass-language-server": "2.0.2",
   "sqlfluff": "3.2.4",

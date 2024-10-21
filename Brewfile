@@ -127,6 +127,7 @@ tap "pkgxdev/made" # pkgx
 # brew "mono" # .NET compiler for mac. Useful for OmniSharp. (not needed)
 # brew "mutagen" # docker volume helper - syncs docker volumes on the host machine rather than mounting it.
 # brew "mutagen-compose" # mutagen helper for docker-compose
+# brew "mysql" # I haven't been using the server lately but I use the cli tool to connect and I use mysql_config_editor. Unfortunately I can't just install the config editor separately :( (replaced by mysql-client@8.0)
 # brew "mysql-client" # If I ever need mysql client without mysql on local... downside: it doesn't link automatically - you have to brew link --force even if mysql isn't installed :/
 # brew "mysql-connector-c" # required for percona-tools (renamed to mysql-client)
 # brew "nano" # text editor. This gets the latest version: 2.2.6 rather than 2.2.0 that comes with osx.
@@ -299,7 +300,7 @@ brew "mas" # mac app store cli. e.g. `mas install Xcode`
 brew "memcached" # needed by php70 memcached pecl extension
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
-brew "mysql" # I haven't been using the server lately but I use the cli tool to connect and I use mysql_config_editor. Unfortunately I can't just install the config editor separately :(
+brew "mysql-client@8.0"
 brew "node" # nodejs and npm (non-asdf version required by yarn)
 brew "noti" # simple terminal notifier
 brew "nss" # required by mkcert to make certs trusted in firefox
