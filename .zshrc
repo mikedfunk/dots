@@ -163,6 +163,8 @@ fi
 # export BROWSER="open %u"
 unset BROWSER
 export FLOX_DISABLE_METRICS=true
+export DOCKER_CLI_HINTS=false
+export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
 export ZK_NOTEBOOK_DIR="$HOME/Notes"

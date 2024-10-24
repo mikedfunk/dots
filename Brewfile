@@ -115,6 +115,7 @@ tap "pkgxdev/made" # pkgx
 # brew "lerna" # used by cloudbeaver (mysql web app)
 # brew "lftp" # fancy scp, torrent, http, ftp download and upload client with queues, backgrounding, and more
 # brew "litecli" # like mycli for sqlite
+# brew "lnav" # log navigator similar to multitail
 # brew "lockrun" # simple way to lock cron jobs with a lock file and clear them when done
 # brew "lsd" # pretty ls augmentation
 # brew "lynx" # console web browser. used by ranger to preview html.
@@ -225,6 +226,7 @@ tap "pkgxdev/made" # pkgx
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
+brew "aider" # AI coding assistant
 brew "akamai" # interact with akamai caching
 brew "algolia" # search cli
 brew "antidote" # zsh plugin system like antigen but faster
@@ -305,6 +307,7 @@ brew "node" # nodejs and npm (non-asdf version required by yarn)
 brew "noti" # simple terminal notifier
 brew "nss" # required by mkcert to make certs trusted in firefox
 brew "oha" # http load tester
+brew "ollama" # local AI LLMs
 brew "oniguruma" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openssl@1.1" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
