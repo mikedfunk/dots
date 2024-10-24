@@ -565,45 +565,81 @@ return {
     --   { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
     -- },
   },
+  -- {
+  --   "Bryley/neoai.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     {
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --     },
+  --   },
+  --   -- expects OPENAI_API_KEY env var to be set
+  --   opts = {
+  --     models = {
+  --       {
+  --         name = "openai",
+  --         -- model = "gpt-3.5-turbo",
+  --         model = "gpt-4",
+  --         params = nil,
+  --       },
+  --     },
+  --   },
+  --   cmd = {
+  --     "NeoAI",
+  --     "NeoAIOpen",
+  --     "NeoAIClose",
+  --     "NeoAIToggle",
+  --     "NeoAIContext",
+  --     "NeoAIContextOpen",
+  --     "NeoAIContextClose",
+  --     "NeoAIInject",
+  --     "NeoAIInjectCode",
+  --     "NeoAIInjectContext",
+  --     "NeoAIInjectContextCode",
+  --   },
+  --   keys = {
+  --     { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
+  --     { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
+  --     { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
+  --     { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
+  --     { "<Leader>ag", desc = "NeoAI Commit Message" },
+  --   },
+  -- },
   {
-    "Bryley/neoai.nvim",
+    "olimorris/codecompanion.nvim",
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      {
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>a", group = "+ai" } } },
-      },
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
-    -- expects OPENAI_API_KEY env var to be set
     opts = {
-      models = {
-        {
-          name = "openai",
-          -- model = "gpt-3.5-turbo",
-          model = "gpt-4",
-          params = nil,
-        },
+      strategies = {
+        chat = { adapter = "openai" },
+        inline = { adapter = "openai" },
+        agent = { adapter = "openai" },
       },
     },
     cmd = {
-      "NeoAI",
-      "NeoAIOpen",
-      "NeoAIClose",
-      "NeoAIToggle",
-      "NeoAIContext",
-      "NeoAIContextOpen",
-      "NeoAIContextClose",
-      "NeoAIInject",
-      "NeoAIInjectCode",
-      "NeoAIInjectContext",
-      "NeoAIInjectContextCode",
+      "CodeCompanion",
+      "CodeCompanionChat",
+      "CodeCompanionActions",
     },
     keys = {
-      { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
-      { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
-      { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
-      { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
-      { "<Leader>ag", desc = "NeoAI Commit Message" },
+      {
+        "<Leader>ai",
+        "<Cmd>CodeCompanionChat Toggle<CR>",
+        mode = { "n", "v" },
+        desc = "CodeCompanion Chat",
+        noremap = true,
+      },
+      {
+        "<Leader>aa",
+        "<Cmd>CodeCompanionActions<CR>",
+        mode = { "n", "v" },
+        desc = "CodeCompanion Actions",
+        noremap = true,
+      },
+      { "<a-a>", "<Cmd>CodeCompanionActions<CR>", mode = "i", desc = "CodeCompanion Actions", noremap = true },
     },
   },
 }

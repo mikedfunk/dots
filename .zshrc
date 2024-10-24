@@ -164,7 +164,13 @@ fi
 unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
+
+export AIDER_AUTO_COMMITS=false
+# export AIDER_YES_ALWAYS=true
+# export AIDER_SHOW_MODEL_WARNINGS=false
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
+# export AIDER_MODEL="ollama/llama3.1:8b"
+
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
