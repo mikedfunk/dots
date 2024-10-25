@@ -514,8 +514,8 @@ cask "virtualbox" # virtual machine software
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
 # mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
-# mas "PdaNet for Android", id: 1542657021 # get around tethering restrictions on my carrier
 # mas "Session - Pomodoro Focus Timer", id: 1521432881
+# mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app

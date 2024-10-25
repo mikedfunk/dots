@@ -44,9 +44,10 @@ bind-key "^S" toggle-show-read-feeds
 
 # Simple theme {{{
 # https://newsboat.org/releases/2.17.1/docs/newsboat.html#_configuring_colors
+# color8 = gray (readable in dark and light mode, lower contrast)
 color info white magenta bold
-color listnormal white default
-color listnormal_unread white default bold
+color listnormal color8 default
+color listnormal_unread color8 default bold
 color listfocus magenta white
 color listfocus_unread magenta white bold
 # }}}

@@ -614,9 +614,12 @@ return {
     },
     opts = {
       strategies = {
-        chat = { adapter = "openai" },
-        inline = { adapter = "openai" },
-        agent = { adapter = "openai" },
+        -- chat = { adapter = "openai" },
+        -- inline = { adapter = "openai" },
+        -- agent = { adapter = "openai" },
+        chat = { adapter = "ollama" },
+        inline = { adapter = "ollama" },
+        agent = { adapter = "ollama" },
       },
     },
     cmd = {

@@ -24,7 +24,7 @@
   "helm-ls": "v0.1.0",
   "intelephense": "1.12.6",
   "isort": "5.13.2",
-  "js-debug-adapter": "v1.95.0",
+  "js-debug-adapter": "v1.95.1",
   "json-lsp": "4.10.0",
   "jsonlint": "1.6.3",
   "lemminx": "0.27.1",
@@ -44,13 +44,12 @@
   "pyright": "1.1.386",
   "rubocop": "1.67.0",
   "ruby-lsp": "0.20.1",
-  "ruff": "0.7.0",
+  "ruff": "0.7.1",
   "rustywind": "0.23.1",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.10.0",
   "solargraph": "0.50.0",
   "some-sass-language-server": "2.0.2",
-  "sqlfluff": "3.2.4",
   "sqlls": "1.7.0",
   "stylua": "v0.20.0",
   "tailwindcss-language-server": "0.0.25",
@@ -60,5 +59,6 @@
   "vtsls": "0.2.6",
   "vue-language-server": "2.1.6",
   "yaml-language-server": "1.15.0",
-  "zk": "v0.14.1"
+  "zk": "v0.14.1",
+
 }
