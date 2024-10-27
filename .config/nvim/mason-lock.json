@@ -60,6 +60,5 @@
   "vale": "v3.8.0",
   "vtsls": "0.2.6",
   "vue-language-server": "2.1.8",
-  "yaml-language-server": "1.15.0",
-  "zk": "v0.14.1"
+  "yaml-language-server": "1.15.0"
 }
