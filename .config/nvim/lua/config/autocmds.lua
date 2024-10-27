@@ -46,6 +46,14 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
+  pattern = { "mysql" },
+  callback = function()
+    vim.bo.commentstring = "-- %s"
+  end,
+  desc = "dosini commentstring",
+})
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
   pattern = { "plantuml" },
   callback = function()
     vim.bo.commentstring = "' %s"

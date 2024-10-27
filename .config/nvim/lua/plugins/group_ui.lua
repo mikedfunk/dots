@@ -44,7 +44,7 @@ return {
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
   {
     "lewis6991/gitsigns.nvim",
-    dependencies = { "seanbreckenridge/gitsigns-yadm.nvim" },
+    dependencies = { "purarue/gitsigns-yadm.nvim" },
     opts = {
       _on_attach_pre = function(_, callback)
         require("gitsigns-yadm").yadm_signs(callback)
