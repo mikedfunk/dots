@@ -3,9 +3,10 @@ return {
   -- this is included with lazyvim, I'm just changing an option
   {
     "echasnovski/mini.pairs",
-    opts = {
-      modes = { command = false }, -- do not auto-pair in command or search mode
-    },
+    enabled = false,
+    -- opts = {
+    --   modes = { command = false }, -- do not auto-pair in command or search mode
+    -- },
   },
   {
     -- add some completion sources
@@ -614,12 +615,12 @@ return {
     },
     opts = {
       strategies = {
-        -- chat = { adapter = "openai" },
-        -- inline = { adapter = "openai" },
-        -- agent = { adapter = "openai" },
-        chat = { adapter = "ollama" },
-        inline = { adapter = "ollama" },
-        agent = { adapter = "ollama" },
+        chat = { adapter = "openai" },
+        inline = { adapter = "openai" },
+        agent = { adapter = "openai" },
+        -- chat = { adapter = "ollama" },
+        -- inline = { adapter = "ollama" },
+        -- agent = { adapter = "ollama" },
       },
     },
     cmd = {

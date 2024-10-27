@@ -50,15 +50,16 @@
   "shfmt": "v3.10.0",
   "solargraph": "0.50.0",
   "some-sass-language-server": "2.0.2",
+  "sqlfluff": "3.2.5",
   "sqlls": "1.7.0",
   "stylua": "v0.20.0",
+  "svelte-language-server": "0.17.2",
   "tailwindcss-language-server": "0.0.25",
   "taplo": "0.9.3",
   "tflint": "v0.53.0",
   "vale": "v3.8.0",
   "vtsls": "0.2.6",
-  "vue-language-server": "2.1.6",
+  "vue-language-server": "2.1.8",
   "yaml-language-server": "1.15.0",
-  "zk": "v0.14.1",
-
+  "zk": "v0.14.1"
 }

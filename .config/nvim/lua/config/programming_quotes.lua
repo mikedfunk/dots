@@ -7,6 +7,7 @@ M.quotes = {
   -- 5. https://www.reddit.com/r/quotes/
   -- 6. https://www.cs.yale.edu/homes/perlis-alan/quotes.html
   -- 7. https://amturing.acm.org/award_winners/dijkstra_1053701.cfm
+  -- 8. https://registerspill.thorstenball.com/p/the-basics
   -- { "'select' isn't broken.", "", "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application.", "", "- The Pragmatic Programmer" },
   -- { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
   -- { "All loops are infinite ones for faulty RAM modules." },
@@ -53,6 +54,7 @@ M.quotes = {
   { "A typical software project can present more opportunities to learn from mistakes than some people get in a lifetime.", "", "- Steve McConnell" },
   { "Abstraction is not about vagueness, it is about being precise at a new semantic level.", "", "- Rob Pike" },
   { "Abstractions live longer than details.", "", "Invest in the abstraction, not the implementation. Abstractions can survive the barrage of changes from different implementations and new technologies.", "", "- The Pragmatic Programmer" },
+  { "Accept that sometimes you’ll have to do things that you don’t find interesting or exciting or that don’t bring you joy. Sometimes it’s just work.", "", "- Thorsten Ball" },
   { "Act locally.", "", "Keep the scope of mutable variables and open resources short and easily visible.", "", "- The Pragmatic Programmer" },
   { "Adapting old programs to fit new machines usually means adapting new machines to behave like old ones.", "", "- Alan Perlis" },
   { "Adding manpower to a late software project makes it later.", "", "- Brooks's law" },
@@ -136,8 +138,10 @@ M.quotes = {
   { "Do not clutter the public interface of a class with items that clients are not able to use or are not interested in using.", "", "- Object-Oriented Design Heuristics" },
   { "Do not create god classes/objects (classes that control all other classes). Be very suspicious of classes whose name contains Driver, Manager, System, SubSystem.", "", "- Object-Oriented Design Heuristics" },
   { "Do not turn objects of a class into derived classes of the class. Be very suspicious of any derived class for which there is only one instance.", "", "- Object-Oriented Design Heuristics" },
+  { "Do the homework before the meeting. You’ll stand out.", "", "- Thorsten Ball" },
   { "Do the simplest thing that could possibly work.", "", "- Kent Beck" },
   { "Documenting is very, very hard; it’s time-consuming. To do it right, you’ve got to do it like programming. You’ve got to deconstruct it, put it together in nice ways, rewrite it when it’s wrong. People don’t do that.", "", "- Ken Thompson" },
+  { "Don't ask for \"quick\" reviews when you never review other people’s code.", "", "- Thorsten Ball" },
   { "Don't assume it. Prove it.", "", "Prove your assumptions in the actual environment - with real data and boundary conditions.", "", "- The Pragmatic Programmer" },
   { "Don't attach your identity to your code. Don't attach anyone's identity to their code. Realize that people are separate from the artifacts they produce. Don't take code criticism personally but be very careful when criticizing others' code.", "", "- Alex Ewerlöf" },
   { "Don't be a slave to formal methods.", "", "Don't blindly adopt any technique without putting it into the context of your development practices and capabilities.", "", "- The Pragmatic Programmer" },
@@ -164,6 +168,7 @@ M.quotes = {
   { "Every application has an inherent amount of complexity that cannot be removed or hidden. Instead, it must be dealt with, either in product development or user interaction.", "", "- Law of conservation of complexity" },
   { "Every good work of software starts by scratching a developer’s personal itch.", "", "- Eric S. Raymond" },
   { "Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.", "", "- Patrick McKenzie" },
+  { "Every time you add a test, actually test that it would fail. Yes, literally: go and comment out the code that you think makes the test pass, then run the test, see it fail, comment the code back in, run test again, see it succeed. Only then have you written a test.", "", "- Thorsten Ball" },
   { "Everyday life is like programming, I guess. If you love something you can put beauty into it.", "", "- Donald Knuth" },
   { "Everything should be built top-down, except the first time.", "", "- Alan Perlis" },
   { "Extreme complication is contrary to art.", "", "- Claude Debussy" },
@@ -386,6 +391,7 @@ M.quotes = {
   { "Tell, don't ask.", "", "Don't get values from an object, transform them, and stick them back. Make the object do the work.", "", "- The Pragmatic Programmer" },
   { "Telling a programmer there's already a library to do X is like telling a songwriter there's already a song about love.", "", "- Pete Cordell" },
   { "Test early. Test often. Test automatically.", "", "Tests that run with every build are much more effective than test plans that sit on a shelf.", "", "- The Pragmatic Programmer" },
+  { "Test it manually. Even if you wrote and ran automated tests, test it manually at least once before you ask for a review. Record yourself testing it manually. You’ll be surprised by what you find.", "", "- Thorsten Ball" },
   { "Test state coverage, not code coverage.", "", "Identify and test significant program states. Testing just lines of code isn't enough.", "", "- The Pragmatic Programmer" },
   { "Test your software, or your users will.", "", "Test ruthlessly. Don't make your users find bugs for you.", "", "- The Pragmatic Programmer" },
   { "Testing Is Not About Finding Bugs.", "", "A test is a perspective into your code, and gives you feedback about its design, api, and coupling.", "", "- The Pragmatic Programmer" },
@@ -472,6 +478,7 @@ M.quotes = {
   { "They did not know it was impossible, so they did it!", "", "- Mark Twain" },
   { "Think about your work.", "", "Turn off the autopilot and take control. Constantly critique and appraise your work.", "", "- The Pragmatic Programmer" },
   { "Think deeply about things. Don’t just go along because that’s the way things are or that’s what your friends say. Consider the effects, consider the alternatives, but most importantly, just think.", "", "- Aaron Swartz" },
+  { "Think through the edge cases. That doesn’t mean you have to handle them all right away, but you should have an answer to them.", "", "- Thorsten Ball" },
   { "Think twice, code once." },
   { "Those that can, do. Those that can't, complain.", "", "- Linus Torvalds" },
   { "Three strikes, then refactor.", "", "- Martin Fowler" },
@@ -484,6 +491,7 @@ M.quotes = {
   { "Truth can only be found in one place: the code.", "", "- Robert C. Martin" },
   { "Twenty percent of all input forms filled out by people contain bad data.", "", "- Dennis Ritchie" },
   { "Typing is no substitute for thinking.", "", "- Richard Hamming" },
+  { "Understand what problem you’re solving. Knowing why you’re doing something is a requirement to knowing whether you’re actually solving the problem.", "", "- Thorsten Ball" },
   { "Unix was not designed to stop its users from doing stupid things, as that would also stop them from doing clever things." },
   { "Use a project glossary.", "", "Create and maintain a single source of all the specific terms and vocabulary for a project.", "", "- The Pragmatic Programmer" },
   { "Use a single editor well.", "", "The editor should be an extension of your hand; make sure your editor is configurable, extensible, and programmable.", "", "- The Pragmatic Programmer" },
