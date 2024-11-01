@@ -189,7 +189,7 @@ bind generic gcim !git canimerge
 bind generic gcm !?git cleanmerged
 bind generic gmt !git mergetool
 # git spice (stacked PR management)
-bind generic gSS !git spice branch split
+bind generic gSs !git spice branch split
 bind generic gSr @git spice stack restack
 # (pneumonic: publish)
 bind generic gSp !sh -c "git spice stack restack && git spice stack submit"

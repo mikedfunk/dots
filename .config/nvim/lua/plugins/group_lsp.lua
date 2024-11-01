@@ -28,6 +28,7 @@ return {
         },
         jsonls = {},
         lemminx = {},
+        -- lsp_ai = {}, -- TODO: This is currently installed via cargo. Put this in Mason once it's available there.
         -- snyk_ls = {
         --   init_options = {
         --     token = os.getenv("SNYK_TOKEN"),

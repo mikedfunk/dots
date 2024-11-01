@@ -69,6 +69,15 @@
         }
       }
     },
+    "lsp_ai": {
+      "models": {
+        "ollama_llama_3_1": {
+          "type": "ollama",
+          "model": "llama3.1:8b",
+          "max_requests_per_second": 10
+        }
+      }
+    },
     "sqlls": {
       "sqlLanguageServer": {
         "lint": {

@@ -107,7 +107,7 @@ path=(
   # homebrew doesn't like to link curl
   $(brew --prefix)/opt/{curl,perl}/bin
   # rust cargo packages
-  # $HOME/.cargo/bin
+  $HOME/.cargo/bin
   # golang packages
   "$GOPATH"/bin
   # $HOME/go/bin
@@ -180,6 +180,11 @@ export BAT_THEME="TwoDark"
 # _has nvim && export MANPAGER='nvim +colo\ base16-heetch +Man!'
 _has nvim && export MANPAGER='nvim +Man!'
 # _has nvim && export MANPAGER='nvim -u NONE +Man!'
+
+# https://cmichel.io/fixing-cpp-compilation-bugs-for-the-mac-os-catalina-upgrade/
+# This was needed to install lsp-ai via cargo
+export CPLUS_INCLUDE_PATH="$(brew --prefix llvm)/include/c++/v1:$(xcrun --show-sdk-path)/usr/include"
+# export LIBRARY_PATH="$LIBRARY_PATH:$(xcrun --show-sdk-path)/usr/lib"
 
 export XDG_RUNTIME_DIR="$TMPDIR"
 export XDG_CONFIG_HOME="$HOME"/.config

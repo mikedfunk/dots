@@ -115,6 +115,7 @@ tap "pkgxdev/made" # pkgx
 # brew "lerna" # used by cloudbeaver (mysql web app)
 # brew "lftp" # fancy scp, torrent, http, ftp download and upload client with queues, backgrounding, and more
 # brew "litecli" # like mycli for sqlite
+# brew "llama.cpp" # Used by lsp_ai in neovim to interface with ollama more directly
 # brew "lnav" # log navigator similar to multitail
 # brew "lockrun" # simple way to lock cron jobs with a lock file and clear them when done
 # brew "lsd" # pretty ls augmentation

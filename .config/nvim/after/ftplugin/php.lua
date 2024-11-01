@@ -1,7 +1,7 @@
 -- vim: set foldmethod=marker:
 vim.b.autoformat = false
 vim.bo.commentstring = "// %s"
-vim.wo.foldlevel = 1
+-- vim.wo.foldlevel = 1
 
 local php_splitter = function()
   vim.cmd([[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]])
