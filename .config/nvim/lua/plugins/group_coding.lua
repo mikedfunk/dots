@@ -212,7 +212,7 @@ return {
           },
         },
         keys = {
-          { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+          -- { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
             "<a-cr>",
             function()
@@ -633,7 +633,7 @@ return {
         "<Leader>ai",
         "<Cmd>CodeCompanionChat Toggle<CR>",
         mode = { "n", "v" },
-        desc = "CodeCompanion Chat",
+        desc = "Toggle CodeCompanion Chat",
         noremap = true,
       },
       {

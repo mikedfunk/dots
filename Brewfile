@@ -38,6 +38,7 @@ tap "pkgxdev/made" # pkgx
 # brew {{{
 
 # brew "aicommits" # AI commit message writer
+# brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with gptme)
 # brew "angband" # middle-earth themed dungeon crawler (requires java)
 # brew "ansible" # used in some of my company-specific stuff to run ssh commands on multiple servers.
 # brew "ansifilter" # filter out ansi codes. used by tmux-logging tpm plugin.
@@ -228,7 +229,6 @@ tap "pkgxdev/made" # pkgx
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
-brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 brew "akamai" # interact with akamai caching
 brew "algolia" # search cli
 brew "antidote" # zsh plugin system like antigen but faster
