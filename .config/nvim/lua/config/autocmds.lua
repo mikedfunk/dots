@@ -60,3 +60,11 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
   end,
   desc = "plantuml commentstring",
 })
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+  pattern = { "gitconfig" },
+  callback = function()
+    vim.bo.commentstring = "# %s"
+  end,
+  desc = "gitconfig commentstring",
+})

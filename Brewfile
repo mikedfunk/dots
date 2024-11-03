@@ -83,6 +83,7 @@ tap "pkgxdev/made" # pkgx
 # brew "git-flow" # adds first class git commands for the git-flow workflow (I use avh version below)
 # brew "git-flow-avh" # adds first class git commands for the git-flow workflow. This version will delete remote feature, release, and hotfix branches on finishing.
 # brew "git-gui" # gitk. Really not necessary.
+# brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 # brew "github-keygen" # simpler way to generate a github ssh key
 # brew "gitlab-gem" # gitlab cli
 # brew "global" # gnu global tags aka gtags. More powerful than ctags but has a different interface with a learning curve. Also depends on ctags which conflicts with universal-ctags.
@@ -227,7 +228,7 @@ tap "pkgxdev/made" # pkgx
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
-brew "aider" # AI coding assistant
+brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 brew "akamai" # interact with akamai caching
 brew "algolia" # search cli
 brew "antidote" # zsh plugin system like antigen but faster
@@ -265,13 +266,13 @@ brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
 brew "git-spice" # stacked PR manager
-brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 brew "glab" # like gh for gitlab
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "go" # golang programming language. used for installing/managing sqls
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
+brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
