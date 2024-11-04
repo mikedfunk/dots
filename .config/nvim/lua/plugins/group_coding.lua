@@ -212,7 +212,7 @@ return {
           },
         },
         keys = {
-          -- { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+          { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
           {
             "<a-cr>",
             function()

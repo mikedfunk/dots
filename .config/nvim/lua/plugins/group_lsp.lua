@@ -38,6 +38,7 @@ return {
         --     organization = "leaf-saatchiart",
         --   },
         -- },
+        -- phpactor = {},
         somesass_ls = {},
         sqlls = {},
         tailwindcss = {
@@ -95,10 +96,30 @@ return {
   --   event = "LspAttach",
   --   opts = { vt_position = "end_of_line" },
   -- },
-  -- {
-  --   "zeioth/garbage-day.nvim",
-  --   dependencies = "neovim/nvim-lspconfig",
-  --   event = "VeryLazy",
-  --   opts = {},
-  -- },
+  {
+    "gbprod/phpactor.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+      {
+        "williamboman/mason.nvim",
+        opts_extend = { "ensure_installed" },
+        opts = {
+          ensure_installed = { "phpactor" },
+        },
+      },
+    },
+    filetypes = { "php" },
+    keys = {
+      { "<Leader>rm", "<Cmd>PhpActor context_menu<CR>", buffer = true, noremap = true, desc = "PHP Refactor Menu" },
+    },
+    cmd = { "PhpActor" },
+    opts = {
+      install = {
+        bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
+        php_bin = table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "") .. "/bin/php",
+      },
+      lspconfig = { enabled = false },
+    },
+  },
 }
