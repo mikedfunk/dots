@@ -19,6 +19,48 @@ return {
     },
   },
   {
+    -- add some lualine components to display some more things in the statusline
+    "nvim-lualine/lualine.nvim",
+    ---Add some lualine components
+    ---@class LuaLineOpts
+    ---@field sections table
+    ---@param opts LuaLineOpts
+    opts = function(_, opts)
+      ---@return string[]
+      local function get_linters()
+        local linters = { unpack(require("lint").linters_by_ft[vim.bo.ft] or {}) }
+        for _, linter in ipairs(vim.g.ale_linters and vim.g.ale_linters[vim.bo.ft] or {}) do
+          if not vim.tbl_contains(linters, linter) then
+            table.insert(linters, linter)
+          end
+        end
+
+        return linters
+      end
+
+      local nvim_lint_component = {
+        ---@return string
+        function()
+          return " " .. tostring(#get_linters())
+        end,
+        color = function()
+          return {
+            fg = #get_linters() > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            gui = "None",
+          }
+        end,
+        cond = function()
+          return package.loaded["lint"] ~= nil
+        end,
+        on_click = function()
+          print(vim.inspect(get_linters()))
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, nvim_lint_component)
+    end,
+  },
+  {
     "mfussenegger/nvim-lint",
     config = function(_, opts)
       -- fix phpcs linter to allow --stdin-path=... {{{
