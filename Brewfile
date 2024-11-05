@@ -505,6 +505,7 @@ cask "jordanbaird-ice" # menubar tool similar to hiddenbar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "nvidia-geforce-now" # game streaming
+cask "obsidian" # used for solo RPGs, etc. I don't use it for work notes.
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # maintained fork of sequel pro see also table-plus
 cask "virtualbox" # virtual machine software

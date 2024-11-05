@@ -118,6 +118,9 @@ return {
       install = {
         bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
         php_bin = table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "") .. "/bin/php",
+        path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
+        composer_bin = table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "")
+          .. "/.composer/vendor/bin/composer",
       },
       lspconfig = { enabled = false },
     },
