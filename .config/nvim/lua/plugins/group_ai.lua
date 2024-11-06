@@ -168,4 +168,45 @@ return {
       { "<a-a>", "<Cmd>CodeCompanionActions<CR>", mode = "i", desc = "CodeCompanion Actions", noremap = true },
     },
   },
+  -- {
+  --   "Bryley/neoai.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     {
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --     },
+  --   },
+  --   -- expects OPENAI_API_KEY env var to be set
+  --   opts = {
+  --     models = {
+  --       {
+  --         name = "openai",
+  --         -- model = "gpt-3.5-turbo",
+  --         model = "gpt-4",
+  --         params = nil,
+  --       },
+  --     },
+  --   },
+  --   cmd = {
+  --     "NeoAI",
+  --     "NeoAIOpen",
+  --     "NeoAIClose",
+  --     "NeoAIToggle",
+  --     "NeoAIContext",
+  --     "NeoAIContextOpen",
+  --     "NeoAIContextClose",
+  --     "NeoAIInject",
+  --     "NeoAIInjectCode",
+  --     "NeoAIInjectContext",
+  --     "NeoAIInjectContextCode",
+  --   },
+  --   keys = {
+  --     { "<Leader>ai", "<cmd>NeoAIToggle<cr>", desc = "NeoAI Chat", noremap = true },
+  --     { "<Leader>ac", "<cmd>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true },
+  --     { "<Leader>ac", "<cmd>'<,'>NeoAIContext<cr>", desc = "NeoAI Context", noremap = true, mode = "v" },
+  --     { "<Leader>as", desc = "NeoAI Summarize", mode = "v" },
+  --     { "<Leader>ag", desc = "NeoAI Commit Message" },
+  --   },
+  -- },
 }
