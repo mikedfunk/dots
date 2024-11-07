@@ -358,16 +358,18 @@ brew "zsh" # awesome bash shell replacement
 # cask "adoptopenjdk8" # needed for swagger-codegen
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
-# cask "authy" # desktop 2-factor!
+# cask "authy" # desktop 2-factor! (desktop app discontinued)
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
 # cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
 # cask "chromium" # no google tracking for me
+# cask "claude" # desktop app <opt-space>
 # cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
+# cask "deskpad" # cool virtual display for screen sharing
 # cask "discord" # chat
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
@@ -385,7 +387,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-caskaydia-cove-nerd-font" # Microsoft coding font with cursive italics
 # cask "font-commit-mono" # coding font (NOT nerd)
 # cask "font-fira-code-nerd-font"
-# cask "font-iosevka-nerd-font" # Tall, narrow programming font
 # cask "font-maple" # programming font (NOT nerd) with cursive italics
 # cask "font-mononoki-nerd-font" # programming font
 # cask "font-symbols-only-nerd-font" # just the nerd-font symbols
@@ -439,6 +440,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "neardrop" # android nearby devices drop
 # cask "ngrok" # securely expose your local site to the internet and inspect and repeat traffic
 # cask "noti" # mac native pushbullet notifications (I use the chrome/firefox extension)
+# cask "obsidian" # used for solo RPGs, etc. I don't use it for work notes.
 # cask "onecast" # cast xbox one to mac.
 # cask "openemu" # multi game system emulator
 # cask "orbstack" # docker-for-mac replacement
@@ -491,10 +493,11 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
+cask "chatgpt" # desktop app <opt-space>
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
-cask "deskpad" # cool virtual display for screen sharing
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
+cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
@@ -505,9 +508,8 @@ cask "jordanbaird-ice" # menubar tool similar to hiddenbar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "nvidia-geforce-now" # game streaming
-cask "obsidian" # used for solo RPGs, etc. I don't use it for work notes.
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
-cask "sequel-ace" # maintained fork of sequel pro see also table-plus
+cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "virtualbox" # virtual machine software
 
 # }}}

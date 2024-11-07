@@ -43,8 +43,8 @@
         },
         "completion": {
           "fullyQualifyGlobalConstantsAndFunctions": true,
-          "insertUseDeclaration": true,
-          "suggestObjectOperatorStaticMethods": false
+          "suggestObjectOperatorStaticMethods": false,
+          "maxItems": 30
         },
         "phpdoc": {
           "classTemplate": {
