@@ -283,7 +283,7 @@ brew "k9s" # handy kubernetes dashboard `k9s -n develop`
 brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for minikube via VirtualBox
 brew "krb5" # needed to build php
 brew "kubecolor" # kubectl with colors
-brew "less" # huh, there's a newer version of less available
+brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
 brew "libavif" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "libedit" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "libffi" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1

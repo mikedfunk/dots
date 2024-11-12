@@ -336,15 +336,6 @@
     # excludesfile = /Users/mikefunk/.config/git/ignore
 # }}}
 
-# delta https://github.com/dandavison/delta {{{
-[delta]
-	navigate = true # use n and N to move between diff sections
-    # light = true # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-    line-numbers = true
-    # DOESN'T WORK!
-    # syntax-theme = "Monokai Extended Light"
-# }}}
-
 # interactive settings {{{
 # https://github.com/dandavison/delta/issues/1114
 # [add.interactive]
@@ -467,21 +458,25 @@
 
 # delta settings {{{
 [delta]
+    # DOESN'T WORK!
     # features = "unobtrusive-line-numbers side-by-side decorations"
     # features = unobtrusive-line-numbers decorations
-    # light = true
-    line-numbers = true
-    # syntax-theme = Dracula
-    file-style = "yellow bold"
-    file-decoration-style = "yellow bold ol ul"
     # hunk-header-decoration-style = "blue ul ol"
-    hunk-header-style = "omit"
-    hunk-header-decoration-style = "omit"
-    side-by-side = true
-    # keep-plus-minus-markers = true
-    # syntax-theme = DarkNeon
-    # navigate = true
     # hyperlinks = true
+    # keep-plus-minus-markers = true
+    # light = true
+    # light = true # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    # syntax-theme = "Monokai Extended Light"
+    # syntax-theme = DarkNeon
+    # syntax-theme = Dracula
+    file-decoration-style = "yellow bold ol ul"
+    file-style = "yellow bold"
+    hunk-header-decoration-style = "omit"
+    hunk-header-style = "omit"
+    line-numbers = true
+    navigate = true # use n and N to move between diff sections
+    side-by-side = true
+    true-color = always
 # }}}
 
 # git-fixup {{{
