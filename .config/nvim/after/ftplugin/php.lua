@@ -3,10 +3,9 @@ vim.b.autoformat = false
 vim.bo.commentstring = "// %s"
 -- vim.wo.foldlevel = 1
 
-local php_splitter = function()
-  vim.cmd([[exec "norm! 0/\\S->\<cr>a\<cr>\<esc>"]])
-end
-vim.keymap.set("n", ",.", php_splitter, { noremap = true, buffer = true, desc = "Split PHP" })
+vim.keymap.set("n", ",.", function()
+  vim.cmd(vim.api.nvim_replace_termcodes([[norm! 0/\S-><cr>a<cr><esc>]], true, true, true))
+end, { noremap = true, buffer = true, desc = "Split PHP" })
 
 vim.keymap.set(
   "n",
@@ -14,8 +13,37 @@ vim.keymap.set(
   "<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>",
   { noremap = true, buffer = true, desc = "Split Docblock" }
 )
--- require("which-key").register({ Ps = { "Split Docblock" } })
-require("which-key").add({ { "<leader>Ps", desc = "Split Docblock" } })
+
+vim.keymap.set("n", "<Leader>Pq", function()
+  vim.cmd([[:command! -range FixThis :silent! '<,'>s/,$//g]], true, true, true)
+  vim.cmd(
+    vim.api.nvim_replace_termcodes(
+      [[:norm I* @param ObjectBehavior<<esc>Ea><esc>V:'<,'>FixThis<cr><esc>]],
+      true,
+      true,
+      true
+    )
+  )
+end, { noremap = true, buffer = true, desc = "Fix Spec Docblock Line" })
+
+vim.keymap.set("n", "<Leader>Pf", function()
+  vim.cmd(
+    vim.api.nvim_replace_termcodes(
+      [[command! -range FixLine :'<,'>norm I* @param ObjectBehavior<<esc>Ea><esc>$x]],
+      true,
+      true,
+      true
+    )
+  )
+  vim.cmd(
+    vim.api.nvim_replace_termcodes(
+      [[norm "byii[Mjo/**<cr>/<esc>"b[PV/*<cr>k:'<,'>g!/./d<cr><esc>gv<esc>A,<esc>gv:'<,'>FixLine<cr>"]],
+      true,
+      true,
+      true
+    )
+  )
+end, { noremap = true, buffer = true, desc = "Add Spec Docblock" })
 
 -- improve php highlights {{{
 vim.cmd("hi link phpDocTags phpDefine")

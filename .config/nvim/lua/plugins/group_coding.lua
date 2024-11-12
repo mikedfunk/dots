@@ -1,12 +1,13 @@
 ---@return LazyPluginSpec[]
 return {
   -- this is included with lazyvim, I'm just changing an option
+  -- NOTE: <a-A> (capitalized) will jump ahead out of parens, etc. in insert mode with no plugins!
   {
     "echasnovski/mini.pairs",
-    enabled = false,
-    -- opts = {
-    --   modes = { command = false }, -- do not auto-pair in command or search mode
-    -- },
+    -- enabled = false,
+    opts = {
+      modes = { command = false }, -- do not auto-pair in command or search mode
+    },
   },
   {
     -- add some completion sources
@@ -42,7 +43,7 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      -- opts.experimental = { ghost_text = false } -- this conflicts with codeium and similar
+      opts.experimental = { ghost_text = false } -- this conflicts with codeium and similar
       opts.view = vim.tbl_deep_extend("force", opts.view or {}, {
         entries = { follow_cursor = true },
       })
@@ -177,7 +178,7 @@ return {
     event = "VeryLazy",
     opts = {},
   },
-  { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
+  -- { "tzachar/highlight-undo.nvim", event = "VeryLazy", config = true },
   {
     "haringsrob/nvim_context_vt",
     event = "VeryLazy",

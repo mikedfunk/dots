@@ -18,7 +18,7 @@ return {
       },
       {
         "folke/which-key.nvim",
-        opts = { spec = { { "<leader>P", group = "+peek" } } },
+        opts = { spec = { { "<leader>k", group = "+peek" } } },
       },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
@@ -61,8 +61,8 @@ return {
           border = "rounded",
           -- TODO: Can't seem to which-key this
           peek_definition_code = {
-            ["<leader>Pf"] = "@function.outer",
-            ["<leader>Pc"] = "@class.outer",
+            ["<leader>kf"] = "@function.outer",
+            ["<leader>kc"] = "@class.outer",
           },
         },
 

@@ -510,7 +510,7 @@ cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
-cask "virtualbox" # virtual machine software
+cask "virtualbox" # virtual machine software. `VBoxManage setextradata global "VBoxInternal2/EnableX86OnArm" 1` to enable ARM support.
 
 # }}}
 

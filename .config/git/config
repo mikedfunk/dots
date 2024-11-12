@@ -107,32 +107,32 @@
     # ffc = flow feature checkout
     # ffd = flow feature diff
     # fff = flow feature finish
-    fff = "!f() { git flow feature finish $1 && git push; }; f"
+    # fff = "!f() { git flow feature finish $1 && git push; }; f"
     # ffl = flow feature list
     # ffp = flow feature publish
     # ffpl = flow feature pull
     # ffr = flow feature rebase
     # ffs = "!f() { git checkout develop && git pull && git flow feature start $1; }; f"
-    ffs = "!f() { git checkout develop && git pull && git checkout -b feature/$1; }; f"
+    # ffs = "!f() { git checkout develop && git pull && git checkout -b feature/$1; }; f"
     # fft = flow feature track
     # git flow hotfix shortcuts
     # fhc = flow hotfix checkout
     # fhd = flow hotfix diff
     # fhf = flow hotfix finish
     # fhf = "!f() { git checkout develop && git pull && git checkout - && git checkout master && git pull && git flow hotfix finish $1 && git push && git checkout master && git push && git push --tags && git checkout develop && ( git push origin --delete hotfix/$1  || true ); }; f"
-    fhf = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow hotfix finish $1 && git push && git checkout master && git push && git push --tags && git checkout develop && hub release create $1 -m $1; }; f"
+    # fhf = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow hotfix finish $1 && git push && git checkout master && git push && git push --tags && git checkout develop && hub release create $1 -m $1; }; f"
     # fhl = flow hotfix list
     # fhp = flow hotfix publish
     # fhpl = flow hotfix pull
     # fhr = flow hotfix rebase
     # fhs = flow hotfix start
-    fhs = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow hotfix start $1 && git push; }; f"
-    fht = flow hotfix track
+    # fhs = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow hotfix start $1 && git push; }; f"
+    # fht = flow hotfix track
     # git flow release shortcuts
     # frs = flow release start
-    frs = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow release start $1 && git push; }; f"
+    # frs = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow release start $1 && git push; }; f"
     # frf = flow release finish
-    frf = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow release finish $1 && git push && git checkout master && git push && git push --tags && git checkout develop && hub release create $1 -m $1; }; f"
+    # frf = "!f() { git checkout develop && git pull && git checkout master && git pull && git flow release finish $1 && git push && git checkout master && git push && git push --tags && git checkout develop && hub release create $1 -m $1; }; f"
     # show change for one file
     # filelog = log -u
     # fl = log -u
@@ -304,7 +304,7 @@
 [core]
     # editor = vim
     editor = nvim
-    ; editor = $EDITOR
+    # editor = $EDITOR
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     trustctime = false
     # if you want to specify a custom global gitignore location
@@ -324,7 +324,7 @@
     # pager = diff-so-fancy | less --tabs=4
     # https://github.com/dandavison/delta
     # pager = delta --diff-so-fancy
-    pager = ~/.support/delta-helper.sh
+	pager = ~/.support/delta-helper.sh
     # reduce lag in CLI git status (but breaks nvim plugin update)
 	# fsmonitor = true
     # pager = delta --dark --syntax-theme='Monokai Extended Dark' --
@@ -338,8 +338,8 @@
 
 # delta https://github.com/dandavison/delta {{{
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    # light = true    # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	navigate = true # use n and N to move between diff sections
+    # light = true # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     line-numbers = true
     # DOESN'T WORK!
     # syntax-theme = "Monokai Extended Light"
@@ -350,7 +350,7 @@
 # [add.interactive]
 #     useBuiltin = false
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 # }}}
 
 # diff and mergetool {{{
@@ -366,7 +366,7 @@
 	colorMovedWS = allow-indentation-change
 [diftool "nvimdiff3"]
     path = nvim
-    ; path = $EDITOR
+    # path = $EDITOR
 [merge]
     # tool = opendiff
     # tool = vimdiff
@@ -384,7 +384,7 @@
     # path = nvim
     # cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
     cmd = $EDITOR -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-    ; cmd = $EDITOR -f -c Gvdiffsplit! $MERGED
+    # cmd = $EDITOR -f -c Gvdiffsplit! $MERGED
     # cmd = $EDITOR -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "diffview"]
     # https://www.reddit.com/r/neovim/comments/158zdir/favorite_git_mergetool/jtdn6tf/
@@ -393,7 +393,7 @@
     keepBackup = false
     prompt = false
     path = nvim
-    ; path = $EDITOR
+    # path = $EDITOR
 [pager]
     # this lets you skip to the next/prev file with `n` and `N`
     # diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '

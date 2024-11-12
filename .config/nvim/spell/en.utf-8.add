@@ -280,3 +280,5 @@ phpcs
 ruleset
 Slevomat
 Rocio
+typehints
+configs
