@@ -357,9 +357,9 @@ _configure_flags_and_paths_for_homebrew_tools() {
     # }}}
 
     # configure libmcrypt (needed to build php) {{{
-    PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
+    # PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
+    # LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
+    # CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
     # }}}
 
     # configure libpng (needed to build php) {{{

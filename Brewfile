@@ -73,6 +73,7 @@ tap "pkgxdev/made" # pkgx
 # brew "docker-machine-nfs" # enables nfs mounts for docker-machine via `docker-machine-nfs default --mount-opts="async,noatime,actimeo=1,nolock,vers=3,udp" --force` (speeds up docker-machine a LOT)
 # brew "dos2unix" # converts dos line endings to unix in a file
 # brew "dtrx" # do the right extraction - so you don't have to remember tar args (I found a helpful pneumonic to remember tar args: eXtract Ze Vucking Files, Compress Ze Vucking Files)
+# brew "duti" # find osc 8 links registered with macos
 # brew "emacs" # text editor - the terminal version
 # brew "fasd" # Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v. (I use wd) (used by zsh-autocomplete)
 # brew "fd" # prettier alternative to find that respects gitignore (haven't used it yet)
@@ -116,6 +117,7 @@ tap "pkgxdev/made" # pkgx
 # brew "lastpass-cli" # TODO move all of my cli private_stuff over to lastpass
 # brew "lerna" # used by cloudbeaver (mysql web app)
 # brew "lftp" # fancy scp, torrent, http, ftp download and upload client with queues, backgrounding, and more
+# brew "libmcrypt" # needed by php-build, which is used by phpenv DO NOT DELETE php will break (apparently this is not a formula any more?)
 # brew "litecli" # like mycli for sqlite
 # brew "llama.cpp" # Used by lsp_ai in neovim to interface with ollama more directly
 # brew "lnav" # log navigator similar to multitail
@@ -289,7 +291,6 @@ brew "libedit" # needed for php https://github.com/phpenv/phpenv/issues/90#issue
 brew "libffi" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "libiconv" # needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "libjpeg" # needed to build php
-brew "libmcrypt" # needed by php-build, which is used by phpenv DO NOT DELETE php will break
 brew "libmemcached" # needed by php70 memcached pecl extension
 brew "libomp" # needed to build php imagick extension
 brew "libpng" # needed for php https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864

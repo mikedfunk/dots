@@ -93,8 +93,6 @@ return {
       },
     },
     ---Add some lualine components
-    ---@class LuaLineOpts
-    ---@field sections table
     ---@param opts LuaLineOpts
     opts = function(_, opts)
       local neocodeium_status_component = {
