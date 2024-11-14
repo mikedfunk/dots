@@ -11,9 +11,11 @@
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
 # tap "dbcli/tap" # litecli
+# tap "grishka/grishka" # neardrop
 # tap "homebrew/cask" # brew cask
 # tap "jannis-baum/tap" # vivify
 # tap "jetbrains/utils" # qodana
+# tap "lihaoyun6/tap" # quickrecorder
 # tap "mutagen-io/mutagen"
 # tap "nextdns/tap" # nextdns
 # tap "pokanop/pokanop" # nostromo
@@ -24,12 +26,10 @@
 tap "abhinav/tap" # git-spice
 tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
-tap "cormacrelf/tap" # dark-notify, which is used byhttps://github.com/erikw/tmux-dark-notify
+tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "derailed/k9s" # k9s
-tap "grishka/grishka" # neardrop
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
-tap "lihaoyun6/tap" # quickrecorder
 tap "oven-sh/bun" # bun
 tap "pkgxdev/made" # pkgx
 
