@@ -392,7 +392,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-fira-code-nerd-font"
 # cask "font-maple" # programming font (NOT nerd) with cursive italics
 # cask "font-mononoki-nerd-font" # programming font
-# cask "font-symbols-only-nerd-font" # just the nerd-font symbols
 # cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 # cask "freetube" # privacy-friendly and add-free youtube player
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)
@@ -504,6 +503,7 @@ cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
+cask "font-symbols-only-nerd-font"
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
