@@ -11,7 +11,7 @@ vim.keymap.set(
   "n",
   "<Leader>Ps",
   -- "<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>",
-  vim.api.nvim_replace_termcodes([[^xxi <esc>O<esc>hC/**<esc>j$xxxo/<esc>:noh<cr>]], true, true, true),
+  vim.api.nvim_replace_termcodes([[^xxi <esc>O<esc>hC /**<esc>j$xxxo/<esc>:noh<cr>]], true, true, true),
   { noremap = true, buffer = true, desc = "Split Docblock" }
 )
 

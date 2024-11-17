@@ -115,3 +115,7 @@ windows:
   - name: news
     manual: true
     commands: [news]
+
+  - name: mastodon
+    manual: true
+    commands: [toot tui]

@@ -348,7 +348,7 @@ export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
 # [ -f "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/path.zsh.inc
 # [ -f "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc ] && source "$(brew --prefix)"/share/google-cloud-sdk/completion.zsh.inc
 
-_has kubectl && _evalcache kubectl completion zsh
+# _has kubectl && _evalcache kubectl completion zsh
 # _has algolia && _evalcache algolia completion zsh
 # _has poetry && source <(poetry completions zsh) # python virtualenv and sane dependency management (breaks)
 # _has stern && source <(stern --completion=zsh) # unfortunately I still get no completion. cod works better for this.
@@ -361,6 +361,12 @@ zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 
 # _has akamai && _evalcache akamai --zsh
 # [ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
+
+if _has carapace; then
+    # export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+    zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+    source <(carapace _carapace)
+fi
 
 # }}}
 

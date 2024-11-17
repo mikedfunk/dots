@@ -206,7 +206,6 @@ tap "pkgxdev/made" # pkgx
 # brew "tldr" # more consise community man pages (tealdeer is faster)
 # brew "tmuxinator" # tmux orchestrator / automator. Alternatives: tmuxp (broken for a long time) and teamocil (old, can't install via homebrew, no XDG_HOME) and smug
 # brew "tofrodos" # line ending conversion (install if needed)
-# brew "toot" # mastodon cli client
 # brew "trash" # a trash can for the terminal
 # brew "trash-cli" # a trash can for the terminal
 # brew "tree-sitter" # for some reason lunarvim expects this to exist when opening a gitignore file 🤷
@@ -249,6 +248,7 @@ brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
 brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "carapace" # shell completion for projects using spf13/cobra
 brew "cloc" # count lines of code
 brew "cloudflared" # cloudflare CLI
 brew "ctop" # like top for docker containers (really great!)
@@ -340,6 +340,7 @@ brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also
 brew "tidy-html5" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "tmux", args: ["HEAD"] # terminal multiplexer similar to screen. (HEAD fixes a bug with splits in nvim)
+brew "toot" # mastodon cli/tui client
 brew "tree" # display file/folder hierarchies in a visual tree format
 brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
@@ -360,6 +361,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "authy" # desktop 2-factor! (desktop app discontinued)
+# cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
 # cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
@@ -419,6 +421,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "lastpass" # desktop lastpass - can use mouseless (switched to BitWarden)
 # cask "launchcontrol" # launchctl gui. (I use lunchy gem instead)
 # cask "lens" # kubernetes management native app
+# cask "lepton" # I don't get it... "snippet manager" just gives you an electron gui for gists. No way to use snippets in other apps.
 # cask "licecap" # shitty, simple gif screen capture. OSX used to have this but I think they got rid of the gif exporting :/
 # cask "lofi" # spotify mini mode companion app
 # cask "loom" # yet another screenshot, screencast, etc. service, free up to 5 mins and like 50 most recent screenshots/shares, includes a video corner box, trying it out
@@ -426,6 +429,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "macfusion" # other half of tool to mount ssh directories in the finder (see osxfuse)
 # cask "macgdbp" # xdebug gui client (I use nvim-dap instead)
 # cask "malwarebytes" # ya neva know (company has another antivirus installed)
+# cask "masscode" # snippet manager... I don't get it. No variables, no logic it seems.
 # cask "menubar-colors" # color picker in the menubar
 # cask "menubar-stats" # used to show bluetooth headphones battery level in menubar (Doesn't work with my headphones for some reason... and it's $5)
 # cask "microsoft-edge"

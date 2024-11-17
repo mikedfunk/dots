@@ -130,6 +130,10 @@ vim.o.sessionoptions = table.concat({
 
 -- bug: I don't see a way to apply _local_ iabbrevs so if you load a
 -- markdown file it will enable the abbrev in the entire workspace :/
+vim.cmd("iabbrev collectino collection")
+vim.cmd("iabbrev Collectino Collection")
+vim.cmd("iabbrev connectino connection")
+vim.cmd("iabbrev Connectino Connection")
 
 -- show vert lines at the psr-2 suggested column limits
 vim.o.colorcolumn = table.concat({
