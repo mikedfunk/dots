@@ -28,21 +28,6 @@ return {
     },
   },
   {
-    "mvllow/modes.nvim",
-    event = "VeryLazy",
-    opts = {
-      ignore_filetypes = {
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "dashboard",
-        "lazy",
-        "lspinfo",
-        "starter",
-      },
-    },
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     -- https://github.com/pysan3/neo-tree.nvim/blob/v4-dev/MIGRATION-v4.md#setup-lazy-for-devs
     -- branch = "v4-dev",
@@ -82,15 +67,6 @@ return {
     },
   },
   { "michaeljsmith/vim-indent-object" },
-  {
-    "echasnovski/mini.indentscope",
-    opts = {
-      mappings = {
-        object_scope = "ic",
-        object_scope_with_border = "iC",
-      },
-    },
-  },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {

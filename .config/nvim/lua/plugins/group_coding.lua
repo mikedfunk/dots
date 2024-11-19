@@ -11,9 +11,9 @@ return {
   },
   {
     -- add some completion sources
-    -- "hrsh7th/nvim-cmp",
+    "hrsh7th/nvim-cmp",
     -- https://github.com/LazyVim/LazyVim/discussions/4549
-    "iguanacucumber/magazine.nvim",
+    -- "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji", -- trigger with :\w
@@ -60,20 +60,23 @@ return {
 
       -- set nvim_lsp to top priority
       opts.sources[1].priority = 1000
-      -- opts.sources[1].entry_filter = no_comments_or_text -- this breaks emmet-language-server
 
-      -- table.insert(opts.sources, { name = "nvim_lsp_signature_help", entry_filter = no_comments_or_text })
-      -- table.insert(opts.sources, { name = "dap-repl"})
-      -- table.insert(opts.sources, { name = "dapui_watches"})
-      -- table.insert(opts.sources, { name = "dapui_hover"})
-      table.insert(opts.sources, { name = "treesitter", entry_filter = no_comments_or_text })
-      table.insert(opts.sources, { name = "emoji" })
-      table.insert(opts.sources, { name = "cmp_jira" })
-      table.insert(opts.sources, { name = "git" })
-      table.insert(opts.sources, { name = "nerdfont" })
-      table.insert(opts.sources, { name = "dictionary", keyword_length = 2, max_item_count = 5 })
-      table.insert(opts.sources, { name = "rg", max_item_count = 5 })
-      table.insert(opts.sources, { name = "tmux", max_item_count = 5 })
+      -- add more sources
+      opts.sources = vim
+        .iter({
+          opts.sources,
+          require("cmp").config.sources({
+            { name = "treesitter", entry_filter = no_comments_or_text },
+            { name = "emoji" },
+            { name = "cmp_jira" },
+            { name = "nerdfont" },
+            { name = "dictionary", keyword_length = 2, max_item_count = 5 },
+            { name = "rg", max_item_count = 5 },
+            { name = "tmux", max_item_count = 5 },
+          }),
+        })
+        :flatten()
+        :totable()
 
       opts.mapping["<CR>"] = require("cmp").mapping.confirm({ select = false })
       opts.preselect = require("cmp").PreselectMode.None

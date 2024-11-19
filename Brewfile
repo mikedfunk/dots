@@ -333,6 +333,7 @@ brew "ripgrep" # needed for lunarvim telescope plugin
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
+brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
 brew "tealdeer" # more consise community man pages (faster than tldr)
 brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti.
@@ -360,6 +361,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "adoptopenjdk8" # needed for swagger-codegen
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
+# cask "android-platform-tools" # adb, etc.
 # cask "authy" # desktop 2-factor! (desktop app discontinued)
 # cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
@@ -480,6 +482,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "steam" # yep
 # cask "stoplight-studio" # openapi ide. This is cool but you can also just use the web version at https://stoplight.io/p/studio but the desktop app works with local files _and_ automatically mocks local apis with prism - their built-in api mocker (this is really only useful as a fancy local openapi spec editor since even their ci docs generator just hits their api)
 # cask "suspicious-package" # quicklook plugin for mac dmg package inspection (I don't care about inspecting these)
+# cask "syncthing" # technically not needed as you can go to a local web app at http://localhost:8384
 # cask "synthesia" # piano learning software
 # cask "tableplus" # alternative to sequelpro
 # cask "transmission" # unleash a torrent of files ;)

@@ -64,6 +64,7 @@ return {
         "TelescopePrompt",
         "alpha",
         "dashboard",
+        "snacks_dashboard",
         "harpoon",
         "lazy",
         "lspinfo",
@@ -72,6 +73,16 @@ return {
     },
   },
   {
+    "echasnovski/mini.indentscope",
+    opts = {
+      mappings = {
+        object_scope = "ic",
+        object_scope_with_border = "iC",
+      },
+    },
+  },
+  {
+    -- TODO: switch to snacks.nvim dashboard
     "nvimdev/dashboard-nvim",
     dependencies = {
       {
@@ -100,8 +111,9 @@ return {
 
       logo = vim.list_extend(vim.split(string.rep("\n", 8), "\n"), logo)
       local stats = require("lazy").stats()
-      local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms", "" })
+      -- local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      -- logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms", "" })
+      logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins", "" })
 
       local opts = {
         theme = "doom",
@@ -187,6 +199,22 @@ return {
   },
   { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   {
+    "mvllow/modes.nvim",
+    event = "VeryLazy",
+    opts = {
+      ignore_filetypes = {
+        "DressingInput",
+        "TelescopePrompt",
+        "alpha",
+        "dashboard",
+        "snacks_dashboard",
+        "lazy",
+        "lspinfo",
+        "starter",
+      },
+    },
+  },
+  {
     "Isrothy/neominimap.nvim",
     lazy = false,
     init = function()
@@ -197,6 +225,7 @@ return {
           "TelescopePrompt",
           "alpha",
           "dashboard",
+          "snacks_dashboard",
           "harpoon",
           "lazy",
           "lspinfo",
@@ -244,6 +273,14 @@ return {
           },
           opts = { skip = true },
         },
+        -- TODO: vim-projectionist inputlist doesn't show up until you hit esc
+        -- {
+        --   filter = {
+        --     event = "msg_show",
+        --     find = "Create alternate file?",
+        --   },
+        --   opts = { view = "confirm" },
+        -- },
         {
           filter = {
             event = "lsp",
@@ -357,6 +394,7 @@ return {
         "TelescopePrompt",
         "alpha",
         "dashboard",
+        "snacks_dashboard",
         "lazy",
         "lspinfo",
         "starter",

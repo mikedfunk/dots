@@ -3,7 +3,7 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
-  group = vim.api.nvim_create_augroup("grep_open_quickfix", { clear = true }),
+  group = vim.api.nvim_create_augroup("mike_grep_open_quickfix", { clear = true }),
   pattern = { "[^l]*", "l*" },
   command = "cwindow",
   desc = "Grep open quickfix",
@@ -11,6 +11,7 @@ vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
 
 -- show cursor line only in active window
 vim.api.nvim_create_autocmd({ "WinEnter" }, {
+  group = vim.api.nvim_create_augroup("mike_hide_cursorline", { clear = true }),
   callback = function()
     if vim.w.auto_cursorline then
       vim.wo.cursorline = true
@@ -20,6 +21,7 @@ vim.api.nvim_create_autocmd({ "WinEnter" }, {
   desc = "Hide cursor line",
 })
 vim.api.nvim_create_autocmd({ "WinLeave" }, {
+  group = vim.api.nvim_create_augroup("mike_auto_cursorline", { clear = true }),
   callback = function()
     if vim.wo.cursorline then
       vim.w.auto_cursorline = true
@@ -30,6 +32,7 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("mike_dont_autoformat", { clear = true }),
   pattern = { "composer.json", "programming_quotes.lua" },
   callback = function()
     vim.b.autoformat = false
@@ -38,6 +41,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
+  group = vim.api.nvim_create_augroup("mike_dosini_commentstring", { clear = true }),
   pattern = { "dosini" },
   callback = function()
     vim.bo.commentstring = "# %s"
@@ -46,6 +50,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
+  group = vim.api.nvim_create_augroup("mike_mysql_commentstring", { clear = true }),
   pattern = { "mysql" },
   callback = function()
     vim.bo.commentstring = "-- %s"
@@ -54,6 +59,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
+  group = vim.api.nvim_create_augroup("mike_plantuml_commentstring", { clear = true }),
   pattern = { "plantuml" },
   callback = function()
     vim.bo.commentstring = "' %s"
@@ -62,6 +68,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
+  group = vim.api.nvim_create_augroup("mike_gitconfig_commentstring", { clear = true }),
   pattern = { "gitconfig" },
   callback = function()
     vim.bo.commentstring = "# %s"
