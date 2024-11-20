@@ -42,7 +42,6 @@ Code/saatchi/zed/.editorconfig
 .circleci/cli.yml
 .config/algolia/config.toml
 .config/multitail/multitail.conf
-.config/sql-language-server/.sqllsrc.json
 .edgerc
 .kube/config
 .mailmap
@@ -52,6 +51,7 @@ Code/saatchi/zed/.editorconfig
 .ssh/{config,keys}
 .support/hosts.json
 .warprc
+.bigqueryrc
 Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 intelephense/licence.txt
 

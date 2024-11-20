@@ -123,6 +123,14 @@ _pin_homebrew_packages() {
 }
 # }}}
 
+# gcloud {{{
+_upgrade_gcloud_components() {
+    _has gcloud || return
+    _log_info "Updating gcloud components"
+    gcloud components update --quiet
+}
+# }}}
+
 # akamai {{{
 _upgrade_akamai_and_install_missing() {
     _has akamai || return
@@ -738,6 +746,7 @@ _bootstrap_all() {
     # _update_python_pip_packages
     _install_ruby_versions
     _upgrade_akamai_and_install_missing
+    _upgrade_gcloud_components
     # _install_erlang_version
     # _install_elixir_version
     _install_tmux_plugin_manager
