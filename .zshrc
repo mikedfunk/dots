@@ -164,7 +164,7 @@ fi
 unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
-export HOMEBREW_BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
 
 # This will break automatic clipboard transfer between neovim and the system
 # but it will allow sharing your clipboard over ssh with a remote server.
@@ -249,7 +249,7 @@ export AUTO_NTFY_DONE_IGNORE=(
 lessc () { rougify highlight $@ | \less -R -M }
 export GITWEB_PROJECTROOT="$HOME/Code"
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
-export PSPG_CONF="~/.config/pspg/.pspgconf"
+export PSPG_CONF="$XDG_CONFIG_HOME/pspg/.pspgconf"
 export PSQL_PAGER="pspg --clipboard-app=3"
 
 set PLANTUML_LIMIT_SIZE=8192
@@ -380,7 +380,7 @@ fi
 
 # misc {{{
 alias info="info --vi-keys" # info -> pinfo is like top -> htop
-alias pinfo='pinfo --rcfile=$HOME/.config/pinfo/pinforc'
+alias pinfo='pinfo --rcfile=$XDG_CONFIG_HOME/pinfo/pinforc'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
@@ -448,8 +448,8 @@ alias news="BROWSER='open %u' newsboat"
 
 k9s () {
     defaults read -g AppleInterfaceStyle &>/dev/null
-    local skin_file=$([ $? -eq 0 ] && echo "$HOME/.config/k9s/skins/skin_dark.yaml" || echo "$HOME/.config/k9s/skins/skin_light.yaml")
-    command cp "$skin_file" "$HOME/.config/k9s/skins/skin.yaml"
+    local skin_file=$([ $? -eq 0 ] && echo "$XDG_CONFIG_HOME/k9s/skins/skin_dark.yaml" || echo "$XDG_CONFIG_HOME/k9s/skins/skin_light.yaml")
+    command cp "$skin_file" "$XDG_CONFIG_HOME/k9s/skins/skin.yaml"
     command k9s $@
 }
 
@@ -485,7 +485,7 @@ pretty-path () { tr : '\n' <<<"$PATH"; }
 # alias tree="alder" # colorized tree from npm (I colorize tree with "lsd" now so this is not needed)
 # https://unix.stackexchange.com/a/293608/287898
 alias mc="mc --nosubshell --xterm"
-alias multitail="multitail -F $HOME/.config/multitail/multitail.conf"
+alias multitail="multitail -F $XDG_CONFIG_HOME/multitail/multitail.conf"
 # }}}
 
 # games {{{
