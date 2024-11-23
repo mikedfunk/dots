@@ -164,7 +164,9 @@ fi
 unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
+
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
 
 # This will break automatic clipboard transfer between neovim and the system
 # but it will allow sharing your clipboard over ssh with a remote server.
