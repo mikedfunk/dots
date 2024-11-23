@@ -173,8 +173,8 @@ bind generic gps !git push
 # gr: rebase/reset/release
 bind generic grbd !git rbd --autosquash
 bind generic grbm !git rbm --autosquash
-bind generic grbc !git rebase --continue
-bind generic grba !git rebase --abort
+bind generic grbc !git spice rebase continue
+bind generic grba !git spice rebase continue
 bind generic grh @?git reset --hard
 bind generic grs @?git reset --soft HEAD^
 bind generic gru @?git checkout -- .

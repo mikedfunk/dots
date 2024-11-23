@@ -96,14 +96,14 @@ return {
     ---@param opts LuaLineOpts
     opts = function(_, opts)
       local neocodeium_status_component = {
-        function()
-          return LazyVim.config.icons.kinds.Codeium
-          -- return "󰌶" --  󱙺 󰌵 󱐋 ⚡ 󰲋 󰲌󰚩 
-          -- local on = "󰲋"
-          -- local off = "󰲌"
-          -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
-          -- return is_neocodeium_enabled and on or off
-        end,
+        LazyVim.config.icons.kinds.Codeium,
+        -- function()
+        --   -- return "󰌶" --  󱙺 󰌵 󱐋 ⚡ 󰲋 󰲌󰚩 
+        --   -- local on = "󰲋"
+        --   -- local off = "󰲌"
+        --   -- local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
+        --   -- return is_neocodeium_enabled and on or off
+        -- end,
         color = function()
           local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
           return {

@@ -273,13 +273,14 @@ return {
           },
           opts = { skip = true },
         },
-        -- TODO: vim-projectionist inputlist doesn't show up until you hit esc
+        -- Noice! They fixed this, so this not-yet-working workaround is not needed.
         -- {
         --   filter = {
         --     event = "msg_show",
+        --     -- kind = "number_prompt",
         --     find = "Create alternate file?",
         --   },
-        --   opts = { view = "confirm" },
+        --   opts = { view = "cmdline" },
         -- },
         {
           filter = {
