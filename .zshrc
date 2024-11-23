@@ -248,6 +248,7 @@ export AUTO_NTFY_DONE_IGNORE=(
 lessc () { rougify highlight $@ | \less -R -M }
 export GITWEB_PROJECTROOT="$HOME/Code"
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
+export PSPG_CONF="~/.config/pspg/.pspgconf"
 export PSQL_PAGER="pspg --clipboard-app=3"
 
 set PLANTUML_LIMIT_SIZE=8192
