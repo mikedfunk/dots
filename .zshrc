@@ -165,7 +165,9 @@ unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
 
-export SSH_TTY=$TTY
+# This will break automatic clipboard transfer between neovim and the system
+# but it will allow sharing your clipboard over ssh with a remote server.
+# export SSH_TTY=$TTY
 
 # export AIDER_MODEL="ollama/llama3.1:8b"
 # export AIDER_SHOW_MODEL_WARNINGS=false
