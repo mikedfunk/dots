@@ -3,6 +3,7 @@ return {
   {
     -- automatically install nvim-lint packages that are configured
     "rshkarin/mason-nvim-lint",
+    -- enabled = false,
     opts = function()
       -- add some missing packages :/
       require("mason-nvim-lint.mapping").nvimlint_to_package =
@@ -23,7 +24,6 @@ return {
     "nvim-lualine/lualine.nvim",
     ---Add some lualine components
     ---@class LuaLineOpts
-    ---@field sections table
     ---@param opts LuaLineOpts
     opts = function(_, opts)
       ---@return string[]

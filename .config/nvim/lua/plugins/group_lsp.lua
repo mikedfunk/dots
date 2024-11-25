@@ -4,7 +4,6 @@ return {
     "nvim-lualine/lualine.nvim",
     ---Add some lualine components
     ---@class LuaLineOpts
-    ---@field sections table
     ---@param opts LuaLineOpts
     opts = function(_, opts)
       local get_lsp_client_names = function()
@@ -161,10 +160,13 @@ return {
     opts = {
       install = {
         bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
-        php_bin = table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "") .. "/bin/php",
+        php_bin = vim.fn.executable("asdf") == 1
+            and table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "") .. "/bin/php"
+          or "php",
         path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
-        composer_bin = table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }), "")
-          .. "/.composer/vendor/bin/composer",
+        composer_bin = vim.fn.executable("asdf") == 1
+          and table.concat(vim.fn.systemlist({ "asdf", "where", "php", "8.2.12" }) or "composer", "")
+            .. "/.composer/vendor/bin/composer",
       },
       lspconfig = { enabled = false },
     },

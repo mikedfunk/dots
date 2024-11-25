@@ -27,6 +27,7 @@ tap "abhinav/tap" # git-spice
 tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
+tap "daytonaio/tap" # daytona.io
 tap "derailed/k9s" # k9s
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
@@ -254,6 +255,8 @@ brew "cloudflared" # cloudflare CLI
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
+brew "daytona" # fancy devcontainer setup daytona.io
+brew "devcontainer"
 brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.)
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "eza" # pretty ls replacement
@@ -267,7 +270,7 @@ brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
-brew "git-spice" # stacked PR manager
+brew "git-spice" # stacked PR manager. Absolutely amazing.
 brew "glab" # like gh for gitlab
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
@@ -396,6 +399,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-mononoki-nerd-font" # programming font
 # cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 # cask "freetube" # privacy-friendly and add-free youtube player
+# cask "git-credential-manager" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)
 # cask "glance" # all-in-one quicklook app that works with dark mode (abandoned - switch to glamce-chamburr)
 # cask "gog-galaxy" # good old games
@@ -434,7 +438,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "menubar-colors" # color picker in the menubar
 # cask "menubar-stats" # used to show bluetooth headphones battery level in menubar (Doesn't work with my headphones for some reason... and it's $5)
 # cask "microsoft-edge"
-# cask "microsoft/git/git-credential-manager-core" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
 # cask "minikube" # for learning `minikube start` (alternative: kind)
 # cask "monitorcontrol" # menubar app to control non-apple monitors. works! (same controls are in the menubar dashboard thing)
 # cask "mpv" # video player like vlc

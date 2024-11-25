@@ -6,9 +6,10 @@ auto-reload yes # Auto load feeds at startup
 reload-threads 8 # Load feeds in 8 different threads
 reload-time 15 # Time elapsed between each auto-reload
 notify-always yes # Notify unread feeds
-feed-sort-order title # Sort feeds by title
-show-read-feeds no # Do not show read feeds
-show-read-articles no # Do not show read articles
+# feed-sort-order title # Sort feeds by title
+feed-sort-order unreadarticlecount-asc # Sort feeds by unread article count
+# show-read-feeds no # Do not show read feeds
+# show-read-articles no # Do not show read articles
 bookmark-autopilot yes # Don't ask me all these questions when bookmarking
 bookmark-cmd /Users/mikefunk/.support/newsboat-bookmark-helper.sh # TODO find a better bookmarking tool that is NOT buku. That thing is ok as a tui but does not function as a cli.
 # }}}

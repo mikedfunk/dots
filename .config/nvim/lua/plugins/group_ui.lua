@@ -187,6 +187,7 @@ return {
   --     opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
   --   end,
   -- },
+  -- { "sphamba/smear-cursor.nvim", opts = {} }, -- cursor move animation
   {
     "echasnovski/mini.indentscope",
     opts = {

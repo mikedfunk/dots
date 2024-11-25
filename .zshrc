@@ -165,9 +165,6 @@ unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
 
-export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
-
 # This will break automatic clipboard transfer between neovim and the system
 # but it will allow sharing your clipboard over ssh with a remote server.
 # export SSH_TTY=$TTY
@@ -251,7 +248,6 @@ export AUTO_NTFY_DONE_IGNORE=(
 lessc () { rougify highlight $@ | \less -R -M }
 export GITWEB_PROJECTROOT="$HOME/Code"
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
-export PSPG_CONF="$XDG_CONFIG_HOME/pspg/.pspgconf"
 export PSQL_PAGER="pspg --clipboard-app=3"
 
 set PLANTUML_LIMIT_SIZE=8192
@@ -286,6 +282,7 @@ export HOMEBREW_NO_ANALYTICS=1
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # export TERMINFO="$XDG_DATA_HOME"/terminfo
 # export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
@@ -295,6 +292,7 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export MYCLI_HISTFILE="$XDG_DATA_HOME/mycli/history"
@@ -302,10 +300,12 @@ export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export PSPG_CONF="$XDG_CONFIG_HOME/pspg/.pspgconf"
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+
 unset AWS_SHARED_CREDENTIALS_FILE AWS_CONFIG_FILE ASDF_CONFIG_FILE ASDF_DATA_DIR
 
 # }}}
