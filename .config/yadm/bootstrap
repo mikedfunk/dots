@@ -818,8 +818,7 @@ _bootstrap_all() {
     _clear_evalcache
 }
 
-# _bootstrap_all
-_install_php_versions
+_bootstrap_all
 _log_info "Installation complete"
 
 # }}}
