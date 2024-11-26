@@ -10,6 +10,10 @@
 #
 # https://blog.mattclemente.com/2020/06/26/oh-my-zsh-slow-to-load/#a-note-on-profiling-with-zsh%2Fzprof
 # zmodload zsh/zprof
+
+# Want to use docker build cloud? `docker buildx use cloud-mikedfunk-mybuilder`.
+# This sets it for the current session _only_ to ensure you don't build with
+# cloud when you dont need a ferrari.
 # }}}
 
 # p10k instant prompt (must be first) {{{
