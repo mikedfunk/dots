@@ -7,16 +7,34 @@ vim.keymap.set("n", ",.", function()
   vim.cmd(vim.api.nvim_replace_termcodes([[norm! 0/\S-><cr>a<cr><esc>]], true, true, true))
 end, { noremap = true, buffer = true, desc = "Split PHP" })
 
-vim.keymap.set(
-  "n",
-  "<Leader>Ps",
-  "<Cmd>.,.s/\\/\\*\\* \\(.*\\) \\*\\//\\/\\*\\*\\r     * \\1\\r     *\\//g<cr>",
-  -- vim.api.nvim_replace_termcodes([[^xxi <esc>O<esc>hC /**<esc>j$xxxo/<esc>:noh<cr>]], true, true, true),
-  { noremap = true, buffer = true, desc = "Split Docblock" }
-)
+-- Turn /** Test */ into:
+--
+-- /**
+--  * Test
+--  */
+vim.keymap.set("n", "<Leader>Ps", function()
+  vim.cmd([[s/\/\*\* \(.*\) \*\//\/\*\*\r     * \1\r     *\//]])
+  vim.cmd([[?/\*\*]])
+  vim.cmd([[norm V]])
+  vim.cmd([[/\*\/]])
+  vim.cmd([[silent! :norm =]])
+  vim.cmd([[noh]])
+end, { noremap = true, buffer = true, desc = "Split Docblock" })
 
+-- Turn:
+--
+-- /**
+--  SomeClass $someVar <-- cursor is anywhere on this line
+--  */
+--
+--  into:
+--
+--  /**
+--   * @param ObjectBehavior<SomeClass> $someVar
+--   */
 vim.keymap.set("n", "<Leader>Pq", function()
-  vim.cmd([[:command! -range FixThis :silent! '<,'>s/,$//g]], true, true, true)
+  -- vim.api.nvim_buf_create_user_command(0, "FixThis", "silent! s/,$//g", {})
+  vim.cmd([[:command! FixThis :silent! s/,$//g]])
   vim.cmd(
     vim.api.nvim_replace_termcodes(
       [[:norm I* @param ObjectBehavior<<esc>Ea><esc>V:'<,'>FixThis<cr><esc>]],
@@ -27,7 +45,25 @@ vim.keymap.set("n", "<Leader>Pq", function()
   )
 end, { noremap = true, buffer = true, desc = "Fix Spec Docblock Line" })
 
+-- Turn:
+--
+-- public function (
+--     SomeClass1 $someVar1, <-- cursor is anywhere in this indent area
+--     SomeClass2 $someVar2
+-- ): void {
+--
+--  into:
+--
+--  /**
+--   * @param ObjectBehavior<SomeClass1> $someVar1
+--   * @param ObjectBehavior<SomeClass2> $someVar2
+--   */
+-- public function (
+--     SomeClass1 $someVar1,
+--     SomeClass2 $someVar2
+-- ): void {
 vim.keymap.set("n", "<Leader>Pf", function()
+  -- These can probably be simplified. I definitely need replace_termcodes somewhere though.
   vim.cmd(
     vim.api.nvim_replace_termcodes(
       [[command! -range FixLine :'<,'>norm I* @param ObjectBehavior<<esc>Ea><esc>$x]],
@@ -47,6 +83,7 @@ vim.keymap.set("n", "<Leader>Pf", function()
 end, { noremap = true, buffer = true, desc = "Add Spec Docblock" })
 
 -- improve php highlights {{{
+-- :Inspect to see current highlight group
 vim.cmd("hi link phpDocTags phpDefine")
 vim.cmd("hi link phpDocParam phpType")
 vim.cmd("hi link phpDocParam phpRegion")
