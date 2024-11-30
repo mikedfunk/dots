@@ -1,0 +1,143 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets
+{
+    "PHPSpec method": {
+        "prefix": "psmeth",
+        "body": [
+            "",
+            "",
+            "public function it_${1:does_something}($2): void",
+            "{",
+            "    $3",
+            "}"
+        ]
+    },
+    "Playground": {
+        "prefix": "pgr",
+        "body": [
+            "<?php",
+            "",
+            // NOTE: RELATIVE_FILEPATH seems to have a bug - it sometimes resolves and othertimes is ignored.
+            //
+            // NOTE: the final $1 is the regexp replacement, not a placeholder.
+            // This is VSCode's way of applying transformations to regex capture
+            // groups. Unfortunately you cannot apply another regexp replacement
+            // here. That is my blocker to using JSON snippets when namespaces are
+            // involved. I need to replace / with \ and then remove the filename +
+            // replace app with Palette. It seems this can't be done in a single
+            // regexp.
+            //
+            // https://hatoum.com/blog/2017/12/6/using-regular-expressions-to-change-case
+            // https://code.visualstudio.com/docs/editor/userdefinedsnippets#_transform-examples
+            "Do everything but slashes, demo of upcase all: ${RELATIVE_FILEPATH/app\\/(.*)(\\/[a-zA-Z0-9_]+\\.php)$/Palette\\\\${1:/upcase}/}",
+            "Slashes only: ${RELATIVE_FILEPATH/\\//\\\\/g};",
+            "selectedText: ${TM_SELECTED_TEXT}",
+            "currentLine: ${TM_CURRENT_LINE}",
+            "currentWord: ${TM_CURRENT_WORD}",
+            "lineIndex: ${TM_LINE_INDEX}",
+            "lineNumber: ${TM_LINE_NUMBER}",
+            "filename: ${TM_FILENAME}",
+            "filenameBase: ${TM_FILENAME_BASE}",
+            "directory: ${TM_DIRECTORY}",
+            "filepath: ${TM_FILEPATH}",
+            "relativeFilepath: ${RELATIVE_FILEPATH}",
+            // "clipboard: ${CLIPBOARD}",
+            "workspaceName: ${WORKSPACE_NAME}",
+            "workspaceFolder: ${WORKSPACE_FOLDER}",
+            "cursorIndex: ${CURSOR_INDEX}",
+            "cursorNumber: ${CURSOR_NUMBER}",
+            "currentYear: ${CURRENT_YEAR}",
+            "currentYearShort: ${CURRENT_YEAR_SHORT}",
+            "currentMonth: ${CURRENT_MONTH}",
+            "currentMonthName: ${CURRENT_MONTH_NAME}",
+            "currentMonthNameShort: ${CURRENT_MONTH_NAME_SHORT}",
+            "currentDate: ${CURRENT_DATE}",
+            "currentDayName: ${CURRENT_DAY_NAME}",
+            "currentDayNameShort: ${CURRENT_DAY_NAME_SHORT}",
+            "currentHour: ${CURRENT_HOUR}",
+            "currentMinute: ${CURRENT_MINUTE}",
+            "currentSecond: ${CURRENT_SECOND}",
+            "currentSecondsUnix: ${CURRENT_SECONDS_UNIX}",
+            "currentTimezoneOffset: ${CURRENT_TIMEZONE_OFFSET}",
+            "random: ${RANDOM}",
+            "randomHex: ${RANDOM_HEX}",
+            "uuid: ${UUID}",
+            "blockCommentStart: ${BLOCK_COMMENT_START}",
+            "blockCommentEnd: ${BLOCK_COMMENT_END}",
+            "lineComment: ${LINE_COMMENT}"
+        ],
+        "description": "Show the extent of transforming capture groups"
+    },
+    "Zed log": {
+        "prefix": "zlg",
+        "body": [
+            "\\PalShared_Log::getLogger()->${1|debug,error,critical,info,warning,notice|}(\"$2\", ${3:[]});"
+        ]
+    },
+    "Palette log": {
+        "prefix": "plg",
+        "body": [
+            "\\Log::${1|debug,error,critical,info,warning,notice|}(\"$1\");"
+        ]
+    },
+    "Legacy log": {
+        "prefix": "llg",
+        "body": [
+            "\\Zend_Registry::get('file_logger')->${1|debug,info,warn,notice,err,alert,emerg,crit|}(\"$1\");"
+        ]
+    },
+    "inheritDoc": {
+        "prefix": "id",
+        "body": [
+            "/** @inheritDoc */"
+        ]
+    },
+    "Declare strict types": {
+        "prefix": "dst",
+        "body": [
+            "",
+            "declare(strict_types=1);"
+        ]
+    },
+    "Assign property": {
+        "prefix": "asn",
+        "body": [
+            "\\$this->${1:myProp} = \\$$1;"
+        ]
+    },
+    "Const": {
+        "prefix": "cnst",
+        "body": [
+            "${1|private,protected,public|} const ${1:MY_CONST} = \"$2\""
+        ]
+    },
+    "Method": {
+        "prefix": "meth",
+        "body": [
+            "",
+            "",
+            "${1|public,private,protected|} function ${2:myFunc}($3): ${4:string}",
+            "{",
+            "    $5",
+            "}"
+        ]
+    },
+    "Class property": {
+        "prefix": "va",
+        "body": [
+            "${1|private,protected,public|} ${2:MyClass} \\$${2/(.*)/${1:/camelcase}/};"
+        ]
+    },
+    "Function argument": {
+        "prefix": "arg",
+        "body": [
+            "${1:MyClass} \\$${1/(.*)/${1:/camelcase}/}"
+        ]
+    },
+    "Json decode": {
+        "prefix": "json_decode",
+        "body": [
+            "\\json_decode(\\$${1:myVar}, true, 512, \\JSON_THROW_ON_ERROR);"
+        ],
+        "description": "Throws exception on failure"
+    }
+}
