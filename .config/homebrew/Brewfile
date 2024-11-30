@@ -333,6 +333,7 @@ brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
+brew "skopeo" # get docker registry info
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.

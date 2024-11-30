@@ -90,9 +90,26 @@ return {
       },
       formatters_by_ft = {
         -- python = { "black" }, -- moved to lazy extra
-        php = { "phpcbf" },
+        php = { "rector", "phpcbf", "php_cs_fixer" },
       },
       formatters = {
+        rector = function()
+          local util = require("conform.util")
+          ---@type conform.FormatterConfigOverride
+          return {
+            meta = {
+              url = "https://github.com/rectorphp/rector",
+              description = "Instant Upgrades and Automated Refactoring",
+            },
+            command = util.find_executable({
+              "tools/rector/vendor/bin/rector",
+              "vendor/bin/rector",
+            }, "rector"),
+            args = { "process", "$FILENAME" },
+            stdin = false,
+            cwd = util.root_file({ "composer.json" }),
+          }
+        end,
         phpcbf = {
           -- ALWAYS use local version because it is tightly coupled to the
           -- default _rules_ it comes with.

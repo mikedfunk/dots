@@ -576,12 +576,12 @@ puw-pretty() {
 
 # composer {{{
 export COMPOSER_MEMORY_LIMIT=-1
-alias cda="composer dump-autoload"
-alias cu="composer update"
-alias ci="composer install --prefer-dist"
-alias cr="composer require"
-alias crd="composer require --dev"
-alias crs="composer run-script"
+# alias cda="composer dump-autoload"
+# alias cu="composer update"
+# alias ci="composer install --prefer-dist"
+# alias cr="composer require"
+# alias crd="composer require --dev"
+# alias crs="composer run-script"
 # }}}
 
 # git {{{
@@ -806,3 +806,7 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # }}}
 
 # }}}
+
+source /Users/mikefunk/.daytona.completion_script.zsh
+
+source /Users/mikefunk/.daytona.completion_script.zsh

@@ -329,6 +329,42 @@ END_HEREDOC
     # asdf reshim php "8.2.12"
 }
 
+_install_php_83() {
+    (asdf list php | grep --quiet "8.3.14") && return
+    _log_info "installing php 8.3.14"
+    asdf install php 8.3.14
+    asdf global php 8.3.14 || return
+
+    # install php extensions (different set for 8.3.14)
+    local -r PHP_PATH="$(asdf where php)"
+    mkdir -p "${PHP_PATH}"/conf.d
+
+    local PICKLE="${PHP_PATH}"/pickle.phar
+    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
+    chmod +x "${PICKLE}"
+
+    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    export PHP_ZLIB_DIR
+    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
+    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+    _xdebug_config() {
+        cat <<'END_HEREDOC'
+zend_extension="xdebug.so"
+[xdebug]
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+END_HEREDOC
+    }
+    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
+
+    # install global composer packages
+    # mkdir -p  "${PHP_PATH}"/{.,}composer
+    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    # asdf reshim php "8.3.14"
+}
+
 # internal: configure flags and paths for homebrew tools {{{
 _configure_flags_and_paths_for_homebrew_tools() {
     # I probably don't need to configure all of these
@@ -407,6 +443,7 @@ _configure_flags_and_paths_for_homebrew_tools() {
     LDFLAGS="-L$(brew --prefix libxml2)/lib ${LDFLAGS}"
     CPPFLAGS="-I$(brew --prefix libxml2)/include ${CPPFLAGS}"
     PKG_CONFIG_PATH="$(brew --prefix libxml2)/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    CFLAGS="-Wno-error=incompatible-pointer-types -Wno-error=ignored-qualifiers ${CFLAGS}"
     # }}}
 
     # configure libzip (needed to build php) {{{
@@ -460,7 +497,7 @@ _configure_flags_and_paths_for_homebrew_tools() {
     # above icu4c flags.
     # another approach:
     # https://mikebian.co/installing-an-old-homebrew-package/
-    sed -i '' 's/(brew --prefix icu4c)/(brew --prefix icu4c@74)/g' "$HOME/.asdf/plugins/php/bin/install"
+    sed -i '' 's/(homebrew_package_path icu4c)/(homebrew_package_path icu4c@74)/g' "$HOME/.asdf/plugins/php/bin/install"
     # }}}
 
     export PATH LDFLAGS CPPFLAGS PKG_CONFIG_PATH CXXFLAGS CFLAGS ICU_CONFIG
@@ -484,7 +521,8 @@ _install_php_versions() {
     _install_php_80
     _install_php_81
     _install_php_82
-    asdf global php 8.2.12
+    _install_php_83
+    asdf global php 8.3.14
 
     # NOTE: revert temporary nasty hack
     cd "$HOME/.asdf/plugins/php/" && git reset --hard
@@ -818,7 +856,8 @@ _bootstrap_all() {
     _clear_evalcache
 }
 
-_bootstrap_all
+# _bootstrap_all
+_install_php_versions
 _log_info "Installation complete"
 
 # }}}

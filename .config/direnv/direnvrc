@@ -1,5 +1,6 @@
+# vim: set ft=bash:
 layout_poetry() {
-    if [[ ! -f pyproject.toml ]]; then
+    if ! [ -f pyproject.toml ]; then
         log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
         exit 2
     fi
@@ -8,4 +9,14 @@ layout_poetry() {
     export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
     export POETRY_ACTIVE=1
     PATH_add "$VENV"
+}
+
+layout_php() {
+    if ! [ -f composer.json ]; then
+        log_error 'No composer.json found.  Use `composer init` to create one first.'
+        exit 2
+    fi
+
+    PATH_add "./vendor/bin"
+    PATH_add "./tools"
 }
