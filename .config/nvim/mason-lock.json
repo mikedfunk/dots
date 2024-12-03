@@ -5,7 +5,7 @@
   "checkmake": "0.2.2",
   "cspell": "8.16.1",
   "css-lsp": "4.10.0",
-  "cssmodules-language-server": "1.4.1",
+  "cssmodules-language-server": "1.5.0",
   "cucumber-language-server": "1.6.0",
   "debugpy": "1.8.9",
   "delve": "v1.23.1",
@@ -36,7 +36,7 @@
   "nginx-language-server": "0.8.0",
   "php-cs-fixer": "v3.64.0",
   "php-debug-adapter": "v1.35.0",
-  "phpactor": "2024.11.28.0",
+  "phpactor": "2024.11.28.1",
   "phpcbf": "3.11.1",
   "phpcs": "3.11.1",
   "phpstan": "2.0.3",
@@ -44,6 +44,7 @@
   "pyright": "1.1.389",
   "rubocop": "1.69.0",
   "ruby-lsp": "0.22.1",
+  "ruff": "0.8.1",
   "rustywind": "0.23.1",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.10.0",
@@ -59,6 +60,5 @@
   "vale": "v3.9.1",
   "vtsls": "0.2.6",
   "vue-language-server": "2.1.10",
-  "yaml-language-server": "1.15.0",
-
+  "yaml-language-server": "1.15.0"
 }

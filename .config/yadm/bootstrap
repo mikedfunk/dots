@@ -365,6 +365,69 @@ END_HEREDOC
     # asdf reshim php "8.3.14"
 }
 
+_install_php_84() {
+    (asdf list php | grep --quiet "8.4.1") && return
+    _log_info "installing php 8.4.1"
+    asdf install php 8.4.1
+    asdf global php 8.4.1 || return
+
+    # install php extensions (different set for 8.4.1)
+    local -r PHP_PATH="$(asdf where php)"
+    mkdir -p "${PHP_PATH}"/conf.d
+
+    local PICKLE="${PHP_PATH}"/pickle.phar
+    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
+    chmod +x "${PICKLE}"
+
+    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    export PHP_ZLIB_DIR
+    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
+    # yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+
+    # install fork that fixes php 8.4 compat {{{
+    _install_imagick_php_84() {
+        [ -d /tmp/imagick_php_84 ] || git clone https://github.com/mvorisek/imagick.git /tmp/imagick_php_84
+        cd /tmp/imagick_php_84 || return
+        git checkout fix_php84
+        phpize
+        ./configure
+        make
+        make install
+        cd - || return
+        rm -rf /tmp/imagick_php_84
+    }
+
+    _install_imagick_php_84 && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+    _opcache_config() {
+        cat <<'END_HEREDOC'
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=4000
+opcache.revalidate_freq=60
+opcache.enable_cli=1
+END_HEREDOC
+    }
+    (_opcache_config >"${PHP_PATH}"/conf.d/06_opcache.ini)
+    # }}}
+
+    _xdebug_config() {
+        cat <<'END_HEREDOC'
+zend_extension="xdebug.so"
+[xdebug]
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+END_HEREDOC
+    }
+    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
+    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
+
+    # install global composer packages
+    # mkdir -p  "${PHP_PATH}"/{.,}composer
+    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
+    # asdf reshim php "8.4.1"
+}
+
 # internal: configure flags and paths for homebrew tools {{{
 _configure_flags_and_paths_for_homebrew_tools() {
     # I probably don't need to configure all of these
@@ -522,7 +585,8 @@ _install_php_versions() {
     _install_php_81
     _install_php_82
     _install_php_83
-    asdf global php 8.3.14
+    _install_php_84
+    asdf global php 8.4.1
 
     # NOTE: revert temporary nasty hack
     cd "$HOME/.asdf/plugins/php/" && git reset --hard
@@ -856,8 +920,8 @@ _bootstrap_all() {
     _clear_evalcache
 }
 
-# _bootstrap_all
-_install_php_versions
+_bootstrap_all
+# _install_php_versions
 _log_info "Installation complete"
 
 # }}}

@@ -576,6 +576,8 @@ puw-pretty() {
 
 # composer {{{
 export COMPOSER_MEMORY_LIMIT=-1
+alias c="composer"
+compdef c="composer"
 # alias cda="composer dump-autoload"
 # alias cu="composer update"
 # alias ci="composer install --prefer-dist"
@@ -671,7 +673,8 @@ alias magento-phpunit="pu -c dev/tests/unit/phpunit.xml.dist"
 # Public: runs phpspec run and uses noti to show the results
 phpspecnotify() {
     # xdebug-off > /dev/null
-    phpdbg -qrr -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
+    # phpdbg -qrr -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
+    php -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
     # php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=${XDEBUG_IDE_KEY} -dxdebug.remote_port=9015 -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
     [[ $? == 0 ]] && noti --message "✅ Specs passed" ||
         noti --message "❌ Specs failed"
