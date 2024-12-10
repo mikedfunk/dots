@@ -62,8 +62,10 @@ return {
     "chrisgrieser/nvim-various-textobjs",
     event = "VeryLazy",
     opts = {
-      useDefaultKeymaps = true,
-      disabledKeymaps = { "gc", "gw", "ai", "ii", "aI", "iI" },
+      keymaps = {
+        useDefaults = true,
+        disabledDefaults = { "gc", "gw", "ai", "ii", "aI", "iI" },
+      },
     },
   },
   { "michaeljsmith/vim-indent-object" },
@@ -122,6 +124,23 @@ return {
   -- { "jwalton512/vim-blade", event = "VimEnter" },
   { "tpope/vim-cucumber", event = "VimEnter" },
   { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
+  -- {
+  --   "adalessa/laravel.nvim",
+  --   dependencies = {
+  --     "tpope/vim-dotenv",
+  --     "nvim-telescope/telescope.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     "kevinhwang91/promise-async",
+  --   },
+  --   cmd = { "Laravel" },
+  --   keys = {
+  --     { "<leader>la", ":Laravel artisan<cr>" },
+  --     { "<leader>lr", ":Laravel routes<cr>" },
+  --     { "<leader>lm", ":Laravel related<cr>" },
+  --   },
+  --   event = { "VeryLazy" },
+  --   opts = {},
+  -- },
   -- {
   --   "stevearc/profile.nvim",
   --   config = function()

@@ -809,7 +809,3 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # }}}
 
 # }}}
-
-source /Users/mikefunk/.daytona.completion_script.zsh
-
-source /Users/mikefunk/.daytona.completion_script.zsh
