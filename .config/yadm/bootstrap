@@ -574,7 +574,7 @@ _install_php_versions() {
     _log_info "Installing php version(s)"
     (asdf plugin list | grep --quiet php) || asdf plugin add php
 
-    _configure_flags_and_paths_for_homebrew_tools
+    # _configure_flags_and_paths_for_homebrew_tools
 
     # change implicit function declaration to warning instead of error
     # https://bugs.php.net/bug.php?id=80171
@@ -666,7 +666,7 @@ _install_python_versions() {
     _log_info "Installing python version(s)"
     (asdf plugin list | grep --quiet python) || asdf plugin add python
 
-    _configure_flags_and_paths_for_homebrew_tools
+    # _configure_flags_and_paths_for_homebrew_tools
 
     # I:
     # https://github.com/danhper/asdf-python/issues/98
