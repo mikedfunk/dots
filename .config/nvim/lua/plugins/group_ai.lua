@@ -107,7 +107,7 @@ return {
         color = function()
           local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
           return {
-            fg = is_neocodeium_enabled and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            fg = is_neocodeium_enabled and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
             -- fg = is_neocodeium_enabled and LazyVim.ui.fg("DiagnosticOk").fg or LazyVim.ui.fg("DiagnosticError").fg,
           }
         end,

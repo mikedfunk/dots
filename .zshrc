@@ -574,6 +574,24 @@ puw-pretty() {
 }
 # }}}
 
+# pest {{{
+pestnotify() {
+    touch /tmp/test-results
+    phpdbg -qrr -dmemory_limit=4096M -ddisplay_errors=on ./vendor/bin/pest --cache-directory=/tmp "${@}"
+    [[ $? == 0 ]] && noti --message "✅ Pest tests passed" ||
+        noti --message "❌ Pest tests failed"
+    # xdebug-on > /dev/null
+}
+alias per="pestnotify"
+
+pew() {
+    touch /tmp/test-results
+    noglob ag -l -g '.*\.php' \
+        | entr -cr \
+        noti --message "✅ Pest tests passed" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/pest --cache-directory=/tmp $@
+}
+# }}}
+
 # composer {{{
 export COMPOSER_MEMORY_LIMIT=-1
 alias c="composer"

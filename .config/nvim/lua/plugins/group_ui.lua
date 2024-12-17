@@ -1,4 +1,10 @@
 return {
+  {
+    "folke/snacks.nvim",
+    init = function()
+      vim.g.snacks_animate = false
+    end,
+  },
   { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
   {

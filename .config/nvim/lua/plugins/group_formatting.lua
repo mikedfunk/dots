@@ -50,7 +50,7 @@ return {
         end,
         color = function()
           return {
-            fg = #get_formatters() > 0 and LazyVim.ui.fg("Normal").fg or LazyVim.ui.fg("Comment").fg,
+            fg = #get_formatters() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
             gui = "None",
           }
         end,

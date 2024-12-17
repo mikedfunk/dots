@@ -280,8 +280,8 @@ return {
     opts = function()
       return {
         highlights = {
-          covered = { fg = LazyVim.ui.fg("DiagnosticOk").fg },
-          uncovered = { fg = LazyVim.ui.fg("DiagnosticError").fg },
+          covered = { fg = Snacks.util.color("DiagnosticOk") },
+          uncovered = { fg = Snacks.util.color("DiagnosticError") },
         },
         auto_reload = true,
         lcov_file = "./coverage/lcov.info",
