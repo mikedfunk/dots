@@ -539,8 +539,9 @@ alias puf="pu --filter="
 # phpunit watch
 puw() {
     noglob ag -l -g \
-        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests|spec|domain|adapter)/.*\.php' \
-        | entr -cr \
+        '(application|library|src|app|tests|spec|domain|adapter)/.*\.php' \
+        | entr -c \
+        noti --title '✅' --message "${PWD##*/} PHPUnit tests passed" \
         php \
         -dmemory_limit=2048M \
         -ddisplay_errors=on \
@@ -552,7 +553,7 @@ puw() {
 # phpunit coverage watch
 pucw() {
     noglob ag -l -g \
-        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|app|tests|spec|domain|adapter)/.*\.php' \
+        '(application|library|src|app|tests|spec|domain|adapter)/.*\.php' \
         | entr -cr \
         php \
         -dmemory_limit=2048M \
@@ -561,15 +562,6 @@ pucw() {
         ./vendor/bin/phpunit \
         --colors=always \
         --coverage-cobertura="coverage/cobertura.xml" \
-        $@
-}
-
-# Public: phpunit watch with a "pretty" formatter (close to phpspec's pretty formatter)
-puw-pretty() {
-    noglob ag -l -g \
-        '(application\/controllers|application\/modules\/*\/controllers|application\/models|library|src|tests)/.*\.php' \
-        | entr -cr \
-        "$HOME/.bin/pu-pretty" \
         $@
 }
 # }}}
@@ -624,11 +616,23 @@ alias gtw="noglob ag -l -g '.*\\.go' | entr -cr noti --message \"✅ Go tests pa
 # phpspec {{{
 alias psr="phpspecnotify"
 alias psd="phpspec describe"
-alias psw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed\" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction -vvv"
+psw() {
+    noglob ag -l -g '.*\.php' \
+        | entr -cr \
+        noti --message "✅ ${PWD##*/} PHPSpec passed" \
+        php -dmemory_limit=1024M -ddisplay_errors=off \
+        ./vendor/bin/phpspec run --no-interaction -vvv
+}
 # phpspec coverage
 psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
 alias psc="php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
-alias pscw="noglob ag -l -g '.*\\.php' | entr -cr noti --message \"✅ PHPSpec passed and coverage generated\" php -dxdebug.mode=coverage -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml --no-code-generation -vvv"
+pscw() {
+    noglob ag -l -g '.*\.php' \
+        | entr -cr \
+        noti --message "✅ ${PWD##*/} PHPSpec passed and converage generated" \
+        php -dmemory_limit=1024M -ddisplay_errors=off \
+        ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml -vvv
+}
 # }}}
 
 # pytest {{{

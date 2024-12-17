@@ -31,6 +31,7 @@ tap "daytonaio/tap" # daytona.io
 tap "derailed/k9s" # k9s
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
+tap "mikedfunk/zoomhider" # hide shitty zoom meeting controls
 tap "oven-sh/bun" # bun
 tap "pkgxdev/made" # pkgx
 
@@ -378,6 +379,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
+# cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
 # cask "discord" # chat
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
@@ -505,7 +507,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "chatgpt" # desktop app <opt-space>
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
-cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
@@ -523,6 +524,7 @@ cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "virtualbox" # virtual machine software. `VBoxManage setextradata global "VBoxInternal2/EnableX86OnArm" 1` to enable ARM support.
+cask "zoomhider" # hide zoom floating meeting controls
 
 # }}}
 

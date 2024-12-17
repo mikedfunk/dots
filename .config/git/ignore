@@ -38,3 +38,4 @@ coverage
 cspell.json
 nohup.out
 yarn-error.log
+.ruby-lsp
