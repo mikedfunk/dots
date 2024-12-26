@@ -541,7 +541,7 @@ puw() {
     noglob ag -l -g \
         '(application|library|src|app|tests|spec|domain|adapter)/.*\.php' \
         | entr -c \
-        noti --title '✅' --message "${PWD##*/} PHPUnit tests passed" \
+        noti --message "✅ ${PWD##*/} PHPUnit tests passed" \
         php \
         -dmemory_limit=2048M \
         -ddisplay_errors=on \

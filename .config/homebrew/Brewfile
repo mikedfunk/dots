@@ -31,7 +31,8 @@ tap "daytonaio/tap" # daytona.io
 tap "derailed/k9s" # k9s
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
-tap "mikedfunk/zoomhider" # hide shitty zoom meeting controls
+tap "mikedfunk/keytty" # keytty
+tap "mikedfunk/zoomhider" # zoomhider
 tap "oven-sh/bun" # bun
 tap "pkgxdev/made" # pkgx
 
@@ -494,6 +495,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "tunnelbear" # tunnel to a specific country
 # cask "unshaky" # fix double keypress on macbook butterfly keyboard
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
+# cask "virtualbox" # virtual machine software. `VBoxManage setextradata global "VBoxInternal2/EnableX86OnArm" 1` to enable ARM support.
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
 # cask "vlc" # watch the videos I download (switchtd to mpv)
 # cask "webpquicklook" # quicklook plugin (preview webp images)
@@ -518,12 +520,13 @@ cask "grandperspective" # visualize storage hogs in the hard drive
 cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
 cask "jordanbaird-ice" # menubar tool similar to hiddenbar
+cask "keytty" # control the keyboard with the mouse
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
+cask "meetingbar" # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
-cask "virtualbox" # virtual machine software. `VBoxManage setextradata global "VBoxInternal2/EnableX86OnArm" 1` to enable ARM support.
 cask "zoomhider" # hide zoom floating meeting controls
 
 # }}}
