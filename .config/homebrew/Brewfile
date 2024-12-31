@@ -524,6 +524,7 @@ cask "keytty" # control the keyboard with the mouse
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
 cask "meetingbar" # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
+cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
