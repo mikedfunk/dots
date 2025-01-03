@@ -414,7 +414,7 @@
 [pull]
     rebase = true
 [rerere]
-    # enabled = 1
+    enabled = 1
     # autoupdate = true
 [fetch]
     prune = true
