@@ -18,7 +18,7 @@
 [user]
     email = mike@mikefunk.com
     name = Mike Funk
-    signingkey = 3BF8DE6DDEEF3A68
+	signingkey = 4E721DA7058E2551
 [web]
     browser = open
 [instaweb]
@@ -414,7 +414,7 @@
 [pull]
     rebase = true
 [rerere]
-    enabled = 1
+    # enabled = 1
     # autoupdate = true
 [fetch]
     prune = true

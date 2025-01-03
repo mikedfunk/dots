@@ -58,7 +58,7 @@
   "taplo": "0.9.3",
   "tflint": "v0.54.0",
   "vale": "v3.9.2",
-  "vtsls": "0.2.7",
+  "vtsls": "0.2.8",
   "vue-language-server": "2.2.0",
   "yaml-language-server": "1.15.0"
 }

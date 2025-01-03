@@ -28,8 +28,15 @@
             //
             // https://hatoum.com/blog/2017/12/6/using-regular-expressions-to-change-case
             // https://code.visualstudio.com/docs/editor/userdefinedsnippets#_transform-examples
-            "Do everything but slashes, demo of upcase all: ${RELATIVE_FILEPATH/app\\/(.*)(\\/[a-zA-Z0-9_]+\\.php)$/Palette\\\\${1:/upcase}/}",
-            "Slashes only: ${RELATIVE_FILEPATH/\\//\\\\/g};",
+            // possible transforms: '/upcase' | '/downcase' | '/capitalize' | '/camelcase' | '/pascalcase'
+            "Do everything but slashes, demo of capitalize all: ${RELATIVE_FILEPATH/app\\/(.*)(\\/[a-zA-Z0-9_]+\\.php)$/Palette\\\\${1:/capitalize}/}",
+            "Slashes and capitalize: ${RELATIVE_FILEPATH/\\//\\\\/g};",
+            // apparently you can't make a _dynamic_ number of capture groups.
+            // If I were to use this approach I would have to have a separate
+            // snippet for classes based on how many directories it is nested
+            // e.g. cla3. Also more duplication for controllers, specs/tests,
+            // interfaces, etc. That would suck.
+            "Try1: ${RELATIVE_FILEPATH/app(?:\\/([a-zA-Z0-9_]+))+\\.php$/\\\\$1___$2___$3/g};",
             "selectedText: ${TM_SELECTED_TEXT}",
             "currentLine: ${TM_CURRENT_LINE}",
             "currentWord: ${TM_CURRENT_WORD}",
