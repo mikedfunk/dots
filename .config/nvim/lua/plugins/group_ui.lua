@@ -193,7 +193,15 @@ return {
     config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
         onchange = function()
-          vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
+          local color_mode = vim.fn.system("defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light")
+          local should_reload_tmux = vim.o.bg ~= "dark" and color_mode == "Dark\n"
+            or vim.o.bg ~= "light" and color_mode == "Light"
+          -- prevent this from running on startup if unnecessary
+          if should_reload_tmux then
+            -- plugins must be loaded after theme change or they stop working
+            -- in statusbar, so source entire config
+            vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
+          end
         end,
       })
     end,
