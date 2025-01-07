@@ -18,15 +18,16 @@ return {
       })
     end,
   },
-  {
-    "anuvyklack/fold-preview.nvim",
-    event = "VeryLazy",
-    opts = {
-      auto = 400,
-      border = "rounded",
-      default_keybindings = false,
-    },
-  },
+  -- {
+  --   "anuvyklack/fold-preview.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     auto = 400,
+  --     border = "rounded",
+  --     default_keybindings = false,
+  --   },
+  -- },
+  -- installed by default, this just customizes it
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- https://github.com/pysan3/neo-tree.nvim/blob/v4-dev/MIGRATION-v4.md#setup-lazy-for-devs

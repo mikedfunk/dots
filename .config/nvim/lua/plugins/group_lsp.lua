@@ -1,48 +1,5 @@
 return {
   {
-    -- add some lualine components to display some more things in the statusline
-    "nvim-lualine/lualine.nvim",
-    ---Add some lualine components
-    ---@class LuaLineOpts
-    ---@param opts LuaLineOpts
-    opts = function(_, opts)
-      local get_lsp_client_names = function()
-        local buf_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-
-        ---@type string[]
-        local buf_client_names = {}
-
-        for _, client in pairs(buf_clients) do
-          if client.name ~= "null-ls" then
-            table.insert(buf_client_names, client.name)
-          end
-        end
-
-        ---@type string[]
-        buf_client_names = vim.fn.uniq(buf_client_names) ---@diagnostic disable-line missing-parameter
-        return buf_client_names
-      end
-
-      local lsp_status_component = {
-        ---@return string
-        function()
-          return "ʪ " .. tostring(#get_lsp_client_names())
-        end,
-        color = function()
-          return {
-            fg = #get_lsp_client_names() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-            gui = "None",
-          }
-        end,
-        on_click = function()
-          vim.cmd("LspInfo")
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, lsp_status_component)
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {

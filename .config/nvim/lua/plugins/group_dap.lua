@@ -9,24 +9,6 @@ return {
       config = true,
     },
     {
-      "jay-babu/mason-nvim-dap.nvim",
-      opts = {
-        ensure_installed = { "php" },
-      },
-    },
-    {
-      "nvim-telescope/telescope-dap.nvim",
-      dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
-      keys = {
-        { "<Leader>dL", "<Cmd>Telescope dap breakpoints<CR>", noremap = true, desc = "Telescope List Breakpoints" },
-        { "<Leader>dV", "<Cmd>Telescope dap variables<CR>", noremap = true, desc = "Telescope List Variables" },
-        { "<Leader>dF", "<Cmd>Telescope dap frames<CR>", noremap = true, desc = "Telescope Call Stack" },
-      },
-      config = function()
-        require("telescope").load_extension("dap")
-      end,
-    },
-    {
       "ofirgall/goto-breakpoints.nvim",
       dependencies = { "mfussenegger/nvim-dap" },
       keys = {

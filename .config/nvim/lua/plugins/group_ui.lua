@@ -1,19 +1,30 @@
 return {
   {
     "folke/snacks.nvim",
-    init = function()
-      vim.g.snacks_animate = false
-    end,
-  },
-  { "SmiteshP/nvim-navic", opts = { separator = "  " } },
-  -- { "Bekaboo/dropbar.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
-  {
-    "folke/twilight.nvim",
-    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    keys = {
-      { "<leader>uz", "<Cmd>Twilight<CR>", noremap = true, desc = "Twilight" },
+    opts = {
+      -- https://github.com/folke/snacks.nvim/blob/main/docs/animate.md#-animate
+      animate = {
+        -- speed up animations
+        ---@class snacks.animate.Config
+        {
+          ---@type snacks.animate.Duration|number
+          duration = 5, -- ms per step (default: 20)
+          easing = "cubic", -- https://github.com/kikito/tween.lua#easing-functions
+        },
+      },
     },
-    config = true,
+    -- init = function()
+    --   vim.g.snacks_animate = false
+    -- end,
+  },
+  {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        documentation = { window = { border = "rounded" } },
+        menu = { border = "rounded" },
+      },
+    },
   },
   {
     "akinsho/bufferline.nvim",
@@ -66,6 +77,7 @@ return {
         highlight = "PmenuSel",
       },
       excluded_filetypes = {
+        "cmp",
         "DressingInput",
         "TelescopePrompt",
         "alpha",
@@ -79,103 +91,6 @@ return {
     },
   },
   {
-    "echasnovski/mini.indentscope",
-    opts = {
-      mappings = {
-        object_scope = "ic",
-        object_scope_with_border = "iC",
-      },
-    },
-  },
-  {
-    -- TODO: switch to snacks.nvim dashboard
-    "nvimdev/dashboard-nvim",
-    dependencies = {
-      {
-        "rubiin/fortune.nvim",
-        opts = {
-          display_format = "mixed",
-          custom_quotes = {
-            short = {},
-            long = require("config.programming_quotes").quotes,
-          },
-        },
-      },
-    },
-    -- copy/paste from lazyvim config except for header and footer
-    opts = function()
-      local logo = {
-        " ██████   █████                   █████   █████  ███                 ",
-        "░░██████ ░░███                   ░░███   ░░███  ░░░                  ",
-        " ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  ",
-        " ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ ",
-        " ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ ",
-        " ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ ",
-        " █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████",
-        "░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ ",
-      }
-
-      logo = vim.list_extend(vim.split(string.rep("\n", 8), "\n"), logo)
-      local stats = require("lazy").stats()
-      -- local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      -- logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms", "" })
-      logo = vim.list_extend(logo, { "", "⚡ Neovim loaded " .. stats.count .. " plugins", "" })
-
-      local opts = {
-        theme = "doom",
-        hide = {
-          -- this is taken care of by lualine
-          -- enabling this messes up the actual laststatus setting after loading a file
-          statusline = false,
-        },
-        config = {
-          header = logo,
-          -- stylua: ignore
-          center = {
-            { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                              desc = " New File",        icon = " ", key = "n" },
-            { action = 'lua LazyVim.pick("oldfiles")()',                 desc = " Recent Files",    icon = " ", key = "r" },
-            { action = 'lua LazyVim.pick("live_grep")()',                desc = " Find Text",       icon = " ", key = "g" },
-            { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
-            { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
-            { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
-            { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
-            { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
-          },
-          footer = function()
-            return require("fortune").get_fortune()
-          end,
-        },
-      }
-
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-        button.key_format = "  %s"
-      end
-
-      -- open dashboard after closing lazy
-      if vim.o.filetype == "lazy" then
-        vim.api.nvim_create_autocmd("WinClosed", {
-          pattern = tostring(vim.api.nvim_get_current_win()),
-          once = true,
-          callback = function()
-            vim.schedule(function()
-              vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
-            end)
-          end,
-        })
-      end
-
-      return opts
-    end,
-  },
-  {
-    "kevinhwang91/nvim-bqf",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ft = "qf",
-  },
-  { "nvim-zh/colorful-winsep.nvim", event = "WinNew", config = true },
-  {
     "nyngwang/NeoZoom.lua",
     cmd = { "NeoZoomToggle", "NeoZoom" },
     keys = {
@@ -183,33 +98,12 @@ return {
     },
     opts = {},
   },
-  -- {
-  --   -- this expects the extra lazyvim.plugins.extras.ui.mini-animate to be
-  --   -- enabled in lazy.lua. It just tweaks the timing.
-  --   "echasnovski/mini.animate",
-  --   opts = function(_, opts)
-  --     -- speed it up
-  --     opts.resize.timing = require("mini.animate").gen_timing.cubic({ duration = 75, unit = "total" })
-  --     opts.scroll.timing = require("mini.animate").gen_timing.cubic({ duration = 35, unit = "total" })
-  --   end,
-  -- },
-  -- { "sphamba/smear-cursor.nvim", opts = {} }, -- cursor move animation
-  {
-    "echasnovski/mini.indentscope",
-    opts = {
-      draw = {
-        -- speed it up
-        delay = 50,
-        animation = require("mini.indentscope").gen_animation.cubic({ duration = 70, unit = "total" }),
-      },
-    },
-  },
-  { "folke/edgy.nvim", opts = { animate = { cps = 200 } } }, -- speed up animation
   {
     "mvllow/modes.nvim",
     event = "VeryLazy",
     opts = {
       ignore_filetypes = {
+        "cmp",
         "DressingInput",
         "TelescopePrompt",
         "alpha",
@@ -222,40 +116,10 @@ return {
     },
   },
   {
-    "Isrothy/neominimap.nvim",
-    lazy = false,
-    init = function()
-      vim.g.neominimap = {
-        auto_enable = false,
-        excluded_filetypes = {
-          "DressingInput",
-          "TelescopePrompt",
-          "alpha",
-          "dashboard",
-          "snacks_dashboard",
-          "harpoon",
-          "lazy",
-          "lspinfo",
-          "starter",
-          "help",
-        },
-      }
-    end,
-    keys = {
-      { "<leader>um", "<Cmd>Neominimap toggle<CR>", desc = "Toggle Minimap" },
-    },
-  },
-  {
     "b0o/incline.nvim",
     opts = {
       hide = { only_win = true },
       window = { winhighlight = { active = { Normal = "CursorLineSign" } } },
-    },
-  },
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      timeout = 5000, -- increase the time that the notification stays on the screen
     },
   },
   {
@@ -280,15 +144,6 @@ return {
           },
           opts = { skip = true },
         },
-        -- Noice! They fixed this, so this not-yet-working workaround is not needed.
-        -- {
-        --   filter = {
-        --     event = "msg_show",
-        --     -- kind = "number_prompt",
-        --     find = "Create alternate file?",
-        --   },
-        --   opts = { view = "cmdline" },
-        -- },
         {
           filter = {
             event = "lsp",
@@ -366,63 +221,6 @@ return {
           "%l:%M %p", -- local time
         },
         z = { "%a", "%b %d" }, -- local date
-      }
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      -- local navic_component = table.remove(opts.sections.lualine_c, #opts.sections.lualine_c)
-      -- table.remove(opts.sections.lualine_c, #opts.sections.lualine_c) -- filename component
-      local diagnostics_component = table.remove(opts.sections.lualine_c, 2)
-      local git_diff_component = table.remove(opts.sections.lualine_x, 5)
-
-      -- not sure if this is worth it... I have to run it in a timer to avoid exceeding my rate limit
-      -- local checks_text = ""
-      -- local github_checks_component = {
-      --   ---@return string
-      --   function()
-      --     local cmd = { "gh", "pr", "checks", "--json", "state", "--jq", ".[].state" }
-      --     vim.system(cmd, { text = true }, function(obj)
-      --       if obj.code == 0 then
-      --         checks_text = " "
-      --           .. obj.stdout:gsub("\n", ""):gsub("FAILURE", "F"):gsub("SUCCESS", "."):gsub("IN_PROGRESS", "")
-      --       end
-      --     end)
-      --     return checks_text
-      --   end,
-      -- }
-      --
-      -- table.insert(opts.sections.lualine_c, 2, github_checks_component)
-      table.insert(opts.sections.lualine_c, 2, git_diff_component)
-      table.insert(opts.sections.lualine_x, 5, diagnostics_component)
-
-      opts.options.disabled_filetypes.winbar = {
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "dashboard",
-        "snacks_dashboard",
-        "lazy",
-        "lspinfo",
-        "starter",
-      }
-
-      -- opts.winbar = {
-      --   lualine_b = {
-      --     { "filename" },
-      --   },
-      --   lualine_c = {
-      --     navic_component,
-      --   },
-      -- }
-
-      opts.sections.lualine_y = {
-        { "progress" },
-      }
-
-      opts.sections.lualine_z = {
-        { "location" },
       }
     end,
   },

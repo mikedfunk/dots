@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      { "gsuuon/tshjkl.nvim", config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
+      -- { "gsuuon/tshjkl.nvim", config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
       { "RRethy/nvim-treesitter-endwise", ft = { "ruby", "lua", "zsh", "bash" } },
       -- { "gbprod/php-enhanced-treesitter.nvim", ft = { "php" } },
       -- { "yioneko/nvim-yati", version = "*" },
@@ -15,10 +15,6 @@ return {
           vim.g.matchup_matchparen_hi_surround_always = 1
           vim.g.matchup_surround_enabled = 1
         end,
-      },
-      {
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>k", group = "+peek" } } },
       },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
@@ -41,17 +37,17 @@ return {
         additional_vim_regex_highlighting = { "php", "jsx" },
       },
 
-      ensure_installed = {
-        "comment",
-        "lua", -- update to latest
-        "luadoc",
-        "jsdoc",
-        "markdown_inline",
-        "phpdoc",
-        "regex",
-        "sql",
-        "vim",
-      },
+      -- ensure_installed = {
+      --   "comment",
+      --   "lua", -- update to latest
+      --   "luadoc",
+      --   "jsdoc",
+      --   "markdown_inline",
+      --   "phpdoc",
+      --   "regex",
+      --   "sql",
+      --   "vim",
+      -- },
 
       textobjects = {
 
