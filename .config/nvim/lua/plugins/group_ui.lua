@@ -229,4 +229,10 @@ return {
     lazy = false, -- Recommended
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ui = { border = "rounded" },
+    },
+  },
 }

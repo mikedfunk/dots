@@ -1,6 +1,25 @@
 # vim: set fdm=marker:
 return {
   {
+    -- automatically install nvim-lint packages that are configured
+    "rshkarin/mason-nvim-lint",
+    -- enabled = false,
+    opts = function()
+      -- add some missing packages :/
+      require("mason-nvim-lint.mapping").nvimlint_to_package =
+        vim.tbl_deep_extend("force", require("mason-nvim-lint.mapping").nvimlint_to_package, {
+          checkmake = "checkmake",
+          ["editorconfig-checker"] = "editorconfig-checker",
+          ["markdownlint-cli2"] = "markdownlint-cli2",
+          gitlint = "gitlint",
+        })
+    end,
+    dependencies = {
+      "mfussenegger/nvim-lint",
+      dependencies = "williamboman/mason.nvim",
+    },
+  },
+  {
     "mfussenegger/nvim-lint",
     config = function(_, opts)
       -- TODO: add ecs to linters {{{

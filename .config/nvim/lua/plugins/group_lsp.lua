@@ -76,16 +76,10 @@ return {
     },
   },
   {
-    -- "zapling/mason-lock.nvim",
-    "mikedfunk/mason-lock.nvim",
+    "zapling/mason-lock.nvim",
+    -- "mikedfunk/mason-lock.nvim",
     config = true,
     dependencies = { "williamboman/mason.nvim" },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ui = { border = "rounded" },
-    },
   },
   { "antosha417/nvim-lsp-file-operations", config = true },
   -- Buggy and slow when lots of usages. Breaks on dropbar.
