@@ -384,32 +384,170 @@ return {
       ui = { border = "rounded" },
     },
   },
-  -- {
-  --   "xzbdmw/colorful-menu.nvim",
-  --   dependencies = { "saghen/blink.cmp" },
-  --   config = function()
-  --     require("colorful-menu").setup({})
-  --     require("blink.cmp").setup({
-  --       completion = {
-  --         menu = {
-  --           draw = {
-  --             -- We don't need label_description now because label and label_description are already
-  --             -- conbined together in label by colorful-menu.nvim.
-  --             --
-  --             -- However, for `basedpyright`, it is recommend to set
-  --             -- columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
-  --             -- because the `label_description` will only be import path.
-  --             columns = { { "kind_icon" }, { "label", gap = 1 } },
-  --             components = {
-  --               label = {
-  --                 text = require("colorful-menu").blink_components_text,
-  --                 highlight = require("colorful-menu").blink_components_highlight,
-  --               },
-  --             },
-  --           },
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "mfussenegger/nvim-lint",
+      "monkoose/neocodeium",
+      "stevearc/conform.nvim",
+    },
+    opts = function(_, opts)
+      opts.options.disabled_filetypes.winbar = {
+        "DressingInput",
+        "TelescopePrompt",
+        "alpha",
+        "dashboard",
+        "snacks_dashboard",
+        "lazy",
+        "lspinfo",
+        "starter",
+      }
+      opts.sections.lualine_y = {
+        { "progress" },
+      }
+
+      opts.sections.lualine_z = {
+        { "location" },
+      }
+
+      -- nvim-lint and ale linters {{{
+      ---@return string[]
+      local function get_linters()
+        local linters = { unpack(require("lint").linters_by_ft[vim.bo.ft] or {}) }
+        for _, linter in ipairs(vim.g.ale_linters and vim.g.ale_linters[vim.bo.ft] or {}) do
+          if not vim.tbl_contains(linters, linter) then
+            table.insert(linters, linter)
+          end
+        end
+
+        return linters
+      end
+
+      local nvim_lint_component = {
+        ---@return string
+        function()
+          return " " .. tostring(#get_linters())
+        end,
+        color = function()
+          return {
+            fg = #get_linters() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
+            gui = "None",
+          }
+        end,
+        cond = function()
+          return package.loaded["lint"] ~= nil
+        end,
+        on_click = function()
+          print(vim.inspect(get_linters()))
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, nvim_lint_component)
+      -- }}}
+
+      -- neocodeium {{{
+      local neocodeium_status_component = {
+        LazyVim.config.icons.kinds.Codeium,
+        color = function()
+          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
+          return {
+            fg = is_neocodeium_enabled and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
+          }
+        end,
+        on_click = function()
+          if package.loaded["neocodeium"] then
+            vim.cmd("NeoCodeium toggle")
+          end
+        end,
+        cond = function()
+          return package.loaded["neocodeium"] ~= nil
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, neocodeium_status_component)
+      -- }}}
+
+      -- conform.nvim and ale fixers {{{
+      ---@return string[]
+      local function get_formatters()
+        ---@class OneFormatter
+        ---@type OneFormatter[]
+        local raw_enabled_formatters, _ = require("conform").list_formatters_to_run()
+        ---@type string[]
+        local formatters = {}
+
+        for _, formatter in ipairs(raw_enabled_formatters) do
+          table.insert(formatters, formatter.name)
+        end
+
+        ---@type string[]
+        local ale_fixers = vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}
+
+        for _, formatter in ipairs(ale_fixers) do
+          if not vim.tbl_contains(formatters, formatter) then
+            table.insert(formatters, formatter)
+          end
+        end
+
+        return formatters
+      end
+
+      local conform_nvim_component = {
+        ---@return string
+        function()
+          return " " .. tostring(#get_formatters())
+        end,
+        color = function()
+          return {
+            fg = #get_formatters() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
+            gui = "None",
+          }
+        end,
+        cond = function()
+          return package.loaded["conform"] ~= nil
+        end,
+        on_click = function()
+          vim.cmd("LazyFormatInfo")
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, conform_nvim_component)
+      -- }}}
+
+      -- lsp clients {{{
+      local get_lsp_client_names = function()
+        local buf_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+        ---@type string[]
+        local buf_client_names = {}
+
+        for _, client in pairs(buf_clients) do
+          table.insert(buf_client_names, client.name)
+        end
+
+        ---@type string[]
+        buf_client_names = vim.fn.uniq(buf_client_names) ---@diagnostic disable-line missing-parameter
+        return buf_client_names
+      end
+
+      local lsp_status_component = {
+        ---@return string
+        function()
+          return "ʪ " .. tostring(#get_lsp_client_names())
+        end,
+        color = function()
+          return {
+            fg = #get_lsp_client_names() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
+            gui = "None",
+          }
+        end,
+        on_click = function()
+          vim.cmd("LspInfo")
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, lsp_status_component)
+      -- }}}
+    end,
+  },
 }
