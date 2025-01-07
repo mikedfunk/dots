@@ -75,13 +75,11 @@ return {
           "cmp_jira",
         },
         providers = {
-          -- luasnip = {
-          --   score_offset = -1,
-          -- },
           emoji = {
             module = "blink-emoji",
             name = "Emoji",
-            score_offset = 15,
+            -- score_offset = 15,
+            -- min_keyword_length = 2,
             opts = { insert = true }, -- Insert emoji (default) or complete its name
           },
           nerdfont = {
@@ -103,6 +101,7 @@ return {
           dictionary = {
             name = "dictionary",
             module = "blink.compat.source",
+            async = true,
             max_items = 5,
             min_keyword_length = 2,
             score_offset = -10,
@@ -113,9 +112,9 @@ return {
           tmux = {
             name = "tmux",
             module = "blink.compat.source",
+            async = true,
             max_items = 5,
             score_offset = -10,
-            async = true,
             opts = {},
           },
           cmp_jira = {
@@ -135,7 +134,7 @@ return {
           },
         },
         menu = {
-          -- draw = { treesitter = { "lsp" } },
+          draw = { treesitter = { "lsp" } },
           border = "rounded",
           winblend = 15,
         },
