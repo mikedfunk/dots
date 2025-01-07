@@ -543,11 +543,16 @@ M.quotes = {
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
 }
 
+local memoized_quote = nil
+
 M.random = function()
   local random_elem = function(tb)
       local keys = {}
       for k in pairs(tb) do table.insert(keys, k) end
-      return tb[keys[math.random(#keys)]]
+      if memoized_quote == nil then
+        memoized_quote = tb[keys[math.random(#keys)]]
+      end
+      return memoized_quote
   end
   -- return M.quotes[math.random(#M.quotes)]
 

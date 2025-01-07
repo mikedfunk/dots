@@ -16,7 +16,7 @@ return {
     end,
     dependencies = {
       "mfussenegger/nvim-lint",
-      dependencies = "williamboman/mason.nvim",
+      "williamboman/mason.nvim",
     },
   },
   {

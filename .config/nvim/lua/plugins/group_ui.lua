@@ -1,6 +1,23 @@
+local memoized_quote = nil
+
 return {
   {
     "folke/snacks.nvim",
+    dependencies = {
+      {
+        "rubiin/fortune.nvim",
+        opts = {
+          display_format = "mixed",
+          custom_quotes = {
+            short = {},
+            long = require("config.programming_quotes").quotes,
+          },
+        },
+      },
+    },
+    opts_extend = {
+      "dashboard.sections",
+    },
     opts = {
       -- https://github.com/folke/snacks.nvim/blob/main/docs/animate.md#-animate
       animate = {
@@ -10,6 +27,34 @@ return {
           ---@type snacks.animate.Duration|number
           duration = 5, -- ms per step (default: 20)
           easing = "cubic", -- https://github.com/kikito/tween.lua#easing-functions
+        },
+      },
+      dashboard = {
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 1 },
+          { section = "startup" },
+          function()
+            if memoized_quote == nil then
+              memoized_quote = table.concat(require("fortune").get_fortune(), "\n")
+            end
+
+            return {
+              text = memoized_quote,
+            }
+          end,
+        },
+        preset = {
+          header = table.concat({
+            " ██████   █████                   █████   █████  ███                 ",
+            "░░██████ ░░███                   ░░███   ░░███  ░░░                  ",
+            " ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  ",
+            " ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ ",
+            " ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ ",
+            " ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ ",
+            " █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████",
+            "░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ ",
+          }, "\n"),
         },
       },
     },
