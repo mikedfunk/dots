@@ -77,7 +77,7 @@ return {
   },
   {
     "zapling/mason-lock.nvim",
-    -- "mikedfunk/mason-lock.nvim",
+    -- "mikedfunk/mason-lock.nvim", -- notify when writing lockfile
     config = true,
     dependencies = { "williamboman/mason.nvim" },
   },

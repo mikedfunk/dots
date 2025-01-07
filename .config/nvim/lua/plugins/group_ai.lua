@@ -1,5 +1,93 @@
 return {
   {
+    "monkoose/neocodeium",
+    event = "VeryLazy",
+    opts = {
+      silent = true,
+      filter = function(bufnr)
+        local excluded_filetypes = {
+          "cmp",
+          "DressingInput",
+          "NvimTree",
+          "TelescopePrompt",
+          "TelescopeResults",
+          "alpha",
+          "dashboard",
+          "harpoon",
+          "lazy",
+          "lspinfo",
+          "neoai-input",
+          "starter",
+        }
+
+        if vim.tbl_contains(excluded_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr })) then
+          return false
+        end
+
+        return true
+      end,
+      -- show_label = false,
+    },
+    dependencies = {
+      {
+        -- add AI section to which-key
+        "folke/which-key.nvim",
+        opts = { spec = { { "<leader>a", group = "+ai" } } },
+      },
+    },
+    keys = {
+      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+      {
+        "<a-cr>",
+        function()
+          require("neocodeium").accept()
+        end,
+        mode = "i",
+        desc = "Codeium Accept",
+      },
+      {
+        "<a-w>",
+        function()
+          require("neocodeium").accept_word()
+        end,
+        mode = "i",
+        desc = "Codeium Accept Word",
+      },
+      {
+        "<a-l>",
+        function()
+          require("neocodeium").accept_line()
+        end,
+        mode = "i",
+        desc = "Codeium Accept Line",
+      },
+      {
+        "<a-n>",
+        function()
+          require("neocodeium").cycle(1)
+        end,
+        mode = "i",
+        desc = "Next Codeium Completion",
+      },
+      {
+        "<a-p>",
+        function()
+          require("neocodeium").cycle(-1)
+        end,
+        mode = "i",
+        desc = "Prev Codeium Completion",
+      },
+      {
+        "<a-c>",
+        function()
+          require("neocodeium").clear()
+        end,
+        mode = "i",
+        desc = "Clear Codeium",
+      },
+    },
+  },
+  {
     "olimorris/codecompanion.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",

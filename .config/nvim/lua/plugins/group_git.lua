@@ -1,10 +1,10 @@
 return {
-  {
-    "folke/snacks.nvim",
-    opts = {
-      git = { enabled = false },
-    },
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   opts = {
+  --     git = { enabled = false },
+  --   },
+  -- },
   {
     "tpope/vim-fugitive",
     dependencies = {

@@ -241,3 +241,4 @@ vim.filetype.add({ pattern = { [".sqlfluff"] = "dosini" } })
 
 -- https://www.lazyvim.org/extras/lang/php#options
 vim.g.lazyvim_php_lsp = "intelephense"
+vim.g.ai_cmp = false

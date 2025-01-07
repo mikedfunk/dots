@@ -64,10 +64,107 @@ return {
   },
   {
     "saghen/blink.cmp",
+    opts_extend = { "sources.default" },
     opts = {
+      sources = {
+        default = {
+          "emoji",
+          "nerdfont",
+          "ripgrep",
+          "dictionary",
+          "cmp_jira",
+        },
+        providers = {
+          -- luasnip = {
+          --   score_offset = -1,
+          -- },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 15,
+            opts = { insert = true }, -- Insert emoji (default) or complete its name
+          },
+          nerdfont = {
+            name = "nerdfont",
+            module = "blink.compat.source",
+            score_offset = 10,
+            opts = {},
+          },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+            async = true,
+            max_items = 5,
+            score_offset = -10,
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {},
+          },
+          dictionary = {
+            name = "dictionary",
+            module = "blink.compat.source",
+            max_items = 5,
+            min_keyword_length = 2,
+            score_offset = -10,
+            opts = {
+              paths = { "/usr/share/dict/words" },
+            },
+          },
+          tmux = {
+            name = "tmux",
+            module = "blink.compat.source",
+            max_items = 5,
+            score_offset = -10,
+            async = true,
+            opts = {},
+          },
+          cmp_jira = {
+            name = "cmp_jira",
+            module = "blink.compat.source",
+            async = true,
+            score_offset = 15,
+            opts = {},
+          },
+        },
+      },
       completion = {
-        documentation = { window = { border = "rounded" } },
-        menu = { border = "rounded" },
+        documentation = {
+          window = {
+            border = "rounded",
+            winblend = 15,
+          },
+        },
+        menu = {
+          -- draw = { treesitter = { "lsp" } },
+          border = "rounded",
+          winblend = 15,
+        },
+      },
+      signature = { enabled = true },
+    },
+    dependencies = {
+      "moyiz/blink-emoji.nvim",
+      "mikavilpas/blink-ripgrep.nvim",
+      {
+        "uga-rosa/cmp-dictionary",
+        dependencies = { "saghen/blink.compat" },
+      },
+      {
+        "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
+        dependencies = { "saghen/blink.compat" },
+      },
+      {
+        "andersevenrud/cmp-tmux",
+        branch = "main",
+        dependencies = { "saghen/blink.compat" },
+      },
+      {
+        -- change Jira authentication from oauth to basic auth (API key). Remove debug print.
+        "mikedfunk/cmp-jira",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+          "saghen/blink.compat",
+        },
       },
     },
   },
@@ -280,4 +377,32 @@ return {
       ui = { border = "rounded" },
     },
   },
+  -- {
+  --   "xzbdmw/colorful-menu.nvim",
+  --   dependencies = { "saghen/blink.cmp" },
+  --   config = function()
+  --     require("colorful-menu").setup({})
+  --     require("blink.cmp").setup({
+  --       completion = {
+  --         menu = {
+  --           draw = {
+  --             -- We don't need label_description now because label and label_description are already
+  --             -- conbined together in label by colorful-menu.nvim.
+  --             --
+  --             -- However, for `basedpyright`, it is recommend to set
+  --             -- columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
+  --             -- because the `label_description` will only be import path.
+  --             columns = { { "kind_icon" }, { "label", gap = 1 } },
+  --             components = {
+  --               label = {
+  --                 text = require("colorful-menu").blink_components_text,
+  --                 highlight = require("colorful-menu").blink_components_highlight,
+  --               },
+  --             },
+  --           },
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 }
