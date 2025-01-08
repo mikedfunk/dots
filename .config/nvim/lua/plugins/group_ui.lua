@@ -139,7 +139,13 @@ return {
           winblend = 15,
         },
       },
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = {
+          border = "rounded",
+          winblend = 15,
+        },
+      },
     },
     dependencies = {
       "moyiz/blink-emoji.nvim",
