@@ -128,14 +128,15 @@ return {
       },
     },
   },
-  {
-    "nyngwang/NeoZoom.lua",
-    cmd = { "NeoZoomToggle", "NeoZoom" },
-    keys = {
-      { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
-    },
-    opts = {},
-  },
+  -- snacks has this native now <leader>uZ to toggle
+  -- {
+  --   "nyngwang/NeoZoom.lua",
+  --   cmd = { "NeoZoomToggle", "NeoZoom" },
+  --   keys = {
+  --     { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
+  --   },
+  --   opts = {},
+  -- },
   {
     "mvllow/modes.nvim",
     event = "VeryLazy",
