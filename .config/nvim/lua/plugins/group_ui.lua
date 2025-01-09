@@ -57,6 +57,9 @@ return {
           }, "\n"),
         },
       },
+      notifier = {
+        timeout = 5000,
+      },
     },
     -- init = function()
     --   vim.g.snacks_animate = false
@@ -154,13 +157,14 @@ return {
       },
     },
   },
-  {
-    "b0o/incline.nvim",
-    opts = {
-      hide = { only_win = true },
-      window = { winhighlight = { active = { Normal = "CursorLineSign" } } },
-    },
-  },
+  -- This is really helpful but it overlaps a lot of stuff and starts to become a nuisance.
+  -- {
+  --   "b0o/incline.nvim",
+  --   opts = {
+  --     hide = { only_win = true },
+  --     window = { winhighlight = { active = { Normal = "CursorLineSign" } } },
+  --   },
+  -- },
   {
     "folke/noice.nvim",
     -- commit = "d9328ef903168b6f52385a751eb384ae7e906c6f", -- https://github.com/folke/noice.nvim/issues/921#issuecomment-2253363579
@@ -265,7 +269,7 @@ return {
   },
   {
     "OXY2DEV/helpview.nvim",
-    lazy = false, -- Recommended
+    ft = "help",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
@@ -274,6 +278,8 @@ return {
       ui = { border = "rounded" },
     },
   },
+  -- this is installed via extras and customized here (TODO: config not working any more)
+  -- { "SmiteshP/nvim-navic", opts = { separator = "  " } },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -300,6 +306,30 @@ return {
       opts.sections.lualine_z = {
         { "location" },
       }
+
+      -- neocodeium {{{
+      local neocodeium_status_component = {
+        function()
+          return LazyVim.config.icons.kinds.Codeium
+        end,
+        color = function()
+          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
+          return {
+            fg = is_neocodeium_enabled and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
+          }
+        end,
+        on_click = function()
+          if package.loaded["neocodeium"] then
+            vim.cmd("NeoCodeium toggle")
+          end
+        end,
+        cond = function()
+          return package.loaded["neocodeium"] ~= nil
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, neocodeium_status_component)
+      -- }}}
 
       -- nvim-lint and ale linters {{{
       ---@return string[]
@@ -334,28 +364,6 @@ return {
       }
 
       table.insert(opts.sections.lualine_x, nvim_lint_component)
-      -- }}}
-
-      -- neocodeium {{{
-      local neocodeium_status_component = {
-        LazyVim.config.icons.kinds.Codeium,
-        color = function()
-          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
-          return {
-            fg = is_neocodeium_enabled and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-          }
-        end,
-        on_click = function()
-          if package.loaded["neocodeium"] then
-            vim.cmd("NeoCodeium toggle")
-          end
-        end,
-        cond = function()
-          return package.loaded["neocodeium"] ~= nil
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, neocodeium_status_component)
       -- }}}
 
       -- conform.nvim and ale fixers {{{
