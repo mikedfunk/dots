@@ -17,8 +17,8 @@ return {
       table.insert(opts.groups.markdown, checkboxes)
       return opts
     end,
-    keys = {
-      { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
-    },
+    -- keys = {
+    --   { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
+    -- },
   },
 }

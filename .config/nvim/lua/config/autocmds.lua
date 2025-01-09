@@ -41,37 +41,10 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd({ "Filetype" }, {
-  group = vim.api.nvim_create_augroup("mike_dosini_commentstring", { clear = true }),
-  pattern = { "dosini" },
-  callback = function()
-    vim.bo.commentstring = "# %s"
-  end,
-  desc = "dosini commentstring",
-})
-
-vim.api.nvim_create_autocmd({ "Filetype" }, {
-  group = vim.api.nvim_create_augroup("mike_mysql_commentstring", { clear = true }),
-  pattern = { "mysql" },
-  callback = function()
-    vim.bo.commentstring = "-- %s"
-  end,
-  desc = "dosini commentstring",
-})
-
-vim.api.nvim_create_autocmd({ "Filetype" }, {
   group = vim.api.nvim_create_augroup("mike_plantuml_commentstring", { clear = true }),
   pattern = { "plantuml" },
   callback = function()
     vim.bo.commentstring = "' %s"
   end,
   desc = "plantuml commentstring",
-})
-
-vim.api.nvim_create_autocmd({ "Filetype" }, {
-  group = vim.api.nvim_create_augroup("mike_gitconfig_commentstring", { clear = true }),
-  pattern = { "gitconfig" },
-  callback = function()
-    vim.bo.commentstring = "# %s"
-  end,
-  desc = "gitconfig commentstring",
 })

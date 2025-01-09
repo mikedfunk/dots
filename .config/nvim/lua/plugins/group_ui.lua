@@ -63,117 +63,6 @@ return {
     -- end,
   },
   {
-    "saghen/blink.cmp",
-    opts_extend = { "sources.default" },
-    opts = {
-      sources = {
-        default = {
-          "emoji",
-          "nerdfont",
-          "ripgrep",
-          "dictionary",
-          "cmp_jira",
-        },
-        providers = {
-          emoji = {
-            module = "blink-emoji",
-            name = "Emoji",
-            -- score_offset = 15,
-            -- min_keyword_length = 2,
-            opts = { insert = true }, -- Insert emoji (default) or complete its name
-          },
-          nerdfont = {
-            name = "nerdfont",
-            module = "blink.compat.source",
-            score_offset = 10,
-            opts = {},
-          },
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "Ripgrep",
-            async = true,
-            max_items = 5,
-            score_offset = -10,
-            ---@module "blink-ripgrep"
-            ---@type blink-ripgrep.Options
-            opts = {},
-          },
-          dictionary = {
-            name = "dictionary",
-            module = "blink.compat.source",
-            async = true,
-            max_items = 5,
-            min_keyword_length = 2,
-            score_offset = -10,
-            opts = {
-              paths = { "/usr/share/dict/words" },
-            },
-          },
-          tmux = {
-            name = "tmux",
-            module = "blink.compat.source",
-            async = true,
-            max_items = 5,
-            score_offset = -10,
-            opts = {},
-          },
-          cmp_jira = {
-            name = "cmp_jira",
-            module = "blink.compat.source",
-            async = true,
-            score_offset = 15,
-            opts = {},
-          },
-        },
-      },
-      completion = {
-        documentation = {
-          window = {
-            border = "rounded",
-            winblend = 15,
-          },
-        },
-        menu = {
-          draw = { treesitter = { "lsp" } },
-          border = "rounded",
-          winblend = 15,
-        },
-      },
-      signature = {
-        enabled = true,
-        window = {
-          border = "rounded",
-          winblend = 15,
-        },
-      },
-    },
-    dependencies = {
-      "moyiz/blink-emoji.nvim",
-      "mikavilpas/blink-ripgrep.nvim",
-      {
-        "uga-rosa/cmp-dictionary",
-        dependencies = { "saghen/blink.compat" },
-      },
-      {
-        "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
-        dependencies = { "saghen/blink.compat" },
-      },
-      {
-        "andersevenrud/cmp-tmux",
-        branch = "main",
-        dependencies = { "saghen/blink.compat" },
-      },
-      {
-        -- change Jira authentication from oauth to basic auth (API key). Remove debug print.
-        "mikedfunk/cmp-jira",
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-          "saghen/blink.compat",
-        },
-      },
-    },
-  },
-  {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
       opts.options = vim.tbl_deep_extend("force", opts.options, {
@@ -199,15 +88,9 @@ return {
     config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
         onchange = function()
-          local color_mode = vim.fn.system("defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light")
-          local should_reload_tmux = vim.o.bg ~= "dark" and color_mode == "Dark\n"
-            or vim.o.bg ~= "light" and color_mode == "Light"
-          -- prevent this from running on startup if unnecessary
-          if should_reload_tmux then
-            -- plugins must be loaded after theme change or they stop working
-            -- in statusbar, so source entire config
-            vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
-          end
+          -- plugins must be loaded after theme change or they stop working
+          -- in statusbar, so source entire config
+          vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
         end,
       })
     end,
@@ -399,6 +282,7 @@ return {
     },
     opts = function(_, opts)
       opts.options.disabled_filetypes.winbar = {
+        "cmp",
         "DressingInput",
         "TelescopePrompt",
         "alpha",

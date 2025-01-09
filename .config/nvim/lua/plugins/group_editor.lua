@@ -125,6 +125,16 @@ return {
   -- { "jwalton512/vim-blade", event = "VimEnter" },
   { "tpope/vim-cucumber", event = "VimEnter" },
   { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
+  {
+    "folke/ts-comments.nvim",
+    opts = {
+      lang = {
+        ini = "# %s",
+        sql = "-- %s",
+        git_config = "# %s",
+      },
+    },
+  },
   -- {
   --   "adalessa/laravel.nvim",
   --   dependencies = {
