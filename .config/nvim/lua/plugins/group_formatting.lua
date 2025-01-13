@@ -14,7 +14,7 @@ return {
       },
       formatters_by_ft = {
         -- python = { "black" }, -- moved to lazy extra
-        php = { "rector", "phpcbf", "php_cs_fixer" },
+        php = { "rector", "php_cs_fixer", "phpcbf" },
       },
       formatters = {
         rector = function()
@@ -51,15 +51,6 @@ return {
           },
         },
         php_cs_fixer = {
-          -- command = function(self, ctx)
-          --   local executable = require("conform.util").find_executable({
-          --     "tools/php-cs-fixer/vendor/bin/php-cs-fixer",
-          --     "vendor/bin/php-cs-fixer",
-          --   }, "php-cs-fixer")(self, ctx)
-          --
-          --   -- temporary hack until PHP 8.4 is officially supported
-          --   return "PHP_CS_FIXER_IGNORE_ENV=1" .. " " .. executable
-          -- end,
           cwd = function(self, ctx)
             return require("conform.util").root_file({ ".php-cs-fixer.php" })(self, ctx)
           end,

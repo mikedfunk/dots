@@ -16,6 +16,13 @@ return {
     "saghen/blink.cmp",
     opts_extend = { "sources.default" },
     opts = {
+      keymap = {
+        -- <c-n>/<c-p> next/prev, <c-y>/<c-e> accept/cancel
+        -- This is mostly because if I press enter at the end of a line, by
+        -- default it will complete instead of carriage return! This way I
+        -- don't have to <esc>o to do that.
+        preset = "default", -- lazyvim default is "enter"
+      },
       sources = {
         default = {
           "emoji",
