@@ -70,6 +70,11 @@ return {
     },
   },
   { "michaeljsmith/vim-indent-object" },
+  {
+    "wurli/visimatch.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
   -- {
   --   "nvim-telescope/telescope.nvim",
   --   dependencies = {
