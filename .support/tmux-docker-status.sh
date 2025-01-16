@@ -8,10 +8,10 @@ DOCKER="󰡨"
 # [[ $? != 0 ]] && echo "#[fg=red]${DOCKER}#[fg=default]" && exit 0
 # echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
 case "$(docker desktop status --format=json | jq -r .Status)" in
-'running')
+running)
     echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
     ;;
-'paused')
+paused)
     echo "#[fg=yellow]${DOCKER}#[fg=default]"
     exit 0
     ;;

@@ -53,14 +53,14 @@ return {
         mode = "i",
         desc = "Codeium Accept Word",
       },
-      {
-        "<a-l>",
-        function()
-          require("neocodeium").accept_line()
-        end,
-        mode = "i",
-        desc = "Codeium Accept Line",
-      },
+      -- {
+      --   "<a-l>",
+      --   function()
+      --     require("neocodeium").accept_line()
+      --   end,
+      --   mode = "i",
+      --   desc = "Codeium Accept Line",
+      -- },
       {
         "<a-n>",
         function()

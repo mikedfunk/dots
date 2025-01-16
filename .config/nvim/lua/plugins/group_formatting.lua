@@ -34,22 +34,6 @@ return {
             cwd = util.root_file({ "composer.json" }),
           }
         end,
-        phpcbf = {
-          -- ALWAYS use local version because it is tightly coupled to the
-          -- default _rules_ it comes with.
-          command = "./vendor/bin/phpcbf",
-          prepend_args = {
-            "--cache",
-            "--warning-severity=3", -- fix warnings from severity 3 up to the max of 5
-            -- "--warning-severity=0", -- do not fix warnings, same as -n
-            "-d",
-            "memory_limit=100m",
-            "-d",
-            "xdebug.mode=off",
-            "-d",
-            "zend.enable_gc=0",
-          },
-        },
         php_cs_fixer = {
           cwd = function(self, ctx)
             return require("conform.util").root_file({ ".php-cs-fixer.php" })(self, ctx)
@@ -79,6 +63,22 @@ return {
         },
         stylua = {
           require_cwd = true,
+        },
+        phpcbf = {
+          -- ALWAYS use local version because it is tightly coupled to the
+          -- default _rules_ it comes with.
+          command = "./vendor/bin/phpcbf",
+          prepend_args = {
+            "--cache",
+            "--warning-severity=3", -- fix warnings from severity 3 up to the max of 5
+            -- "--warning-severity=0", -- do not fix warnings, same as -n
+            "-d",
+            "memory_limit=100m",
+            "-d",
+            "xdebug.mode=off",
+            "-d",
+            "zend.enable_gc=0",
+          },
         },
       },
     },

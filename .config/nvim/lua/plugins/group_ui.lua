@@ -299,6 +299,18 @@ return {
         "lspinfo",
         "starter",
       }
+
+      opts.options.disabled_filetypes.statusline = {
+        "DressingInput",
+        "TelescopePrompt",
+        "alpha",
+        "dashboard",
+        "snacks_dashboard",
+        "lazy",
+        "lspinfo",
+        "starter",
+      }
+
       opts.sections.lualine_y = {
         { "progress" },
       }
