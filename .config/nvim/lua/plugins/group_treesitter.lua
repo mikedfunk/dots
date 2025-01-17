@@ -23,6 +23,7 @@ return {
             {
               "<leader>k",
               group = "+peek",
+              icon = "",
             },
           },
         },
@@ -94,6 +95,14 @@ return {
         },
         move = { set_jumps = true },
       },
+    },
+  },
+  {
+    "haringsrob/nvim_context_vt",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      prefix = "↩ ",
     },
   },
   {

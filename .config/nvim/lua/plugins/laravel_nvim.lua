@@ -39,6 +39,10 @@ return {
             {
               "<leader>P",
               group = "+php",
+              icon = "",
+              cond = function()
+                return vim.bo.ft == "php"
+              end,
             },
           },
         },
@@ -46,7 +50,13 @@ return {
     },
     ft = { "php" },
     keys = {
-      { "<leader>Pr", "<Cmd>Laravel routes<cr>", noremap = true, desc = "Laravel routes" },
+      {
+        "<leader>Pr",
+        "<Cmd>Laravel routes<cr>",
+        noremap = true,
+        desc = "Laravel routes",
+        ft = "php",
+      },
     },
     opts = {
       lsp_server = vim.g.lazyvim_php_lsp,

@@ -1,10 +1,4 @@
 return {
-  -- {
-  --   "kylechui/nvim-surround",
-  --   version = "*",
-  --   event = "VeryLazy",
-  --   opts = {},
-  -- },
   -- this is installed via LazyExtras and customized here
   {
     "echasnovski/mini.pairs",
@@ -131,23 +125,23 @@ return {
       },
     },
   },
-  {
-    "haringsrob/nvim_context_vt",
-    event = "VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      prefix = "↩ ",
-    },
-  },
   { "tpope/vim-apathy", event = "VeryLazy" },
-  { "sickill/vim-pasta", event = "BufRead" },
+  -- { "sickill/vim-pasta", event = "BufRead" },
   { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
   {
     "tpope/vim-projectionist",
     dependencies = {
       {
         "folke/which-key.nvim",
-        opts = { spec = { { "<leader>A", group = "+alternate" } } },
+        opts = {
+          spec = {
+            {
+              "<leader>A",
+              group = "+alternate",
+              icon = "󱂬",
+            },
+          },
+        },
       },
     },
     lazy = false,
