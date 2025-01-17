@@ -32,8 +32,22 @@ return {
           },
         },
       },
+      {
+        "folke/which-key.nvim",
+        opts = {
+          spec = {
+            {
+              "<leader>P",
+              group = "+php",
+            },
+          },
+        },
+      },
     },
     ft = { "php" },
+    keys = {
+      { "<leader>Pr", "<Cmd>Laravel routes<cr>", noremap = true, desc = "Laravel routes" },
+    },
     opts = {
       lsp_server = vim.g.lazyvim_php_lsp,
       features = {

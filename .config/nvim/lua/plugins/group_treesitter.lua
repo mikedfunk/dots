@@ -16,6 +16,17 @@ return {
           vim.g.matchup_surround_enabled = 1
         end,
       },
+      {
+        "folke/which-key.nvim",
+        opts = {
+          spec = {
+            {
+              "<leader>k",
+              group = "+peek",
+            },
+          },
+        },
+      },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
     opts = {
