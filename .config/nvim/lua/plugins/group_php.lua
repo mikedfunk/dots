@@ -40,9 +40,9 @@ return {
               "<leader>P",
               group = "+php",
               icon = "",
-              cond = function()
-                return vim.bo.ft == "php"
-              end,
+              -- cond = function()
+              --   return vim.bo.ft == "php"
+              -- end,
             },
           },
         },

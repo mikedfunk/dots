@@ -57,23 +57,6 @@ return {
           }, "\n"),
         },
       },
-      -- picker = {
-      --   filter = function(bufnr)
-      --     return vim.tbl_contains({
-      --       "cmp",
-      --       "DressingInput",
-      --       "TelescopePrompt",
-      --       "alpha",
-      --       "dashboard",
-      --       "snacks_picker_input",
-      --       "snacks_dashboard",
-      --       "harpoon",
-      --       "lazy",
-      --       "lspinfo",
-      --       "starter",
-      --     }, vim.bo.ft)
-      --   end,
-      -- },
       notifier = {
         timeout = 5000,
       },
