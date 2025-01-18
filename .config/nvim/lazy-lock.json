@@ -35,6 +35,7 @@
   "grug-far.nvim": { "branch": "main", "commit": "8e8f3429038d45a6d4144c0642d92f470e5480f3" },
   "helpview.nvim": { "branch": "main", "commit": "857aec1dab331252910da158ab6cbfbc65239c71" },
   "highlighturl.nvim": { "branch": "main", "commit": "5a15865d6639c1188c2621f3171304d3b4e4312d" },
+  "inc-rename.nvim": { "branch": "main", "commit": "e510160beefa9806751d883a5945c4fe6520b633" },
   "laravel.nvim": { "branch": "main", "commit": "325fa34f5e02d5393ad8a38fe7c9e1add94279e8" },
   "lazy.nvim": { "branch": "main", "commit": "7e6c863bc7563efbdd757a310d17ebc95166cef3" },
   "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },

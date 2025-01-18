@@ -25,7 +25,7 @@ local ok, which_key = pcall(require, "which-key")
 
 if ok then
   which_key.add({
-    { "<leader>i", noremap = true, buffer = true, desc = "UML" },
+    { "<leader>i", noremap = true, buffer = true, group = "+uml", icon = "" },
     { "<leader>io", open_uml_image, noremap = true, buffer = true, desc = "Open SVG" },
     { "<leader>ir", refresh_uml_image, noremap = true, buffer = true, desc = "Refresh SVG" },
   })
