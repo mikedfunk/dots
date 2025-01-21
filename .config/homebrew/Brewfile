@@ -62,7 +62,6 @@ tap "pkgxdev/made" # pkgx
 # brew "codespell" # neat little utility to show and fix code misspellings
 # brew "colortail" # tail with support for colors (I use multitail)
 # brew "composer" # php dependency management (now installed via phpenv)
-# brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems.
 # brew "csvq" # jq for csv
 # brew "ctags" # allows jumping to function/class definitions, etc. in vim (I use universal-ctags)
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
@@ -254,8 +253,9 @@ brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/i
 brew "carapace" # shell completion for projects using spf13/cobra
 brew "cloc" # count lines of code
 brew "cloudflared" # cloudflare CLI
+brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf.
 brew "ctop" # like top for docker containers (really great!)
-brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
+brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
 brew "daytona" # fancy devcontainer setup daytona.io
 brew "devcontainer"

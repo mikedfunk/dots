@@ -292,3 +292,4 @@ linters
 eslint
 phpcbf
 untrack
+Nginx

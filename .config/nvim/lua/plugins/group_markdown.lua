@@ -21,4 +21,9 @@ return {
     --   { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
     -- },
   },
+  {
+    "wurli/contextindent.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+  },
 }
