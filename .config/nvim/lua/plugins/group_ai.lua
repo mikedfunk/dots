@@ -7,6 +7,7 @@ return {
       filter = function(bufnr)
         local excluded_filetypes = {
           "cmp",
+          "codecompanion",
           "DressingInput",
           "NvimTree",
           "TelescopePrompt",
