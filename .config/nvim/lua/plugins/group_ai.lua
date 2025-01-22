@@ -91,10 +91,11 @@ return {
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
+      "saghen/blink.cmp", -- complete @ and / commands
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      -- { "echasnovski/mini.pick", opts = {} },
       { "echasnovski/mini.diff", opts = {} },
+      -- { "echasnovski/mini.pick", opts = {} },
     },
     opts = {
       strategies = {

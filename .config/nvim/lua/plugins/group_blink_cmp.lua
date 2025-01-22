@@ -17,6 +17,7 @@ return {
           "ripgrep",
           "dictionary",
           "cmp_jira",
+          "tmux",
         },
         providers = {
           emoji = {
@@ -75,7 +76,6 @@ return {
           },
         },
         menu = {
-          draw = { treesitter = { "lsp" } },
           border = "rounded",
           winblend = 15,
         },
