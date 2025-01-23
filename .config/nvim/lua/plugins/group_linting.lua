@@ -119,6 +119,7 @@ return {
       "linters_by_ft.markdown",
       "linters_by_ft.make",
       "linters_by_ft.php",
+      "linters_by_ft.sql",
     },
     opts = {
       linters_by_ft = {
@@ -132,6 +133,7 @@ return {
         markdown = { "markdownlint" },
         make = { "checkmake" },
         php = { "cspell" },
+        -- sql = { "sqlruff" },
         -- php = { "cspell", "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
       },
       linters = {

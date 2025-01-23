@@ -1,9 +1,28 @@
 return {
   {
+    "zapling/mason-conform.nvim",
+    priority = -100, -- ensure this is loaded _after_ the deps
+    dependencies = {
+      "stevearc/conform.nvim",
+      "williamboman/mason.nvim",
+    },
+    opts = {},
+  },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts_extend = { "ensure_installed" },
+  --   opts = {
+  --     ensure_installed = {
+  --       "sqlruff",
+  --     },
+  --   },
+  -- },
+  {
     "stevearc/conform.nvim",
     opts_extend = {
       -- "formatters_by_ft.python",
       "formatters_by_ft.php",
+      "formatters_by_ft.sql",
       "formatters.phpcbf.prepend_args",
     },
     ---@type conform.setupOpts
@@ -15,6 +34,7 @@ return {
       formatters_by_ft = {
         -- python = { "black" }, -- moved to lazy extra
         php = { "rector", "php_cs_fixer", "phpcbf" },
+        sql = { "sqlruff" },
       },
       formatters = {
         rector = function()
