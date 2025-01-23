@@ -3,6 +3,7 @@
   "biome": "1.9.4",
   "black": "24.10.0",
   "checkmake": "0.2.2",
+  "contextive": "v1.12.1",
   "cspell": "8.17.2",
   "css-lsp": "4.10.0",
   "cssmodules-language-server": "1.5.1",
@@ -48,6 +49,7 @@
   "rustywind": "0.23.1",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.10.0",
+  "snyk-ls": "v20241112.105448",
   "solargraph": "0.51.0",
   "some-sass-language-server": "2.1.1",
   "sqlfluff": "3.3.0",
@@ -57,8 +59,9 @@
   "tailwindcss-language-server": "0.0.27",
   "taplo": "0.9.3",
   "tflint": "v0.55.0",
-  "vale": "v3.9.3",
+  "vale": "v3.9.4",
   "vtsls": "0.2.8",
   "vue-language-server": "2.2.0",
-  "yaml-language-server": "1.15.0"
+  "yaml-language-server": "1.15.0",
+  "zk": "v0.14.1"
 }
