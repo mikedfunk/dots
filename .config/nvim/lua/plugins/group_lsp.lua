@@ -37,6 +37,7 @@ return {
             activateSnykCodeQuality = "true",
             organization = "leaf-saatchiart",
           },
+          autostart = false, -- to use this LS: :LspStart snyk_ls
         },
         -- phpactor = {},
         somesass_ls = {},
