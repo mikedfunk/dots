@@ -13,11 +13,14 @@ return {
       sources = {
         default = {
           "emoji",
-          "nerdfont",
           "ripgrep",
           "dictionary",
           "cmp_jira",
           "tmux",
+        },
+        -- nvim-cmp providers that do not require provider customization
+        compat = {
+          "nerdfont",
         },
         providers = {
           emoji = {
@@ -26,11 +29,6 @@ return {
             -- score_offset = 15,
             -- min_keyword_length = 2,
             opts = { insert = true }, -- Insert emoji (default) or complete its name
-          },
-          nerdfont = {
-            name = "nerdfont",
-            module = "blink.compat.source",
-            score_offset = 10,
           },
           ripgrep = {
             module = "blink-ripgrep",
@@ -42,13 +40,19 @@ return {
             ---@type blink-ripgrep.Options
             opts = {},
           },
+          -- moved to compat above as config is not necessary here
+          -- nerdfont = {
+          --   name = "nerdfont",
+          --   module = "blink.compat.source",
+          --   score_offset = 10,
+          -- },
           dictionary = {
             name = "dictionary",
             module = "blink.compat.source",
             async = true,
             max_items = 5,
             min_keyword_length = 2,
-            score_offset = -10,
+            -- score_offset = -10,
           },
           tmux = {
             name = "tmux",
