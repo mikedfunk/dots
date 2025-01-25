@@ -21,11 +21,7 @@ return {
           "starter",
         }
 
-        if vim.tbl_contains(excluded_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr })) then
-          return false
-        end
-
-        return true
+        return not vim.tbl_contains(excluded_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr }))
       end,
       -- show_label = false,
     },
