@@ -6,13 +6,15 @@ return {
       silent = true,
       filter = function(bufnr)
         local excluded_filetypes = {
-          "cmp",
-          "codecompanion",
+          "Avante",
+          "AvanteInput",
           "DressingInput",
           "NvimTree",
           "TelescopePrompt",
           "TelescopeResults",
           "alpha",
+          "cmp",
+          "codecompanion",
           "dashboard",
           "harpoon",
           "lazy",

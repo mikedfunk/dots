@@ -48,3 +48,12 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
   end,
   desc = "plantuml commentstring",
 })
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+  group = vim.api.nvim_create_augroup("mike_neon_commentstring", { clear = true }),
+  pattern = { "neon" },
+  callback = function()
+    vim.bo.commentstring = "# %s"
+  end,
+  desc = "neon commentstring",
+})

@@ -66,9 +66,13 @@ return {
   { "tpope/vim-cucumber", event = "VimEnter" },
   { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
   {
+    -- sets commentstring by treesitter lang
     "folke/ts-comments.nvim",
     opts = {
       lang = {
+        php = "// %s",
+        -- plantuml = "' %s",
+        -- neon = "# %s",
         ini = "# %s",
         sql = "-- %s",
         git_config = "# %s",

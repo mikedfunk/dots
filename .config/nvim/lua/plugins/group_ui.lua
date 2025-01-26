@@ -118,16 +118,18 @@ return {
         highlight = "PmenuSel",
       },
       excluded_filetypes = {
-        "cmp",
+        "Avante",
+        "AvanteInput",
         "DressingInput",
         "TelescopePrompt",
         "alpha",
+        "cmp",
         "dashboard",
-        "snacks_picker_input",
-        "snacks_dashboard",
         "harpoon",
         "lazy",
         "lspinfo",
+        "snacks_dashboard",
+        "snacks_picker_input",
         "starter",
       },
     },
@@ -146,15 +148,17 @@ return {
     event = "VeryLazy",
     opts = {
       ignore_filetypes = {
-        "cmp",
+        "Avante",
+        "AvanteInput",
         "DressingInput",
         "TelescopePrompt",
         "alpha",
+        "cmp",
         "dashboard",
-        "snacks_picker_input",
-        "snacks_dashboard",
         "lazy",
         "lspinfo",
+        "snacks_dashboard",
+        "snacks_picker_input",
         "starter",
       },
     },
@@ -291,15 +295,17 @@ return {
     },
     opts = function(_, opts)
       opts.options.disabled_filetypes.winbar = {
-        "cmp",
+        "Avante",
+        "AvanteInput",
         "DressingInput",
         "TelescopePrompt",
         "alpha",
+        "cmp",
         "dashboard",
-        "snacks_picker_input",
-        "snacks_dashboard",
         "lazy",
         "lspinfo",
+        "snacks_dashboard",
+        "snacks_picker_input",
         "starter",
       }
 
@@ -308,10 +314,10 @@ return {
         "TelescopePrompt",
         "alpha",
         "dashboard",
-        "snacks_picker_input",
-        "snacks_dashboard",
         "lazy",
         "lspinfo",
+        "snacks_dashboard",
+        "snacks_picker_input",
         "starter",
       }
 
@@ -465,4 +471,10 @@ return {
       -- }}}
     end,
   },
+  {
+    "kevinhwang91/nvim-bqf",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = "qf",
+  },
+  { "stevearc/quicker.nvim", ft = "qf", opts = {} },
 }
