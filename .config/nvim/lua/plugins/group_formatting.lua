@@ -33,7 +33,7 @@ return {
       },
       formatters_by_ft = {
         -- python = { "black" }, -- moved to lazy extra
-        php = { "rector", "php_cs_fixer", "phpcbf" },
+        php = { "php_cs_fixer", "rector", "phpcbf" },
         sql = { "sqlruff" },
       },
       formatters = {

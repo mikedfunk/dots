@@ -375,7 +375,8 @@ zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 # [ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
 
 if _has carapace; then
-    # export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+    export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+    # this might interfere with fzf-tab https://github.com/orgs/carapace-sh/discussions/2596
     zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
     source <(carapace _carapace)
 fi
@@ -783,6 +784,17 @@ PROMPT_EOL_MARK=''
 # }}}
 
 # zsh plugins config {{{
+
+# fzf-tab {{{
+_has enable-fzf-tab && enable-fzf-tab
+# https://github.com/Aloxaf/fzf-tab#configure
+
+# https://github.com/Aloxaf/fzf-tab/issues/32#issuecomment-1519639800
+zstyle ':fzf-tab:*' query-string ''
+
+# https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
+_has ftb-tmux-popup && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# }}}
 
 # powerlevel10k {{{
 # https://getantidote.github.io/usage#plugins-file

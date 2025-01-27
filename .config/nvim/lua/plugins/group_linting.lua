@@ -22,44 +22,6 @@ return {
   {
     "mfussenegger/nvim-lint",
     config = function(_, opts)
-      -- TODO: add ecs to linters {{{
-      -- require("lint").linters.ecs = {
-      --   cmd = "ecs",
-      --   name = "Easy Coding Standard",
-      --   stdin = false,
-      --   append_fname = true,
-      --   args = {
-      --     "check",
-      --     "--output-format",
-      --     "--gitlab",
-      --   },
-      --   parser = function(output)
-      --     local severities = {
-      --       ERROR = vim.diagnostic.severity.ERROR,
-      --       WARNING = vim.diagnostic.severity.WARN,
-      --     }
-      --
-      --     local decoded = vim.json.decode(output)
-      --     local diagnostics = {}
-      --
-      --     for _, msg in ipairs(decoded or {}) do
-      --       table.insert(diagnostics, {
-      --         lnum = msg.line - 1,
-      --         end_lnum = msg.line - 1,
-      --         col = msg.column - 1,
-      --         end_col = msg.column - 1,
-      --         message = msg.message,
-      --         code = msg.source,
-      --         source = bin,
-      --         severity = assert(severities[msg.type], "missing mapping for severity " .. msg.type),
-      --       })
-      --     end
-      --
-      --     return diagnostics
-      --   end,
-      -- }
-      -- }}}
-
       -- fix phpcs linter to allow --stdin-path=... {{{
       require("lint.linters.phpcs").parser = function(output, _)
         local severities = {
@@ -106,8 +68,8 @@ return {
       end
       -- }}}
 
-      local lazy_config = require("lazyvim.plugins.linting")[1].config
-      lazy_config(_, opts)
+      local lazyvim_config = require("lazyvim.plugins.linting")[1].config
+      lazyvim_config(_, opts)
     end,
     opts_extend = {
       "linters_by_ft.editorconfig",

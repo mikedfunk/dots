@@ -24,6 +24,7 @@ getantidote/use-omz # antibody-friendly helper to improve integration with zsh
 # zdharma-continuum/zsh-startify # like vim-startify for zsh (neat, but doesn't really help)
 # zsh-users/zsh-history-substring-search # up arrow after typing part of command (not needed with fzf reverse i-search)
 # zsh-users/zsh-syntax-highlighting # colored input... replaced with fast-syntax-highlighting below
+Aloxaf/fzf-tab # use FZF for ZSH completion menu
 belak/zsh-utils path:editor
 belak/zsh-utils path:history
 belak/zsh-utils path:utility
