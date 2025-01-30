@@ -66,6 +66,17 @@ return {
       },
     },
   },
+  -- {
+  --   "kitagry/bqls.nvim",
+  --   dependencies = { "neovim/nvim-lspconfig" },
+  --   config = function()
+  --     require("lspconfig").bqls.setup({
+  --       init_options = {
+  --         project_id = "BIGQUERY_PROJECT_ID",
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "kosayoda/nvim-lightbulb",
     opts = {

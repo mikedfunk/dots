@@ -27,6 +27,8 @@ return {
       default_keybindings = false,
     },
   },
+  { "nvim-zh/colorful-winsep.nvim", event = "WinNew", opts = {} },
+  -- { "luukvbaal/statuscol.nvim", opts = {} }, -- clickable fold markers
   -- installed by default, this just customizes it
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -70,7 +72,7 @@ return {
     "folke/ts-comments.nvim",
     opts = {
       lang = {
-        php = "// %s",
+        -- php = "// %s", -- doesn't work for some reason
         -- plantuml = "' %s",
         -- neon = "# %s",
         ini = "# %s",

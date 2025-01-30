@@ -12,7 +12,7 @@ getantidote/use-omz # antibody-friendly helper to improve integration with zsh
 # hlissner/zsh-autopair # auto close parens, etc. (this is a pain in the ass - sometimes you don't want to close a bracket or paren)
 # jeffreytse/zsh-vi-mode # breaks history search via fzf
 # marlonrichert/zsh-autocomplete branch:main # automatically show flags/options completion (this plugin is really janky)
-# mattmc3/zfunctions # define and save functions to separate files. Apparently this is popular.
+# mattmc3/zfunctions # define and save functions to separate files. Apparently this is popular. Lazy load functions, define them in the shell then save them, and define help text for them.
 # mfaerevaag/wd # warp directory
 # ohmyzsh/ohmyzsh path:plugins/per-directory-history # press <c-g> to toggle between local and global history
 # oldratlee/hacker-quotes # just add some cool hacker quotes in shell init like MOTD
@@ -38,7 +38,7 @@ ohmyzsh/ohmyzsh path:plugins/colorize # Plugin for highlighting file content
 ohmyzsh/ohmyzsh path:plugins/command-not-found # suggest packages to install if command not found
 ohmyzsh/ohmyzsh path:plugins/gitfast # fix git completion issues https://unix.stackexchange.com/a/204308 downside: this also adds a TON of gxx aliases https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitfast it also adds MORE git aliases and functions from the main git plugin https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 ohmyzsh/ohmyzsh path:plugins/jira # simple command-line tool that just opens jira on different pages. No fancy shit.
-ohmyzsh/ohmyzsh path:plugins/vi-mode # switched to zsh-vi-mode
+ohmyzsh/ohmyzsh path:plugins/vi-mode # switched to zsh-vi-mode... then switched back due to probs
 ohmyzsh/ohmyzsh path:plugins/wd/wd.plugin.zsh # warp directory
 romkatv/powerlevel10k kind:fpath # zsh prompt theme (see ~/.p10k.zsh)
 yous/vanilli.sh # sensible zsh defaults

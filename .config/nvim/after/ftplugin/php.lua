@@ -1,5 +1,6 @@
 -- vim: set foldmethod=marker:
 vim.b.autoformat = false
+vim.bo.commentstring = "// %s"
 -- vim.wo.foldlevel = 1
 
 vim.keymap.set("n", ",.", function()

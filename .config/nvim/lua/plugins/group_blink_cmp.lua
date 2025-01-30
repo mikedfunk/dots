@@ -67,6 +67,7 @@ return {
           cmp_jira = {
             name = "cmp_jira",
             module = "blink.compat.source",
+            min_keyword_length = 2,
             async = true,
             score_offset = 15,
           },

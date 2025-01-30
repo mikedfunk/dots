@@ -1,6 +1,7 @@
 return {
   {
     "adalessa/laravel.nvim",
+    enabled = false,
     dependencies = {
       "tpope/vim-dotenv",
       "MunifTanjim/nui.nvim",
@@ -98,6 +99,20 @@ return {
             .. "/.composer/vendor/bin/composer",
       },
       lspconfig = { enabled = false },
+    },
+  },
+  {
+    "jdrupal-dev/code-refactor.nvim",
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "php",
+    },
+    opts = {},
+    keys = {
+      { "<Leader>rt", "<Cmd>CodeActions all<CR>", buffer = true, noremap = true, desc = "Treesitter Refactor Menu" },
     },
   },
 }

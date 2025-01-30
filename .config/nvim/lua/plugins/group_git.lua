@@ -39,7 +39,7 @@ return {
   },
   {
     "rhysd/committia.vim",
-    ft = "gitcommit",
+    ft = { "gitcommit", "gitrebase" },
   },
   {
     "FabijanZulj/blame.nvim",
