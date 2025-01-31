@@ -61,7 +61,7 @@ return {
             max_items = 5,
             score_offset = -10,
             opts = {
-              all_panes = true,
+              -- all_panes = true,
             },
           },
           cmp_jira = {

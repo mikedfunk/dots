@@ -72,9 +72,9 @@ return {
     "folke/ts-comments.nvim",
     opts = {
       lang = {
-        -- php = "// %s", -- doesn't work for some reason
-        -- plantuml = "' %s",
-        -- neon = "# %s",
+        php = { "// %s", "/* %s */" }, -- doesn't work for some reason
+        -- plantuml = "' %s", -- doesn't have a treesitter parser
+        -- neon = "# %s", -- doesn't have a treesitter parser
         ini = "# %s",
         sql = "-- %s",
         git_config = "# %s",
