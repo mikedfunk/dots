@@ -99,7 +99,7 @@
   "quicker.nvim": { "branch": "master", "commit": "92e0f61a5d6422424cf7728ad323d2a06e3ab2d5" },
   "refactoring.nvim": { "branch": "master", "commit": "2db6d378e873de31d18ade549c2edba64ff1c2e3" },
   "render-markdown.nvim": { "branch": "main", "commit": "1ba6fb7998985736ca3480366c9792be05b93ad7" },
-  "snacks.nvim": { "branch": "main", "commit": "9ffe0948f4250fe48cba080c4f2da7144c72834c" },
+  "snacks.nvim": { "branch": "main", "commit": "4da7bdb82ea929d682c8e4cc83fa5add66a03bc4" },
   "telescope.nvim": { "branch": "master", "commit": "415af52339215926d705cccc08145f3782c4d132" },
   "thanks.nvim": { "branch": "main", "commit": "c9296494d1f0e2fa2bed51db5d2f546aaebc2b0b" },
   "tmuxline.vim": { "branch": "master", "commit": "4119c553923212cc67f4e135e6f946dc3ec0a4d6" },
