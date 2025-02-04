@@ -14,17 +14,18 @@
 
 Code/saatchi/palette/phpspec-coverage**.yml
 
-Code/saatchi/**/.pre-commit-config.yaml
+Code/saatchi/**/.envrc
+Code/saatchi/**/.gitlint
+Code/saatchi/**/.ignore
+Code/saatchi/**/.lazy.lua
 Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.nvim.lua
-Code/saatchi/**/.lazy.lua
-Code/saatchi/**/.envrc
-Code/saatchi/**/.ignore
-Code/saatchi/**/cspell.json
-Code/saatchi/**/.tool-versions
-Code/saatchi/**/.projections.json
 Code/saatchi/**/.php-cs-fixer.php
-Code/saatchi/**/.gitlint
+Code/saatchi/**/.pre-commit-config.yaml
+Code/saatchi/**/.projections.json
+Code/saatchi/**/.tool-versions
+Code/saatchi/**/cspell.json
+Code/saatchi/**/mise.toml
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 Code/saatchi/{zed,gallery,legacy}/phpstan.neon

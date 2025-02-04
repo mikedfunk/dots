@@ -214,11 +214,12 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 
 # evaluated startup commands {{{
 # _has mutagen && mutagen daemon start
-_has direnv && _evalcache direnv hook zsh # (evalcache version)
+# _has direnv && _evalcache direnv hook zsh # (evalcache version)
 # _has pkgx && source <(pkgx --shellcode)
 # _has aicommits && aicommits config set OPENAI_KEY="$OPENAI_API_KEY"
 # #slow
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
+_has mise && _evalcache mise activate zsh
 
 # https://github.com/trapd00r/LS_COLORS
 local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
@@ -280,13 +281,13 @@ export HOMEBREW_NO_ANALYTICS=1
 # export ANDROID_HOME="$XDG_DATA_HOME"/android
 # export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 # export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
+# export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
 # export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
 # export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 # export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # export TERMINFO="$XDG_DATA_HOME"/terminfo
 # export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
@@ -715,12 +716,12 @@ pux() {
 
 # xdebug {{{
 xdebug-off() {
-    local -r ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini")
+    local -r ini_file=$(find $(mise where php)/conf.d -name "*xdebug.ini")
     [ -n $ini_file ] && mv ${ini_file}{,_OLD}
 }
 
 xdebug-on() {
-    local ini_file=$(find $(asdf where php)/conf.d -name "*xdebug.ini_OLD")
+    local ini_file=$(find $(mise where php)/conf.d -name "*xdebug.ini_OLD")
     [ -z $ini_file ] && return
     ini_file=$(echo ${ini_file} | sed s/_OLD//)
     mv ${ini_file}{_OLD,}
@@ -739,7 +740,7 @@ xdebug-on() {
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
 # _has cod && source <(cod init $$ zsh) # does not work well on arm64
-[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1104
+# [ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh # https://github.com/asdf-vm/asdf/issues/1104
 # }}}
 
 # zsh options {{{

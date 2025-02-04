@@ -169,102 +169,41 @@ _install_upgrade_tmux_plugins() {
 }
 # }}}
 
-# update asdf plugins {{{
-_update_asdf_plugins() {
-    _log_info "Updating asdf plugins"
-    asdf plugin update --all
+# update mise plugins {{{
+_update_mise_plugins() {
+    _log_info "Updating mise plugins"
+    mise plugin update --all
 }
 # }}}
 
 # install neovim version(s) {{{
 _install_neovim_versions() {
-    (asdf list neovim | grep --quiet stable) && return
+    (mise list neovim | grep --quiet stable) && return
     _log_info "installing neovim stable"
-    asdf install neovim stable
-    asdf global neovim stable
-    # asdf install neovim nightly # but don't activate it by default
+    mise install neovim stable
+    mise global neovim stable
+    # mise install neovim nightly # but don't activate it by default
 }
 # }}}
 
 # install php versions {{{
 
-_install_php_74() {
-    (asdf list php | grep --quiet 7.4.32) && return
-    _log_info "installing php 7.4.32"
-    asdf install php 7.4.32
-    asdf global php 7.4.32 || return
-
-    # install php extensions (different set for 7.4.32)
-    local -r PHP_PATH="$(asdf where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
-    yes "" | "${PICKLE}" install pcs-beta && (echo 'extension="pcs.so"' >"${PHP_PATH}"/conf.d/01_pcs.ini)
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/03_memcached.ini)
-    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/04_imagick.ini)
-    # latest xdebug 3.2 is php 8.0+ only
-    yes "" | "${PICKLE}" install xdebug@3.1.5 && (echo 'zend_extension="xdebug.so"' >"${PHP_PATH}"/conf.d/05_xdebug.ini)
-    yes "" | "${PICKLE}" install intl && (echo 'zend_extension="intl.so"' >"${PHP_PATH}"/conf.d/06_intl.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    asdf reshim php 7.4.32
-}
-
-_install_php_80() {
-    # I would have installed 28 but for some reason asdf is getting a bad archive when trying to decompress
-    (asdf list php | grep --quiet "8.0.27") && return
-    _log_info "installing php 8.0.27"
-    asdf install php 8.0.27
-    asdf global php 8.0.27 || return
-
-    # install php extensions (different set for 8.0.27)
-    local -r PHP_PATH="$(asdf where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
-    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
-    _xdebug_config() {
-        cat <<'END_HEREDOC'
-zend_extension="xdebug.so"
-[xdebug]
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-END_HEREDOC
-    }
-    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # asdf reshim php "8.0.37"
-}
-
 _install_php_81() {
-    # I would have installed 28 but for some reason asdf is getting a bad archive when trying to decompress
-    (asdf list php | grep --quiet "8.1.31") && return
+    # NOTE: nasty hack to the mise php  plugin install script to make it work.
+    # This is because the intl extension install script does not respect the
+    # above icu4c flags.
+    # another approach:
+    # https://mikebian.co/installing-an-old-homebrew-package/
+    sed -i '' 's/(homebrew_package_path icu4c)/(homebrew_package_path icu4c@74)/g' "$HOME/.local/share/mise/plugins/php/bin/install"
+
+    # I would have installed 28 but for some reason mise is getting a bad archive when trying to decompress
+    (mise list php | grep --quiet "8.1.31") && return
     _log_info "installing php 8.1.31"
-    asdf install php 8.1.31
-    asdf global php 8.1.31 || return
+    mise install php 8.1.31
+    mise global php 8.1.31 || return
 
     # install php extensions (different set for 8.1.31)
-    local -r PHP_PATH="$(asdf where php)"
+    local -r PHP_PATH="$(mise where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
     local PICKLE="${PHP_PATH}"/pickle.phar
@@ -276,6 +215,7 @@ _install_php_81() {
     export PHP_ZLIB_DIR
     yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
     yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+
     _xdebug_config() {
         cat <<'END_HEREDOC'
 zend_extension="xdebug.so"
@@ -284,95 +224,27 @@ xdebug.cli_color=1
 xdebug.show_local_vars=1
 END_HEREDOC
     }
+
     yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
     echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
 
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
     # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # asdf reshim php "8.0.37"
-}
+    # mise reshim php "8.0.37"
 
-_install_php_82() {
-    (asdf list php | grep --quiet "8.2.12") && return
-    _log_info "installing php 8.2.12"
-    asdf install php 8.2.12
-    asdf global php 8.2.12 || return
-
-    # install php extensions (different set for 8.2.12)
-    local -r PHP_PATH="$(asdf where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
-    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
-    _xdebug_config() {
-        cat <<'END_HEREDOC'
-zend_extension="xdebug.so"
-[xdebug]
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-END_HEREDOC
-    }
-    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # asdf reshim php "8.2.12"
-}
-
-_install_php_83() {
-    (asdf list php | grep --quiet "8.3.14") && return
-    _log_info "installing php 8.3.14"
-    asdf install php 8.3.14
-    asdf global php 8.3.14 || return
-
-    # install php extensions (different set for 8.3.14)
-    local -r PHP_PATH="$(asdf where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
-    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
-    _xdebug_config() {
-        cat <<'END_HEREDOC'
-zend_extension="xdebug.so"
-[xdebug]
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-END_HEREDOC
-    }
-    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # asdf reshim php "8.3.14"
+    # undo nasty hack
+    sed -i '' 's/(homebrew_package_path icu4c@74)/(homebrew_package_path icu4c)/g' "$HOME/.local/share/mise/plugins/php/bin/install"
 }
 
 _install_php_84() {
-    (asdf list php | grep --quiet "8.4.1") && return
+    (mise list php | grep --quiet "8.4.1") && return
     _log_info "installing php 8.4.1"
-    asdf install php 8.4.1
-    asdf global php 8.4.1 || return
+    mise install php 8.4.1
+    mise global php 8.4.1 || return
 
     # install php extensions (different set for 8.4.1)
-    local -r PHP_PATH="$(asdf where php)"
+    local -r PHP_PATH="$(mise where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
     local PICKLE="${PHP_PATH}"/pickle.phar
@@ -425,171 +297,26 @@ END_HEREDOC
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
     # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # asdf reshim php "8.4.1"
+    # mise reshim php "8.4.1"
 }
 
-# internal: configure flags and paths for homebrew tools {{{
-_configure_flags_and_paths_for_homebrew_tools() {
-    # I probably don't need to configure all of these
-
-    # configure bison {{{
-    PATH="$(brew --prefix bison)/bin:${PATH}"
-    # For compilers to find bison you may need to set:
-    LDFLAGS="-L$(brew --prefix bison)/lib ${LDFLAGS}"
-    # }}}
-
-    # configure bzip2 {{{
-    PATH="$(brew --prefix bzip2)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix bzip2)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix bzip2)/include ${CPPFLAGS}"
-    # }}}
-
-    # configure curl {{{
-    PATH="$(brew --prefix curl)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix curl)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix curl)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix curl)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure freetype {{{
-    PKG_CONFIG_PATH="-I$(brew --prefix freetype)/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure gettext {{{
-    PATH="$(brew --prefix gettext)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix gettext)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix gettext)/include ${CPPFLAGS}"
-    # }}}
-
-    # configure krb5 (needed to build php) {{{
-    PATH="$(brew --prefix krb5)/bin:${PATH}"
-    PATH="$(brew --prefix krb5)/sbin:${PATH}"
-    LDFLAGS="-L$(brew --prefix krb5)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix krb5)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure libiconv (needed to build php) {{{
-    PATH="$(brew --prefix libiconv)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libiconv)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libiconv)/include ${CPPFLAGS}"
-    # }}}
-
-    # configure libedit (needed to build php) {{{
-    LDFLAGS="-L$(brew --prefix libedit)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libedit)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure libjpeg (needed to build php) {{{
-    PATH="$(brew --prefix libjpeg)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libjpeg)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libjpeg)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure libmcrypt (needed to build php) {{{
-    # PATH="$(brew --prefix libmcrypt)/bin:${PATH}"
-    # LDFLAGS="-L$(brew --prefix libmcrypt)/lib ${LDFLAGS}"
-    # CPPFLAGS="-I$(brew --prefix libmcrypt)/include ${CPPFLAGS}"
-    # }}}
-
-    # configure libpng (needed to build php) {{{
-    PATH="$(brew --prefix libpng)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libpng)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libpng)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix libpng)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure libxml2 (needed to build php) {{{
-    PATH="$(brew --prefix libxml2)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libxml2)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libxml2)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix libxml2)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    CFLAGS="-Wno-error=incompatible-pointer-types -Wno-error=ignored-qualifiers ${CFLAGS}"
-    # }}}
-
-    # configure libzip (needed to build php) {{{
-    PATH="$(brew --prefix libzip)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix libzip)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix libzip)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix libzip)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure openldap (needed to build curl in php) {{{
-    PATH="$(brew --prefix openldap)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix openldap)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix openldap)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix openldap)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure openssl@1.1 {{{
-    PATH="$(brew --prefix openssl@1.1)/bin:${PATH}"
-    # For compilers to find openssl@1.1 you may need to set:
-    LDFLAGS="-L$(brew --prefix openssl@1.1)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix openssl@1.1)/include ${CPPFLAGS}"
-    # For pkg-config to find openssl@1.1 you may need to set:
-    PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure postgresql {{{
-    PATH="$(brew --prefix postgresql@14)/bin:${PATH}"
-    LDFLAGS="-L$(brew --prefix postgresql@14)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix postgresql@14)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix postgresql@14)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure zlib (needed to build php) {{{
-    LDFLAGS="-L$(brew --prefix zlib)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix zlib)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix zlib)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    # }}}
-
-    # configure icu4c (needed for php intl extension) {{{
-    PATH="$(brew --prefix icu4c@74)/bin:${PATH}"
-    PATH="$(brew --prefix icu4c@74)/sbin:${PATH}"
-    LDFLAGS="-L$(brew --prefix icu4c@74)/lib ${LDFLAGS}"
-    CPPFLAGS="-I$(brew --prefix icu4c@74)/include ${CPPFLAGS}"
-    PKG_CONFIG_PATH="$(brew --prefix icu4c@74)/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    ICU_CONFIG="$(brew --prefix icu4c@74)/bin/icu-config"
-    export CC="gcc -DTRUE=1 -DFALSE=0"
-    export CXX="g++ -DTRUE=1 -DFALSE=0"
-
-    # NOTE: nasty hack to the asdf php  plugin install script to make it work.
-    # This is because the intl extension install script does not respect the
-    # above icu4c flags.
-    # another approach:
-    # https://mikebian.co/installing-an-old-homebrew-package/
-    sed -i '' 's/(homebrew_package_path icu4c)/(homebrew_package_path icu4c@74)/g' "$HOME/.asdf/plugins/php/bin/install"
-    # }}}
-
-    export PATH LDFLAGS CPPFLAGS PKG_CONFIG_PATH CXXFLAGS CFLAGS ICU_CONFIG
-}
-# }}}
-
-# https://github.com/asdf-community/asdf-php/blob/master/.github/workflows/workflow.yml#L33-L52
+# https://github.com/mise-community/mise-php/blob/master/.github/workflows/workflow.yml#L33-L52
 _install_php_versions() {
     pushd .
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing php version(s)"
-    (asdf plugin list | grep --quiet php) || asdf plugin add php
-
-    # _configure_flags_and_paths_for_homebrew_tools
+    (mise plugin list | grep --quiet php) || mise plugin add php
 
     # change implicit function declaration to warning instead of error
     # https://bugs.php.net/bug.php?id=80171
     # export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
 
-    _install_php_74
-    _install_php_80
     _install_php_81
-    _install_php_82
-    _install_php_83
     _install_php_84
-    asdf global php 8.4.1
+    mise global php 8.4.1
 
     # NOTE: revert temporary nasty hack
-    cd "$HOME/.asdf/plugins/php/" && git reset --hard
+    cd "$HOME/.mise/plugins/php/" && git reset --hard
 
     popd || return
 }
@@ -599,9 +326,9 @@ _install_php_versions() {
 _install_deno_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing deno version(s)"
-    (asdf plugin list | grep --quiet deno) || asdf plugin add deno
-    (asdf list deno | grep --quiet 1.29.4) || asdf install deno 1.29.4
-    asdf global deno 1.29.4
+    (mise plugin list | grep --quiet deno) || mise plugin add deno
+    (mise list deno | grep --quiet 1.29.4) || mise install deno 1.29.4
+    mise global deno 1.29.4
 }
 # }}}
 
@@ -609,25 +336,25 @@ _install_deno_versions() {
 _install_node_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing node version(s)"
-    # https://github.com/asdf-vm/asdf-nodejs#problems-with-openpgp-signatures-in-older-versions
-    # bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-previous-release-team-keyring'
-    (asdf plugin list | grep --quiet nodejs) || asdf plugin add nodejs
-    # https://github.com/asdf-vm/asdf-nodejs/issues/40#issuecomment-297053730
-    # bash "$HOME"/.asdf/plugins/nodejs/bin/import-release-team-keyring
+    # https://github.com/mise-vm/mise-nodejs#problems-with-openpgp-signatures-in-older-versions
+    # bash -c '${mise_DATA_DIR:=$HOME/.mise}/plugins/nodejs/bin/import-previous-release-team-keyring'
+    (mise plugin list | grep --quiet nodejs) || mise plugin add nodejs
+    # https://github.com/mise-vm/mise-nodejs/issues/40#issuecomment-297053730
+    # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
 
     # L, G
-    (asdf list nodejs | grep --quiet 9.11.2) || asdf install nodejs 9.11.2
+    (mise list nodejs | grep --quiet 9.11.2) || mise install nodejs 9.11.2
     # Z
-    (asdf list nodejs | grep --quiet 6.7.0) || asdf install nodejs 6.7.0
+    (mise list nodejs | grep --quiet 6.7.0) || mise install nodejs 6.7.0
     # E
-    (asdf list nodejs | grep --quiet 21.7.3) || asdf install nodejs 21.7.3
+    (mise list nodejs | grep --quiet 21.7.3) || mise install nodejs 21.7.3
     # global
-    (asdf list nodejs | grep --quiet latest) || asdf install nodejs latest
+    (mise list nodejs | grep --quiet latest) || mise install nodejs latest
 
-    asdf global nodejs latest
+    mise global nodejs latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
-    asdf exec corepack enable
-    asdf reshim nodejs
+    mise exec corepack enable
+    mise reshim nodejs
 
     builtin cd - >/dev/null || return
 }
@@ -638,10 +365,10 @@ _install_node_versions() {
 _install_lua_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing lua version(s)"
-    (asdf plugin list | grep --quiet perl) || asdf plugin add lua
-    (asdf list lua | grep --quiet 5.4.4) || asdf install lua 5.4.4
+    (mise plugin list | grep --quiet perl) || mise plugin add lua
+    (mise list lua | grep --quiet 5.4.4) || mise install lua 5.4.4
 
-    asdf global lua 5.4.4
+    mise global lua 5.4.4
 
     builtin cd - >/dev/null || return
 }
@@ -651,10 +378,10 @@ _install_lua_versions() {
 _install_perl_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing perl version(s)"
-    (asdf plugin list | grep --quiet perl) || asdf plugin add perl
-    (asdf list perl | grep --quiet 5.38.0) || asdf install perl 5.38.0
+    (mise plugin list | grep --quiet perl) || mise plugin add perl
+    (mise list perl | grep --quiet 5.38.0) || mise install perl 5.38.0
 
-    asdf global perl 5.38.0
+    mise global perl 5.38.0
 
     builtin cd - >/dev/null || return
 }
@@ -664,26 +391,24 @@ _install_perl_versions() {
 _install_python_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing python version(s)"
-    (asdf plugin list | grep --quiet python) || asdf plugin add python
-
-    # _configure_flags_and_paths_for_homebrew_tools
+    (mise plugin list | grep --quiet python) || mise plugin add python
 
     # I:
-    # https://github.com/danhper/asdf-python/issues/98
+    # https://github.com/danhper/mise-python/issues/98
     # I uses 3.7.3. It won't install on macos but 3.7.10 will.
     # https://github.com/pyenv/pyenv/issues/1740#issuecomment-986082691
     # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
-    # ( asdf list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && asdf install python 3.7.10 )
+    # ( mise list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && mise install python 3.7.10 )
     # api tests and ui tests:
-    (asdf list python | grep --quiet 3.8.15) ||
+    (mise list python | grep --quiet 3.8.15) ||
         (_log_info "installing python 3.8.15" &&
-            asdf install python 3.8.15)
+            mise install python 3.8.15)
     # global
-    (asdf list python | grep --quiet 3.10.1) ||
+    (mise list python | grep --quiet 3.10.1) ||
         (_log_info "installing python 3.10.1" &&
-            asdf install python 3.10.1 &&
-            asdf install python 2.7.18 &&
-            asdf global python 3.10.1 2.7.18)
+            mise install python 3.10.1 &&
+            mise install python 2.7.18 &&
+            mise global python 3.10.1 2.7.18)
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -692,27 +417,27 @@ _install_python_versions() {
 _install_ruby_versions() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing ruby version(s)"
-    (asdf plugin list | grep --quiet ruby) || asdf plugin add ruby
-    # ( asdf list ruby | grep --quiet 2.3.3 ) || asdf install ruby 2.3.3 # Z (compass) - doesn't install on mac but 3.x works
-    (asdf list ruby | grep --quiet 3.1.2) || asdf install ruby 3.1.2
-    asdf global ruby 3.1.2
+    (mise plugin list | grep --quiet ruby) || mise plugin add ruby
+    # ( mise list ruby | grep --quiet 2.3.3 ) || mise install ruby 2.3.3 # Z (compass) - doesn't install on mac but 3.x works
+    (mise list ruby | grep --quiet 3.1.2) || mise install ruby 3.1.2
+    mise global ruby 3.1.2
     builtin cd - >/dev/null || return
 }
 # }}}
 
 # install erlang version {{{
 _install_erlang_version() {
-    (asdf plugin list | grep --quiet erlang) && (asdf list erlang | grep --quiet 23.0) && return
+    (mise plugin list | grep --quiet erlang) && (mise list erlang | grep --quiet 23.0) && return
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing erland version"
-    (asdf plugin list | grep --quiet erlang) || asdf plugin add erlang
+    (mise plugin list | grep --quiet erlang) || mise plugin add erlang
     export KERL_CONFIGURE_OPTIONS="--enable-m64-build --disable-debug --without-javac"
     PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
     export PATH
     export MACOSX_DEPLOYMENT_TARGET=10.4
     export SYSTEM_VERSION_COMPAT=1
-    (asdf list erlang | grep --quiet 23.0) || asdf install erlang 23.0
-    asdf global erlang 23.0
+    (mise list erlang | grep --quiet 23.0) || mise install erlang 23.0
+    mise global erlang 23.0
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -721,9 +446,9 @@ _install_erlang_version() {
 _install_elixir_version() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing elixir version"
-    (asdf plugin list | grep --quiet elixir) || asdf plugin add elixir
-    (asdf list elixir | grep --quiet 1.10.4-otp-23) || asdf install elixir 1.10.4-otp-23
-    asdf global elixir 1.10.4-otp-23
+    (mise plugin list | grep --quiet elixir) || mise plugin add elixir
+    (mise list elixir | grep --quiet 1.10.4-otp-23) || mise install elixir 1.10.4-otp-23
+    mise global elixir 1.10.4-otp-23
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -914,7 +639,7 @@ _bootstrap_all() {
     _start_launch_agents
     # _fix_file_size_limit_for_watching_with_entr
     _install_fzf_to_shell
-    _update_asdf_plugins
+    _update_mise_plugins
     _fix_delta_syntax_highlighting_for_php
     _install_godoc
     _clear_evalcache

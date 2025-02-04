@@ -48,6 +48,7 @@ tap "pkgxdev/made" # pkgx
 # brew "ant" # apache build tool
 # brew "antibody" # like antigen but faster! (zsh plugin system) (archived - replaced with antidote)
 # brew "antigen" # zsh package manager. I switched to ~antibody~ antidote for speed
+# brew "asdf" # language runtime version switcher like rbenv and phpenv (I use mise now)
 # brew "autojump" # used by zsh-autocomplete to display recent directories
 # brew "bandwhich" # top-like tool to see which processes are using the most bandwidth (sudo bandwhich)
 # brew "bash" # for extrakto and lazyman
@@ -67,6 +68,7 @@ tap "pkgxdev/made" # pkgx
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "desk" # shell workspace manager. (I use direnv instead)
 # brew "diff-so-fancy" # better git diff viewer (note: diff-highlight is in pip) (I now use delta instead)
+# brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.) (I use mise now)
 # brew "dnsmasq" # easily set up dynamic dev domains such as myproject.dev `sudo brew services start dnsmasq` (WARNING: this _could_ cause problems with docker-machine certs)
 # brew "docker" # virtualization software (I use docker-for-mac, which comes with executables but doesn't link them to /usr/local/bin any more, so I'm doing that manually in my yadm bootstrap)
 # brew "docker-compose" # manage multiple docker images and how they interact (now merged into docker `docker composer`)
@@ -238,7 +240,6 @@ brew "antidote" # zsh plugin system like antigen but faster
 brew "apr" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "apr-util" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "argon2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
-brew "asdf" # language runtime version switcher like rbenv and phpenv
 brew "aspell" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "autoconf" # needed to build some php70 libs from source https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "autoconf@2.69" # needed to build asdf erlang
@@ -259,7 +260,6 @@ brew "curl" # http cli tool. Included with mac of course, but this gives me the 
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
 brew "daytona" # fancy devcontainer setup daytona.io
 brew "devcontainer"
-brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.)
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "eza" # pretty ls replacement
 brew "freetds" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
@@ -308,6 +308,7 @@ brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugi
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode`
 brew "memcached" # needed by php70 memcached pecl extension
+brew "mise" # like asdf but better?
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
