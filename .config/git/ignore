@@ -26,6 +26,7 @@
 .phpunit.result.cache
 .pre-commit-config.yaml
 .projections.json
+.ruby-lsp
 .tern-project
 .tool-versions
 .yarn
@@ -36,6 +37,6 @@ cobertura.xml
 conform.*
 coverage
 cspell.json
+mise.toml
 nohup.out
 yarn-error.log
-.ruby-lsp
