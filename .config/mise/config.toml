@@ -1,0 +1,9 @@
+[tools]
+deno = "latest"
+lua = "5.4.4"
+neovim = "stable"
+node = "latest"
+php = "latest"
+python = "latest"
+ruby = "latest"
+yarn = "1.22.10"
