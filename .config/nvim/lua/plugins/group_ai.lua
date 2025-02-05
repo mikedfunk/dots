@@ -20,6 +20,7 @@ return {
           "lazy",
           "lspinfo",
           "neoai-input",
+          "snacks_picker_input",
           "starter",
         }
 

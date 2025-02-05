@@ -528,6 +528,7 @@ cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
+cask "scrcpy" # mirror android screen
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "zoomhider" # hide zoom floating meeting controls
 

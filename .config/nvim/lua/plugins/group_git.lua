@@ -55,7 +55,7 @@ return {
     keys = {
       { "<Leader>go", "<Cmd>GitConflictChooseOurs<CR>", desc = "Resolve ours conflict" },
       { "<Leader>gt", "<Cmd>GitConflictChooseTheirs<CR>", desc = "Resolve theirs conflict" },
-      { "<Leader>gB", "<Cmd>GitConflictChooseBoth<CR>", desc = "Resolve both conflict" },
+      -- { "<Leader>gB", "<Cmd>GitConflictChooseBoth<CR>", desc = "Resolve both conflict" },
       { "<Leader>gn", "<Cmd>GitConflictChooseNone<CR>", desc = "Resolve none conflict" },
       { "<Leader>gq", "<Cmd>GitConflictListQf<CR>", desc = "List conflicts" },
       { "<Leader>gr", "<Cmd>GitConflictRefresh<CR>", desc = "Refresh conflicts" },

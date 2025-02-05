@@ -14,7 +14,6 @@
 
 Code/saatchi/palette/phpspec-coverage**.yml
 
-Code/saatchi/**/.envrc
 Code/saatchi/**/.gitlint
 Code/saatchi/**/.ignore
 Code/saatchi/**/.lazy.lua
@@ -23,7 +22,6 @@ Code/saatchi/**/.nvim.lua
 Code/saatchi/**/.php-cs-fixer.php
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.projections.json
-Code/saatchi/**/.tool-versions
 Code/saatchi/**/cspell.json
 Code/saatchi/**/mise.toml
 
