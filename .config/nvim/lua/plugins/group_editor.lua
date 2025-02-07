@@ -129,7 +129,6 @@ return {
         style = {
           up_to_date = "<- ",
           outdated = "<- (new version) ^ ",
-          invalid = "<- (invalid) ",
         },
       },
     },
@@ -139,7 +138,6 @@ return {
       -- manually register highlight groups due to bug https://github.com/vuki656/package-info.nvim/issues/155#issuecomment-2270572104
       vim.cmd([[highlight PackageInfoUpToDateVersion guifg=]] .. Snacks.util.color("Comment"))
       vim.cmd([[highlight PackageInfoOutdatedVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
-      vim.cmd([[highlight PackageInfoInvalidVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
     end,
   },
 }
