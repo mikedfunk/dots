@@ -117,4 +117,29 @@ return {
       },
     },
   },
+  {
+    "vuki656/package-info.nvim", -- show available package.json updates
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "folke/snacks.nvim",
+    },
+    event = "BufRead package.json",
+    opts = {
+      icons = {
+        style = {
+          up_to_date = "<- ",
+          outdated = "<- (new version) ^ ",
+          invalid = "<- (invalid) ",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("package-info").setup(opts)
+
+      -- manually register highlight groups due to bug https://github.com/vuki656/package-info.nvim/issues/155#issuecomment-2270572104
+      vim.cmd([[highlight PackageInfoUpToDateVersion guifg=]] .. Snacks.util.color("Comment"))
+      vim.cmd([[highlight PackageInfoOutdatedVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
+      vim.cmd([[highlight PackageInfoInvalidVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
+    end,
+  },
 }

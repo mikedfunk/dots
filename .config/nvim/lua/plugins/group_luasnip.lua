@@ -2,7 +2,7 @@ return {
   "L3MON4D3/LuaSnip",
   keys = {
     {
-      "<a-l>",
+      "<a-l>", -- complete without blink.nvim
       function()
         if require("luasnip").expand_or_jumpable() then
           require("luasnip").expand_or_jump()
@@ -12,17 +12,7 @@ return {
       mode = { "i", "s" },
     },
     {
-      "<a-h>",
-      function()
-        if require("luasnip").jumpable(-1) then
-          require("luasnip").jump(-1)
-        end
-      end,
-      desc = "Jump backward",
-      mode = { "i", "s" },
-    },
-    {
-      "<a-e>",
+      "<a-c>", -- pneumonic: choice
       function()
         if require("luasnip").choice_active() then
           require("luasnip").change_choice(1)

@@ -74,6 +74,11 @@ return {
         },
       },
       completion = {
+        list = {
+          selection = {
+            auto_insert = false,
+          },
+        },
         documentation = {
           window = {
             border = "rounded",
