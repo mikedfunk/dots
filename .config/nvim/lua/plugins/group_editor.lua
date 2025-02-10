@@ -28,6 +28,14 @@ return {
     },
   },
   { "nvim-zh/colorful-winsep.nvim", event = "WinNew", opts = {} },
+  {
+    "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps
+    event = "VeryLazy",
+    opts = {
+      next_file_key = "<M-i>",
+      prev_file_key = "<M-o>",
+    },
+  },
   -- { "luukvbaal/statuscol.nvim", opts = {} }, -- clickable fold markers
   -- installed by default, this just customizes it
   {
