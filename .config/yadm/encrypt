@@ -19,15 +19,13 @@ Code/saatchi/**/.ignore
 Code/saatchi/**/.lazy.lua
 Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.nvim.lua
-Code/saatchi/**/.php-cs-fixer.php
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.projections.json
+Code/saatchi/**/compose.override.yml
 Code/saatchi/**/cspell.json
 Code/saatchi/**/mise.toml
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
-Code/saatchi/{zed,gallery,legacy}/phpstan.neon
-Code/saatchi/zed/.editorconfig
 
 # }}}
 
@@ -38,6 +36,7 @@ Code/saatchi/zed/.editorconfig
 # .local/share/nvim/dadbod_ui/connections.json
 # Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 .aws/config
+.bigqueryrc
 .circleci/cli.yml
 .config/algolia/config.toml
 .config/multitail/multitail.conf
@@ -50,7 +49,6 @@ Code/saatchi/zed/.editorconfig
 .ssh/{config,keys}
 .support/hosts.json
 .warprc
-.bigqueryrc
 Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 intelephense/licence.txt
 

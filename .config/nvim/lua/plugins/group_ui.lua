@@ -163,7 +163,7 @@ return {
       },
     },
   },
-  -- This is really helpful but it overlaps a lot of stuff and starts to become a nuisance.
+  -- Top right filename float. This is really helpful but it overlaps a lot of stuff and starts to become a nuisance.
   -- {
   --   "b0o/incline.nvim",
   --   opts = {
@@ -187,17 +187,29 @@ return {
       -- https://github.com/folke/noice.nvim/discussions/364
       routes = {
         {
-          filter = {
-            event = "notify",
-            find = "No information available",
-          },
+          filter = { event = "notify", find = "No information available" },
+          opts = { skip = true },
+        },
+        -- lua_ls has a bunch of noisy messages
+        {
+          filter = { event = "lsp", find = "Searching in files..." },
           opts = { skip = true },
         },
         {
-          filter = {
-            event = "lsp",
-            find = "snyk",
-          },
+          filter = { event = "lsp", find = "Processing file symbols..." },
+          opts = { skip = true },
+        },
+        {
+          filter = { event = "lsp", find = "Loading workspace" },
+          opts = { skip = true },
+        },
+        {
+          filter = { event = "lsp", find = "Diagnosing" },
+          opts = { skip = true },
+        },
+        -- so does snyk_ls
+        {
+          filter = { event = "lsp", find = "snyk" },
           opts = { skip = true },
         },
       },
@@ -284,8 +296,14 @@ return {
       ui = { border = "rounded" },
     },
   },
-  -- this is installed via extras and customized here (TODO: config not working any more)
-  -- { "SmiteshP/nvim-navic", opts = { separator = "  " } },
+  -- this is installed via extras and customized here (TODO: override still not working. Needs config in the lualine segment which is harder to do.)
+  -- {
+  --   "SmiteshP/nvim-navic",
+  --   config = function(_, opts) -- lazyvim force overrides opts, so gotta do the same :/
+  --     opts.separator = "  "
+  --     require("nvim-navic").setup(opts)
+  --   end,
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {

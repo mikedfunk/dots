@@ -38,18 +38,18 @@ return {
   },
   -- { "luukvbaal/statuscol.nvim", opts = {} }, -- clickable fold markers
   -- installed by default, this just customizes it
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      filesystem = {
-        filtered_items = {
-          visible = true,
-          hide_dotfiles = false,
-        },
-        use_libuv_file_watcher = true,
-      },
-    },
-  },
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim", -- disabled to use snacks instead
+  --   opts = {
+  --     filesystem = {
+  --       filtered_items = {
+  --         visible = true,
+  --         hide_dotfiles = false,
+  --       },
+  --       use_libuv_file_watcher = true,
+  --     },
+  --   },
+  -- },
   { "wsdjeg/vim-fetch" }, -- go to file including line number e.g. stack trace
   -- {
   --   "ziontee113/icon-picker.nvim",
@@ -63,11 +63,10 @@ return {
     opts = {
       keymaps = {
         useDefaults = true,
-        disabledDefaults = { "gc", "gw", "ai", "ii", "aI", "iI" },
+        disabledDefaults = { "gc", "gw" },
       },
     },
   },
-  -- { "michaeljsmith/vim-indent-object" },
   { "wurli/visimatch.nvim", event = "VeryLazy", opts = {} },
   { "fpob/nette.vim", event = "VimEnter" },
   { "martinda/Jenkinsfile-vim-syntax", event = "VimEnter" },

@@ -40,12 +40,11 @@
   "phpactor": "2024.11.28.1",
   "phpcbf": "3.11.3",
   "phpcs": "3.11.3",
-  "phpstan": "2.1.3",
+  "phpstan": "2.1.4",
   "prettier": "3.5.0",
   "pyright": "1.1.393",
   "rubocop": "1.71.2",
   "ruby-lsp": "0.23.9",
-  "ruff": "0.9.5",
   "rustywind": "0.23.1",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.10.0",
@@ -63,5 +62,6 @@
   "vtsls": "0.2.8",
   "vue-language-server": "2.2.0",
   "yaml-language-server": "1.16.0",
-  "zk": "v0.14.1"
+  "zk": "v0.14.1",
+
 }
