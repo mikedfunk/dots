@@ -182,6 +182,7 @@ tap "pkgxdev/made" # pkgx
 # brew "s3cmd" # amazon s3 uploader (I use awscli instead)
 # brew "scummvm" # never have I seen a more wretched hive of scum(m) and villainy
 # brew "selenium-server-standalone" # controls a browser for automated testing
+# brew "sequoia-sq" # pgp/gpg CLI alternative
 # brew "shellcheck" # Checks shell syntax (used by vim ALE)
 # brew "shfmt" # formats shell scripts (used by vim ALE)
 # brew "shml" # $(fgcolor red)wow$(fgcolor end)
