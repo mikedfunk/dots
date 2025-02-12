@@ -5,7 +5,7 @@ return {
       "servers.snyk_ls.filetypes",
       "servers.emmet_language_server.filetypes",
     },
-    ---@class PluginLspOpts
+    ---@type PluginLspOpts
     opts = {
       codelens = { enabled = true },
       servers = {

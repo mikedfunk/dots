@@ -78,6 +78,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #   $cdpath
 # )
 
+fpath=(
+  $HOME/.docker/completions $fpath
+)
+
 # https://github.com/denisidoro/navi
 navipath=(
   $HOME/.navi

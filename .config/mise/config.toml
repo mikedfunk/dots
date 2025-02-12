@@ -1,7 +1,6 @@
 [tools]
 bun = "latest"
 deno = "latest"
-lua = "5.4.4"
 neovim = "stable"
 node = "latest"
 php = "latest"

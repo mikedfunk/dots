@@ -10,6 +10,7 @@
 # tap "avencera/taps" # rustywind
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
+# tap "daytonaio/tap" # daytona.io
 # tap "dbcli/tap" # litecli
 # tap "grishka/grishka" # neardrop
 # tap "homebrew/cask" # brew cask
@@ -28,7 +29,6 @@ tap "abhinav/tap" # git-spice
 tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
-tap "daytonaio/tap" # daytona.io
 tap "derailed/k9s" # k9s
 tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
@@ -66,6 +66,7 @@ tap "pkgxdev/made" # pkgx
 # brew "csvq" # jq for csv
 # brew "ctags" # allows jumping to function/class definitions, etc. in vim (I use universal-ctags)
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+# brew "daytona" # fancy devcontainer setup daytona.io
 # brew "desk" # shell workspace manager. (I use direnv instead)
 # brew "diff-so-fancy" # better git diff viewer (note: diff-highlight is in pip) (I now use delta instead)
 # brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.) (I use mise now)
@@ -259,7 +260,6 @@ brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
-brew "daytona" # fancy devcontainer setup daytona.io
 brew "devcontainer"
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "eza" # pretty ls replacement

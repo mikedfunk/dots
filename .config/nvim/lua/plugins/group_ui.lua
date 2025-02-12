@@ -18,13 +18,12 @@ return {
     opts_extend = {
       "dashboard.sections",
     },
+    ---@type snacks.Config
     opts = {
       -- https://github.com/folke/snacks.nvim/blob/main/docs/animate.md#-animate
       animate = {
         -- speed up animations
-        ---@class snacks.animate.Config
         {
-          ---@type snacks.animate.Duration|number
           duration = 5, -- ms per step (default: 20)
           easing = "cubic", -- https://github.com/kikito/tween.lua#easing-functions
         },
@@ -178,7 +177,7 @@ return {
       presets = {
         lsp_doc_border = true,
       },
-      ---@class NoiceConfigViews
+      ---@type NoiceConfigViews
       -- views = {
       --   notify = {
       --     backend = "notify_send",
@@ -409,7 +408,6 @@ return {
       -- conform.nvim and ale fixers {{{
       ---@return string[]
       local function get_formatters()
-        ---@class OneFormatter
         ---@type OneFormatter[]
         local raw_enabled_formatters, _ = require("conform").list_formatters_to_run()
         ---@type string[]
