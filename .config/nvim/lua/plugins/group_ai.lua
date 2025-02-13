@@ -80,7 +80,7 @@ return {
         desc = "Prev Codeium Completion",
       },
       {
-        "<a-c>",
+        "<a-e>",
         function()
           require("neocodeium").clear()
         end,
@@ -93,22 +93,13 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     build = ":AvanteBuild",
-    opts = {
-      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
-      file_selector = { provider = "fzf" },
-    },
-    -- just change some highlights
-    config = function(opts)
-      require("avante").setup(opts)
-      vim.cmd("hi link AvantePopupHint Comment")
-      vim.cmd("hi link AvanteInlineHint Comment")
-    end,
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       {
         "saghen/blink.cmp",
+        opts_extend = { "sources.compat" },
         opts = {
           sources = {
             compat = {
@@ -119,6 +110,45 @@ return {
           },
         },
       },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts_extend = { "file_types" },
+        opts = {
+          file_types = { "Avante" },
+        },
+        ft = { "markdown", "norg", "rmd", "org", "codecompanion", "Avante" },
+      },
     },
+    opts = {
+      -- local ollama model {{{
+      provider = "ollama",
+      vendors = {
+        ollama = {
+          __inherited_from = "openai",
+          api_key_name = "",
+          -- endpoint = "http://localhost:11434/api/generate",
+          endpoint = "http://127.0.0.1:11434/v1",
+          model = "mistral-mike",
+        },
+      },
+      -- }}}
+      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
+      file_selector = { provider = "snacks" },
+      -- auto_suggestions_provider = "gemini",
+      -- mappings = {
+      --   suggestion = {
+      --     accept = "<a-y>",
+      --     next = "<a-n>",
+      --     prev = "<a-p>",
+      --     dismiss = "<a-e>",
+      --   },
+      -- },
+    },
+    -- just change some highlights
+    config = function(_, opts)
+      require("avante").setup(opts)
+      vim.cmd("hi link AvantePopupHint Comment")
+      vim.cmd("hi link AvanteInlineHint Comment")
+    end,
   },
 }

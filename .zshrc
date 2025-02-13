@@ -78,29 +78,30 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #   $cdpath
 # )
 
-fpath=(
-  $HOME/.docker/completions $fpath
+export fpath=(
+  $HOME/.docker/completions
+  ${fpath:-}
 )
 
 # https://github.com/denisidoro/navi
-navipath=(
+export navipath=(
   $HOME/.navi
   ${navipath:-}
 )
 
-infopath=(
+export infopath=(
   $(brew --prefix)/share/info
   /usr/share/info
   ${infopath:-}
 )
 
-manpath=(
+export manpath=(
   $(brew --prefix)/share/man
   /usr/share/man
   ${manpath:-}
 )
 
-path=(
+export path=(
   $(brew --prefix mysql-client@8.0)/bin
   $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
@@ -191,6 +192,8 @@ export DOCKER_CLI_HINTS=false
 # export AIDER_YES_ALWAYS=true
 export AIDER_AUTO_COMMITS=false
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
+# https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
+export OLLAMA_NUM_PARALLEL=1
 
 # use latest versions of all plugins (if anything breaks, turn this off and sync packages)
 # currently indentline is breaking
