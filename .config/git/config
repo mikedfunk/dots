@@ -432,8 +432,9 @@
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
 [credential]
-    # helper = osxkeychain
+	helper = 
 	helper = /usr/local/share/gcm-core/git-credential-manager
+    # helper = osxkeychain
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 # }}}

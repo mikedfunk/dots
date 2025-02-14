@@ -121,16 +121,16 @@ return {
     },
     opts = {
       -- local ollama model {{{
-      provider = "ollama",
-      vendors = {
-        ollama = {
-          __inherited_from = "openai",
-          api_key_name = "",
-          -- endpoint = "http://localhost:11434/api/generate",
-          endpoint = "http://127.0.0.1:11434/v1",
-          model = "mistral-mike",
-        },
-      },
+      -- provider = "ollama",
+      -- vendors = {
+      --   ollama = {
+      --     __inherited_from = "openai",
+      --     api_key_name = "",
+      --     -- endpoint = "http://localhost:11434/api/generate",
+      --     endpoint = "http://127.0.0.1:11434/v1",
+      --     model = "mistral-mike",
+      --   },
+      -- },
       -- }}}
       -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
       file_selector = { provider = "snacks" },
@@ -151,4 +151,70 @@ return {
       vim.cmd("hi link AvanteInlineHint Comment")
     end,
   },
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   dependencies = {
+  --     "saghen/blink.cmp", -- complete @ and / commands
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     { "echasnovski/mini.diff", opts = {} },
+  --     -- { "echasnovski/mini.pick", opts = {} },
+  --   },
+  --   opts = {
+  --     strategies = {
+  --       -- chat = { adapter = "openai" },
+  --       -- inline = { adapter = "openai" },
+  --       -- agent = { adapter = "openai" },
+  --       chat = { adapter = "anthropic" },
+  --       inline = { adapter = "anthropic" },
+  --       agent = { adapter = "anthropic" },
+  --       -- chat = { adapter = "ollama" },
+  --       -- inline = { adapter = "ollama" },
+  --       -- agent = { adapter = "ollama" },
+  --     },
+  --   },
+  --   diff = { provider = "mini_diff" },
+  --   cmd = {
+  --     "CodeCompanion",
+  --     "CodeCompanionChat",
+  --     "CodeCompanionActions",
+  --   },
+  --   keys = {
+  --     {
+  --       "<Leader>ai",
+  --       "<Cmd>CodeCompanionChat Toggle<CR>",
+  --       mode = { "n", "v" },
+  --       desc = "Toggle CodeCompanion Chat",
+  --       noremap = true,
+  --     },
+  --     {
+  --       "<Leader>ab",
+  --       "<Cmd>CodeCompanion /buffer<CR>",
+  --       mode = { "n", "v" },
+  --       desc = "CodeCompanion Buffer",
+  --       noremap = true,
+  --     },
+  --     {
+  --       "<Leader>ae",
+  --       "<Cmd>CodeCompanion /explain<CR>",
+  --       mode = { "n", "v" },
+  --       desc = "CodeCompanion Explain",
+  --       noremap = true,
+  --     },
+  --     {
+  --       "<Leader>aa",
+  --       "<Cmd>CodeCompanionActions<CR>",
+  --       mode = { "n", "v" },
+  --       desc = "CodeCompanion Actions",
+  --       noremap = true,
+  --     },
+  --     {
+  --       "<a-a>",
+  --       "<Cmd>CodeCompanionActions<CR>",
+  --       mode = "i",
+  --       desc = "CodeCompanion Actions",
+  --       noremap = true,
+  --     },
+  --   },
+  -- },
 }

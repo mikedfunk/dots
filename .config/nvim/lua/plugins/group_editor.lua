@@ -95,6 +95,8 @@ return {
     opts = {
       left = {
         { title = "Undotree", ft = "undotree" },
+        -- { title = "Explorer", ft = "snacks_picker_list" },
+        -- { title = "Explorer", ft = "snacks_picker_input" },
       },
     },
     dependencies = {

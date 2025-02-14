@@ -93,9 +93,11 @@ tap "pkgxdev/made" # pkgx
 # brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 # brew "github-keygen" # simpler way to generate a github ssh key
 # brew "gitlab-gem" # gitlab cli
+# brew "glab" # like gh for gitlab
 # brew "global" # gnu global tags aka gtags. More powerful than ctags but has a different interface with a learning curve. Also depends on ctags which conflicts with universal-ctags.
 # brew "glow" # markdown terminal renderer - conflicts with npm glow (pretty flowtype checker)
 # brew "gnu-tar" # linux version of tar so stuff actually works
+# brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 # brew "graphviz" # useful for xdebug profiler class maps
 # brew "gum" # spiffy shell script UI helper
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
@@ -188,7 +190,8 @@ tap "pkgxdev/made" # pkgx
 # brew "shfmt" # formats shell scripts (used by vim ALE)
 # brew "shml" # $(fgcolor red)wow$(fgcolor end)
 # brew "shy" # neat ssh fuzzy connector (I rarely even use ssh these days)
-# brew "skaffold" # awesome local kubernetes cluster by google (TODO learn this! It looks freakin awesome)
+# brew "skaffold" # awesome local kubernetes cluster and dev/CI/deploy by google (TODO learn this! It looks freakin awesome)
+# brew "skopeo" # get docker registry info
 # brew "solr" # search data server (I hate solr. If I were to install it for an app it would be through docker.)
 # brew "source-highlight" # used to automatically colorize `less` text (I Just use `bat` instead. Got weird results with this.)
 # brew "spark" # used for rainbarf to show spiffy cli graphs (I don't use rainbarf currently)
@@ -249,6 +252,7 @@ brew "automake" # needed for building php
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "aws-sam-cli" # local lambda CLI
 brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials)
+brew "awslogs" # get cloudwatch logs
 brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
@@ -274,13 +278,11 @@ brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
 brew "git-spice" # stacked PR manager. Absolutely amazing.
-brew "glab" # like gh for gitlab
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "go" # golang programming language. used for installing/managing sqls
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
-brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
@@ -337,7 +339,6 @@ brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
-brew "skopeo" # get docker registry info
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
@@ -537,6 +538,7 @@ cask "zoomhider" # hide zoom floating meeting controls
 
 # mac app store {{{
 
+# mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
 # mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
@@ -546,7 +548,6 @@ cask "zoomhider" # hide zoom floating meeting controls
 # mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
-mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
 
 # }}}
