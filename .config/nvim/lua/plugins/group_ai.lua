@@ -1,33 +1,40 @@
 return {
+  -- {
+  --   "milanglacier/minuet-ai.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     blink = { enable_auto_complete = false },
+  --     provider = "openai_fim_compatible",
+  --     n_completions = 1,
+  --     context_window = 512,
+  --     provider_options = {
+  --       openai_fim_compatible = {
+  --         api_key = "TERM",
+  --         name = "Ollama",
+  --         end_point = "http://localhost:11434/v1/completions",
+  --         -- model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
+  --         model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
+  --         optional = {
+  --           max_tokens = 56,
+  --           top_p = 0.9,
+  --         },
+  --       },
+  --     },
+  --     virtualtext = {
+  --       auto_trigger_ft = { "*" },
+  --       show_on_completion_menu = true,
+  --       keymap = {
+  --         accept = "<a-y>",
+  --         prev = "<a-p>",
+  --         next = "<a-n>",
+  --         dismiss = "<a-e>",
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "monkoose/neocodeium",
     event = "VeryLazy",
-    opts = {
-      silent = true,
-      filter = function(bufnr)
-        local excluded_filetypes = {
-          "Avante",
-          "AvanteInput",
-          "DressingInput",
-          "NvimTree",
-          "TelescopePrompt",
-          "TelescopeResults",
-          "alpha",
-          "cmp",
-          "codecompanion",
-          "dashboard",
-          "harpoon",
-          "lazy",
-          "lspinfo",
-          "neoai-input",
-          "snacks_picker_input",
-          "starter",
-        }
-
-        return not vim.tbl_contains(excluded_filetypes, vim.api.nvim_get_option_value("filetype", { buf = bufnr }))
-      end,
-      -- show_label = false,
-    },
     dependencies = {
       {
         -- add AI section to which-key
@@ -88,6 +95,29 @@ return {
         desc = "Clear Codeium",
       },
     },
+    opts = {
+      silent = true,
+      filetypes = {
+        Avante = false,
+        AvanteInput = false,
+        DressingInput = false,
+        NvimTree = false,
+        TelescopePrompt = false,
+        TelescopeResults = false,
+        alpha = false,
+        cmp = false,
+        codecompanion = false,
+        ["dap-repl"] = false,
+        dashboard = false,
+        harpoon = false,
+        lazy = false,
+        lspinfo = false,
+        ["neoai-input"] = false,
+        snacks_picker_input = false,
+        starter = false,
+      },
+      -- show_label = false,
+    },
   },
   {
     "yetone/avante.nvim",
@@ -120,6 +150,8 @@ return {
       },
     },
     opts = {
+      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
+      file_selector = { provider = "snacks" },
       -- local ollama model {{{
       -- provider = "ollama",
       -- vendors = {
@@ -128,13 +160,11 @@ return {
       --     api_key_name = "",
       --     -- endpoint = "http://localhost:11434/api/generate",
       --     endpoint = "http://127.0.0.1:11434/v1",
-      --     model = "mistral-mike",
+      --     model = "qwen2.5-coder:7b",
       --   },
       -- },
       -- }}}
-      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
-      file_selector = { provider = "snacks" },
-      -- auto_suggestions_provider = "gemini",
+      -- auto_suggestions_provider = "ollama",
       -- mappings = {
       --   suggestion = {
       --     accept = "<a-y>",
