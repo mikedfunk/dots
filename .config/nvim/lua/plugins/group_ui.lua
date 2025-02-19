@@ -218,37 +218,78 @@ return {
     "edkolev/tmuxline.vim",
     init = function()
       local function set_tmuxline_theme()
+        -- 256 colors. Print all available colors: `curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/e50a28ec54188d2413518788de6c6367ffcea4f7/print256colours.sh | bash`
+        -- values represent: { FG, BG, ?ATTR }
+        --   FG ang BG are color codes
+        --   ATTR (optional) is a comma-delimited string of one or more of bold, dim, underscore, etc. For details refer to the STYLE section in the tmux man page
         if vim.o.background == "dark" then
+          -- dark 256 colors only
+          -- vim.g["tmuxline_theme"] = {
+          --   a = { "16", "254", "bold" }, -- left-most statusline section
+          --   b = { "247", "236" }, -- one away from left-most statusline section
+          --   c = { "250", "233" }, -- two away from left-most statusline section
+          --
+          --   x = { "250", "233" }, -- right-most statusline section
+          --   y = { "247", "236" }, -- one away from right-most statusline section
+          --   z = { "235", "252" }, -- right-most statusline section
+          --
+          --   bg = { "247", "234" }, -- statusline background between sections
+          --   win = { "250", "234" }, -- unselected "tab" aka window in tmux
+          --   ["win.dim"] = { "244", "234" },
+          --   cwin = { "231", "31", "bold" }, -- selected "tab" aka window in tmux
+          --   ["cwin.dim"] = { "117", "31" },
+          -- }
+
+          -- dark 16 colors + 256 colors mix
           vim.g["tmuxline_theme"] = {
-            a = { "16", "254", "bold" },
-            b = { "247", "236" },
-            c = { "250", "233" },
-            x = { "250", "233" },
-            y = { "247", "236" },
-            z = { "235", "252" },
-            bg = { "247", "234" },
-            win = { "250", "234" },
-            ["win.dim"] = { "244", "234" },
-            cwin = { "231", "31", "bold" },
-            ["cwin.dim"] = { "117", "31" },
+            a = { "15", "0", "bold" }, -- left-most statusline section
+            b = { "247", "236" }, -- one away from left-most statusline section
+            c = { "248", "237" }, -- two away from left-most statusline section
+
+            z = { "15", "0", "bold" }, -- right-most statusline section
+            y = { "247", "236" }, -- one away from right-most statusline section
+            x = { "248", "237" }, -- two away from right-most statusline section
+
+            bg = { "247", "235" }, -- statusline background between sections
+            win = { "7", "235" }, -- unselected "tab" aka window in tmux
+            cwin = { "7", "14", "bold" }, -- selected "tab" aka window in tmux
+            ["win.dim"] = { "244", "235" },
+            ["cwin.dim"] = { "117", "14", "bold" },
           }
           vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf") -- apply tmuxline settings and snapshot to file
 
           return
         end
 
+        -- light 256 colors version
+        -- vim.g["tmuxline_theme"] = {
+        --   a = { "238", "253", "bold" }, -- left-most statusline section
+        --   b = { "255", "238" }, -- one away from left-most statusline section
+        --   c = { "255", "236" }, -- two away from left-most statusline section
+        --
+        --   z = { "238", "253" }, -- right-most statusline section
+        --   y = { "255", "238" }, -- one away from right-most statusline section
+        --   x = { "255", "236" }, -- right-most statusline section
+        --
+        --   bg = { "16", "254" }, -- statusline background between sections
+        --   win = { "16", "254" }, -- unselected "tab" aka window in tmux
+        --   cwin = { "231", "31", "bold" }, -- selected "tab" aka window in tmux
+        -- }
+        -- light 16 colors + 256 colors version
         vim.g["tmuxline_theme"] = {
-          a = { "238", "253", "bold" },
-          b = { "255", "238" },
-          c = { "255", "236" },
-          x = { "255", "236" },
-          y = { "255", "238" },
-          z = { "238", "253" },
-          bg = { "16", "254" },
-          win = { "16", "254" },
-          cwin = { "231", "31", "bold" },
+          a = { "0", "15", "bold" }, -- left-most statusline section
+          b = { "254", "238" }, -- one away from left-most statusline section
+          c = { "255", "239" }, -- two away from left-most statusline section
+
+          z = { "0", "15", "bold" }, -- right-most statusline section
+          y = { "254", "238" }, -- one away from right-most statusline section
+          x = { "255", "239" }, -- two away from right-most statusline section
+
+          bg = { "16", "0" }, -- statusline background between sections
+          win = { "16", "0" }, -- unselected "tab" aka window in tmux
+          cwin = { "231", "14", "bold" }, -- selected "tab" aka window in tmux
         }
-        vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-light.conf") -- apply tmuxline settings and snapshot to file
+        vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-light.conf") -- apply tmuxline settings or snapshot to file
       end
       set_tmuxline_theme()
 

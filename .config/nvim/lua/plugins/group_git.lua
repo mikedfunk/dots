@@ -37,6 +37,26 @@ return {
       vim.keymap.set("v", "D", ":'<,'>Drop<cr>", { buffer = true, noremap = true })
     end,
   },
+  -- usage:
+  -- :DiffviewFileHistory % (log of current file)
+  -- :DiffviewFileHistory (log of current repo)
+  -- :DiffviewOpen (show all modified files)
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    opts = {
+      default = {
+        disable_diagnostics = false,
+      },
+      view = {
+        merge_tool = {
+          disable_diagnostics = false,
+          winbar_info = true,
+        },
+      },
+      enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+    },
+  },
   {
     "rhysd/committia.vim",
     ft = { "gitcommit", "gitrebase" },

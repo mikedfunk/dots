@@ -46,7 +46,12 @@ require("lazy").setup({
       },
     },
   },
-  install = { colorscheme = { "tokyonight" } },
+  install = {
+    colorscheme = {
+      "tokyonight",
+      "everforest",
+    },
+  },
   checker = { enabled = true, notify = false }, -- automatically check for plugin updates
   performance = {
     rtp = {
