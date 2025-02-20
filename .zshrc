@@ -563,6 +563,7 @@ puw() {
         php \
         -dmemory_limit=2048M \
         -ddisplay_errors=on \
+        -dxdebug.mode=off \
         ./vendor/bin/phpunit \
         --colors=always \
         $@
@@ -581,24 +582,6 @@ pucw() {
         --colors=always \
         --coverage-cobertura="coverage/cobertura.xml" \
         $@
-}
-# }}}
-
-# pest {{{
-pestnotify() {
-    touch /tmp/test-results
-    phpdbg -qrr -dmemory_limit=4096M -ddisplay_errors=on ./vendor/bin/pest --cache-directory=/tmp "${@}"
-    [[ $? == 0 ]] && noti --message "✅ Pest tests passed" ||
-        noti --message "❌ Pest tests failed"
-    # xdebug-on > /dev/null
-}
-alias per="pestnotify"
-
-pew() {
-    touch /tmp/test-results
-    noglob ag -l -g '.*\.php' \
-        | entr -cr \
-        noti --message "✅ Pest tests passed" php -dmemory_limit=1024M -ddisplay_errors=off ./vendor/bin/pest --cache-directory=/tmp $@
 }
 # }}}
 
@@ -638,17 +621,23 @@ psw() {
     noglob ag -l -g '.*\.php' \
         | entr -cr \
         noti --message "✅ ${PWD##*/} PHPSpec passed" \
-        php -dmemory_limit=1024M -ddisplay_errors=off \
-        ./vendor/bin/phpspec run --no-interaction -vvv
+        php \
+        -dmemory_limit=1024M \
+        -ddisplay_errors=off \
+        -dxdebug.mode=off \
+        ./vendor/bin/phpspec run --no-interaction -vvv $@
 }
 # phpspec coverage
 psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
-alias psc="php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
+alias psc="php -dxdebug.mode=coverage -dmemory_limit=2048M -dxdebug.mode=off ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
 pscw() {
     noglob ag -l -g '.*\.php' \
         | entr -cr \
         noti --message "✅ ${PWD##*/} PHPSpec passed and converage generated" \
-        php -dmemory_limit=1024M -ddisplay_errors=off \
+        php \
+        -dmemory_limit=1024M \
+        -ddisplay_errors=off \
+        -dxdebug.mode=off \
         ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml -vvv
 }
 # }}}
@@ -714,7 +703,11 @@ alias magento-phpunit="pu -c dev/tests/unit/phpunit.xml.dist"
 phpspecnotify() {
     # xdebug-off > /dev/null
     # phpdbg -qrr -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
-    php -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
+    php \
+        -dmemory_limit=2048M \
+        -ddisplay_errors=on \
+        -dxdebug.mode=off \
+        ./vendor/bin/phpspec run "${@}"
     # php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=${XDEBUG_IDE_KEY} -dxdebug.remote_port=9015 -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpspec run "${@}"
     [[ $? == 0 ]] && noti --message "✅ Specs passed" ||
         noti --message "❌ Specs failed"

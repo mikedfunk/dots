@@ -11,9 +11,11 @@ return {
   --       openai_fim_compatible = {
   --         api_key = "TERM",
   --         name = "Ollama",
+  --         stream = true,
   --         end_point = "http://localhost:11434/v1/completions",
   --         -- model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
-  --         model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
+  --         -- model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
+  --         model = "qwen2.5-coder:1.5b", -- takes 0.3-1 seconds to respond
   --         optional = {
   --           max_tokens = 56,
   --           top_p = 0.9,

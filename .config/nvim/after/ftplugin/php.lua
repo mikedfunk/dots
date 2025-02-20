@@ -34,7 +34,7 @@ end, { noremap = true, buffer = true, desc = "Split Docblock" })
 --   */
 vim.keymap.set("n", "<Leader>Pq", function()
   -- vim.api.nvim_buf_create_user_command(0, "FixThis", "silent! s/,$//g", {})
-  vim.cmd([[:command! FixThis :silent! s/,$//g]])
+  vim.cmd([[:command! -range FixThis :silent! s/,$//g]])
   vim.cmd(
     vim.api.nvim_replace_termcodes(
       [[:norm I* @param ObjectBehavior<<esc>Ea><esc>V:'<,'>FixThis<cr><esc>]],

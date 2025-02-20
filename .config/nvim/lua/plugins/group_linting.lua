@@ -153,7 +153,7 @@ return {
 
       vim.g.ale_linters = { php = { "phpstan" } }
       vim.g.ale_php_phpstan_level = 9
-      vim.g.ale_php_phpstan_memory_limit = "200M"
+      vim.g.ale_php_phpstan_memory_limit = "300M"
       -- use latest version from Mason
       vim.g.ale_php_phpstan_use_global = true
 

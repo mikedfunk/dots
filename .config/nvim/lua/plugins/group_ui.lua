@@ -252,7 +252,7 @@ return {
 
             bg = { "247", "235" }, -- statusline background between sections
             win = { "7", "235" }, -- unselected "tab" aka window in tmux
-            cwin = { "7", "14", "bold" }, -- selected "tab" aka window in tmux
+            cwin = { "0", "14", "bold" }, -- selected "tab" aka window in tmux
             ["win.dim"] = { "244", "235" },
             ["cwin.dim"] = { "117", "14", "bold" },
           }

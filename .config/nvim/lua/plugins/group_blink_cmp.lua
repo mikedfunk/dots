@@ -3,6 +3,12 @@ return {
     "saghen/blink.cmp",
     opts_extend = { "sources.default" },
     opts = {
+      enabled = function()
+        return not vim.tbl_contains({
+          "snacks_picker_input",
+          "markdown",
+        }, vim.bo.filetype)
+      end,
       keymap = {
         -- <c-n>/<c-p> next/prev, <c-y>/<c-e> accept/cancel
         -- This is mostly because if I press enter at the end of a line, by
