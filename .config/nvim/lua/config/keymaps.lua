@@ -19,20 +19,21 @@ vim.keymap.set("n", "zh", "20h", { noremap = true, desc = "Move left 20" })
 
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR><Esc>", { noremap = true, desc = "Save File" })
 
-vim.keymap.set("n", "<c-q>", function()
-  if package.loaded["trouble"] and require("trouble").is_open() then
-    require("trouble").close()
-    vim.cmd("cclose")
-
-    return
-  end
-
-  if vim.fn.empty(vim.fn.filter(vim.fn.getwininfo(), "v:val.quickfix")) == 1 then
-    vim.cmd("copen")
-  else
-    vim.cmd("cclose")
-  end
-end, { noremap = true, desc = "Toggle Quickfix" })
+vim.keymap.set("n", "<c-q>", "<Leader>xq", { remap = true, desc = "Toggle Quickfix" })
+-- vim.keymap.set("n", "<c-q>", function()
+--   if package.loaded["trouble"] and require("trouble").is_open() then
+--     require("trouble").close()
+--     vim.cmd("cclose")
+--
+--     return
+--   end
+--
+--   if vim.fn.empty(vim.fn.filter(vim.fn.getwininfo(), "v:val.quickfix")) == 1 then
+--     vim.cmd("copen")
+--   else
+--     vim.cmd("cclose")
+--   end
+-- end, { noremap = true, desc = "Toggle Quickfix" })
 
 vim.keymap.set("n", "[B", "<Cmd>BufferLineMovePrev<CR>", { noremap = true, desc = "Move Buffer Left" })
 vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc = "Move Buffer Right" })
@@ -40,7 +41,7 @@ vim.keymap.set("n", "]B", "<Cmd>BufferLineMoveNext<CR>", { noremap = true, desc 
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
 
-vim.keymap.set("i", "<c-space", function()
+vim.keymap.set("i", "<c-space>", function()
   return require("cmp.config.mapping").complete()
 end, { noremap = true, desc = "Complete" })
 

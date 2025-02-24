@@ -172,7 +172,7 @@ _install_upgrade_tmux_plugins() {
 # update mise plugins {{{
 _update_mise_plugins() {
     _log_info "Updating mise plugins"
-    mise plugin update --all
+    mise plugin update
 }
 # }}}
 

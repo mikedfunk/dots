@@ -1,21 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace %namespace%;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+%imports%
 
-/**
- * Specification unit test
- *
- * @see \%subject%
- */
+/** @see %subject_class% */
 final class %name% extends ObjectBehavior
 {
-
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
-        $this->shouldHaveType('%subject%');
+        $this->shouldHaveType(%subject_class%::class);
     }
 }
