@@ -131,13 +131,16 @@ return {
       "MunifTanjim/nui.nvim",
       {
         "saghen/blink.cmp",
-        opts_extend = { "sources.compat" },
+        dependencies = { "Kaiser-Yang/blink-cmp-avante" },
         opts = {
           sources = {
-            compat = {
-              "avante_commands",
-              "avante_mentions",
-              "avante_files",
+            per_filetype = { AvanteInput = "avante" },
+            providers = {
+              avante = {
+                module = "blink-cmp-avante",
+                name = "Avante",
+                opts = {},
+              },
             },
           },
         },
@@ -152,6 +155,7 @@ return {
       },
     },
     opts = {
+      behaviour = { enable_cursor_planning_mode = true },
       -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
       file_selector = { provider = "snacks" },
       -- local ollama model {{{
@@ -186,7 +190,12 @@ return {
   -- {
   --   "olimorris/codecompanion.nvim",
   --   dependencies = {
-  --     "saghen/blink.cmp", -- complete @ and / commands
+  --     {
+  --       "saghen/blink.cmp", -- complete @ and / commands
+  --       opts = {
+  --         sources = { per_filetype = { codecompanion = "codecompanion" } },
+  --       },
+  --     },
   --     "nvim-lua/plenary.nvim",
   --     "nvim-treesitter/nvim-treesitter",
   --     { "echasnovski/mini.diff", opts = {} },
