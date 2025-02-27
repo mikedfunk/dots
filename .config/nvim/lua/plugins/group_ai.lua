@@ -159,6 +159,7 @@ return {
       -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
       file_selector = { provider = "snacks" },
       -- local ollama model {{{
+      -- auto_suggestions_provider = "ollama",
       -- provider = "ollama",
       -- vendors = {
       --   ollama = {
@@ -170,7 +171,6 @@ return {
       --   },
       -- },
       -- }}}
-      -- auto_suggestions_provider = "ollama",
       -- mappings = {
       --   suggestion = {
       --     accept = "<a-y>",
