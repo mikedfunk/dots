@@ -65,7 +65,7 @@ return {
       },
     },
   },
-  -- get a hierarchical tree of references with :FunctionReferences
+  -- get a hierarchical tree of references with :FunctionReferences (only if lsp feature is supported)
   { "lafarr/hierarchy.nvim", event = "LspAttach", opts = {} },
   -- {
   --   "kitagry/bqls.nvim",

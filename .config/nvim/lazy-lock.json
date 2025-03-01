@@ -40,6 +40,7 @@
   "goto-breakpoints.nvim": { "branch": "master", "commit": "d14776899eda4023667b246e5c53c14a7c41f88e" },
   "grug-far.nvim": { "branch": "main", "commit": "309ecac6e6240d37c0be3c567d9f7cc95f63d255" },
   "helpview.nvim": { "branch": "main", "commit": "2bc021a2cf1e6ce103f95ceffc172cfefbbf9cfc" },
+  "hierarchy.nvim": { "branch": "master", "commit": "6e5d8d0970d08bf47699c03ced093020d77527db" },
   "highlighturl.nvim": { "branch": "main", "commit": "5a15865d6639c1188c2621f3171304d3b4e4312d" },
   "inc-rename.nvim": { "branch": "main", "commit": "f9b9e5b9a75074810f40881b7e254b5bbeaf122e" },
   "laravel.nvim": { "branch": "main", "commit": "2aef93890ca7853ddf550e11b4a60741a2eab1a1" },
