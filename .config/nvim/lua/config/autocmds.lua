@@ -57,3 +57,12 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
   end,
   desc = "neon commentstring",
 })
+
+-- moved to ftplugin/php.lua
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   group = vim.api.nvim_create_augroup("mike_php_auto_fold_use_statements", { clear = true }),
+--   pattern = "*.php",
+--   callback = function()
+--     vim.cmd([[silent! g/^use /normal! zc]]) -- Collapse only `use` statements
+--   end,
+-- })

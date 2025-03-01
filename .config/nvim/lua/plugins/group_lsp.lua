@@ -5,7 +5,6 @@ return {
       "servers.snyk_ls.filetypes",
       "servers.emmet_language_server.filetypes",
     },
-    ---@type PluginLspOpts
     opts = {
       codelens = { enabled = true },
       servers = {
@@ -66,6 +65,8 @@ return {
       },
     },
   },
+  -- get a hierarchical tree of references with :FunctionReferences
+  { "lafarr/hierarchy.nvim", event = "LspAttach", opts = {} },
   -- {
   --   "kitagry/bqls.nvim",
   --   dependencies = { "neovim/nvim-lspconfig" },
