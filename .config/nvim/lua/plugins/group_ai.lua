@@ -139,12 +139,12 @@ return {
         dependencies = { "Kaiser-Yang/blink-cmp-avante" },
         opts = {
           sources = {
-            per_filetype = { AvanteInput = "avante" },
+            per_filetype = { AvanteInput = { "avante" } },
             providers = {
               avante = {
                 module = "blink-cmp-avante",
                 name = "Avante",
-                opts = {},
+                -- opts = {},
               },
             },
           },
@@ -160,9 +160,26 @@ return {
       },
     },
     opts = {
-      behaviour = { enable_cursor_planning_mode = true },
+      behaviour = {
+        -- auto_suggestions = true,
+        enable_cursor_planning_mode = true,
+      },
       -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
       file_selector = { provider = "snacks" },
+      provider = "gemini",
+      -- auto_suggestion_provider = "gemini",
+      -- mappings = {
+      --   suggestion = {
+      --     accept = "<a-y>",
+      --     next = "<a-n>",
+      --     prev = "<a-p>",
+      --     dismiss = "<a-e>",
+      --   },
+      -- },
+      -- suggestion = {
+      --   debounce = 1000,
+      --   throttle = 1000,
+      -- },
       -- local ollama model {{{
       -- auto_suggestions_provider = "ollama",
       -- provider = "ollama",
@@ -176,14 +193,6 @@ return {
       --   },
       -- },
       -- }}}
-      -- mappings = {
-      --   suggestion = {
-      --     accept = "<a-y>",
-      --     next = "<a-n>",
-      --     prev = "<a-p>",
-      --     dismiss = "<a-e>",
-      --   },
-      -- },
     },
     -- just change some highlights
     config = function(_, opts)
