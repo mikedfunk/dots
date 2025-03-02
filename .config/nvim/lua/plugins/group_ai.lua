@@ -3,29 +3,29 @@ return {
   --   "milanglacier/minuet-ai.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim" },
   --   opts = {
-  --     debounce = 0,
-  --     throttle = 0,
+  --     -- debounce = 0,
+  --     -- throttle = 0,
   --     blink = { enable_auto_complete = false },
-  --     provider = "gemini",
+  --     -- provider = "gemini",
   --     -- ollama provider {{{
-  --     -- provider = "openai_fim_compatible",
-  --     -- n_completions = 1,
-  --     -- context_window = 512,
-  --     -- provider_options = {
-  --     --   openai_fim_compatible = {
-  --     --     api_key = "TERM",
-  --     --     name = "Ollama",
-  --     --     stream = true,
-  --     --     end_point = "http://localhost:11434/v1/completions",
-  --     --     -- model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
-  --     --     -- model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
-  --     --     model = "qwen2.5-coder:1.5b", -- takes 0.3-1 seconds to respond
-  --     --     optional = {
-  --     --       max_tokens = 56,
-  --     --       top_p = 0.9,
-  --     --     },
-  --     --   },
-  --     -- },
+  --     provider = "openai_fim_compatible",
+  --     n_completions = 1,
+  --     context_window = 512,
+  --     provider_options = {
+  --       openai_fim_compatible = {
+  --         api_key = "TERM",
+  --         name = "Ollama",
+  --         stream = true,
+  --         end_point = "http://localhost:11434/v1/completions",
+  --         model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
+  --         -- model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
+  --         -- model = "qwen2.5-coder:1.5b", -- takes 0.3-1 seconds to respond
+  --         optional = {
+  --           max_tokens = 56,
+  --           top_p = 0.9,
+  --         },
+  --       },
+  --     },
   --     -- }}}
   --     virtualtext = {
   --       auto_trigger_ft = { "*" },

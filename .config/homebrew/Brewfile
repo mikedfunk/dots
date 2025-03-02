@@ -512,7 +512,9 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "chatgpt" # desktop app <opt-space>
+cask "clop" # automatically optimize copied images
 cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
+cask "dockdoor" # show windows open in each app in dock on hover
 cask "firefox" # I use firefox for my home profile
 cask "firefox-developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font

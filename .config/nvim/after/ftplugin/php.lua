@@ -4,7 +4,10 @@ vim.bo.commentstring = "// %s"
 -- vim.wo.foldlevel = 1
 
 -- moved from autocmds.lua
+vim.cmd("norm mz")
 vim.cmd([[silent! g/^use /normal! zc]]) -- Collapse only `use` statements
+vim.cmd("norm `z")
+vim.cmd("delmarks z")
 
 vim.keymap.set("n", ",.", function()
   vim.cmd(vim.api.nvim_replace_termcodes([[norm! 0/\S-><cr>a<cr><esc>]], true, true, true))
