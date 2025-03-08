@@ -8,7 +8,6 @@
   "css-lsp": "4.10.0",
   "cssmodules-language-server": "1.5.1",
   "cucumber-language-server": "1.6.0",
-  "debugpy": "1.8.12",
   "delve": "v1.24.0",
   "docker-compose-language-service": "0.3.0",
   "dockerfile-language-server": "0.13.0",
@@ -19,7 +18,7 @@
   "eslint-lsp": "4.10.0",
   "gitlint": "0.19.1",
   "gofumpt": "v0.7.0",
-  "goimports": "v0.30.0",
+  "goimports": "v0.31.0",
   "gopls": "v0.18.1",
   "hadolint": "v2.12.0",
   "helm-ls": "v0.2.0",
@@ -63,5 +62,6 @@
   "vtsls": "0.2.8",
   "vue-language-server": "2.2.8",
   "yaml-language-server": "1.16.0",
-  "zk": "v0.14.1"
+  "zk": "v0.14.1",
+
 }
