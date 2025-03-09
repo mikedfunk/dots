@@ -15,6 +15,8 @@ getantidote/use-omz # antibody-friendly helper to improve integration with zsh
 # mattmc3/zfunctions # define and save functions to separate files. Apparently this is popular. Lazy load functions, define them in the shell then save them, and define help text for them.
 # mfaerevaag/wd # warp directory
 # ohmyzsh/ohmyzsh path:plugins/alias-finder # supposed to be 10x faster than alias-tips O_O https://github.com/djui/alias-tips/issues/49#issuecomment-569726313
+# ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+# ohmyzsh/ohmyzsh path:plugins/colorize # Plugin for highlighting file content
 # ohmyzsh/ohmyzsh path:plugins/per-directory-history # press <c-g> to toggle between local and global history
 # oldratlee/hacker-quotes # just add some cool hacker quotes in shell init like MOTD
 # olets/zsh-abbr # define abbreviations that expand as you type
@@ -33,8 +35,6 @@ junegunn/fzf-git.sh # fzf git helper <c-g><c-f>, etc.
 marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
 mroth/evalcache # speeds up subsequent runs of eval init functions. if you make a change just call `_evalcache_clear`.
 ohmyzsh/ohmyzsh path:lib/functions.zsh # some dependencies for oh-my-zsh plugins
-ohmyzsh/ohmyzsh path:plugins/colored-man-pages
-ohmyzsh/ohmyzsh path:plugins/colorize # Plugin for highlighting file content
 ohmyzsh/ohmyzsh path:plugins/command-not-found # suggest packages to install if command not found
 ohmyzsh/ohmyzsh path:plugins/gitfast # fix git completion issues https://unix.stackexchange.com/a/204308 downside: this also adds a TON of gxx aliases https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitfast it also adds MORE git aliases and functions from the main git plugin https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 ohmyzsh/ohmyzsh path:plugins/jira # simple command-line tool that just opens jira on different pages. No fancy shit.
@@ -43,5 +43,5 @@ ohmyzsh/ohmyzsh path:plugins/wd/wd.plugin.zsh # warp directory
 romkatv/powerlevel10k kind:fpath # zsh prompt theme (see ~/.p10k.zsh)
 yous/vanilli.sh # sensible zsh defaults
 zdharma-continuum/fast-syntax-highlighting kind:defer # colored input but faster
-zsh-users/zsh-autosuggestions # OLD COMMENT: buggy if enabled along with zsh-syntax-highlighting. crashes the shell regularly.
+zsh-users/zsh-autosuggestions kind:defer # OLD COMMENT: buggy if enabled along with zsh-syntax-highlighting. crashes the shell regularly.
 zsh-users/zsh-completions kind:fpath path:src # do-everything argument completions

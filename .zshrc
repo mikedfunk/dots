@@ -26,6 +26,8 @@ export GPG_TTY=$TTY
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+#
+# P10k is installed as a ZSH plugin.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -277,7 +279,7 @@ set PLANTUML_LIMIT_SIZE=8192
 export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
 
 # [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh" # this seems to conflict with direnv. Direnv seems to wipe the PATH changes this applies.
-[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh. P10k is installed as a ZSH plugin.
 
 # [[ -f $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh ]] && source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 builtin setopt aliases # weird, this should have already been done :/

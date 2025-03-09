@@ -24,6 +24,7 @@ return {
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
         },
+        -- golangci_lint_ls = {}, -- lazyvim go extra already has gopls that does this fine
         jsonls = {},
         lemminx = {},
         -- lsp_ai = {}, -- TODO: This is currently installed via cargo. Put this in Mason once it's available there.
