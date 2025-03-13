@@ -4,3 +4,6 @@ model: sonnet
 # model: claude-3-opus-20240229
 #
 # built-in model aliases: https://aider.chat/docs/config/model-aliases.html#built-in-aliases
+#
+# alias:
+#   - "qwen:ollama_chat/qwen2.5-coder:7b"

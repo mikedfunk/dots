@@ -95,8 +95,19 @@ return {
     opts = {
       left = {
         { title = "Undotree", ft = "undotree" },
+        { title = "Diffview Files", ft = "DiffviewFiles" },
         -- { title = "Explorer", ft = "snacks_picker_list" },
         -- { title = "Explorer", ft = "snacks_picker_input" },
+      },
+      bottom = {
+        { title = "Diffview File History", ft = "DiffviewFileHistory" },
+        { title = "QuickFix", ft = "qf" },
+      },
+      options = {
+        left = { size = 40 },
+        bottom = { size = 15 },
+        right = { size = 40 },
+        top = { size = 15 },
       },
     },
     dependencies = {

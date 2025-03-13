@@ -130,6 +130,46 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     build = ":AvanteBuild",
+    opts = {
+      behaviour = {
+        -- auto_suggestions = true,
+        enable_cursor_planning_mode = true,
+      },
+      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
+      file_selector = { provider = "snacks" },
+      provider = "gemini",
+      -- moved to .lazy.lua in some projects
+      -- rag_service = {
+      --   provider = "gemini",
+      --   enabled = true,
+      -- },
+      -- auto_suggestion_provider = "gemini",
+      -- mappings = {
+      --   suggestion = {
+      --     accept = "<a-y>",
+      --     next = "<a-n>",
+      --     prev = "<a-p>",
+      --     dismiss = "<a-e>",
+      --   },
+      -- },
+      -- suggestion = {
+      --   debounce = 1000,
+      --   throttle = 1000,
+      -- },
+      -- local ollama model {{{
+      -- auto_suggestions_provider = "ollama",
+      -- provider = "ollama",
+      -- vendors = {
+      --   ollama = {
+      --     __inherited_from = "openai",
+      --     api_key_name = "",
+      --     -- endpoint = "http://localhost:11434/api/generate",
+      --     endpoint = "http://127.0.0.1:11434/v1",
+      --     model = "qwen2.5-coder:7b",
+      --   },
+      -- },
+      -- }}}
+    },
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
@@ -158,41 +198,6 @@ return {
         },
         ft = { "markdown", "norg", "rmd", "org", "codecompanion", "Avante" },
       },
-    },
-    opts = {
-      behaviour = {
-        -- auto_suggestions = true,
-        enable_cursor_planning_mode = true,
-      },
-      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
-      file_selector = { provider = "snacks" },
-      provider = "gemini",
-      -- auto_suggestion_provider = "gemini",
-      -- mappings = {
-      --   suggestion = {
-      --     accept = "<a-y>",
-      --     next = "<a-n>",
-      --     prev = "<a-p>",
-      --     dismiss = "<a-e>",
-      --   },
-      -- },
-      -- suggestion = {
-      --   debounce = 1000,
-      --   throttle = 1000,
-      -- },
-      -- local ollama model {{{
-      -- auto_suggestions_provider = "ollama",
-      -- provider = "ollama",
-      -- vendors = {
-      --   ollama = {
-      --     __inherited_from = "openai",
-      --     api_key_name = "",
-      --     -- endpoint = "http://localhost:11434/api/generate",
-      --     endpoint = "http://127.0.0.1:11434/v1",
-      --     model = "qwen2.5-coder:7b",
-      --   },
-      -- },
-      -- }}}
     },
     -- just change some highlights
     config = function(_, opts)
