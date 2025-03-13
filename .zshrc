@@ -192,6 +192,7 @@ export DOCKER_CLI_HINTS=false
 # export AIDER_MODEL="ollama/llama3.1:8b"
 # export AIDER_SHOW_MODEL_WARNINGS=false
 # export AIDER_YES_ALWAYS=true
+export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
 export AIDER_AUTO_COMMITS=false
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027

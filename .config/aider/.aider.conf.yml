@@ -1,0 +1,6 @@
+provider: anthropic
+model: sonnet
+# model: claude-3-sonnet-20240229
+# model: claude-3-opus-20240229
+#
+# built-in model aliases: https://aider.chat/docs/config/model-aliases.html#built-in-aliases
