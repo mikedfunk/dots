@@ -138,6 +138,9 @@ return {
       -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
       file_selector = { provider = "snacks" },
       provider = "gemini",
+      -- gemini = {
+      --   model = "gemini/gemini-2.0-flash-exp", -- not yet available in avante. :AvanteModels
+      -- },
       -- moved to .lazy.lua in some projects
       -- rag_service = {
       --   provider = "gemini",

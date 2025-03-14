@@ -91,13 +91,20 @@ return {
   -- added via LazyExtras and customized here to add undotree as an edgy window
   {
     "folke/edgy.nvim",
-    opts_extend = { "left" },
+    opts_extend = { "left", "bottom", "right" },
     opts = {
       left = {
         { title = "Undotree", ft = "undotree" },
         { title = "Diffview Files", ft = "DiffviewFiles" },
+        -- messes up window: doubles it up. Besides, this is not the only place snacks_picker_list is used.
         -- { title = "Explorer", ft = "snacks_picker_list" },
         -- { title = "Explorer", ft = "snacks_picker_input" },
+      },
+      right = {
+        -- messes up titles, adds ugly padding to bottom
+        -- { title = "Avante", ft = "Avante" },
+        -- { title = "Avante Selected Files", ft = "AvanteSelectedFiles" },
+        -- { title = "Avante Input", ft = "AvanteInput" },
       },
       bottom = {
         { title = "Diffview File History", ft = "DiffviewFileHistory" },
