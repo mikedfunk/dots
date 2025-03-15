@@ -2,6 +2,10 @@
   "lspconfig": {
     "harper_ls": {
       "harper-ls": {
+        "linters": {
+          "SpellCheck": false,
+          "SentenceCapitalization": false
+        },
         "userDictPath": "~/.config/nvim/spell/en.utf-8.add"
       }
     },

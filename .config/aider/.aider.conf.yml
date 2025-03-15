@@ -1,5 +1,7 @@
-provider: anthropic
-model: sonnet
+# provider: anthropic
+# model: sonnet
+provider: gemini
+model: gemini-2.0-flash-exp
 # model: claude-3-sonnet-20240229
 # model: claude-3-opus-20240229
 #

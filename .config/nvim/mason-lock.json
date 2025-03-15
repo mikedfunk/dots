@@ -22,6 +22,7 @@
   "goimports": "v0.31.0",
   "gopls": "v0.18.1",
   "hadolint": "v2.12.0",
+  "harper-ls": "v0.25.1",
   "helm-ls": "v0.2.0",
   "intelephense": "1.14.3",
   "isort": "6.0.1",
