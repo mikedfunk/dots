@@ -276,7 +276,7 @@ brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-fixup" # git commit --fixup helper
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
-brew "git-spice" # stacked PR manager. Absolutely amazing.
+brew "git-spice", link: false # stacked PR manager. Absolutely amazing.
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
@@ -361,6 +361,7 @@ brew "yadm" # yet another dotfiles manager
 brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zlib" # needed to build php and python
 brew "zsh" # awesome bash shell replacement
+brew "uv" # python package manager. needed for uvx used by mcphub neovim plugin.
 
 # }}}
 

@@ -238,12 +238,12 @@ END_HEREDOC
 }
 
 _install_php_84() {
-    (mise list php | grep --quiet "8.4.1") && return
-    _log_info "installing php 8.4.1"
-    mise install php 8.4.1
-    mise global php 8.4.1 || return
+    (mise list php | grep --quiet "8.4.5") && return
+    _log_info "installing php 8.4.5"
+    mise install php 8.4.5
+    mise global php 8.4.5 || return
 
-    # install php extensions (different set for 8.4.1)
+    # install php extensions (different set for 8.4.5)
     local -r PHP_PATH="$(mise where php)"
     mkdir -p "${PHP_PATH}"/conf.d
 
@@ -259,9 +259,9 @@ _install_php_84() {
 
     # install fork that fixes php 8.4 compat {{{
     _install_imagick_php_84() {
-        [ -d /tmp/imagick_php_84 ] || git clone https://github.com/mvorisek/imagick.git /tmp/imagick_php_84
+        [ -d /tmp/imagick_php_84 ] || git clone https://github.com/imagick/imagick.git /tmp/imagick_php_84
         cd /tmp/imagick_php_84 || return
-        git checkout fix_php84
+        git checkout develop
         phpize
         ./configure
         make
@@ -297,7 +297,7 @@ END_HEREDOC
     # install global composer packages
     # mkdir -p  "${PHP_PATH}"/{.,}composer
     # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # mise reshim php "8.4.1"
+    # mise reshim php "8.4.5"
 }
 
 # https://github.com/mise-community/mise-php/blob/master/.github/workflows/workflow.yml#L33-L52
@@ -313,7 +313,7 @@ _install_php_versions() {
 
     _install_php_81
     _install_php_84
-    mise global php 8.4.1
+    mise global php 8.4.5
 
     # NOTE: revert temporary nasty hack
     cd "$HOME/.mise/plugins/php/" && git reset --hard

@@ -209,6 +209,32 @@ return {
       vim.cmd("hi link AvanteInlineHint Comment")
     end,
   },
+  -- TODO: not working yet. Says the mcp server was not started.
+  -- {
+  --   "ravitemer/mcphub.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     {
+  --       "yetone/avante.nvim",
+  --       opts = {
+  --         system_prompt = function()
+  --           local hub = require("mcphub").get_hub_instance()
+  --           return hub:get_active_servers_prompt()
+  --         end,
+  --         custom_tools = function()
+  --           return {
+  --             require("mcphub.extensions.avante").mcp_tool(),
+  --           }
+  --         end,
+  --       },
+  --     },
+  --   },
+  --   build = "npm install -g mcp-hub@latest",
+  --   opts = {
+  --     port = 3000,
+  --     config = vim.fn.expand("~/.config/mcphub/mcpservers.json"),
+  --   },
+  -- },
   -- {
   --   "olimorris/codecompanion.nvim",
   --   dependencies = {

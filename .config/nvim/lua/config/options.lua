@@ -242,3 +242,6 @@ vim.filetype.add({ pattern = { [".sqlfluff"] = "dosini" } })
 -- https://www.lazyvim.org/extras/lang/php#options
 vim.g.lazyvim_php_lsp = "intelephense"
 vim.g.ai_cmp = false
+
+-- neovide (moved to ~/.config/neovide/config.toml)
+-- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14"
