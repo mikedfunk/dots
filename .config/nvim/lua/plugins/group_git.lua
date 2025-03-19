@@ -43,7 +43,8 @@ return {
   -- :DiffviewOpen (show all modified files)
   {
     "sindrets/diffview.nvim",
-    event = "VeryLazy",
+    lazy = false, -- avoid probs with git mergetool
+    -- event = "VeryLazy",
     opts = {
       default = {
         disable_diagnostics = false,
