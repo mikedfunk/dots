@@ -8,6 +8,10 @@ return {
     },
   },
   {
+    "HawkinsT/pathfinder.nvim",
+    event = "VeryLazy",
+  },
+  {
     "smjonas/live-command.nvim",
     event = "VeryLazy",
     config = function()

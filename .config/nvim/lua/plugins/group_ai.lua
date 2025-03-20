@@ -6,9 +6,9 @@ return {
   --     -- debounce = 0,
   --     -- throttle = 0,
   --     blink = { enable_auto_complete = false },
-  --     -- provider = "gemini",
+  --     provider = "gemini",
   --     -- ollama provider {{{
-  --     provider = "openai_fim_compatible",
+  --     -- provider = "openai_fim_compatible",
   --     n_completions = 1,
   --     context_window = 512,
   --     provider_options = {

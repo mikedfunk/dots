@@ -245,3 +245,5 @@ vim.g.ai_cmp = false
 
 -- neovide (moved to ~/.config/neovide/config.toml)
 -- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14"
+vim.g.neovide_input_macos_option_key_is_meta = "both"
+vim.g.neovide_fullscreen = true

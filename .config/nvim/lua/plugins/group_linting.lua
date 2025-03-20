@@ -1,4 +1,4 @@
-# vim: set fdm=marker:
+-- vim: set fdm=marker:
 return {
   {
     -- automatically install nvim-lint packages that are configured
@@ -140,6 +140,7 @@ return {
   {
     -- this is ONLY for slow phpstan level 9. See comment above.
     "dense-analysis/ale",
+    branch = "neovim-lsp-api",
     ft = { "php" },
     init = function()
       vim.g.ale_set_loclist = 0
