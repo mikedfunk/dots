@@ -36,7 +36,7 @@
   "markdownlint-cli2": "0.17.2",
   "marksman": "2024-12-18",
   "nginx-language-server": "0.8.0",
-  "php-cs-fixer": "v3.72.0",
+  "php-cs-fixer": "v3.73.1",
   "php-debug-adapter": "v1.35.0",
   "phpactor": "2025.02.21.0",
   "phpcbf": "3.12.0",
@@ -46,7 +46,6 @@
   "pyright": "1.1.396",
   "rubocop": "1.74.0",
   "ruby-lsp": "0.23.12",
-  "ruff": "0.11.0",
   "rustywind": "0.24.0",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.11.0",
@@ -64,5 +63,6 @@
   "vtsls": "0.2.8",
   "vue-language-server": "2.2.8",
   "yaml-language-server": "1.17.0",
-  "zk": "v0.14.1"
+  "zk": "v0.14.1",
+
 }

@@ -11,6 +11,7 @@ return {
     "HawkinsT/pathfinder.nvim",
     event = "VeryLazy",
   },
+  -- { "tpope/vim-apathy", event = "VeryLazy" },
   {
     "smjonas/live-command.nvim",
     event = "VeryLazy",

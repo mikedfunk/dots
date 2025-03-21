@@ -6,7 +6,6 @@ return {
       modes = { command = false }, -- do not auto-pair in command or search mode
     },
   },
-  { "tpope/vim-apathy", event = "VeryLazy" },
   -- { "sickill/vim-pasta", event = "BufRead" },
   { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
   {
