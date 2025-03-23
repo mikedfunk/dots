@@ -307,7 +307,6 @@ export HOMEBREW_NO_ANALYTICS=1
 # export TERMINFO="$XDG_DATA_HOME"/terminfo
 # export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
-export AWS_SSO_CACHE_FILE="$XDG_CONFIG_HOME"/aws/sso/cache
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
@@ -457,7 +456,10 @@ alias du="grc --colour=auto /usr/bin/du"
 _has eza && alias ls="eza"
 # alias ll='ls -lhGFA'
 alias ll='ls -lhA --classify=auto'
-alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
+# alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
+# alias phpx="php -dxdebug.mode=debug -dxdebug.start_with_request=yes -dxdebug.client_host=localhost -dxdebug.client_port=9015 -dxdebug.idekey=mikedfunkxd -ddisplay_errors=on"
+# override port with `XDEBUG_PORT=9015 phpx ...`
+phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug -dxdebug.client_port=${XDEBUG_PORT:-9003} $@; }
 alias work="smug start work"
 alias home="smug start home"
 alias rmf='rm -rf'
