@@ -24,7 +24,7 @@ return {
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
         },
-        harper_ls = {},
+        -- harper_ls = {},
         -- golangci_lint_ls = {}, -- lazyvim go extra already has gopls that does this fine
         jsonls = {},
         lemminx = {},

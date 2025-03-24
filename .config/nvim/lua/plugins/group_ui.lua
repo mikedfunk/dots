@@ -28,6 +28,14 @@ return {
           easing = "cubic", -- https://github.com/kikito/tween.lua#easing-functions
         },
       },
+      -- https://github.com/folke/snacks.nvim/blob/main/docs/styles.md
+      styles = {
+        zen = {
+          backdrop = {
+            transparent = false,
+          },
+        },
+      },
       dashboard = {
         sections = {
           { section = "header" },

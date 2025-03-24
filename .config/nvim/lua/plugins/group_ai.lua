@@ -131,6 +131,16 @@ return {
     event = "VeryLazy",
     build = ":AvanteBuild",
     opts = {
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        if hub == nil then
+          return
+        end
+        return hub:get_active_servers_prompt()
+      end,
+      custom_tools = function()
+        return { require("mcphub.extensions.avante").mcp_tool() }
+      end,
       behaviour = {
         -- auto_suggestions = true,
         enable_cursor_planning_mode = true,
@@ -177,6 +187,14 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      {
+        "ravitemer/mcphub.nvim",
+        build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+        opts = {
+          port = 3003,
+          config = vim.fn.expand("~/.config/mcphub/mcpservers.json"),
+        },
+      },
       {
         "saghen/blink.cmp",
         dependencies = { "Kaiser-Yang/blink-cmp-avante" },
