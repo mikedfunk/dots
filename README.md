@@ -25,4 +25,4 @@ Light mode:
 - [Zshrc](.zshrc), [Zsh plugins](.zsh_plugins.txt)
 - [P10k prompt config](.p10k.zsh)
 - [Git config](.config/git/config), [Tig config](.config/tig/config)
-- [Tmux config and tmux plugins](.config/tmux/tmux.conf), [Home smug layout](.config/smug/home.yml)
+- [Tmux config and tmux plugins](.config/tmux/tmux.conf), [Home tmuxinator layouts](.config/tmuxinator/)

@@ -1,0 +1,9 @@
+---
+windows:
+  - go:
+      root: ~/Code/test/go-with-tests
+      layout: main-horizontal
+      panes:
+        - v
+        - ts
+        - gtw

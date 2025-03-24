@@ -1,0 +1,4 @@
+---
+windows:
+  - mastodon:
+      panes: [toot tui]

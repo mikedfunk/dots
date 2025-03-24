@@ -1,0 +1,9 @@
+---
+windows:
+  - blog:
+      root: ~/Code/mikedfunk.github.io
+      layout: main-horizontal
+      panes:
+        - v
+        - ts
+        - bundle install && bundle exec jekyll serve --watch

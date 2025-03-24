@@ -10,7 +10,7 @@
 .support/saatchi/*
 
 .config/git/config-saatchi
-.config/smug/work.yml
+.config/tmuxinator/work**.yml
 
 Code/saatchi/palette/phpspec-coverage**.yml
 

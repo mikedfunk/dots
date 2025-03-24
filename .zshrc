@@ -331,6 +331,7 @@ export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmuxp
 
 unset AWS_SHARED_CREDENTIALS_FILE AWS_CONFIG_FILE ASDF_CONFIG_FILE ASDF_DATA_DIR
 
@@ -456,12 +457,9 @@ alias du="grc --colour=auto /usr/bin/du"
 _has eza && alias ls="eza"
 # alias ll='ls -lhGFA'
 alias ll='ls -lhA --classify=auto'
-# alias phpx="php -dxdebug.remote_autostart=1 -dxdebug.remote_connect_back=1 -dxdebug.idekey=mikedfunkxd -dxdebug.remote_port=9000 -ddisplay_errors=on"
-# alias phpx="php -dxdebug.mode=debug -dxdebug.start_with_request=yes -dxdebug.client_host=localhost -dxdebug.client_port=9015 -dxdebug.idekey=mikedfunkxd -ddisplay_errors=on"
-# override port with `XDEBUG_PORT=9015 phpx ...`
-phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug -dxdebug.client_port=${XDEBUG_PORT:-9003} $@; }
-alias work="smug start work"
-alias home="smug start home"
+phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug,develop -dxdebug.client_port=${XDEBUG_PORT:-9003} $@; }
+alias work="tmuxinator start work"
+alias home="tmuxinator start home"
 alias rmf='rm -rf'
 compdef rmf="rm"
 mkcd () { mkdir $1 && cd $1; }
