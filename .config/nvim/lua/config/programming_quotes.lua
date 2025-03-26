@@ -541,6 +541,7 @@ M.quotes = {
   { "You never finish a program, you just stop working on it." },
   { "You see the fingers flying over the keyboard; you don't see the hours spent in talking to users, discussing the problems with coworkers, doing research and thinking the problems through.", "", "- Unknown" },
   { "You should name a variable using the same care with which you name a first-born child.", "", "- Jim Coplien" },
+  { "You teach me, I forget. You show me, I remember. You involve me, I understand.", "", "- Xunzi" },
   { "Your code will eventually have its assumptions challenged and stop working.", "", "- /u/the7key" },
   { "Your mind is programmable – if you're not programming your mind, else will program it for you.", "", "- Jeremy Hammond" },
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
