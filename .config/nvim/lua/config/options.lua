@@ -10,10 +10,7 @@ vim.o.swapfile = true -- I hate them but they help if neovim crashes
 vim.o.splitkeep = "screen"
 
 vim.o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add" -- this is necessary because nvim-treesitter is first in the runtimepath
-vim.o.spelloptions = table.concat({
-  "noplainbuffer",
-  "camel",
-}, ",")
+vim.opt.spelloptions:append("camel")
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = "croqjt"
 vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
@@ -23,6 +20,7 @@ vim.o.mousemoveevent = true -- enable hover X on bufferline tabs
 vim.o.scrolloff = 10
 vim.g.vimsyn_embed = "alpPrj" -- Highlight embedded languages in the strings when working in augroups, lua, perl, python, ruby, and javascript
 vim.cmd("hi link mysql sql")
+-- vim.o.winborder = "rounded"
 
 -- turn off relativenumber in insert mode and others {{{
 local norelative_events = { "InsertEnter", "WinLeave", "FocusLost" }
@@ -96,6 +94,7 @@ end -- :h dictionary
 vim.o.updatetime = 100 -- wait time before CursorHold activation
 
 vim.cmd("packadd! cfilter")
+vim.opt.completeopt:append("fuzzy")
 
 -- vim-cool replacement https://www.reddit.com/r/neovim/comments/zc720y/tip_to_manage_hlsearch/iyvcdf0/
 -- vim.on_key(function(char)

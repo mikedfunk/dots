@@ -2,7 +2,7 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
-vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   group = vim.api.nvim_create_augroup("mike_grep_open_quickfix", { clear = true }),
   pattern = { "[^l]*", "l*" },
   command = "cwindow",
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
 })
 
 -- show cursor line only in active window
-vim.api.nvim_create_autocmd({ "WinEnter" }, {
+vim.api.nvim_create_autocmd("WinEnter", {
   group = vim.api.nvim_create_augroup("mike_hide_cursorline", { clear = true }),
   callback = function()
     if vim.w.auto_cursorline then
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "WinEnter" }, {
   end,
   desc = "Hide cursor line",
 })
-vim.api.nvim_create_autocmd({ "WinLeave" }, {
+vim.api.nvim_create_autocmd("WinLeave", {
   group = vim.api.nvim_create_augroup("mike_auto_cursorline", { clear = true }),
   callback = function()
     if vim.wo.cursorline then
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   desc = "dont autoformat these",
 })
 
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd("Filetype", {
   group = vim.api.nvim_create_augroup("mike_plantuml_commentstring", { clear = true }),
   pattern = { "plantuml" },
   callback = function()
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
   desc = "plantuml commentstring",
 })
 
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd("Filetype", {
   group = vim.api.nvim_create_augroup("mike_neon_commentstring", { clear = true }),
   pattern = { "neon" },
   callback = function()
@@ -57,6 +57,19 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
   end,
   desc = "neon commentstring",
 })
+--
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   group = vim.api.nvim_create_augroup("lsp_def_cursorhold", { clear = true }),
+--   pattern = "*",
+--   callback = function()
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+--     if #clients > 0 then
+--       vim.lsp.buf.hover()
+--     end
+--   end,
+--   desc = "lsp def cursorhold",
+-- })
 
 -- moved to ftplugin/php.lua
 -- vim.api.nvim_create_autocmd("BufReadPost", {

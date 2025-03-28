@@ -7,10 +7,7 @@ return {
       show_cursorline = true, -- Enable 'cursorline' for the window while peeking
     },
   },
-  {
-    "HawkinsT/pathfinder.nvim",
-    event = "VeryLazy",
-  },
+  { "HawkinsT/pathfinder.nvim", event = "VeryLazy" },
   -- { "tpope/vim-apathy", event = "VeryLazy" },
   {
     "smjonas/live-command.nvim",

@@ -24,11 +24,10 @@ return {
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
         },
-        -- harper_ls = {},
-        -- golangci_lint_ls = {}, -- lazyvim go extra already has gopls that does this fine
+        -- harper_ls = {}, -- annoying grammar checker that usually reports false positives in code
         jsonls = {},
         lemminx = {},
-        -- lsp_ai = {}, -- TODO: This is currently installed via cargo. Put this in Mason once it's available there.
+        -- lsp_ai = {},
         snyk_ls = {
           filetypes = { "php" }, -- add more filetypes
           init_options = {
@@ -38,7 +37,7 @@ return {
             activateSnykCodeQuality = "true",
             organization = "leaf-saatchiart",
           },
-          autostart = false, -- to use this LS: :LspStart snyk_ls
+          autostart = false, -- to use this LS, :LspStart snyk_ls
         },
         -- phpactor = {},
         somesass_ls = {},

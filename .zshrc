@@ -299,9 +299,6 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # export ANDROID_HOME="$XDG_DATA_HOME"/android
 # export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
-# export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
-# export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/.asdfrc"
-# export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
 # export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # export TERMINFO="$XDG_DATA_HOME"/terminfo
@@ -332,8 +329,6 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmuxp
-
-unset AWS_SHARED_CREDENTIALS_FILE ASDF_CONFIG_FILE ASDF_DATA_DIR
 
 # }}}
 # _has inshellisense && inshellisense --shell zsh # check this later - right now it sucks but they are rewriting it
