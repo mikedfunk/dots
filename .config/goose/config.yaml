@@ -1,0 +1,8 @@
+GOOSE_MODEL: gemini-2.0-flash
+GOOSE_PROVIDER: google
+extensions:
+  developer:
+    enabled: true
+    name: developer
+    type: builtin
+GOOSE_MODE: smart_approve

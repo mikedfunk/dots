@@ -7,13 +7,15 @@
 
 # tap "andersjanmyr/homebrew-tap" # mc
 # tap "artginzburg/tap" # for sudo-touchid
-# tap "avencera/taps" # rustywind
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
 # tap "daytonaio/tap" # daytona.io
 # tap "dbcli/tap" # litecli
+# tap "derailed/k9s" # k9s
 # tap "grishka/grishka" # neardrop
 # tap "homebrew/cask" # brew cask
+# tap "homebrew/cask-fonts" # weird, I have to tap this manually?
+# tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # tap "jannis-baum/tap" # vivify
 # tap "jetbrains/utils" # qodana
 # tap "lihaoyun6/tap" # quickrecorder
@@ -26,15 +28,10 @@
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
 tap "abhinav/tap" # git-spice
-tap "algolia/algolia-cli" # algolia
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
-tap "derailed/k9s" # k9s
-tap "homebrew/cask-fonts" # weird, I have to tap this manually?
-tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 tap "mikedfunk/zoomhider" # zoomhider
 tap "oven-sh/bun" # bun
-tap "pkgxdev/made" # pkgx
 
 # }}}
 
@@ -332,7 +329,7 @@ brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/
 brew "pkgx" # like npx for homebrew
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
-brew "portaudio" used by aider to enable voice input
+brew "portaudio" # used by aider to enable voice input
 brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
 brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.)
 brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json
@@ -341,6 +338,7 @@ brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
+brew "scrcpy" # mirror android screen
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
@@ -374,7 +372,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "aerial" # cool apple tv style screensavers
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "android-platform-tools" # adb, etc.
-# cask "authy" # desktop 2-factor! (desktop app discontinued)
 # cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
 # cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
@@ -385,6 +382,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "claude" # desktop app <opt-space> (tags: llm, llama, openai, chatgpt)
 # cask "clop" # automatically optimize copied images (also copies path to clipboard. Ends up with 2 images in sequence in clipboard. Kind of messy. Can't easily quit app.)
 # cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
+# cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
 # cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
@@ -425,7 +423,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "huggingchat" # huggingface native app ton interact with LLMs
 # cask "immersed" # use your oculus quest as up to 2 monitors for your computer (no longer in brew cask)
 # cask "insomnia" # http api client like postman but nicer looking (I use this for sharing with my team but I mostly use vim-rest-console)
-# cask "iterm2" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 # cask "java" # required for plantuml, etc.
 # cask "joplin" # desktop joplin (I use the terminal interface)
 # cask "jumpcut" # clipboard manager recommended by Michael Zick (slightly annoying interface) (I now use maccy instead)
@@ -518,17 +515,16 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "chatgpt" # desktop app <opt-space>
-cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 cask "dockdoor" # show windows open in each app in dock on hover
 cask "firefox" # I use firefox for my home profile
-cask "firefox-developer-edition" # I use dev edition for my work profile
+cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
-cask "iterm2-beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
+cask "iterm2@beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
 cask "jordanbaird-ice" # menubar tool similar to hiddenbar
 cask "maccy" # simple clipboard manager. WAY better than jumpcut!
@@ -537,7 +533,6 @@ cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
-cask "scrcpy" # mirror android screen
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "zoomhider" # hide zoom floating meeting controls
 
