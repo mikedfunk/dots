@@ -4,7 +4,7 @@
 
 mattmc3/ez-compinit # queues compinit. Must be first!
 getantidote/use-omz # antibody-friendly helper to improve integration with zsh
-romkatv/zsh-defer kind:fpath path:zsh-defer.plugin.zsh # defer loading of zsh plugins
+# romkatv/zsh-defer kind:fpath path:zsh-defer.plugin.zsh # defer loading of zsh plugins. Not necessary with P10k instant prompt.
 
 # belak/zsh-utils path:prompt
 # chitoku-k/fzf-zsh-completions # Add zsh fzf completions for git, kubectl, and more e.g. `git rebase -i **<tab>`. Slow - most expensive plugin.
