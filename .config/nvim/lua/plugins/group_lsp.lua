@@ -20,6 +20,7 @@ return {
         },
         cssmodules_ls = {},
         cucumber_language_server = {},
+        denols = {},
         -- flow = {},
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes

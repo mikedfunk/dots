@@ -29,6 +29,17 @@ return {
       default_keybindings = false,
     },
   },
+  {
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {
+      -- TODO: not working
+      -- autoFold = {
+      --   enabled = true,
+      --   kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
+      -- },
+    },
+  },
   { "nvim-zh/colorful-winsep.nvim", event = "WinNew", opts = {} },
   {
     "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps

@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-deno = "1.29.4"
+deno = "latest"
 lua = "5.4.4"
 neovim = "stable"
 node = "latest"

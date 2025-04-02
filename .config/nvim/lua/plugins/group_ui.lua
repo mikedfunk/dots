@@ -542,4 +542,9 @@ return {
     ft = "qf",
   },
   { "stevearc/quicker.nvim", ft = "qf", opts = {} },
+  {
+    "mcauley-penney/visual-whitespace.nvim",
+    opts = {},
+    keys = { "v", "V", "<C-v>" },
+  },
 }
