@@ -131,6 +131,19 @@ return {
     event = "VeryLazy",
     build = ":AvanteBuild",
     opts = {
+      -- mcphub replaces these
+      -- disabled_tools = {
+      --   "list_files",
+      --   "search_files",
+      --   "read_file",
+      --   "create_file",
+      --   "rename_file",
+      --   "delete_file",
+      --   "create_dir",
+      --   "rename_dir",
+      --   "delete_dir",
+      --   "bash",
+      -- },
       -- system_prompt = function()
       --   local hub = require("mcphub").get_hub_instance()
       --   if hub == nil then
@@ -189,11 +202,10 @@ return {
       "MunifTanjim/nui.nvim",
       -- {
       --   "ravitemer/mcphub.nvim",
-      --   build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-      --   opts = {
-      --     port = 3003,
-      --     config = vim.fn.expand("~/.config/mcphub/mcpservers.json"),
-      --   },
+      --   build = "npm install -g mcp-hub@latest",
+      --   dependencies = { "nvim-lua/plenary.nvim" },
+      --   cmd = "MCPHub",
+      --   opts = {},
       -- },
       {
         "saghen/blink.cmp",
@@ -227,32 +239,6 @@ return {
       vim.cmd("hi link AvanteInlineHint Comment")
     end,
   },
-  -- TODO: not working yet. Says the mcp server was not started.
-  -- {
-  --   "ravitemer/mcphub.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     {
-  --       "yetone/avante.nvim",
-  --       opts = {
-  --         system_prompt = function()
-  --           local hub = require("mcphub").get_hub_instance()
-  --           return hub:get_active_servers_prompt()
-  --         end,
-  --         custom_tools = function()
-  --           return {
-  --             require("mcphub.extensions.avante").mcp_tool(),
-  --           }
-  --         end,
-  --       },
-  --     },
-  --   },
-  --   build = "npm install -g mcp-hub@latest",
-  --   opts = {
-  --     port = 3000,
-  --     config = vim.fn.expand("~/.config/mcphub/mcpservers.json"),
-  --   },
-  -- },
   -- {
   --   "olimorris/codecompanion.nvim",
   --   dependencies = {
