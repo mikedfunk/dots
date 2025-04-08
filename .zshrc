@@ -184,6 +184,8 @@ fi
 unset BROWSER
 export FLOX_DISABLE_METRICS=true
 export DOCKER_CLI_HINTS=false
+# for ctop:
+export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 
 # This will break automatic clipboard transfer between neovim and the system
 # but it will allow sharing your clipboard over ssh with a remote server.
