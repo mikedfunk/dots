@@ -116,14 +116,41 @@ return {
       end,
     },
   },
+  -- {
+  --   "dstein64/nvim-scrollview",
+  --   event = "VeryLazy",
+  --   opts_extend = { "excluded_filetypes" },
+  --   opts = {
+  --     excluded_filetypes = {
+  --       "Avante",
+  --       "AvanteInput",
+  --       "DressingInput",
+  --       "TelescopePrompt",
+  --       "alpha",
+  --       "cmp",
+  --       "dashboard",
+  --       "harpoon",
+  --       "lazy",
+  --       "lspinfo",
+  --       "snacks_dashboard",
+  --       "snacks_picker_input",
+  --       "starter",
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --    require('scrollview').setup(opts)
+  --    require('scrollview.contrib.gitsigns').setup({})
+  --   end,
+  -- },
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",
+    opts_extend = { "excluded_filetypes" },
     opts = {
       handlers = { gitsigns = true },
-      handle = {
-        highlight = "PmenuSel",
-      },
+      -- handle = {
+      --   highlight = "PmenuSel",
+      -- },
       excluded_filetypes = {
         "Avante",
         "AvanteInput",
