@@ -20,7 +20,11 @@ return {
         },
         cssmodules_ls = {},
         cucumber_language_server = {},
-        denols = {},
+        denols = {
+          root_dir = function(startpath)
+            return require("lspconfig.util").root_pattern("deno.json")(startpath)
+          end,
+        },
         -- flow = {},
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
