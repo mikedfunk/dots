@@ -407,7 +407,7 @@ fi
 # functions and aliases {{{
 
 # misc {{{
-alias info="info --vi-keys" # info -> pinfo is like top -> htop
+# alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias pinfo='pinfo --rcfile=$XDG_CONFIG_HOME/pinfo/pinforc'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
