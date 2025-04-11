@@ -29,6 +29,7 @@ return {
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
         },
+        groovyls = {},
         -- harper_ls = {}, -- annoying grammar checker that usually reports false positives in code
         jsonls = {},
         lemminx = {},
