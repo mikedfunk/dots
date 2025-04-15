@@ -25,6 +25,7 @@ Code/saatchi/**/compose.override.yml
 Code/saatchi/**/cspell.json
 Code/saatchi/**/mise.toml
 Code/**/.goosehints
+Code/**/pyrightconfig.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 
