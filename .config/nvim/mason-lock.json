@@ -41,7 +41,7 @@
   "phpactor": "2025.03.28.0",
   "phpcbf": "3.12.2",
   "phpcs": "3.12.2",
-  "phpstan": "2.1.11",
+  "phpstan": "2.1.12",
   "prettier": "3.5.3",
   "pyright": "1.1.399",
   "rubocop": "1.75.2",
