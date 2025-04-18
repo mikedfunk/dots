@@ -38,7 +38,7 @@
   "nginx-language-server": "0.8.0",
   "php-cs-fixer": "v3.75.0",
   "php-debug-adapter": "v1.35.0",
-  "phpactor": "2025.03.28.0",
+  "phpactor": "2025.04.17.0",
   "phpcbf": "3.12.2",
   "phpcs": "3.12.2",
   "phpstan": "2.1.12",
@@ -46,7 +46,6 @@
   "pyright": "1.1.399",
   "rubocop": "1.75.2",
   "ruby-lsp": "0.23.14",
-  "ruff": "0.11.5",
   "rustywind": "0.24.0",
   "shellcheck": "v0.10.0",
   "shfmt": "v3.11.0",
@@ -64,5 +63,6 @@
   "vtsls": "0.2.8",
   "vue-language-server": "2.2.8",
   "yaml-language-server": "1.17.0",
-  "zk": "v0.14.1"
+  "zk": "v0.14.1",
+
 }

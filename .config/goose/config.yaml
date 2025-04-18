@@ -1,8 +1,50 @@
-GOOSE_MODEL: gemini-2.0-flash
+GOOSE_MODE: smart_approve
 GOOSE_PROVIDER: google
+GOOSE_MODEL: gemini-2.0-flash
 extensions:
+  computercontroller:
+    bundled: true
+    display_name: Computer Controller
+    enabled: false
+    name: computercontroller
+    timeout: 300
+    type: builtin
   developer:
+    bundled: true
+    display_name: Developer
     enabled: true
     name: developer
+    timeout: 300
     type: builtin
-GOOSE_MODE: smart_approve
+  fetch:
+    args:
+    - mcp-server-fetch
+    bundled: null
+    cmd: uvx
+    description: Web content fetching and processing capabilities
+    enabled: false
+    envs: {}
+    name: Fetch
+    timeout: 300
+    type: stdio
+  jetbrains:
+    bundled: true
+    display_name: Jetbrains
+    enabled: false
+    name: jetbrains
+    timeout: 300
+    type: builtin
+  memory:
+    bundled: true
+    display_name: Memory
+    enabled: true
+    name: memory
+    timeout: 300
+    type: builtin
+  tutorial:
+    bundled: true
+    display_name: Tutorial
+    enabled: false
+    name: tutorial
+    timeout: 300
+    type: builtin

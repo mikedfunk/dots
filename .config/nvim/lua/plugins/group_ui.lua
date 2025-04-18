@@ -367,6 +367,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
+    url = "https://github.com/iguanacucumber/mason.nvim", -- temporary fork see https://old.reddit.com/r/neovim/comments/1k1jtlm/made_a_small_fork_of_masonnvim_a_bit_like_what_i/
     opts = {
       ui = { border = "rounded" },
     },
@@ -569,9 +570,9 @@ return {
     ft = "qf",
   },
   { "stevearc/quicker.nvim", ft = "qf", opts = {} },
-  {
-    "mcauley-penney/visual-whitespace.nvim",
-    opts = {},
-    keys = { "v", "V", "<C-v>" },
-  },
+  -- {
+  --   "mcauley-penney/visual-whitespace.nvim",
+  --   opts = {},
+  --   keys = { "v", "V", "<C-v>" },
+  -- },
 }
