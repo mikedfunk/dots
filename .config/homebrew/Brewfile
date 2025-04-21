@@ -148,7 +148,6 @@ tap "oven-sh/bun" # bun
 # brew "nnn" # file picker I use inside of vim
 # brew "nodenv" # node version manager (same api as rbenv) (I use asdf now)
 # brew "nostromo" # alias manaager
-# brew "pandoc" # transform between document formats e.g. markdown <-> pdf (used for inline vim php documentation, which I no longer use)
 # brew "pass" # unix password manager using gpg
 # brew "peco" # interactively filter results and print the filtered version. can be used to print filtered one or e.g. `vim $(dosomething | peco)` (FZF does this)
 # brew "perl" # for swat cpan package
@@ -321,6 +320,7 @@ brew "ollama" # local AI LLMs
 brew "oniguruma" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openssl@1.1" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+brew "pandoc" # transform between document formats e.g. markdown <-> pdf (used for inline vim php documentation, which I no longer use)
 brew "pcre2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "percona-toolkit" # mysql schema migrator among other things. requires java and perl.
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
