@@ -126,119 +126,119 @@ return {
       -- show_label = false,
     },
   },
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    build = ":AvanteBuild",
-    opts = {
-      -- mcphub replaces these
-      -- disabled_tools = {
-      --   "list_files",
-      --   "search_files",
-      --   "read_file",
-      --   "create_file",
-      --   "rename_file",
-      --   "delete_file",
-      --   "create_dir",
-      --   "rename_dir",
-      --   "delete_dir",
-      --   "bash",
-      -- },
-      -- system_prompt = function()
-      --   local hub = require("mcphub").get_hub_instance()
-      --   if hub == nil then
-      --     return
-      --   end
-      --   return hub:get_active_servers_prompt()
-      -- end,
-      -- custom_tools = function()
-      --   return { require("mcphub.extensions.avante").mcp_tool() }
-      -- end,
-      behaviour = {
-        -- auto_suggestions = true,
-        enable_cursor_planning_mode = true,
-      },
-      -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
-      file_selector = { provider = "snacks" },
-      provider = "gemini",
-      -- gemini = {
-      --   model = "gemini/gemini-2.0-flash-exp", -- not yet available in avante. :AvanteModels
-      -- },
-      -- moved to .lazy.lua in some projects
-      -- rag_service = {
-      --   provider = "gemini",
-      --   enabled = true,
-      -- },
-      -- auto_suggestion_provider = "gemini",
-      -- mappings = {
-      --   suggestion = {
-      --     accept = "<a-y>",
-      --     next = "<a-n>",
-      --     prev = "<a-p>",
-      --     dismiss = "<a-e>",
-      --   },
-      -- },
-      -- suggestion = {
-      --   debounce = 1000,
-      --   throttle = 1000,
-      -- },
-      -- local ollama model {{{
-      -- auto_suggestions_provider = "ollama",
-      -- provider = "ollama",
-      -- vendors = {
-      --   ollama = {
-      --     __inherited_from = "openai",
-      --     api_key_name = "",
-      --     -- endpoint = "http://localhost:11434/api/generate",
-      --     endpoint = "http://127.0.0.1:11434/v1",
-      --     model = "qwen2.5-coder:7b",
-      --   },
-      -- },
-      -- }}}
-    },
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      -- {
-      --   "ravitemer/mcphub.nvim",
-      --   build = "npm install -g mcp-hub@latest",
-      --   dependencies = { "nvim-lua/plenary.nvim" },
-      --   cmd = "MCPHub",
-      --   opts = {},
-      -- },
-      {
-        "saghen/blink.cmp",
-        dependencies = { "Kaiser-Yang/blink-cmp-avante" },
-        opts = {
-          sources = {
-            per_filetype = { AvanteInput = { "avante" } },
-            providers = {
-              avante = {
-                module = "blink-cmp-avante",
-                name = "Avante",
-                -- opts = {},
-              },
-            },
-          },
-        },
-      },
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts_extend = { "file_types" },
-        opts = {
-          file_types = { "Avante" },
-        },
-        ft = { "markdown", "norg", "rmd", "org", "codecompanion", "Avante" },
-      },
-    },
-    -- just change some highlights
-    config = function(_, opts)
-      require("avante").setup(opts)
-      vim.cmd("hi link AvantePopupHint Comment")
-      vim.cmd("hi link AvanteInlineHint Comment")
-    end,
-  },
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   build = ":AvanteBuild",
+  --   opts = {
+  --     -- mcphub replaces these
+  --     -- disabled_tools = {
+  --     --   "list_files",
+  --     --   "search_files",
+  --     --   "read_file",
+  --     --   "create_file",
+  --     --   "rename_file",
+  --     --   "delete_file",
+  --     --   "create_dir",
+  --     --   "rename_dir",
+  --     --   "delete_dir",
+  --     --   "bash",
+  --     -- },
+  --     -- system_prompt = function()
+  --     --   local hub = require("mcphub").get_hub_instance()
+  --     --   if hub == nil then
+  --     --     return
+  --     --   end
+  --     --   return hub:get_active_servers_prompt()
+  --     -- end,
+  --     -- custom_tools = function()
+  --     --   return { require("mcphub.extensions.avante").mcp_tool() }
+  --     -- end,
+  --     behaviour = {
+  --       -- auto_suggestions = true,
+  --       enable_cursor_planning_mode = true,
+  --     },
+  --     -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#blinkcmp-users
+  --     file_selector = { provider = "snacks" },
+  --     provider = "gemini",
+  --     -- gemini = {
+  --     --   model = "gemini/gemini-2.0-flash-exp", -- not yet available in avante. :AvanteModels
+  --     -- },
+  --     -- moved to .lazy.lua in some projects
+  --     -- rag_service = {
+  --     --   provider = "gemini",
+  --     --   enabled = true,
+  --     -- },
+  --     -- auto_suggestion_provider = "gemini",
+  --     -- mappings = {
+  --     --   suggestion = {
+  --     --     accept = "<a-y>",
+  --     --     next = "<a-n>",
+  --     --     prev = "<a-p>",
+  --     --     dismiss = "<a-e>",
+  --     --   },
+  --     -- },
+  --     -- suggestion = {
+  --     --   debounce = 1000,
+  --     --   throttle = 1000,
+  --     -- },
+  --     -- local ollama model {{{
+  --     -- auto_suggestions_provider = "ollama",
+  --     -- provider = "ollama",
+  --     -- vendors = {
+  --     --   ollama = {
+  --     --     __inherited_from = "openai",
+  --     --     api_key_name = "",
+  --     --     -- endpoint = "http://localhost:11434/api/generate",
+  --     --     endpoint = "http://127.0.0.1:11434/v1",
+  --     --     model = "qwen2.5-coder:7b",
+  --     --   },
+  --     -- },
+  --     -- }}}
+  --   },
+  --   dependencies = {
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     -- {
+  --     --   "ravitemer/mcphub.nvim",
+  --     --   build = "npm install -g mcp-hub@latest",
+  --     --   dependencies = { "nvim-lua/plenary.nvim" },
+  --     --   cmd = "MCPHub",
+  --     --   opts = {},
+  --     -- },
+  --     {
+  --       "saghen/blink.cmp",
+  --       dependencies = { "Kaiser-Yang/blink-cmp-avante" },
+  --       opts = {
+  --         sources = {
+  --           per_filetype = { AvanteInput = { "avante" } },
+  --           providers = {
+  --             avante = {
+  --               module = "blink-cmp-avante",
+  --               name = "Avante",
+  --               -- opts = {},
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --     {
+  --       "MeanderingProgrammer/render-markdown.nvim",
+  --       opts_extend = { "file_types" },
+  --       opts = {
+  --         file_types = { "Avante" },
+  --       },
+  --       ft = { "markdown", "norg", "rmd", "org", "codecompanion", "Avante" },
+  --     },
+  --   },
+  --   -- just change some highlights
+  --   config = function(_, opts)
+  --     require("avante").setup(opts)
+  --     vim.cmd("hi link AvantePopupHint Comment")
+  --     vim.cmd("hi link AvanteInlineHint Comment")
+  --   end,
+  -- },
   -- {
   --   "olimorris/codecompanion.nvim",
   --   dependencies = {

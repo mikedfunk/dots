@@ -575,4 +575,18 @@ return {
   --   opts = {},
   --   keys = { "v", "V", "<C-v>" },
   -- },
+  -- doesn't work :/
+  -- {
+  --   "soemre/commentless.nvim",
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       "<leader>C",
+  --       function()
+  --         require("commentless").toggle()
+  --       end,
+  --       desc = "Toggle Comments",
+  --     },
+  --   },
+  -- },
 }
