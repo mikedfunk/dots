@@ -368,8 +368,13 @@ return {
   {
     "williamboman/mason.nvim",
     url = "https://github.com/iguanacucumber/mason.nvim", -- temporary fork see https://old.reddit.com/r/neovim/comments/1k1jtlm/made_a_small_fork_of_masonnvim_a_bit_like_what_i/
+    opts_extend = { "registries" },
     opts = {
       ui = { border = "rounded" },
+      registries = {
+        "file:~/.config/nvim/lua/mason_registry/zk",
+        "github:mason-org/mason-registry",
+      },
     },
   },
   -- this is installed via extras and customized here (TODO: override still not working. Needs config in the lualine segment which is harder to do.)
