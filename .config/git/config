@@ -349,8 +349,8 @@
     # tool = opendiff
     # tool = vimdiff
     compactionHeuristic = 1
-	# tool = nvimdiff3
-	tool = diffview
+	tool = nvimdiff3
+	# tool = diffview
     # https://github.com/dandavison/delta#--color-moved-support
 	colorMoved = default
 	algorithm = histogram
@@ -362,9 +362,9 @@
 [merge]
     # tool = opendiff
     # tool = vimdiff
-	# tool = nvimdiff3
+	tool = nvimdiff3
     # tool = vim-conflicted
-    tool = diffview
+    # tool = diffview
 
     # shows local, parent, then remote
     # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html

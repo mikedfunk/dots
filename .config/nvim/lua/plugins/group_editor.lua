@@ -33,7 +33,7 @@ return {
     "chrisgrieser/nvim-origami",
     event = "VeryLazy",
     opts = {
-      -- TODO: not working
+      -- TODO: not working (last checked 2025-04-28)
       -- autoFold = {
       --   enabled = true,
       --   kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
