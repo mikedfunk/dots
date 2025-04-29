@@ -162,6 +162,7 @@ return {
         "harpoon",
         "lazy",
         "lspinfo",
+        "noice",
         "snacks_dashboard",
         "snacks_picker_input",
         "starter",

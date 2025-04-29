@@ -341,6 +341,7 @@ brew "ripgrep" # needed for lunarvim telescope plugin
 brew "scrcpy" # mirror android screen
 brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
+brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
@@ -386,7 +387,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
 # cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
-# cask "discord" # chat
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
 # cask "dropbox" # I especially use this for syncing my notes so I can view them in the joplin mobile app (not using this feature right now)
@@ -515,6 +515,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "chatgpt" # desktop app <opt-space>
+cask "discord" # chat
 cask "dockdoor" # show windows open in each app in dock on hover
 cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
@@ -551,5 +552,6 @@ cask "zoomhider" # hide zoom floating meeting controls
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
+mas "d-d-beyond", id: 1501810129 # dnd beyond
 
 # }}}
