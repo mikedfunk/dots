@@ -205,6 +205,7 @@ tap "oven-sh/bun" # bun
 # brew "task" # taskwarrior https://taskwarrior.org (I don't need this unless I don't have jira. Doesn't let you assign points! Has an opaque priority selection algorithm.)
 # brew "teleconsole" # share your console with others easily (Extremely rare that I need something like this)
 # brew "telnet" # I don't have telnet? How am I going to watch star wars?
+# brew "terraform" # IAC
 # brew "timewarrior" # taskwarrior-like interface for tracking time (I don't use this)
 # brew "tldr" # more consise community man pages (tealdeer is faster)
 # brew "tmuxinator" # tmux orchestrator / automator. Alternatives: tmuxp (broken for a long time) and teamocil (old, can't install via homebrew, no XDG_HOME) and smug

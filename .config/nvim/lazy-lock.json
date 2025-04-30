@@ -61,7 +61,6 @@
   "mini.pairs": { "branch": "main", "commit": "69864a2efb36c030877421634487fd90db1e4298" },
   "mini.splitjoin": { "branch": "main", "commit": "70240d5d3881ff1b2b1d7902450f98a6fa303800" },
   "mini.surround": { "branch": "main", "commit": "5aab42fcdcf31fa010f012771eda5631c077840a" },
-  "minuet-ai.nvim": { "branch": "main", "commit": "fb1616faaf4af1c6a4ac6952d9e73833206600a5" },
   "modes.nvim": { "branch": "main", "commit": "7c6ca20de4c9acb22ef06074e39fd2c021b99935" },
   "neocodeium": { "branch": "main", "commit": "511ae8a76561a6352f845169bcb6c906fd1892bb" },
   "neoconf.nvim": { "branch": "main", "commit": "36634d990d621b54d03cf97e67b1053e5e8f606d" },
