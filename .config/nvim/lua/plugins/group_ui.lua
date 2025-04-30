@@ -392,7 +392,7 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "mfussenegger/nvim-lint",
-      "monkoose/neocodeium",
+      -- "monkoose/neocodeium",
       "stevearc/conform.nvim",
     },
     opts = function(_, opts)
