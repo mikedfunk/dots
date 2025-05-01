@@ -554,5 +554,6 @@ mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menub
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
 mas "d-d-beyond", id: 1501810129 # dnd beyond
+mas "liquid", id: 569048352 # text clipboard processor
 
 # }}}
