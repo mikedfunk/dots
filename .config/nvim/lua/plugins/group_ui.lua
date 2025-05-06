@@ -369,8 +369,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
-    "williamboman/mason.nvim",
-    url = "https://github.com/iguanacucumber/mason.nvim", -- temporary fork see https://old.reddit.com/r/neovim/comments/1k1jtlm/made_a_small_fork_of_masonnvim_a_bit_like_what_i/
+    "mason-org/mason.nvim",
+    -- url = "https://github.com/iguanacucumber/mason.nvim", -- temporary fork see https://old.reddit.com/r/neovim/comments/1k1jtlm/made_a_small_fork_of_masonnvim_a_bit_like_what_i/
     opts_extend = { "registries" },
     opts = {
       ui = { border = "rounded" },

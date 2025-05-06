@@ -550,10 +550,10 @@ cask "zoomhider" # hide zoom floating meeting controls
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
+# mas "liquid", id: 569048352 # text clipboard processor
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
 mas "d-d-beyond", id: 1501810129 # dnd beyond
-mas "liquid", id: 569048352 # text clipboard processor
 
 # }}}

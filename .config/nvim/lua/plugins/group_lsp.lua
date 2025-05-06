@@ -98,7 +98,7 @@ return {
   {
     "zapling/mason-lock.nvim",
     opts = {},
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = { "mason-org/mason.nvim" },
   },
   { "antosha417/nvim-lsp-file-operations", opts = {} },
   -- {

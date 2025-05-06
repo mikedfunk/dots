@@ -4,7 +4,7 @@ return {
     priority = -100, -- ensure this is loaded _after_ the deps
     dependencies = {
       "stevearc/conform.nvim",
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
     },
     opts = {},
   },

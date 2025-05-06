@@ -1,5 +1,5 @@
 -- vim: set foldmethod=marker:
--- vim.b.autoformat = false
+vim.b.autoformat = false -- too slow
 vim.bo.commentstring = "// %s"
 -- vim.wo.foldlevel = 1
 
