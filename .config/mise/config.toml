@@ -6,7 +6,7 @@ neovim = "stable"
 node = "latest"
 php = "8.4.5"
 python = "latest"
-ruby = "3.1.2"
+ruby = "latest"
 usage = "latest"
 yarn = "1.22.10"
 

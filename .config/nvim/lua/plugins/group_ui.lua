@@ -18,6 +18,9 @@ return {
     opts_extend = {
       "dashboard.sections",
     },
+    init = function()
+      vim.g.snacks_animate = false
+    end,
     ---@type snacks.Config
     opts = {
       -- https://github.com/folke/snacks.nvim/blob/main/docs/animate.md#-animate
@@ -116,11 +119,16 @@ return {
       end,
     },
   },
+  -- TODO: breaks my terminal due to some problem with character width
   -- {
-  --   "dstein64/nvim-scrollview",
+  --   "petertriho/nvim-scrollbar",
   --   event = "VeryLazy",
   --   opts_extend = { "excluded_filetypes" },
   --   opts = {
+  --     handlers = { gitsigns = true },
+  --     -- handle = {
+  --     --   highlight = "PmenuSel",
+  --     -- },
   --     excluded_filetypes = {
   --       "Avante",
   --       "AvanteInput",
@@ -132,52 +140,13 @@ return {
   --       "harpoon",
   --       "lazy",
   --       "lspinfo",
+  --       "mason",
+  --       "noice",
   --       "snacks_dashboard",
   --       "snacks_picker_input",
   --       "starter",
   --     },
   --   },
-  --   config = function(_, opts)
-  --    require('scrollview').setup(opts)
-  --    require('scrollview.contrib.gitsigns').setup({})
-  --   end,
-  -- },
-  {
-    "petertriho/nvim-scrollbar",
-    event = "VeryLazy",
-    opts_extend = { "excluded_filetypes" },
-    opts = {
-      handlers = { gitsigns = true },
-      -- handle = {
-      --   highlight = "PmenuSel",
-      -- },
-      excluded_filetypes = {
-        "Avante",
-        "AvanteInput",
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "cmp",
-        "dashboard",
-        "harpoon",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "noice",
-        "snacks_dashboard",
-        "snacks_picker_input",
-        "starter",
-      },
-    },
-  },
-  -- snacks has this native now <leader>uZ to toggle
-  -- {
-  --   "nyngwang/NeoZoom.lua",
-  --   cmd = { "NeoZoomToggle", "NeoZoom" },
-  --   keys = {
-  --     { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
-  --   },
-  --   opts = {},
   -- },
   {
     "mvllow/modes.nvim",
@@ -329,6 +298,7 @@ return {
         }
         vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-light.conf") -- apply tmuxline settings or snapshot to file
       end
+
       set_tmuxline_theme()
 
       vim.api.nvim_create_autocmd("OptionSet", {
