@@ -57,15 +57,16 @@ vim.api.nvim_create_autocmd("Filetype", {
   end,
   desc = "neon commentstring",
 })
---
+
+-- BUG: this still focuses sometimes
 -- vim.api.nvim_create_autocmd("CursorHold", {
 --   group = vim.api.nvim_create_augroup("lsp_def_cursorhold", { clear = true }),
 --   pattern = "*",
 --   callback = function()
 --     local bufnr = vim.api.nvim_get_current_buf()
---     local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+--     local clients = vim.lsp.get_clients({ bufnr = bufnr })
 --     if #clients > 0 then
---       vim.lsp.buf.hover()
+--       vim.lsp.buf.hover({ focusable = false, focus = false })
 --     end
 --   end,
 --   desc = "lsp def cursorhold",
