@@ -1,12 +1,12 @@
 [tools]
 bun = "latest"
-deno = "latest"
+deno = "1.29.4"
 lua = "5.4.4"
 neovim = "stable"
 node = "latest"
 php = "8.4.5"
 python = "latest"
-ruby = "latest"
+ruby = "3.1.2"
 usage = "latest"
 yarn = "1.22.10"
 
