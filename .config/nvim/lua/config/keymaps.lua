@@ -42,7 +42,7 @@ vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
 
 vim.keymap.set("i", "<c-space>", function()
-  return require("cmp.config.mapping").complete()
+  require("blink.cmp").show()
 end, { noremap = true, desc = "Complete" })
 
 -- vim.keymap.set("n", "<leader>fe", function()

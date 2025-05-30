@@ -152,7 +152,7 @@ return {
     "mvllow/modes.nvim",
     event = "VeryLazy",
     opts = {
-      ignore_filetypes = {
+      ignore = {
         "Avante",
         "AvanteInput",
         "DressingInput",

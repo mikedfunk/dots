@@ -515,6 +515,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
+cask "betterdiscord-installer" # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
 cask "discord" # chat
 cask "dockdoor" # show windows open in each app in dock on hover
