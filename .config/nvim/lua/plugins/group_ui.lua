@@ -325,7 +325,7 @@ return {
         win = { "#I", "#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}" }, -- unselected tab
         cwin = { "#I", "#W#{?window_zoomed_flag, ,}" }, -- current tab
         x = {
-          "#(~/.support/tmux-shpotify-status.sh)",
+          "#(~/.support/tmux-spotify-status.sh)",
           "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}",
         },
         y = {

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# throttle
+sleep 2
+
 # DOCKER="🐳 "
 DOCKER="󰡨"
 # DOCKER=""
