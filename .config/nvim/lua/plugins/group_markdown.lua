@@ -1,5 +1,11 @@
 return {
   { "bullets-vim/bullets.vim", ft = "markdown" },
+  -- use utf-8 symbols directly
+  -- {
+  --   "bngarren/checkmate.nvim",
+  --   ft = "markdown",
+  --   opts = {},
+  -- },
   {
     "monaqa/dial.nvim",
     lazy = false,

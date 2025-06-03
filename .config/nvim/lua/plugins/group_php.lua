@@ -91,11 +91,11 @@ return {
       install = {
         bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
         php_bin = vim.fn.executable("mise") == 1
-            and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.1" }), "") .. "/bin/php"
+            and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.5" }), "") .. "/bin/php"
           or "php",
         path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
         composer_bin = vim.fn.executable("mise") == 1
-          and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.1" }) or "composer", "")
+          and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.5" }) or "composer", "")
             .. "/.composer/vendor/bin/composer",
       },
       lspconfig = { enabled = false },
