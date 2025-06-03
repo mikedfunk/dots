@@ -858,3 +858,5 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # }}}
 
 # }}}
+
+export PATH=$PATH:/Users/mikefunk/.spicetify

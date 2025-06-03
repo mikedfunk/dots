@@ -324,9 +324,12 @@ return {
         c = { "#(~/.support/tmux-docker-status.sh)" },
         win = { "#I", "#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}" }, -- unselected tab
         cwin = { "#I", "#W#{?window_zoomed_flag, ,}" }, -- current tab
-        x = { "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}" }, -- UTC time
+        x = {
+          "#(~/.support/tmux-shpotify-status.sh)",
+          "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}",
+        },
         y = {
-          "#(TZ=Etc/UTC date '+%%R UTC')",
+          "#(TZ=Etc/UTC date '+%%R UTC')", -- UTC time
           "%l:%M %p", -- local time
         },
         z = { "%a", "%b %d" }, -- local date
