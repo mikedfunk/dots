@@ -31,7 +31,6 @@ tap "abhinav/tap" # git-spice
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "mikedfunk/zoomhider" # zoomhider
-tap "oven-sh/bun" # bun
 
 # }}}
 
@@ -46,6 +45,7 @@ tap "oven-sh/bun" # bun
 # brew "antigen" # zsh package manager. I switched to ~antibody~ antidote for speed
 # brew "asdf" # language runtime version switcher like rbenv and phpenv (I use mise now)
 # brew "autojump" # used by zsh-autocomplete to display recent directories
+# brew "awslogs" # get cloudwatch logs
 # brew "bandwhich" # top-like tool to see which processes are using the most bandwidth (sudo bandwhich)
 # brew "bash" # for extrakto and lazyman
 # brew "bmon" # bandwidth monitor
@@ -83,10 +83,12 @@ tap "oven-sh/bun" # bun
 # brew "fx" # json funagler used by some of my shell functions (switched to jq)
 # brew "git-absorb" # fixup helper
 # brew "git-extras" # adds some cool additional git commands (conflicts with npm git-standup)
+# brew "git-fixup" # git commit --fixup helper
 # brew "git-flow" # adds first class git commands for the git-flow workflow (I use avh version below)
 # brew "git-flow-avh" # adds first class git commands for the git-flow workflow. This version will delete remote feature, release, and hotfix branches on finishing.
 # brew "git-gui" # gitk. Really not necessary.
 # brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
+# brew "git-who" # like git blame but for directories
 # brew "github-keygen" # simpler way to generate a github ssh key
 # brew "gitlab-gem" # gitlab cli
 # brew "glab" # like gh for gitlab
@@ -157,6 +159,7 @@ tap "oven-sh/bun" # bun
 # brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt and to sign git commits)
 # brew "pinfo" # man-like command to get manuals on tools written for info
 # brew "pipeline" # cool subshell to let you interactively view unix pipeline results as you write
+# brew "pkgx" # like npx for homebrew
 # brew "plenv" # perl version manager. better than perlbrew and consistent with my other env managers (rbenv, phpenv, nodenv, pyenv). used to get percona-toolkit working.
 # brew "prettyping" # ping with a cool sparkline graph of status
 # brew "procs" # process viewer - prettier ps. Not as cool as htop.
@@ -186,7 +189,7 @@ tap "oven-sh/bun" # bun
 # brew "shy" # neat ssh fuzzy connector (I rarely even use ssh these days)
 # brew "skaffold" # awesome local kubernetes cluster and dev/CI/deploy by google (TODO learn this! It looks freakin awesome)
 # brew "skopeo" # get docker registry info
-# brew "solr" # search data server (I hate solr. If I were to install it for an app it would be through docker.)
+# brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly! (no longer maintained, broken :( switched back to tmuxinator )
 # brew "source-highlight" # used to automatically colorize `less` text (I Just use `bat` instead. Got weird results with this.)
 # brew "spark" # used for rainbarf to show spiffy cli graphs (I don't use rainbarf currently)
 # brew "sqlite3" # used as the default db for rails
@@ -248,7 +251,6 @@ brew "automake" # needed for building php
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "aws-sam-cli" # local lambda CLI
 brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials)
-brew "awslogs" # get cloudwatch logs
 brew "bat" # much cooler looking cat
 brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
@@ -271,10 +273,8 @@ brew "gettext" # needed to build php
 brew "gh" # new github cli
 brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
-brew "git-fixup" # git commit --fixup helper
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
 brew "git-spice", link: false # stacked PR manager. Absolutely amazing.
-brew "git-who" # like git blame but for directories
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
@@ -309,7 +309,7 @@ brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugi
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode`
 brew "memcached" # needed by php70 memcached pecl extension
-brew "mise" # like asdf but better?
+brew "mise" # asdf but faster and includes direnv
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
@@ -327,7 +327,6 @@ brew "percona-toolkit" # mysql schema migrator among other things. requires java
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
-brew "pkgx" # like npx for homebrew
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
 brew "portaudio" # used by aider to enable voice input
@@ -340,7 +339,6 @@ brew "qcachegrind" # like kcachegrind which is useful for profiling php apps wit
 brew "re2c" # needed by phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "ripgrep" # needed for lunarvim telescope plugin
 brew "scrcpy" # mirror android screen
-brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly!
 brew "snyk-cli" # security tool
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
@@ -406,6 +404,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-fira-code-nerd-font"
 # cask "font-maple" # programming font (NOT nerd) with cursive italics
 # cask "font-mononoki-nerd-font" # programming font
+# cask "font-symbols-only-nerd-font"
 # cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 # cask "freetube" # privacy-friendly and add-free youtube player
 # cask "git-credential-manager" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
@@ -523,7 +522,6 @@ cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
-cask "font-symbols-only-nerd-font"
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
@@ -537,7 +535,7 @@ cask "music-decoy" # Stop loading apple music when spotify isn't open and you ac
 cask "nvidia-geforce-now" # game streaming
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
-cask "zoomhider" # hide zoom floating meeting controls
+cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
 
@@ -551,10 +549,10 @@ cask "zoomhider" # hide zoom floating meeting controls
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
+# mas "d-d-beyond", id: 1501810129 # dnd beyond
 # mas "liquid", id: 569048352 # text clipboard processor
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
-mas "d-d-beyond", id: 1501810129 # dnd beyond
 
 # }}}
