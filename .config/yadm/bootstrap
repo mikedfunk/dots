@@ -353,7 +353,7 @@ _install_node_versions() {
 
     mise global nodejs latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
-    mise exec corepack enable
+    mise exec nodejs@latest -- corepack enable
     mise reshim nodejs
 
     builtin cd - >/dev/null || return
