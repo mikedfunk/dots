@@ -1,5 +1,3 @@
-GOOSE_MODE: smart_approve
-GOOSE_PROVIDER: google
 GOOSE_MODEL: gemini-2.0-flash
 extensions:
   computercontroller:
@@ -23,6 +21,7 @@ extensions:
     cmd: uvx
     description: Web content fetching and processing capabilities
     enabled: false
+    env_keys: []
     envs: {}
     name: Fetch
     timeout: 300
@@ -48,3 +47,5 @@ extensions:
     name: tutorial
     timeout: 300
     type: builtin
+GOOSE_PROVIDER: google
+GOOSE_MODE: smart_approve

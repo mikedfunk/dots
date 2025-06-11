@@ -1,5 +1,5 @@
-# global git config
 # vim: set foldmethod=marker:
+# global git config
 
 # Tips {{{
 # g rbid: git rebase -i develop
@@ -499,9 +499,9 @@
 
 # git-spice {{{
 [spice "branchCreate"]
-    commit = false
+	commit = false
 [spice "submit"]
-    navigationComment = multiple
+	navigationComment = multiple
 # }}}
 
 # git-secrets {{{

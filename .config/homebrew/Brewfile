@@ -554,5 +554,6 @@ cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolu
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
+mas "MuteKey", id: 1509590766 # global media mute hotkey
 
 # }}}

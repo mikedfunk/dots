@@ -1,7 +1,7 @@
 local M = {}
 M.quotes = {
   -- 1. https://www.ccs.neu.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm
-  -- 2. and some more from https://defprogramming.com
+  -- 2. and some more from https://www.defprogramming.com
   -- 3. some more quotes from @codewisdom@twitter.com
   -- 4. https://programming-quotesapi.vercel.app/api/random
   -- 5. https://www.reddit.com/r/quotes/
@@ -37,6 +37,7 @@ M.quotes = {
   { "A computer lets you make more mistakes faster than any other invention in human history, with the possible exceptions of handguns and tequila.", "", "- Mitch Ratcliffe" },
   { "A display connected to a digital computer gives us a chance to gain familiarity with concepts not realizable in the physical world. It is a looking glass into a mathematical wonderland.", "", "- Ivan Sutherland" },
   { "A foolish consistency is the hobgoblin of little minds, adored by little statesmen and philosophers and divines. With consistency a great soul has simply nothing to do. He may as well concern himself with his shadow on the wall.", "", "- Ralph Waldo Emerson" },
+  { "A framework can provide 90% of the features we need quickly - giving us a false sense of confidence early in the development cycle - and then be frustratingly hard when it comes to implementing the last 10%.", "", "- Tony Parisi" },
   { "A good API is not just easy to use but also hard to misuse.", "", "- JBD" },
   { "A good programmer is someone who always looks both ways before crossing a one-way street.", "", "- Doug Linder" },
   { "A happy programmer is a productive programmer. That's why we optimize for happiness and you should too. Don't just pick tools and practices based on industry standards or performance metrics. Look at the intangibles: Is there passion, pride, and craftmanship here? Would you truly be happy working in this environment eight hours a day?", "", "- 37Signals" },
@@ -70,6 +71,7 @@ M.quotes = {
   { "Always take small steps.", "", "Check the feedback and adjust before proceeding.", "", "- The Pragmatic Programmer" },
   { "An API that isn't comprehensible isn't usable.", "", "- James Gosling" },
   { "An evolving system increases its complexity unless work is done to reduce it.", "", "- Meir Lehman" },
+  { "An organisation that treats its programmers as morons will soon have programmers that are willing and able to act like morons only.", "", "- Bjarne Stroustrup" },
   { "An organisation that treats its programmers as morons will soon have programmers that are willing and able to act like morons only.", "", "- Bjarne Stroustrup" },
   { "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", "", "- Martin Fowler" },
   { "Any intelligent fool can make things bigger, more complex, and more violent. It takes a touch of genius – and a lot of courage – to move in the opposite direction.", "", "- Albert Einstein" },
@@ -213,6 +215,7 @@ M.quotes = {
   { "I really think a champion is defined not by their wins, but how they can recover when they fall.", "", "- Serena Williams" },
   { "I think a lot of new programmers like to use advanced data structures and advanced language features as a way of demonstrating their ability. I call it the lion-tamer syndrome. Such demonstrations are impressive, but unless they actually translate into real wins for the project, avoid them.", "", "- Glyn Williams" },
   { "I think it is inevitable that people program poorly. Training will not substantially help matters. We have to learn to live with it.", "", "- Alan Perlis" },
+  { "I think the best way to supervise is by personal example and by frequent code reviews.", "", "- Charles Simonyi" },
   { "I would rather die of passion than of boredom.", "", "- Vincent Van Gogh" },
   { "I'm not a great programmer. I'm just a good programmer with great habits.", "", "- Kent Beck" },
   { "I've finally learned what \"upward compatible\" means. It means we get to keep all our old mistakes.", "", "- Linus Torvalds" },
@@ -249,6 +252,7 @@ M.quotes = {
   { "In preparing for battle I have always found that plans are useless, but planning is indispensable.", "", "- Dwight D. Eisenhower" },
   { "In programming, if someone tells you you're overcomplicating it, they're either 10 steps behind you or 10 steps ahead of you.", "", "- Andrew Clark" },
   { "In programming, the hard part isn't solving problems, but deciding what problems to solve.", "", "- Paul Graham" },
+  { "In science if you know what you are doing you should not be doing it. In engineering if you do not know what you are doing you should not be doing it.", "", "- Richard Hamming" },
   { "In science it often happens that scientists say, \"You know that's a really good argument; my position is mistaken\" ...and you never hear that old view from them again... It happens every day. I cannot recall the last time something like that happened in politics or religion.", "", "- Carl Sagan" },
   { "In software, the chain isn't as strong as its weakest link; it's as weak as all the weak links multiplied together.", "", "- Steve McConnell" },
   { "Incorrect documentation is often worse than no documentation.", "", "- Bertrand Meyer" },
@@ -266,6 +270,7 @@ M.quotes = {
   { "It is foolish to answer a question that you do not understand. It is sad to work for an end that you do not desire.", "", "- George Pólya" },
   { "It is hard to write a simple definition of something as varied as hacking, but I think what these activities have in common is playfulness, cleverness, and exploration. Thus, hacking means exploring the limits of what is possible, in a spirit of playful cleverness. Activities that display playful cleverness have \"hack value\".", "", "- Richard Stallman" },
   { "It seems to me to be important to distinguish a good idea from poor implementations of it.", "", "- Ron Jeffries" },
+  { "It was a turning point in my programming career when I realized that I didn't have to win every argument.", "", "- Ward Cunningham" },
   { "It would be a mistake to think that solving problems is a purely intellectual affair; determination and emotions play an important role.", "", "- George Pólya" },
   { "It's OK to figure out murder mysteries, but you shouldn't need to figure out code. You should be able to read it.", "", "- Steve McConnell" },
   { "It's both what you say and the way you say it.", "", "There's no point in having great ideas if you don't communicate them effectively.", "", "- The Pragmatic Programmer" },
@@ -289,6 +294,7 @@ M.quotes = {
   { "Make it work, then make it beautiful, then if you really, really have to, make it fast. 90 percent of the time, if you make it beautiful, it will already be fast. So really, just make it beautiful!", "", "- Joe Armstrong" },
   { "Make quality a requirements issue.", "", "Involve your users in determining the project's real quality requirements.", "", "- The Pragmatic Programmer" },
   { "Making code do what it's supposed to do is the easy part. Handling the myriad ways it can go wrong is the real work.", "", "- Aaron Lozier" },
+  { "Mathematics is important in programming, but it’s just one of a lot of things that are important. If you overemphasize the math then you underemphasize stuff which might be even more important, such as literacy.", "", "- Douglas Crockford" },
   { "Measuring programming progress by lines of code is like measuring aircraft building progress by weight.", "", "- Bill Gates" },
   { "Methods are just functions with a special first argument.", "", "- Andrew Gerrand" },
   { "Minimize coupling between modules.", "", "Avoid coupling by writing \"shy\" code and applying the Law of Demeter.", "", "- The Pragmatic Programmer" },
@@ -330,6 +336,7 @@ M.quotes = {
   { "Paying attention to how things work without thinking about how they fail is a recipe for disaster.", "", "- Cory Doctorow" },
   { "People are inherently imperfect - we like to say that humans are mostly a collection of intermittent bugs. But before you can understand the bugs in your coworkers, you need to understand the bugs in yourself.", "", "We're going to ask you to think about your own reactions, behaviors, and attitudes - and in return, we hope you gain some real insight into how to become a more efficient and successful software engineer who spends less energy dealing with people-related problems and more time writing great code.", "", "- Titus Winters" },
   { "People have an enormous tendency to resist change. They love to say, \"We've always done it this way.\" I try to fight that.", "", "- Grace Hopper" },
+  { "People under pressure don’t work better; they just work faster.", "", "- Tom DeMarco" },
   { "Perfecting oneself is as much unlearning as it is learning.", "", "- Edsger Dijkstra" },
   { "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.", "", "- Antoine de Saint-Exupéry" },
   { "Playfully doing something difficult, whether useful or not, that is hacking.", "", "- Richard M. Stallman" },
@@ -484,6 +491,7 @@ M.quotes = {
   { "There are no final decisions.", "", "No decision is cast in stone. Instead, consider each as being written in the sand at the beach, and plan for change.", "", "- The Pragmatic Programmer" },
   { "There are only two hard problems in distributed systems:", "2. Exactly-once delivery", "1. Guaranteed order of messages", "2. Exactly-once delivery", "", "- Matthias Verraes" },
   { "There are only two industries that refer to their customers as \"users\".", "", "- Edward Tufte" },
+  { "There are some basic techniques to control complexity. Fundamentally, I divide and conquer, break things down, and try to write reasonably precise descriptions of what each piece is supposed to do.", "", "- Butler Lampson" },
   { "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult.", "", "- Leslie Lamport" },
   { "There are two ways to write error-free programs; only the third works.", "", "- Alan J. Perlis" },
   { "There is not now, nor has there ever been, nor will there ever be, any programming language in which it is the least bit difficult to write bad code.", "", "- Flon's Law" },
@@ -519,16 +527,20 @@ M.quotes = {
   { "We're programmers. Programmers are, in their hearts, architects, and the first thing they want to do when they get to a site is to bulldoze the place flat and build something grand. We're not excited by incremental renovation: tinkering, improving, planting flower beds.", "", "There's a subtle reason that programmers always want to throw away the code and start over. The reason is that they think the old code is a mess. And here is the interesting observation: they are probably wrong. The reason that they think the old code is a mess is because of a cardinal, fundamental law of programming:", "", "It's harder to read code than to write it.", "", "- Joel Spolsky" },
   { "Weeks of coding can save you hours of planning.", "", "- Unknown" },
   { "Well over half of the time you spend working on a project (on the order of 70 percent) is spent thinking, and no tool, no matter how advanced, can think for you. Consequently, even if a tool did everything except the thinking for you - if it wrote 100 percent of the code, wrote 100 percent of the documentation, did 100 percent of the testing, burned the CD-ROMs, put them in boxes, and mailed them to your customers - the best you could hope for would be a 30 percent improvement in productivity. In order to do better than that, you have to change the way you think.", "", "- Fred Brooks" },
+  { "What I cannot build, I do not understand.", "", "- Richard Feynman" },
   { "What one programmer can do in one month, two programmers can do in two months.", "", "- Frederick P. Brooks" },
+  { "When I am working on a problem I never think about beauty. I think only how to solve the problem. But when I have finished, if the solution is not beautiful, I know it is wrong.", "", "- Buckminster Fuller" },
   { "When a distinguished but elderly scientist states that something is possible, he is almost certainly right. When he states that something is impossible, he is very probably wrong.", "", "- Arthur C. Clarke" },
   { "When given a choice in an object-oriented design between a containment relationship and an association relationship, choose the containment relationship.", "", "- Object-Oriented Design Heuristics" },
   { "When in doubt, leave it out.", "", "- Joshua Bloch" },
   { "When program developers are not territorial about their code and encourage others to look for bugs and potential improvements, progress speeds up dramatically.", "", "- Gerald Weinberg" },
+  { "When there is no type hierarchy you don’t have to manage the type hierarchy.", "", "- Rob Pike" },
   { "When we focus on building an intuition, we don't need to memorize rules. We can rely on our mental model to come up with the right answer. It's wayyy more practical.", "", "- Josh W. Comeau" }, -- https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
   { "When you choose not to care about complexity, you're merely pushing it onto other developers in your org. Ops people, your customers, someone. Now they have to work around your assumptions to make sure everything keeps running smoothly.", "", "- fasterthanli.me" },
   { "When you come across a stumbling block because the code doesn't quite fit anymore, or you notice two things that should really be merged, or anything else at all strikes you as being \"wrong\", don't hesitate to change it. There's no time like the present.", "", "- Andy Hunt, Dave Thomas" },
   { "When you need to make a change, first make the change easy, then make the change.", "", "- Kent Beck" },
   { "When you write a program, think of it primarily as a work of literature. You're trying to write something that human beings are going to read. Don't think of it primarily as something a computer is going to follow. The more effective you are at making your program readable, the more effective it's going to be: You'll understand it today, you'll understand it next week, and your successors who are going to maintain and modify it will understand it.", "", "- Donald Knuth" },
+  { "Whenever I have to think to understand what the code is doing, I ask myself if I can refactor the code to make that understanding more immediately apparent.", "", "- Martin Fowler" },
   { "Why do we make the mess? What drives us to make the mess in the first place? Because we want to go fast.", "", "- Robert C. Martin" },
   { "Why do we never have time to do it right, but always have time to do it over?", "", "- Jack Bergman" },
   { "Why is programming fun?", "", "First is the sheer joy of making things.", "", "Second is the pleasure of making things that are useful to other people.", "", "Third is the fascination of fashioning complex puzzle-like objects of interlocking moving parts and watching them work in subtle cycles.", "", "Fourth is the joy of always learning, which springs from the non-repeating nature of the task.", "", "Finally, there is the delight of working in such a tractable medium. The programmer, like the poet, works only slightly removed from pure thought-stuff.", "", "- Fred Brooks: The Mythical Man-Month" },
