@@ -1,4 +1,5 @@
 return {
+  -- like Codeium but with any back-end and much slower
   -- {
   --   "milanglacier/minuet-ai.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim" },

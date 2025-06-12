@@ -29,17 +29,19 @@ return {
       default_keybindings = false,
     },
   },
-  {
-    "chrisgrieser/nvim-origami",
-    event = "VeryLazy",
-    opts = {
-      -- TODO: not working (last checked 2025-04-28)
-      -- autoFold = {
-      --   enabled = true,
-      --   kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
-      -- },
-    },
-  },
+  -- This auto folds stuff in mergetool >:(
+  -- {
+  --   "chrisgrieser/nvim-origami",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     foldKeymaps = { setup = false },
+  --     -- TODO: not working (last checked 2025-04-28)
+  --     autoFold = {
+  --       enabled = true,
+  --       kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
+  --     },
+  --   },
+  -- },
   { "nvim-zh/colorful-winsep.nvim", event = "WinNew", opts = {} },
   {
     "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps
@@ -50,19 +52,6 @@ return {
     },
   },
   -- { "luukvbaal/statuscol.nvim", opts = {} }, -- clickable fold markers
-  -- installed by default, this just customizes it
-  -- {
-  --   "nvim-neo-tree/neo-tree.nvim", -- disabled to use snacks instead
-  --   opts = {
-  --     filesystem = {
-  --       filtered_items = {
-  --         visible = true,
-  --         hide_dotfiles = false,
-  --       },
-  --       use_libuv_file_watcher = true,
-  --     },
-  --   },
-  -- },
   { "wsdjeg/vim-fetch" }, -- go to file including line number e.g. stack trace
   -- {
   --   "ziontee113/icon-picker.nvim",
