@@ -1,149 +1,177 @@
 return {
   -- like Codeium but with any back-end and much slower
+  {
+    "milanglacier/minuet-ai.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    -- fix: without this the highlight keeps getting cleared
+    init = function()
+      vim.api.nvim_create_autocmd({ "LspAttach" }, {
+        group = vim.api.nvim_create_augroup("mike_minuet_virtual_text", {}),
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "Comment" })
+        end,
+        desc = "Minuet virtual text highlight fix",
+      })
+    end,
+    opts = {
+      -- debounce = 0,
+      -- throttle = 0,
+      blink = { enable_auto_complete = false },
+      -- provider = "gemini",
+
+      -- claude provider {{{
+      provider = "claude",
+      -- provider_options = {
+      --   claude = { model = "claude-sonnet-4-20250514" }, -- default: claude-3-5-haiku-20241022
+      -- },
+      -- }}}
+
+      -- ollama provider {{{
+      -- provider = "openai_fim_compatible",
+      -- n_completions = 1,
+      -- context_window = 512,
+      -- provider_options = {
+      --   openai_fim_compatible = {
+      --     api_key = "TERM",
+      --     name = "Ollama",
+      --     stream = true,
+      --     end_point = "http://localhost:11434/v1/completions",
+      --     model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
+      --     -- model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
+      --     -- model = "qwen2.5-coder:1.5b", -- takes 0.3-1 seconds to respond
+      --     optional = {
+      --       max_tokens = 56,
+      --       top_p = 0.9,
+      --     },
+      --   },
+      -- },
+      -- }}}
+
+      virtualtext = {
+        auto_trigger_ft = { "*" },
+        auto_trigger_ignore_ft = {
+          "Avante",
+          "AvanteInput",
+          "DressingInput",
+          "NvimTree",
+          "TelescopePrompt",
+          "TelescopeResults",
+          "alpha",
+          "cmp",
+          "codecompanion",
+          "dap-repl",
+          "dashboard",
+          "harpoon",
+          "lazy",
+          "lspinfo",
+          "neoai-input",
+          "snacks_picker_input",
+          "starter",
+        },
+        show_on_completion_menu = true,
+        keymap = {
+          -- accept = "<a-y>",
+          accept_line = "<a-y>",
+          prev = "<a-p>",
+          next = "<a-n>",
+          dismiss = "<a-e>",
+        },
+      },
+    },
+    -- config = function(_, opts)
+    --   require("minuet").setup(opts)
+    --   vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "Comment" })
+    --   require("minuet.virtualtext")
+    -- end,
+  },
   -- {
-  --   "milanglacier/minuet-ai.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   -- fix: without this the highlight keeps getting cleared
-  --   init = function()
-  --     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  --       group = vim.api.nvim_create_augroup("mike_minuet_virtual_text", { clear = true }),
-  --       pattern = "*",
-  --       callback = function()
-  --         vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "Comment" })
-  --       end,
-  --       desc = "Minuet virtual text highlight fix",
-  --     })
-  --   end,
-  --   opts = {
-  --     -- debounce = 0,
-  --     -- throttle = 0,
-  --     blink = { enable_auto_complete = false },
-  --     provider = "gemini",
-  --     -- ollama provider {{{
-  --     -- provider = "openai_fim_compatible",
-  --     -- n_completions = 1,
-  --     -- context_window = 512,
-  --     -- provider_options = {
-  --     --   openai_fim_compatible = {
-  --     --     api_key = "TERM",
-  --     --     name = "Ollama",
-  --     --     stream = true,
-  --     --     end_point = "http://localhost:11434/v1/completions",
-  --     --     model = "qwen2.5-coder:7b", -- takes 2-3 seconds to respond
-  --     --     -- model = "qwen2.5-coder:3b", -- takes 1-2 seconds to respond
-  --     --     -- model = "qwen2.5-coder:1.5b", -- takes 0.3-1 seconds to respond
-  --     --     optional = {
-  --     --       max_tokens = 56,
-  --     --       top_p = 0.9,
-  --     --     },
-  --     --   },
-  --     -- },
-  --     -- }}}
-  --     virtualtext = {
-  --       auto_trigger_ft = { "*" },
-  --       show_on_completion_menu = true,
-  --       keymap = {
-  --         -- accept = "<a-y>",
-  --         accept_line = "<a-y>",
-  --         prev = "<a-p>",
-  --         next = "<a-n>",
-  --         dismiss = "<a-e>",
-  --       },
+  --   "monkoose/neocodeium",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     {
+  --       -- add AI section to which-key
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
   --     },
   --   },
-  --   -- config = function(_, opts)
-  --   --   require("minuet").setup(opts)
-  --   --   vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "Comment" })
-  --   --   require("minuet.virtualtext")
-  --   -- end,
+  --   keys = {
+  --     { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+  --     {
+  --       -- "<a-cr>",
+  --       "<a-y>",
+  --       function()
+  --         require("neocodeium").accept()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept",
+  --     },
+  --     {
+  --       "<a-w>",
+  --       function()
+  --         require("neocodeium").accept_word()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept Word",
+  --     },
+  --     -- conflicts with luasnip mapping
+  --     -- {
+  --     --   "<a-l>",
+  --     --   function()
+  --     --     require("neocodeium").accept_line()
+  --     --   end,
+  --     --   mode = "i",
+  --     --   desc = "Codeium Accept Line",
+  --     -- },
+  --     {
+  --       "<a-n>",
+  --       function()
+  --         require("neocodeium").cycle(1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Next Codeium Completion",
+  --     },
+  --     {
+  --       "<a-p>",
+  --       function()
+  --         require("neocodeium").cycle(-1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Prev Codeium Completion",
+  --     },
+  --     {
+  --       "<a-e>",
+  --       function()
+  --         require("neocodeium").clear()
+  --       end,
+  --       mode = "i",
+  --       desc = "Clear Codeium",
+  --     },
+  --   },
+  --   opts = {
+  --     silent = true,
+  --     filetypes = {
+  --       Avante = false,
+  --       AvanteInput = false,
+  --       DressingInput = false,
+  --       NvimTree = false,
+  --       TelescopePrompt = false,
+  --       TelescopeResults = false,
+  --       alpha = false,
+  --       cmp = false,
+  --       codecompanion = false,
+  --       ["dap-repl"] = false,
+  --       dashboard = false,
+  --       harpoon = false,
+  --       lazy = false,
+  --       lspinfo = false,
+  --       ["neoai-input"] = false,
+  --       snacks_picker_input = false,
+  --       starter = false,
+  --     },
+  --     -- show_label = false,
+  --   },
   -- },
-  {
-    "monkoose/neocodeium",
-    event = "VeryLazy",
-    dependencies = {
-      {
-        -- add AI section to which-key
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>a", group = "+ai" } } },
-      },
-    },
-    keys = {
-      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
-      {
-        -- "<a-cr>",
-        "<a-y>",
-        function()
-          require("neocodeium").accept()
-        end,
-        mode = "i",
-        desc = "Codeium Accept",
-      },
-      {
-        "<a-w>",
-        function()
-          require("neocodeium").accept_word()
-        end,
-        mode = "i",
-        desc = "Codeium Accept Word",
-      },
-      -- conflicts with luasnip mapping
-      -- {
-      --   "<a-l>",
-      --   function()
-      --     require("neocodeium").accept_line()
-      --   end,
-      --   mode = "i",
-      --   desc = "Codeium Accept Line",
-      -- },
-      {
-        "<a-n>",
-        function()
-          require("neocodeium").cycle(1)
-        end,
-        mode = "i",
-        desc = "Next Codeium Completion",
-      },
-      {
-        "<a-p>",
-        function()
-          require("neocodeium").cycle(-1)
-        end,
-        mode = "i",
-        desc = "Prev Codeium Completion",
-      },
-      {
-        "<a-e>",
-        function()
-          require("neocodeium").clear()
-        end,
-        mode = "i",
-        desc = "Clear Codeium",
-      },
-    },
-    opts = {
-      silent = true,
-      filetypes = {
-        Avante = false,
-        AvanteInput = false,
-        DressingInput = false,
-        NvimTree = false,
-        TelescopePrompt = false,
-        TelescopeResults = false,
-        alpha = false,
-        cmp = false,
-        codecompanion = false,
-        ["dap-repl"] = false,
-        dashboard = false,
-        harpoon = false,
-        lazy = false,
-        lspinfo = false,
-        ["neoai-input"] = false,
-        snacks_picker_input = false,
-        starter = false,
-      },
-      -- show_label = false,
-    },
-  },
   -- {
   --   "yetone/avante.nvim",
   --   event = "VeryLazy",

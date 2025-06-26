@@ -12,3 +12,4 @@ yarn = "1.22.10"
 
 [settings]
 experimental = true
+idiomatic_version_file_enable_tools = []
