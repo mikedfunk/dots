@@ -18,10 +18,33 @@ return {
       -- debounce = 0,
       -- throttle = 0,
       blink = { enable_auto_complete = false },
-      -- provider = "gemini",
+
+      -- gemini provider {{{
+      -- https://github.com/milanglacier/minuet-ai.nvim#gemini
+      provider = "gemini",
+      provider_options = {
+        gemini = {
+          -- model = "gemini-2.5-flash-lite-preview-06-17"
+          -- model = "gemini-2.5-flash",
+          model = "gemini-2.0-flash",
+          optional = {
+            generationConfig = {
+              maxOutputTokens = 256,
+              thinkingConfig = { thinkingBudget = 0 },
+            },
+            safetySettings = {
+              {
+                category = "HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold = "BLOCK_ONLY_HIGH",
+              },
+            },
+          },
+        },
+      },
+      -- }}}
 
       -- claude provider {{{
-      provider = "claude",
+      -- provider = "claude",
       -- provider_options = {
       --   claude = { model = "claude-sonnet-4-20250514" }, -- default: claude-3-5-haiku-20241022
       -- },
@@ -72,6 +95,7 @@ return {
         show_on_completion_menu = true,
         keymap = {
           -- accept = "<a-y>",
+          accept = "<a-Y>",
           accept_line = "<a-y>",
           prev = "<a-p>",
           next = "<a-n>",

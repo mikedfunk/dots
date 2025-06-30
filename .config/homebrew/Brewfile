@@ -27,6 +27,7 @@
 # tap "universal-ctags/universal-ctags" # universal-ctags
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
+# tap "zackriya-solutions/meetily" # meetily
 tap "abhinav/tap" # git-spice
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
@@ -381,7 +382,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "chromium" # no google tracking for me
 # cask "claude" # desktop app <opt-space> (tags: llm, llama, openai, chatgpt)
 # cask "clop" # automatically optimize copied images (also copies path to clipboard. Ends up with 2 images in sequence in clipboard. Kind of messy. Can't easily quit app.)
-# cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 # cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
@@ -445,6 +445,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "macgdbp" # xdebug gui client (I use nvim-dap instead)
 # cask "malwarebytes" # ya neva know (company has another antivirus installed)
 # cask "masscode" # snippet manager... I don't get it. No variables, no logic it seems.
+# cask "meetily" # AI meeting notetaker (local LLM. NOTE: requires Xcode to compile)
 # cask "menubar-colors" # color picker in the menubar
 # cask "menubar-stats" # used to show bluetooth headphones battery level in menubar (Doesn't work with my headphones for some reason... and it's $5)
 # cask "microsoft-edge"
@@ -516,6 +517,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "betterdiscord-installer" # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
+cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
 cask "discord" # chat
 cask "dockdoor" # show windows open in each app in dock on hover
 cask "firefox" # I use firefox for my home profile
@@ -533,6 +535,7 @@ cask "meetingbar" # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "nvidia-geforce-now" # game streaming
+cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
@@ -548,7 +551,7 @@ cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolu
 # mas "Session - Pomodoro Focus Timer", id: 1521432881
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
-# mas "Xcode", id: 497799835 # needed for some tools (TODO which tools?)
+# mas "Xcode", id: 497799835 # needed for some tools: Meetily
 # mas "d-d-beyond", id: 1501810129 # dnd beyond
 # mas "liquid", id: 569048352 # text clipboard processor
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app

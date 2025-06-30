@@ -559,6 +559,14 @@ return {
     ft = "qf",
   },
   { "stevearc/quicker.nvim", ft = "qf", opts = {} },
+  {
+    "nyngwang/NeoZoom.lua",
+    cmd = { "NeoZoomToggle", "NeoZoom" },
+    keys = {
+      { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
+    },
+    opts = {},
+  },
   -- {
   --   "mcauley-penney/visual-whitespace.nvim",
   --   opts = {},

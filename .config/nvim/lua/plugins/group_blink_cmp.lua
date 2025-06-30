@@ -89,19 +89,19 @@ return {
         documentation = {
           window = {
             border = "rounded",
-            winblend = 15,
+            -- winblend = 15,
           },
         },
         menu = {
           border = "rounded",
-          winblend = 15,
+          -- winblend = 15,
         },
       },
       signature = {
         enabled = true,
         window = {
           border = "rounded",
-          winblend = 15,
+          -- winblend = 15,
         },
       },
     },

@@ -1,5 +1,11 @@
 return {
-  { "bullets-vim/bullets.vim", ft = "markdown" },
+  {
+    "bullets-vim/bullets.vim",
+    ft = "markdown",
+    init = function()
+      vim.g.bullets_checkbox_markers = "    x" -- default: ' .oOX'
+    end,
+  },
   -- use utf-8 symbols directly
   -- {
   --   "bngarren/checkmate.nvim",
@@ -27,10 +33,10 @@ return {
     --   { "<CR>", "<Cmd>norm <C-a><CR>", mode = "n", noremap = true, desc = "Dial" },
     -- },
   },
-  {
-    "wurli/contextindent.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {},
-  },
+  -- {
+  --   "wurli/contextindent.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = { pattern = "*" },
+  -- },
   { "dhruvasagar/vim-table-mode", ft = "markdown" },
 }
