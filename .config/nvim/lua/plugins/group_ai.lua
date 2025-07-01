@@ -5,7 +5,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     -- fix: without this the highlight keeps getting cleared
     init = function()
-      vim.api.nvim_create_autocmd({ "LspAttach" }, {
+      vim.api.nvim_create_autocmd({ "BufReadPost" }, {
         group = vim.api.nvim_create_augroup("mike_minuet_virtual_text", {}),
         pattern = "*",
         callback = function()

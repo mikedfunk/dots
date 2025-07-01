@@ -545,6 +545,7 @@ cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolu
 # mac app store {{{
 
 # mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
+# mas "Fello AI", id: 6447705369 # some AI app to make a Gemini desktop app (5 free questions per day :/ )
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
 # mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
@@ -552,7 +553,7 @@ cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolu
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools: Meetily
-# mas "d-d-beyond", id: 1501810129 # dnd beyond
+# mas "d-d-beyond", id: 1501810129 # dnd beyond / d&d beyond
 # mas "liquid", id: 569048352 # text clipboard processor
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
 mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
