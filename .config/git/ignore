@@ -42,3 +42,6 @@ nohup.out
 yarn-error.log
 gptme.toml
 .goosehints
+.aiderignore
+.aider.chat.history.md
+.aider.tags.cache*

@@ -194,6 +194,7 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 
 # export AIDER_MODEL="haiku" # claude haiku latest
 export AIDER_MODEL="gemini/gemini-2.0-flash" # gemini free fast model
+export AIDER_GITIGNORE="False"
 # export AIDER_MODEL="ollama/llama3.1:8b"
 # export AIDER_SHOW_MODEL_WARNINGS=false
 # export AIDER_YES_ALWAYS=true

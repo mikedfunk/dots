@@ -342,7 +342,7 @@ _install_node_versions() {
     # https://github.com/mise-vm/mise-nodejs/issues/40#issuecomment-297053730
     # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
 
-    # L, G
+    # L
     (mise list nodejs | grep --quiet 9.11.2) || mise install nodejs 9.11.2
     # Z
     (mise list nodejs | grep --quiet 6.7.0) || mise install nodejs 6.7.0
