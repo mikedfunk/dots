@@ -201,7 +201,7 @@ export AIDER_GITIGNORE="False"
 # export AIDER_YES_ALWAYS=true
 export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
 export AIDER_AUTO_COMMITS=false
-export AIDER_READ=.goosehints
+export AIDER_READ=AGENTS.md
 
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
