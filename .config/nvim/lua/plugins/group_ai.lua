@@ -318,6 +318,7 @@ return {
   --         sources = { per_filetype = { codecompanion = "codecompanion" } },
   --       },
   --     },
+  --     { "franco-ruggeri/codecompanion-spinner.nvim", opts = {} },
   --     "nvim-lua/plenary.nvim",
   --     "nvim-treesitter/nvim-treesitter",
   --     { "echasnovski/mini.diff", opts = {} },
