@@ -192,16 +192,17 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 # but it will allow sharing your clipboard over ssh with a remote server.
 # export SSH_TTY=$TTY
 
-# export AIDER_MODEL="haiku" # claude haiku latest
+export AIDER_MODEL="haiku" # claude haiku latest
 # export AIDER_MODEL="gemini/gemini-2.0-flash" # gemini free fast model
-export AIDER_MODEL="anthropic/claude-3-opus-latest"
+# export AIDER_MODEL="anthropic/claude-3-opus-latest"
 export AIDER_GITIGNORE="False"
 # export AIDER_MODEL="ollama/llama3.1:8b"
 # export AIDER_SHOW_MODEL_WARNINGS=false
 # export AIDER_YES_ALWAYS=true
 export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
 export AIDER_AUTO_COMMITS=false
-export AIDER_READ=AGENTS.md
+# export AIDER_READ=AGENTS.md
+export AIDER_READ=CONTEXT.md
 
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027

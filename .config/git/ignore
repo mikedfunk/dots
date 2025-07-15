@@ -19,12 +19,14 @@
 .php_cs.cache
 .phpactor.json
 .phpspec
+.phpunit.cache
 .phpunit.result.cache
 .pre-commit-config.yaml
 .projections.json
 .ruby-lsp
 .yarn
 AGENTS.md
+CONTEXT.md
 __pycache__
 cobertura.xml
 conform.*
@@ -33,3 +35,4 @@ cspell.json
 mise.toml
 nohup.out
 yarn-error.log
+.conform*

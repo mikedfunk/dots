@@ -524,8 +524,8 @@ cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
+cask "gcloud-cli" # previously google-cloud-sdk. used for BigQuery, etc.
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
-cask "google-cloud-sdk" # used for BigQuery, etc.
 cask "grandperspective" # visualize storage hogs in the hard drive
 cask "iterm2@beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" # menubar calendar
