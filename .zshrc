@@ -855,9 +855,12 @@ zstyle ':notify:*' success-sound 'default'
 # zstyle ':notify:*' blacklist-regex 'v|lvim|vim'
 # }}}
 
-# oh-my-zsh-jira {{{
+# acli/jira {{{
 # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/jira
 export JIRA_DEFAULT_ACTION='dashboard'
+
+alias acli-login="echo $JIRA_USER_API_KEY | acli jira auth login --site $JIRA_SITE --email $JIRA_USER_EMAIL --token"
+_has acli && _evalcache acli completion zsh
 # }}}
 
 # zsh-vi-mode {{{

@@ -29,6 +29,7 @@
 # tap "xvxx/code" # shy
 # tap "zackriya-solutions/meetily" # meetily
 tap "abhinav/tap" # git-spice
+tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
 tap "buo/cask-upgrade" # for `brew cu`
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "mikedfunk/zoomhider" # zoomhider
@@ -238,6 +239,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
+brew "acli" # atlassian CLI for Jira, etc.
 brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with gptme)
 brew "akamai" # interact with akamai caching
 brew "algolia" # search cli
