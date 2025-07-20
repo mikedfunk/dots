@@ -1,10 +1,12 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    -- TODO: not working
     opts_extend = {
       "servers.snyk_ls.filetypes",
       "servers.emmet_language_server.filetypes",
     },
+    ---@class PluginLspOpts
     opts = {
       codelens = { enabled = true },
       servers = {
@@ -25,6 +27,7 @@ return {
             return require("lspconfig.util").root_pattern("deno.json")(startpath)
           end,
         },
+        eslint = { enabled = vim.fn.executable("eslint") == 1 },
         -- flow = {},
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
@@ -34,16 +37,34 @@ return {
         jsonls = {},
         lemminx = {},
         -- lsp_ai = {},
+        ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua
+        ---@see https://github.com/snyk/snyk-ls#configuration-1
         snyk_ls = {
-          filetypes = { "php" }, -- add more filetypes
+          -- TODO: this is not merging with existing config
+          -- filetypes = { "php" }, -- add more filetypes
+          filetypes = {
+            "go",
+            "gomod",
+            "javascript",
+            "typescript",
+            "json",
+            "python",
+            "requirements",
+            "helm",
+            "yaml",
+            "terraform",
+            "terraform-vars",
+            "php",
+          },
+          -- TODO: I can't get this to merge properly with neoconf
           init_options = {
-            token = os.getenv("SNYK_TOKEN"),
+            token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
             enableTrustedFoldersFeature = "false",
             enableTelemetry = "false",
-            activateSnykCodeQuality = "true",
             organization = "leaf-saatchiart",
           },
-          autostart = false, -- to use this LS, :LspStart snyk_ls
+          -- BUG: with autostart false it doesn't apply any of the config above
+          -- autostart = false, -- to use this LS, :LspStart snyk_ls
         },
         -- phpactor = {},
         somesass_ls = {},

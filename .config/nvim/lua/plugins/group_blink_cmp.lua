@@ -19,58 +19,58 @@ return {
       },
       sources = {
         default = {
-          "emoji",
-          "ripgrep",
-          "dictionary",
+          -- "emoji",
+          -- "ripgrep",
+          -- "dictionary",
           "cmp_jira",
-          "tmux",
+          -- "tmux",
         },
         -- nvim-cmp providers that do not require provider customization
         compat = {
-          "nerdfont",
+          -- "nerdfont",
         },
         providers = {
-          emoji = {
-            module = "blink-emoji",
-            name = "Emoji",
-            -- score_offset = 15,
-            -- min_keyword_length = 2,
-            opts = { insert = true }, -- Insert emoji (default) or complete its name
-          },
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "Ripgrep",
-            async = true,
-            max_items = 5,
-            score_offset = -10,
-            ---@module "blink-ripgrep"
-            ---@type blink-ripgrep.Options
-            opts = {},
-          },
+          -- emoji = {
+          --   module = "blink-emoji",
+          --   name = "Emoji",
+          --   -- score_offset = 15,
+          --   -- min_keyword_length = 2,
+          --   opts = { insert = true }, -- Insert emoji (default) or complete its name
+          -- },
+          -- ripgrep = {
+          --   module = "blink-ripgrep",
+          --   name = "Ripgrep",
+          --   async = true,
+          --   max_items = 5,
+          --   score_offset = -10,
+          --   ---@module "blink-ripgrep"
+          --   ---@type blink-ripgrep.Options
+          --   opts = {},
+          -- },
           -- moved to compat above as config is not necessary here
           -- nerdfont = {
           --   name = "nerdfont",
           --   module = "blink.compat.source",
           --   score_offset = 10,
           -- },
-          dictionary = {
-            name = "dictionary",
-            module = "blink.compat.source",
-            async = true,
-            max_items = 5,
-            min_keyword_length = 2,
-            -- score_offset = -10,
-          },
-          tmux = {
-            name = "tmux",
-            module = "blink.compat.source",
-            async = true,
-            max_items = 5,
-            score_offset = -10,
-            opts = {
-              -- all_panes = true,
-            },
-          },
+          -- dictionary = {
+          --   name = "dictionary",
+          --   module = "blink.compat.source",
+          --   async = true,
+          --   max_items = 5,
+          --   min_keyword_length = 2,
+          --   -- score_offset = -10,
+          -- },
+          -- tmux = {
+          --   name = "tmux",
+          --   module = "blink.compat.source",
+          --   async = true,
+          --   max_items = 5,
+          --   score_offset = -10,
+          --   opts = {
+          --     -- all_panes = true,
+          --   },
+          -- },
           cmp_jira = {
             name = "cmp_jira",
             module = "blink.compat.source",
@@ -106,24 +106,24 @@ return {
       },
     },
     dependencies = {
-      "moyiz/blink-emoji.nvim",
-      "mikavilpas/blink-ripgrep.nvim",
-      {
-        "uga-rosa/cmp-dictionary",
-        dependencies = { "saghen/blink.compat" },
-        opts = {
-          paths = { "/usr/share/dict/words" },
-        },
-      },
-      {
-        "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
-        dependencies = { "saghen/blink.compat" },
-      },
-      {
-        "andersevenrud/cmp-tmux",
-        branch = "main",
-        dependencies = { "saghen/blink.compat" },
-      },
+      -- "moyiz/blink-emoji.nvim",
+      -- "mikavilpas/blink-ripgrep.nvim",
+      -- {
+      --   "uga-rosa/cmp-dictionary",
+      --   dependencies = { "saghen/blink.compat" },
+      --   opts = {
+      --     paths = { "/usr/share/dict/words" },
+      --   },
+      -- },
+      -- {
+      --   "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
+      --   dependencies = { "saghen/blink.compat" },
+      -- },
+      -- {
+      --   "andersevenrud/cmp-tmux",
+      --   branch = "main",
+      --   dependencies = { "saghen/blink.compat" },
+      -- },
       {
         -- change Jira authentication from oauth to basic auth (API key). Remove debug print.
         "mikedfunk/cmp-jira",
