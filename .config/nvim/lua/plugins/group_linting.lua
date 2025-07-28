@@ -122,7 +122,7 @@ return {
             -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/phpcs.lua
             "-q",
             "--report=json",
-            "--cache",
+            "--cache=.php_cs.cache",
             -- "--warning-severity=3", -- show warnings from severity 3 up to the max of 5
             -- "--warning-severity=0", -- do not show warnings, same as -n
             "-d",

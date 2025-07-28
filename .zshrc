@@ -192,11 +192,12 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 # but it will allow sharing your clipboard over ssh with a remote server.
 # export SSH_TTY=$TTY
 
-export AIDER_MODEL="haiku" # claude haiku latest
-# export AIDER_MODEL="gemini/gemini-2.0-flash" # gemini free fast model
+# export AIDER_MODEL="anthropic/claude-3-5-haiku-latest" # Faster and cheaper. Can hit token limit.
+export AIDER_MODEL="anthropic/claude-3-7-sonnet-latest" # capable of returning diffs, apparently less likely to hit token limit
 # export AIDER_MODEL="anthropic/claude-3-opus-latest"
-export AIDER_GITIGNORE="False"
+# export AIDER_MODEL="gemini/gemini-2.0-flash" # gemini free fast model
 # export AIDER_MODEL="ollama/llama3.1:8b"
+export AIDER_GITIGNORE="False" # use .aiderignore instead so I can add more/less
 # export AIDER_SHOW_MODEL_WARNINGS=false
 # export AIDER_YES_ALWAYS=true
 export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
