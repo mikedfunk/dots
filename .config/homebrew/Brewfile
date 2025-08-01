@@ -312,6 +312,7 @@ brew "llvm" # used to build php imagick extension properly
 brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugin
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode`
+brew "media-control" # macos media status helper
 brew "memcached" # needed by php70 memcached pecl extension
 brew "mise" # asdf but faster and includes direnv
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
@@ -389,6 +390,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
 # cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
+# cask "dockdoor" # show windows open in each app in dock on hover
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
 # cask "dropbox" # I especially use this for syncing my notes so I can view them in the joplin mobile app (not using this feature right now)
@@ -474,6 +476,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
 # cask "postman" # http api client (I use the web interface mostly)
 # cask "postman-cli" # new postman cli runner. Replaces newman.
+# cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 # cask "qlcolorcode" # quicklook plugin to provide syntax highlighting to code files (fails to install)
 # cask "qlimagesize" # quicklook plugin (display image size and resolution in the title in preview)
 # cask "qlmarkdown" # quicklook plugin (preview markdown)
@@ -520,9 +523,8 @@ brew "zsh" # awesome bash shell replacement
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "betterdiscord-installer" # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
-cask "cold-turkey-blocker" # blocks distracting website access so I can work. tags: focus, distractions
+cask "cold-turkey-blocker" # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
 cask "discord" # chat
-cask "dockdoor" # show windows open in each app in dock on hover
 cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
@@ -538,7 +540,6 @@ cask "meetingbar" # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "nvidia-geforce-now" # game streaming
-cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
 cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
