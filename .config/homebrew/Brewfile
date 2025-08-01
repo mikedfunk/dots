@@ -331,6 +331,7 @@ brew "pcre2" # needed to build php https://github.com/shivammathur/homebrew-php/
 brew "percona-toolkit" # mysql schema migrator among other things. requires java and perl.
 brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
+brew "pipx" # like npx for python pip
 brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "poetry" # MUCH better than pip - python package manager
