@@ -36,5 +36,7 @@ mise.toml
 nohup.out
 yarn-error.log
 .conform*
+.crush/
+CRUSH.md
 
 **/.claude/settings.local.json

@@ -31,6 +31,7 @@
 tap "abhinav/tap" # git-spice
 tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
 tap "buo/cask-upgrade" # for `brew cu`
+tap "charmbracelet/tap" # crush and others
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "mikedfunk/zoomhider" # zoomhider
 
@@ -263,6 +264,7 @@ brew "claude-code" # cli AI helper
 brew "cloc" # count lines of code
 brew "cloudflared" # cloudflare CLI
 brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf.
+brew "crush" # AI CLI agent
 brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
