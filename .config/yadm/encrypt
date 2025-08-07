@@ -26,6 +26,7 @@ Code/saatchi/**/cspell.json
 Code/saatchi/**/mise.toml
 Code/**/.goosehints
 Code/**/pyrightconfig.json
+Code/**/crush.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 

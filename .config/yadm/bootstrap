@@ -338,23 +338,23 @@ _install_node_versions() {
     _log_info "Installing node version(s)"
     # https://github.com/mise-vm/mise-nodejs#problems-with-openpgp-signatures-in-older-versions
     # bash -c '${mise_DATA_DIR:=$HOME/.mise}/plugins/nodejs/bin/import-previous-release-team-keyring'
-    (mise plugin list | grep --quiet nodejs) || mise plugin add nodejs
+    (mise plugin list | grep --quiet node) || mise plugin add node
     # https://github.com/mise-vm/mise-nodejs/issues/40#issuecomment-297053730
     # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
 
     # L
-    (mise list nodejs | grep --quiet 9.11.2) || mise install nodejs 9.11.2
+    (mise list node | grep --quiet 9.11.2) || mise install node 9.11.2
     # Z
-    (mise list nodejs | grep --quiet 6.7.0) || mise install nodejs 6.7.0
+    (mise list node | grep --quiet 6.7.0) || mise install node 6.7.0
     # E
-    (mise list nodejs | grep --quiet 21.7.3) || mise install nodejs 21.7.3
+    (mise list node | grep --quiet 21.7.3) || mise install node 21.7.3
     # global
-    # (mise list nodejs | grep --quiet latest) || mise install nodejs latest
+    # (mise list node | grep --quiet latest) || mise install node latest
 
-    mise use --global nodejs latest
+    mise use --global node latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
-    mise exec nodejs@latest -- corepack enable
-    mise reshim nodejs
+    mise exec node@latest -- corepack enable
+    mise reshim node
 
     builtin cd - >/dev/null || return
 }
