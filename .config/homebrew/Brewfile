@@ -136,6 +136,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "maven" # used by cloudbeaver (mysql web app)
 # brew "mc" # memcached cli. Use the full path to avoid conflicting with midnight commander, or just uninstall midnight commander (Trouble using due to networking limitations, also this tap is in a private github repo!! I have an installer in my yadm config instead)
 # brew "mc" # old-school file manager, editor, viewer, script runner, remote filesystem access, etc.
+# brew "mcpm" # mcp manager. Package manager for LLM MCPs.
 # brew "mkcert" # create a certificate, create a local CA, add the cert as trusted in the CA (Only needed to _create_ certs)
 # brew "mono" # .NET compiler for mac. Useful for OmniSharp. (not needed)
 # brew "mutagen" # docker volume helper - syncs docker volumes on the host machine rather than mounting it.

@@ -1,12 +1,17 @@
 # .ctags
 # _ide_helper.php
 # composer.phar
+
+**/.claude/settings.local.json
 *.swp
 *.tsbuildinfo
 *.un~
 .DS_Store
 .aider*
+.conform*
+.crush/
 .deptrac.cache
+.ethersync
 .gitlint
 .ignore
 .jenkinslintrc
@@ -27,17 +32,13 @@
 .yarn
 AGENTS.md
 CONTEXT.md
+CRUSH.md
 __pycache__
 cobertura.xml
 conform.*
 coverage
+crush.json
 cspell.json
 mise.toml
 nohup.out
 yarn-error.log
-.conform*
-.crush/
-CRUSH.md
-.ethersync
-
-**/.claude/settings.local.json
