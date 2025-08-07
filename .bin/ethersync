@@ -1,0 +1,5 @@
+#!/usr/bin/env -S mise tool-stub
+
+url = "https://github.com/ethersync/ethersync/releases/download/v0.7.0/ethersync-universal-apple-darwin.tar.gz"
+checksum = "blake3:c83542a7a57282f64d4fdcd54b0a06b816b55cbeac35d74b52b1e0d2175540a8"
+size = 17309667 # 16.51 MiB

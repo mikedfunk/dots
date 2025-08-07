@@ -349,7 +349,7 @@ _install_node_versions() {
     # E
     (mise list nodejs | grep --quiet 21.7.3) || mise install nodejs 21.7.3
     # global
-    (mise list nodejs | grep --quiet latest) || mise install nodejs latest
+    # (mise list nodejs | grep --quiet latest) || mise install nodejs latest
 
     mise global nodejs latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
@@ -375,6 +375,7 @@ _install_lua_versions() {
 # }}}
 
 # install perl version(s) {{{
+# used for percona tools
 _install_perl_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing perl version(s)"

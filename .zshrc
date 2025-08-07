@@ -117,7 +117,7 @@ export path=(
   # global ruby gems
   $HOME/bin
   # global python pip packages (also lazyman)
-  $HOME/.local/bin
+  $(python -m site --user-base)/bin
   # emacs
   # $HOME/.emacs.d/bin
   # /Applications/Docker.app/Contents/Resources/bin

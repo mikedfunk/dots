@@ -169,4 +169,11 @@ return {
       vim.cmd([[highlight PackageInfoOutdatedVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
     end,
   },
+  -- {
+  --   "ethersync/ethersync-nvim",
+  --   keys = {
+  --     -- { "<leader>j", "<cmd>EthersyncJumpToCursor<cr>" },
+  --   },
+  --   lazy = false,
+  -- },
 }
