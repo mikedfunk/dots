@@ -181,7 +181,7 @@ _install_neovim_versions() {
     (mise list neovim | grep --quiet stable) && return
     _log_info "installing neovim stable"
     mise install neovim stable
-    mise global neovim stable
+    mise use --global neovim stable
     # mise install neovim nightly # but don't activate it by default
 }
 # }}}
@@ -200,7 +200,7 @@ _install_php_81() {
     (mise list php | grep --quiet "8.1.31") && return
     _log_info "installing php 8.1.31"
     mise install php 8.1.31
-    mise global php 8.1.31 || return
+    mise use --global php 8.1.31 || return
 
     # install php extensions (different set for 8.1.31)
     local -r PHP_PATH="$(mise where php)"
@@ -241,7 +241,7 @@ _install_php_84() {
     (mise list php | grep --quiet "8.4.5") && return
     _log_info "installing php 8.4.5"
     mise install php 8.4.5
-    mise global php 8.4.5 || return
+    mise use --global php 8.4.5 || return
 
     # install php extensions (different set for 8.4.5)
     local -r PHP_PATH="$(mise where php)"
@@ -313,7 +313,7 @@ _install_php_versions() {
 
     _install_php_81
     _install_php_84
-    mise global php 8.4.5
+    mise use --global php 8.4.5
 
     # NOTE: revert temporary nasty hack
     cd "$HOME/.mise/plugins/php/" && git reset --hard
@@ -328,7 +328,7 @@ _install_deno_versions() {
     _log_info "Installing deno version(s)"
     (mise plugin list | grep --quiet deno) || mise plugin add deno
     (mise list deno | grep --quiet 1.29.4) || mise install deno 1.29.4
-    mise global deno 1.29.4
+    mise use --global deno 1.29.4
 }
 # }}}
 
@@ -351,7 +351,7 @@ _install_node_versions() {
     # global
     # (mise list nodejs | grep --quiet latest) || mise install nodejs latest
 
-    mise global nodejs latest
+    mise use --global nodejs latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
     mise exec nodejs@latest -- corepack enable
     mise reshim nodejs
@@ -368,7 +368,7 @@ _install_lua_versions() {
     (mise plugin list | grep --quiet perl) || mise plugin add lua
     (mise list lua | grep --quiet 5.4.4) || mise install lua 5.4.4
 
-    mise global lua 5.4.4
+    mise use --global lua 5.4.4
 
     builtin cd - >/dev/null || return
 }
@@ -382,7 +382,7 @@ _install_perl_versions() {
     (mise plugin list | grep --quiet perl) || mise plugin add perl
     (mise list perl | grep --quiet 5.38.0) || mise install perl 5.38.0
 
-    mise global perl 5.38.0
+    mise use --global perl 5.38.0
 
     builtin cd - >/dev/null || return
 }
@@ -409,7 +409,7 @@ _install_python_versions() {
         (_log_info "installing python 3.10.1" &&
             mise install python 3.10.1 &&
             mise install python 2.7.18 &&
-            mise global python 3.10.1 2.7.18)
+            mise use --global python 3.10.1 2.7.18)
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -421,7 +421,7 @@ _install_ruby_versions() {
     (mise plugin list | grep --quiet ruby) || mise plugin add ruby
     # ( mise list ruby | grep --quiet 2.3.3 ) || mise install ruby 2.3.3 # Z (compass) - doesn't install on mac but 3.x works
     (mise list ruby | grep --quiet 3.1.2) || mise install ruby 3.1.2
-    mise global ruby 3.1.2
+    mise use --global ruby 3.1.2
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -438,7 +438,7 @@ _install_erlang_version() {
     export MACOSX_DEPLOYMENT_TARGET=10.4
     export SYSTEM_VERSION_COMPAT=1
     (mise list erlang | grep --quiet 23.0) || mise install erlang 23.0
-    mise global erlang 23.0
+    mise use --global erlang 23.0
     builtin cd - >/dev/null || return
 }
 # }}}
@@ -449,7 +449,7 @@ _install_elixir_version() {
     _log_info "Installing elixir version"
     (mise plugin list | grep --quiet elixir) || mise plugin add elixir
     (mise list elixir | grep --quiet 1.10.4-otp-23) || mise install elixir 1.10.4-otp-23
-    mise global elixir 1.10.4-otp-23
+    mise use --global elixir 1.10.4-otp-23
     builtin cd - >/dev/null || return
 }
 # }}}

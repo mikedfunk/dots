@@ -38,5 +38,6 @@ yarn-error.log
 .conform*
 .crush/
 CRUSH.md
+.ethersync
 
 **/.claude/settings.local.json
