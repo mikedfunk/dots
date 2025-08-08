@@ -40,6 +40,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew {{{
 
 # brew "aicommits" # AI commit message writer
+# brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "angband" # middle-earth themed dungeon crawler (requires java)
 # brew "ansible" # used in some of my company-specific stuff to run ssh commands on multiple servers.
 # brew "ansifilter" # filter out ansi codes. used by tmux-logging tpm plugin.
@@ -57,9 +58,11 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "bzt" # taurus http and performance test runner
 # brew "chromedriver" # like selenium for chrome. (These drivers feel pretty outdated to me)
 # brew "circleci" # circleci cli e.g. `circleci open`
+# brew "claude-code" # cli AI helper (replaced with crush)
 # brew "cmake" # used by youcompleteme (which I no longer use)
 # brew "code-minimap" # for a vim plugin
 # brew "codespell" # neat little utility to show and fix code misspellings
+# brew "codex" # openai version of claude-code, etc. (replaced with crush)
 # brew "colortail" # tail with support for colors (I use multitail)
 # brew "composer" # php dependency management (now installed via phpenv)
 # brew "csvq" # jq for csv
@@ -98,6 +101,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "global" # gnu global tags aka gtags. More powerful than ctags but has a different interface with a learning curve. Also depends on ctags which conflicts with universal-ctags.
 # brew "glow" # markdown terminal renderer - conflicts with npm glow (pretty flowtype checker)
 # brew "gnu-tar" # linux version of tar so stuff actually works
+# brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "graphviz" # useful for xdebug profiler class maps
 # brew "gum" # spiffy shell script UI helper
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
@@ -154,6 +158,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "nnn" # file picker I use inside of vim
 # brew "nodenv" # node version manager (same api as rbenv) (I use asdf now)
 # brew "nostromo" # alias manaager
+# brew "oha" # http load tester
 # brew "pass" # unix password manager using gpg
 # brew "peco" # interactively filter results and print the filtered version. can be used to print filtered one or e.g. `vim $(dosomething | peco)` (FZF does this)
 # brew "perl" # for swat cpan package
@@ -242,7 +247,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "acli" # atlassian CLI for Jira, etc.
-brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with gptme)
 brew "akamai" # interact with akamai caching
 brew "algolia" # search cli
 brew "antidote" # zsh plugin system like antigen but faster
@@ -261,7 +265,6 @@ brew "bison" # needed to build php. The default mac one is too old. https://gith
 brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
 brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 brew "carapace" # shell completion for projects using spf13/cobra
-brew "claude-code" # cli AI helper
 brew "cloc" # count lines of code
 brew "cloudflared" # cloudflare CLI
 brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf.
@@ -281,13 +284,12 @@ brew "gh" # new github cli
 brew "git"
 brew "git-delta" # git pager with syntax highlighting, language aware
 brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
-brew "git-spice", link: false # stacked PR manager. Absolutely amazing.
+brew "git-spice", link: false # stacked PR manager. Absolutely amazing. (note: this conflicts with gs from ghostscript, which is a dependency of imagemagick, so it is not linked. I have an elaborate workaround to use `git spice ...` instead like it should be)
 brew "glib" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "go" # golang programming language. used for installing/managing sqls
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
-brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt)
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
@@ -314,8 +316,8 @@ brew "libzip" # needed for php https://github.com/phpenv/phpenv/issues/90#issuec
 brew "llvm" # used to build php imagick extension properly
 brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugin
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
-brew "mas" # mac app store cli. e.g. `mas install Xcode`
-brew "media-control" # macos media status helper
+brew "mas" # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
+brew "media-control" # macos media status helper (used for my tmux statusbar)
 brew "memcached" # needed by php70 memcached pecl extension
 brew "mise" # asdf but faster and includes direnv
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
@@ -324,7 +326,6 @@ brew "mysql-client@8.0"
 brew "node" # nodejs and npm (non-asdf version required by yarn)
 brew "noti" # simple terminal notifier
 brew "nss" # required by mkcert to make certs trusted in firefox
-brew "oha" # http load tester
 brew "ollama" # local AI LLMs
 brew "oniguruma" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1

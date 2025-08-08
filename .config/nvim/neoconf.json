@@ -73,11 +73,23 @@
         }
       }
     },
+    "jsonls": {
+      "json": {
+        "schemas": [
+          {
+            "fileMatch": [
+              "crush.json"
+            ],
+            "url": "https://charm.land/crush.json"
+          }
+        ]
+      }
+    },
     "lsp_ai": {
       "models": {
-        "ollama_llama_3_1": {
+        "ollama_qwen2.5-coder:3b": {
           "type": "ollama",
-          "model": "llama3.1:8b",
+          "model": "qwen2.5-coder:3b",
           "max_requests_per_second": 10
         }
       }

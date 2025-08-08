@@ -420,6 +420,7 @@ alias pinfo='pinfo --rcfile=$XDG_CONFIG_HOME/pinfo/pinforc'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
+alias ccusage="npx -y ccusage@latest"
 alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt config option stopped working :/
 _has kubecolor && alias kubectl=kubecolor && compdef kubecolor=kubectl
 alias k="kubectl"
@@ -640,8 +641,8 @@ psw() {
         ./vendor/bin/phpspec run --no-interaction -vvv $@
 }
 # phpspec coverage
-psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2048M ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
-alias psc="php -dxdebug.mode=coverage -dmemory_limit=2048M -dxdebug.mode=off ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
+psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2G ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
+alias psc="php -dxdebug.mode=coverage -dmemory_limit=2G ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
 pscw() {
     noglob ag -l -g '.*\.php' \
         | entr -cr \

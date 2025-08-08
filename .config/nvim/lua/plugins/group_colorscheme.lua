@@ -18,8 +18,15 @@ return {
       -- jack up all saturation, default is too dull!
       on_colors = function(colors)
         local hsluv = require("tokyonight.hsluv")
-        local hue_shift = 0.95 -- +: purple, -: green
+
+        -- cyber:
+        -- local hue_shift = 0.95 -- +: purple, -: green
+        local hue_shift = 1.05 -- +: purple, -: green
         local saturation_multiplier = 2.50
+
+        -- forest:
+        -- local saturation_multiplier = 0.7
+        -- local hue_shift = 0.5 -- +: purple, -: green
 
         for k, v in pairs(colors) do
           if type(v) == "string" and v ~= "NONE" then
