@@ -12,7 +12,7 @@ DOCKER="󰡨"
 # echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
 case "$(docker desktop status --format=json | jq -r .Status)" in
 running)
-    echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
+    echo "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
     ;;
 paused)
     echo "#[fg=yellow]${DOCKER}#[fg=default]"

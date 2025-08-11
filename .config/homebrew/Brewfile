@@ -68,6 +68,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "csvq" # jq for csv
 # brew "ctags" # allows jumping to function/class definitions, etc. in vim (I use universal-ctags)
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+# brew "cursor-cli" # AI AI AI
 # brew "daytona" # fancy devcontainer setup daytona.io
 # brew "desk" # shell workspace manager. (I use direnv instead)
 # brew "diff-so-fancy" # better git diff viewer (note: diff-highlight is in pip) (I now use delta instead)
@@ -87,6 +88,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "flow" # flowtype for javascript. Moved from ~/.config/yarn/global/package.json
 # brew "fpp" # facebook path picker. Used with tmux-fpp to easily open files in an editor. (I don't use it)
 # brew "fx" # json funagler used by some of my shell functions (switched to jq)
+# brew "gemini-cli" # AI AI AI
 # brew "git-absorb" # fixup helper
 # brew "git-extras" # adds some cool additional git commands (conflicts with npm git-standup)
 # brew "git-fixup" # git commit --fixup helper

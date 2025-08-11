@@ -47,47 +47,45 @@ return {
       { "<Leader>ci", "<Cmd>CspellIgnore<CR>", noremap = true, desc = "Cspell Ignore" },
     },
   },
-  -- {
-  --   -- TODO: this fails to install https://github.com/andythigpen/nvim-coverage/issues/60
-  --   -- needed for nvim-coverage PHP cobertura parser. Requires `brew install luajit`
-  --   "vhyrro/luarocks.nvim",
-  --   priority = 1000,
-  --   opts = {
-  --     rocks = { "lua-xmlreader" },
-  --   },
-  -- },
-  -- {
-  --   -- "andythigpen/nvim-coverage",
-  --   "strottie/nvim-coverage",
-  --   branch = "strottie-cpp-cobertura",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "folke/tokyonight.nvim",
-  --     "folke/snacks.nvim",
-  --   },
-  --   opts = function()
-  --     return {
-  --       highlights = {
-  --         covered = { fg = Snacks.util.color("DiagnosticOk") },
-  --         uncovered = { fg = Snacks.util.color("DiagnosticError") },
-  --       },
-  --       auto_reload = true,
-  --       lcov_file = "./coverage/lcov.info",
-  --     }
-  --   end,
-  --   keys = {
-  --     {
-  --       "<leader>tc",
-  --       function()
-  --         if require("coverage.signs").is_enabled() then
-  --           require("coverage").clear()
-  --         else
-  --           require("coverage").load(true)
-  --         end
-  --       end,
-  --       noremap = true,
-  --       desc = "Toggle Coverage",
-  --     },
-  --   },
-  -- },
+  {
+    -- needed for nvim-coverage PHP cobertura parser. Requires `brew install luajit`
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    opts = {
+      rocks = { "lua-xmlreader" },
+    },
+  },
+  {
+    "andythigpen/nvim-coverage",
+    -- "strottie/nvim-coverage", branch = "strottie-cpp-cobertura",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/tokyonight.nvim",
+      "folke/snacks.nvim",
+    },
+    opts = function()
+      return {
+        highlights = {
+          covered = { fg = Snacks.util.color("DiagnosticOk") },
+          uncovered = { fg = Snacks.util.color("DiagnosticError") },
+        },
+        auto_reload = true,
+        lcov_file = "./coverage/lcov.info",
+      }
+    end,
+    keys = {
+      {
+        "<leader>tc",
+        function()
+          if require("coverage.signs").is_enabled() then
+            require("coverage").clear()
+          else
+            require("coverage").load(true)
+          end
+        end,
+        noremap = true,
+        desc = "Toggle Coverage",
+      },
+    },
+  },
 }

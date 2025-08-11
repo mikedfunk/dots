@@ -143,6 +143,7 @@ return {
         "mason",
         "noice",
         "snacks_dashboard",
+        "snacks_notif",
         "snacks_picker_input",
         "starter",
       },
@@ -164,6 +165,7 @@ return {
         "lspinfo",
         "mason",
         "snacks_dashboard",
+        "snacks_notif",
         "snacks_picker_input",
         "starter",
       },
@@ -184,7 +186,6 @@ return {
       presets = {
         lsp_doc_border = true,
       },
-      ---@type NoiceConfigViews
       -- views = {
       --   notify = {
       --     backend = "notify_send",
@@ -314,14 +315,20 @@ return {
           table.concat({
             "#{cpu_fg_color}#{cpu_icon}#[fg=default]",
             "#{ram_fg_color}#{ram_icon}#[fg=default]",
-            ("#{battery_color_charge_fg}#[bg=colour%s]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour%s]#{battery_icon_status}#[fg=default]"):format(
+            ("#{battery_color_charge_fg}#[bg=colour%s]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour%s]#{battery_icon_status}"):format(
               vim.g.tmuxline_theme.b[2],
               vim.g.tmuxline_theme.b[2]
             ),
             -- .. "#{wifi_icon}",
           }, " "),
         },
-        c = { "#(~/.support/tmux-docker-status.sh)" },
+        c = {
+          ("#[fg=colour%s]#(~/.support/tmux-docker-status.sh)#[fg=colour%s]"):format(
+            vim.g.tmuxline_theme.c[1],
+            vim.g.tmuxline_theme.c[1]
+          ),
+          "#(~/.support/jiras-in-progress.sh)",
+        },
         win = { "#I", "#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}" }, -- unselected tab
         cwin = { "#I", "#W#{?window_zoomed_flag, ,}" }, -- current tab
         x = {

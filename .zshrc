@@ -641,7 +641,7 @@ psw() {
         ./vendor/bin/phpspec run --no-interaction -vvv $@
 }
 # phpspec coverage
-psc-html() { php -dxdebug.mode=coverage -dmemory_limit=2G ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
+psc-html() { php -dxdebug.mode=coverage -dmemory_limit=3G ./vendor/bin/phpspec run --config ./phpspec-coverage-html.yml --no-interaction --no-code-generation -vvv $@ && open coverage/index.html; }
 alias psc="php -dxdebug.mode=coverage -dmemory_limit=2G ./vendor/bin/phpspec run --config ./phpspec-coverage.yml --no-interaction --no-code-generation -vvv"
 pscw() {
     noglob ag -l -g '.*\.php' \
