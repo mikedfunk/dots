@@ -42,7 +42,6 @@ return {
   --     },
   --   },
   -- },
-  { "nvim-zh/colorful-winsep.nvim", event = "WinNew", opts = {} },
   {
     "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps
     event = "VeryLazy",

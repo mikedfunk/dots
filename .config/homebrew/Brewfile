@@ -34,6 +34,7 @@ tap "buo/cask-upgrade" # for `brew cu`
 tap "charmbracelet/tap" # crush and others
 tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "mikedfunk/zoomhider" # zoomhider
+tap "sst/tap" # opencode
 
 # }}}
 
@@ -161,6 +162,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "nodenv" # node version manager (same api as rbenv) (I use asdf now)
 # brew "nostromo" # alias manaager
 # brew "oha" # http load tester
+# brew "opencode" # like claude code but any provider
 # brew "pass" # unix password manager using gpg
 # brew "peco" # interactively filter results and print the filtered version. can be used to print filtered one or e.g. `vim $(dosomething | peco)` (FZF does this)
 # brew "perl" # for swat cpan package

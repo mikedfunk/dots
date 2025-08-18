@@ -1,0 +1,104 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "model": "anthropic/claude-sonnet-4-20250514",
+    "small_model": "anthropic/claude-3-5-haiku-20241022",
+    "theme": "system",
+    "share": "auto",
+    "instructions": [
+        "CRUSH.md"
+    ],
+    "permission": {
+        "bash": {
+            "git status": "allow",
+            "git diff": "allow",
+            "ls": "allow",
+            "pwd": "allow",
+            "grep *": "allow",
+            "find *": "allow",
+            "*": "ask"
+        }
+    },
+    "lsp": {
+        "php": {
+            "command": [
+                "/Users/mikefunk/.local/share/nvim/mason/bin/intelephense",
+                "--stdio"
+            ],
+            "extensions": [
+                ".php",
+                ".phtml"
+            ]
+        },
+        "scss": {
+            "command": [
+                "/Users/mikefunk/.local/share/nvim/mason/bin/some-sass-language-server",
+                "--stdio"
+            ],
+            "extensions": [
+                ".scss"
+            ]
+        }
+    },
+    "mcp": {
+        "context7": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "npx",
+                "-y",
+                "@upstash/context7-mcp"
+            ]
+        },
+        "tree-sitter": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "mcp-server-tree-sitter"
+            ]
+        }
+    },
+    "formatter": {
+        "php_cs_fixer": {
+            "command": [
+                "php-cs-fixer",
+                "fix",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        },
+        "rector": {
+            "command": [
+                "rector",
+                "process",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        },
+        "phpcbf": {
+            "command": [
+                "phpcbf",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        }
+    },
+    "agent": {
+        "code-reviewer": {
+            "description": "Reviews code for best practices and potential issues",
+            "mode": "subagent",
+            "model": "anthropic/claude-sonnet-4-20250514",
+            "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
+            "tools": {
+                "write": false,
+                "edit": false
+            }
+        }
+    }
+}

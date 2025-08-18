@@ -98,16 +98,25 @@ return {
   {
     "cormacrelf/dark-notify",
     lazy = false,
-    config = function() -- can receive mode: "dark"|"light"
-      require("dark_notify").run({
-        onchange = function()
-          -- plugins must be loaded after theme change or they stop working
-          -- in statusbar, so source entire config
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "UpdateDarkNotifyTheme",
+        callback = function()
+          -- tmux plugins must be loaded after theme change or they stop working
+          -- in statusbar, so source entire tmux config
           vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
         end,
       })
     end,
+    config = function() -- can receive mode: "dark"|"light"
+      require("dark_notify").run({
+        onchange = function()
+          vim.api.nvim_exec_autocmds("User", { pattern = "UpdateDarkNotifyTheme" })
+        end,
+      })
+    end,
   },
+  { "nvim-zh/colorful-winsep.nvim", event = { "User UpdateDarkNotifyTheme" }, opts = {} },
   -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
   {
@@ -224,6 +233,7 @@ return {
   },
   {
     "edkolev/tmuxline.vim",
+    event = "User UpdateDarkNotifyTheme",
     init = function()
       local function set_tmuxline_theme()
         -- 256 colors. Print all available colors: `curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/e50a28ec54188d2413518788de6c6367ffcea4f7/print256colours.sh | bash`
@@ -264,6 +274,9 @@ return {
             ["win.dim"] = { "244", "235" },
             ["cwin.dim"] = { "117", "14", "bold" },
           }
+          if vim.fn.exists(":MyTmuxline") == 2 then
+            vim.api.nvim_del_user_command("MyTmuxline")
+          end
           vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-dark.conf") -- apply tmuxline settings and snapshot to file
 
           return
@@ -302,11 +315,18 @@ return {
 
       set_tmuxline_theme()
 
-      vim.api.nvim_create_autocmd("OptionSet", {
-        group = vim.api.nvim_create_augroup("set_tmuxline_theme", { clear = true }),
-        pattern = "background",
+      vim.api.nvim_create_autocmd("User", {
+        group = vim.api.nvim_create_augroup("set_tmuxline_theme_on_dark_notify_theme_change", { clear = true }),
+        pattern = "UpdateDarkNotifyTheme",
         callback = set_tmuxline_theme,
-        desc = "set tmuxline theme",
+        desc = "set tmuxline theme on dark notify theme change",
+      })
+
+      vim.api.nvim_create_autocmd("OptionSet", {
+        group = vim.api.nvim_create_augroup("set_tmuxline_theme_on_background_change", { clear = true }),
+        pattern = "background", -- on changing vim.o.background
+        callback = set_tmuxline_theme,
+        desc = "set tmuxline theme on background change",
       })
 
       vim.g["tmuxline_preset"] = {
