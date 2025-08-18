@@ -239,6 +239,8 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree
 [ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
 
+export AKAMAI_EDGERC="$XDG_CONFIG_HOME/akamai/.edgerc"
+
 # cod: error: server returned error: Binary was compiled with 'CGO_ENABLED=0', go-sqlite3 requires cgo to work. This is a stub
 # ( antidote list | grep --quiet dim-an/cod ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
 

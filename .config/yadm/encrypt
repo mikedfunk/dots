@@ -40,11 +40,11 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 # Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
 .bigqueryrc
 .circleci/cli.yml
+.config/akamai/.edgerc
 .config/algolia/config.toml
 .config/aws/config
 .config/kube/config
 .config/multitail/multitail.conf
-.edgerc
 .mailmap
 .mylogin.cnf
 .netrc
