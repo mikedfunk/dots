@@ -189,73 +189,43 @@ _install_neovim_versions() {
 # install php versions {{{
 
 _install_php_81() {
-    # NOTE: nasty hack to the mise php  plugin install script to make it work.
-    # This is because the intl extension install script does not respect the
-    # above icu4c flags.
-    # another approach:
-    # https://mikebian.co/installing-an-old-homebrew-package/
-    sed -i '' 's/(homebrew_package_path icu4c)/(homebrew_package_path icu4c@74)/g' "$HOME/.local/share/mise/plugins/php/bin/install"
+    (mise list php-brew | grep --quiet "8.1") && return
+    _log_info "installing php 8.1"
 
-    # I would have installed 28 but for some reason mise is getting a bad archive when trying to decompress
-    (mise list php | grep --quiet "8.1.31") && return
-    _log_info "installing php 8.1.31"
-    mise install php 8.1.31
-    mise use --global php 8.1.31 || return
+    mise install php-brew@8.1
+    mise use --global php-brew@8.1 || return
 
-    # install php extensions (different set for 8.1.31)
-    local -r PHP_PATH="$(mise where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
+    # install php extensions (different set for 8.1)
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
     local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
-    yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
+    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
 
     _xdebug_config() {
         cat <<'END_HEREDOC'
-zend_extension="xdebug.so"
+zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 END_HEREDOC
     }
 
-    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # mise reshim php "8.0.37"
-
-    # undo nasty hack
-    sed -i '' 's/(homebrew_package_path icu4c@74)/(homebrew_package_path icu4c)/g' "$HOME/.local/share/mise/plugins/php/bin/install"
+    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
+    _xdebug_config >/opt/homebrew/etc/php/8.1/conf.d/ext-xdebug.ini
 }
 
 _install_php_84() {
-    (mise list php | grep --quiet "8.4.5") && return
-    _log_info "installing php 8.4.5"
-    mise install php 8.4.5
-    mise use --global php 8.4.5 || return
+    (mise list php-brew | grep --quiet "8.4") && return
+    _log_info "installing php 8.4"
+    mise install php-brew@8.4
+    mise use --global php-brew@8.4 || return
 
-    # install php extensions (different set for 8.4.5)
-    local -r PHP_PATH="$(mise where php)"
-    mkdir -p "${PHP_PATH}"/conf.d
-
-    local PICKLE="${PHP_PATH}"/pickle.phar
-    wget -O "${PICKLE}" https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
-    chmod +x "${PICKLE}"
-
+    # install php extensions (different set for 8.4)
     # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
     local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
     export PHP_ZLIB_DIR
-    yes "" | "${PICKLE}" install memcached && (echo 'extension="memcached.so"' >"${PHP_PATH}"/conf.d/02_memcached.ini)
-    # yes "" | "${PICKLE}" install imagick && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
 
     # install fork that fixes php 8.4 compat {{{
     _install_imagick_php_84() {
@@ -270,7 +240,7 @@ _install_php_84() {
         rm -rf /tmp/imagick_php_84
     }
 
-    _install_imagick_php_84 && (echo 'extension="imagick.so"' >"${PHP_PATH}"/conf.d/03_imagick.ini)
+    _install_imagick_php_84 && (echo 'extension="imagick.so"' >/opt/homebrew/etc/php/8.4/conf.d/ext-imagick.ini)
     _opcache_config() {
         cat <<'END_HEREDOC'
 opcache.memory_consumption=128
@@ -280,24 +250,19 @@ opcache.revalidate_freq=60
 opcache.enable_cli=1
 END_HEREDOC
     }
-    (_opcache_config >"${PHP_PATH}"/conf.d/06_opcache.ini)
+    (_opcache_config >/opt/homebrew/etc/php/8.4/conf.d/ext-opcache.ini)
     # }}}
 
     _xdebug_config() {
         cat <<'END_HEREDOC'
-zend_extension="xdebug.so"
+zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 END_HEREDOC
     }
-    yes "" | "${PICKLE}" install xdebug && (_xdebug_config >"${PHP_PATH}"/conf.d/04_xdebug.ini)
-    echo 'phar.readonly = false' >"${PHP_PATH}"/conf.d/05_phar.ini
-
-    # install global composer packages
-    # mkdir -p  "${PHP_PATH}"/{.,}composer
-    # ln -sf "$HOME"/.composer/composer.json "${PHP_PATH}"/composer/composer.json
-    # mise reshim php "8.4.5"
+    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
+    _xdebug_config >/opt/homebrew/etc/php/8.4/conf.d/ext-xdebug.ini
 }
 
 # https://github.com/mise-community/mise-php/blob/master/.github/workflows/workflow.yml#L33-L52
@@ -305,18 +270,11 @@ _install_php_versions() {
     pushd .
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing php version(s)"
-    (mise plugin list | grep --quiet php) || mise plugin add php
-
-    # change implicit function declaration to warning instead of error
-    # https://bugs.php.net/bug.php?id=80171
-    # export CFLAGS="-Wno-error=implicit-function-declaration ${CFLAGS}"
+    (mise plugin list | grep --quiet php-brew) || mise plugin add php-brew
 
     _install_php_81
     _install_php_84
-    mise use --global php 8.4.5
-
-    # NOTE: revert temporary nasty hack
-    cd "$HOME/.mise/plugins/php/" && git reset --hard
+    mise use --global php-brew@8.4
 
     popd || return
 }
