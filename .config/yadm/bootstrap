@@ -301,9 +301,9 @@ _install_node_versions() {
     # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
 
     # L
-    (mise list node | grep --quiet 9.11.2) || mise install node 9.11.2
+    # (mise list node | grep --quiet 9.11.2) || mise install node 9.11.2
     # Z
-    (mise list node | grep --quiet 6.7.0) || mise install node 6.7.0
+    # (mise list node | grep --quiet 6.7.0) || mise install node 6.7.0
     # E
     (mise list node | grep --quiet 21.7.3) || mise install node 21.7.3
     # global
