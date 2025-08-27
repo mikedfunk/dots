@@ -1778,9 +1778,9 @@
       local tool=${(U)raw_tool}
       local version=${parts[2]}
       # Resolve icon and colors
-      local icon_var="MISE_${tool}_ICON"
-      local fg_var="MISE_${tool}_FOREGROUND"
-      local bg_var="MISE_${tool}_BACKGROUND"
+      local icon_var="POWERLEVEL9K_MISE_${tool}_ICON"
+      local fg_var="POWERLEVEL9K_MISE_${tool}_FOREGROUND"
+      local bg_var="POWERLEVEL9K_MISE_${tool}_BACKGROUND"
       local icon="${(P)icon_var}"
       local fg="${(P)fg_var}"
       local bg="${(P)bg_var}"
@@ -1788,18 +1788,18 @@
     done
   }
 
-  typeset -g MISE_PHP_FOREGROUND=0
-  typeset -g MISE_PHP_BACKGROUND=5
-  typeset -g MISE_PHP_ICON=""
-  typeset -g MISE_PYTHON_FOREGROUND=0
-  typeset -g MISE_PYTHON_BACKGROUND=4
-  typeset -g MISE_PYTHON_ICON=""
-  typeset -g MISE_NODE_FOREGROUND=0
-  typeset -g MISE_NODE_BACKGROUND=2
-  typeset -g MISE_NODE_ICON=""
-  typeset -g MISE_RUBY_FOREGROUND=0
-  typeset -g MISE_RUBY_BACKGROUND=1
-  typeset -g MISE_RUBY_ICON=""
+  typeset -g POWERLEVEL9K_MISE_PHP_FOREGROUND=0
+  typeset -g POWERLEVEL9K_MISE_PHP_BACKGROUND=5
+  typeset -g POWERLEVEL9K_MISE_PHP_ICON=""
+  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=0
+  typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=4
+  typeset -g POWERLEVEL9K_MISE_PYTHON_ICON=""
+  typeset -g POWERLEVEL9K_MISE_NODE_FOREGROUND=0
+  typeset -g POWERLEVEL9K_MISE_NODE_BACKGROUND=2
+  typeset -g POWERLEVEL9K_MISE_NODE_ICON=""
+  typeset -g POWERLEVEL9K_MISE_RUBY_FOREGROUND=0
+  typeset -g POWERLEVEL9K_MISE_RUBY_BACKGROUND=1
+  typeset -g POWERLEVEL9K_MISE_RUBY_ICON=""
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
