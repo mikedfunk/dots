@@ -85,7 +85,7 @@ _install_homebrew_if_its_missing() {
 
 # install/update homebrew packages {{{
 _install_update_homebrew_packages() {
-    [ -e "$HOME"/Brewfile ] || return
+    [ -e "$HOME"/.config/homebrew/Brewfile ] || return
     _log_info "Installing/upgrading homebrew packages"
     cd || return
     # brew update         # update homebrew itself and the list of brew package versions
@@ -94,7 +94,7 @@ _install_update_homebrew_packages() {
     brew upgrade --cask # upgrade all homebrew casks
     # brew cleanup         # remove outdated versions and dead symlinks from the homebrew prefix. WARNING this could break dependencies if low level libs are not pinned!!
     # brew bundle cleanup --force # remove brew packages not in ~/Brewfile
-    brew unlink node
+    # brew unlink node
     cd - || return
 }
 
