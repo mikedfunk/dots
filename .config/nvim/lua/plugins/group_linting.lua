@@ -140,27 +140,19 @@ return {
   {
     -- this is ONLY for slow phpstan level 9. See comment above.
     "dense-analysis/ale",
-    branch = "neovim-lsp-api",
     ft = { "php" },
-    init = function()
-      vim.g.ale_set_loclist = 0
-      -- TODO: there is some problem with vim LSP diagnostic signs sent from ALE. I get everything else but signs.
-      vim.g.ale_set_signs = 0
-      vim.g.ale_echo_cursor = 0
-      vim.g.ale_disable_lsp = 1
-      vim.g.ale_hover_cursor = 0
-
-      vim.g.ale_lint_delay = 0
-      vim.g.ale_linters_explicit = 1
-
-      vim.g.ale_linters = { php = { "phpstan" } }
-      vim.g.ale_php_phpstan_level = 9
-      vim.g.ale_php_phpstan_memory_limit = "300M"
-      -- use latest version from Mason
-      vim.g.ale_php_phpstan_use_global = 1
-
-      -- vim.g.ale_fixers = { php = {"php_cs_fixer", "phpcbf" } }
-      -- vim.g.ale_php_phpcbf_options = "--warning-severity=3"
-    end,
+    opts = {
+      set_loclist = false,
+      set_signs = false,
+      echo_cursor = false,
+      disable_lsp = true,
+      hover_cursor = false,
+      lint_delay = 0,
+      linters_explicit = true, -- only enable a whitelist of linters
+      linters = { php = { "phpstan" } },
+      php_phpstan_level = 9,
+      php_phpstan_memory_limit = "300M",
+      php_phpstan_use_global = true, -- use latest version from Mason
+    },
   },
 }
