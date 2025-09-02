@@ -92,13 +92,14 @@ return {
     opts = {
       install = {
         bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
-        php_bin = vim.fn.executable("mise") == 1
-            and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }), "") .. "/bin/php"
-          or "php",
-        path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
-        composer_bin = vim.fn.executable("mise") == 1
-          and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }) or "composer", "")
-            .. "/bin/composer",
+        -- phpactor requires php 8.1+
+        -- php_bin = vim.fn.executable("mise") == 1
+        --     and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }), "") .. "/bin/php"
+        --   or "php",
+        -- path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
+        -- composer_bin = vim.fn.executable("mise") == 1
+        --     and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }), "") .. "/bin/composer"
+        --   or "composer",
       },
       lspconfig = { enabled = false },
     },
