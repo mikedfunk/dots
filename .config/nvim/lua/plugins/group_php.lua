@@ -1,6 +1,8 @@
 return {
   {
     "adalessa/laravel.nvim",
+    -- TODO: There is some bug with execution on v4.x, need to fix
+    tag = "v3.3.0",
     -- enabled = false,
     dependencies = {
       "tpope/vim-dotenv",
@@ -91,12 +93,12 @@ return {
       install = {
         bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor.phar",
         php_bin = vim.fn.executable("mise") == 1
-            and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.5" }), "") .. "/bin/php"
+            and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }), "") .. "/bin/php"
           or "php",
         path = vim.fn.stdpath("data") .. "/mason/packages/phpactor",
         composer_bin = vim.fn.executable("mise") == 1
-          and table.concat(vim.fn.systemlist({ "mise", "where", "php", "8.4.5" }) or "composer", "")
-            .. "/.composer/vendor/bin/composer",
+          and table.concat(vim.fn.systemlist({ "mise", "where", "php-brew", "8.4" }) or "composer", "")
+            .. "/bin/composer",
       },
       lspconfig = { enabled = false },
     },
