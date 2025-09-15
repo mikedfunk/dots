@@ -20,8 +20,9 @@ return {
         local hsluv = require("tokyonight.hsluv")
 
         -- cyber:
+        local hue_shift = 1 -- +: purple, -: green
         -- local hue_shift = 0.95 -- +: purple, -: green
-        local hue_shift = 1.05 -- +: purple, -: green
+        -- local hue_shift = 1.05 -- +: purple, -: green
         local saturation_multiplier = 2.50
 
         -- forest:
