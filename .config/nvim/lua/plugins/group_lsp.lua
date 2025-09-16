@@ -173,6 +173,7 @@ return {
   -- TODO: this broke - figure out the fix
   {
     "zapling/mason-lock.nvim",
+    branch = "feat/support-mason2",
     opts = {},
     dependencies = { "mason-org/mason.nvim" },
   },
