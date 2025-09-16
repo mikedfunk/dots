@@ -171,11 +171,11 @@ return {
     },
   },
   -- TODO: this broke - figure out the fix
-  -- {
-  --   "zapling/mason-lock.nvim",
-  --   opts = {},
-  --   dependencies = { "mason-org/mason.nvim" },
-  -- },
+  {
+    "zapling/mason-lock.nvim",
+    opts = {},
+    dependencies = { "mason-org/mason.nvim" },
+  },
   { "antosha417/nvim-lsp-file-operations", opts = {} },
   -- {
   --   "rachartier/tiny-inline-diagnostic.nvim",

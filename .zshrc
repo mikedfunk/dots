@@ -308,6 +308,9 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
 
 export HOMEBREW_NO_ANALYTICS=1
 
+# Ignore calls to docker login or logout and pretend they succeeded
+export AWS_ECR_IGNORE_CREDS_STORAGE=true
+
 # xdg-ninja (move configs to proper locations) {{{
 
 # export ANDROID_HOME="$XDG_DATA_HOME"/android
@@ -317,6 +320,7 @@ export HOMEBREW_NO_ANALYTICS=1
 # export TERMINFO="$XDG_DATA_HOME"/terminfo
 # export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+export AWS_ECR_CACHE_DIR="$XDG_CACHE_HOME"/aws/ecr
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle

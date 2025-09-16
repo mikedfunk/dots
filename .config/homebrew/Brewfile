@@ -86,7 +86,6 @@ tap "sst/tap" # opencode
 # brew "dnsmasq" # easily set up dynamic dev domains such as myproject.dev `sudo brew services start dnsmasq` (WARNING: this _could_ cause problems with docker-machine certs)
 # brew "docker" # virtualization software (I use docker-for-mac, which comes with executables but doesn't link them to /usr/local/bin any more, so I'm doing that manually in my yadm bootstrap)
 # brew "docker-compose" # manage multiple docker images and how they interact (now merged into docker `docker composer`)
-# brew "docker-credential-helper-ecr" # tell docker about ECR so it can pull (included in docker-for-mac now)
 # brew "docker-machine" # virtualbox VM for your docker images
 # brew "docker-machine-nfs" # enables nfs mounts for docker-machine via `docker-machine-nfs default --mount-opts="async,noatime,actimeo=1,nolock,vers=3,udp" --force` (speeds up docker-machine a LOT)
 # brew "dos2unix" # converts dos line endings to unix in a file
@@ -212,6 +211,9 @@ tap "sst/tap" # opencode
 # brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 # brew "pkgx" # like npx for homebrew
 # brew "plenv" # perl version manager. better than perlbrew and consistent with my other env managers (rbenv, phpenv, nodenv, pyenv). used to get percona-toolkit working.
+# brew "podman" # docker alternative
+# brew "podman-compose" # docker alternative
+# brew "podman-machine" # docker alternative
 # brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
 # brew "prettyping" # ping with a cool sparkline graph of status
 # brew "procs" # process viewer - prettier ps. Not as cool as htop.
@@ -311,6 +313,7 @@ brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
 brew "devcontainer"
+brew "docker-credential-helper-ecr" # tell docker about ECR so it can pull
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "eza" # pretty ls replacement
 brew "fzf" # fuzzy file finder `git branch | fzf | xargs git checkout`
