@@ -1,13 +1,13 @@
 return {
   -- this is installed via LazyExtras and customized here
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     opts = {
       modes = { command = false }, -- do not auto-pair in command or search mode
     },
   },
   -- { "sickill/vim-pasta", event = "BufRead" },
-  { "echasnovski/mini.splitjoin", event = "VeryLazy", opts = {} },
+  { "nvim-mini/mini.splitjoin", event = "VeryLazy", opts = {} },
   {
     "tpope/vim-projectionist",
     dependencies = {

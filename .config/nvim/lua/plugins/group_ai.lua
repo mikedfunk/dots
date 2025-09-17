@@ -321,8 +321,8 @@ return {
   --     { "franco-ruggeri/codecompanion-spinner.nvim", opts = {} },
   --     "nvim-lua/plenary.nvim",
   --     "nvim-treesitter/nvim-treesitter",
-  --     { "echasnovski/mini.diff", opts = {} },
-  --     -- { "echasnovski/mini.pick", opts = {} },
+  --     { "nvim-mini/mini.diff", opts = {} },
+  --     -- { "nvim-mini/mini.pick", opts = {} },
   --   },
   --   opts = {
   --     strategies = {

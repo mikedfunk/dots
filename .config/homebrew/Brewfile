@@ -272,6 +272,7 @@ tap "sst/tap" # opencode
 # brew "trash" # a trash can for the terminal
 # brew "trash-cli" # a trash can for the terminal
 # brew "tree-sitter" # for some reason lunarvim expects this to exist when opening a gitignore file 🤷
+# brew "tree-sitter-cli" # now REQUIRED for LazyVim (installed via Mason)
 # brew "universal-ctags", args: ["HEAD"] # tag creator for use by vim to navigate by symbols. head only. See here for jansson https://github.com/liuchengxu/vista.vim#other-tips
 # brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "urlview" # used by <prefix>u tmux urlview plugin
