@@ -64,35 +64,35 @@ return {
       textobjects = {
 
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#textobjects-lsp-interop
-        lsp_interop = {
-          enable = true,
-          border = "rounded",
-          -- TODO: Can't seem to which-key this
-          peek_definition_code = {
-            ["<leader>kf"] = "@function.outer",
-            ["<leader>kc"] = "@class.outer",
-          },
-        },
+        -- lsp_interop = {
+        --   enable = true,
+        --   border = "rounded",
+        --   -- TODO: Can't seem to which-key this
+        --   peek_definition_code = {
+        --     ["<leader>kf"] = "@function.outer",
+        --     ["<leader>kc"] = "@class.outer",
+        --   },
+        -- },
 
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            af = "@function.outer",
-            ["if"] = "@function.inner",
-            ac = "@class.outer",
-            ic = "@class.inner",
-          },
-        },
+        -- select = {
+        --   enable = true,
+        --   lookahead = true,
+        --   keymaps = {
+        --     af = "@function.outer",
+        --     ["if"] = "@function.inner",
+        --     ac = "@class.outer",
+        --     ic = "@class.inner",
+        --   },
+        -- },
 
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
-        swap = {
-          enable = true,
-          -- TODO: Can't seem to which-key this
-          swap_next = { ["g>"] = "@parameter.inner" },
-          swap_previous = { ["g<"] = "@parameter.inner" },
-        },
+        -- swap = {
+        --   enable = true,
+        --   -- TODO: Can't seem to which-key this
+        --   swap_next = { ["g>"] = "@parameter.inner" },
+        --   swap_previous = { ["g<"] = "@parameter.inner" },
+        -- },
         move = { set_jumps = true },
       },
     },
@@ -105,20 +105,20 @@ return {
       prefix = "↩ ",
     },
   },
-  {
-    "aaronik/treewalker.nvim",
-    opts = {},
-    keys = {
-      { "<C-k>", "<cmd>Treewalker Up<cr>", { mode = { "n", "v" } } },
-      { "<C-j>", "<cmd>Treewalker Down<cr>", { mode = { "n", "v" } } },
-      { "<C-l>", "<cmd>Treewalker Right<cr>", { mode = { "n", "v" } } },
-      { "<C-h>", "<cmd>Treewalker Left<cr>", { mode = { "n", "v" } } },
-
-      -- TODO: not working
-      -- { "<C-S-k>", "<cmd>Treewalker SwapUp<cr>", { mode = { "n" } } },
-      -- { "<C-S-j>", "<cmd>Treewalker SwapDown<cr>", { mode = { "n" } } },
-      -- { "<C-S-l>", "<cmd>Treewalker SwapRight<cr>", { mode = { "n" } } },
-      -- { "<C-S-h>", "<cmd>Treewalker SwapLeft<cr>", { mode = { "n" } } },
-    },
-  },
+  -- {
+  --   "aaronik/treewalker.nvim",
+  --   opts = {},
+  --   keys = {
+  --     { "<C-k>", "<cmd>Treewalker Up<cr>", { mode = { "n", "v" } } },
+  --     { "<C-j>", "<cmd>Treewalker Down<cr>", { mode = { "n", "v" } } },
+  --     { "<C-l>", "<cmd>Treewalker Right<cr>", { mode = { "n", "v" } } },
+  --     { "<C-h>", "<cmd>Treewalker Left<cr>", { mode = { "n", "v" } } },
+  --
+  --     -- TODO: not working
+  --     -- { "<C-S-k>", "<cmd>Treewalker SwapUp<cr>", { mode = { "n" } } },
+  --     -- { "<C-S-j>", "<cmd>Treewalker SwapDown<cr>", { mode = { "n" } } },
+  --     -- { "<C-S-l>", "<cmd>Treewalker SwapRight<cr>", { mode = { "n" } } },
+  --     -- { "<C-S-h>", "<cmd>Treewalker SwapLeft<cr>", { mode = { "n" } } },
+  --   },
+  -- },
 }
