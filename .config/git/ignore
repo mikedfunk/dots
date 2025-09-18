@@ -19,6 +19,7 @@
 .neoconf.json
 .netrwhist
 .nvim.lua
+.opencode
 .phing_targets
 .php-cs-fixer.cache
 .php_cs.cache
@@ -29,6 +30,7 @@
 .pre-commit-config.yaml
 .projections.json
 .ruby-lsp
+.specify
 .yarn
 AGENTS.md
 CONTEXT.md
@@ -41,5 +43,5 @@ crush.json
 cspell.json
 mise.toml
 nohup.out
-yarn-error.log
 root_local
+yarn-error.log
