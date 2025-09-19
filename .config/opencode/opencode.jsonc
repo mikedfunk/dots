@@ -7,6 +7,9 @@
     "instructions": [
         "CRUSH.md"
     ],
+    "disabled_providers": [
+        "xai"
+    ],
     "permission": {
         "bash": {
             "git status": "allow",

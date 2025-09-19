@@ -231,7 +231,7 @@ export XDG_STATE_HOME="$HOME"/.local/state
 export XDG_CACHE_HOME="$HOME"/.cache
 # export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim"
 
-
+export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME/wezterm/config.lua"
 export COMPOSE_HTTP_TIMEOUT=120 # default is 60
 export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
 [ -f "$HOME"/.private_vars.sh ] && source "$HOME"/.private_vars.sh # where I store my secret env vars

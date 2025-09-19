@@ -13,6 +13,7 @@ getantidote/use-omz # antibody-friendly helper to improve integration with zsh
 # hlissner/zsh-autopair # auto close parens, etc. (this is a pain in the ass - sometimes you don't want to close a bracket or paren)
 # jeffreytse/zsh-vi-mode # breaks history search via fzf
 # marlonrichert/zsh-autocomplete branch:main # automatically show flags/options completion (this plugin is really janky)
+# marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
 # mattmc3/zfunctions # define and save functions to separate files. Apparently this is popular. Lazy load functions, define them in the shell then save them, and define help text for them.
 # mfaerevaag/wd # warp directory
 # ohmyzsh/ohmyzsh path:plugins/alias-finder # supposed to be 10x faster than alias-tips O_O https://github.com/djui/alias-tips/issues/49#issuecomment-569726313
@@ -33,7 +34,6 @@ belak/zsh-utils path:editor
 belak/zsh-utils path:history
 belak/zsh-utils path:utility
 junegunn/fzf-git.sh # fzf git helper <c-g><c-f>, etc.
-marzocchi/zsh-notify # notify when a command fails or lasts longer than 30 seconds and the terminal is in the background (requires terminal-notifier and reattach-to-user-namespace from within tmux) (same functionality as ntfy)
 mroth/evalcache # speeds up subsequent runs of eval init functions. if you make a change just call `_evalcache_clear`.
 ohmyzsh/ohmyzsh path:lib/functions.zsh # some dependencies for oh-my-zsh plugins
 ohmyzsh/ohmyzsh path:plugins/command-not-found # suggest packages to install if command not found
