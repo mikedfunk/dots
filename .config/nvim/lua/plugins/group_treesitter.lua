@@ -1,21 +1,33 @@
 return {
   {
+    "andymass/vim-matchup",
+    init = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      -- vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
+      vim.g.matchup_matchparen_deferred = 1
+      vim.g.matchup_matchparen_hi_surround_always = 1
+      vim.g.matchup_surround_enabled = 1
+    end,
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+          matchup = { enable = true },
+        },
+      },
+    },
+  },
+  {
+    "RRethy/nvim-treesitter-endwise",
+    ft = { "ruby", "lua", "zsh", "bash" },
+    opts = { endwise = { enable = true } },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       -- { "gsuuon/tshjkl.nvim", config = true }, -- cool treesitter nav. <m-v> to toggle treesitter nav mode, then just hjkl or HJKL.
-      { "RRethy/nvim-treesitter-endwise", ft = { "ruby", "lua", "zsh", "bash" } },
       -- { "gbprod/php-enhanced-treesitter.nvim", ft = { "php" } },
       -- { "yioneko/nvim-yati", version = "*" },
-      {
-        "andymass/vim-matchup",
-        init = function()
-          vim.g.matchup_matchparen_offscreen = { method = "popup" }
-          -- vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
-          vim.g.matchup_matchparen_deferred = 1
-          vim.g.matchup_matchparen_hi_surround_always = 1
-          vim.g.matchup_surround_enabled = 1
-        end,
-      },
       {
         "folke/which-key.nvim",
         opts = {
@@ -30,6 +42,9 @@ return {
       },
       -- { "yorickpeterse/nvim-tree-pairs", config = true },
     },
+    opts_extend = {
+      "highlight.additional_vim_regex_highlighting",
+    },
     opts = {
       auto_install = true,
 
@@ -38,28 +53,26 @@ return {
       ignore_install = {},
       modules = {},
 
-      indent = { enable = false }, -- use yati instead or just disable it
-      endwise = { enable = true },
+      -- indent = { enable = false }, -- use yati instead or just disable it
       -- yati = { enable = true, disable = { "jsx" } },
-      matchup = { enable = true },
 
       -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1742
       -- this is misleading: it's to fix indent, not highlighting
-      highlight = {
-        additional_vim_regex_highlighting = { "php", "jsx" },
-      },
-
-      -- ensure_installed = {
-      --   "comment",
-      --   "lua", -- update to latest
-      --   "luadoc",
-      --   "jsdoc",
-      --   "markdown_inline",
-      --   "phpdoc",
-      --   "regex",
-      --   "sql",
-      --   "vim",
+      -- highlight = {
+      --   additional_vim_regex_highlighting = { "php", "jsx" },
       -- },
+
+      ensure_installed = {
+        "comment",
+        "lua", -- update to latest
+        "luadoc",
+        "jsdoc",
+        "markdown_inline",
+        "phpdoc",
+        "regex",
+        "sql",
+        "vim",
+      },
 
       textobjects = {
 

@@ -99,7 +99,7 @@ vim.cmd("hi link phpClassNamespaceSeparator Comment")
 -- }}}
 
 -- php settings https://github.com/StanAngeloff/php.vim/blob/master/syntax/php.vim#L35-L67 {{{
-vim.g["php_version_id"] = 80401 -- value of PHP_VERSION_ID constant (8.4)
+vim.g["php_version_id"] = 80405 -- value of PHP_VERSION_ID constant (8.4)
 vim.g["PHP_removeCRwhenUnix"] = 1
 vim.g["PHP_outdentphpescape"] = 0 -- means that PHP tags will match the indent of the HTML around them in files that a mix of PHP and HTML
 vim.g["php_htmlInStrings"] = 1 -- neat! :h php.vim
