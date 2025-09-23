@@ -72,7 +72,7 @@ vim.keymap.set("n", "<Leader>Pf", function()
   -- These can probably be simplified. I definitely need replace_termcodes somewhere though.
   vim.cmd(
     vim.api.nvim_replace_termcodes(
-      [[command! -range FixLine :'<,'>norm! I* @param ObjectBehavior<<esc>Ea><esc>$x]],
+      [[command! -range FixLine :'<,'>norm! I<tab> * @param ObjectBehavior<<esc>Ea><esc>$x]],
       true,
       true,
       true
@@ -80,7 +80,7 @@ vim.keymap.set("n", "<Leader>Pf", function()
   )
   vim.cmd(
     vim.api.nvim_replace_termcodes(
-      [[norm "byii[Mjo/**<cr>/<esc>"b[PV/*<cr>k:'<,'>g!/./d<cr><esc>gv<esc>A,<esc>gv:FixLine<cr><cr>"]],
+      [[norm "byii[Mjo/**<cr>/<esc>"b[PV/*<cr>k:'<,'>g!/./d<cr><esc>gv<esc>A,<esc>gv:FixLine<cr><cr>I<tab> ]],
       true,
       true,
       true
