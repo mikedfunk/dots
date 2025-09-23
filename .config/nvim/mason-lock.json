@@ -58,7 +58,7 @@
   "tailwindcss-language-server": "0.14.26",
   "taplo": "0.10.0",
   "tflint": "v0.59.1",
-  "tree-sitter-cli": "v0.25.9",
+  "tree-sitter-cli": "v0.25.10",
   "vale": "v3.12.0",
   "vtsls": "0.2.9",
   "yaml-language-server": "1.18.0",

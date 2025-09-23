@@ -11,16 +11,19 @@ return {
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter",
-        opts = {
-          matchup = { enable = true },
-        },
+        opts = { matchup = { enable = true } },
       },
     },
   },
   {
     "RRethy/nvim-treesitter-endwise",
-    ft = { "ruby", "lua", "zsh", "bash" },
-    opts = { endwise = { enable = true } },
+    ft = { "ruby", "lua", "vimscript", "zsh", "bash" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        opts = { endwise = { enable = true } },
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
