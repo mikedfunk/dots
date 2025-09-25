@@ -435,37 +435,49 @@ return {
       }
 
       -- mason updates {{{
-      local function get_mason_updates_count(callback)
-        local registry = require("mason-registry")
-        registry.update(function()
-          local count = 0
-          local pkgs = registry.get_installed_packages()
-          local remaining = #pkgs
+      -- run this once at startup
+      local registry_ok, registry = pcall(require, "mason-registry")
+      if registry_ok then
+        registry.refresh()
+      end
 
-          if remaining == 0 then
-            callback(0)
-            return
-          end
-
-          for _, pkg in ipairs(pkgs) do
-            pkg:check_new_version(function(success, result)
-              if success and result and result.is_outdated then
-                count = count + 1
-              end
-              remaining = remaining - 1
-              if remaining == 0 then
-                callback(count)
-              end
-            end)
+      -- refresh every 10 minutes (600,000 ms)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        600000, -- first run delay
+        600000, -- repeat interval
+        vim.schedule_wrap(function()
+          if registry_ok then
+            registry.refresh()
           end
         end)
+      )
+
+      local function get_mason_updates_count()
+        if not registry_ok then
+          return 0
+        end
+
+        local pkgs = registry.get_installed_packages()
+        local count = 0
+
+        for _, pkg in ipairs(pkgs) do
+          local ok_installed, installed = pcall(function()
+            return pkg:get_installed_version()
+          end)
+          local ok_latest, latest = pcall(function()
+            return pkg:get_latest_version()
+          end)
+          if ok_installed and ok_latest and installed and latest and installed ~= latest then
+            count = count + 1
+          end
+        end
+
+        return count
       end
 
       -- cache so statusline can render synchronously
-      local mason_updates_count = 0
-      get_mason_updates_count(function(count)
-        mason_updates_count = count
-      end)
+      local mason_updates_count = get_mason_updates_count()
 
       local mason_updates_component = {
         function()
@@ -473,7 +485,7 @@ return {
         end,
         color = function()
           return {
-            fg = Snacks.util.color("Normal"),
+            fg = Snacks.util.color("Character"),
             gui = "None",
           }
         end,
@@ -482,9 +494,6 @@ return {
         end,
         on_click = function()
           vim.cmd("Mason")
-          get_mason_updates_count(function(count)
-            mason_updates_count = count
-          end)
         end,
       }
 
