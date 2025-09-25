@@ -178,11 +178,12 @@ _update_mise_plugins() {
 
 # install neovim version(s) {{{
 _install_neovim_versions() {
-    (mise list neovim | grep --quiet stable) && return
+    # (mise list neovim | grep --quiet stable) && return
     _log_info "installing neovim stable"
-    mise install neovim stable
+    mise uninstall neovim@stable
+    mise install neovim@stable
     mise use --global neovim@stable
-    # mise install neovim nightly # but don't activate it by default
+    # mise install neovim@nightly # but don't activate it by default
 }
 # }}}
 
@@ -202,9 +203,9 @@ _install_php_81() {
     pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
     pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
 
+    # zend_extension=xdebug.so
     _xdebug_config() {
         cat <<'END_HEREDOC'
-zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
@@ -285,7 +286,8 @@ _install_deno_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing deno version(s)"
     # (mise plugin list | grep --quiet deno) || mise plugin add deno
-    (mise list deno | grep --quiet 1.29.4) || mise install deno 1.29.4
+    (mise list deno | grep --quiet 1.29.4) || mise install deno@1.29.4
+    mise install deno@latest
     mise use --global deno@1.29.4
 }
 # }}}
@@ -301,13 +303,14 @@ _install_node_versions() {
     # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
 
     # L
-    # (mise list node | grep --quiet 9.11.2) || mise install node 9.11.2
+    # (mise list node | grep --quiet 9.11.2) || mise install node@9.11.2
     # Z
-    # (mise list node | grep --quiet 6.7.0) || mise install node 6.7.0
+    # (mise list node | grep --quiet 6.7.0) || mise install node@6.7.0
     # E
-    (mise list node | grep --quiet 21.7.3) || mise install node 21.7.3
+    (mise list node | grep --quiet 21.7.3) || mise install node@21.7.3
     # global
-    # (mise list node | grep --quiet latest) || mise install node latest
+    # (mise list node | grep --quiet latest) || mise install node@latest
+    mise install node@latest
 
     mise use --global node@latest
     # install pnpm and friends next to corepack (must reshim, only on latest node)
@@ -324,7 +327,7 @@ _install_lua_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing lua version(s)"
     (mise plugin list | grep --quiet lua) || mise plugin add lua
-    (mise list lua | grep --quiet 5.4.4) || mise install lua 5.4.4
+    (mise list lua | grep --quiet 5.4.4) || mise install lua@5.4.4
 
     mise use --global lua@5.4.4
 
@@ -338,7 +341,7 @@ _install_perl_versions() {
     builtin cd >/dev/null || return
     _log_info "Installing perl version(s)"
     (mise plugin list | grep --quiet perl) || mise plugin add perl
-    (mise list perl | grep --quiet 5.38.0) || mise install perl 5.38.0
+    (mise list perl | grep --quiet 5.38.0) || mise install perl@5.38.0
 
     mise use --global perl@5.38.0
 
@@ -357,18 +360,19 @@ _install_python_versions() {
     # I uses 3.7.3. It won't install on macos but 3.7.10 will.
     # https://github.com/pyenv/pyenv/issues/1740#issuecomment-986082691
     # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
-    # ( mise list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && mise install python 3.7.10 )
+    # ( mise list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && mise install python@3.7.10 )
     # api tests and ui tests:
     (mise list python | grep --quiet 3.8.15) ||
         (_log_info "installing python 3.8.15" &&
-            mise install python 3.8.15)
+            mise install python@3.8.15)
     # global
     # Can't do this in mise like in asdf
     # mise use --global python 3.10.1 2.7.18)
+    # mise install python@2.7.18 &&
+    mise install python@latest
     (mise list python | grep --quiet 3.10.1) ||
         (_log_info "installing python 3.10.1" &&
-            mise install python 3.10.1 &&
-            mise install python 2.7.18 &&
+            mise install python@3.10.1 &&
             mise use --global python@3.10.1)
     builtin cd - >/dev/null || return
 }
@@ -379,8 +383,9 @@ _install_ruby_versions() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing ruby version(s)"
     # (mise plugin list | grep --quiet ruby) || mise plugin add ruby
-    # ( mise list ruby | grep --quiet 2.3.3 ) || mise install ruby 2.3.3 # Z (compass) - doesn't install on mac but 3.x works
-    (mise list ruby | grep --quiet 3.1.2) || mise install ruby 3.1.2
+    # ( mise list ruby | grep --quiet 2.3.3 ) || mise install ruby@2.3.3 # Z (compass) - doesn't install on mac but 3.x works
+    (mise list ruby | grep --quiet 3.1.2) || mise install ruby@3.1.2
+    mise install ruby@latest
     mise use --global ruby@3.1.2
     builtin cd - >/dev/null || return
 }
@@ -397,7 +402,7 @@ _install_erlang_version() {
     export PATH
     export MACOSX_DEPLOYMENT_TARGET=10.4
     export SYSTEM_VERSION_COMPAT=1
-    (mise list erlang | grep --quiet 23.0) || mise install erlang 23.0
+    (mise list erlang | grep --quiet 23.0) || mise install erlang@23.0
     mise use --global erlang@23.0
     builtin cd - >/dev/null || return
 }
@@ -408,7 +413,7 @@ _install_elixir_version() {
     builtin cd "$HOME" >/dev/null || return
     _log_info "Installing elixir version"
     (mise plugin list | grep --quiet elixir) || mise plugin add elixir
-    (mise list elixir | grep --quiet 1.10.4-otp-23) || mise install elixir 1.10.4-otp-23
+    (mise list elixir | grep --quiet 1.10.4-otp-23) || mise install elixir@1.10.4-otp-23
     mise use --global elixir@1.10.4-otp-23
     builtin cd - >/dev/null || return
 }
