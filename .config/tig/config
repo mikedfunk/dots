@@ -197,7 +197,7 @@ bind generic gmt !git mergetool
 bind generic gSs !git spice branch split
 bind generic gSr @git spice stack restack
 # (pneumonic: publish)
-bind generic gSp !sh -c "git spice stack restack && git spice stack submit"
+bind generic gSp !sh -c "git spice repo sync && git spice stack restack && git spice stack submit"
 # (pneumonic: new)
 bind generic gSn !git spice branch create "%(prompt Enter branch name: )"
 bind generic gSc !git spice branch checkout

@@ -434,6 +434,63 @@ return {
         { "location" },
       }
 
+      -- mason updates {{{
+      local function get_mason_updates_count(callback)
+        local registry = require("mason-registry")
+        registry.update(function()
+          local count = 0
+          local pkgs = registry.get_installed_packages()
+          local remaining = #pkgs
+
+          if remaining == 0 then
+            callback(0)
+            return
+          end
+
+          for _, pkg in ipairs(pkgs) do
+            pkg:check_new_version(function(success, result)
+              if success and result and result.is_outdated then
+                count = count + 1
+              end
+              remaining = remaining - 1
+              if remaining == 0 then
+                callback(count)
+              end
+            end)
+          end
+        end)
+      end
+
+      -- cache so statusline can render synchronously
+      local mason_updates_count = 0
+      get_mason_updates_count(function(count)
+        mason_updates_count = count
+      end)
+
+      local mason_updates_component = {
+        function()
+          return mason_updates_count > 0 and ("⚒ " .. mason_updates_count) or ""
+        end,
+        color = function()
+          return {
+            fg = Snacks.util.color("Normal"),
+            gui = "None",
+          }
+        end,
+        cond = function()
+          return mason_updates_count > 0
+        end,
+        on_click = function()
+          vim.cmd("Mason")
+          get_mason_updates_count(function(count)
+            mason_updates_count = count
+          end)
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, mason_updates_component)
+      -- }}}
+
       -- neocodeium {{{
       local neocodeium_status_component = {
         function()
@@ -502,7 +559,6 @@ return {
       -- conform.nvim and ale fixers {{{
       ---@return string[]
       local function get_formatters()
-        ---@type OneFormatter[]
         local raw_enabled_formatters, _ = require("conform").list_formatters_to_run()
         ---@type string[]
         local formatters = {}
