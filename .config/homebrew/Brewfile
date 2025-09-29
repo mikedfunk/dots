@@ -351,6 +351,7 @@ brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
 brew "pipx" # like npx for python pip
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
+brew "pngpaste" # save image from clipboard to file
 brew "poetry" # MUCH better than pip - python package manager
 brew "portaudio" # used by aider to enable voice input
 brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.)
