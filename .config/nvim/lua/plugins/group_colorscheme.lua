@@ -58,6 +58,13 @@ return {
           end
         end
       end,
+      on_highlights = function(highlight, colors)
+        local util = require("tokyonight.util")
+        highlight.Folded = {
+          fg = colors.blue,
+          bg = util.darken(colors.fg_gutter, 0.3), -- make it darker in dark mode, lighter in light mode
+        }
+      end,
     },
   },
 }
