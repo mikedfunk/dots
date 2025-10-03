@@ -1,4 +1,5 @@
 local memoized_quote = nil
+local mason_updates_count = 0
 
 return {
   {
@@ -75,6 +76,7 @@ return {
     --   vim.g.snacks_animate = false
     -- end,
   },
+  -- { "mawkler/hml.nvim", opts = {} },
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
@@ -435,24 +437,8 @@ return {
       }
 
       -- mason updates {{{
-      -- run this once at startup
+
       local registry_ok, registry = pcall(require, "mason-registry")
-      if registry_ok then
-        registry.refresh()
-      end
-
-      -- refresh every 10 minutes (600,000 ms)
-      local timer = vim.loop.new_timer()
-      timer:start(
-        600000, -- first run delay
-        600000, -- repeat interval
-        vim.schedule_wrap(function()
-          if registry_ok then
-            registry.refresh()
-          end
-        end)
-      )
-
       local function get_mason_updates_count()
         if not registry_ok then
           return 0
@@ -476,8 +462,26 @@ return {
         return count
       end
 
-      -- cache so statusline can render synchronously
-      local mason_updates_count = get_mason_updates_count()
+      -- run this once at startup
+      if registry_ok then
+        registry.refresh(function()
+          mason_updates_count = get_mason_updates_count()
+        end)
+      end
+
+      -- refresh the registry and update the count every 10 minutes (600,000 ms)
+      local timer = vim.loop.new_timer()
+      timer:start(
+        600000, -- first run delay
+        600000, -- repeat interval
+        vim.schedule_wrap(function()
+          if registry_ok then
+            registry.refresh(function()
+              mason_updates_count = get_mason_updates_count()
+            end)
+          end
+        end)
+      )
 
       local mason_updates_component = {
         function()
