@@ -374,13 +374,14 @@ return {
   {
     "mason-org/mason.nvim",
     -- url = "https://github.com/iguanacucumber/mason.nvim", -- temporary fork see https://old.reddit.com/r/neovim/comments/1k1jtlm/made_a_small_fork_of_masonnvim_a_bit_like_what_i/
-    opts_extend = { "registries" },
+    -- opts_extend = { "registries" },
     opts = {
       ui = { border = "rounded" },
-      registries = {
-        "file:~/.config/nvim/lua/mason_registry/zk",
-        "github:mason-org/mason-registry",
-      },
+      -- registries = {
+      -- -- Fixes an issue present in 0.15.0 with in incorrect path to the ARM64 version of the file. This should not be used for 0.15.1+.
+      -- "file:~/.config/nvim/lua/mason_registry/zk",
+      --   "github:mason-org/mason-registry",
+      -- },
     },
   },
   -- this is installed via extras and customized here (TODO: override still not working. Needs config in the lualine segment which is harder to do.)
@@ -463,11 +464,11 @@ return {
       end
 
       -- run this once at startup
-      if registry_ok then
-        registry.refresh(function()
-          mason_updates_count = get_mason_updates_count()
-        end)
-      end
+      -- if registry_ok then
+      --   registry.refresh(function()
+      --     mason_updates_count = get_mason_updates_count()
+      --   end)
+      -- end
 
       -- refresh the registry and update the count every 10 minutes (600,000 ms)
       local timer = vim.loop.new_timer()

@@ -576,7 +576,7 @@ M.quotes = {
   { "You should name a variable using the same care with which you name a first-born child.", "", "- Jim Coplien" },
   { "You teach me, I forget. You show me, I remember. You involve me, I understand.", "", "- Xunzi" },
   { "Your code will eventually have its assumptions challenged and stop working.", "", "- /u/the7key" },
-  { "Your mind is programmable – if you're not programming your mind, else will program it for you.", "", "- Jeremy Hammond" },
+  { "Your mind is programmable – if you're not programming your mind someone else will program it for you.", "", "- Jeremy Hammond" },
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
 }
 
