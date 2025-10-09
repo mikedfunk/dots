@@ -56,12 +56,12 @@
   "sqlls": "1.7.1",
   "stylua": "v2.3.0",
   "svelte-language-server": "0.17.19",
-  "tailwindcss-language-server": "0.14.27",
+  "tailwindcss-language-server": "0.14.28",
   "taplo": "0.10.0",
   "tflint": "v0.59.1",
   "tree-sitter-cli": "v0.25.10",
   "vale": "v3.12.0",
   "vtsls": "0.2.9",
-  "yaml-language-server": "1.19.1",
+  "yaml-language-server": "1.19.2",
   "zk": "v0.15.1"
 }
