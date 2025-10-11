@@ -147,8 +147,6 @@ return {
       },
     },
   },
-  -- get a hierarchical tree of references with :FunctionReferences (only if lsp feature is supported)
-  { "lafarr/hierarchy.nvim", event = "LspAttach", opts = {} },
   -- {
   --   "kitagry/bqls.nvim",
   --   dependencies = { "neovim/nvim-lspconfig" },
@@ -162,6 +160,7 @@ return {
   -- },
   {
     "kosayoda/nvim-lightbulb",
+    event = "LspAttach",
     opts = {
       autocmd = { enabled = true },
       sign = {
@@ -170,14 +169,13 @@ return {
       },
     },
   },
-  -- TODO: this broke - figure out the fix
   {
     "zapling/mason-lock.nvim",
-    branch = "feat/support-mason2",
+    branch = "feat/support-mason2", -- TODO: when are they going to merge this?
     opts = {},
     dependencies = { "mason-org/mason.nvim" },
   },
-  { "antosha417/nvim-lsp-file-operations", opts = {} },
+  { "antosha417/nvim-lsp-file-operations", event = "LspAttach", opts = {} },
   -- {
   --   "rachartier/tiny-inline-diagnostic.nvim",
   --   priority = 1000, -- needs to be loaded in first
@@ -194,5 +192,7 @@ return {
   --   event = "LspAttach",
   --   opts = { vt_position = "end_of_line" },
   -- },
-  { "Sebastian-Nielsen/better-type-hover", opts = {} },
+  { "Sebastian-Nielsen/better-type-hover", event = "LspAttach", opts = {} },
+  -- get a hierarchical tree of references with :FunctionReferences (only if lsp feature is supported)
+  { "lafarr/hierarchy.nvim", event = "LspAttach", opts = {} },
 }
