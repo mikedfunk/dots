@@ -62,7 +62,7 @@ return {
       -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1742
       -- this is misleading: it's to fix indent, not highlighting
       highlight = {
-        additional_vim_regex_highlighting = { "php", "jsx" },
+        additional_vim_regex_highlighting = { "php", "jsx", "make" },
       },
 
       ensure_installed = {
@@ -70,6 +70,7 @@ return {
         "lua", -- update to latest
         "luadoc",
         "jsdoc",
+        "make",
         "markdown_inline",
         "phpdoc",
         "regex",

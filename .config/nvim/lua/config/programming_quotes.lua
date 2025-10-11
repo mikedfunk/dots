@@ -72,7 +72,6 @@ M.quotes = {
   { "An API that isn't comprehensible isn't usable.", "", "- James Gosling" },
   { "An evolving system increases its complexity unless work is done to reduce it.", "", "- Meir Lehman" },
   { "An organisation that treats its programmers as morons will soon have programmers that are willing and able to act like morons only.", "", "- Bjarne Stroustrup" },
-  { "An organisation that treats its programmers as morons will soon have programmers that are willing and able to act like morons only.", "", "- Bjarne Stroustrup" },
   { "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", "", "- Martin Fowler" },
   { "Any intelligent fool can make things bigger, more complex, and more violent. It takes a touch of genius – and a lot of courage – to move in the opposite direction.", "", "- Albert Einstein" },
   { "Any non-trivial program contains at least one bug.", "", "- Anonymous" },
