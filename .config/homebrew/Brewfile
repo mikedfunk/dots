@@ -336,6 +336,7 @@ brew "kubecolor" # kubectl with colors
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
 brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
+brew "mcp-toolbox" # google tool for MCP access to various google properties
 brew "media-control" # macos media status helper (used for my tmux statusbar)
 brew "mise" # asdf but faster and includes direnv
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.

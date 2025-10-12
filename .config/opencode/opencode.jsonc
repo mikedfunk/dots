@@ -47,11 +47,104 @@
             "type": "local",
             "enabled": true,
             "command": [
-                "npx",
+                "bunx",
                 "-y",
                 "@upstash/context7-mcp"
             ]
         },
+        "slack": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "slack-mcp-server@latest",
+                "--transport",
+                "stdio"
+            ],
+            "environment": {
+                "SLACK_MCP_XOXC_TOKEN": "{env:SLACK_MCP_XOXC_TOKEN}",
+                "SLACK_MCP_XOXD_TOKEN": "{env:SLACK_MCP_XOXD_TOKEN}",
+                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            }
+        },
+        "atlassian": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.atlassian.com/v1/sse"
+            ],
+        },
+        "snyk": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "snyk",
+                "mcp",
+                "-t",
+                "stdio"
+            ]
+        },
+        "github": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://api.githubcopilot.com/mcp/",
+                "--header",
+                "Authorization: Bearer {env:GITHUB_TOKEN}"
+            ]
+        },
+        "postman": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.postman.com/minimal",
+                "--header",
+                "Authorization: Bearer {env:POSTMAN_API_TOKEN}"
+            ]
+        },
+        "youtube-transcript": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/jkawamoto/mcp-youtube-transcript",
+                "mcp-youtube-transcript"
+            ]
+        },
+        "playwright": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "@playwright/mcp@latest"
+            ]
+        },
+        // TODO: does not work because my account does not have roles/serviceusage.serviceUsageConsumer
+        // "bigquery": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         "toolbox",
+        //         "--prebuilt",
+        //         "bigquery",
+        //         "--stdio"
+        //     ],
+        //     "environment": {
+        //         "BIGQUERY_PROJECT": "bi-saatchi-fission",
+        //     }
+        // },
         "tree-sitter": {
             "type": "local",
             "enabled": true,

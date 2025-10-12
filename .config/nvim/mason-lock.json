@@ -27,7 +27,7 @@
   "hadolint": "v2.14.0",
   "helm-ls": "v0.5.1",
   "intelephense": "1.14.4",
-  "isort": "6.1.0",
+  "isort": "7.0.0",
   "js-debug-adapter": "v1.105.0",
   "json-lsp": "4.10.0",
   "jsonlint": "1.6.3",
