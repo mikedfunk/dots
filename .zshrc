@@ -34,9 +34,11 @@ fi
 # }}}
 
 # speed up omz {{{
-DISABLE_AUTO_UPDATE="true"
-DISABLE_MAGIC_FUNCTIONS="true"
-DISABLE_COMPFIX="true"
+DISABLE_AUTO_UPDATE=true
+DISABLE_UPDATE_PROMPT=true
+DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_COMPFIX=true
+# zstyle ':omz:update' mode disabled
 # }}}
 
 # helper functions {{{
@@ -46,23 +48,23 @@ _has() {
     type "$1" &>/dev/null
 }
 
-timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-}
+# timezsh() {
+#   shell=${1-$SHELL}
+#   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+# }
 
 # colors {{{
-local BLACK="$(tput setaf 0)"
-local RED="$(tput setaf 1)"
+# local BLACK="$(tput setaf 0)"
+# local RED="$(tput setaf 1)"
 local GREEN="$(tput setaf 2)"
 local YELLOW="$(tput setaf 3)"
 local BLUE="$(tput setaf 4)"
-local PINK="$(tput setaf 5)"
-local CYAN="$(tput setaf 6)"
-local WHITE="$(tput setaf 7)"
+# local PINK="$(tput setaf 5)"
+# local CYAN="$(tput setaf 6)"
+# local WHITE="$(tput setaf 7)"
 local NORMAL="$(tput sgr0)"
-local MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
-local LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
+# local MAC_REMOVE_ANSI='gsed "s/\x1b\[[0-9;]*m//g"'
+# local LINUX_REMOVE_ANSI='sed \"s/\x1b\[[0-9;]*m//g\"'
 local UNDERLINE="$(tput smul)"
 # }}}
 
@@ -70,6 +72,7 @@ local UNDERLINE="$(tput smul)"
 
 # Paths {{{
 
+# set up homebrew env vars and paths
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # when CDing from anywhere, this will add the configured path to the
@@ -86,29 +89,29 @@ export fpath=(
 )
 
 # https://github.com/denisidoro/navi
-export navipath=(
-  $HOME/.navi
-  ${navipath:-}
-)
+# export navipath=(
+#   $HOME/.navi
+#   ${navipath:-}
+# )
 
-export infopath=(
-  $(brew --prefix)/share/info
-  /usr/share/info
-  ${infopath:-}
-)
+# export infopath=(
+#   $(brew --prefix)/share/info
+#   /usr/share/info
+#   ${infopath:-}
+# )
 
-export manpath=(
-  $(brew --prefix)/share/man
-  /usr/share/man
-  ${manpath:-}
-)
+# export manpath=(
+#   $(brew --prefix)/share/man
+#   /usr/share/man
+#   ${manpath:-}
+# )
 
 export path=(
   $(brew --prefix mysql-client@8.0)/bin
   $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
-  "${KREW_ROOT:-$HOME/.krew}"/bin
-  $HOME/.yarn/bin
+  # "${KREW_ROOT:-$HOME/.krew}"/bin
+  # $HOME/.yarn/bin
   $HOME/.docker/bin
   # to install groovy-language-server
   $(brew --prefix openjdk@17)/bin
@@ -125,7 +128,7 @@ export path=(
   # wtf homebrew? this is too far down the list!
   # $(brew --prefix)/{bin,sbin}
   # homebrew doesn't like to link curl
-  $(brew --prefix)/opt/{curl,perl}/bin
+  $(brew --prefix)/opt/curl/bin
   # rust cargo packages
   $HOME/.cargo/bin
   # golang packages
@@ -155,6 +158,7 @@ export path=(
 # https://www.justingarrison.com/blog/2020-05-28-shell-shortcuts/
 bindkey '^q' push-line-or-edit
 # https://github.com/getantidote/use-omz?tab=readme-ov-file#differences
+# ^ Oh-My-Zsh by default checks the security of directories in fpath when running compinit. This feature can cause slower performance, and can be disabled by setting ZSH_DISABLE_COMPFIX=true
 ZSH_DISABLE_COMPFIX=true
 
 # https://github.com/mattmc3/ez-compinit?tab=readme-ov-file#how-do-i-customize-it
@@ -193,17 +197,17 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 # export SSH_TTY=$TTY
 
 # export AIDER_MODEL="anthropic/claude-3-5-haiku-latest" # Faster and cheaper. Can hit token limit.
-export AIDER_MODEL="anthropic/claude-3-7-sonnet-latest" # capable of returning diffs, apparently less likely to hit token limit
+# export AIDER_MODEL="anthropic/claude-3-7-sonnet-latest" # capable of returning diffs, apparently less likely to hit token limit
 # export AIDER_MODEL="anthropic/claude-3-opus-latest"
 # export AIDER_MODEL="gemini/gemini-2.0-flash" # gemini free fast model
 # export AIDER_MODEL="ollama/llama3.1:8b"
-export AIDER_GITIGNORE="False" # use .aiderignore instead so I can add more/less
+# export AIDER_GITIGNORE="False" # use .aiderignore instead so I can add more/less
 # export AIDER_SHOW_MODEL_WARNINGS=false
 # export AIDER_YES_ALWAYS=true
-export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
-export AIDER_AUTO_COMMITS=false
+# export AIDER_CONFIG_FILE="$HOME/.config/aider/.aider.conf.yml"
+# export AIDER_AUTO_COMMITS=false
 # export AIDER_READ=AGENTS.md
-export AIDER_READ=CONTEXT.md
+# export AIDER_READ=CONTEXT.md
 
 export OLLAMA_API_BASE=http://127.0.0.1:11434 # for aider
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
@@ -221,7 +225,7 @@ _has nvim && export MANPAGER='nvim +Man!'
 
 # https://cmichel.io/fixing-cpp-compilation-bugs-for-the-mac-os-catalina-upgrade/
 # This was needed to install lsp-ai via cargo
-export CPLUS_INCLUDE_PATH="$(brew --prefix llvm)/include/c++/v1:$(xcrun --show-sdk-path)/usr/include"
+# export CPLUS_INCLUDE_PATH="$(brew --prefix llvm)/include/c++/v1:$(xcrun --show-sdk-path)/usr/include"
 # export LIBRARY_PATH="$LIBRARY_PATH:$(xcrun --show-sdk-path)/usr/lib"
 
 export XDG_RUNTIME_DIR="$TMPDIR"
@@ -231,15 +235,15 @@ export XDG_STATE_HOME="$HOME"/.local/state
 export XDG_CACHE_HOME="$HOME"/.cache
 # export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim"
 
-export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME/wezterm/config.lua"
+export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/config.lua
 export COMPOSE_HTTP_TIMEOUT=120 # default is 60
 export ZSH_ALIAS_FINDER_AUTOMATIC=true # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
-[ -f "$HOME"/.private_vars.sh ] && source "$HOME"/.private_vars.sh # where I store my secret env vars
+[ -f "$HOME"/.private_vars.sh ] && source "$HOME"/.private_vars.sh
 [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
-[ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
+# [ -f $(brew --prefix)/etc/openssl/cert.pem ] && export SSL_CERT_FILE=$(brew --prefix)/etc/openssl/cert.pem # https://github.com/google/google-api-ruby-client/issues/235#issuecomment-169956795
 # [ -d "$HOME/.zsh/completion" ] && find "$HOME/.zsh/completion" | while read f; do source "$f"; done
 
-export AKAMAI_EDGERC="$XDG_CONFIG_HOME/akamai/.edgerc"
+export AKAMAI_EDGERC="$XDG_CONFIG_HOME"/akamai/.edgerc
 
 # cod: error: server returned error: Binary was compiled with 'CGO_ENABLED=0', go-sqlite3 requires cgo to work. This is a stub
 # ( antidote list | grep --quiet dim-an/cod ) && source $(antidote path dim-an/cod)/cod.plugin.zsh
@@ -255,7 +259,7 @@ _has mise && _evalcache mise activate zsh
 
 # https://github.com/trapd00r/LS_COLORS
 local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
-local dircolors_file="$HOME/.dircolors"
+local dircolors_file="$HOME"/.dircolors
 [[ -e "$dircolors_cmd" && -f "$dircolors_file" ]] && _evalcache "$dircolors_cmd" -b "$dircolors_file"
 # }}}
 
@@ -282,18 +286,18 @@ export AUTO_NTFY_DONE_IGNORE=(
 # https://www.reddit.com/r/linux/comments/b5n1l5/whats_your_favorite_cli_tool_nobody_knows_about/ejex2pm/
 # export LESSOPEN="| $(brew --prefix)/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
 # alias less="less -R"
-lessc () { rougify highlight $@ | \less -R -M }
-export GITWEB_PROJECTROOT="$HOME/Code"
+# lessc () { rougify highlight $@ | \less -R -M }
+export GITWEB_PROJECTROOT="$HOME"/Code
 export PRE_COMMIT_COLOR="always" # https://pre-commit.com/#cli
 export PSQL_PAGER="pspg --clipboard-app=3"
 
 set PLANTUML_LIMIT_SIZE=8192
 
 # to install groovy-language-server
-export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
+# export CPPFLAGS="-I$(brew --prefix openjdk@17)/include"
 
 # [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh" # this seems to conflict with direnv. Direnv seems to wipe the PATH changes this applies.
-[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh. P10k is installed as a ZSH plugin.
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh # To customize prompt, run `p10k configure` (NOT within tmux) or edit ~/.p10k.zsh. P10k is installed as a ZSH plugin.
 
 # [[ -f $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh ]] && source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 builtin setopt aliases # weird, this should have already been done :/
@@ -303,8 +307,8 @@ builtin setopt aliases # weird, this should have already been done :/
 # https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
 # _has navi && _evalcache navi widget zsh
 
-export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
-[[ -f "$HOME"/.iterm2_shell_integration.zsh ]] && source "$HOME"/.iterm2_shell_integration.zsh
+# export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX="YES"
+# [[ -f "$HOME"/.iterm2_shell_integration.zsh ]] && source "$HOME"/.iterm2_shell_integration.zsh
 
 export HOMEBREW_NO_ANALYTICS=1
 
@@ -340,7 +344,7 @@ export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
-export PSPG_CONF="$XDG_CONFIG_HOME/pspg/.pspgconf"
+export PSPG_CONF="$XDG_CONFIG_HOME"/pspg/.pspgconf
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export TERMINFO="$XDG_DATA_HOME"/terminfo
@@ -360,7 +364,7 @@ zle_highlight=('paste:none')
 # https://www.everythingcli.org/ssh-tunnelling-for-fun-and-profit-autossh/
 export AUTOSSH_PORT=0
 
-# https://infosec.mozilla.org/guidelines/openssh#openssh-client
+# https://infosec.mozilla.org/guidelines/openssh#openssh-client (med slow)
 ssh-add --apple-use-keychain --apple-load-keychain ~/.ssh/keys/* 2>/dev/null # add all keys stored in keychain if they haven't been added yet
 # ssh-add -c -K -A 2>/dev/null # add all keys stored in keychain if they haven't been added yet
 # [c] confirm password on use
@@ -403,12 +407,13 @@ export FZF_DEFAULT_COMMAND='ag --files-with-matches --skip-vcs-ignores -g ""'
 # https://github.com/machinshin/dotfiles/blob/master/.zshrc#L159-L160
 # Complete the hosts and - last but not least - the remote directories.
 #  $ scp file username@<TAB><TAB>:/<TAB>
-zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
-zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
+# zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' hosts $hosts
+# zstyle ':completion:*:(ssh|scp|sftp|sshrc|autossh|sshfs):*' users $users
 
 # _has akamai && _evalcache akamai --zsh
 # [ -f $(brew --prefix git-spice)/bin/gs ] && _evalcache $(brew --prefix git-spice)/bin/gs shell completion zsh
 
+# carapace is that go cobra auto completion lib (fast)
 if _has carapace; then
     export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
     # this might interfere with fzf-tab https://github.com/orgs/carapace-sh/discussions/2596
@@ -423,7 +428,7 @@ fi
 # misc {{{
 # alias info="info --vi-keys" # info -> pinfo is like top -> htop
 alias pinfo='pinfo --rcfile=$XDG_CONFIG_HOME/pinfo/pinforc'
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias ccusage="npx -y ccusage@latest"
@@ -449,13 +454,13 @@ alias mv="mv -iv"
 alias cp="cp -riv"
 alias mkdir="mkdir -vp"
 
-mysql-web-server () {
-    ( docker ps | grep -q dbgate ) && return
-    docker run --rm --detach -ti --name=dbgate-instance \
-        --publish 8001:3000 \
-        --env SHELL_CONNECTION='1' \
-        dbgate/dbgate
-}
+# mysql-web-server () {
+#     ( docker ps | grep -q dbgate ) && return
+#     docker run --rm --detach -ti --name=dbgate-instance \
+#         --publish 8001:3000 \
+#         --env SHELL_CONNECTION='1' \
+#         dbgate/dbgate
+# }
 
 # tip: curl ping.gg to set up a pingdom-style alert
 shorten-url () { curl -s http://tinyurl.com/api-create.php?url=$1; }
@@ -515,7 +520,7 @@ alias journal="zk journal"
 alias notes="zk edit --interactive"
 # alias save-notes="cd $HOME/Notes && git add . && git commit -am 'working' && git push"
 # alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc" # javascript repl for testing javascript wonkiness
-alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude vendor" # enhanced interactive disk usage command
+# alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude vendor" # enhanced interactive disk usage command
 alias tmux-layout="tmux display-message -p \"#{window_layout}\""
 # fuzzy wd
 wf () { wd $(wd list | gsed '1d' | fzf | gsed -E 's/^ +(\w+).*$/\1/'); }
@@ -527,7 +532,7 @@ pretty-path () { tr : '\n' <<<"$PATH"; }
 # alias vit="vim +TW" # until vit gets its act together
 # alias tree="alder" # colorized tree from npm (I colorize tree with "lsd" now so this is not needed)
 # https://unix.stackexchange.com/a/293608/287898
-alias mc="mc --nosubshell --xterm"
+# alias mc="mc --nosubshell --xterm"
 alias multitail="multitail -F $XDG_CONFIG_HOME/multitail/multitail.conf"
 # }}}
 
@@ -697,9 +702,9 @@ export LANG=en_US.UTF-8
 alias docker-restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
 
 # wrap docker status with color and underline in header
-docker-stats() {
-    docker stats --format "table ${GREEN}{{.Name}}\t${YELLOW}{{.CPUPerc}}\t${BLUE}{{.MemPerc}}" | sed -E -e "s/(NAME.*)/${UNDERLINE}\1${NORMAL}/"
-}
+# docker-stats() {
+#     docker stats --format "table ${GREEN}{{.Name}}\t${YELLOW}{{.CPUPerc}}\t${BLUE}{{.MemPerc}}" | sed -E -e "s/(NAME.*)/${UNDERLINE}\1${NORMAL}/"
+# }
 # }}}
 
 # phpunit {{{
@@ -716,7 +721,7 @@ phpunitnotify() {
 }
 
 # but why
-alias magento-phpunit="pu -c dev/tests/unit/phpunit.xml.dist"
+# alias magento-phpunit="pu -c dev/tests/unit/phpunit.xml.dist"
 
 # Public: runs phpspec run and uses noti to show the results
 phpspecnotify() {
@@ -743,17 +748,17 @@ pux() {
 # }}}
 
 # xdebug {{{
-xdebug-off() {
-    local -r ini_file=$(find $(mise where php)/conf.d -name "*xdebug.ini")
-    [ -n $ini_file ] && mv ${ini_file}{,_OLD}
-}
-
-xdebug-on() {
-    local ini_file=$(find $(mise where php)/conf.d -name "*xdebug.ini_OLD")
-    [ -z $ini_file ] && return
-    ini_file=$(echo ${ini_file} | sed s/_OLD//)
-    mv ${ini_file}{_OLD,}
-}
+# xdebug-off() {
+#     local -r ini_file=$(find $(mise where php-brew)/conf.d -name "*xdebug.ini")
+#     [ -n $ini_file ] && mv ${ini_file}{,_OLD}
+# }
+#
+# xdebug-on() {
+#     local ini_file=$(find $(mise where php-brew)/conf.d -name "*xdebug.ini_OLD")
+#     [ -z $ini_file ] && return
+#     ini_file=$(echo ${ini_file} | sed s/_OLD//)
+#     mv ${ini_file}{_OLD,}
+# }
 # }}}
 
 # }}}
@@ -774,7 +779,7 @@ ZLE_RPROMPT_INDENT=0
 # zsh options {{{
 setopt bang_hist # this was disabled by vanilli.zsh
 
-# fuzzy completion: cd ~/Cde -> ~/Code
+# fuzzy completion: cd ~/Cde -> ~/Code (fast)
 # https://superuser.com/a/815317
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
@@ -785,7 +790,7 @@ zstyle ':completion:*' matcher-list '' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
 
-# https://mastodon.social/@vonheikemen@hachyderm.io/109367664531721862
+# https://mastodon.social/@vonheikemen@hachyderm.io/109367664531721862 (fast)
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line

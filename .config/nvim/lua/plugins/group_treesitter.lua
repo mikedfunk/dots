@@ -114,14 +114,14 @@ return {
       },
     },
   },
-  {
-    "haringsrob/nvim_context_vt",
-    event = "VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      prefix = "↩ ",
-    },
-  },
+  -- {
+  --   "haringsrob/nvim_context_vt",
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = {
+  --     prefix = "↩ ",
+  --   },
+  -- },
   -- {
   --   "aaronik/treewalker.nvim",
   --   opts = {},

@@ -38,5 +38,5 @@ return {
   --   dependencies = { "nvim-treesitter/nvim-treesitter" },
   --   opts = { pattern = "*" },
   -- },
-  { "dhruvasagar/vim-table-mode", ft = "markdown" },
+  -- { "dhruvasagar/vim-table-mode", ft = "markdown" },
 }

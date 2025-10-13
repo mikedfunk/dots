@@ -4,9 +4,9 @@
     "small_model": "openrouter/claude-3-5-haiku-20241022",
     "theme": "system",
     "share": "manual",
-    "instructions": [
-        "CRUSH.md"
-    ],
+    // "instructions": [
+    //     "CRUSH.md"
+    // ],
     "disabled_providers": [
         "xai"
     ],
@@ -52,6 +52,53 @@
                 "@upstash/context7-mcp"
             ]
         },
+        "spotify": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "--python",
+                "3.12",
+                "--from",
+                "git+https://github.com/varunneal/spotify-mcp",
+                "spotify-mcp"
+            ],
+            "environment": {
+                "SPOTIFY_CLIENT_ID": "{env:SPOTIFY_CLIENT_ID}",
+                "SPOTIFY_CLIENT_SECRET": "{env:SPOTIFY_CLIENT_SECRET}",
+                "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+            }
+        },
+        "obsidian": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "mcp-obsidian"
+            ],
+            "environment": {
+                "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
+                // "OBSIDIAN_HOST": "<your_obsidian_host>",
+                // "OBSIDIAN_PORT": "<your_obsidian_port>"
+            }
+        },
+        // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
+        // "strava": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         // "uvx",
+        //         // "--python",
+        //         // "3.13",
+        //         // "strava-activity-mcp-server"
+        //         // "strava-mcp-server"
+        //     ],
+        //     "environment": {
+        //         "STRAVA_CLIENT_ID": "{env:STRAVA_CLIENT_ID}",
+        //         "STRAVA_CLIENT_SECRET": "{env:STRAVA_CLIENT_SECRET}",
+        //         "STRAVA_REFRESH_TOKEN": "{env:STRAVA_REFRESH_TOKEN}"
+        //     }
+        // },
         "slack": {
             "type": "local",
             "enabled": true,
@@ -75,12 +122,14 @@
                 "bunx",
                 "-y",
                 "mcp-remote",
-                "https://mcp.atlassian.com/v1/sse"
+                "https://mcp.atlassian.com/v1/sse",
+                "--transport",
+                "sse-only"
             ],
         },
         "snyk": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "snyk",
                 "mcp",
@@ -102,7 +151,7 @@
         },
         "postman": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -114,7 +163,7 @@
         },
         "youtube-transcript": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "uvx",
                 "--from",
@@ -124,7 +173,7 @@
         },
         "playwright": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -183,18 +232,6 @@
             "extensions": [
                 "php"
             ]
-        }
-    },
-    "agent": {
-        "code-reviewer": {
-            "description": "Reviews code for best practices and potential issues",
-            "mode": "subagent",
-            "model": "openrouter/claude-sonnet-4-5-20250929",
-            "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
-            "tools": {
-                "write": false,
-                "edit": false
-            }
         }
     }
 }

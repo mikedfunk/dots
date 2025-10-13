@@ -423,7 +423,7 @@ M.quotes = {
   { "Testing leads to failure, and failure leads to understanding.", "", "- Burt Rutan" },
   { "Testing shows the presence, not the absence of bugs.", "", "- Edsger W Dijkstra" },
   { "That hardly ever happens is another way of saying 'it happens'.", "", "- Douglas Crockford" },
-  { "That was a problem for future me and now I am future me", "", "- Tom Scott" },
+  { "That was a problem for future me and now I am future me.", "", "- Tom Scott" },
   { "The Programmer's Creed: We do these things not because they are easy, but because we thought they were going to be easy.", "", "- @Pinboard" },
   { "The Three Laws of TDD:", "", "(1) You may not write production code until you have written a failing unit test.", "(2) You may not write more of a unit test than is sufficient to fail, and not compiling is failing.", "(3) You may not write more production code than is sufficient to pass the currently failing test.", "", "- Robert C. Martin" },
   { "The absence of limitations is the enemy of art.", "", "- Orson Welles" },

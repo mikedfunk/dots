@@ -124,7 +124,6 @@ tap "sst/tap" # opencode
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
 # brew "hg" # mercurial (who still uses mercurial? no rebase)
 # brew "highlight" # colorizes html and other output on the command line. used by ranger. (I don't use ranger these days)
-# brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ )
 # brew "https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb" # use an ssh password. trying this for leaf group LDAP access. (didn't work, don't need it for anything else at the moment)
 # brew "hub" # , args: ["devel"] # github tool is a superset of git with extra commands.
 # brew "hurl" # language-agnostic http testing tool
@@ -329,6 +328,7 @@ brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
+brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ )
 brew "jq" # simple json pretty-printer `echo '{"my" => "json"}' | jq .` (Used in some of my shell functions)
 brew "k9s" # handy kubernetes dashboard `k9s -n develop`
 brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for minikube via VirtualBox

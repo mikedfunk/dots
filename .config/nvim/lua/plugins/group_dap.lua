@@ -6,6 +6,7 @@ return {
         "folke/edgy.nvim",
         opts_extend = { "bottom" },
         opts = {
+          -- Move all panels across the bottom
           bottom = {
             { title = "Scopes", ft = "dapui_scopes" },
             { title = "Stacks", ft = "dapui_stacks" },

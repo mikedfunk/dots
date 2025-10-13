@@ -100,16 +100,17 @@ return {
   {
     "cormacrelf/dark-notify",
     lazy = false,
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "UpdateDarkNotifyTheme",
-        callback = function()
-          -- tmux plugins must be loaded after theme change or they stop working
-          -- in statusbar, so source entire tmux config
-          vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
-        end,
-      })
-    end,
+    opts = {},
+    -- init = function()
+    --   vim.api.nvim_create_autocmd("User", {
+    --     pattern = "UpdateDarkNotifyTheme",
+    --     callback = function()
+    --       -- tmux plugins must be loaded after theme change or they stop working
+    --       -- in statusbar, so source entire tmux config
+    --       vim.cmd("silent! !tmux source ~/.config/tmux/tmux.conf &")
+    --     end,
+    --   })
+    -- end,
     config = function() -- can receive mode: "dark"|"light"
       require("dark_notify").run({
         onchange = function()
@@ -118,18 +119,22 @@ return {
       })
     end,
   },
-  { "nvim-zh/colorful-winsep.nvim", event = { "User UpdateDarkNotifyTheme" }, opts = {} },
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    event = { "User UpdateDarkNotifyTheme" },
+    opts = {},
+  },
   -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
-  {
-    "lewis6991/gitsigns.nvim",
-    dependencies = { "purarue/gitsigns-yadm.nvim" },
-    opts = {
-      _on_attach_pre = function(_, callback)
-        require("gitsigns-yadm").yadm_signs(callback)
-      end,
-    },
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   dependencies = { "purarue/gitsigns-yadm.nvim" },
+  --   opts = {
+  --     _on_attach_pre = function(_, callback)
+  --       require("gitsigns-yadm").yadm_signs(callback)
+  --     end,
+  --   },
+  -- },
   -- TODO: breaks my terminal due to some problem with character width
   {
     "petertriho/nvim-scrollbar",
@@ -160,28 +165,28 @@ return {
       },
     },
   },
-  {
-    "mvllow/modes.nvim",
-    event = "VeryLazy",
-    opts = {
-      ignore = {
-        "Avante",
-        "AvanteInput",
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "cmp",
-        "dashboard",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "snacks_dashboard",
-        "snacks_notif",
-        "snacks_picker_input",
-        "starter",
-      },
-    },
-  },
+  -- {
+  --   "mvllow/modes.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     ignore = {
+  --       "Avante",
+  --       "AvanteInput",
+  --       "DressingInput",
+  --       "TelescopePrompt",
+  --       "alpha",
+  --       "cmp",
+  --       "dashboard",
+  --       "lazy",
+  --       "lspinfo",
+  --       "mason",
+  --       "snacks_dashboard",
+  --       "snacks_notif",
+  --       "snacks_picker_input",
+  --       "starter",
+  --     },
+  --   },
+  -- },
   -- Top right filename float. This is really helpful but it overlaps a lot of stuff and starts to become a nuisance.
   -- {
   --   "b0o/incline.nvim",
@@ -393,278 +398,19 @@ return {
   --   end,
   -- },
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "mfussenegger/nvim-lint",
-      -- "monkoose/neocodeium",
-      "stevearc/conform.nvim",
-    },
-    opts = function(_, opts)
-      opts.options.disabled_filetypes.winbar = {
-        "Avante",
-        "AvanteInput",
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "cmp",
-        "dashboard",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "snacks_dashboard",
-        "snacks_picker_input",
-        "starter",
-      }
-
-      opts.options.disabled_filetypes.statusline = {
-        "DressingInput",
-        "TelescopePrompt",
-        "alpha",
-        "dashboard",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "snacks_dashboard",
-        "snacks_picker_input",
-        "starter",
-      }
-
-      opts.sections.lualine_y = {
-        { "progress" },
-      }
-
-      opts.sections.lualine_z = {
-        { "location" },
-      }
-
-      -- mason updates {{{
-
-      local registry_ok, registry = pcall(require, "mason-registry")
-      local function get_mason_updates_count()
-        if not registry_ok then
-          return 0
-        end
-
-        local pkgs = registry.get_installed_packages()
-        local count = 0
-
-        for _, pkg in ipairs(pkgs) do
-          local ok_installed, installed = pcall(function()
-            return pkg:get_installed_version()
-          end)
-          local ok_latest, latest = pcall(function()
-            return pkg:get_latest_version()
-          end)
-          if ok_installed and ok_latest and installed and latest and installed ~= latest then
-            count = count + 1
-          end
-        end
-
-        return count
-      end
-
-      -- run this once at startup
-      -- if registry_ok then
-      --   registry.refresh(function()
-      --     mason_updates_count = get_mason_updates_count()
-      --   end)
-      -- end
-
-      -- refresh the registry and update the count every 10 minutes (600,000 ms)
-      local timer = vim.loop.new_timer()
-      timer:start(
-        600000, -- first run delay
-        600000, -- repeat interval
-        vim.schedule_wrap(function()
-          if registry_ok then
-            registry.refresh(function()
-              mason_updates_count = get_mason_updates_count()
-            end)
-          end
-        end)
-      )
-
-      local mason_updates_component = {
-        function()
-          return mason_updates_count > 0 and ("⚒ " .. mason_updates_count) or ""
-        end,
-        color = function()
-          return {
-            fg = Snacks.util.color("Character"),
-            gui = "None",
-          }
-        end,
-        cond = function()
-          return mason_updates_count > 0
-        end,
-        on_click = function()
-          vim.cmd("Mason")
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, mason_updates_component)
-      -- }}}
-
-      -- neocodeium {{{
-      local neocodeium_status_component = {
-        function()
-          return LazyVim.config.icons.kinds.Codeium:gsub("%s+", "")
-        end,
-        color = function()
-          local is_neocodeium_enabled = package.loaded["neocodeium"] and require("neocodeium").get_status() == 0
-          return {
-            fg = is_neocodeium_enabled and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-          }
-        end,
-        on_click = function()
-          if package.loaded["neocodeium"] then
-            vim.cmd("NeoCodeium toggle")
-          end
-        end,
-        cond = function()
-          return package.loaded["neocodeium"] ~= nil
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, neocodeium_status_component)
-      -- }}}
-
-      -- minuet-ai {{{
-      if package.loaded["minuet"] then
-        table.insert(opts.sections.lualine_x, require("minuet.lualine"))
-      end
-      -- }}}
-
-      -- nvim-lint and ale linters {{{
-      ---@return string[]
-      local function get_linters()
-        local linters = { unpack(require("lint").linters_by_ft[vim.bo.ft] or {}) }
-        for _, linter in ipairs(vim.g.ale_linters and vim.g.ale_linters[vim.bo.ft] or {}) do
-          if not vim.tbl_contains(linters, linter) then
-            table.insert(linters, linter)
-          end
-        end
-
-        return linters
-      end
-
-      local nvim_lint_component = {
-        ---@return string
-        function()
-          return " " .. tostring(#get_linters())
-        end,
-        color = function()
-          return {
-            fg = #get_linters() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-            gui = "None",
-          }
-        end,
-        cond = function()
-          return package.loaded["lint"] ~= nil
-        end,
-        on_click = function()
-          print(vim.inspect(get_linters()))
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, nvim_lint_component)
-      -- }}}
-
-      -- conform.nvim and ale fixers {{{
-      ---@return string[]
-      local function get_formatters()
-        local raw_enabled_formatters, _ = require("conform").list_formatters_to_run()
-        ---@type string[]
-        local formatters = {}
-
-        for _, formatter in ipairs(raw_enabled_formatters) do
-          table.insert(formatters, formatter.name)
-        end
-
-        ---@type string[]
-        local ale_fixers = vim.g.ale_fixers and vim.g.ale_fixers[vim.bo.ft] or {}
-
-        for _, formatter in ipairs(ale_fixers) do
-          if not vim.tbl_contains(formatters, formatter) then
-            table.insert(formatters, formatter)
-          end
-        end
-
-        return formatters
-      end
-
-      local conform_nvim_component = {
-        ---@return string
-        function()
-          return " " .. tostring(#get_formatters())
-        end,
-        color = function()
-          return {
-            fg = #get_formatters() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-            gui = "None",
-          }
-        end,
-        cond = function()
-          return package.loaded["conform"] ~= nil
-        end,
-        on_click = function()
-          vim.cmd("LazyFormatInfo")
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, conform_nvim_component)
-      -- }}}
-
-      -- lsp clients {{{
-      local get_lsp_client_names = function()
-        local buf_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-
-        ---@type string[]
-        local buf_client_names = {}
-
-        for _, client in pairs(buf_clients) do
-          table.insert(buf_client_names, client.name)
-        end
-
-        ---@type string[]
-        buf_client_names = vim.fn.uniq(buf_client_names) ---@diagnostic disable-line missing-parameter
-        return buf_client_names
-      end
-
-      local lsp_status_component = {
-        ---@return string
-        function()
-          return "ʪ " .. tostring(#get_lsp_client_names())
-        end,
-        color = function()
-          return {
-            fg = #get_lsp_client_names() > 0 and Snacks.util.color("Normal") or Snacks.util.color("Comment"),
-            gui = "None",
-          }
-        end,
-        on_click = function()
-          vim.cmd("LspInfo")
-        end,
-      }
-
-      table.insert(opts.sections.lualine_x, lsp_status_component)
-      -- }}}
-    end,
-  },
-  {
     "kevinhwang91/nvim-bqf",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = "qf",
   },
   { "stevearc/quicker.nvim", ft = "qf", opts = {} },
-  {
-    "nyngwang/NeoZoom.lua",
-    cmd = { "NeoZoomToggle", "NeoZoom" },
-    keys = {
-      { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
-    },
-    opts = {},
-  },
+  -- {
+  --   "nyngwang/NeoZoom.lua",
+  --   cmd = { "NeoZoomToggle", "NeoZoom" },
+  --   keys = {
+  --     { "<C-w>z", "<cmd>NeoZoomToggle<cr>", noremap = true, desc = "Toggle Zoom" },
+  --   },
+  --   opts = {},
+  -- },
   -- {
   --   "mcauley-penney/visual-whitespace.nvim",
   --   opts = {},

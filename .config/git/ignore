@@ -8,6 +8,7 @@
 *.un~
 .DS_Store
 .aider*
+.channels_cache_v2.json
 .conform*
 .crush/
 .deptrac.cache
@@ -31,6 +32,7 @@
 .projections.json
 .ruby-lsp
 .specify
+.users_cache.json
 .yarn
 AGENTS.md
 CONTEXT.md

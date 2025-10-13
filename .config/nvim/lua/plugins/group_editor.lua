@@ -1,34 +1,34 @@
 return {
-  {
-    "nacro90/numb.nvim",
-    event = "CmdlineEnter",
-    opts = {
-      show_numbers = true, -- Enable 'number' for the window while peeking
-      show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-    },
-  },
-  { "HawkinsT/pathfinder.nvim", event = "VeryLazy" },
+  -- {
+  --   "nacro90/numb.nvim",
+  --   event = "CmdlineEnter",
+  --   opts = {
+  --     show_numbers = true, -- Enable 'number' for the window while peeking
+  --     show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  --   },
+  -- },
+  -- { "HawkinsT/pathfinder.nvim", event = "VeryLazy" },
   -- { "tpope/vim-apathy", event = "VeryLazy" },
-  {
-    "smjonas/live-command.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("live-command").setup({
-        commands = {
-          Norm = { cmd = "norm" },
-        },
-      })
-    end,
-  },
-  {
-    "anuvyklack/fold-preview.nvim",
-    event = "VeryLazy",
-    opts = {
-      auto = 400, -- ms before auto open
-      border = "rounded",
-      default_keybindings = false,
-    },
-  },
+  -- {
+  --   "smjonas/live-command.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("live-command").setup({
+  --       commands = {
+  --         Norm = { cmd = "norm" },
+  --       },
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "anuvyklack/fold-preview.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     auto = 400, -- ms before auto open
+  --     border = "rounded",
+  --     default_keybindings = false,
+  --   },
+  -- },
   -- This auto folds stuff in mergetool >:(
   -- {
   --   "chrisgrieser/nvim-origami",
@@ -42,39 +42,39 @@ return {
   --     },
   --   },
   -- },
-  {
-    "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps
-    event = "VeryLazy",
-    opts = {
-      next_file_key = "<M-i>",
-      prev_file_key = "<M-o>",
-    },
-  },
+  -- {
+  --   "wojciech-kulik/filenav.nvim", -- like browser back button for nvim files, not jumps
+  --   event = "VeryLazy",
+  --   opts = {
+  --     next_file_key = "<M-i>",
+  --     prev_file_key = "<M-o>",
+  --   },
+  -- },
   -- { "luukvbaal/statuscol.nvim", opts = {} }, -- clickable fold markers
-  { "wsdjeg/vim-fetch" }, -- go to file including line number e.g. stack trace
+  -- { "wsdjeg/vim-fetch" }, -- go to file including line number e.g. stack trace
   -- {
   --   "ziontee113/icon-picker.nvim",
   --   dependencies = "stevearc/dressing.nvim",
   --   cmd = { "IconPickerYank", "IconPickerInsert", "IconPickerNormal" },
   --   opts = { disable_legacy_commands = true },
   -- },
-  {
-    "chrisgrieser/nvim-various-textobjs",
-    event = "VeryLazy",
-    opts = {
-      keymaps = {
-        useDefaults = true,
-        disabledDefaults = { "gc", "gw" },
-      },
-    },
-  },
-  { "wurli/visimatch.nvim", event = "VeryLazy", opts = {} },
+  -- {
+  --   "chrisgrieser/nvim-various-textobjs",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     keymaps = {
+  --       useDefaults = true,
+  --       disabledDefaults = { "gc", "gw" },
+  --     },
+  --   },
+  -- },
+  -- { "wurli/visimatch.nvim", event = "VeryLazy", opts = {} },
   { "fpob/nette.vim", event = "VimEnter" },
   { "martinda/Jenkinsfile-vim-syntax", event = "VimEnter" },
   { "aklt/plantuml-syntax", event = "VimEnter" },
   -- { "jwalton512/vim-blade", event = "VimEnter" },
-  { "tpope/vim-cucumber", event = "VimEnter" },
-  { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
+  -- { "tpope/vim-cucumber", event = "VimEnter" },
+  -- { "neoclide/vim-jsx-improve", ft = { "javascriptreact", "typescriptreact" } },
   {
     -- sets commentstring by treesitter lang
     "folke/ts-comments.nvim",

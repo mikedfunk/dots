@@ -5,17 +5,17 @@ return {
   --     git = { enabled = false },
   --   },
   -- },
-  {
-    "tpope/vim-fugitive",
-    dependencies = {
-      "folke/which-key.nvim",
-      -- "tpope/vim-rhubarb",
-      -- "tyru/open-browser.vim",
-    },
-    -- config = function()
-    --   vim.cmd("command! -nargs=1 Browse OpenBrowser <args>") -- allow GBrowse to work with open-browser.nvim instead of netrw
-    -- end,
-  },
+  -- {
+  --   "tpope/vim-fugitive",
+  --   dependencies = {
+  --     "folke/which-key.nvim",
+  --     -- "tpope/vim-rhubarb",
+  --     -- "tyru/open-browser.vim",
+  --   },
+  --   -- config = function()
+  --   --   vim.cmd("command! -nargs=1 Browse OpenBrowser <args>") -- allow GBrowse to work with open-browser.nvim instead of netrw
+  --   -- end,
+  -- },
   -- this is only used for shortcuts in git interactive rebase
   {
     "tpope/vim-git",
@@ -83,11 +83,9 @@ return {
       { "[x", "<Cmd>GitConflictPrevConflict<CR>", desc = "Previous conflict" },
       { "]x", "<Cmd>GitConflictNextConflict<CR>", desc = "Next conflict" },
     },
-    opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        default_mappings = false,
-        disable_diagnostics = true,
-      })
-    end,
+    opts = {
+      default_mappings = false,
+      disable_diagnostics = true,
+    },
   },
 }
