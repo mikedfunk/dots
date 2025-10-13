@@ -1,5 +1,4 @@
 local memoized_quote = nil
-local mason_updates_count = 0
 
 return {
   {

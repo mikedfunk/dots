@@ -21,22 +21,46 @@ return {
   --
   --     -- gemini provider {{{
   --     -- https://github.com/milanglacier/minuet-ai.nvim#gemini
-  --     provider = "gemini",
+  --     -- provider = "gemini",
+  --     -- provider_options = {
+  --     --   gemini = {
+  --     --     -- model = "gemini-2.5-flash-lite-preview-06-17"
+  --     --     -- model = "gemini-2.5-flash",
+  --     --     model = "gemini-2.0-flash",
+  --     --     optional = {
+  --     --       generationConfig = {
+  --     --         maxOutputTokens = 256,
+  --     --         thinkingConfig = { thinkingBudget = 0 },
+  --     --       },
+  --     --       safetySettings = {
+  --     --         {
+  --     --           category = "HARM_CATEGORY_DANGEROUS_CONTENT",
+  --     --           threshold = "BLOCK_ONLY_HIGH",
+  --     --         },
+  --     --       },
+  --     --     },
+  --     --   },
+  --     -- },
+  --     -- }}}
+  --
+  --     -- openrouter auto provider {{{
+  --     provider = "openai_compatible",
+  --     request_timeout = 2.5,
+  --     throttle = 1500, -- Increase to reduce costs and avoid rate limits
+  --     debounce = 600, -- Increase to reduce costs and avoid rate limits
   --     provider_options = {
-  --       gemini = {
-  --         -- model = "gemini-2.5-flash-lite-preview-06-17"
-  --         -- model = "gemini-2.5-flash",
-  --         model = "gemini-2.0-flash",
+  --       openai_compatible = {
+  --         api_key = "OPENROUTER_API_KEY",
+  --         -- api_key = vim.env.OPENROUTER_API_KEY,
+  --         end_point = "https://openrouter.ai/api/v1/chat/completions",
+  --         model = "openrouter/auto",
+  --         name = "Openrouter",
   --         optional = {
-  --           generationConfig = {
-  --             maxOutputTokens = 256,
-  --             thinkingConfig = { thinkingBudget = 0 },
-  --           },
-  --           safetySettings = {
-  --             {
-  --               category = "HARM_CATEGORY_DANGEROUS_CONTENT",
-  --               threshold = "BLOCK_ONLY_HIGH",
-  --             },
+  --           max_tokens = 56,
+  --           top_p = 0.9,
+  --           provider = {
+  --             -- Prioritize throughput for faster completion
+  --             sort = "throughput",
   --           },
   --         },
   --       },
@@ -109,93 +133,93 @@ return {
   --   --   require("minuet.virtualtext")
   --   -- end,
   -- },
-  {
-    "monkoose/neocodeium",
-    event = "VeryLazy",
-    dependencies = {
-      {
-        -- add AI section to which-key
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>a", group = "+ai" } } },
-      },
-    },
-    keys = {
-      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
-      {
-        -- "<a-cr>",
-        "<a-y>",
-        function()
-          require("neocodeium").accept()
-        end,
-        mode = "i",
-        desc = "Codeium Accept",
-      },
-      {
-        "<a-w>",
-        function()
-          require("neocodeium").accept_word()
-        end,
-        mode = "i",
-        desc = "Codeium Accept Word",
-      },
-      -- conflicts with luasnip mapping
-      -- {
-      --   "<a-l>",
-      --   function()
-      --     require("neocodeium").accept_line()
-      --   end,
-      --   mode = "i",
-      --   desc = "Codeium Accept Line",
-      -- },
-      {
-        "<a-n>",
-        function()
-          require("neocodeium").cycle(1)
-        end,
-        mode = "i",
-        desc = "Next Codeium Completion",
-      },
-      {
-        "<a-p>",
-        function()
-          require("neocodeium").cycle(-1)
-        end,
-        mode = "i",
-        desc = "Prev Codeium Completion",
-      },
-      {
-        "<a-e>",
-        function()
-          require("neocodeium").clear()
-        end,
-        mode = "i",
-        desc = "Clear Codeium",
-      },
-    },
-    opts = {
-      silent = true,
-      filetypes = {
-        Avante = false,
-        AvanteInput = false,
-        DressingInput = false,
-        NvimTree = false,
-        TelescopePrompt = false,
-        TelescopeResults = false,
-        alpha = false,
-        cmp = false,
-        codecompanion = false,
-        ["dap-repl"] = false,
-        dashboard = false,
-        harpoon = false,
-        lazy = false,
-        lspinfo = false,
-        ["neoai-input"] = false,
-        snacks_picker_input = false,
-        starter = false,
-      },
-      -- show_label = false,
-    },
-  },
+  -- {
+  --   "monkoose/neocodeium",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     {
+  --       -- add AI section to which-key
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --     },
+  --   },
+  --   keys = {
+  --     { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+  --     {
+  --       -- "<a-cr>",
+  --       "<a-y>",
+  --       function()
+  --         require("neocodeium").accept()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept",
+  --     },
+  --     {
+  --       "<a-w>",
+  --       function()
+  --         require("neocodeium").accept_word()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept Word",
+  --     },
+  --     -- conflicts with luasnip mapping
+  --     -- {
+  --     --   "<a-l>",
+  --     --   function()
+  --     --     require("neocodeium").accept_line()
+  --     --   end,
+  --     --   mode = "i",
+  --     --   desc = "Codeium Accept Line",
+  --     -- },
+  --     {
+  --       "<a-n>",
+  --       function()
+  --         require("neocodeium").cycle(1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Next Codeium Completion",
+  --     },
+  --     {
+  --       "<a-p>",
+  --       function()
+  --         require("neocodeium").cycle(-1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Prev Codeium Completion",
+  --     },
+  --     {
+  --       "<a-e>",
+  --       function()
+  --         require("neocodeium").clear()
+  --       end,
+  --       mode = "i",
+  --       desc = "Clear Codeium",
+  --     },
+  --   },
+  --   opts = {
+  --     silent = true,
+  --     filetypes = {
+  --       Avante = false,
+  --       AvanteInput = false,
+  --       DressingInput = false,
+  --       NvimTree = false,
+  --       TelescopePrompt = false,
+  --       TelescopeResults = false,
+  --       alpha = false,
+  --       cmp = false,
+  --       codecompanion = false,
+  --       ["dap-repl"] = false,
+  --       dashboard = false,
+  --       harpoon = false,
+  --       lazy = false,
+  --       lspinfo = false,
+  --       ["neoai-input"] = false,
+  --       snacks_picker_input = false,
+  --       starter = false,
+  --     },
+  --     -- show_label = false,
+  --   },
+  -- },
   -- {
   --   "yetone/avante.nvim",
   --   event = "VeryLazy",

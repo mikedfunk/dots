@@ -428,6 +428,7 @@ M.quotes = {
   { "The Three Laws of TDD:", "", "(1) You may not write production code until you have written a failing unit test.", "(2) You may not write more of a unit test than is sufficient to fail, and not compiling is failing.", "(3) You may not write more production code than is sufficient to pass the currently failing test.", "", "- Robert C. Martin" },
   { "The absence of limitations is the enemy of art.", "", "- Orson Welles" },
   { "The act of describing a program in unambiguous detail and the act of programming are one and the same.", "", "- Kevlin Henney" },
+  { "A test isn’t proof that something is correct, it's proof that one piece of code behaves the way another piece of code thinks it should behave.", "", "- Reddit /u/untypedfuture" },
   { "The amount of energy necessary to refute bullshit is an order of magnitude bigger than to produce it.", "", "- Alberto Brandolini" },
   { "The art of programming is the art of organizing complexity, of mastering multitude and avoiding its bastard chaos as effectively as possible.", "", "- E.W. Dijkstra" },
   { "The best learners are the people who push through the discomfort of being objectively bad at something.", "", "- Tommy Collison" },

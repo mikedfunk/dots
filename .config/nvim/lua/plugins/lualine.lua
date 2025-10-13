@@ -7,6 +7,7 @@ return {
       "stevearc/conform.nvim",
     },
     opts = function(_, opts)
+      local mason_updates_count = 0
       opts.options.disabled_filetypes.winbar = {
         "Avante",
         "AvanteInput",
@@ -78,8 +79,8 @@ return {
       -- end
 
       -- refresh the registry and update the count every 10 minutes (600,000 ms)
-      local timer = vim.loop.new_timer()
-      timer:start(
+      local mason_updates_timer = vim.loop.new_timer()
+      mason_updates_timer:start(
         600000, -- first run delay
         600000, -- repeat interval
         vim.schedule_wrap(function()
@@ -111,7 +112,7 @@ return {
 
       table.insert(opts.sections.lualine_x, mason_updates_component)
       -- }}}
-
+      --
       -- github checks {{{
       -- CI Checks component
       local ci_failure_count = 0
@@ -196,9 +197,9 @@ return {
       -- }}}
 
       -- minuet-ai {{{
-      if package.loaded["minuet"] then
-        table.insert(opts.sections.lualine_x, require("minuet.lualine"))
-      end
+      -- if package.loaded["minuet"] then
+      --   table.insert(opts.sections.lualine_x, require("minuet.lualine"))
+      -- end
       -- }}}
 
       -- nvim-lint and ale linters {{{
