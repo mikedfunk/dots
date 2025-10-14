@@ -354,6 +354,7 @@ return {
             vim.g.tmuxline_theme.c[1]
           ),
           "#(~/.support/jiras-in-progress.sh)",
+          "#(~/.support/openrouter-remaining-balance.sh)",
         },
         win = { "#I", "#W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}" }, -- unselected tab
         cwin = { "#I", "#W#{?window_zoomed_flag, ,}" }, -- current tab

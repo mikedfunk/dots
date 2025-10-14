@@ -49,7 +49,7 @@ return {
       provider = "openai_compatible",
       request_timeout = 2.5,
       throttle = 1500, -- Increase to reduce costs and avoid rate limits
-      debounce = 600, -- Increase to reduce costs and avoid rate limits
+      debounce = 100, -- Increase to reduce costs and avoid rate limits
       provider_options = {
         openai_compatible = {
           api_key = "OPENROUTER_API_KEY",
