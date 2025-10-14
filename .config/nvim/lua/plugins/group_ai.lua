@@ -56,13 +56,19 @@ return {
           -- api_key = vim.env.OPENROUTER_API_KEY,
           end_point = "https://openrouter.ai/api/v1/chat/completions",
           -- model = "openrouter/auto",
-          model = "openai/gpt-3.5-turbo",
+          -- model = "openai/gpt-3.5-turbo",
+          -- model = "qwen/qwen3-coder",
+          model = "google/gemini-2.0-flash-001",
           name = "Openrouter",
+          stream = true,
           optional = {
             max_tokens = 56,
-            top_p = 0.9,
+            top_p = 0.95,
             provider = {
-              sort = "throughput",
+              sort = "throughput", -- bias toward faster providers
+            },
+            reasoning = {
+              effort = "minimal",
             },
           },
         },
@@ -137,6 +143,7 @@ return {
   },
   {
     "monkoose/neocodeium",
+    enabled = true,
     event = "VeryLazy",
     dependencies = {
       {
