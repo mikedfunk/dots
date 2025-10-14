@@ -55,16 +55,16 @@ vim.o.fillchars = table.concat({
 -- replaced with origami plugin
 -- -- ripped from here https://github.com/tamton-aquib/essentials.nvim/blob/main/lua/essentials.lua
 -- ---@return string: foldtext
--- _G.simple_fold = function()
---   local fs, fe = vim.v.foldstart, vim.v.foldend
---   local start_line = vim.fn.getline(fs):gsub("\t", ("\t"):rep(vim.opt.ts:get())) ---@diagnostic disable-line undefined-field
---   local end_line = vim.trim(vim.fn.getline(fe)) ---@diagnostic disable-line param-type-mismatch
---   local spaces = (" "):rep(vim.o.columns - start_line:len() - end_line:len() - 7)
---
---   -- return start_line .. '  ' .. end_line .. spaces
---   return start_line .. " … " .. end_line .. spaces
--- end
--- vim.opt.foldtext = "v:lua.simple_fold()"
+_G.simple_fold = function()
+  local fs, fe = vim.v.foldstart, vim.v.foldend
+  local start_line = vim.fn.getline(fs):gsub("\t", ("\t"):rep(vim.opt.ts:get())) ---@diagnostic disable-line undefined-field
+  local end_line = vim.trim(vim.fn.getline(fe)) ---@diagnostic disable-line param-type-mismatch
+  local spaces = (" "):rep(vim.o.columns - start_line:len() - end_line:len() - 7)
+
+  -- return start_line .. '  ' .. end_line .. spaces
+  return start_line .. " … " .. end_line .. spaces
+end
+vim.opt.foldtext = "v:lua.simple_fold()"
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.api.nvim_create_autocmd("TextYankPost", {
