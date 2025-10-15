@@ -257,6 +257,9 @@ export AKAMAI_EDGERC="$XDG_CONFIG_HOME"/akamai/.edgerc
 # _has hub && _evalcache hub alias -s # alias git to hub with completion intact
 _has mise && _evalcache mise activate zsh
 
+# https://python-poetry.org/docs/managing-environments/#bash-csh-zsh
+_has poetry && _evalcache poetry env activate
+
 # https://github.com/trapd00r/LS_COLORS
 local dircolors_cmd="$(brew --prefix coreutils)/libexec/gnubin/dircolors"
 local dircolors_file="$HOME"/.dircolors

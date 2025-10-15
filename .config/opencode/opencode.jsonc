@@ -8,6 +8,13 @@
     //     "CRUSH.md"
     // ],
     "disabled_providers": [
+        "alibaba",
+        "amazon-bedrock",
+        "github-copilot",
+        "github-models",
+        "openai",
+        "opencode",
+        "anthropic",
         "xai"
     ],
     "permission": {
@@ -23,6 +30,7 @@
     },
     "lsp": {
         "php": {
+            "disabled": true, // TODO: this is preventing the agent from responding
             "command": [
                 "/Users/mikefunk/.local/share/nvim/mason/bin/intelephense",
                 "--stdio"
@@ -82,54 +90,9 @@
                 // "OBSIDIAN_PORT": "<your_obsidian_port>"
             }
         },
-        // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
-        // "strava": {
-        //     "type": "local",
-        //     "enabled": true,
-        //     "command": [
-        //         // "uvx",
-        //         // "--python",
-        //         // "3.13",
-        //         // "strava-activity-mcp-server"
-        //         // "strava-mcp-server"
-        //     ],
-        //     "environment": {
-        //         "STRAVA_CLIENT_ID": "{env:STRAVA_CLIENT_ID}",
-        //         "STRAVA_CLIENT_SECRET": "{env:STRAVA_CLIENT_SECRET}",
-        //         "STRAVA_REFRESH_TOKEN": "{env:STRAVA_REFRESH_TOKEN}"
-        //     }
-        // },
-        "slack": {
-            "type": "local",
-            "enabled": true,
-            "command": [
-                "bunx",
-                "-y",
-                "slack-mcp-server@latest",
-                "--transport",
-                "stdio"
-            ],
-            "environment": {
-                "SLACK_MCP_XOXC_TOKEN": "{env:SLACK_MCP_XOXC_TOKEN}",
-                "SLACK_MCP_XOXD_TOKEN": "{env:SLACK_MCP_XOXD_TOKEN}",
-                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
-            }
-        },
-        "atlassian": {
-            "type": "local",
-            "enabled": true,
-            "command": [
-                "bunx",
-                "-y",
-                "mcp-remote",
-                "https://mcp.atlassian.com/v1/sse",
-                "--transport",
-                "sse-only"
-            ],
-        },
         "snyk": {
             "type": "local",
-            "enabled": false,
+            "enabled": true,
             "command": [
                 "snyk",
                 "mcp",
@@ -180,6 +143,74 @@
                 "@playwright/mcp@latest"
             ]
         },
+        "slack": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "slack-mcp-server@latest",
+                "--transport",
+                "stdio"
+            ],
+            "environment": {
+                "SLACK_MCP_XOXC_TOKEN": "{env:SLACK_MCP_XOXC_TOKEN}",
+                "SLACK_MCP_XOXD_TOKEN": "{env:SLACK_MCP_XOXD_TOKEN}",
+                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            }
+        },
+        "atlassian": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.atlassian.com/v1/sse",
+                "--transport",
+                "sse-only"
+            ],
+        },
+        "tree-sitter": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "mcp-server-tree-sitter"
+            ]
+        },
+        "zen": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/BeehiveInnovations/zen-mcp-server.git",
+                "zen-mcp-server"
+            ],
+            "environment": {
+                "OPENROUTER_API_KEY": "{env:OPENROUTER_API_KEY}",
+                "DISABLED_TOOLS": "analyze,refactor,testgen,secaudit,docgen,tracer",
+                "DEFAULT_MODEL": "auto"
+            }
+        },
+        // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
+        // "strava": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         // "uvx",
+        //         // "--python",
+        //         // "3.13",
+        //         // "strava-activity-mcp-server"
+        //         // "strava-mcp-server"
+        //     ],
+        //     "environment": {
+        //         "STRAVA_CLIENT_ID": "{env:STRAVA_CLIENT_ID}",
+        //         "STRAVA_CLIENT_SECRET": "{env:STRAVA_CLIENT_SECRET}",
+        //         "STRAVA_REFRESH_TOKEN": "{env:STRAVA_REFRESH_TOKEN}"
+        //     }
+        // },
         // TODO: does not work because my account does not have roles/serviceusage.serviceUsageConsumer
         // "bigquery": {
         //     "type": "local",
@@ -194,14 +225,6 @@
         //         "BIGQUERY_PROJECT": "bi-saatchi-fission",
         //     }
         // },
-        "tree-sitter": {
-            "type": "local",
-            "enabled": true,
-            "command": [
-                "uvx",
-                "mcp-server-tree-sitter"
-            ]
-        }
     },
     "formatter": {
         "php_cs_fixer": {
