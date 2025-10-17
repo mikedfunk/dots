@@ -1,3 +1,4 @@
+-- # vim: set fdm=marker:
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
@@ -52,3 +53,75 @@ end, { noremap = true, desc = "Complete" })
 --     vim.cmd("Neotree reveal_file=%")
 --   end
 -- end, { remap = true, desc = "Explorer NeoTree (Root dir)" })
+--
+--
+-- Go to next/previous reference {{{
+local refs = {}
+local idx = 0
+local last_symbol = nil
+
+local function normalize_location(item)
+  if item.targetUri and item.targetRange then
+    return { uri = item.targetUri, range = item.targetRange }
+  elseif item.uri and item.range then
+    return item
+  elseif item.user_data and item.user_data.uri and item.user_data.range then
+    return { uri = item.user_data.uri, range = item.user_data.range }
+  end
+  return nil
+end
+
+local function jump_to_ref(item)
+  local loc = normalize_location(item)
+  if not loc then
+    return
+  end
+
+  local fname = vim.uri_to_fname(loc.uri)
+  vim.cmd("edit " .. fname)
+
+  local line = (loc.range.start.line or 0) + 1
+  local col = (loc.range.start.character or 0) + 1
+  vim.fn.cursor(line, col)
+  vim.cmd("normal! zz")
+end
+
+local function get_current_symbol()
+  return vim.fn.expand("<cword>")
+end
+
+local function fetch_references_and_jump(forward)
+  local symbol = get_current_symbol()
+  if symbol ~= last_symbol then
+    -- new symbol, fetch references
+    vim.lsp.buf.references(nil, {
+      on_list = function(res)
+        refs = res.items or {}
+        last_symbol = symbol
+        idx = forward and 1 or #refs
+        if refs[idx] then
+          jump_to_ref(refs[idx])
+        else
+          vim.notify("No references found", vim.log.levels.INFO)
+        end
+      end,
+    })
+  else
+    -- same symbol, just cycle
+    if #refs == 0 then
+      vim.notify("No references cached", vim.log.levels.INFO)
+      return
+    end
+    idx = forward and (idx % #refs + 1) or (idx - 2 + #refs) % #refs + 1
+    jump_to_ref(refs[idx])
+  end
+end
+
+-- Keymaps
+vim.keymap.set("n", "]r", function()
+  fetch_references_and_jump(true)
+end, { desc = "Next LSP reference" })
+vim.keymap.set("n", "[r", function()
+  fetch_references_and_jump(false)
+end, { desc = "Previous LSP reference" })
+-- }}}

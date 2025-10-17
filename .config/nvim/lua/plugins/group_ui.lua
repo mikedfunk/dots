@@ -121,7 +121,9 @@ return {
   {
     "nvim-zh/colorful-winsep.nvim",
     event = { "User UpdateDarkNotifyTheme" },
-    opts = {},
+    opts = {
+      animate = { enabled = false },
+    },
   },
   -- { "itchyny/vim-highlighturl", event = "VeryLazy" },
   { "rubiin/highlighturl.nvim", event = "VeryLazy" },
