@@ -413,11 +413,43 @@ return {
   --   },
   --   opts = {},
   -- },
-  -- {
-  --   "mcauley-penney/visual-whitespace.nvim",
-  --   opts = {},
-  --   keys = { "v", "V", "<C-v>" },
-  -- },
+  {
+    "mcauley-penney/visual-whitespace.nvim",
+    event = "ModeChanged *:[vV\22]", -- lazy load on entering visual mode
+    keys = {
+      {
+        "<leader>uw",
+        function()
+          require("visual-whitespace").toggle()
+        end,
+        desc = "Toggle visual whitespace",
+      },
+    },
+    opts = {
+      highlight = { link = "Comment" },
+      ignore = {
+        filetypes = {
+          "Avante",
+          "AvanteInput",
+          "DressingInput",
+          "NvimTree",
+          "TelescopePrompt",
+          "TelescopeResults",
+          "alpha",
+          "cmp",
+          "codecompanion",
+          "dap-repl",
+          "dashboard",
+          "harpoon",
+          "lazy",
+          "lspinfo",
+          "neoai-input",
+          "snacks_picker_input",
+          "starter",
+        },
+      },
+    },
+  },
   -- doesn't work :/
   -- {
   --   "soemre/commentless.nvim",
