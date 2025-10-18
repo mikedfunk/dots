@@ -4,6 +4,6 @@ windows:
       root: ~/Code/test/go-with-tests
       layout: main-horizontal
       panes:
-        - v
-        - ts
-        - gtw
+        - editor: [v]
+        - git: [ts]
+        - tests: [gtw]

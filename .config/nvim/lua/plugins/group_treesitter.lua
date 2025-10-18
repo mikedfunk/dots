@@ -66,6 +66,7 @@ return {
       },
 
       ensure_installed = {
+        "apex",
         "comment",
         "lua", -- update to latest
         "luadoc",

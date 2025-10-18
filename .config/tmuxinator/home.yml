@@ -1,14 +1,15 @@
 ---
 name: "󰋜 Home"
+# enable_pane_titles: true
 windows:
   - config:
       root: ~/.config/yadm
       layout: main-horizontal
       panes:
-        - v
-        - cd && while true; do clear && yadm st; sleep 60; done
-        - while true; do ctop; sleep 5; done
-        - htop
+        - editor: [v]
+        - yadm: [cd && while true; do clear && yadm st; sleep 60; done]
+        - docker: [while true; do ctop; sleep 5; done]
+        - htop: [htop]
   - journal:
       root: ~/.Notes
       layout: main-horizontal

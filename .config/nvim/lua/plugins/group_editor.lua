@@ -168,6 +168,15 @@ return {
       vim.cmd([[highlight PackageInfoOutdatedVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
     end,
   },
+  -- TODO: 401 unauthorized
+  -- {
+  --   "skanehira/github-actions.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   opts = {},
+  --   ft = "yaml",
+  -- },
   -- {
   --   "ethersync/ethersync-nvim",
   --   keys = {
