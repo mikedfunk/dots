@@ -635,6 +635,11 @@ compdef g="git"
 alias ts="tig status"
 alias td="tig develop.."
 # alias tm="tig master.."
+
+# added to ~/.bin/git-spice instead so git will do `git spice`
+# git-spice() { "$(brew --prefix git-spice)/bin/gs" "$@"; }
+
+
 # }}}
 
 # go test {{{
