@@ -201,6 +201,8 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
 export OLLAMA_NUM_PARALLEL=1
 
+export DEVPOD_HOME="$XDG_CONFIG_HOME"/devpod
+
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 export BAT_THEME="TwoDark"
 # use `gO` to open a quickfix with a table of contents!
@@ -208,7 +210,7 @@ export BAT_THEME="TwoDark"
 source "$HOME"/.private_vars.sh 2>/dev/null
 # [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
 
-eval "$(mise activate zsh 2>/dev/null)"
+_evalcache mise activate zsh 2>/dev/null
 
 # https://github.com/variadico/noti/blob/master/docs/noti.md#environment
 export NOTI_NSUSER_SOUNDNAME="Hero"
@@ -270,7 +272,8 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 { source <(carapace _carapace) } 2>/dev/null
 
-# eval "$(acli completion zsh 2>/dev/null)"
+_evalcache acli completion zsh 2>/dev/null
+_evalcache devpod completion zsh 2>/dev/null
 # }}}
 
 # functions and aliases {{{

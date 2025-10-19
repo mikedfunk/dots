@@ -168,6 +168,14 @@ return {
       vim.cmd([[highlight PackageInfoOutdatedVersion guifg=]] .. Snacks.util.color("DiagnosticError"))
     end,
   },
+  {
+    "nat-418/scamp.nvim",
+    init = function()
+      vim.g.loaded_netrwPlugin = 1
+      vim.g.loaded_netrw = 1
+    end,
+    opts = {},
+  },
   -- TODO: 401 unauthorized
   -- {
   --   "skanehira/github-actions.nvim",

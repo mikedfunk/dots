@@ -1,0 +1,26 @@
+contexts:
+  default:
+    defaultIde: none
+    defaultProvider: docker
+    options:
+      DOTFILES_URL:
+        userProvided: true
+        value: git@github.com:mikedfunk/dots.git@devpod-minimal
+      GPG_AGENT_FORWARDING:
+        userProvided: true
+        value: "true"
+      SSH_INJECT_GIT_CREDENTIALS:
+        userProvided: true
+        value: "true"
+    providers:
+      docker:
+        creationTimestamp: "2024-11-24T05:35:34Z"
+        initialized: true
+        options:
+          DOCKER_BUILDER: {}
+          DOCKER_HOST: {}
+          DOCKER_PATH:
+            value: docker
+          INACTIVITY_TIMEOUT: {}
+        singleMachine: true
+defaultContext: default
