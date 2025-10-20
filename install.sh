@@ -2,9 +2,18 @@
 # vim: set foldmethod=marker ft=sh:
 
 # helper functions {{{
-function _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; "${@:2}"; }
-function _log_error() { echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"; "${@:2}"; }
-function _log_notice() { echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"; "${@:2}"; }
+function _log_info() {
+    echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"
+    "${@:2}"
+}
+function _log_error() {
+    echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"
+    "${@:2}"
+}
+function _log_notice() {
+    echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"
+    "${@:2}"
+}
 function _has() { type "$1" &>/dev/null; }
 
 function _executable_check() {
@@ -21,7 +30,7 @@ function _directory_check() {
     exit 1
 }
 
-function _install_yadm_if_missing () {
+function _install_yadm_if_missing() {
     _has yadm && return
     _log_info "Installing yadm"
     curl -fLo /usr/local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm && chmod a+x /usr/local/bin/yadm
@@ -29,8 +38,8 @@ function _install_yadm_if_missing () {
 }
 # }}}
 
-_directory_check "$HOME"/.ssh
-_directory_check "$HOME"/.gpg
+# _directory_check "$HOME"/.ssh
+# _directory_check "$HOME"/.gpg
 _executable_check git
 _install_yadm_if_missing
-yadm clone git@github.com:mikedfunk/dotfiles.git --bootstrap
+yadm clone git@github.com:mikedfunk/dotfiles.git --branch=devpod-minimal --bootstrap

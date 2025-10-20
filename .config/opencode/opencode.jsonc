@@ -1,7 +1,8 @@
 {
     "$schema": "https://opencode.ai/config.json",
     // see `opencode models`
-    "model": "openrouter/claude-sonnet-4-5-20250929",
+    // "model": "openrouter/claude-sonnet-4-5-20250929",
+    "model": "opencode/code-supernova",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     "small_model": "openrouter/claude-3-5-haiku-20241022",
     "theme": "system",
@@ -15,7 +16,7 @@
         "github-copilot",
         "github-models",
         "openai",
-        "opencode",
+        // "opencode",
         "anthropic",
         "xai"
     ],
@@ -60,6 +61,27 @@
                 "bunx",
                 "-y",
                 "@upstash/context7-mcp"
+            ]
+        },
+        // https://spotlightjs.com/
+        "spotlight": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "@spotlightjs/spotlight",
+                "--stdio-mcp"
+            ]
+        },
+        "sentry": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.sentry.dev/mcp"
             ]
         },
         "spotify": {
@@ -167,7 +189,7 @@
             "command": [
                 "bunx",
                 "-y",
-                "mcp-remote",
+                "mcp-remote@0.1.13",
                 "https://mcp.atlassian.com/v1/sse",
                 "--transport",
                 "sse-only"

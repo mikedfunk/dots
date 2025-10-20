@@ -5,10 +5,14 @@
 # separate taps are required to make `brew bundle --global cleanup --force`
 # work as expected
 
+# tap "abhinav/tap" # git-spice
 # tap "andersjanmyr/homebrew-tap" # mc
 # tap "artginzburg/tap" # for sudo-touchid
+# tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
+# tap "charmbracelet/tap" # crush and others
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
+# tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 # tap "daytonaio/tap" # daytona.io
 # tap "dbcli/tap" # litecli
 # tap "derailed/k9s" # k9s
@@ -24,29 +28,29 @@
 # tap "nextdns/tap" # nextdns
 # tap "pokanop/pokanop" # nostromo
 # tap "saulpw/vd" # visidata
+# tap "sst/tap" # opencode
 # tap "universal-ctags/universal-ctags" # universal-ctags
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
 # tap "zackriya-solutions/meetily" # meetily
-tap "abhinav/tap" # git-spice
-tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
 tap "buo/cask-upgrade" # for `brew cu`
-tap "charmbracelet/tap" # crush and others
-tap "cormacrelf/tap" # dark-notify, which is used by https://github.com/erikw/tmux-dark-notify
 tap "mikedfunk/zoomhider" # zoomhider
-tap "sst/tap" # opencode
 
 # }}}
 
 # brew {{{
 
+# brew "acli" # atlassian CLI for Jira, etc. (moved to mise)
 # brew "aicommits" # AI commit message writer
 # brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
+# brew "akamai" # interact with akamai caching (moved to mise)
+# brew "algolia" # search cli (moved to mise)
 # brew "angband" # middle-earth themed dungeon crawler (requires java)
 # brew "ansible" # used in some of my company-specific stuff to run ssh commands on multiple servers.
 # brew "ansifilter" # filter out ansi codes. used by tmux-logging tpm plugin.
 # brew "ant" # apache build tool
 # brew "antibody" # like antigen but faster! (zsh plugin system) (archived - replaced with antidote)
+# brew "antidote" # zsh plugin system like antigen but faster
 # brew "antigen" # zsh package manager. I switched to ~antibody~ antidote for speed
 # brew "apr" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "apr-util" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
@@ -57,41 +61,54 @@ tap "sst/tap" # opencode
 # brew "autoconf@2.69" # needed to build asdf erlang
 # brew "autojump" # used by zsh-autocomplete to display recent directories
 # brew "automake" # needed for building php
+# brew "aws-sam-cli" # local lambda CLI (moved to mise)
+# brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials) (moved to mise)
 # brew "awslogs" # get cloudwatch logs
 # brew "bandwhich" # top-like tool to see which processes are using the most bandwidth (sudo bandwhich)
 # brew "bash" # for extrakto and lazyman
+# brew "bat" # much cooler looking cat (moved to mise)
 # brew "bison" # needed to build php. The default mac one is too old. https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 # brew "bmon" # bandwidth monitor
 # brew "broot" # use `br` to do something between tree and ls. File browser with lots of vim patterns.
 # brew "browser" # pipe html to a temp file and open in browser e.g. `ls | browser`
+# brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
 # brew "bzip2" # needed to build php and python https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 # brew "bzt" # taurus http and performance test runner
+# brew "carapace" # shell completion for projects using spf13/cobra (moved to mise)
 # brew "chromedriver" # like selenium for chrome. (These drivers feel pretty outdated to me)
 # brew "circleci" # circleci cli e.g. `circleci open`
 # brew "claude-code" # cli AI helper (replaced with crush)
+# brew "cloudflared" # cloudflare CLI (moved to mise)
 # brew "cmake" # used by youcompleteme (which I no longer use)
 # brew "code-minimap" # for a vim plugin
 # brew "codespell" # neat little utility to show and fix code misspellings
 # brew "codex" # openai version of claude-code, etc. (replaced with crush)
 # brew "colortail" # tail with support for colors (I use multitail)
 # brew "composer" # php dependency management (now installed via phpenv)
+# brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf. (moved to mise)
+# brew "crush" # AI CLI agent
 # brew "csvq" # jq for csv
 # brew "ctags" # allows jumping to function/class definitions, etc. in vim (I use universal-ctags)
+# brew "ctop" # like top for docker containers (really great!) (moved to mise)
 # brew "curl-openssl" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "cursor-cli" # AI AI AI
+# brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify (moved to mise)
 # brew "daytona" # fancy devcontainer setup daytona.io
 # brew "desk" # shell workspace manager. (I use direnv instead)
+# brew "devcontainer" (moved to mise)
 # brew "diff-so-fancy" # better git diff viewer (note: diff-highlight is in pip) (I now use delta instead)
 # brew "direnv" # allow .envrc in directories to be loaded at every prompt to add relative bins to PATH, etc. easy. (I use this a lot to adjust path, kubernetes context, etc.) (I use mise now)
 # brew "dnsmasq" # easily set up dynamic dev domains such as myproject.dev `sudo brew services start dnsmasq` (WARNING: this _could_ cause problems with docker-machine certs)
 # brew "docker" # virtualization software (I use docker-for-mac, which comes with executables but doesn't link them to /usr/local/bin any more, so I'm doing that manually in my yadm bootstrap)
 # brew "docker-compose" # manage multiple docker images and how they interact (now merged into docker `docker composer`)
+# brew "docker-credential-helper-ecr" # tell docker about ECR so it can pull (moved to mise)
 # brew "docker-machine" # virtualbox VM for your docker images
 # brew "docker-machine-nfs" # enables nfs mounts for docker-machine via `docker-machine-nfs default --mount-opts="async,noatime,actimeo=1,nolock,vers=3,udp" --force` (speeds up docker-machine a LOT)
 # brew "dos2unix" # converts dos line endings to unix in a file
 # brew "dtrx" # do the right extraction - so you don't have to remember tar args (I found a helpful pneumonic to remember tar args: eXtract Ze Vucking Files, Compress Ze Vucking Files)
 # brew "duti" # find osc 8 links registered with macos
 # brew "emacs" # text editor - the terminal version
+# brew "eza" # pretty ls replacement (moved to mise)
 # brew "fasd" # Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v. (I use wd) (used by zsh-autocomplete)
 # brew "fd" # prettier alternative to find that respects gitignore (haven't used it yet)
 # brew "flow" # flowtype for javascript. Moved from ~/.config/yarn/global/package.json
@@ -99,15 +116,20 @@ tap "sst/tap" # opencode
 # brew "freetds" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "freetype" # needed to build php
 # brew "fx" # json funagler used by some of my shell functions (switched to jq)
+# brew "fzf" # fuzzy file finder `git branch | fzf | xargs git checkout` (moved to mise)
 # brew "gd" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "gemini-cli" # AI AI AI
 # brew "gettext" # needed to build php
+# brew "gh" # new github cli (moved to mise)
 # brew "git-absorb" # fixup helper
+# brew "git-delta" # git pager with syntax highlighting, language aware (moved to mise)
 # brew "git-extras" # adds some cool additional git commands (conflicts with npm git-standup)
 # brew "git-fixup" # git commit --fixup helper
 # brew "git-flow" # adds first class git commands for the git-flow workflow (I use avh version below)
 # brew "git-flow-avh" # adds first class git commands for the git-flow workflow. This version will delete remote feature, release, and hotfix branches on finishing.
 # brew "git-gui" # gitk. Really not necessary.
+# brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook. (moved to mise)
+# brew "git-spice", link: false # stacked PR manager. Absolutely amazing. (note: this conflicts with gs from ghostscript, which is a dependency of imagemagick, so it is not linked. I have an elaborate workaround to use `git spice ...` instead like it should be) (moved to mise)
 # brew "git-standup" # show commits in the last day. works in parent dir too. Works on Mondays.
 # brew "git-who" # like git blame but for directories
 # brew "github-keygen" # simpler way to generate a github ssh key
@@ -118,12 +140,15 @@ tap "sst/tap" # opencode
 # brew "glow" # markdown terminal renderer - conflicts with npm glow (pretty flowtype checker)
 # brew "gmp" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "gnu-tar" # linux version of tar so stuff actually works
+# brew "go" # golang programming language. used for installing/managing sqls (moved to mise)
 # brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "graphviz" # useful for xdebug profiler class maps
 # brew "gum" # spiffy shell script UI helper
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
 # brew "hg" # mercurial (who still uses mercurial? no rebase)
 # brew "highlight" # colorizes html and other output on the command line. used by ranger. (I don't use ranger these days)
+# brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json. (moved to mise)
+# brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ ) (moved to mise)
 # brew "https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb" # use an ssh password. trying this for leaf group LDAP access. (didn't work, don't need it for anything else at the moment)
 # brew "hub" # , args: ["devel"] # github tool is a superset of git with extra commands.
 # brew "hurl" # language-agnostic http testing tool
@@ -136,12 +161,16 @@ tap "sst/tap" # opencode
 # brew "irssi" # irc client (I use web app)
 # brew "jenkins-zh/jcli/jcli" # jenkins cli - alternative to .jar version
 # brew "joplin-cli" # powerful note-taking app with cli version, multi-pane, search, etc. (now managed by yarn global because it doesn't behave with asdf nodejs)
+# brew "jq" # simple json pretty-printer `echo '{"my" => "json"}' | jq .` (Used in some of my shell functions) (moved to mise)
 # brew "jrnl" # simple journaling wrapper (I use joplin)
 # brew "jsawk" # parse json in bash
 # brew "jsonlint" # used by vim ale to lint json
+# brew "k9s" # handy kubernetes dashboard `k9s -n develop` (moved to mise)
 # brew "keychain" # manage ssh agent and adding keys to it automatically. (I don't use this now that I have an ssh config directive to store passphrases for ssh agent in my osx keychain, which is different from this project's "keychain". Confusing, I know.)
+# brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for minikube via VirtualBox (moved to mise)
 # brew "kiota" # microsoft API client from OpenAPI generator for a variety of languages (very outdated, using asdf version instead)
 # brew "krb5" # needed to build php
+# brew "kubecolor" # kubectl with colors (moved to mise)
 # brew "kubectx" # quick way to switch contexts with a fzf picker
 # brew "kubernetes-cli" # already installed via brew cask install docker
 # brew "lastpass-cli" # TODO move all of my cli private_stuff over to lastpass
@@ -167,6 +196,7 @@ tap "sst/tap" # opencode
 # brew "lockrun" # simple way to lock cron jobs with a lock file and clear them when done
 # brew "lsd" # pretty ls augmentation
 # brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugin
+# brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile (moved to mise)
 # brew "lynx" # console web browser. used by ranger to preview html.
 # brew "m-cli" # mac cli tools e.g. restart, screensaver, bluetooth, etc.
 # brew "macvim" # mac gui vim client
@@ -192,33 +222,43 @@ tap "sst/tap" # opencode
 # brew "nnn" # file picker I use inside of vim
 # brew "nodenv" # node version manager (same api as rbenv) (I use asdf now)
 # brew "nostromo" # alias manaager
+# brew "noti" # simple terminal notifier (moved to mise)
 # brew "oha" # http load tester
+# brew "ollama" # local AI LLMs (moved to mise)
 # brew "oniguruma" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+# brew "opencode" # like claude code but any provider (moved to mise)
 # brew "openldap" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "openssl@1.1" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
+# brew "pandoc" # transform between document formats e.g. markdown <-> pdf (used for inline vim php documentation, which I no longer use) (moved to mise)
 # brew "pass" # unix password manager using gpg
 # brew "pcre2" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "peco" # interactively filter results and print the filtered version. can be used to print filtered one or e.g. `vim $(dosomething | peco)` (FZF does this)
 # brew "percona-toolkit" # mysql schema migrator among other things. requires java and perl. (use gh-ost instead)
 # brew "perl" # for swat cpan package
 # brew "perl-build" # needed for perlenv (which I don't use currently)
+# brew "pgcli" # like mycli for postgres (used for toaf judging app)
 # brew "php-cs-fixer" # fix php code according to configuration
 # brew "php@7.1", args: ["--with-pear"], link: true
 # brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt and to sign git commits)
 # brew "pinfo" # man-like command to get manuals on tools written for info
 # brew "pipeline" # cool subshell to let you interactively view unix pipeline results as you write
+# brew "pipx" # like npx for python pip
 # brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 # brew "pkgx" # like npx for homebrew
+# brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 # brew "plenv" # perl version manager. better than perlbrew and consistent with my other env managers (rbenv, phpenv, nodenv, pyenv). used to get percona-toolkit working.
 # brew "podman" # docker alternative
 # brew "podman-compose" # docker alternative
 # brew "podman-machine" # docker alternative
+# brew "portaudio" # used by aider to enable voice input
 # brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
+# brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.) (moved to mise)
 # brew "prettyping" # ping with a cool sparkline graph of status
 # brew "procs" # process viewer - prettier ps. Not as cool as htop.
 # brew "psalm" # php static analysis tool
 # brew "pv" # pipe something to pv to see progress of data through a pipeline. pv works like cat so `pv /path/to/myfile.sql > mysql ...`
 # brew "pyenv" # python version manager (same api as rbenv)
+# brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt (usage: pygmentize -f html ...)
 # brew "python" # updated version of python with updated pip. Useful for installing pip packages without root. NOTE: homebrew "pip" breaks neovim. Needed for ntfy, see ~/.config/yadm/bootstrap
 # brew "qodana" # jetbrains php (and other languages) static analysis
 # brew "rain" # aws cli for cloudformation, but useful for the `rain aws-console --service s3` command (seems to have been removed)
@@ -228,6 +268,7 @@ tap "sst/tap" # opencode
 # brew "readline" # needed for phpenv
 # brew "reattach-to-user-namespace" # used to fix mac issues with copy/paste in tmux (not needed after tmux 2.6! https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/issues/66)
 # brew "redis" # key/value store (If I need this I'll use docker)
+# brew "ripgrep" # needed for lunarvim telescope plugin (moved to mise)
 # brew "rlwrap" # wrap a command in readline to enable up for history, etc. Useful for python repl: `rlwrap python`
 # brew "ruby" # (rbenv covers it for me)
 # brew "ruby-build" # an rbenv plugin that provides an rbenv install command to compile and install different versions of ruby
@@ -244,8 +285,10 @@ tap "sst/tap" # opencode
 # brew "skaffold" # awesome local kubernetes cluster and dev/CI/deploy by google (TODO learn this! It looks freakin awesome)
 # brew "skopeo" # get docker registry info
 # brew "smug" # tmux orchestrator. Killer feature: allows me to start and stop configured windows on the fly! (no longer maintained, broken :( switched back to tmuxinator )
+# brew "snyk-cli" # security tool (moved to mise)
 # brew "source-highlight" # used to automatically colorize `less` text (I Just use `bat` instead. Got weird results with this.)
 # brew "spark" # used for rainbarf to show spiffy cli graphs (I don't use rainbarf currently)
+# brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls. (installed by mason)
 # brew "sqlite3" # used as the default db for rails
 # brew "sqlparse" # sql formatter (managed by pip in ~/requirements.txt)
 # brew "ssh-copy-id" # copies ssh keys to remote servers
@@ -260,21 +303,27 @@ tap "sst/tap" # opencode
 # brew "sudo-touchid" # touch to verify sudo access (requires `sudo brew services start sudo-touchid`)
 # brew "swagger-codegen" # openapi codegen - depends on adoptopenjdk8.
 # brew "task" # taskwarrior https://taskwarrior.org (I don't need this unless I don't have jira. Doesn't let you assign points! Has an opaque priority selection algorithm.)
+# brew "tealdeer" # more consise community man pages (faster than tldr) (moved to mise)
 # brew "teleconsole" # share your console with others easily (Extremely rare that I need something like this)
 # brew "telnet" # I don't have telnet? How am I going to watch star wars?
+# brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti. (moved to mise)
 # brew "terraform" # IAC
+# brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (moved to mise)
 # brew "tidy-html5" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "timewarrior" # taskwarrior-like interface for tracking time (I don't use this)
 # brew "tldr" # more consise community man pages (tealdeer is faster)
+# brew "tmux", args: ["HEAD"] # terminal multiplexer similar to screen. (HEAD fixes a bug with splits in nvim) (moved to mise)
 # brew "tmuxinator" # tmux orchestrator / automator. Alternatives: tmuxp (broken for a long time) and teamocil (old, can't install via homebrew, no XDG_HOME) and smug
 # brew "tofrodos" # line ending conversion (install if needed)
 # brew "trash" # a trash can for the terminal
 # brew "trash-cli" # a trash can for the terminal
+# brew "tree" # display file/folder hierarchies in a visual tree format
 # brew "tree-sitter" # for some reason lunarvim expects this to exist when opening a gitignore file 🤷
 # brew "tree-sitter-cli" # now REQUIRED for LazyVim (installed via Mason)
 # brew "universal-ctags", args: ["HEAD"] # tag creator for use by vim to navigate by symbols. head only. See here for jansson https://github.com/liuchengxu/vista.vim#other-tips
 # brew "unixodbc" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "urlview" # used by <prefix>u tmux urlview plugin
+# brew "uv" # python package manager. needed for uvx used by mcphub neovim plugin. (moved to mise)
 # brew "vim" # macvim requires xcode. This also allows you to get vim 8 without using a separate tap. (switched back to neovim)
 # brew "virtualhost".sh # (crappy) virtualhost management script
 # brew "visidata" # funky csv viewer
@@ -286,100 +335,51 @@ tap "sst/tap" # opencode
 # brew "xdg-ninja" # shell script to look for opportunities to move config files/folders in the home directory into XDG directories instead
 # brew "xmlto" # convert xml to other formats because fuck xml
 # brew "xq" # jq is to json what xq is to xml/html
+# brew "yadm" # yet another dotfiles manager (moved to mise)
 # brew "yamllint" # used by vim-ale
 # brew "yarn" # wrapper for npm with real lock files and caching (installing via npm is deprecated, but installing it here causes problems with asdf nodejs :/ ) (used by cloudbeaver: mysql web app)
 # brew "yq" # jq is to json what yq is to yaml (and xml!). yaml parser and searcher. I use it to read configs my circleci stuff, etc.
+# brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin (moved to mise)
 # brew "zlib" # needed to build php and python
 # brew "zork" # seriously? yes. tip: `save` and `restore` And yes, there's only one save slot, what do you think this is, 1990?
 # brew "zplug" # zsh plugin manager like composer. bash installer crashes for some reason. works fine via homebrew. (switched to ~antibody~ antidote)
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
-brew "acli" # atlassian CLI for Jira, etc.
-brew "akamai" # interact with akamai caching
-brew "algolia" # search cli
-brew "antidote" # zsh plugin system like antigen but faster
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
-brew "aws-sam-cli" # local lambda CLI
-brew "awscli" # aws command - used to upload to s3, etc. `aws configure` to set up credentials. (set up access keys here https://console.aws.amazon.com/iam/home?region=us-west-1#/users/mike.funk?section=security_credentials)
-brew "bat" # much cooler looking cat
-brew "bun" # node, npm, webpack, npx, yarn, etc. replacement
-brew "carapace" # shell completion for projects using spf13/cobra
 brew "cloc" # count lines of code
-brew "cloudflared" # cloudflare CLI
-brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf.
-brew "crush" # AI CLI agent
-brew "ctop" # like top for docker containers (really great!)
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
-brew "dark-notify" # used by https://github.com/erikw/tmux-dark-notify
-brew "devcontainer"
-brew "docker-credential-helper-ecr" # tell docker about ECR so it can pull
 brew "entr" # file watcher (I use this a lot in my shell functions)
-brew "eza" # pretty ls replacement
-brew "fzf" # fuzzy file finder `git branch | fzf | xargs git checkout`
-brew "gh" # new github cli
 brew "git"
-brew "git-delta" # git pager with syntax highlighting, language aware
-brew "git-secrets" # aws tool to detect secrets trying to commit. Used via pre-commit hook.
-brew "git-spice", link: false # stacked PR manager. Absolutely amazing. (note: this conflicts with gs from ghostscript, which is a dependency of imagemagick, so it is not linked. I have an elaborate workaround to use `git spice ...` instead like it should be)
 brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
-brew "go" # golang programming language. used for installing/managing sqls
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
-brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
-brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ )
-brew "jq" # simple json pretty-printer `echo '{"my" => "json"}' | jq .` (Used in some of my shell functions)
-brew "k9s" # handy kubernetes dashboard `k9s -n develop`
-brew "kind" # alternative to minikube: Kubernetes IN Docker. No need for minikube via VirtualBox
-brew "kubecolor" # kubectl with colors
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
-brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile
 brew "mas" # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
 brew "mcp-toolbox" # google tool for MCP access to various google properties
 brew "media-control" # macos media status helper (used for my tmux statusbar)
-brew "mise" # asdf but faster and includes direnv
+brew "mise" # asdf but faster and includes direnv (TODO: extract to install script outside of brew)
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
 brew "node" # nodejs and npm (non-asdf version required by yarn)
-brew "noti" # simple terminal notifier
 brew "nss" # required by mkcert to make certs trusted in firefox
-brew "ollama" # local AI LLMs
-brew "opencode" # like claude code but any provider
-brew "pandoc" # transform between document formats e.g. markdown <-> pdf (used for inline vim php documentation, which I no longer use)
-brew "pgcli" # like mycli for postgres (used for toaf judging app)
 brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
-brew "pipx" # like npx for python pip
-brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
 brew "poetry" # MUCH better than pip - python package manager
-brew "portaudio" # used by aider to enable voice input
-brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.)
 brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
-brew "pygments" # generic syntax highlighter - moved from ~/requirements.txt
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
-brew "ripgrep" # needed for lunarvim telescope plugin
 brew "scrcpy" # mirror android screen
-brew "snyk-cli" # security tool
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
-brew "sqlfluff" # linter/fixer for SQL. Used by neovim / null-ls.
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
-brew "tealdeer" # more consise community man pages (faster than tldr)
-brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti.
-brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep
 brew "tig" # git? tig! (note: this requires asciidoc)
-brew "tmux", args: ["HEAD"] # terminal multiplexer similar to screen. (HEAD fixes a bug with splits in nvim)
 brew "toot" # mastodon cli/tui client
-brew "tree" # display file/folder hierarchies in a visual tree format
-brew "uv" # python package manager. needed for uvx used by mcphub neovim plugin.
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
 brew "wget" # latest version
-brew "yadm" # yet another dotfiles manager
-brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin
 brew "zsh" # awesome bash shell replacement
 
 # }}}
@@ -427,6 +427,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "font-symbols-only-nerd-font"
 # cask "font-victor-mono-nerd-font" # modern curves, a little slim, tall em height, short descenders/ascenders, mono-distinctive serifs (t, l) and cursive italics (italic ligatures are messed up, missing symbols for dap-ui repl controls)
 # cask "freetube" # privacy-friendly and add-free youtube player
+# cask "gcloud-cli" # previously google-cloud-sdk. used for BigQuery, etc. (moved to mise)
 # cask "git-credential-manager" # new github credentials manager https://github.blog/2020-07-02-git-credential-manager-core-building-a-universal-authentication-experience/
 # cask "gitify" # github desktop notifications in the menubar (I get added to PRs so often that keeping this gray has become a chore)
 # cask "glance" # all-in-one quicklook app that works with dark mode (abandoned - switch to glamce-chamburr)
@@ -546,7 +547,6 @@ cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
-cask "gcloud-cli" # previously google-cloud-sdk. used for BigQuery, etc.
 cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
 cask "grandperspective" # visualize storage hogs in the hard drive
 cask "iterm2@beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
@@ -557,7 +557,7 @@ cask "meetingbar" # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
-cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus.
+cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "sfdx" #SalesForce CLI
 cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 

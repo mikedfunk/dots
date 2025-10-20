@@ -1,14 +1,86 @@
 [tools]
+# mise plugins list https://github.com/jdx/mise/blob/main/registry.toml
+# mise search {fuzzy}
+# aqua g
+
 bun = "latest"
-deno = "1.29.4"
-lua = "5.4.4"
+deno = "latest"
+go = "latest"
+java = "latest" # needed for plantuml
+lua = "latest"
 neovim = "stable"
 node = "latest"
-php-brew = "8.4"
+php-brew = "latest"
 python = "latest"
-ruby = "3.1.2"
+ruby = "latest"
+
 usage = "latest"
-yarn = "1.22.10"
+
+# TODO: doesn't work, requires installation process
+# see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
+# "aqua:aws/aws-sam-cli" = "latest"
+
+"aqua:awslabs/git-secrets" = "latest"
+"aqua:bensadeh/tailspin" = "latest"
+"aqua:mas-cli/mas" = "latest"
+"aqua:tealdeer-rs/tealdeer" = "latest"
+"aqua:variadico/noti" = "latest"
+"aqua:zk-org/zk" = "latest"
+"gem:lunchy" = "latest"
+"gem:terminal-notifier" = "latest"
+"npm:@devcontainers/cli" = "latest"
+"ubi:abhinav/git-spice" = { version = "latest", exe = "gs", rename_exe = "git-spice" }
+"ubi:algolia/cli" = { version = "latest", exe = "algolia" }
+"ubi:cbednarski/hostess" = "latest"
+"ubi:cormacrelf/dark-notify" = "latest"
+"ubi:https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar" = { version = "latest", rename_exe = "plantuml" }
+# cloudflared = "latest"
+# lsd = "latest"
+amazon-ecr-credential-helper = "latest"
+aws-cli = "latest"
+aws-sam-cli = "latest"
+bat = "latest"
+carapace = "latest"
+coreutils = "latest"
+ctop = "latest"
+delta = "latest"
+eza = "latest"
+fzf = "latest"
+gcloud = "latest"
+gh = "latest"
+httpie-go = "latest"
+jq = "latest"
+k9s = "latest"
+kind = "latest"
+kubecolor = "latest"
+ollama = "latest"
+opencode = "latest"
+pandoc = "latest"
+pre-commit = "latest"
+ripgrep = "latest"
+tmux = "latest"
+uv = "latest"
+yadm = "latest"
+"asdf:ag" = "latest"
+
+# TODO: https://github.com/eradman/entr#source-installation---bsd-mac-os-and-linux
+# "ubi:eradman/entr"
+
+# NOTE: this installs all for current OS but picks the right one based on arch
+# TODO: this is hacky but there's something wrong with toml parsing, need to use the right configuration https://mise.jdx.dev/dev-tools/
+"ubi:https://acli.atlassian.com/linux/latest/acli_linux_arm64/acli" = { version = "platforms.linux-arm64.url", rename_exe = "acli", os = ["linux"] }
+"ubi:https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli" = { version = "platforms.linux-amd64.url", rename_exe = "acli", os = ["linux"] }
+"ubi:https://acli.atlassian.com/darwin/latest/acli_darwin_arm64/acli" = { version = "platforms.macos-arm64.url", rename_exe = "acli", os = ["macos"] }
+"ubi:https://acli.atlassian.com/darwin/latest/acli_darwin_amd64/acli" = { version = "platforms.macos-amd64.url", rename_exe = "acli", os = ["macos"] }
+
+# NOTE: this installs all for current OS but picks the right one based on arch
+# TODO: this should be installable via vendor/project but I can't get ubi to find the right release
+"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linux386" = { version = "platforms.linux-arm64.url", rename_exe = "akamai", os = ["linux"] }
+"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linuxamd64" = { version = "platforms.linux-amd64.url", rename_exe = "akamai", os = ["linux"] }
+"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macarm64" = { version = "platforms.macos-arm64.url", rename_exe = "akamai", os = ["macos"] }
+"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macamd64" = { version = "platforms.macos-amd64.url", rename_exe = "akamai", os = ["macos"] }
+"aqua:getsentry/sentry-cli" = { version = "latest", rename_exe = "sentry" }
+"aqua:snyk/cli" = "latest"
 
 [settings]
 experimental = true

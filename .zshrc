@@ -105,7 +105,7 @@ export path=(
 # zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 # }}}
 
-# zinit {{{
+# zinit (installs if missing) {{{
 ZINIT_HOME="$XDG_DATA_HOME"/zinit/zinit.git
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -116,7 +116,6 @@ compinit
 
 zinit wait lucid depth"1" light-mode for \
     Aloxaf/fzf-tab \
-    mroth/evalcache \
     atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting \
     atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
     OMZP::vi-mode \
@@ -124,7 +123,8 @@ zinit wait lucid depth"1" light-mode for \
     mfaerevaag/wd
 
 zinit depth"1" light-mode for \
-    romkatv/powerlevel10k
+    romkatv/powerlevel10k \
+    mroth/evalcache
 # }}}
 
 # source additional files and env vars {{{
@@ -202,6 +202,10 @@ export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 export OLLAMA_NUM_PARALLEL=1
 
 export DEVPOD_HOME="$XDG_CONFIG_HOME"/devpod
+
+export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/evalcache
+
+export AQUA_GLOBAL_CONFIG="$XDG_CONFIG_HOME"/aquaproj-aqua/aqua.yaml
 
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 export BAT_THEME="TwoDark"
