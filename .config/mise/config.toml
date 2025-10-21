@@ -3,16 +3,16 @@
 # mise search {fuzzy}
 # aqua g
 
-bun = "latest"
+# bun = "latest"
 # deno = "latest"
-go = "latest"
+# go = "latest"
 # java = "latest" # needed for plantuml
 # lua = "latest"
-neovim = "stable"
-node = "latest"
-php-brew = "latest"
-python = "latest"
-ruby = "latest"
+# neovim = "stable"
+# node = "latest"
+# php-brew = "latest"
+# python = "latest"
+# ruby = "latest"
 
 usage = "latest"
 
