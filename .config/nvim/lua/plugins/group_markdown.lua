@@ -39,4 +39,12 @@ return {
   --   opts = { pattern = "*" },
   -- },
   -- { "dhruvasagar/vim-table-mode", ft = "markdown" },
+  {
+    "jmbuhr/otter.nvim",
+    ft = "markdown",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("otter").activate()
+    end,
+  },
 }

@@ -16,6 +16,7 @@ return {
           apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
         },
         biome = {},
+        -- copilot = {},
         contextive = {
           root_dir = function(startpath)
             return require("lspconfig.util").root_pattern(".contextive")(startpath)

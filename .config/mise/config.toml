@@ -3,26 +3,22 @@
 # mise search {fuzzy}
 # aqua g
 
-# bun = "latest"
-# deno = "latest"
-# go = "latest"
-# java = "latest" # needed for plantuml
-# lua = "latest"
-# neovim = "stable"
-# node = "latest"
-# php-brew = "latest"
-# python = "latest"
-# ruby = "latest"
+bun = "latest"
+deno = "latest"
+go = "latest"
+java = "latest" # needed for plantuml
+lua = "latest"
+node = { version = "latest", postinstall = "corepack enable" }
+php-brew = "8.4"
+python = "latest"
+ruby = "latest"
 
 usage = "latest"
-
-# TODO: doesn't work, requires installation process
-# see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
-# "aqua:aws/aws-sam-cli" = "latest"
 
 "aqua:awslabs/git-secrets" = "latest"
 "aqua:bensadeh/tailspin" = "latest"
 "aqua:mas-cli/mas" = "latest"
+"aqua:snyk/cli" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
 "aqua:variadico/noti" = "latest"
 "aqua:zk-org/zk" = "latest"
@@ -33,56 +29,56 @@ usage = "latest"
 "ubi:algolia/cli" = { version = "latest", exe = "algolia" }
 "ubi:cbednarski/hostess" = "latest"
 "ubi:cormacrelf/dark-notify" = "latest"
-"ubi:https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar" = { version = "latest", rename_exe = "plantuml" }
-# "asdf:ag" = "latest"
-# cloudflared = "latest"
-# kind = "latest"
-# lsd = "latest"
-# ollama = "latest"
+"ubi:https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar" = { version = "1.2025.9", rename_exe = "plantuml" }
 amazon-ecr-credential-helper = "latest"
 aws-cli = "latest"
 aws-sam-cli = "latest"
 bat = "latest"
 carapace = "latest"
+cloudflared = "latest"
 coreutils = "latest"
 ctop = "latest"
 delta = "latest"
 eza = "latest"
 fzf = "latest"
-gcloud = "latest"
+gcloud = { version = "latest", postinstall = "gcloud components update" }
 gh = "latest"
 httpie-go = "latest"
 jq = "latest"
 k9s = "latest"
 kubecolor = "latest"
+neovim = "stable"
+ollama = "latest"
 opencode = "latest"
 pandoc = "latest"
+poetry = "latest"
 pre-commit = "latest"
 ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
 
-# TODO: https://github.com/eradman/entr#source-installation---bsd-mac-os-and-linux
-# "ubi:eradman/entr"
+[tools."http:atlassian-cli"]
+version = "latest"
+rename_exe = "acli"
+platforms.macos-x64.url = "https://acli.atlassian.com/darwin/latest/acli_darwin_amd64/acli"
+platforms.macos-arm64.url = "https://acli.atlassian.com/darwin/latest/acli_darwin_arm64/acli"
+platforms.linux-x64.url = "https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli"
+platforms.linux-arm64.url = "https://acli.atlassian.com/linux/latest/acli_linux_arm64/acli"
 
-# NOTE: this installs all for current OS but picks the right one based on arch
-# TODO: this is hacky but there's something wrong with toml parsing, need to use the right configuration https://mise.jdx.dev/dev-tools/
-"ubi:https://acli.atlassian.com/linux/latest/acli_linux_arm64/acli" = { version = "platforms.linux-arm64.url", rename_exe = "acli", os = ["linux"] }
-"ubi:https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli" = { version = "platforms.linux-amd64.url", rename_exe = "acli", os = ["linux"] }
-"ubi:https://acli.atlassian.com/darwin/latest/acli_darwin_arm64/acli" = { version = "platforms.macos-arm64.url", rename_exe = "acli", os = ["macos"] }
-"ubi:https://acli.atlassian.com/darwin/latest/acli_darwin_amd64/acli" = { version = "platforms.macos-amd64.url", rename_exe = "acli", os = ["macos"] }
+[tools."http:akamai-cli"]
+version = "2.0.2"
+rename_exe = "akamai"
+platforms.macos-x64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macamd64"
+platforms.macos-arm64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macarm64"
+platforms.linux-x64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linuxamd64"
+platforms.linux-arm64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linux386"
 
-# NOTE: this installs all for current OS but picks the right one based on arch
-# TODO: this should be installable via vendor/project but I can't get ubi to find the right release
-"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linux386" = { version = "platforms.linux-arm64.url", rename_exe = "akamai", os = ["linux"] }
-"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-linuxamd64" = { version = "platforms.linux-amd64.url", rename_exe = "akamai", os = ["linux"] }
-"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macarm64" = { version = "platforms.macos-arm64.url", rename_exe = "akamai", os = ["macos"] }
-"ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macamd64" = { version = "platforms.macos-amd64.url", rename_exe = "akamai", os = ["macos"] }
-"aqua:getsentry/sentry-cli" = { version = "latest", rename_exe = "sentry" }
-"aqua:snyk/cli" = "latest"
-neovim = "stable"
-poetry = "latest"
+# TODO: bin property doesn't work
+# [tools."http:plantuml"]
+# url = "https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar"
+# version = "1.2025.9"
+# bin = "plantuml"
 
 [settings]
 experimental = true

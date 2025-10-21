@@ -33,9 +33,9 @@
     },
     "lsp": {
         "php": {
-            "disabled": true, // TODO: this is preventing the agent from responding
+            "disabled": false, // TODO: this is preventing the agent from responding
             "command": [
-                "/Users/mikefunk/.local/share/nvim/mason/bin/intelephense",
+                "{env:HOME}/.local/share/nvim/mason/bin/intelephense",
                 "--stdio"
             ],
             "extensions": [

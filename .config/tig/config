@@ -49,16 +49,16 @@ bind main grv !git revert %(commit)
 
 # open the commit on github (brs = browse)
 # bind main gbrs @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
-bind main B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+bind main B @bash -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
 
 # Show commit statistics for the author under the cursor
-bind main U +sh -c 'git --no-pager shortlog -s --author="$(git show -s --format=%aE %(commit))" </dev/tty'
+bind main U +bash -c 'git --no-pager shortlog -s --author="$(git show -s --format=%aE %(commit))" </dev/tty'
 # }}}
 
 # status {{{
 bind status P !gh pr create
 # bind status V @gh pr view
-bind status V @sh -c "gh pr view | grep 'View this pull request' | awk 'NF>1{print $NF}' | xargs open"
+bind status V @bash -c "gh pr view | grep 'View this pull request' | awk 'NF>1{print $NF}' | xargs open"
 
 # Go to the first file in the status view
 bind status <Ctrl-n> :/^.$
@@ -103,7 +103,7 @@ bind refs R @?git rebase %(branch)
 bind refs B @git checkout -b "%(prompt Enter new branch name: )"
 bind refs D @?git branch -D %(branch) && git push origin --delete %(branch)
 bind refs F @git flow feature start "%(prompt Enter feature branch name: )"
-bind refs V @sh -c "gh pr view | grep 'View this pull request' | awk 'NF>1{print $NF}' | xargs open"
+bind refs V @bash -c "gh pr view | grep 'View this pull request' | awk 'NF>1{print $NF}' | xargs open"
 
 # same thing but without output
 bind refs C @git switch %(branch)
@@ -173,8 +173,8 @@ bind generic gps !git push
 # gr: rebase/reset/release
 bind generic grbd !git rbd --autosquash
 bind generic grbm !git rbm --autosquash
-bind generic grbc !git spice rebase continue
-bind generic grba !git spice rebase continue
+bind generic grbc !git-spice rebase continue
+bind generic grba !git-spice rebase continue
 bind generic grh @?git reset --hard
 bind generic grs @?git reset --soft HEAD^
 bind generic gru @?git checkout -- .
@@ -194,17 +194,17 @@ bind generic gcm !?git cleanmerged
 bind generic gmt !git mergetool
 # gS: git spice (stacked PR management)
 # (color is messed up in dark mode on this one)
-bind generic gSs !git spice branch split
-bind generic gSr @git spice stack restack
+bind generic gSs !git-spice branch split
+bind generic gSr @git-spice stack restack
 # (pneumonic: publish)
-bind generic gSp !sh -c "git spice repo sync && git spice stack restack && git spice stack submit"
+bind generic gSp !bash -c "git-spice repo sync && git-spice stack restack && git-spice stack submit"
 # (pneumonic: new)
-bind generic gSn !git spice branch create "%(prompt Enter branch name: )"
-bind generic gSc !git spice branch checkout
+bind generic gSn !git-spice branch create "%(prompt Enter branch name: )"
+bind generic gSc !git-spice branch checkout
 # (pneumonic: graft)
-bind generic gSg !git spice upstack onto
-bind generic gSe !git spice stack edit
-bind generic gSt @git spice branch track
+bind generic gSg !git-spice upstack onto
+bind generic gSe !git-spice stack edit
+bind generic gSt @git-spice branch track
 
 # Go back to the previous view state
 bind generic <C-O> back
@@ -247,7 +247,7 @@ bind log <Ctrl-n> :/^commit
 bind log <Ctrl-p> :?^commit
 bind log A none
 bind log A ?git commit --amend
-bind log B @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+bind log B @bash -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
 # }}}
 
 # }}}

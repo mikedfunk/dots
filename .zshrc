@@ -127,11 +127,11 @@ zinit wait lucid depth"1" light-mode for \
     Aloxaf/fzf-tab \
     atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting \
     atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
-    OMZP::vi-mode \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
     mfaerevaag/wd
 
 zinit depth"1" light-mode for \
+    OMZP::vi-mode \
     romkatv/powerlevel10k \
     mroth/evalcache
 # }}}
@@ -529,11 +529,13 @@ source "$HOME/.saatchirc" 2>/dev/null
 # ensure the tmux term exists, otherwise some stuff like ncurses apps (e.g. tig) might break. This is very fast.
 tic -x "$HOME/.support/tmux-256color.terminfo" &>/dev/null
 tic -x "$HOME/.support/tmux.terminfo" &>/dev/null
-# source "$HOME"/.fzf.zsh 2>/dev/null # fuzzy finder - installed via yadm bootstrap (still from homebrew)
-_evalcache fzf --zsh
 
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
+
+# source "$HOME"/.fzf.zsh 2>/dev/null # fuzzy finder - installed via yadm bootstrap (still from homebrew)
+# source <(fzf --zsh)
+_evalcache fzf --zsh
 # }}}
 
 # zsh options {{{

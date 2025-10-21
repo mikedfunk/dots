@@ -57,6 +57,42 @@ _decrypt_yadm_files() {
     fi
 }
 
+_install_and_configure_php_81_extensions() {
+    _log_info "Installing and configuring php 8.1 extensions"
+    cd "$HOME" || return
+    mise use --global php-brew@8.1
+    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
+    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
+    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
+    xdebug_config_file="$(brew --prefix)"/etc/php/8.1/conf.d/04_xdebug.ini
+    if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
+        cat <<'EOF' >>"$xdebug_config_file"
+[xdebug]
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+EOF
+    fi
+    mise use --global php-brew@8.4
+    cd - || return
+}
+
+_install_and_configure_php_84_extensions() {
+    _log_info "Installing and configuring php 8.4 extensions"
+    cd "$HOME" || return
+    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
+    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
+    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
+    xdebug_config_file="$(brew --prefix)"/etc/php/8.4/conf.d/04_xdebug.ini
+    if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
+        cat <<'EOF' >>"$xdebug_config_file"
+[xdebug]
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+EOF
+    fi
+    cd - || return
+}
+
 _upgrade_gcloud_components() {
     _log_info "Upgrading gcloud components"
     gcloud components update --quiet
@@ -172,6 +208,8 @@ _install_upgrade_homebrew_packages
 _update_mise_plugins
 _install_mise_dependencies
 _decrypt_yadm_files
+_install_and_configure_php_81_extensions
+_install_and_configure_php_84_extensions
 _upgrade_gcloud_components
 _install_akamai_purge_command
 _upgrade_akamai_commands
