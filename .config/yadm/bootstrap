@@ -157,10 +157,10 @@ _apply_mac_preferences() {
     killall SystemUIServer
 }
 
-_start_mac_launch_agents() {
+_start_saatchi_tunnel() {
     [ "$system_type" = "Darwin" ] || return
     (lunchy status launched.mike.saatchi-tunnel.autossh | grep --quiet launched.mike.saatchi-tunnel.autossh) && return
-    _log_info "Starting launch agents"
+    _log_info "Starting Saatchi tunnel"
     lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
 
@@ -182,6 +182,6 @@ _upgrade_zinit_plugins
 # _sync_hosts_file
 _clear_evalcache
 _apply_mac_preferences
-_start_mac_launch_agents
+_start_saatchi_tunnel
 
 _log_info "Installation complete"

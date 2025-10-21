@@ -78,6 +78,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "chromedriver" # like selenium for chrome. (These drivers feel pretty outdated to me)
 # brew "circleci" # circleci cli e.g. `circleci open`
 # brew "claude-code" # cli AI helper (replaced with crush)
+# brew "cloc" # count lines of code
 # brew "cloudflared" # cloudflare CLI (moved to mise)
 # brew "cmake" # used by youcompleteme (which I no longer use)
 # brew "code-minimap" # for a vim plugin
@@ -203,6 +204,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "maven" # used by cloudbeaver (mysql web app)
 # brew "mc" # memcached cli. Use the full path to avoid conflicting with midnight commander, or just uninstall midnight commander (Trouble using due to networking limitations, also this tap is in a private github repo!! I have an installer in my yadm config instead)
 # brew "mc" # old-school file manager, editor, viewer, script runner, remote filesystem access, etc.
+# brew "mcp-toolbox" # google tool for MCP access to various google properties
 # brew "mcpm" # mcp manager. Package manager for LLM MCPs.
 # brew "memcached" # needed by php70 memcached pecl extension
 # brew "mkcert" # create a certificate, create a local CA, add the cert as trusted in the CA (Only needed to _create_ certs)
@@ -220,6 +222,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "newsboat" # terminal rss reader. I'm debating on whether this is worth it. It's kind of handy to read the headlines in hackernews, reddit programming, etc.
 # brew "nextdns" # dns privacy service
 # brew "nnn" # file picker I use inside of vim
+# brew "node" # nodejs and npm (non-asdf version required by yarn)
 # brew "nodenv" # node version manager (same api as rbenv) (I use asdf now)
 # brew "nostromo" # alias manaager
 # brew "noti" # simple terminal notifier (moved to mise)
@@ -250,9 +253,11 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "podman" # docker alternative
 # brew "podman-compose" # docker alternative
 # brew "podman-machine" # docker alternative
+# brew "poetry" # MUCH better than pip - python package manager (moved to mise)
 # brew "portaudio" # used by aider to enable voice input
 # brew "postgresql@14" # database similar to mysql (needed for default php install) (needed for toaf elixir app)
 # brew "pre-commit" # yelp git pre-commit framework (local hooks ftw! Easily create hooks that run various CI stuff before committing with pretty output, able to skip during rebases, yaml config.) (moved to mise)
+# brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json (moved to mise local deps)
 # brew "prettyping" # ping with a cool sparkline graph of status
 # brew "procs" # process viewer - prettier ps. Not as cool as htop.
 # brew "psalm" # php static analysis tool
@@ -346,35 +351,30 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
-brew "cloc" # count lines of code
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "git"
-brew "gnu-sed" # linux version of sed - saves as gsed (required for diff-so-fancy)
+brew "gnu-sed" if OS.mac? # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
-brew "mas" # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
-brew "mcp-toolbox" # google tool for MCP access to various google properties
-brew "media-control" # macos media status helper (used for my tmux statusbar)
+brew "mas" if OS.mac? # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
+brew "media-control" if OS.mac? # macos media status helper (used for my tmux statusbar)
 brew "mise" # asdf but faster and includes direnv (TODO: extract to install script outside of brew)
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
-brew "node" # nodejs and npm (non-asdf version required by yarn)
-brew "nss" # required by mkcert to make certs trusted in firefox
-brew "pinentry-mac" # native gpg pin entry for yadm and others. Opens a native window.
+brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
+brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "pngpaste" # save image from clipboard to file
-brew "poetry" # MUCH better than pip - python package manager
-brew "prettier" # javascript and other languages formatter. moved from ~/.config/yarn/global/package.json
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
-brew "scrcpy" # mirror android screen
+brew "scrcpy" if OS.mac? # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
-brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
+brew "syncthing" if OS.mac? # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
-brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep
+brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (mise version doesn't work right for some reason)
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "toot" # mastodon cli/tui client
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
@@ -446,6 +446,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "insomnia" # http api client like postman but nicer looking (I use this for sharing with my team but I mostly use vim-rest-console)
 # cask "java" # required for plantuml, etc.
 # cask "joplin" # desktop joplin (I use the terminal interface)
+# cask "jordanbaird-ice" if OS.mac? # menubar tool similar to hiddenbar
 # cask "jumpcut" # clipboard manager recommended by Michael Zick (slightly annoying interface) (I now use maccy instead)
 # cask "keeper-password-manager" # password manager used at my work (managed by my work)
 # cask "keytty" # control the keyboard with the mouse
@@ -540,26 +541,25 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-cask "betterdiscord-installer" # hacks for discord native app
+cask "betterdiscord-installer" if OS.mac? # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
-cask "cold-turkey-blocker" # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
+cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
 cask "discord" # chat
 cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
-cask "glance-chamburr" # fork of glance kept alive (all-in-one quicklook collection)
-cask "grandperspective" # visualize storage hogs in the hard drive
-cask "iterm2@beta" # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
-cask "itsycal" # menubar calendar
-cask "jordanbaird-ice" # menubar tool similar to hiddenbar
-cask "maccy" # simple clipboard manager. WAY better than jumpcut!
-cask "meetingbar" # full screen notifications for zoom meetings
+cask "glance-chamburr" if OS.mac? # fork of glance kept alive (all-in-one quicklook collection)
+cask "grandperspective" if OS.mac? # visualize storage hogs in the hard drive
+cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
+cask "itsycal" if OS.mac? # menubar calendar
+cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
+cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
-cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
-cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
-cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus. (mac only)
-cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
+cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
+cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
+cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
+cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
 

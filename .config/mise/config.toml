@@ -82,6 +82,7 @@ yadm = "latest"
 "aqua:getsentry/sentry-cli" = { version = "latest", rename_exe = "sentry" }
 "aqua:snyk/cli" = "latest"
 neovim = "stable"
+poetry = "latest"
 
 [settings]
 experimental = true
