@@ -4,10 +4,10 @@
 # aqua g
 
 bun = "latest"
-deno = "latest"
+# deno = "latest"
 go = "latest"
-java = "latest" # needed for plantuml
-lua = "latest"
+# java = "latest" # needed for plantuml
+# lua = "latest"
 neovim = "stable"
 node = "latest"
 php-brew = "latest"
