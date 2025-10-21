@@ -126,7 +126,7 @@
         },
         "github": {
             "type": "local",
-            "enabled": false,
+            "enabled": true,
             "command": [
                 "bunx",
                 "-y",
