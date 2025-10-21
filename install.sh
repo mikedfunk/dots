@@ -1,7 +1,3 @@
 #!/bin/bash
 
-mkdir -p "$HOME"/.bin &&
-    curl -fLo "$HOME"/.bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm &&
-    chmod +x "$HOME"/.bin/yadm
-
-"$HOME"/.bin/yadm clone git@github.com:mikedfunk/dots.git --bootstrap
+sh -c "$(curl -fsLS raw.githubusercontent.com/yadm-dev/yadm/master/yadm)" -- clone git@github.com:mikedfunk/dots.git --bootstrap
