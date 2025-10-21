@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
-# _log_info() { echo "$1"; }
 
 system_type=$(uname -s)
 
@@ -28,7 +27,7 @@ _mac_xcode_command_line_tools() {
 _install_homebrew() {
     if ! command -v brew &>/dev/null; then
         _log_info "Install homebrew"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 }
 
