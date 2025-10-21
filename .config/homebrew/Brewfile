@@ -505,6 +505,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "scummvm" # old school
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
+# cask "sfdx" #SalesForce CLI
 # cask "shadow" # cloud gaming system https://shadow.tech
 # cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
 # cask "shottr" # spiffier screenshot app <cmd-shift-2> (not free, nagware)
@@ -558,7 +559,6 @@ cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "rectangle" # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" # Maintained fork of sequel pro. See also: table-plus. (mac only)
-cask "sfdx" #SalesForce CLI
 cask "zoomhider" # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}

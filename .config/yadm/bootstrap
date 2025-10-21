@@ -1,618 +1,194 @@
-#!/usr/bin/env bash
-# main yadm setup file https://github.com/TheLocehiliosan/yadm
-# vim: set foldmethod=marker ft=sh:
+#!/usr/bin/env zsh
 
-# notes {{{
-# Why did I wrap everything in functions? So I could re-run specific things
-# when necessary without having to re-run the entire bootstrap file. It also
-# makes it easier to temporarily run one or more install steps.
-# }}}
+_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
 
-# helper functions {{{
-_log_info() {
-    # icon, bold, colors
-    echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"
-    "${@:2}"
-}
-_log_error() {
-    # icon, bold, colors
-    echo -e "$(tput setaf 1)$(tput rev)$(tput bold) \xE2\x9C\x97 $1 $(tput sgr0)"
-    "${@:2}"
-}
-_log_notice() {
-    # icon, bold, colors
-    echo -e "$(tput setaf 3)$(tput rev)$(tput bold) \xE2\x9A\xa0 $1 $(tput sgr0)"
-    "${@:2}"
-}
-_has() { type "$1" &>/dev/null; }
-# }}}
+system_type=$(uname -s)
 
-# create dirs {{{
-_create_dirs() {
-    _log_info "Creating any missing home directories"
-    [[ -d "$HOME/Code" ]] || mkdir "$HOME/Code"
-}
-# }}}
-
-# decrypt yadm files {{{
-# _log_info "Decrypting yadm files"
-# yadm decrypt
-#
-# This is commented out because it requires the GPG password each time. Yadm
-# asynmetric encryption still requires a password on _decrypt_.
-#
-# TODO: This is also a chicken/egg scenario. Some encrypted files get symlinked
-# into ~/Code/* directories, but those directories do not yet exist on a new
-# install. But in order to clone those repos, I need my ssh keys, which are in
-# my encrypted files too! If I decrypt _then_ clone, I'll get an error because
-# the directories already exist. If I clone _then_ decrypt, I won't be able to
-# clone yet.
-#
-# One workaround for this is to just clone the https urls for them,
-# allowing me to authenticate via https basic auth. Downside: now the remotes
-# on everything are set to the https version. I'll need to change to the ssh
-# versions to let them use public key authorization. Hmmm...
-#
-# Another way would be if I was able to decrypt just my ssh keys separately.
-# Maybe I can use a different encryption setup outside of yadm for those?
-# Downside: now I have to deal with two methods of encryption. :(
-#
-# Another approach would be to decrypt, check to see if the repos have been
-# cloned, if not delete the repo directories and their contents, clone, then
-# decrypt again. Slight downside - I have to decrypt twice, requiring two
-# password entries. But really this should only happen once - when the code has
-# not been cloned. This seems like the right approach.
-#
-# TODO add .git/config/exclude for each codebase to yadm?
-# }}}
-
-# install xcode command line tools {{{
-# needed for a variety of things including phpenv (zlib), CommandLineTools below, sshpass
-_install_xcode_command_line_tools() {
-    _log_info "Installing xcode command line tools"
-    xcode-select --install || true
-    # /System/Library/CoreServices/Install Command Line Developer Tools.app
-}
-# }}}
-
-# install homebrew if it's missing {{{
-_install_homebrew_if_its_missing() {
-    _has brew && return
-    _log_info "Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-}
-# }}}
-
-# install/update homebrew packages {{{
-_install_update_homebrew_packages() {
-    [ -e "$HOME"/.config/homebrew/Brewfile ] || return
-    _log_info "Installing/upgrading homebrew packages"
-    cd || return
-    # brew update         # update homebrew itself and the list of brew package versions
-    brew bundle         # install/upgrade from ~/Brewfile
-    brew upgrade        # upgrade all homebrew packages
-    brew upgrade --cask # upgrade all homebrew casks
-    # brew cleanup         # remove outdated versions and dead symlinks from the homebrew prefix. WARNING this could break dependencies if low level libs are not pinned!!
-    # brew bundle cleanup --force # remove brew packages not in ~/Brewfile
-    # brew unlink node
-    cd - || return
+_create_code_dir() {
+    _log_info "Creating code directory if missing"
+    mkdir -p "$HOME/Code"
 }
 
-# }}}
-
-# pin homebrew packages {{{
-_pin_homebrew_packages() {
-    _log_info "Pinning brew packages that need pinning"
-    # brew pin bison
-    # brew pin bzip2
-    # brew pin cmake
-    # brew pin curl
-    brew pin icu4c
-    brew pin imagemagick
-    # brew pin libedit
-    # brew pin libiconv
-    # brew pin libmcrypt
-    # brew pin libmemcached
-    brew pin libsodium
-    # brew pin openssl
-    # brew pin pkg-config
-    # brew pin re2c
-    # brew pin readline
-    # brew pin xz
-    # brew pin zlib
-}
-# }}}
-
-# gcloud {{{
-_upgrade_gcloud_components() {
-    _has gcloud || return
-    _log_info "Updating gcloud components"
-    gcloud components update --quiet
-}
-# }}}
-
-# akamai {{{
-_upgrade_akamai_and_install_missing() {
-    _has akamai || return
-    _log_info "Updating akamai commands"
-    (akamai list | grep --quiet purge) || akamai install purge
-    akamai update
-}
-# }}}
-
-# set zsh as shell {{{
-_set_zsh_as_shell() {
-    if [[ $(grep "$(brew --prefix)/bin/zsh" /etc/shells -c) == 0 ]]; then
-        _log_info "Installing homebrew zsh to /etc/shells"
-        sudo /bin/sh -c "echo $(brew --prefix)/bin/zsh >> /etc/shells"
-    fi
-    if [[ "$SHELL" != "$(brew --prefix)/bin/zsh" ]]; then
-        _log_info "Changing shell to homebrew zsh"
-        chsh -s "$(which zsh)"
+_decrypt_yadm_files() {
+    if ! [ -f "$HOME"/.saatchirc ]; then
+        _log_info "Decrypting yadm files"
+        yadm decrypt
     fi
 }
-# }}}
 
-# install tmux plugin manager {{{
-_install_tmux_plugin_manager() {
-    [[ -d "$HOME"/.config/tmux/plugins/tpm ]] && return
-    _log_info "Installing tmux plugin manager. Upgrade packages with \`<c-a>U\`."
-    git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
+_mac_xcode_command_line_tools() {
+    if [ "$system_type" = "Darwin" ]; then
+        _log_info "Installing mac xcode command line tools if missing"
+        xcode-select --install || true
+    fi
 }
-# }}}
 
-# install/update tmux plugins {{{
-_install_upgrade_tmux_plugins() {
-    _log_info "Install/upgrade tmux plugins"
-    "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
-    "$HOME"/.config/tmux/plugins/tpm/bin/update_plugins all
+_install_mise() {
+    if ! command -v mise &>/dev/null; then
+        _log_info "Installing mise"
+        curl https://mise.run | sh
+    fi
 }
-# }}}
 
-# update mise plugins {{{
 _update_mise_plugins() {
     _log_info "Updating mise plugins"
     mise plugin update
 }
-# }}}
 
-# install neovim version(s) {{{
-_install_neovim_versions() {
-    # (mise list neovim | grep --quiet stable) && return
-    _log_info "installing neovim stable"
-    mise uninstall neovim@stable
-    mise install neovim@stable
-    mise use --global neovim@stable
-    # mise install neovim@nightly # but don't activate it by default
-}
-# }}}
-
-# install php versions {{{
-
-_install_php_81() {
-    (mise list php-brew | grep --quiet "8.1") && return
-    _log_info "installing php 8.1"
-
-    mise install php-brew@8.1
-    mise use --global php-brew@8.1 || return
-
-    # install php extensions (different set for 8.1)
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
-    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
-
-    # zend_extension=xdebug.so
-    _xdebug_config() {
-        cat <<'END_HEREDOC'
-[xdebug]
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-END_HEREDOC
-    }
-
-    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
-    _xdebug_config >/opt/homebrew/etc/php/8.1/conf.d/ext-xdebug.ini
+_install_mise_dependencies() {
+    _log_info "Installing mise dependencies"
+    cd "$HOME" || return
+    mise install
+    cd - || return
 }
 
-_install_php_84() {
-    (mise list php-brew | grep --quiet "8.4") && return
-    _log_info "installing php 8.4"
-    mise install php-brew@8.4
-    mise use --global php-brew@8.4 || return
-
-    # install php extensions (different set for 8.4)
-    # https://stackoverflow.com/questions/59784601/how-to-install-memcache-extension-php72-macos-catalina
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
-
-    # install fork that fixes php 8.4 compat {{{
-    _install_imagick_php_84() {
-        [ -d /tmp/imagick_php_84 ] || git clone https://github.com/imagick/imagick.git /tmp/imagick_php_84
-        cd /tmp/imagick_php_84 || return
-        git checkout develop
-        phpize
-        ./configure
-        make
-        make install
-        cd - || return
-        rm -rf /tmp/imagick_php_84
-    }
-
-    _install_imagick_php_84 && (echo 'extension="imagick.so"' >/opt/homebrew/etc/php/8.4/conf.d/ext-imagick.ini)
-    _opcache_config() {
-        cat <<'END_HEREDOC'
-opcache.memory_consumption=128
-opcache.interned_strings_buffer=8
-opcache.max_accelerated_files=4000
-opcache.revalidate_freq=60
-opcache.enable_cli=1
-END_HEREDOC
-    }
-    (_opcache_config >/opt/homebrew/etc/php/8.4/conf.d/ext-opcache.ini)
-    # }}}
-
-    _xdebug_config() {
-        cat <<'END_HEREDOC'
-zend_extension=xdebug.so
-[xdebug]
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-END_HEREDOC
-    }
-    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
-    _xdebug_config >/opt/homebrew/etc/php/8.4/conf.d/ext-xdebug.ini
-}
-
-# https://github.com/mise-community/mise-php/blob/master/.github/workflows/workflow.yml#L33-L52
-_install_php_versions() {
-    pushd .
-    builtin cd "$HOME" >/dev/null || return
-    _log_info "Installing php version(s)"
-    (mise plugin list | grep --quiet php-brew) || mise plugin add php-brew
-
-    _install_php_81
-    _install_php_84
-    mise use --global php-brew@8.4
-
-    popd || return
-}
-# }}}
-
-# install deno version(s) {{{
-_install_deno_versions() {
-    builtin cd >/dev/null || return
-    _log_info "Installing deno version(s)"
-    # (mise plugin list | grep --quiet deno) || mise plugin add deno
-    (mise list deno | grep --quiet 1.29.4) || mise install deno@1.29.4
-    mise install deno@latest
-    mise use --global deno@1.29.4
-}
-# }}}
-
-# install node version(s) {{{
-_install_node_versions() {
-    builtin cd >/dev/null || return
-    _log_info "Installing node version(s)"
-    # https://github.com/mise-vm/mise-nodejs#problems-with-openpgp-signatures-in-older-versions
-    # bash -c '${mise_DATA_DIR:=$HOME/.mise}/plugins/nodejs/bin/import-previous-release-team-keyring'
-    # (mise plugin list | grep --quiet node) || mise plugin add node
-    # https://github.com/mise-vm/mise-nodejs/issues/40#issuecomment-297053730
-    # bash "$HOME"/.mise/plugins/nodejs/bin/import-release-team-keyring
-
-    # L
-    # (mise list node | grep --quiet 9.11.2) || mise install node@9.11.2
-    # Z
-    # (mise list node | grep --quiet 6.7.0) || mise install node@6.7.0
-    # E
-    (mise list node | grep --quiet 21.7.3) || mise install node@21.7.3
-    # global
-    # (mise list node | grep --quiet latest) || mise install node@latest
-    mise install node@latest
-
-    mise use --global node@latest
-    # install pnpm and friends next to corepack (must reshim, only on latest node)
-    mise exec node@latest -- corepack enable
-    mise reshim node
-
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install lua version(s) {{{
-# needed for luarocks, which is needed by luacheck
-_install_lua_versions() {
-    builtin cd >/dev/null || return
-    _log_info "Installing lua version(s)"
-    (mise plugin list | grep --quiet lua) || mise plugin add lua
-    (mise list lua | grep --quiet 5.4.4) || mise install lua@5.4.4
-
-    mise use --global lua@5.4.4
-
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install perl version(s) {{{
-# used for percona tools
-_install_perl_versions() {
-    builtin cd >/dev/null || return
-    _log_info "Installing perl version(s)"
-    (mise plugin list | grep --quiet perl) || mise plugin add perl
-    (mise list perl | grep --quiet 5.38.0) || mise install perl@5.38.0
-
-    mise use --global perl@5.38.0
-
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install python version(s) {{{
-_install_python_versions() {
-    builtin cd >/dev/null || return
-    _log_info "Installing python version(s)"
-    # (mise plugin list | grep --quiet python) || mise plugin add python
-
-    # I:
-    # https://github.com/danhper/mise-python/issues/98
-    # I uses 3.7.3. It won't install on macos but 3.7.10 will.
-    # https://github.com/pyenv/pyenv/issues/1740#issuecomment-986082691
-    # but I can't install python dependencies: "No module named '_ctypes'" so I just use 3.10
-    # ( mise list python | grep --quiet 3.7.10 ) || ( _log_info "installing python 3.7.10" && mise install python@3.7.10 )
-    # api tests and ui tests:
-    (mise list python | grep --quiet 3.8.15) ||
-        (_log_info "installing python 3.8.15" &&
-            mise install python@3.8.15)
-    # global
-    # Can't do this in mise like in asdf
-    # mise use --global python 3.10.1 2.7.18)
-    # mise install python@2.7.18 &&
-    mise install python@latest
-    (mise list python | grep --quiet 3.10.1) ||
-        (_log_info "installing python 3.10.1" &&
-            mise install python@3.10.1 &&
-            mise use --global python@3.10.1)
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install ruby version(s) {{{
-_install_ruby_versions() {
-    builtin cd "$HOME" >/dev/null || return
-    _log_info "Installing ruby version(s)"
-    # (mise plugin list | grep --quiet ruby) || mise plugin add ruby
-    # ( mise list ruby | grep --quiet 2.3.3 ) || mise install ruby@2.3.3 # Z (compass) - doesn't install on mac but 3.x works
-    (mise list ruby | grep --quiet 3.1.2) || mise install ruby@3.1.2
-    mise install ruby@latest
-    mise use --global ruby@3.1.2
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install erlang version {{{
-_install_erlang_version() {
-    (mise plugin list | grep --quiet erlang) && (mise list erlang | grep --quiet 23.0) && return
-    builtin cd "$HOME" >/dev/null || return
-    _log_info "Installing erland version"
-    (mise plugin list | grep --quiet erlang) || mise plugin add erlang
-    export KERL_CONFIGURE_OPTIONS="--enable-m64-build --disable-debug --without-javac"
-    PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
-    export PATH
-    export MACOSX_DEPLOYMENT_TARGET=10.4
-    export SYSTEM_VERSION_COMPAT=1
-    (mise list erlang | grep --quiet 23.0) || mise install erlang@23.0
-    mise use --global erlang@23.0
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# install elixir version {{{
-_install_elixir_version() {
-    builtin cd "$HOME" >/dev/null || return
-    _log_info "Installing elixir version"
-    (mise plugin list | grep --quiet elixir) || mise plugin add elixir
-    (mise list elixir | grep --quiet 1.10.4-otp-23) || mise install elixir@1.10.4-otp-23
-    mise use --global elixir@1.10.4-otp-23
-    builtin cd - >/dev/null || return
-}
-# }}}
-
-# update python pip packages {{{
-_update_python_pip_packages() {
-    _log_info "Installing/upgrading pip3 packages"
-    pip install --upgrade pip
-    pip install --upgrade neovim --user # neovim uses this pip/python version
-}
-# }}}
-
-# antidote (zsh plugin manager) {{{
-_update_antidote_plugins() {
-    _log_info "Updating antidote plugins"
-    if (brew list | grep antidote >/dev/null); then
-        local -r ANTIDOTE_ZSH_FILE="$(brew --prefix antidote)"/share/antidote/antidote.zsh
-        zsh -c "source $ANTIDOTE_ZSH_FILE && antidote load && antidote update --bundles" # update all packages
+_install_homebrew() {
+    if ! command -v brew &>/dev/null; then
+        _log_info "Install homebrew"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 }
-# }}}
 
-# apply hosts file {{{
-_apply_hosts_file() {
+_install_upgrade_homebrew_packages() {
+    _log_info "Installing/upgrading homebrew packages"
+    cd "$HOME" || return
+    brew bundle
+    cd - || return
+}
+
+_upgrade_gcloud_components() {
+    _log_info "Upgrading gcloud components"
+    gcloud components update --quiet
+}
+
+_install_akamai_purge_command() {
+    if ! (akamai list | grep --quiet purge); then
+        _log_info "Installing akamai purge command"
+        akamai install purge
+    fi
+}
+
+_upgrade_akamai_commands() {
+    _log_info "Upgrading akamai commands"
+    akamai update
+}
+
+_change_shell_to_zsh() {
+    which_zsh=$(which zsh)
+    if ! [ "$SHELL" = "$which_zsh" ]; then
+        _log_info "Changing shell to zsh"
+        chsh -s "$which_zsh"
+    fi
+}
+
+_install_tmux_plugin_manager() {
+    tpm_dir="$XDG_CONFIG_HOME"/tmux/plugins/tpm
+    if ! [ -d "$tpm_dir" ]; then
+        _log_info "Installing tmux plugin manager"
+        git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+    fi
+}
+
+_reinstall_neovim_stable() {
+    _log_info "Reinstalling neovim stable"
+    mise uninstall neovim@stable
+    mise use --global neovim@stable
+}
+
+_install_or_upgrade_zinit() {
+    if command -v zinit &>/dev/null; then
+        _log_info "Upgrading zinit"
+        zinit self-update
+    else
+        command -v zinit &>/dev/null && return
+        _log_info "Installing zinit"
+        zinit_home="$XDG_DATA_HOME"/zinit/zinit.git
+        [ ! -d "$zinit_home" ] && mkdir -p "$(dirname "$zinit_home")"
+        [ ! -d "$zinit_home"/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$zinit_home"
+        source "$zinit_home/zinit.zsh"
+    fi
+}
+
+_upgrade_zinit_plugins() {
+    _log_info "Upgrading zinit plugins"
+    zinit update --parallel
+}
+
+_sync_hosts_file() {
     _log_info "Syncing hosts file"
     sudo hostess apply "$HOME/.support/hosts.json"
 }
-# }}}
 
-# enable terminal text formatting {{{
-# e.g. italics, curly underscore, etc.
-# https://github.com/tmux/tmux/issues/3218#issue-1265998468
-_enable_terminal_text_formattting() {
-    _log_info "Enabling terminal text formatting"
-    "$(brew --prefix)"/Cellar/ncurses/6.3/bin/infocmp -x tmux-256color >tmux-256color.terminfo
-    tic -x "$HOME/.support/tmux-256color.terminfo"
-    "$(brew --prefix)"/Cellar/ncurses/6.3/bin/infocmp -x tmux >tmux.terminfo
-    tic -x "$HOME/.support/tmux.terminfo"
-    sudo /usr/bin/tic -x tmux-256color.src
+_clear_evalcache() {
+    _log_info "Clearing evalcache"
+    rm -f "$ZSH_EVALCACHE_DIR/init-*.sh"
 }
-# }}}
 
-# Mac preferences {{{
-# https://www.reddit.com/r/MacOS/comments/9ijy88/font_antialiasing_on_mojave/?utm_content=title&utm_medium=front&utm_source=reddit&utm_name=MacOS
-# also https://github.com/Jaycedam/mac-setup/blob/aeaec15052a0bed52a5853b0b50be27fd6e42418/modules/preferences.sh
 _apply_mac_preferences() {
+    [ "$system_type" = "Darwin" ] || return
     _log_info "Setting general mac preferences"
     defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-    defaults write -g NSWindowShouldDragOnGesture -bool true                 # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
-    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Disable “natural” (Lion-style) scrolling
-    defaults write com.apple.dock orientation -string 'left'                 # dock on left side
-    defaults write com.apple.dock "autohide" -bool true                      # Autohide
-    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'         # mac dark mode
-    defaults write NSGlobalDomain AppleAquaColorVariant -int 6               # graphite color theme
-    defaults write com.apple.dashboard dashboard-enabled-state -int 1        # disable dashboard
+    defaults write com.apple.LaunchServices LSQuarantine -bool false                             # disable mac quarantining all downloaded files from mise
+    defaults write -g NSWindowShouldDragOnGesture -bool true                                     # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
+    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false                     # Disable “natural” (Lion-style) scrolling
+    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
+    defaults write com.apple.dock "autohide" -bool true                                          # Autohide
+    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'                             # mac dark mode
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
+    defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40          # Increase sound quality for Bluetooth headphones/headsets
+    defaults write com.apple.screensaver askForPassword -int 1                                   # Require password immediately after sleep or screen saver begins
+    defaults write com.apple.screensaver askForPasswordDelay -int 0                              # Disable screensaver delay to ask for password
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"                          # Use column view in all Finder windows by default. Other view modes: `icnv`, `Nlsv`, `Flwv`
+    defaults write com.apple.Finder AppleShowAllFiles true                                       # show hidden files in finder
+    defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true                            # Show file extensions
+    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false        # Chrome - Disable the all too sensitive backswipe on Magic Mouse
+    defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false # Disable swipe for back/forward (e.g. browsers)
+    defaults write com.apple.screencapture location ~/Screenshots                                # Save screenshots to ~/Screenshots
+    defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"                        # Search scope current folder
+    defaults write com.apple.AdLib.plist allowApplePersonalizedAdvertising -bool false           # Disable Apple Advertising
+    defaults write com.apple.AdLib.plist allowIdentifierForAdvertising -bool false               # Disable Apple Advertising
+    defaults write com.apple.AdLib.plist personalizedAdsMigrated -bool false                     # Disable Apple Advertising
+    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false                           # disables "corrects spelling automatically"
+    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
+    defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
+    chflags nohidden ~/Library                                                                   # Show the ~/Library folder
     # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false # Disable press-and-hold for keys in favor of key repeat
     # defaults write NSGlobalDomain KeyRepeat -int 1 # Set a blazingly fast keyboard repeat rate
     # defaults write NSGlobalDomain InitialKeyRepeat -int 10
-    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40 # Increase sound quality for Bluetooth headphones/headsets
-    defaults write com.apple.screensaver askForPassword -int 1                          # Require password immediately after sleep or screen saver begins
-    defaults write com.apple.screensaver askForPasswordDelay -int 0
-    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"                   # Use column view in all Finder windows by default. Other view modes: `icnv`, `Nlsv`, `Flwv`
-    defaults write com.apple.Finder AppleShowAllFiles true                                # show hidden files in finder
-    defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true                     # Show file extensions
-    chflags nohidden ~/Library                                                            # Show the ~/Library folder
-    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false # Chrome - Disable the all too sensitive backswipe on Magic Mouse
-    defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
-    defaults write com.apple.screencapture location ~/Screenshots
-    defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf" # Search scope current folder
-    defaults write com.apple.AdLib.plist allowApplePersonalizedAdvertising -bool false
-    defaults write com.apple.AdLib.plist allowIdentifierForAdvertising -bool false
-    defaults write com.apple.AdLib.plist personalizedAdsMigrated -bool false
-    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false # disables "corrects spelling automatically"
 
     killall Dock
     killall Finder
     killall SystemUIServer
-
-    # finder default location home
-    defaults write com.apple.finder NewWindowTargetPath "file:/$HOME/"
-    if [[ $(defaults read com.apple.dock orientation) != "left" ]]; then
-        _log_info "Moving dock to left side"
-        defaults write com.apple.dock orientation -string 'left'
-        killall Dock
-    fi
-    if [[ $(defaults read NSGlobalDomain AppleInterfaceStyle) != "Dark" ]]; then
-        _log_info "Mac dark mode"
-        defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
-        killall Dock
-        killall SystemUIServer
-    fi
-    if [[ $(defaults read NSGlobalDomain AppleAquaColorVariant) != 6 ]]; then
-        _log_info "Graphite color theme"
-        defaults write NSGlobalDomain AppleAquaColorVariant -int 6
-        killall Finder
-    fi
-    if [[ $(defaults read com.apple.dashboard dashboard-enabled-state) != 1 ]]; then
-        _log_info "Disable dashboard"
-        defaults write com.apple.dashboard dashboard-enabled-state -int 1
-        killall Finder
-    fi
 }
-# }}}
 
-# launchctl jobs {{{
-# debug launchd jobs https://stackoverflow.com/q/6337513/557215
-# use this form to easily generate a launchd plist: http://launched.zerowidth.com/
-_start_launch_agents() {
-    _log_info "Starting launch agents"
-    # let's use lunchy instead of launchctl! https://github.com/eddiezane/lunchy
+_start_mac_launch_agents() {
+    [ "$system_type" = "Darwin" ] || return
     (lunchy status launched.mike.saatchi-tunnel.autossh | grep --quiet launched.mike.saatchi-tunnel.autossh) && return
+    _log_info "Starting launch agents"
     lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
-# }}}
 
-# fix file size limit for watching with entr {{{
-# http://entrproject.org/limits.html
-# DO NOT DO THIS it seems to cause the CrowdStrike memory leak!!!
-_fix_file_size_limit_for_watching_with_entr() {
-    [ -f /Library/LaunchDaemons/limit.maxfiles.plist ] && return
-    _log_info "Installing max files limit fixer for watching with entr"
-    builtin cd /Library/LaunchDaemons || return
-    sudo curl -sO http://entrproject.org/etc/limit.maxfiles.plist
-    builtin cd - || return
-}
-# }}}
+_create_code_dir
+# _decrypt_yadm_files
+_mac_xcode_command_line_tools
+_install_mise
+_update_mise_plugins
+_install_mise_dependencies
+_install_homebrew
+_install_upgrade_homebrew_packages
+_upgrade_gcloud_components
+_install_akamai_purge_command
+_upgrade_akamai_commands
+_change_shell_to_zsh
+_install_tmux_plugin_manager
+_reinstall_neovim_stable
+_install_or_upgrade_zinit
+_upgrade_zinit_plugins
+# _sync_hosts_file
+_clear_evalcache
+_apply_mac_preferences
+_start_mac_launch_agents
 
-# fix delta syntax highlighting for php {{{
-# https://github.com/dandavison/delta/issues/162#issuecomment-625952288
-_fix_delta_syntax_highlighting_for_php() {
-    _has bat && _log_info "fixing delta syntax highlighting for php" && bat cache --build
-}
-# }}}
-
-# clear evalcache {{{
-_clear_evalcache() {
-    _log_info "Clearing evalcache"
-    # This is what _evalcache_clear does
-    rm -f "$ZSH_EVALCACHE_DIR"/init-*.sh
-}
-# }}}
-
-# install fzf to shell {{{
-_install_fzf_to_shell() {
-    [ -f ~/.fzf.zsh ] && return
-    _log_info "Installing fzf to shell"
-    "$(brew --prefix)"/opt/fzf/install
-}
-# }}}
-
-# install godoc {{{
-_install_godoc() {
-    _has godoc && return
-    _log_info "Installing godoc"
-    go install golang.org/x/tools/cmd/godoc@latest
-}
-# }}}
-
-# run functions {{{
-# this way I can still source this file but comment out these function calls
-# and run one or more independently. This is extremely useful!!
-
-_bootstrap_all() {
-    _create_dirs
-    _install_xcode_command_line_tools
-    _install_homebrew_if_its_missing
-    _install_update_homebrew_packages
-    _pin_homebrew_packages
-    _install_neovim_versions
-    _install_php_versions
-    _install_node_versions
-    _install_lua_versions
-    # _install_perl_versions
-    _install_deno_versions
-    _install_python_versions
-    # _update_python_pip_packages
-    _install_ruby_versions
-    _upgrade_akamai_and_install_missing
-    _upgrade_gcloud_components
-    # _install_erlang_version
-    # _install_elixir_version
-    _install_tmux_plugin_manager
-    _install_upgrade_tmux_plugins
-    _update_antidote_plugins
-    # _apply_hosts_file
-    # _enable_terminal_text_formattting
-    _apply_mac_preferences
-    _start_launch_agents
-    # _fix_file_size_limit_for_watching_with_entr
-    _install_fzf_to_shell
-    _update_mise_plugins
-    _fix_delta_syntax_highlighting_for_php
-    _install_godoc
-    _clear_evalcache
-}
-
-_bootstrap_all
-# _install_php_versions
 _log_info "Installation complete"
-
-# }}}

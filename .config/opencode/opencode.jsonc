@@ -76,7 +76,7 @@
         },
         "sentry": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -116,7 +116,7 @@
         },
         "snyk": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "snyk",
                 "mcp",
@@ -126,7 +126,7 @@
         },
         "github": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -138,7 +138,7 @@
         },
         "postman": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -169,7 +169,7 @@
         },
         "slack": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -185,7 +185,7 @@
         },
         "atlassian": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -205,7 +205,7 @@
         },
         "zen": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "uvx",
                 "--from",

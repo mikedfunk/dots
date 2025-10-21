@@ -5,6 +5,12 @@
 # export GPG_TTY=$(tty)
 export GPG_TTY=$TTY
 
+export XDG_RUNTIME_DIR="$TMPDIR"
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_CACHE_HOME="$HOME"/.cache
+
 # p10k instant prompt (must be first) {{{
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -14,9 +20,7 @@ export GPG_TTY=$TTY
 # confirmations, etc.) must go above this block; everything else may go below.
 
 # P10k is installed as a ZSH plugin.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" 2>/dev/null
 # }}}
 
 # Paths {{{
@@ -133,12 +137,7 @@ source "$HOME"/.p10k.zsh 2>/dev/null
 
 # xdg-ninja (move configs to proper locations) {{{
 
-export XDG_RUNTIME_DIR="$TMPDIR"
-export XDG_CONFIG_HOME="$HOME"/.config
-export XDG_DATA_HOME="$HOME"/.local/share
-export XDG_STATE_HOME="$HOME"/.local/state
-export XDG_CACHE_HOME="$HOME"/.cache
-
+export AKAMAI_CLI_HOME="$XDG_CONFIG_HOME"/akamai
 export AKAMAI_EDGERC="$XDG_CONFIG_HOME"/akamai/.edgerc
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export AWS_ECR_CACHE_DIR="$XDG_CACHE_HOME"/aws/ecr
@@ -525,7 +524,8 @@ source "$HOME/.saatchirc" 2>/dev/null
 # ensure the tmux term exists, otherwise some stuff like ncurses apps (e.g. tig) might break. This is very fast.
 tic -x "$HOME/.support/tmux-256color.terminfo" &>/dev/null
 tic -x "$HOME/.support/tmux.terminfo" &>/dev/null
-source "$HOME"/.fzf.zsh 2>/dev/null # fuzzy finder - installed via yadm bootstrap (still from homebrew)
+# source "$HOME"/.fzf.zsh 2>/dev/null # fuzzy finder - installed via yadm bootstrap (still from homebrew)
+_evalcache fzf --zsh
 
 # https://github.com/romkatv/powerlevel10k#does-powerlevel10k-always-render-exactly-the-same-prompt-as-powerlevel9k-given-the-same-config
 ZLE_RPROMPT_INDENT=0
