@@ -1,6 +1,3 @@
 #!/bin/bash
 
-curl -fLo "$HOME"/.bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm >/tmp/yadm
-chmod +x /tmp/yadm
-
-/tmp/yadm clone git@github.com:mikedfunk/dots.git --bootstrap
+bash -c "$(curl -fsLS raw.githubusercontent.com/yadm-dev/yadm/master/yadm)" -- clone git@github.com:mikedfunk/dots.git --bootstrap
