@@ -4,7 +4,8 @@ _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(
 
 _install_yadm_if_missing() {
     _log_info "installing yadm"
-    curl -fLo "$HOME/.bin/yadm" https://github.com/yadm-dev/yadm/raw/master/yadm && chmod +x "$HOME/.bin/yadm"
+    mkdir -p "$HOME"/.bin
+    curl -fLo "$HOME"/.bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm && chmod +x "$HOME"/.bin/yadm
     export PATH="$HOME/.bin:$PATH"
 }
 
