@@ -39,7 +39,19 @@ return {
         },
         groovyls = {},
         -- harper_ls = {}, -- annoying grammar checker that usually reports false positives in code
-        jsonls = {},
+        jsonls = {
+          -- TODO: trying to fix this: Problems loading reference 'vscode://schemas/settings/machine': Unable to load schema from 'vscode://schemas/settings/machine': MethodNotFound.
+          -- settings = {
+          --   json = {
+          --     schemas = require("schemastore").json.schemas({
+          --       replace = {
+          --         ["devcontainer.json"] = "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.base.schema.json",
+          --       },
+          --     }),
+          --     validate = { enable = true },
+          --   },
+          -- },
+        },
         lemminx = {},
         -- lsp_ai = {},
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua

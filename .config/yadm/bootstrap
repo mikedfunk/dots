@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
+# _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
+_log_info() { echo "$1"; }
 
 system_type=$(uname -s)
 
@@ -33,13 +34,13 @@ _install_mise() {
 
 _update_mise_plugins() {
     _log_info "Updating mise plugins"
-    mise plugin update
+    mise plugin update --yes --quiet
 }
 
 _install_mise_dependencies() {
     _log_info "Installing mise dependencies"
     cd "$HOME" || return
-    mise install
+    mise install --yes --quiet
     cd - || return
 }
 
