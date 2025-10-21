@@ -4,16 +4,18 @@ _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(
 
 system_type=$(uname -s)
 
+_change_shell_to_zsh() {
+    which_zsh=$(which zsh)
+    if ! [ "$SHELL" = "$which_zsh" ]; then
+        _log_info "Changing shell to zsh"
+        chsh -s "$which_zsh"
+        exec zsh
+    fi
+}
+
 _create_code_dir() {
     _log_info "Creating code directory if missing"
     mkdir -p "$HOME/Code"
-}
-
-_decrypt_yadm_files() {
-    if ! [ -f "$HOME"/.saatchirc ]; then
-        _log_info "Decrypting yadm files"
-        yadm decrypt
-    fi
 }
 
 _mac_xcode_command_line_tools() {
@@ -56,6 +58,13 @@ _install_upgrade_homebrew_packages() {
     cd - || return
 }
 
+_decrypt_yadm_files() {
+    if ! [ -f "$HOME"/.saatchirc ]; then
+        _log_info "Decrypting yadm files"
+        yadm decrypt
+    fi
+}
+
 _upgrade_gcloud_components() {
     _log_info "Upgrading gcloud components"
     gcloud components update --quiet
@@ -71,14 +80,6 @@ _install_akamai_purge_command() {
 _upgrade_akamai_commands() {
     _log_info "Upgrading akamai commands"
     akamai update
-}
-
-_change_shell_to_zsh() {
-    which_zsh=$(which zsh)
-    if ! [ "$SHELL" = "$which_zsh" ]; then
-        _log_info "Changing shell to zsh"
-        chsh -s "$which_zsh"
-    fi
 }
 
 _install_tmux_plugin_manager() {
@@ -170,18 +171,18 @@ _start_mac_launch_agents() {
     lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
 
+_change_shell_to_zsh
 _create_code_dir
-# _decrypt_yadm_files
 _mac_xcode_command_line_tools
 _install_mise
 _update_mise_plugins
 _install_mise_dependencies
 _install_homebrew
 _install_upgrade_homebrew_packages
+# _decrypt_yadm_files
 _upgrade_gcloud_components
 _install_akamai_purge_command
 _upgrade_akamai_commands
-_change_shell_to_zsh
 _install_tmux_plugin_manager
 _reinstall_neovim_stable
 _install_or_upgrade_zinit
