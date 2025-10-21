@@ -20,7 +20,8 @@ export XDG_CACHE_HOME="$HOME"/.cache
 # confirmations, etc.) must go above this block; everything else may go below.
 
 # P10k is installed as a ZSH plugin.
-source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" 2>/dev/null
+[[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
 # }}}
 
 # Paths {{{

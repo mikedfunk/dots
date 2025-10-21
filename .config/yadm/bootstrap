@@ -180,7 +180,7 @@ _install_tmux_plugin_manager
 _reinstall_neovim_stable
 _install_or_upgrade_zinit
 _upgrade_zinit_plugins
-_sync_hosts_file
+# _sync_hosts_file
 _clear_evalcache
 _apply_mac_preferences
 _start_mac_launch_agents

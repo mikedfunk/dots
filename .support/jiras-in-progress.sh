@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim: set fdm=marker:
 
+eval "$(mise activate bash)"
+
 # not cached version {{{
 
 # icon=''
@@ -11,22 +13,24 @@
 #     echo -n "$icon"
 #     exit 0
 # fi
+#
+# printf "%s %s\n" "$icon" "$keys"
 # }}}
 
 # cached version (run every 5 mins): {{{
 
-CACHE_FILE="/tmp/tmux_jira_status.cache"
-ICON=''
-CACHE_TTL=$((5 * 60)) # 5 minutes
+cache_file="/tmp/tmux_jira_status.cache"
+icon=''
+cache_ttl=$((5 * 60)) # 5 minutes
 
 # Check if cache exists and is fresh
-if [ -f "$CACHE_FILE" ]; then
-    LAST_MODIFIED=$(stat -f "%m" "$CACHE_FILE") # macOS
-    NOW=$(date +%s)
-    AGE=$((NOW - LAST_MODIFIED))
+if [ -f "$cache_file" ]; then
+    last_modified=$(stat -f "%m" "$cache_file") # macOS
+    now=$(date +%s)
+    age=$((now - last_modified))
 
-    if [ "$AGE" -lt "$CACHE_TTL" ]; then
-        cat "$CACHE_FILE"
+    if [ "$age" -lt "$cache_ttl" ]; then
+        cat "$cache_file"
         exit 0
     fi
 fi
@@ -37,11 +41,11 @@ keys=$(acli jira workitem search \
     jq -r 'map(.key) | join(", ")')
 
 if [ -z "$keys" ]; then
-    printf "%s\n" "$ICON" >"$CACHE_FILE"
-    cat "$CACHE_FILE"
+    printf "%s\n" "$icon" >"$cache_file"
+    cat "$cache_file"
     exit 0
 fi
 
-printf "%s %s\n" "$ICON" "$keys" >"$CACHE_FILE"
-cat "$CACHE_FILE"
-# }}}
+printf "%s %s\n" "$icon" "$keys" >"$cache_file"
+cat "$cache_file"
+# # }}}

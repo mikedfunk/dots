@@ -1,4 +1,0 @@
-#!/bin/bash
-# who thought it would be a good idea to link this as gs? This overlaps with ghostscript which is needed for imagemagick and others.
-# passthrough command instead of a zsh function so git will do `git spice`
-"$(brew --prefix git-spice)/bin/gs" "$@"
