@@ -10,4 +10,4 @@ _install_yadm_if_missing() {
 }
 
 _install_yadm_if_missing
-"$HOME"/.bin/yadm clone git@github.com:mikedfunk/dots.git --bootstrap
+bash -c "$HOME/.bin/yadm clone git@github.com:mikedfunk/dots.git --bootstrap"
