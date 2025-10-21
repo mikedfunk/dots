@@ -81,6 +81,7 @@ yadm = "latest"
 "ubi:https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macamd64" = { version = "platforms.macos-amd64.url", rename_exe = "akamai", os = ["macos"] }
 "aqua:getsentry/sentry-cli" = { version = "latest", rename_exe = "sentry" }
 "aqua:snyk/cli" = "latest"
+neovim = "stable"
 
 [settings]
 experimental = true

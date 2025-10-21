@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-# _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
-_log_info() { echo "$1"; }
+_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
+# _log_info() { echo "$1"; }
 
 system_type=$(uname -s)
 
@@ -41,13 +41,13 @@ _install_upgrade_homebrew_packages() {
 
 _update_mise_plugins() {
     _log_info "Updating mise plugins"
-    mise plugin update --yes --quiet
+    mise plugin update --yes
 }
 
 _install_mise_dependencies() {
     _log_info "Installing mise dependencies"
     cd "$HOME" || return
-    mise install --yes --quiet
+    mise install --yes
     cd - || return
 }
 
@@ -86,8 +86,8 @@ _install_tmux_plugin_manager() {
 
 _reinstall_neovim_stable() {
     _log_info "Reinstalling neovim stable"
-    mise uninstall neovim@stable
-    mise use --global neovim@stable
+    mise uninstall neovim@stable --yes
+    mise use --global neovim@stable --yes
 }
 
 _install_or_upgrade_zinit() {
