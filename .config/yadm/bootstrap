@@ -78,7 +78,7 @@ _install_tmux_plugin_manager() {
     tpm_dir="$XDG_CONFIG_HOME"/tmux/plugins/tpm
     if ! [ -d "$tpm_dir" ]; then
         _log_info "Installing tmux plugin manager"
-        mkdir -p "$(dirname "$tpm_dir")"
+        mkdir -p "$tpm_dir"
         git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
     fi
 }
