@@ -61,7 +61,7 @@ ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
-"asdf:ag" = "latest"
+# "asdf:ag" = "latest"
 
 # TODO: https://github.com/eradman/entr#source-installation---bsd-mac-os-and-linux
 # "ubi:eradman/entr"

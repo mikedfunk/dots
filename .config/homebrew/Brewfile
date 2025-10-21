@@ -308,7 +308,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "telnet" # I don't have telnet? How am I going to watch star wars?
 # brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti. (moved to mise)
 # brew "terraform" # IAC
-# brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (moved to mise)
 # brew "tidy-html5" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
 # brew "timewarrior" # taskwarrior-like interface for tracking time (I don't use this)
 # brew "tldr" # more consise community man pages (tealdeer is faster)
@@ -375,6 +374,7 @@ brew "scrcpy" # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
+brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "toot" # mastodon cli/tui client
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
