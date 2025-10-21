@@ -27,7 +27,11 @@ export XDG_CACHE_HOME="$HOME"/.cache
 # Paths {{{
 
 # set up homebrew env vars and paths
-eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)"
+if [ "$(uname -s)" = "Darwin" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)"
+else
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # when CDing from anywhere, this will add the configured path to the
 # completions always. Why would I want to do this ever? It just looks like a

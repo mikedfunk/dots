@@ -34,7 +34,7 @@ _install_homebrew() {
 _install_upgrade_homebrew_packages() {
     _log_info "Installing/upgrading homebrew packages"
     cd "$HOME" || return
-    brew bundle
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
     cd - || return
 }
 
