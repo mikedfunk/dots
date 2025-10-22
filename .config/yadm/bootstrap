@@ -43,10 +43,11 @@ _update_mise_plugins() {
     mise plugin update --yes
 }
 
-_install_mise_dependencies() {
+_install_and_upgrade_mise_dependencies() {
     _log_info "Installing mise dependencies"
     cd "$HOME" || return
     mise install --yes
+    mise upgrade --yes
     cd - || return
 }
 
@@ -206,7 +207,7 @@ _mac_xcode_command_line_tools
 _install_homebrew
 _install_upgrade_homebrew_packages
 _update_mise_plugins
-_install_mise_dependencies
+_install_and_upgrade_mise_dependencies
 _decrypt_yadm_files
 _install_and_configure_php_81_extensions
 _install_and_configure_php_84_extensions
