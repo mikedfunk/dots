@@ -94,7 +94,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "bfd67f1402b97ac619cb538f4bbaed12a7fa89aa" },
   "scamp.nvim": { "branch": "main", "commit": "226fa87bc70d42f0384bd05ca0fa9a81c2b412b2" },
   "sidekick.nvim": { "branch": "main", "commit": "bd1f79a506b7447d44873f78ffc0de7ea232bc88" },
-  "snacks.nvim": { "branch": "main", "commit": "c9528341a6ef9dc9cb404b1c901b1276af331ccf" },
+  "snacks.nvim": { "branch": "main", "commit": "4888c9b19dbbcb9121fd7efe1546ccc523644d33" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "thanks.nvim": { "branch": "main", "commit": "ec5eedab29b734c31050b6618fc58d1107ce8b4c" },
   "tmuxline.vim": { "branch": "master", "commit": "4119c553923212cc67f4e135e6f946dc3ec0a4d6" },
