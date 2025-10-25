@@ -216,7 +216,7 @@ export BAT_THEME="TwoDark"
 # use `gO` to open a quickfix with a table of contents!
 (( $+commands[nvim] )) && export MANPAGER='nvim +Man!'
 source "$HOME"/.private_vars.sh 2>/dev/null
-# [ -f $(brew --prefix)/etc/grc.zsh ] && source "$(brew --prefix)/etc/grc.zsh" # generic colorizer
+source "$(brew --prefix)"/etc/grc.zsh 2>/dev/null # generic colorizer
 
 _evalcache mise activate zsh 2>/dev/null
 

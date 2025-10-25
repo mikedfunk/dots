@@ -57,6 +57,8 @@ ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
+# TODO: move to mason when they recognize that there is an arm64 build :/
+"go:github.com/laravel-ls/laravel-ls/cmd/laravel-ls" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

@@ -38,8 +38,8 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 # .boto
 # .local/share/nvim/dadbod_ui/connections.json
 # Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
+# .circleci/cli.yml
 .bigqueryrc
-.circleci/cli.yml
 .config/akamai/.edgerc
 .config/algolia/config.toml
 .config/aws/config

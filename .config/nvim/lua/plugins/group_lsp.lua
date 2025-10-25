@@ -53,6 +53,7 @@ return {
           --   },
           -- },
         },
+        laravel_ls = { mason = false }, -- TODO: mason doesn't recognize arm64 build so I installed with mise. Switch when available.
         lemminx = {},
         -- lsp_ai = {},
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua

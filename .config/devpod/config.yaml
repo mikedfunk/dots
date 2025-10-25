@@ -3,15 +3,15 @@ contexts:
     defaultIde: none
     defaultProvider: docker
     options:
-      # DOTFILES_URL:
-      #   userProvided: true
-      #   value: git@github.com:mikedfunk/dots.git
-      # GPG_AGENT_FORWARDING:
-      #   userProvided: true
-      #   value: "true"
-      # SSH_INJECT_GIT_CREDENTIALS:
-      #   userProvided: true
-      #   value: "true"
+      DOTFILES_URL:
+        userProvided: true
+        value: git@github.com:mikedfunk/devpod-dotfiles.git
+      GPG_AGENT_FORWARDING:
+        userProvided: true
+        value: "true"
+      SSH_INJECT_GIT_CREDENTIALS:
+        userProvided: true
+        value: "true"
     providers:
       docker:
         creationTimestamp: "2024-11-24T05:35:34Z"
