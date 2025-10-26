@@ -1,30 +1,34 @@
 #!/usr/bin/env bash
 
-# throttle
-sleep 2
-
-# DOCKER="🐳 "
 DOCKER="󰡨"
-# DOCKER=""
+cache_file="/tmp/docker_status_cache"
+cache_ttl=2
 
-# timeout 2s docker ps --quiet 1> /dev/null
-# [[ $? != 0 ]] && echo "#[fg=red]${DOCKER}#[fg=default]" && exit 0
-# echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
-case "$(docker desktop status --format=json | jq -r .Status)" in
+# Refresh cache if missing or older than TTL
+if [[ ! -f "$cache_file" || $(($(date +%s) - $(stat -f %m "$cache_file"))) -gt $cache_ttl ]]; then
+    docker desktop status --format=json >"$cache_file" 2>/dev/null
+fi
+
+status=$(jq -r .Status <"$cache_file" 2>/dev/null)
+
+# Build output buffer instead of printing twice
+output=""
+
+case "$status" in
 running)
-    echo "#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
+    output+="#[fg=green,bold]${DOCKER}#[fg=default,nobold]"
     ;;
 paused)
-    echo "#[fg=yellow]${DOCKER}#[fg=default]"
-    exit 0
+    output+="#[fg=yellow]${DOCKER}#[fg=default]"
     ;;
 *)
-    echo "#[fg=red]${DOCKER}#[fg=default]"
-    exit 0
+    output+="#[fg=red]${DOCKER}#[fg=default]"
     ;;
 esac
-# [ "$(docker desktop status --format=json | jq -r .Status)" = 'running' ] &&
-#     echo -n "#[fg=green,bold]${DOCKER}#[fg=default,nobold]" ||
-#     echo "#[fg=red]${DOCKER}#[fg=default]"
 
-[ -f "$HOME"/.support/saatchi/tmux-docker-status.sh ] && "$HOME"/.support/saatchi/tmux-docker-status.sh
+# Append the saatchi docker status on the same line
+saatchi_status=$(bash "$HOME/.support/saatchi/tmux-docker-status.sh" 2>/dev/null)
+[[ -n "$saatchi_status" ]] && output+=" ${saatchi_status}"
+
+# Print once
+echo -n "$output"
