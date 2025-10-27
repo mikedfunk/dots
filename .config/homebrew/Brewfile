@@ -494,7 +494,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
 # cask "postman" # http api client (I use the web interface mostly)
 # cask "postman-cli" # new postman cli runner. Replaces newman.
-# cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 # cask "qlcolorcode" # quicklook plugin to provide syntax highlighting to code files (fails to install)
 # cask "qlimagesize" # quicklook plugin (display image size and resolution in the title in preview)
 # cask "qlmarkdown" # quicklook plugin (preview markdown)
@@ -557,6 +556,7 @@ cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
+cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.

@@ -38,9 +38,10 @@ _install_upgrade_homebrew_packages() {
     cd - || return
 }
 
-_update_mise_plugins() {
-    _log_info "Updating mise plugins"
-    mise plugin update --yes
+_install_upgrade_mise_plugins() {
+    _log_info "Installing/upgrading mise plugins"
+    mise plugins update --yes
+    mise plugins install php-brew
 }
 
 _install_and_upgrade_mise_dependencies() {
@@ -49,13 +50,6 @@ _install_and_upgrade_mise_dependencies() {
     mise install --yes
     mise upgrade --yes
     cd - || return
-}
-
-_decrypt_yadm_files() {
-    if ! [ -f "$HOME"/.saatchirc ]; then
-        _log_info "Decrypting yadm files"
-        yadm decrypt
-    fi
 }
 
 _install_and_configure_php_81_extensions() {
@@ -127,22 +121,20 @@ _reinstall_neovim_stable() {
 }
 
 _install_or_upgrade_zinit() {
-    if command -v zinit &>/dev/null; then
+    zinit_home="$XDG_DATA_HOME"/zinit/zinit.git
+    if [ -d "$zinit_home" ]; then
         _log_info "Upgrading zinit"
-        zinit self-update
+        zsh -c "source \"${zinit_home}\"/zinit.zsh && zinit self-update"
     else
-        command -v zinit &>/dev/null && return
         _log_info "Installing zinit"
-        zinit_home="$XDG_DATA_HOME"/zinit/zinit.git
         [ ! -d "$zinit_home" ] && mkdir -p "$(dirname "$zinit_home")"
         [ ! -d "$zinit_home"/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$zinit_home"
-        source "$zinit_home/zinit.zsh"
     fi
 }
 
 _upgrade_zinit_plugins() {
     _log_info "Upgrading zinit plugins"
-    zinit update --parallel
+    zsh -c "source \"$XDG_DATA_HOME\"/zinit/zinit.git/zinit.zsh && zinit update --parallel"
 }
 
 _sync_hosts_file() {
@@ -206,9 +198,8 @@ _create_code_dir
 _mac_xcode_command_line_tools
 _install_homebrew
 _install_upgrade_homebrew_packages
-_update_mise_plugins
+_install_upgrade_mise_plugins
 _install_and_upgrade_mise_dependencies
-_decrypt_yadm_files
 _install_and_configure_php_81_extensions
 _install_and_configure_php_84_extensions
 _upgrade_gcloud_components
@@ -218,7 +209,7 @@ _install_tmux_plugin_manager
 _reinstall_neovim_stable
 _install_or_upgrade_zinit
 _upgrade_zinit_plugins
-# _sync_hosts_file
+_sync_hosts_file
 _clear_evalcache
 _apply_mac_preferences
 _start_saatchi_tunnel

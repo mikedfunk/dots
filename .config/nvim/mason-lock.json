@@ -1,7 +1,7 @@
 {
   "apex-language-server": "v65.0.0",
   "bash-language-server": "5.6.0",
-  "biome": "2.3.0",
+  "biome": "2.3.1",
   "black": "25.9.0",
   "checkmake": "0.2.2",
   "contextive": "v1.17.8",
@@ -25,7 +25,7 @@
   "gopls": "v0.20.0",
   "groovy-language-server": "0466842f2b9e7d2c4620e81e3acf85e56c71097f",
   "hadolint": "v2.14.0",
-  "helm-ls": "v0.5.2",
+  "helm-ls": "v0.5.3",
   "intelephense": "1.14.4",
   "isort": "7.0.0",
   "js-debug-adapter": "v1.105.0",

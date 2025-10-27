@@ -1,4 +1,14 @@
 return {
+  -- TODO: trying to use this to add macos arm64 version of laravel-ls, but can't get it to work yet
+  -- {
+  --   "mason-org/mason.nvim",
+  --   opts = {
+  --     registries = {
+  --       "lua:~/.local/share/nvim/mason-registry",
+  --       "github:mason-org/mason-registry",
+  --     },
+  --   },
+  -- },
   {
     "neovim/nvim-lspconfig",
     -- TODO: not working
