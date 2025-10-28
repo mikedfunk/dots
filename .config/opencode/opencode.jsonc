@@ -56,7 +56,7 @@
     "mcp": {
         "context7": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -64,16 +64,16 @@
             ]
         },
         // https://spotlightjs.com/
-        "spotlight": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "bunx",
-                "-y",
-                "@spotlightjs/spotlight",
-                "--stdio-mcp"
-            ]
-        },
+        // "spotlight": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "-y",
+        //         "@spotlightjs/spotlight",
+        //         "--stdio-mcp"
+        //     ]
+        // },
         "sentry": {
             "type": "local",
             "enabled": false,
@@ -126,7 +126,8 @@
         },
         "github": {
             "type": "local",
-            "enabled": true,
+            // apparently this can add a large amount of context to each call, pushing the token limit
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",

@@ -18,14 +18,12 @@ Code/saatchi/**/.gitlint
 Code/saatchi/**/.ignore
 Code/saatchi/**/.lazy.lua
 Code/saatchi/**/.neoconf.json
-Code/saatchi/**/.nvim.lua
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.projections.json
 Code/saatchi/**/compose.override.yml
 Code/saatchi/**/cspell.json
 Code/saatchi/**/mise.toml
-Code/saatchi/**/crush.json
-Code/saatchi/**/CRUSH.md
+Code/saatchi/**/AGENTS.md
 Code/saatchi/**/pyrightconfig.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
