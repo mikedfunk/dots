@@ -1,4 +1,5 @@
 return {
+  -- installed via lazyextras (dap.core) but options changed here
   {
     "rcarriga/nvim-dap-ui",
     dependencies = {
@@ -37,15 +38,14 @@ return {
       },
     },
   },
+  -- installed via lazyextras (dap.core) but options changed here
   {
     "mfussenegger/nvim-dap",
     dependencies = {
       {
         "LiadOz/nvim-dap-repl-highlights",
-        dependencies = {
-          "mfussenegger/nvim-dap",
-        },
-        config = true,
+        dependencies = { "mfussenegger/nvim-dap" },
+        opts = {},
       },
       {
         "ofirgall/goto-breakpoints.nvim",

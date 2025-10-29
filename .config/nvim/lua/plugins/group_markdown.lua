@@ -1,11 +1,11 @@
 return {
-  {
-    "bullets-vim/bullets.vim",
-    ft = "markdown",
-    init = function()
-      vim.g.bullets_checkbox_markers = "    x" -- default: ' .oOX'
-    end,
-  },
+  -- {
+  --   "bullets-vim/bullets.vim",
+  --   ft = "markdown",
+  --   init = function()
+  --     vim.g.bullets_checkbox_markers = "    x" -- default: ' .oOX'
+  --   end,
+  -- },
   -- use utf-8 symbols directly
   -- {
   --   "bngarren/checkmate.nvim",
@@ -40,6 +40,7 @@ return {
   -- },
   -- { "dhruvasagar/vim-table-mode", ft = "markdown" },
   {
+    -- lsp stuff for code embedded in markdown
     "jmbuhr/otter.nvim",
     ft = "markdown",
     dependencies = { "nvim-treesitter/nvim-treesitter" },

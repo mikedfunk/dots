@@ -416,6 +416,7 @@ return {
   -- },
   {
     "folke/sidekick.nvim",
+    enabled = false,
     dependencies = {
       {
         "neovim/nvim-lspconfig",

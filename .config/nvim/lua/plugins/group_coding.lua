@@ -88,18 +88,19 @@ return {
       },
     },
   },
-  {
-    "jdrupal-dev/code-refactor.nvim",
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "php",
-    },
-    opts = {},
-    keys = {
-      { "<Leader>rt", "<Cmd>CodeActions all<CR>", buffer = true, noremap = true, desc = "Treesitter Refactor Menu" },
-    },
-  },
+  -- TODO: doesn't work with treesitter main branch :/
+  -- {
+  --   "jdrupal-dev/code-refactor.nvim",
+  --   filetypes = {
+  --     "javascript",
+  --     "javascriptreact",
+  --     "typescript",
+  --     "typescriptreact",
+  --     "php",
+  --   },
+  --   opts = {},
+  --   keys = {
+  --     { "<Leader>rt", "<Cmd>CodeActions all<CR>", buffer = true, noremap = true, desc = "Treesitter Refactor Menu" },
+  --   },
+  -- },
 }
