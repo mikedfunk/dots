@@ -62,6 +62,7 @@ _install_and_configure_php_81_extensions() {
     xdebug_config_file="$(brew --prefix)"/etc/php/8.1/conf.d/04_xdebug.ini
     if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
         cat <<'EOF' >>"$xdebug_config_file"
+zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
@@ -80,6 +81,7 @@ _install_and_configure_php_84_extensions() {
     xdebug_config_file="$(brew --prefix)"/etc/php/8.4/conf.d/04_xdebug.ini
     if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
         cat <<'EOF' >>"$xdebug_config_file"
+zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1

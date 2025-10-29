@@ -474,8 +474,8 @@ pscw() {
         php \
         -dmemory_limit=1024M \
         -ddisplay_errors=off \
-        -dxdebug.mode=off \
-        ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml -vvv
+        -dxdebug.mode=coverage \
+        ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml -vvv $@
 }
 # }}}
 

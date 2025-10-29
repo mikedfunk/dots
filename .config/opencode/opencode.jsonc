@@ -124,10 +124,58 @@
                 "stdio"
             ]
         },
+        "aws-knowledge-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "fastmcp",
+                "run",
+                "https://knowledge-mcp.global.api.aws"
+            ]
+        },
+        "awslabs.eks-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.eks-mcp-server@latest",
+                // "--allow-write",
+                "--allow-sensitive-data-access"
+            ],
+            "environment": {
+                "FASTMCP_LOG_LEVEL": "ERROR",
+                "AWS_PROFILE": "{env:AWS_PROFILE}"
+            },
+        },
+        "awslabs.cloudwatch-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.cloudwatch-mcp-server@latest"
+            ],
+            "environment": {
+                "AWS_PROFILE": "{env:AWS_PROFILE}",
+                "FASTMCP_LOG_LEVEL": "ERROR"
+            }
+        },
+        "awslabs.cost-explorer-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.cost-explorer-mcp-server@latest"
+            ],
+            "environment": {
+                "FASTMCP_LOG_LEVEL": "ERROR",
+                "AWS_PROFILE": "{env:AWS_PROFILE}"
+            },
+        },
         "github": {
             "type": "local",
             // apparently this can add a large amount of context to each call, pushing the token limit
-            "enabled": false,
+            "enabled": true,
             "command": [
                 "bunx",
                 "-y",
