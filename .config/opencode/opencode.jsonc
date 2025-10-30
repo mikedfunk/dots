@@ -172,6 +172,15 @@
                 "AWS_PROFILE": "{env:AWS_PROFILE}"
             },
         },
+        "apple-mcp": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "--no-cache",
+                "apple-mcp@latest"
+            ]
+        },
         "github": {
             "type": "local",
             // apparently this can add a large amount of context to each call, pushing the token limit
@@ -266,6 +275,24 @@
                 "DISABLED_TOOLS": "analyze,refactor,testgen,secaudit,docgen,tracer",
                 "DEFAULT_MODEL": "auto"
             }
+        },
+        "cloudflare-observability": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "mcp-remote",
+                "https://observability.mcp.cloudflare.com/mcp"
+            ]
+        },
+        "cloudflare-bindings": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "mcp-remote",
+                "https://bindings.mcp.cloudflare.com/mcp"
+            ]
         },
         // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
         // "strava": {

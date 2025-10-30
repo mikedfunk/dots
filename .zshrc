@@ -462,7 +462,7 @@ alias psc="php \
     -dxdebug.mode=coverage \
     -dmemory_limit=2G \
     ./vendor/bin/phpspec run \
-    --config ./phpspec-coverage.yml \
+    --config=./phpspec-coverage.yml \
     --no-interaction \
     --no-code-generation \
     -vvv"
@@ -472,10 +472,14 @@ pscw() {
         | entr -cr \
         noti --message "✅ ${PWD##*/} PHPSpec passed and converage generated" \
         php \
-        -dmemory_limit=1024M \
-        -ddisplay_errors=off \
         -dxdebug.mode=coverage \
-        ./vendor/bin/phpspec run --no-interaction --config ./phpspec-coverage.yml -vvv $@
+        -dmemory_limit=2G \
+        ./vendor/bin/phpspec run \
+        --config=./phpspec-coverage.yml \
+        --no-interaction \
+        --no-code-generation \
+        -vvv \
+        $@
 }
 # }}}
 
