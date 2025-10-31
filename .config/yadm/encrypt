@@ -10,9 +10,7 @@
 .support/saatchi/*
 
 .config/git/config-saatchi
-.config/tmuxinator/work**.yml
-
-Code/saatchi/palette/phpspec-coverage**.yml
+.config/tmuxinator/work*.yml
 
 Code/saatchi/**/.gitlint
 Code/saatchi/**/.ignore
@@ -40,8 +38,7 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 .bigqueryrc
 .config/akamai/.edgerc
 .config/algolia/config.toml
-.config/aws/config
-.config/kube/config
+.config/{aws,kube}/config
 .config/multitail/multitail.conf
 .mailmap
 .mylogin.cnf

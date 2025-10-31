@@ -1,3 +1,7 @@
+-- CI Checks component
+local github_actions_failure_checks_count = 0
+local mason_updates_count = 0
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -7,7 +11,6 @@ return {
       "stevearc/conform.nvim",
     },
     opts = function(_, opts)
-      local mason_updates_count = 0
       opts.options.disabled_filetypes.winbar = {
         "Avante",
         "AvanteInput",
@@ -80,9 +83,10 @@ return {
 
       -- refresh the registry and update the count every 10 minutes (600,000 ms)
       local mason_updates_timer = vim.loop.new_timer()
+      local cache_time_in_milliseconds = 600000
       mason_updates_timer:start(
-        600000, -- first run delay
-        600000, -- repeat interval
+        cache_time_in_milliseconds, -- first run delay
+        cache_time_in_milliseconds, -- repeat interval
         vim.schedule_wrap(function()
           if registry_ok then
             registry.refresh(function()
@@ -114,8 +118,6 @@ return {
       -- }}}
       --
       -- github checks {{{
-      -- CI Checks component
-      local ci_failure_count = 0
 
       local function update_ci_checks()
         vim.fn.jobstart("gh pr checks --json state 2>/dev/null", {
@@ -127,21 +129,21 @@ return {
             local output = table.concat(data, "")
             local ok, json = pcall(vim.json.decode, output)
             if ok and type(json) == "table" then
-              ci_failure_count = 0
+              github_actions_failure_checks_count = 0
               for _, check in ipairs(json) do
                 if check.state == "FAILURE" or check.state == "ERROR" then
-                  ci_failure_count = ci_failure_count + 1
+                  github_actions_failure_checks_count = github_actions_failure_checks_count + 1
                 end
               end
             else
               -- Invalid JSON or no PR - reset to 0
-              ci_failure_count = 0
+              github_actions_failure_checks_count = 0
             end
           end,
           on_exit = function(_, exit_code)
             -- If gh command fails (no PR, no remote branch, etc), reset
             if exit_code ~= 0 then
-              ci_failure_count = 0
+              github_actions_failure_checks_count = 0
             end
           end,
         })
@@ -153,16 +155,16 @@ return {
 
       local ci_checks_component = {
         function()
-          if ci_failure_count == 0 then
+          if github_actions_failure_checks_count == 0 then
             return ""
           end
-          return " " .. ci_failure_count
+          return " " .. github_actions_failure_checks_count
         end,
         color = function()
           return { fg = Snacks.util.color("DiagnosticError") }
         end,
         cond = function()
-          return ci_failure_count > 0
+          return github_actions_failure_checks_count > 0
         end,
         on_click = function()
           vim.cmd("terminal gh pr checks")
