@@ -46,7 +46,7 @@
   "phpstan": "2.1.31",
   "prettier": "3.6.2",
   "pyright": "1.1.407",
-  "ruff": "0.14.2",
+  "ruff": "0.14.3",
   "rustywind": "0.24.3",
   "shellcheck": "v0.11.0",
   "shfmt": "v3.12.0",
