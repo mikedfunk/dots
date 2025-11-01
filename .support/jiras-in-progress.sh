@@ -36,16 +36,16 @@ if [ -f "$cache_file" ]; then
 fi
 
 # Generate new status
-keys=$(acli jira workitem search \
+first_two_keys=$(acli jira workitem search \
     --jql 'assignee = currentUser() AND status = "In Progress" ORDER BY updated DESC' --json |
-    jq -r 'map(.key) | join(", ")')
+    jq -r 'map(.key)[0:2] | join(", ")')
 
-if [ -z "$keys" ]; then
+if [ -z "$first_two_keys" ]; then
     printf "%s\n" "$icon" >"$cache_file"
     cat "$cache_file"
     exit 0
 fi
 
-printf "%s %s\n" "$icon" "$keys" >"$cache_file"
+printf "%s %s\n" "$icon" "$first_two_keys" >"$cache_file"
 cat "$cache_file"
 # # }}}
