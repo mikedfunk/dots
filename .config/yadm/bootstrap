@@ -35,6 +35,7 @@ _install_upgrade_homebrew_packages() {
     _log_info "Installing/upgrading homebrew packages"
     cd "$HOME" || return
     HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew cu --yes
     cd - || return
 }
 
@@ -56,13 +57,15 @@ _install_and_configure_php_81_extensions() {
     _log_info "Installing and configuring php 8.1 extensions"
     cd "$HOME" || return
     mise use --global php-brew@8.1
-    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
-    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
-    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
-    xdebug_config_file="$(brew --prefix)"/etc/php/8.1/conf.d/04_xdebug.ini
+    pie_show="$(pie show)"
+    echo "$pie_show" | grep --quiet xdebug || pie install xdebug/xdebug
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    export PHP_ZLIB_DIR
+    echo "$pie_show" | grep --quiet php-memcached || pie install php-memcached/php-memcached
+    echo "$pie_show" | grep --quiet imagick || pie install imagick/imagick
+    xdebug_config_file="$(brew --prefix)"/etc/php/8.1/conf.d/ext-xdebug.ini
     if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
         cat <<'EOF' >>"$xdebug_config_file"
-zend_extension=xdebug.so
 [xdebug]
 xdebug.cli_color=1
 xdebug.show_local_vars=1
@@ -75,9 +78,14 @@ EOF
 _install_and_configure_php_84_extensions() {
     _log_info "Installing and configuring php 8.4 extensions"
     cd "$HOME" || return
-    pecl list | grep --quiet memcached || (yes "" | pecl install memcached)
-    pecl list | grep --quiet imagick || (yes "" | pecl install imagick)
-    pecl list | grep --quiet xdebug || (yes "" | pecl install xdebug)
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    export PHP_ZLIB_DIR
+    pie_show="$(pie show)"
+    echo "$pie_show" | grep --quiet xdebug || pie install xdebug/xdebug
+    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    export PHP_ZLIB_DIR
+    echo "$pie_show" | grep --quiet php-memcached || pie install php-memcached/php-memcached
+    echo "$pie_show" | grep --quiet imagick || pie install imagick/imagick
     xdebug_config_file="$(brew --prefix)"/etc/php/8.4/conf.d/04_xdebug.ini
     if ! grep --quiet 'xdebug' "$xdebug_config_file"; then
         cat <<'EOF' >>"$xdebug_config_file"
@@ -211,7 +219,7 @@ _install_tmux_plugin_manager
 _reinstall_neovim_stable
 _install_or_upgrade_zinit
 _upgrade_zinit_plugins
-_sync_hosts_file
+# _sync_hosts_file
 _clear_evalcache
 _apply_mac_preferences
 _start_saatchi_tunnel

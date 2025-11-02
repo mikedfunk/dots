@@ -344,7 +344,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "yarn" # wrapper for npm with real lock files and caching (installing via npm is deprecated, but installing it here causes problems with asdf nodejs :/ ) (used by cloudbeaver: mysql web app)
 # brew "yq" # jq is to json what yq is to yaml (and xml!). yaml parser and searcher. I use it to read configs my circleci stuff, etc.
 # brew "zk" # Zettelkasten note-taking tool, used by zk.nvim plugin (moved to mise)
-# brew "zlib" # needed to build php and python
 # brew "zork" # seriously? yes. tip: `save` and `restore` And yes, there's only one save slot, what do you think this is, 1990?
 # brew "zplug" # zsh plugin manager like composer. bash installer crashes for some reason. works fine via homebrew. (switched to ~antibody~ antidote)
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
@@ -366,6 +365,7 @@ brew "multitail" # tail multiple files or tail streams in splits with pretty col
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
 brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
+brew "pie" # php extension installer
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "pngpaste" # save image from clipboard to file
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
@@ -380,6 +380,7 @@ brew "toot" # mastodon cli/tui client
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
 brew "wget" # latest version
+brew "zlib", postinstall: "brew pin zlib" # needed to build php and python and memcached php extension
 brew "zsh" # awesome bash shell replacement
 
 # }}}

@@ -74,6 +74,8 @@ export path=(
   # "${KREW_ROOT:-$HOME/.krew}"/bin
   # $HOME/.yarn/bin
   $HOME/.docker/bin
+  # docker labs k8s toolkit, mise, self-updated tools
+  $HOME/.local/bin
   # to install groovy-language-server
   # $(brew --prefix openjdk@17)/bin
   # my own scripts
