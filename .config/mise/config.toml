@@ -9,7 +9,7 @@ go = "latest"
 java = "latest" # needed for plantuml
 lua = "latest"
 node = { version = "latest", postinstall = "corepack enable" }
-php-brew = "8.4"
+php-brew = { version = "8.4", postinstall = "pie install xdebug/xdebug && pie install php-memcached/php-memcached --with-zlib-dir=$(brew --prefix zlib) && pie install imagick/imagick"}
 python = "latest"
 ruby = "latest"
 
@@ -70,6 +70,7 @@ platforms.linux-arm64.url = "https://acli.atlassian.com/linux/latest/acli_linux_
 
 [tools."http:akamai-cli"]
 version = "2.0.2"
+postinstall = "akamai install purge && akamai update"
 rename_exe = "akamai"
 platforms.macos-x64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macamd64"
 platforms.macos-arm64.url = "https://github.com/akamai/cli/releases/download/v2.0.2/akamai-v2.0.2-macarm64"
