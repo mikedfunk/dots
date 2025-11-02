@@ -33,10 +33,10 @@ _install_homebrew() {
 
 _install_upgrade_homebrew_packages() {
     _log_info "Installing/upgrading homebrew packages"
-    cd "$HOME" || return
+    builtin cd "$HOME" || return
     HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
     HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew cu --yes
-    cd - || return
+    builtin cd - || return
 }
 
 _install_upgrade_mise_plugins() {
@@ -47,19 +47,19 @@ _install_upgrade_mise_plugins() {
 
 _install_and_upgrade_mise_dependencies() {
     _log_info "Installing mise dependencies"
-    cd "$HOME" || return
+    builtin cd "$HOME" || return
     mise install --yes
     mise upgrade --yes
-    cd - || return
+    builtin cd - || return
 }
 
 _install_and_configure_php_81_extensions() {
     _log_info "Installing and configuring php 8.1 extensions"
-    cd "$HOME" || return
+    builtin cd "$HOME" || return
     mise use --global php-brew@8.1
-    pie_show="$(pie show)"
+    pie_show="${pie_show:-$(pie show)}"
     echo "$pie_show" | grep --quiet xdebug || pie install xdebug/xdebug
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    PHP_ZLIB_DIR="${PHP_ZLIB_DIR:-$(brew --prefix zlib)}"
     export PHP_ZLIB_DIR
     echo "$pie_show" | grep --quiet php-memcached || pie install php-memcached/php-memcached
     echo "$pie_show" | grep --quiet imagick || pie install imagick/imagick
@@ -72,17 +72,15 @@ xdebug.show_local_vars=1
 EOF
     fi
     mise use --global php-brew@8.4
-    cd - || return
+    builtin cd - || return
 }
 
 _install_and_configure_php_84_extensions() {
     _log_info "Installing and configuring php 8.4 extensions"
-    cd "$HOME" || return
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
-    export PHP_ZLIB_DIR
-    pie_show="$(pie show)"
+    builtin cd "$HOME" || return
+    pie_show="${pie_show:-$(pie show)}"
     echo "$pie_show" | grep --quiet xdebug || pie install xdebug/xdebug
-    local -r PHP_ZLIB_DIR="$(brew --prefix zlib)"
+    PHP_ZLIB_DIR="${PHP_ZLIB_DIR:-$(brew --prefix zlib)}"
     export PHP_ZLIB_DIR
     echo "$pie_show" | grep --quiet php-memcached || pie install php-memcached/php-memcached
     echo "$pie_show" | grep --quiet imagick || pie install imagick/imagick
@@ -95,7 +93,7 @@ xdebug.cli_color=1
 xdebug.show_local_vars=1
 EOF
     fi
-    cd - || return
+    builtin cd - || return
 }
 
 _upgrade_gcloud_components() {
