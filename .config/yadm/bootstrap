@@ -8,7 +8,7 @@ _change_shell_to_zsh() {
     which_zsh=$(which zsh)
     if ! [ "$SHELL" = "$which_zsh" ]; then
         _log_info "Changing shell to zsh"
-        chsh -s "$which_zsh" $USER
+        chsh -s "$which_zsh" "$USER"
     fi
 }
 
@@ -42,7 +42,7 @@ _install_upgrade_homebrew_packages() {
 _install_upgrade_mise_plugins() {
     _log_info "Installing/upgrading mise plugins"
     mise plugins update --yes
-    mise plugins install php-brew
+    mise plugins install php-brew https://github.com/ntzrbtr/asdf-php-brew.git
 }
 
 _install_and_upgrade_mise_dependencies() {

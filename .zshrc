@@ -306,8 +306,8 @@ alias acli-login="echo $JIRA_USER_API_KEY | acli jira auth login --site $JIRA_SI
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh
-ssh () { env TERM=screen LC_SSH_ALIAS=$1 /usr/bin/ssh $@; }
-autossh () { LC_SSH_ALIAS=$1 autossh $@; }
+ssh () { env TERM=screen LC_SSH_ALIAS=$1 command ssh $@; }
+autossh () { LC_SSH_ALIAS=$1 command autossh $@; }
 compdef autossh="ssh"
 
 # https://www.youtube.com/watch?v=Wl7CDe9jsuo&feature=youtu.be

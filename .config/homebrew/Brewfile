@@ -380,7 +380,7 @@ brew "toot" # mastodon cli/tui client
 brew "watch" # Executes a program periodically, showing output fullscreen (an npm package which is a child dependency of another sometimes replaces this binary: https://www.npmjs.com/package/watch . If so, just `brew link --overwrite watch` )
 brew "watchman" # needed for `jest --watch` https://github.com/cm-pliser-tdd-by-example/tdd-by-example-js/issues/10
 brew "wget" # latest version
-brew "zlib", postinstall: "brew pin zlib" # needed to build php and python and memcached php extension
+brew "zlib", postinstall: "brew pin zlib" # needed for php(s) memcached extension, so must be pinned to the same version used to install those
 brew "zsh" # awesome bash shell replacement
 
 # }}}
