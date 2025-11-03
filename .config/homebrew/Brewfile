@@ -16,7 +16,6 @@
 # tap "daytonaio/tap" # daytona.io
 # tap "dbcli/tap" # litecli
 # tap "derailed/k9s" # k9s
-# tap "grishka/grishka" # neardrop
 # tap "homebrew/cask" # brew cask
 # tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 # tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
@@ -34,6 +33,7 @@
 # tap "xvxx/code" # shy
 # tap "zackriya-solutions/meetily" # meetily
 tap "buo/cask-upgrade" # for `brew cu`
+tap "grishka/grishka" # neardrop
 tap "mikedfunk/zoomhider" # zoomhider
 
 # }}}
@@ -480,7 +480,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "multipass" # "ubuntu LTS on tap" launch instances of ubuntu and initialize them with cloud-init metadata in a matter of seconds. Uses hypervisor or virtualbox behind the scenes.
 # cask "muzzle" # stop notifications while screensharing ( lately it's been incorrectly hiding a lot of notifications when I'm not even in zoom :/ Also Zoom added this feature )
 # cask "mysql-shell" # new shell for mysql8
-# cask "neardrop" # android nearby devices drop
 # cask "ngrok" # securely expose your local site to the internet and inspect and repeat traffic
 # cask "noti" # mac native pushbullet notifications (I use the chrome/firefox extension)
 # cask "nvidia-geforce-now" # game streaming
@@ -494,7 +493,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "playonmac" # run windows apps on mac for free via wine
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
 # cask "postman" # http api client (I use the web interface mostly)
-# cask "postman-cli" # new postman cli runner. Replaces newman.
+# cask "postman-cli" # new postman cli runner. Replaces newman. This is for running collections locally as tests (which we don't use Postman for).
 # cask "qlcolorcode" # quicklook plugin to provide syntax highlighting to code files (fails to install)
 # cask "qlimagesize" # quicklook plugin (display image size and resolution in the title in preview)
 # cask "qlmarkdown" # quicklook plugin (preview markdown)
@@ -534,7 +533,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
 # cask "wormhole" # interact with your phone screen from your computer
-# cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options
+# cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options (I switched to swiftbar)
 # cask "xquartz" # needed to install xclip, which is needed to copy text from multitail (I installed all of that, copy still didn't work :/ ) also needed for wine-stable
 # cask "xscreensaver" # shitload of old screensavers... downside is there are so many it slows down selecting Desktop & Screen Saver the first time in System Preferences :/ Upside: it has GLMatrix :)
 # cask "ytmdesktop-youtube-music" # youtube music
@@ -557,9 +556,12 @@ cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
+cask "neardrop" # android nearby devices drop
 cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
+cask "sf-symbols" if OS.mac? # macos symbols browser
+cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}

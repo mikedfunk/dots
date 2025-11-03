@@ -8,6 +8,7 @@ return {
       "nvim-neotest/nvim-nio",
       {
         "saghen/blink.cmp",
+        dependencies = { "saghen/blink.compat" },
         opts_extend = { "sources.default" },
         opts = {
           sources = {

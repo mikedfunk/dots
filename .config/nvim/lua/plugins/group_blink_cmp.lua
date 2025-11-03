@@ -27,7 +27,7 @@ return {
         },
         -- nvim-cmp providers that do not require provider customization
         compat = {
-          -- "nerdfont",
+          "nerdfont",
         },
         providers = {
           -- emoji = {
@@ -115,10 +115,10 @@ return {
       --     paths = { "/usr/share/dict/words" },
       --   },
       -- },
-      -- {
-      --   "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
-      --   dependencies = { "saghen/blink.compat" },
-      -- },
+      {
+        "chrisgrieser/cmp-nerdfont", -- trigger with :nf-
+        dependencies = { "saghen/blink.compat" },
+      },
       -- {
       --   "andersevenrud/cmp-tmux",
       --   branch = "main",
