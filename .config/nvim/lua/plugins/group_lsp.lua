@@ -146,6 +146,14 @@ return {
       },
     },
   },
+  -- mouse hover to lsp hover
+  {
+    "soulis-1256/eagle.nvim",
+    event = "LspAttach",
+    opts = {
+      border = "rounded",
+    },
+  },
   {
     "zapling/mason-lock.nvim",
     branch = "feat/support-mason2", -- TODO: when are they going to merge this?

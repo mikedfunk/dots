@@ -1,35 +1,25 @@
 return {
   {
     "adalessa/laravel.nvim",
-    -- TODO: There is some bug with execution on v4.x, need to fix
-    tag = "v3.3.0",
-    -- enabled = false,
     dependencies = {
       "tpope/vim-dotenv",
       "MunifTanjim/nui.nvim",
-      "kevinhwang91/promise-async",
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
       {
-        "nvim-telescope/telescope.nvim",
+        "saghen/blink.cmp",
+        opts_extend = { "sources.default" },
         opts = {
-          defaults = {
-            mappings = {
-              i = {
-                ["<Esc>"] = "close",
-                ["<C-n>"] = function(bufnr)
-                  require("telescope.actions").cycle_history_next(bufnr)
-                end,
-                ["<C-p>"] = function(bufnr)
-                  require("telescope.actions").cycle_history_prev(bufnr)
-                end,
-                ["<C-j>"] = function(bufnr)
-                  require("telescope.actions").move_selection_next(bufnr)
-                end,
-                ["<C-k>"] = function(bufnr)
-                  require("telescope.actions").move_selection_previous(bufnr)
-                end,
-                ["<M-p>"] = function(bufnr)
-                  require("telescope.actions").toggle_preview(bufnr)
-                end,
+          sources = {
+            default = {
+              "laravel",
+            },
+            providers = {
+              laravel = {
+                name = "laravel",
+                module = "blink.compat.source",
+                -- async = true,
+                score_offset = 95, -- higher than lsp priority
               },
             },
           },
@@ -43,31 +33,49 @@ return {
               "<leader>P",
               group = "+php",
               icon = "",
-              -- cond = function()
-              --   return vim.bo.ft == "php"
-              -- end,
             },
           },
         },
       },
     },
-    ft = { "php" },
+    ft = { "php", "json" },
+    cmd = { "Laravel" },
+    -- event = { "VeryLazy" },
     keys = {
       {
         "<leader>Pr",
-        "<Cmd>Laravel routes<cr>",
-        noremap = true,
-        desc = "Laravel routes",
-        ft = "php",
+        function()
+          Laravel.pickers.routes()
+        end,
+        desc = "Laravel: Open Routes Picker",
       },
+      -- {
+      --   "<leader>Po",
+      --   function()
+      --     Laravel.pickers.resources()
+      --   end,
+      --   desc = "Laravel: Open Resources Picker",
+      -- },
     },
+    ---@type LaravelOptions
     opts = {
-      lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
-      features = {
-        route_info = { enable = true, view = "right" },
+      extensions = {
+        command_center = { enable = false },
+        -- composer_dev = { enable = false },
+        -- composer_info = { enable = false },
+        dump_server = { enable = false },
+        mcp = { enable = false },
         model_info = { enable = false },
         override = { enable = false },
-        -- pickers = { enable = true, provider = "fzf-lua" }, -- fzf-lua picker is broken - problem with preview
+        route_info = { enable = true, view = "right" },
+        tinker = { enable = false },
+      },
+      lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
+      features = {
+        pickers = {
+          enable = true,
+          provider = "snacks", -- "snacks | telescope | fzf-lua | ui-select"
+        },
       },
     },
   },
