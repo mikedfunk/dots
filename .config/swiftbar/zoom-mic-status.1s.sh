@@ -1,16 +1,16 @@
 #!/bin/bash
 # <bitbar.title>Zoom Mic Status</bitbar.title>
-# <bitbar.desc>Shows Zoom mic status in the menubar (fast, every second)</bitbar.desc>
-# <bitbar.version>1.5</bitbar.version>
+# <bitbar.desc>Shows Zoom mic status in the menubar</bitbar.desc>
+# <bitbar.version>1.6</bitbar.version>
 # <bitbar.author>Mike Funk</bitbar.author>
 
 status=$(
     /usr/bin/osascript <<'APPLESCRIPT'
 tell application "System Events"
     try
-        if not (exists process "zoom.us") then return "off"
+        if not (exists process "zoom.us") then return "closed"
         tell process "zoom.us"
-            if not (exists menu bar item "Meeting" of menu bar 1) then return "off"
+            if not (exists menu bar item "Meeting" of menu bar 1) then return "closed"
             tell menu bar item "Meeting" of menu bar 1
                 set m to menu 1
                 if exists menu item "Mute Audio" of m then return "on"
@@ -19,16 +19,15 @@ tell application "System Events"
             end tell
         end tell
     on error
-        return "off"
+        return "closed"
     end try
 end tell
 APPLESCRIPT
 )
 
-if [[ "$status" == "on" ]]; then
-    echo ":microphone.fill:"
-elif [[ "$status" == "off" ]]; then
-    echo ":microphone.slash.fill: | color=red"
-else
-    echo ""
-fi
+case "$status" in
+on) echo ":microphone.fill: | sfcolor=green" ;;
+off) echo ":microphone.slash.fill: | sfcolor=red" ;;
+closed) echo "" ;; # Show nothing when Zoom is not running
+*) echo "" ;;
+esac

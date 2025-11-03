@@ -505,6 +505,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "scummvm" # old school
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
+# cask "sf-symbols" if OS.mac? # macos symbols browser (used to explore icons for swiftbar)
 # cask "sfdx" #SalesForce CLI
 # cask "shadow" # cloud gaming system https://shadow.tech
 # cask "shortcat" # vaguely vim-like tool to use the keyboard to navigate mouse-only stuff
@@ -560,8 +561,7 @@ cask "neardrop" # android nearby devices drop
 cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
-cask "sf-symbols" if OS.mac? # macos symbols browser
-cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar
+cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
