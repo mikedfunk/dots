@@ -75,18 +75,18 @@
         //     ]
         // },
         // TODO: not yet working as oauth is not popping up
-        "figma": {
-            "type": "local",
-            "enabled": true,
-            "command": [
-                "bunx",
-                "-y",
-                "mcp-remote",
-                "https://mcp.figma.com/mcp",
-                "--transport",
-                "sse-only"
-            ]
-        },
+        // "figma": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         "bunx",
+        //         "-y",
+        //         "mcp-remote",
+        //         "https://mcp.figma.com/mcp",
+        //         "--transport",
+        //         "sse-only"
+        //     ]
+        // },
         "sentry": {
             "type": "local",
             "enabled": true,
