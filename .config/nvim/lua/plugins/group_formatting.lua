@@ -22,7 +22,7 @@ return {
     opts_extend = {
       -- "formatters_by_ft.python",
       "formatters_by_ft.php",
-      "formatters_by_ft.sql",
+      -- "formatters_by_ft.sql",
       "formatters.phpcbf.prepend_args",
     },
     ---@type conform.setupOpts
@@ -35,9 +35,12 @@ return {
         -- python = { "black" }, -- moved to lazy extra
         php = { "php_cs_fixer", "rector", "phpcbf" },
         hurl = { "hurlfmt" },
-        -- sql = { "sqlruff" },
+        sql = { "sleek" }, -- less brittle than sqlfluff and sqruff
       },
       formatters = {
+        sleek = {
+          args = { "--uppercase", "false", "--indent-spaces", "2" },
+        },
         rector = function()
           local util = require("conform.util")
           ---@type conform.FormatterConfigOverride

@@ -11,6 +11,7 @@ return {
           checkmake = "checkmake",
           ["editorconfig-checker"] = "editorconfig-checker",
           ["markdownlint-cli2"] = "markdownlint-cli2",
+          sqruff = "sqruff",
           gitlint = "gitlint",
         })
     end,
@@ -81,7 +82,7 @@ return {
       "linters_by_ft.markdown",
       "linters_by_ft.make",
       "linters_by_ft.php",
-      "linters_by_ft.sql",
+      -- "linters_by_ft.sql",
     },
     opts = {
       linters_by_ft = {
@@ -95,7 +96,8 @@ return {
         markdown = { "markdownlint" },
         make = { "checkmake" },
         php = { "cspell" },
-        -- sql = { "sqlruff" },
+        sql = {}, -- sqruff and sqlfluff are so brittle. They die on local vars and json selectors.
+        -- sql = { "sqruff" },
         -- php = { "cspell", "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
       },
       linters = {
