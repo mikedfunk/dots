@@ -5,7 +5,8 @@
     "model": "opencode/code-supernova",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     "small_model": "openrouter/claude-3-5-haiku-20241022",
-    "theme": "system",
+    // "theme": "system",
+    "theme": "tokyonight",
     "share": "manual",
     // "instructions": [
     //     "CRUSH.md"
@@ -28,12 +29,15 @@
             "pwd": "allow",
             "grep *": "allow",
             "find *": "allow",
+            "*phpspec *": "allow",
+            "*phpstan *": "allow",
+            "*phpcs *": "allow",
             "*": "ask"
         }
     },
     "lsp": {
         "php": {
-            "disabled": false, // TODO: this is preventing the agent from responding
+            "disabled": false,
             "command": [
                 "{env:HOME}/.local/share/nvim/mason/bin/intelephense",
                 "--stdio"
@@ -113,6 +117,20 @@
                 "SPOTIFY_CLIENT_SECRET": "{env:SPOTIFY_CLIENT_SECRET}",
                 "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
             }
+        },
+        // TODO: FUCK SALESFORCE SO MUCH it is the worst. You have to first `sf org login web` which doesn't work for me.
+        "salesforce": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "@salesforce/mcp",
+                "--orgs",
+                "saatchiart",
+                "--toolsets",
+                "all"
+            ]
         },
         "obsidian": {
             "type": "local",

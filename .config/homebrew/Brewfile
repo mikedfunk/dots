@@ -248,7 +248,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "pipx" # like npx for python pip
 # brew "pkg-config" # needed for phpenv to build https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864
 # brew "pkgx" # like npx for homebrew
-# brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 # brew "plenv" # perl version manager. better than perlbrew and consistent with my other env managers (rbenv, phpenv, nodenv, pyenv). used to get percona-toolkit working.
 # brew "podman" # docker alternative
 # brew "podman-compose" # docker alternative
@@ -367,6 +366,7 @@ brew "mysql-client@8.0"
 brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
 brew "pie" # php extension installer
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
+brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)

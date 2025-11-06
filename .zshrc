@@ -10,6 +10,7 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_STATE_HOME="$HOME"/.local/state
 export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_BIN_DIR="$HOME"/.local/bin
 
 # p10k instant prompt (must be first) {{{
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
