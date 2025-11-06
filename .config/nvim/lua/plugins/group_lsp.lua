@@ -98,7 +98,18 @@ return {
         },
         -- phpactor = {},
         somesass_ls = {},
-        sqlls = {},
+        sqlls = {
+          -- This wasn't working in neoconf
+          settings = {
+            sqlLanguageServer = {
+              lint = {
+                rules = {
+                  ["reserved-word-case"] = { "error", "lower" },
+                },
+              },
+            },
+          },
+        },
         tailwindcss = {
           root_dir = function(startpath)
             return require("lspconfig.util").root_pattern(

@@ -100,11 +100,14 @@
         }
       }
     },
-    "sqlls": {
+    "sql": {
       "sqlLanguageServer": {
         "lint": {
           "rules": {
-            "reserved-word-case": "lower"
+            "reserved-word-case": [
+              "error",
+              "lower"
+            ]
           }
         }
       }
