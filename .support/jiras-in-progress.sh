@@ -37,7 +37,7 @@ fi
 
 # Generate new status
 first_two_keys=$(acli jira workitem search \
-    --jql 'assignee = currentUser() AND status = "In Progress" ORDER BY updated DESC' --json |
+    --jql 'assignee = currentUser() AND status = "In Progress" AND issuetype != "Epic" ORDER BY updated DESC' --json |
     jq -r 'map(.key)[0:2] | join(", ")')
 
 if [ -z "$first_two_keys" ]; then

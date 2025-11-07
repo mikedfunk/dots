@@ -296,7 +296,7 @@ alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias ccusage="npx -y ccusage@latest"
-alias mycli="mycli --defaults-group-suffix=_mycli --prompt=' \h  '" # prompt config option stopped working :/
+alias mycli="mycli --defaults-group-suffix=_mycli"
 (( $+commands[kubecolor] )) && alias kubectl=kubecolor && compdef kubecolor=kubectl
 alias k="kubectl"
 compdef k="kubectl"

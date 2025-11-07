@@ -363,7 +363,7 @@ return {
         x = {
           "#(~/.support/tmux-media-status-helper.sh)",
           -- "#(~/.support/tmux-spotify-status.sh)",
-          "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}",
+          -- "#{?#{pomodoro_status},#{pomodoro_status},#(tmux show -gv @pomodoro_off)}",
         },
         y = {
           "#(TZ=Etc/UTC date '+%%R UTC')", -- UTC time
