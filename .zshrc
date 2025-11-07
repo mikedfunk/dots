@@ -545,6 +545,16 @@ ZLE_RPROMPT_INDENT=0
 _evalcache fzf --zsh
 # }}}
 
+# tmux dark mode watcher {{{
+# Start tmux Dark/Light mode watcher once per login
+WATCHER_PID_FILE="$HOME/.tmux-dark-mode-watcher.pid"
+
+if [ ! -f "$WATCHER_PID_FILE" ] || ! kill -0 $(cat "$WATCHER_PID_FILE") 2>/dev/null; then
+    nohup ~/.support/tmux-dark-mode-watcher.sh >/tmp/tmux-dark-mode.log 2>&1 < /dev/null &
+    echo $! > "$WATCHER_PID_FILE"
+fi
+# }}}
+
 # zsh options {{{
 # https://hachyderm.io/@vonheikemen/109367664475938652 (fast)
 autoload -U edit-command-line
