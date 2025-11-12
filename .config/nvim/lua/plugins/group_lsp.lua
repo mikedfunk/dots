@@ -1,3 +1,5 @@
+vim.lsp.set_log_level("debug")
+
 return {
   -- TODO: trying to use this to add macos arm64 version of laravel-ls, but can't get it to work yet
   -- {
@@ -43,11 +45,15 @@ return {
             return require("lspconfig.util").root_pattern("deno.json")(startpath)
           end,
         },
+        elixirls = {
+          cmd = vim.env.HOME .. "/Code/elixir-ls/language_server.sh",
+          mason = false,
+        },
         eslint = { enabled = vim.fn.executable("eslint") == 1 },
-        -- flow = {},
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
         },
+        -- flow = {},
         groovyls = {},
         -- harper_ls = {}, -- annoying grammar checker that usually reports false positives in code
         jsonls = {
@@ -123,13 +129,14 @@ return {
           end,
         },
         taplo = {},
-        vtsls = {
-          root_dir = function(startpath)
-            return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(startpath)
-          end,
-          -- single_file_support = false, -- deprecated
-          workspace_required = true,
-        },
+        -- For some reason this root_dir function now breaks vtsls - it never starts
+        -- vtsls = {
+        --   root_dir = function(startpath)
+        --     return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(startpath)
+        --   end,
+        --   -- single_file_support = false, -- deprecated
+        --   workspace_required = true,
+        -- },
         yamlls = {},
         zk = {}, -- because marksman crashes a lot
       },

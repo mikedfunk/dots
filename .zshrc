@@ -182,6 +182,8 @@ export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/config.lua
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# export ELS_LOCAL=1
+
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
 export ZSH_ALIAS_FINDER_AUTOMATIC=true
 

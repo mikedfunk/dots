@@ -1,85 +1,44 @@
 return {
   {
     "adalessa/laravel.nvim",
-    dependencies = {
-      "tpope/vim-dotenv",
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-neotest/nvim-nio",
-      {
-        "saghen/blink.cmp",
-        dependencies = { "saghen/blink.compat" },
-        opts_extend = { "sources.default" },
-        opts = {
-          sources = {
-            default = {
-              "laravel",
-            },
-            providers = {
-              laravel = {
-                name = "laravel",
-                module = "blink.compat.source",
-                -- async = true,
-                score_offset = 95, -- higher than lsp priority
-              },
-            },
-          },
-        },
-      },
-      {
-        "folke/which-key.nvim",
-        opts = {
-          spec = {
-            {
-              "<leader>P",
-              group = "+php",
-              icon = "",
-            },
-          },
-        },
-      },
-    },
-    ft = { "php", "json" },
-    cmd = { "Laravel" },
-    -- event = { "VeryLazy" },
-    keys = {
-      {
-        "<leader>Pr",
-        function()
-          Laravel.pickers.routes()
-        end,
-        desc = "Laravel: Open Routes Picker",
-      },
-      -- {
-      --   "<leader>Po",
-      --   function()
-      --     Laravel.pickers.resources()
-      --   end,
-      --   desc = "Laravel: Open Resources Picker",
-      -- },
-    },
-    ---@type LaravelOptions
+    -- TODO: There is some bug with execution on v4.x, need to fix
+    tag = "v3.3.0",
+    ft = { "php" },
+    dependencies = { "kevinhwang91/promise-async" },
     opts = {
-      extensions = {
-        command_center = { enable = false },
-        -- composer_dev = { enable = false },
-        -- composer_info = { enable = false },
-        dump_server = { enable = false },
-        mcp = { enable = false },
-        model_info = { enable = false },
-        override = { enable = false },
-        route_info = { enable = true, view = "right" },
-        tinker = { enable = false },
-      },
       lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
       features = {
-        pickers = {
-          enable = true,
-          provider = "snacks", -- "snacks | telescope | fzf-lua | ui-select"
-        },
+        -- I only use this for route info
+        route_info = { enable = true, view = "right" },
+        model_info = { enable = false },
+        override = { enable = false },
+        pickers = { enable = false },
       },
     },
   },
+  -- {
+  --   "adalessa/laravel.nvim",
+  --   dependencies = { "nvim-neotest/nvim-nio" },
+  --   ft = { "php", "json" },
+  --   cmd = { "Laravel" },
+  --   opts = {
+  --     extensions = {
+  --       command_center = { enable = false },
+  --       -- composer_dev = { enable = false },
+  --       -- composer_info = { enable = false },
+  --       dump_server = { enable = false },
+  --       mcp = { enable = false },
+  --       model_info = { enable = false },
+  --       override = { enable = false },
+  --       route_info = { enable = true, view = "right" },
+  --       tinker = { enable = false },
+  --     },
+  --     lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
+  --     features = {
+  --       pickers = { enable = false },
+  --     },
+  --   },
+  -- },
   {
     "gbprod/phpactor.nvim",
     dependencies = {

@@ -68,6 +68,7 @@ return {
       ensure_installed = {
         "apex",
         "comment",
+        "elixir",
         "lua", -- update to latest
         "luadoc",
         "jsdoc",

@@ -32,6 +32,7 @@
             "*phpspec *": "allow",
             "*phpstan *": "allow",
             "*phpcs *": "allow",
+            "*yarn jest *": "allow",
             "*": "ask"
         }
     },
