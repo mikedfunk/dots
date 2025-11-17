@@ -69,6 +69,7 @@ return {
         "apex",
         "comment",
         "elixir",
+        "hurl",
         "lua", -- update to latest
         "luadoc",
         "jsdoc",
