@@ -17,7 +17,7 @@ usage = "latest" # needed for mise completion
 
 "aqua:awslabs/git-secrets" = "latest"
 "aqua:bensadeh/tailspin" = "latest"
-"aqua:mas-cli/mas" = "latest"
+# "aqua:mas-cli/mas" = "latest" # TODO: doesn't work - wrong path
 "aqua:snyk/cli" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
 "aqua:variadico/noti" = "latest"

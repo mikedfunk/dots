@@ -28,7 +28,7 @@ return {
           apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
         },
         biome = {},
-        -- copilot = {},
+        -- copilot = { telemetry = { telemetryLevel = "none" } },
         contextive = {
           root_dir = function(startpath)
             return require("lspconfig.util").root_pattern(".contextive")(startpath)
@@ -52,11 +52,77 @@ return {
         eslint = { enabled = vim.fn.executable("eslint") == 1 },
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
+          settings = {
+            emmet = {
+              includedLanguages = {
+                javascript = "javascriptreact",
+                typescript = "typescriptreact",
+              },
+              syntaxProfiles = {
+                jsx = {
+                  self_closing_tag = true,
+                  filters = "bem",
+                },
+              },
+            },
+          },
         },
         -- flow = {},
         groovyls = {},
-        -- harper_ls = {}, -- annoying grammar checker that usually reports false positives in code
+        -- harper_ls = {
+        --   settings = {
+        --     ["harper-ls"] = {
+        --       linters = {
+        --         SpellCheck = false,
+        --         SentenceCapitalization = false,
+        --       },
+        --       userDictPath = vim.env.XDG_CONFIG_HOME .. "/nvim/spell/en.utf-8.add"
+        --     }
+        --   }
+        -- }, -- annoying grammar checker that usually reports false positives in code
+        intelephense = {
+          settings = {
+            intelephense = {
+              environment = { shortOpenTag = false },
+              codelens = {
+                implementations = { enable = false },
+                overrides = { enable = false },
+                parent = { enable = false },
+                references = { enable = false },
+                usages = { enable = false },
+              },
+              completion = {
+                fullyQualifyGlobalConstantsAndFunctions = true,
+                suggestObjectOperatorStaticMethods = false,
+                maxItems = 30,
+              },
+              phpdoc = {
+                returnVoid = false,
+                classTemplate = { tags = {} },
+              },
+              rename = { namespaceMode = "all" },
+              telemetry = { enable = false },
+              files = {
+                exclude = {
+                  "**/.git/**",
+                  "**/.DS_Store",
+                  "**/node_modules/**",
+                  "**/vendor/**/{Tests,tests,Test,test,Spec,spec,Specs,specs}/**",
+                  "**/vendor/**/vendor/**",
+                  "**/coverage/**",
+                },
+              },
+            },
+          },
+        },
         jsonls = {
+          settings = {
+            json = {
+              schemas = {
+                { fileMatch = { "crush.json" }, url = "https://charm.land/crush.json" },
+              },
+            },
+          },
           -- TODO: trying to fix this: Problems loading reference 'vscode://schemas/settings/machine': Unable to load schema from 'vscode://schemas/settings/machine': MethodNotFound.
           -- settings = {
           --   json = {
@@ -129,6 +195,13 @@ return {
           end,
         },
         taplo = {},
+        vtsls = {
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = true,
+            },
+          },
+        },
         -- For some reason this root_dir function now breaks vtsls - it never starts
         -- vtsls = {
         --   root_dir = function(startpath)
@@ -137,7 +210,16 @@ return {
         --   -- single_file_support = false, -- deprecated
         --   workspace_required = true,
         -- },
-        yamlls = {},
+        yamlls = {
+          settings = {
+            flags = {
+              debounce_text_changes = 500,
+            },
+            schemas = {
+              ["https://json.schemastore.org/pre-commit-config.json"] = ".pre-commit-config.yaml",
+            },
+          },
+        },
         zk = {}, -- because marksman crashes a lot
       },
     },
@@ -214,11 +296,11 @@ return {
   --   event = "LspAttach",
   --   opts = { vt_position = "end_of_line" },
   -- },
-  -- {
-  --   "Sebastian-Nielsen/better-type-hover",
-  --   ft = { "typescript", "typescriptreact" },
-  --   opts = {},
-  -- },
+  {
+    "Sebastian-Nielsen/better-type-hover",
+    ft = { "typescript", "typescriptreact" },
+    opts = {},
+  },
   -- get a hierarchical tree of references with :FunctionReferences (only if lsp feature is supported)
   -- { "lafarr/hierarchy.nvim", event = "LspAttach", opts = {} },
   -- { "m-demare/hlargs.nvim", opts = {} },
