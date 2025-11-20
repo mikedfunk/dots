@@ -491,6 +491,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "origin" # ea games store
 # cask "osxfuse" # half of tool to mount ssh directories in the finder (useful if working on a shared dev environment) see macfusion for other half
 # cask "pdftotext" # used by ranger to preview pdfs (I don't use ranger these days)
+# cask "pgadmin4" # postgresql admin app like mysql workbench
 # cask "playonmac" # run windows apps on mac for free via wine
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
 # cask "postman" # http api client (I use the web interface mostly)
@@ -554,7 +555,7 @@ cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "glance-chamburr" if OS.mac? # fork of glance kept alive (all-in-one quicklook collection)
 cask "grandperspective" if OS.mac? # visualize storage hogs in the hard drive
-cask "hiddenbar" # hide/show part of the menubvar. replaces dozer.
+cask "hiddenbar" # hide/show part of the menubvar. replaces dozer. jordanbaird-ice stopped working.
 cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" if OS.mac? # menubar calendar
 cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!

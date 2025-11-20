@@ -72,7 +72,7 @@
   "nvim-treesitter-endwise": { "branch": "master", "commit": "a61a9de7965324d4019fb1637b66bfacdcb01f51" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "227165aaeb07b567fb9c066f224816aa8f3ce63f" },
   "nvim-ts-autotag": { "branch": "main", "commit": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc" },
-  "octo.nvim": { "branch": "master", "commit": "14bc17dc3b3befcb1fd1c870d311b389060c63e7" },
+  "octo.nvim": { "branch": "master", "commit": "bcb61914c721ede89162908fe20a8312faf34c0e" },
   "otter.nvim": { "branch": "main", "commit": "fc0aa35b1985077d11a20ddf4006bf40f2cd7397" },
   "outline.nvim": { "branch": "main", "commit": "6b62f73a6bf317531d15a7ae1b724e85485d8148" },
   "package-info.nvim": { "branch": "master", "commit": "a1de9eb91fa52ab8361f0c05032673670a3d10ff" },
