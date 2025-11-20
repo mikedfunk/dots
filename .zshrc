@@ -187,6 +187,9 @@ export LC_ALL=en_US.UTF-8
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
 export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
+export PGPASSFILE="${XDG_CONFIG_HOME}/pg/.pgpass"
+export PGSERVICEFILE="${XDG_CONFIG_HOME}/pg/pg_service.conf"
+
 # disable weird highlighting of pasted text
 # https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
 zle_highlight=('paste:none')
@@ -380,6 +383,20 @@ export CLICOLOR=1
 pretty-path () { tr : '\n' <<<"$PATH"; }
 
 alias multitail="multitail -F $XDG_CONFIG_HOME/multitail/multitail.conf"
+
+pgcli_service() {
+    if [[ "$1" == service=* ]]; then
+        service_name="${1#service=}"
+        # Use psql to expand the service into a connection string
+        conn_str=$(psql "service=$service_name" -At -c "SELECT ''" 2>/dev/null | sed 's/^$/dbname=/')
+        # Fallback if the above doesn't work
+        [[ -z "$conn_str" ]] && conn_str="service=$service_name"
+        pgcli "$conn_str"
+    else
+        pgcli "$@"
+    fi
+}
+
 # }}}
 
 # phpunit {{{

@@ -546,6 +546,7 @@ brew "zsh" # awesome bash shell replacement
 cask "betterdiscord-installer" if OS.mac? # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
+cask "dbeaver" # used for postgresql GUI
 cask "discord" # chat
 cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
 cask "firefox" # I use firefox for my home profile
