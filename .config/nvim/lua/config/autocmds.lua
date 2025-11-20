@@ -58,6 +58,44 @@ vim.api.nvim_create_autocmd("Filetype", {
   desc = "neon commentstring",
 })
 
+-- auto fold PHP imports only (TODO: not working - overridden by lazyvim autocmd)
+-- vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter", "WinEnter", "CursorMoved", "TextChanged" }, {
+--   callback = function(ev)
+--     print("DEBUG: Folds recalculated on event:", ev.event)
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   group = vim.api.nvim_create_augroup("mike_auto_fold_php_imports", { clear = true }),
+--   pattern = "*.php",
+--   callback = function()
+--     local start, finish
+--
+--     -- Find contiguous import block
+--     for i = 1, vim.fn.line("$") do
+--       local line = vim.fn.getline(i)
+--       if line:match("^use ") then
+--         start = start or i
+--         finish = i
+--       elseif start then
+--         break
+--       end
+--     end
+--
+--     if not start then
+--       return
+--     end
+--
+--     -- If already folded, do nothing
+--     if vim.fn.foldclosed(start) ~= -1 then
+--       return
+--     end
+--
+--     -- Fold it
+--     vim.cmd(start .. "," .. finish .. "foldclose")
+--   end,
+-- })
+
 -- BUG: this still focuses sometimes
 -- vim.api.nvim_create_autocmd("CursorHold", {
 --   group = vim.api.nvim_create_augroup("lsp_def_cursorhold", { clear = true }),
