@@ -53,13 +53,26 @@ end, { noremap = true, buffer = true, desc = "Fix Spec Docblock Line" })
 
 -- Turn:
 --
+-- ```php
 -- public function (
 --     SomeClass1 $someVar1, <-- cursor is anywhere in this indent area
 --     SomeClass2 $someVar2
 -- ): void {
+-- ```
+--
+-- or:
+--
+-- ```php
+-- public function (
+--     SomeClass1 $someVar1, <-- cursor is anywhere in this indent area
+--
+--     SomeClass2 $someVar2
+-- ): void {
+-- ```
 --
 --  into:
 --
+-- ```php
 --  /**
 --   * @param ObjectBehavior<SomeClass1> $someVar1
 --   * @param ObjectBehavior<SomeClass2> $someVar2
@@ -68,24 +81,55 @@ end, { noremap = true, buffer = true, desc = "Fix Spec Docblock Line" })
 --     SomeClass1 $someVar1,
 --     SomeClass2 $someVar2
 -- ): void {
+-- ```
 vim.keymap.set("n", "<Leader>Pf", function()
-  -- These can probably be simplified. I definitely need replace_termcodes somewhere though.
-  vim.cmd(
-    vim.api.nvim_replace_termcodes(
-      [[command! -range FixLine :'<,'>norm! I<tab> * @param ObjectBehavior<<esc>Ea><esc>$x]],
-      true,
-      true,
-      true
-    )
-  )
-  vim.cmd(
-    vim.api.nvim_replace_termcodes(
-      [[norm "byii[Mjo/**<cr>/<esc>"b[PV/*<cr>k:'<,'>g!/./d<cr><esc>gv<esc>A,<esc>gv:FixLine<cr><cr>I<tab> ]],
-      true,
-      true,
-      true
-    )
-  )
+  local api = vim.api
+  local bufnr = api.nvim_get_current_buf()
+  local cursor = api.nvim_win_get_cursor(0)
+  local cur_line = cursor[1]
+
+  -- 1. Find the line with '(' that starts the parameters
+  local start_line = cur_line
+  while start_line > 0 do
+    local line_text = api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
+    if line_text:match("%(") then
+      break
+    end
+    start_line = start_line - 1
+  end
+
+  -- capture indentation of function line
+  local func_line_text = api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
+  local indent = func_line_text:match("^%s*") or ""
+
+  -- 2. Find end of parameters (line with ')')
+  local end_line = start_line
+  local last_line = api.nvim_buf_line_count(bufnr)
+  while end_line <= last_line do
+    local line_text = api.nvim_buf_get_lines(bufnr, end_line - 1, end_line, false)[1]
+    if line_text:match("%)") then
+      break
+    end
+    end_line = end_line + 1
+  end
+
+  -- 3. Collect parameter lines
+  local param_lines = api.nvim_buf_get_lines(bufnr, start_line, end_line - 1, false)
+  local doc_lines = { indent .. "/**" }
+
+  for _, line in ipairs(param_lines) do
+    if line:match("%S") then
+      local typ, var = line:match("^%s*([%w\\_]+)%s*(%$[%w_]+)")
+      if typ and var then
+        table.insert(doc_lines, string.format("%s * @param ObjectBehavior<%s> %s", indent, typ, var))
+      end
+    end
+  end
+
+  table.insert(doc_lines, indent .. " */")
+
+  -- 4. Insert docblock above function line
+  api.nvim_buf_set_lines(bufnr, start_line - 1, start_line - 1, false, doc_lines)
 end, { noremap = true, buffer = true, desc = "Add Spec Docblock" })
 
 -- improve php highlights {{{

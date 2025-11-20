@@ -1,4 +1,4 @@
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 return {
   -- TODO: trying to use this to add macos arm64 version of laravel-ls, but can't get it to work yet
