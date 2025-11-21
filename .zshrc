@@ -174,7 +174,6 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmuxp
-export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/config.lua
 
 # }}}
 

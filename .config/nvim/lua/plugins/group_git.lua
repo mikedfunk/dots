@@ -88,4 +88,35 @@ return {
       disable_diagnostics = true,
     },
   },
+  {
+    "Juksuu/worktrees.nvim",
+    dependencies = {
+      "folke/snacks.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {},
+    keys = {
+      {
+        "<Leader>gws",
+        function()
+          Snacks.picker.worktrees()
+        end,
+        desc = "Git worktree select",
+      },
+      {
+        "<Leader>gwn",
+        function()
+          Snacks.picker.worktrees_new()
+        end,
+        desc = "Git worktree new",
+      },
+      {
+        "<Leader>gwr",
+        function()
+          Snacks.picker.worktrees_remove()
+        end,
+        desc = "Git worktree remove",
+      },
+    },
+  },
 }

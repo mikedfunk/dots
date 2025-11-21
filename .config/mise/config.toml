@@ -59,6 +59,7 @@ ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
+"aqua:ankitpokhrel/jira-cli" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

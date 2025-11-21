@@ -123,6 +123,7 @@ return {
           "neoai-input",
           "snacks_picker_input",
           "starter",
+          "triforce-profile",
         },
         show_on_completion_menu = true,
         keymap = {
@@ -225,6 +226,7 @@ return {
         ["neoai-input"] = false,
         snacks_picker_input = false,
         starter = false,
+        ["triforce-profile"] = false,
       },
       -- show_label = false,
     },

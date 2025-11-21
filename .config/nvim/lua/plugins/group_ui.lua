@@ -163,6 +163,7 @@ return {
         "snacks_notif",
         "snacks_picker_input",
         "starter",
+        "triforce-profile",
       },
     },
   },
@@ -185,6 +186,7 @@ return {
   --       "snacks_notif",
   --       "snacks_picker_input",
   --       "starter",
+  --       "triforce-profile",
   --     },
   --   },
   -- },
@@ -446,7 +448,17 @@ return {
           "neoai-input",
           "snacks_picker_input",
           "starter",
+          "triforce-profile",
         },
+      },
+    },
+  },
+  {
+    "gisketch/triforce.nvim",
+    dependencies = { "nvzone/volt" },
+    opts = {
+      keymap = {
+        show_profile = "<Leader>tp",
       },
     },
   },

@@ -545,6 +545,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "betterdiscord-installer" if OS.mac? # hacks for discord native app
 cask "chatgpt" # desktop app <opt-space>
+cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI but I haven't found anything yet that will do this easily
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
 cask "dbeaver-community" # used for postgresql GUI
 cask "discord" # chat
@@ -569,7 +570,7 @@ cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
-cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
+cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app. Alternative: super-productivity
 
 # }}}
 

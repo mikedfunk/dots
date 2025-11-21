@@ -40,6 +40,7 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 .config/algolia/config.toml
 .config/{aws,kube}/config
 .config/multitail/multitail.conf
+.config/.jira/.config.yml
 .config/pg/{.pgpass,pg_service.conf}
 .mailmap
 .mylogin.cnf

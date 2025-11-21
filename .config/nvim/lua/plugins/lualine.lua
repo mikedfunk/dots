@@ -25,6 +25,7 @@ return {
         "snacks_dashboard",
         "snacks_picker_input",
         "starter",
+        "triforce-profile",
       }
 
       opts.options.disabled_filetypes.statusline = {
@@ -38,6 +39,7 @@ return {
         "snacks_dashboard",
         "snacks_picker_input",
         "starter",
+        "triforce-profile",
       }
 
       opts.sections.lualine_y = {

@@ -8,6 +8,7 @@ return {
           "TelescopePrompt",
           "markdown",
           "snacks_picker_input",
+          "triforce-profile",
         }, vim.bo.filetype)
       end,
       keymap = {
