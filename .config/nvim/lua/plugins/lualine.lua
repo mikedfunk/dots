@@ -76,27 +76,42 @@ return {
         return count
       end
 
-      -- run this once at startup
-      -- if registry_ok then
-      --   registry.refresh(function()
-      --     mason_updates_count = get_mason_updates_count()
-      --   end)
-      -- end
+      local function refresh_mason_updates_count()
+        if registry_ok then
+          registry.refresh(function()
+            mason_updates_count = get_mason_updates_count()
+            -- Force lualine to refresh by triggering a redraw
+            -- vim.cmd("redrawstatus")
+          end)
+        end
+      end
 
-      -- refresh the registry and update the count every 10 minutes (600,000 ms)
-      local mason_updates_timer = vim.loop.new_timer()
-      local cache_time_in_milliseconds = 600000
-      mason_updates_timer:start(
-        cache_time_in_milliseconds, -- first run delay
-        cache_time_in_milliseconds, -- repeat interval
-        vim.schedule_wrap(function()
-          if registry_ok then
-            registry.refresh(function()
-              mason_updates_count = get_mason_updates_count()
-            end)
-          end
+      -- Set up Mason event listeners for immediate updates
+      if registry_ok then
+        -- Listen for Mason package events via registry
+        if registry.on then
+          registry:on("update:success", function()
+            refresh_mason_updates_count()
+          end)
+        end
+
+        -- Fallback: Create autocmd for Mason UI closing
+        -- vim.api.nvim_create_autocmd("BufWinLeave", {
+        --   pattern = "mason://*",
+        --   callback = function()
+        --     -- Small delay to ensure Mason operations complete
+        --     vim.fn.timer_start(300, refresh_mason_updates_count)
+        --   end,
+        --   desc = "Update lualine mason count when Mason UI closes",
+        -- })
+      end
+
+      -- Initialize count at startup
+      if registry_ok then
+        registry.refresh(function()
+          mason_updates_count = get_mason_updates_count()
         end)
-      )
+      end
 
       local mason_updates_component = {
         function()
