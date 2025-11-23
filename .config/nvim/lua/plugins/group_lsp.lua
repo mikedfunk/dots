@@ -29,6 +29,7 @@ return {
         },
         biome = {},
         -- copilot = { telemetry = { telemetryLevel = "none" } },
+        codebook = {},
         contextive = {
           root_dir = function(startpath)
             return require("lspconfig.util").root_pattern(".contextive")(startpath)
@@ -139,6 +140,7 @@ return {
         laravel_ls = { mason = false },
         lemminx = {},
         -- lsp_ai = {},
+        marksman = { enabled = false },
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua
         ---@see https://github.com/snyk/snyk-ls#configuration-1
         snyk_ls = {
@@ -170,6 +172,7 @@ return {
         },
         -- phpactor = {},
         somesass_ls = {},
+        -- sqlfluff = {},
         sqlls = {
           -- This wasn't working in neoconf
           settings = {

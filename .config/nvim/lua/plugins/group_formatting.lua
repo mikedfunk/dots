@@ -66,24 +66,24 @@ return {
         },
         prettier = {
           command = "prettier",
-          cwd = function(self, ctx)
-            return require("conform.util").root_file({
-              -- O_O
-              ".prettierrc",
-              ".prettierrc.yaml",
-              ".prettierrc.yml",
-              ".prettierrc.json",
-              ".prettierrc.json5",
-              ".prettierrc.js",
-              ".prettierrc.mjs",
-              ".prettierrc.cjs",
-              "prettier.config.js",
-              "prettier.config.mjs",
-              "prettier.config.cjs",
-              ".prettierrc.toml",
-            })(self, ctx)
-          end,
-          require_cwd = true,
+          -- cwd = function(self, ctx)
+          --   return require("conform.util").root_file({
+          --     -- O_O
+          --     ".prettierrc",
+          --     ".prettierrc.yaml",
+          --     ".prettierrc.yml",
+          --     ".prettierrc.json",
+          --     ".prettierrc.json5",
+          --     ".prettierrc.js",
+          --     ".prettierrc.mjs",
+          --     ".prettierrc.cjs",
+          --     "prettier.config.js",
+          --     "prettier.config.mjs",
+          --     "prettier.config.cjs",
+          --     ".prettierrc.toml",
+          --   })(self, ctx)
+          -- end,
+          -- require_cwd = true,
         },
         stylua = {
           require_cwd = true,

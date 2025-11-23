@@ -12,16 +12,17 @@
 .config/git/config-saatchi
 .config/tmuxinator/work*.yml
 
+# Code/saatchi/**/cspell.json
 Code/saatchi/**/.gitlint
 Code/saatchi/**/.ignore
 Code/saatchi/**/.lazy.lua
 Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.projections.json
-Code/saatchi/**/compose.override.yml
-Code/saatchi/**/cspell.json
-Code/saatchi/**/mise.toml
 Code/saatchi/**/AGENTS.md
+Code/saatchi/**/codebook.toml
+Code/saatchi/**/compose.override.yml
+Code/saatchi/**/mise.toml
 Code/saatchi/**/pyrightconfig.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
@@ -32,16 +33,16 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 
 # .aws/credentials
 # .boto
+# .circleci/cli.yml
+# .config/algolia/config.toml
 # .local/share/nvim/dadbod_ui/connections.json
 # Library/Application Support/com.tinyapp.TablePlus/Data/*.plist
-# .circleci/cli.yml
 .bigqueryrc
-.config/akamai/.edgerc
-.config/algolia/config.toml
-.config/{aws,kube}/config
-.config/multitail/multitail.conf
 .config/.jira/.config.yml
+.config/akamai/.edgerc
+.config/multitail/multitail.conf
 .config/pg/{.pgpass,pg_service.conf}
+.config/{aws,kube}/config
 .mailmap
 .mylogin.cnf
 .netrc
