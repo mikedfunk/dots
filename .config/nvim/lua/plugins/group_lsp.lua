@@ -28,13 +28,16 @@ return {
           apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
         },
         biome = {},
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#copilot
         -- copilot = { telemetry = { telemetryLevel = "none" } },
+        bqls = { enabled = false }, -- to use this LS, :LspStop then :LspStart bqls
         codebook = {},
         contextive = {
-          root_dir = function(startpath)
-            return require("lspconfig.util").root_pattern(".contextive")(startpath)
-          end,
-          autostart = false, -- to use this LS, :LspStop then :LspStart contextive
+          root_markers = { ".contextive" },
+          -- root_dir = function(startpath)
+          --   return require("lspconfig.util").root_pattern(".contextive")(startpath)
+          -- end,
+          enabled = false, -- to use this LS, :LspStop then :LspStart contextive
         },
         cssls = {
           filetypes = { "css" }, -- replace filetypes
@@ -42,14 +45,12 @@ return {
         cssmodules_ls = {},
         cucumber_language_server = {},
         denols = {
-          root_dir = function(startpath)
-            return require("lspconfig.util").root_pattern("deno.json")(startpath)
-          end,
+          root_markers = { "deno.json" },
+          -- root_dir = function(startpath)
+          --   return require("lspconfig.util").root_pattern("deno.json")(startpath)
+          -- end,
         },
-        elixirls = {
-          cmd = vim.env.HOME .. "/Code/elixir-ls/language_server.sh",
-          mason = false,
-        },
+        -- expert = {}, -- elixir
         eslint = { enabled = vim.fn.executable("eslint") == 1 },
         emmet_language_server = {
           filetypes = { "javascript" }, -- add more filetypes
@@ -137,7 +138,13 @@ return {
           -- },
         },
         -- TODO: mason doesn't recognize arm64 build so I installed with mise. Switch when available.
-        laravel_ls = { mason = false },
+        laravel_ls = {
+          mason = false,
+          -- fix but with root_dir throwing an error for this ls
+          root_dir = function(startpath)
+            return require("lspconfig.util").root_pattern("artisan")(startpath)
+          end,
+        },
         lemminx = {},
         -- lsp_ai = {},
         marksman = { enabled = false },
@@ -167,14 +174,11 @@ return {
             enableTelemetry = "false",
             organization = "leaf-saatchiart",
           },
-          -- BUG: with autostart false it doesn't apply any of the config above
-          -- autostart = false, -- to use this LS, :LspStart snyk_ls
         },
         -- phpactor = {},
         somesass_ls = {},
         -- sqlfluff = {},
         sqlls = {
-          -- This wasn't working in neoconf
           settings = {
             sqlLanguageServer = {
               lint = {
@@ -185,17 +189,26 @@ return {
             },
           },
         },
+        ---@vim.LspConfig
         tailwindcss = {
-          root_dir = function(startpath)
-            return require("lspconfig.util").root_pattern(
-              "tailwind.config.js",
-              "tailwind.config.cjs",
-              "tailwind.config.mjs",
-              "tailwind.config.ts",
-              "tailwind.config.cts",
-              "tailwind.config.mts"
-            )(startpath)
-          end,
+          root_markers = {
+            "tailwind.config.js",
+            "tailwind.config.cjs",
+            "tailwind.config.mjs",
+            "tailwind.config.ts",
+            "tailwind.config.cts",
+            "tailwind.config.mts",
+          },
+          -- root_dir = function(startpath)
+          --   return require("lspconfig.util").root_pattern(
+          --     "tailwind.config.js",
+          --     "tailwind.config.cjs",
+          --     "tailwind.config.mjs",
+          --     "tailwind.config.ts",
+          --     "tailwind.config.cts",
+          --     "tailwind.config.mts"
+          --   )(startpath)
+          -- end,
         },
         taplo = {},
         vtsls = {

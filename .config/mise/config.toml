@@ -24,7 +24,7 @@ usage = "latest" # needed for mise completion
 "aqua:zk-org/zk" = "latest"
 "gem:lunchy" = "latest"
 "gem:terminal-notifier" = "latest"
-"go:github.com/laravel-ls/laravel-ls/cmd/laravel-ls" = "latest" # TODO: move to mason when they recognize that there is an arm64 build :/
+"go:github.com/laravel-ls/laravel-ls/cmd/laravel-ls" = "latest"
 "npm:@devcontainers/cli" = "latest"
 "ubi:abhinav/git-spice" = { version = "latest", exe = "gs", rename_exe = "git-spice" }
 "ubi:algolia/cli" = { version = "latest", exe = "algolia" }
