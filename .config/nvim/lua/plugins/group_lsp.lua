@@ -140,7 +140,7 @@ return {
         -- TODO: mason doesn't recognize arm64 build so I installed with mise. Switch when available.
         laravel_ls = {
           mason = false,
-          -- fix but with root_dir throwing an error for this ls
+          -- fix bug with root_dir throwing an error for this ls
           root_dir = function(startpath)
             return require("lspconfig.util").root_pattern("artisan")(startpath)
           end,
@@ -151,23 +151,21 @@ return {
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua
         ---@see https://github.com/snyk/snyk-ls#configuration-1
         snyk_ls = {
-          -- TODO: this is not merging with existing config
-          -- filetypes = { "php" }, -- add more filetypes
-          filetypes = {
-            "go",
-            "gomod",
-            "javascript",
-            "typescript",
-            "json",
-            "python",
-            "requirements",
-            "helm",
-            "yaml",
-            "terraform",
-            "terraform-vars",
-            "php",
-          },
-          -- TODO: I can't get this to merge properly with neoconf
+          filetypes = { "php" }, -- add more filetypes
+          -- filetypes = {
+          --   "go",
+          --   "gomod",
+          --   "javascript",
+          --   "typescript",
+          --   "json",
+          --   "python",
+          --   "requirements",
+          --   "helm",
+          --   "yaml",
+          --   "terraform",
+          --   "terraform-vars",
+          --   "php",
+          -- },
           init_options = {
             token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
             enableTrustedFoldersFeature = "false",
