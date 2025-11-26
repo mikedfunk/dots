@@ -42,7 +42,6 @@ cobertura.xml
 conform.*
 coverage
 crush.json
-cspell.json
 codebook.toml
 mise.toml
 nohup.out

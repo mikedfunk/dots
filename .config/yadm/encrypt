@@ -12,7 +12,6 @@
 .config/git/config-saatchi
 .config/tmuxinator/work*.yml
 
-# Code/saatchi/**/cspell.json
 Code/saatchi/**/.gitlint
 Code/saatchi/**/.ignore
 Code/saatchi/**/.lazy.lua

@@ -1,5 +1,5 @@
 {
-  "apex-language-server": "v65.5.0",
+  "apex-language-server": "v65.6.0",
   "bash-language-server": "5.6.0",
   "biome": "2.3.7",
   "black": "25.11.0",
@@ -15,7 +15,7 @@
   "deno": "v2.5.6",
   "docker-compose-language-service": "0.4.0",
   "dockerfile-language-server": "0.15.0",
-  "editorconfig-checker": "v3.5.0",
+  "editorconfig-checker": "v3.6.0",
   "emmet-language-server": "2.8.0",
   "eslint-lsp": "4.10.0",
   "expert": "nightly",
