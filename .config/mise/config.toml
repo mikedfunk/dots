@@ -9,15 +9,15 @@ go = "latest"
 java = "latest" # needed for plantuml
 lua = "latest"
 node = { version = "latest", postinstall = "corepack enable" }
-php-brew = { version = "8.4", postinstall = "pie install xdebug/xdebug && pie install php-memcached/php-memcached --with-zlib-dir=$(brew --prefix zlib) && pie install imagick/imagick"}
+php-brew = { version = "8.4", postinstall = "pie install xdebug/xdebug && pie install php-memcached/php-memcached --with-zlib-dir=$(brew --prefix zlib) && pie install imagick/imagick" }
 python = "latest"
 ruby = "latest"
 
 usage = "latest" # needed for mise completion
 
+"aqua:ankitpokhrel/jira-cli" = "latest"
 "aqua:awslabs/git-secrets" = "latest"
 "aqua:bensadeh/tailspin" = "latest"
-# "aqua:mas-cli/mas" = "latest" # TODO: doesn't work - wrong path
 "aqua:snyk/cli" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
 "aqua:variadico/noti" = "latest"
@@ -30,6 +30,7 @@ usage = "latest" # needed for mise completion
 "ubi:algolia/cli" = { version = "latest", exe = "algolia" }
 "ubi:cbednarski/hostess" = "latest"
 "ubi:cormacrelf/dark-notify" = "latest"
+# "aqua:mas-cli/mas" = "latest" # TODO: doesn't work - wrong path
 # "ubi:https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar" = { version = "1.2025.9", rename_exe = "plantuml" } # it gets renamed properly but it doesn't work
 # gcloud = { version = "latest", postinstall = "gcloud components update" } # components update is not needed as it should be included in the latest gcloud update from mise
 amazon-ecr-credential-helper = "latest"
@@ -54,12 +55,11 @@ ollama = "latest"
 opencode = "latest"
 pandoc = "latest"
 poetry = "latest"
-pre-commit = "latest"
+pre-commit = "4.4.0" # 4.5.0 not working - failed to download
 ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
-"aqua:ankitpokhrel/jira-cli" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

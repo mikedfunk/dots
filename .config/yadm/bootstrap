@@ -195,6 +195,11 @@ _start_saatchi_tunnel() {
     lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
 
+_upgrade_spicetify() {
+    _log_info "Upgrading spicetify"
+    spicetify update
+}
+
 _change_shell_to_zsh
 _create_code_dir_if_missing
 _install_mac_xcode_command_line_tools
@@ -215,5 +220,6 @@ _upgrade_zinit_plugins
 _clear_evalcache
 _apply_mac_preferences
 _start_saatchi_tunnel
+_upgrade_spicetify
 
 _log_info "Installation complete"

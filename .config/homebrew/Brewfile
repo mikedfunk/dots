@@ -242,6 +242,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "pgcli" # like mycli for postgres (used for toaf judging app)
 # brew "php-cs-fixer" # fix php code according to configuration
 # brew "php@7.1", args: ["--with-pear"], link: true
+# brew "pie" # php extension installer (bundled with latest PHP)
 # brew "pinentry" # gpg terminal pin entry (used by yadm encrypt/decrypt and to sign git commits)
 # brew "pinfo" # man-like command to get manuals on tools written for info
 # brew "pipeline" # cool subshell to let you interactively view unix pipeline results as you write
@@ -365,7 +366,6 @@ brew "multitail" # tail multiple files or tail streams in splits with pretty col
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
 brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
-brew "pie" # php extension installer
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
@@ -373,7 +373,7 @@ brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "scrcpy" if OS.mac? # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
-brew "syncthing" if OS.mac? # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
+brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
 brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (mise version doesn't work right for some reason)
 brew "tig" # git? tig! (note: this requires asciidoc)
@@ -395,6 +395,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "android-platform-tools" # adb, etc.
 # cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??
+# cask "betterdiscord-installer" if OS.mac? # hacks for discord native app (no longer supported)
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
 # cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
@@ -543,9 +544,9 @@ brew "zsh" # awesome bash shell replacement
 # cask "zappy" # screenshot and video recorder (buggy solid black screenshots and pins, also privacy concerns)
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
-cask "betterdiscord-installer" if OS.mac? # hacks for discord native app
+cask "bitwarden" # mas upgrades are a pain
 cask "chatgpt" # desktop app <opt-space>
-cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI but I haven't found anything yet that will do this easily
+cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
 cask "dbeaver-community" # used for postgresql GUI
 cask "discord" # chat
@@ -576,6 +577,7 @@ cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc
 
 # mac app store {{{
 
+# mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 # mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 # mas "Fello AI", id: 6447705369 # some AI app to make a Gemini desktop app (5 free questions per day :/ )
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
@@ -588,7 +590,6 @@ cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc
 # mas "d-d-beyond", id: 1501810129 # dnd beyond / d&d beyond
 # mas "liquid", id: 569048352 # text clipboard processor
 mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
-mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
 mas "Clocker", id: 1056643111 # menubar world clock
 mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
 mas "MuteKey", id: 1509590766 # global media mute hotkey
