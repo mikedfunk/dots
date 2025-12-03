@@ -1,0 +1,10 @@
+---
+windows:
+  - bookymark:
+      root: ~/Code/bookymark
+      layout: main-horizontal
+      panes:
+        - editor: [v]
+        - git: [ts]
+        - ai: [opencode]
+        - devpod: [devpod up && ssh bookymark.devpod]

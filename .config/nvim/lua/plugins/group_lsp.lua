@@ -31,7 +31,29 @@ return {
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#copilot
         -- copilot = { telemetry = { telemetryLevel = "none" } },
         bqls = { enabled = false }, -- to use this LS, :LspStop then :LspStart bqls
-        codebook = {},
+        codebook = {
+          filetypes = {
+            "c",
+            "css",
+            "gitcommit",
+            "go",
+            "haskell",
+            "html",
+            "java",
+            "javascript",
+            "javascriptreact",
+            "lua",
+            -- "markdown", -- just use vim spelling for this
+            "php",
+            "python",
+            "ruby",
+            "rust",
+            "toml",
+            -- "text",
+            "typescript",
+            "typescriptreact",
+          },
+        },
         contextive = {
           root_markers = { ".contextive" },
           -- root_dir = function(startpath)
