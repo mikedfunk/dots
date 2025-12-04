@@ -116,8 +116,8 @@ return {
   --   opts = { pattern = "*" },
   -- },
   -- { "dhruvasagar/vim-table-mode", ft = "markdown" },
+  -- lsp stuff for code embedded in markdown
   {
-    -- lsp stuff for code embedded in markdown
     "jmbuhr/otter.nvim",
     ft = "markdown",
     dependencies = { "nvim-treesitter/nvim-treesitter" },

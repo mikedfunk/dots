@@ -39,7 +39,7 @@
   "phpcbf": "4.0.1",
   "phpcs": "4.0.1",
   "phpstan": "2.1.32",
-  "prettier": "3.7.3",
+  "prettier": "3.7.4",
   "pyright": "1.1.407",
   "ruff": "0.14.7",
   "rustywind": "0.24.3",
