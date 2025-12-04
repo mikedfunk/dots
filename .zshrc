@@ -331,7 +331,7 @@ alias du="grc --colour=auto /usr/bin/du"
 alias ll='ls -lhA --classify=auto'
 # phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug,develop -dxdebug.client_port=${XDEBUG_PORT:-9003} $@; }
 alias work="tmuxinator start work --suppress-tmux-version-warning"
-alias home="tmuxinator start home"
+alias home="tmuxinator start home --suppress-tmux-version-warning"
 
 alias rmf='rm -rf'
 compdef rmf="rm"

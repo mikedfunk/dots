@@ -5,8 +5,8 @@
     "model": "opencode/big-pickle",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     "small_model": "openrouter/claude-3-5-haiku-20241022",
-    // "theme": "system",
-    "theme": "tokyonight",
+    "theme": "system",
+    // "theme": "tokyonight",
     "share": "manual",
     // "instructions": [
     //     "CRUSH.md"

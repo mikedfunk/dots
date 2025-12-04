@@ -5,8 +5,7 @@ TMUX_CONF="$HOME/.config/tmux/tmux.conf"
 
 CURRENT_MODE=""
 while true; do
-    NEW_MODE=$(osascript -e 'tell application "System Events" to tell appearance preferences to get dark mode' |
-        grep true &>/dev/null && echo dark || echo light)
+    NEW_MODE=$([[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]] && echo dark || echo light)
     if [ "$NEW_MODE" != "$CURRENT_MODE" ]; then
         CURRENT_MODE="$NEW_MODE"
         tmux source-file "$TMUX_CONF"
