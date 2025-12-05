@@ -60,6 +60,7 @@ ripgrep = "latest"
 tmux = "latest"
 uv = "latest"
 yadm = "latest"
+"cargo:envex" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
