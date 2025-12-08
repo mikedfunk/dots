@@ -3,7 +3,7 @@ return {
     "adalessa/laravel.nvim",
     -- TODO: There is some bug with execution on v4.x, need to fix
     tag = "v3.3.0",
-    ft = { "php" },
+    ft = { "php", "json" },
     dependencies = { "kevinhwang91/promise-async" },
     opts = {
       lsp_server = vim.g.lazyvim_php_lsp or "phpactor",

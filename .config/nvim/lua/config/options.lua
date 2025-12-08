@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "highlight yanked text",
 })
 
-vim.opt.cmdheight = 0 -- height of the bottom line that shows command output. I don't like lvim's default of 2.
+vim.opt.cmdheight = 0 -- height of the bottom line that shows command output
 vim.opt.showtabline = 1 -- show tabs only when more than one file
 vim.o.inccommand = "split" -- preview substitute in neovim `:h inccommand`
 vim.o.foldcolumn = "auto" -- make folds visible left of the sign column. Very cool ui feature!
@@ -214,20 +214,10 @@ vim.g["markdown_fenced_languages"] = {
 -- }}}
 
 -- lsp config {{{
--- vim.lsp.set_log_level("debug") -- enable lsp debug logging - you can open the log with :lua vim.cmd('e'..vim.lsp.get_log_path()) or tail -f ~/.local/state/nvim/lsp.log
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
-})
-
--- vim.lsp.inlay_hint.enable()
-
-vim.diagnostic.config({
-  float = { border = "rounded" },
-})
+-- vim.lsp.log.set_level("debug") -- enable lsp debug logging - you can open the log with :lua vim.cmd('e'..vim.lsp.get_log_path()) or tail -f ~/.local/state/nvim/lsp.log
+vim.lsp.buf.hover({ border = "rounded" })
+vim.lsp.buf.signature_help({ border = "rounded" })
+vim.diagnostic.config({ float = { border = "rounded" } })
 -- }}}
 
 vim.filetype.add({ pattern = { ["compose%.yml"] = "yaml.docker-compose" } })
@@ -235,6 +225,7 @@ vim.filetype.add({ pattern = { ["docker-compose%.yml"] = "yaml.docker-compose" }
 vim.filetype.add({ pattern = { ["%.babelrc"] = "json" } })
 vim.filetype.add({ pattern = { ["Dockerfile-.*"] = "dockerfile" } })
 vim.filetype.add({ pattern = { ["Dockerfile%..*"] = "dockerfile" } })
+vim.filetype.add({ pattern = { ["Containerfile"] = "dockerfile" } })
 vim.filetype.add({ pattern = { [".env"] = "sh" } })
 vim.filetype.add({ pattern = { [".env.example"] = "sh" } })
 vim.filetype.add({ pattern = { [".sqlfluff"] = "dosini" } })
