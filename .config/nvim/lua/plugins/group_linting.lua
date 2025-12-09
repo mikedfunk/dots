@@ -143,6 +143,10 @@ return {
     -- this is ONLY for slow phpstan level 9. See comment above.
     "dense-analysis/ale",
     ft = { "php" },
+    -- TODO: doesn't work :/
+    -- build = function()
+    --   require("mason.api.command").MasonInstall({ "phpstan" })
+    -- end,
     opts = {
       set_loclist = false,
       set_signs = false,

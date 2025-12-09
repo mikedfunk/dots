@@ -211,6 +211,21 @@ return {
         },
         ---@vim.LspConfig
         tailwindcss = {
+          -- reduce this from the insanely huge list to just the ones I would possible use it for
+          -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
+          filetypes = {
+            "html",
+            "css",
+            "sass",
+            "scss",
+            "stylus",
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "svelte",
+          },
           root_markers = {
             "tailwind.config.js",
             "tailwind.config.cjs",

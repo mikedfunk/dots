@@ -1,44 +1,46 @@
 return {
-  {
-    "adalessa/laravel.nvim",
-    -- TODO: There is some bug with execution on v4.x, need to fix
-    tag = "v3.3.0",
-    ft = { "php", "json" },
-    dependencies = { "kevinhwang91/promise-async" },
-    opts = {
-      lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
-      features = {
-        -- I only use this for route info
-        route_info = { enable = true, view = "right" },
-        model_info = { enable = false },
-        override = { enable = false },
-        pickers = { enable = false },
-      },
-    },
-  },
+  -- NOTE: This is the old version, there is some bug where latest 4.x isn't working
+  -- TODO: after rebuilding my neovim config, this isn't working either :/
   -- {
   --   "adalessa/laravel.nvim",
-  --   dependencies = { "nvim-neotest/nvim-nio" },
+  --   tag = "v3.3.0",
   --   ft = { "php", "json" },
-  --   cmd = { "Laravel" },
+  --   dependencies = { "kevinhwang91/promise-async" },
   --   opts = {
-  --     extensions = {
-  --       command_center = { enable = false },
-  --       -- composer_dev = { enable = false },
-  --       -- composer_info = { enable = false },
-  --       dump_server = { enable = false },
-  --       mcp = { enable = false },
-  --       model_info = { enable = false },
-  --       override = { enable = false },
-  --       route_info = { enable = true, view = "right" },
-  --       tinker = { enable = false },
-  --     },
   --     lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
   --     features = {
+  --       -- I only use this for route info
+  --       route_info = { enable = true, view = "right" },
+  --       model_info = { enable = false },
+  --       override = { enable = false },
   --       pickers = { enable = false },
   --     },
   --   },
   -- },
+  {
+    "adalessa/laravel.nvim",
+    dependencies = { "nvim-neotest/nvim-nio" },
+    ft = { "php", "json" },
+    cmd = { "Laravel" },
+    opts = {
+      extensions = {
+        command_center = { enable = false },
+        completion = { enable = true },
+        composer_dev = { enable = true },
+        composer_info = { enable = true },
+        diagnostic = { enable = false },
+        dump_server = { enable = false },
+        model_info = { enable = false },
+        override = { enable = false },
+        route_info = { enable = true, view = "right" },
+        tinker = { enable = false },
+      },
+      lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
+      features = {
+        pickers = { enable = false },
+      },
+    },
+  },
   {
     "gbprod/phpactor.nvim",
     dependencies = {

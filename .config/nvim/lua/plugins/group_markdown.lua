@@ -1,40 +1,47 @@
 return {
-  {
-    "bullets-vim/bullets.vim",
-    ft = { "markdown", "gitcommit" },
-    keys = {
-      -- Insert mode mappings
-      { "<cr>", "<Plug>(bullets-newline)", mode = "i", buffer = 0, desc = "New bullet line" },
-      -- This isn't triggering for some reason:
-      -- { "<C-cr>", "<cr>", mode = "i", buffer = 0, desc = "Normal carriage return" },
-
-      -- Normal mode mappings
-      { "o", "<Plug>(bullets-newline)", mode = "n", buffer = 0, desc = "New bullet line" },
-      -- { "gN", "<Plug>(bullets-renumber)", mode = "n", buffer = 0, desc = "Renumber bullets" },
-      -- { "<leader>x", "<Plug>(bullets-toggle-checkbox)", mode = "n", buffer = 0, desc = "Toggle checkbox" },
-      { ">>", "<Plug>(bullets-demote)", mode = "n", buffer = 0, desc = "Demote bullet" },
-      { "<<", "<Plug>(bullets-promote)", mode = "n", buffer = 0, desc = "Promote bullet" },
-
-      -- Visual mode mappings
-      -- { "gN", "<Plug>(bullets-renumber)", mode = "v", buffer = 0, desc = "Renumber bullets" },
-      { ">", "<Plug>(bullets-demote)", mode = "v", buffer = 0, desc = "Demote bullet" },
-      { "<", "<Plug>(bullets-promote)", mode = "v", buffer = 0, desc = "Promote bullet" },
-
-      -- Insert mode mappings for indentation
-      -- { "<C-t>", "<Plug>(bullets-demote)", mode = "i", buffer = 0, desc = "Demote bullet" },
-      -- { "<C-d>", "<Plug>(bullets-promote)", mode = "i", buffer = 0, desc = "Promote bullet" },
-    },
-    init = function()
-      vim.g.bullets_set_mappings = 0 -- remove some features/mappings above
-      vim.g.bullets_checkbox_markers = table.concat({
-        " ", -- unchecked
-        " ", -- partial: < 33%
-        " ", -- partial: > 33%, < 66%
-        " ", -- partial: > 66%, < 100%
-        "x", -- checked
-      }, "")
-    end,
-  },
+  -- {
+  --   "bullets-vim/bullets.vim",
+  --   ft = { "markdown", "gitcommit" },
+  --   -- TODO: These are being enabled for other languages too :/
+  --   keys = {
+  --     -- Insert mode mappings
+  --     { "<cr>", "<Plug>(bullets-newline)", mode = "i", buffer = 0, desc = "New bullet line" },
+  --     -- This isn't triggering for some reason:
+  --     -- { "<C-cr>", "<cr>", mode = "i", buffer = 0, desc = "Normal carriage return" },
+  --
+  --     -- Normal mode mappings
+  --     { "o", "<Plug>(bullets-newline)", mode = "n", buffer = 0, desc = "New bullet line" },
+  --     -- { "gN", "<Plug>(bullets-renumber)", mode = "n", buffer = 0, desc = "Renumber bullets" },
+  --     -- { "<leader>x", "<Plug>(bullets-toggle-checkbox)", mode = "n", buffer = 0, desc = "Toggle checkbox" },
+  --     { ">>", "<Plug>(bullets-demote)", mode = "n", buffer = 0, desc = "Demote bullet" },
+  --     { "<<", "<Plug>(bullets-promote)", mode = "n", buffer = 0, desc = "Promote bullet" },
+  --
+  --     -- Visual mode mappings
+  --     -- { "gN", "<Plug>(bullets-renumber)", mode = "v", buffer = 0, desc = "Renumber bullets" },
+  --     { ">", "<Plug>(bullets-demote)", mode = "v", buffer = 0, desc = "Demote bullet" },
+  --     { "<", "<Plug>(bullets-promote)", mode = "v", buffer = 0, desc = "Promote bullet" },
+  --
+  --     -- Insert mode mappings for indentation
+  --     -- { "<C-t>", "<Plug>(bullets-demote)", mode = "i", buffer = 0, desc = "Demote bullet" },
+  --     -- { "<C-d>", "<Plug>(bullets-promote)", mode = "i", buffer = 0, desc = "Promote bullet" },
+  --   },
+  --   init = function()
+  --     vim.g.bullets_enabled_file_types = {
+  --       "markdown",
+  --       "text",
+  --       "gitcommit",
+  --       "scratch",
+  --     }
+  --     vim.g.bullets_set_mappings = 0 -- remove some features/mappings above
+  --     vim.g.bullets_checkbox_markers = table.concat({
+  --       " ", -- unchecked
+  --       " ", -- partial: < 33%
+  --       " ", -- partial: > 33%, < 66%
+  --       " ", -- partial: > 66%, < 100%
+  --       "x", -- checked
+  --     }, "")
+  --   end,
+  -- },
   -- NOTE: This is installed via a lazyvim extra, just configuring it here
   {
     "MeanderingProgrammer/render-markdown.nvim",
