@@ -220,15 +220,30 @@ vim.lsp.buf.signature_help({ border = "rounded" })
 vim.diagnostic.config({ float = { border = "rounded" } })
 -- }}}
 
-vim.filetype.add({ pattern = { ["compose%.yml"] = "yaml.docker-compose" } })
-vim.filetype.add({ pattern = { ["docker-compose%.yml"] = "yaml.docker-compose" } })
-vim.filetype.add({ pattern = { ["%.babelrc"] = "json" } })
-vim.filetype.add({ pattern = { ["Dockerfile-.*"] = "dockerfile" } })
-vim.filetype.add({ pattern = { ["Dockerfile%..*"] = "dockerfile" } })
-vim.filetype.add({ pattern = { ["Containerfile"] = "dockerfile" } })
-vim.filetype.add({ pattern = { [".env"] = "sh" } })
-vim.filetype.add({ pattern = { [".env.example"] = "sh" } })
-vim.filetype.add({ pattern = { [".sqlfluff"] = "dosini" } })
+vim.filetype.add({
+  pattern = {
+    ["compose%.yml"] = "yaml.docker-compose",
+    ["docker-compose%.yml"] = "yaml.docker-compose",
+    ["%.babelrc"] = "json",
+    ["Dockerfile-.*"] = "dockerfile",
+    ["Dockerfile%..*"] = "dockerfile",
+    ["Containerfile"] = "dockerfile",
+    [".env"] = "sh",
+    [".env.example"] = "sh",
+    [".sqlfluff"] = "dosini",
+  },
+  extension = {
+    ["mysql.sql"] = "mysql",
+    ["pgsql.sql"] = "postgresql",
+    ["psql"] = "postgresql",
+    ["bq.sql"] = "bigquery",
+    ["bigquery.sql"] = "bigquery",
+  },
+})
+
+vim.treesitter.language.register("sql", "postgresql")
+vim.treesitter.language.register("sql", "mysql")
+vim.treesitter.language.register("sql", "bigquery")
 
 -- https://www.lazyvim.org/extras/lang/php#options
 vim.g.lazyvim_php_lsp = "intelephense"

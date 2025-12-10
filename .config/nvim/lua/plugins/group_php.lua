@@ -17,9 +17,26 @@ return {
   --     },
   --   },
   -- },
+  -- NOTE: I use this for:
+  -- - route info in virtual text next to controller actions
+  -- - I have completion enabled for blade templates but I don't really use it
+  -- - composer.json version virtual text for new versions, etc.
   {
     "adalessa/laravel.nvim",
-    dependencies = { "nvim-neotest/nvim-nio" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      {
+        "saghen/blink.cmp",
+        opts_extend = { "sources.compat" },
+        opts = {
+          sources = {
+            compat = {
+              "laravel",
+            },
+          },
+        },
+      },
+    },
     ft = { "php", "json" },
     cmd = { "Laravel" },
     opts = {

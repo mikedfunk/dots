@@ -1,47 +1,61 @@
 return {
-  -- {
-  --   "bullets-vim/bullets.vim",
-  --   ft = { "markdown", "gitcommit" },
-  --   -- TODO: These are being enabled for other languages too :/
-  --   keys = {
-  --     -- Insert mode mappings
-  --     { "<cr>", "<Plug>(bullets-newline)", mode = "i", buffer = 0, desc = "New bullet line" },
-  --     -- This isn't triggering for some reason:
-  --     -- { "<C-cr>", "<cr>", mode = "i", buffer = 0, desc = "Normal carriage return" },
-  --
-  --     -- Normal mode mappings
-  --     { "o", "<Plug>(bullets-newline)", mode = "n", buffer = 0, desc = "New bullet line" },
-  --     -- { "gN", "<Plug>(bullets-renumber)", mode = "n", buffer = 0, desc = "Renumber bullets" },
-  --     -- { "<leader>x", "<Plug>(bullets-toggle-checkbox)", mode = "n", buffer = 0, desc = "Toggle checkbox" },
-  --     { ">>", "<Plug>(bullets-demote)", mode = "n", buffer = 0, desc = "Demote bullet" },
-  --     { "<<", "<Plug>(bullets-promote)", mode = "n", buffer = 0, desc = "Promote bullet" },
-  --
-  --     -- Visual mode mappings
-  --     -- { "gN", "<Plug>(bullets-renumber)", mode = "v", buffer = 0, desc = "Renumber bullets" },
-  --     { ">", "<Plug>(bullets-demote)", mode = "v", buffer = 0, desc = "Demote bullet" },
-  --     { "<", "<Plug>(bullets-promote)", mode = "v", buffer = 0, desc = "Promote bullet" },
-  --
-  --     -- Insert mode mappings for indentation
-  --     -- { "<C-t>", "<Plug>(bullets-demote)", mode = "i", buffer = 0, desc = "Demote bullet" },
-  --     -- { "<C-d>", "<Plug>(bullets-promote)", mode = "i", buffer = 0, desc = "Promote bullet" },
-  --   },
-  --   init = function()
-  --     vim.g.bullets_enabled_file_types = {
-  --       "markdown",
-  --       "text",
-  --       "gitcommit",
-  --       "scratch",
-  --     }
-  --     vim.g.bullets_set_mappings = 0 -- remove some features/mappings above
-  --     vim.g.bullets_checkbox_markers = table.concat({
-  --       " ", -- unchecked
-  --       " ", -- partial: < 33%
-  --       " ", -- partial: > 33%, < 66%
-  --       " ", -- partial: > 66%, < 100%
-  --       "x", -- checked
-  --     }, "")
-  --   end,
-  -- },
+  {
+    "bullets-vim/bullets.vim",
+    ft = { "markdown", "gitcommit" },
+    init = function()
+      vim.g.bullets_enable_in_empty_buffers = false
+      local bullets_filetypes = { "markdown", "text", "gitcommit", "scratch" }
+      vim.g.bullets_enabled_file_types = bullets_filetypes
+      vim.g.bullets_checkbox_markers = table.concat({
+        " ", -- unchecked
+        " ", -- partial: < 33%
+        " ", -- partial: > 33%, < 66%
+        " ", -- partial: > 66%, < 100%
+        "x", -- checked
+      }, "")
+
+      vim.g.bullets_set_mappings = 0 -- re-do mappings
+
+      -- if I don't put this in an autocmd then it will enable these mappings
+      -- for every filetype :/ It's not respecting the ft filter above.
+      vim.api.nvim_create_autocmd("Filetype", {
+        group = vim.api.nvim_create_augroup("mike_bullets_mappings", { clear = true }),
+        pattern = bullets_filetypes,
+        callback = function()
+          vim.keymap.set(
+            "i",
+            "<cr>",
+            "<Plug>(bullets-newline)",
+            { noremap = true, buffer = true, desc = "New bullet line" }
+          )
+          vim.keymap.set("i", "<C-cr>", "<cr>", { noremap = true, buffer = true, desc = "Regular CR" })
+
+          vim.keymap.set(
+            "n",
+            "o",
+            "<Plug>(bullets-newline)",
+            { noremap = true, buffer = true, desc = "New bullet line" }
+          )
+          vim.keymap.set("n", ">>", "<Plug>(bullets-demote)", { noremap = true, buffer = true, desc = "Demote bullet" })
+          vim.keymap.set(
+            "n",
+            "<<",
+            "<Plug>(bullets-promote)",
+            { noremap = true, buffer = true, desc = "Promote bullet" }
+          )
+
+          vim.keymap.set("v", ">", "<Plug>(bullets-demote)", { noremap = true, buffer = true, desc = "Demote bullet" })
+          vim.keymap.set(
+            "v",
+            "<",
+            "<Plug>(bullets-promote)",
+            { noremap = true, buffer = true, desc = "Promote bullet" }
+          )
+        end,
+        desc = "bullets.nvim mappings",
+      })
+    end,
+  },
   -- NOTE: This is installed via a lazyvim extra, just configuring it here
   {
     "MeanderingProgrammer/render-markdown.nvim",

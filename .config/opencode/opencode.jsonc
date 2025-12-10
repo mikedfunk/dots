@@ -29,7 +29,9 @@
             "pwd": "allow",
             "grep *": "allow",
             "find *": "allow",
+            "*php -l *": "allow",
             "*phpspec *": "allow",
+            "*phpunit *": "allow",
             "*phpstan *": "allow",
             "*phpcs *": "allow",
             "*yarn jest *": "allow",
@@ -92,6 +94,16 @@
         //         "sse-only"
         //     ]
         // },
+        "memory-graph": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/gregorydickson/memory-graph.git",
+                "memorygraph"
+            ]
+        },
         "sentry": {
             "type": "local",
             "enabled": true,

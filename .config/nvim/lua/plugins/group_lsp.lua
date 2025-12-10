@@ -30,7 +30,9 @@ return {
         biome = {},
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#copilot
         -- copilot = { telemetry = { telemetryLevel = "none" } },
-        bqls = { enabled = false }, -- to use this LS, :LspStop then :LspStart bqls
+        bqls = {
+          filetypes = { "bigquery" },
+        },
         codebook = {
           filetypes = {
             "c",
@@ -196,9 +198,14 @@ return {
           },
         },
         -- phpactor = {},
+        postgres_lsp = {
+          -- TODO: need to configure this for my connection https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
+          filetypes = { "postgresql" },
+        },
         somesass_ls = {},
         -- sqlfluff = {},
         sqlls = {
+          filetypes = { "sql", "mysql" }, -- don't enable for postgresql or bigquery
           settings = {
             sqlLanguageServer = {
               lint = {
