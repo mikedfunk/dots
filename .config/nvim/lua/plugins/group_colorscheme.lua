@@ -67,4 +67,5 @@ return {
       end,
     },
   },
+  { "rubiin/highlighturl.nvim", event = "VeryLazy", opts = {} },
 }

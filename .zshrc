@@ -580,7 +580,10 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 # https://unix.stackexchange.com/questions/167582/why-zsh-ends-a-line-with-a-highlighted-percent-symbol
-PROMPT_EOL_MARK=''
+export PROMPT_EOL_MARK=''
+
+# make ctrl-w stop at dashes like in bash (no "-")
+WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 # }}}
 
 # zsh plugins config {{{
