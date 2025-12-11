@@ -81,19 +81,13 @@
         //         "--stdio-mcp"
         //     ]
         // },
-        // TODO: not yet working as oauth is not popping up
-        // "figma": {
-        //     "type": "local",
-        //     "enabled": true,
-        //     "command": [
-        //         "bunx",
-        //         "-y",
-        //         "mcp-remote",
-        //         "https://mcp.figma.com/mcp",
-        //         "--transport",
-        //         "sse-only"
-        //     ]
-        // },
+        // TODO: REQUIRES Figma desktop app to be running.
+        // @see https://github.com/sst/opencode/issues/3875
+        "figma": {
+            "type": "remote",
+            "enabled": false,
+            "url": "http://127.0.0.1:3845/mcp"
+        },
         "memory-graph": {
             "type": "local",
             "enabled": true,

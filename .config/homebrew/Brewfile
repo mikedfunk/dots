@@ -421,7 +421,6 @@ brew "zsh" # awesome bash shell replacement
 # cask "eul" # nice menubar and widget stats
 # cask "ferdi" # all messaging in one electron app (slack, discord, google voice, android messages, etc.) another approach to this is matrix (riot.im) with "bridges" to other services
 # cask "fig" # indispensable terminal completion helper (2022-04-20 If I type too fast it will mess up character order)
-# cask "figma" # mockups app
 # cask "flameshot" # another screenshot app, easier and free! <s-cmd-x> to screenshot, "s" to rectangle, "a" to arrow, <cmd-c> to copy and close. MacOS screenshot preview is so much slower - can't keep annotation controls open, keyboard shortcuts don't work, have to manually cancel saving after copying.
 # cask "font-caskaydia-cove-nerd-font" # Microsoft coding font with cursive italics
 # cask "font-commit-mono" # coding font (NOT nerd)
@@ -551,6 +550,7 @@ cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I c
 cask "dbeaver-community" # used for postgresql GUI
 cask "discord" # chat
 cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
+cask "figma" # mockups app. Includes MCP server.
 cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
