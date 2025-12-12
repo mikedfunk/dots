@@ -1,0 +1,29 @@
+# policy: 'ignore'|'trust'|'ask'
+
+[[rule]]
+executable = "/usr/bin/*"
+policy = 'ignore'
+
+[[rule]]
+executable = "/usr/sbin/*"
+policy = 'ignore'
+
+[[rule]]
+executable = "~/Code/**"
+policy = 'trust'
+
+[[rule]]
+executable = "/opt/homebrew/bin/*"
+policy = 'trust'
+
+[[rule]]
+executable = "/usr/local/bin/*"
+policy = 'trust'
+
+[[rule]]
+executable = "~/.local/bin/*"
+policy = 'trust'
+
+[[rule]]
+executable = "~/.bin"
+policy = 'trust'

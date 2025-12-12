@@ -1,0 +1,9 @@
+# https://neovide.dev/config-file.html
+maximized = true
+frame = "none"
+
+[font]
+size = 14
+
+[[font.normal]]
+family = "JetBrainsMono Nerd Font Mono"

@@ -1,0 +1,74 @@
+# vim: set foldmethod=marker:
+
+# general {{{
+# for scrollbar in tmux
+termcapinfo xterm*|xs|rxvt|terminal ti@:te@
+# termcapinfo xterm* ti@:te@ # Enable mouse scrolling and scroll bar history scrolling
+
+# Same as the utf8 command except that the default setting for new windows is
+# changed. Initial setting is `on' if screen was started with "-U", otherwise
+# `off'.
+defutf8 on
+
+escape b # remap meta key so I can use this from tmux
+
+# If set to on, "alternate screen" support is enabled in virtual terminals,
+# just like in xterm.  Initial setting is `off'. Without this, screen won't
+# respond to the escape sequences, even if they're defined in terminfo or
+# termcap.
+altscreen on
+
+startup_message off
+
+# mouse tracking allows to switch region focus by clicking (may not work on older versions of screen)
+mousetrack on
+
+# increase scrollback size
+defscrollback 1000
+
+# screen and layouts https://superuser.com/questions/687348/how-to-persist-gnu-screen-layout-after-restart#963169
+# (may not work on older versions of screen)
+# "layout autosave on" works only for explicitly named layouts in .screenrc.
+# Namely, if you specified some layout as my-layout, switched to it within
+# Screen session and detached, this last layout will be restored after the
+# session is resumed. If you did not specify any layout in the configuration
+# file, you have to run internal command "layout save my-layout-name" before
+# detaching.
+layout autosave on
+
+# https://superuser.com/questions/343541/how-to-force-gnu-screen-to-load-my-bash-profile/343543#343543
+shell -$SHELL
+
+# https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
+maptimeout 10
+# }}}
+
+# status bar {{{
+hardstatus on
+# LC_SSH_ALIAS is set in my *sh alias/function before sshing in
+# powerline symbol breaks display
+# hardstatus string "%{c} ${LC_SSH_ALIAS}  %w%=%{-}"
+# I only use screen for remote servers anyway
+#
+# color codes https://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
+# {ck} is cyan background, black foreground
+hardstatus lastline "%{ck} ${LC_SSH_ALIAS} | %w%=%{-}"
+# }}}
+
+# splits {{{
+# Show a caption below each horizontal split with the process name
+caption splitonly
+caption string "%{c} %w%=%{-}"
+# vertical split background color
+rendition so c
+# }}}
+
+# bindings {{{
+# unbind the x key which is gnu screen's lockscreen function.
+bind ^x
+bind x
+
+# split with s and v
+bind s split
+bind v split -v
+# }}}

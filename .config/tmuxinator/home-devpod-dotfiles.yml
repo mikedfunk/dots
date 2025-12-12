@@ -1,0 +1,9 @@
+---
+windows:
+  - devpod:
+      root: ~/Code/devpod-dotfiles
+      layout: main-horizontal
+      panes:
+        - editor: [v]
+        - git: [ts]
+        - ai: [opencode]

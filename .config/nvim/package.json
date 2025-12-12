@@ -1,0 +1,16 @@
+{
+  "name": "nvim-snippets",
+  "author": "Mike Funk",
+  "comment": "https://code.visualstudio.com/docs/editor/userdefinedsnippets",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "php",
+        "path": "./snippets/php.jsonc"
+      }
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+session: "󰋜 Home"
+# session: "Home"
+windows:
+  - name: config
+    root: ~/.config/yadm
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [htop]
+      - commands: [ctop]
+      - commands: [cd && while true; do clear && yadm st; sleep 60; done]
+
+  - name: blog
+    root: ~/Code/mikedfunk.github.io
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [bundle install && bundle exec jekyll serve --watch]
+      - commands: [ts]
+
+  - name: remix-checkout
+    root: ~/Code/saatchi/remix-checkout
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [bun dev]
+      - commands: [ts]
+
+  # - name: nextjs
+  #   root: ~/Code/test/nextjs-blog
+  #   manual: true
+  #   layout: main-horizontal
+  #   commands: [v]
+  #   panes:
+  #     - commands: [npm run dev]
+  #     - commands: [./pocketbase serve]
+  #     - commands: [ts]
+
+  - name: nextjs
+    root: ~/Code/test/nextjs-playground
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [npm run dev]
+      - commands: [./pocketbase serve]
+      - commands: [ts]
+
+  - name: go-with-tests
+    root: ~/Code/test/go-with-tests
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [gtw]
+      - commands: [ts]
+
+  # - name: neotest
+  #   root: ~/Code/neotest-phpspec
+  #   manual: true
+  #   layout: main-horizontal
+  #   commands: [v]
+  #   panes:
+  #     - commands: [ts]
+
+  - name: paint
+    root: ~/Code/saatchi/paint-wip
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands:
+          [
+            docker compose --project-directory=$HOME/Code/saatchi/xdocker up mysql.db -d && docker compose up,
+          ]
+      - commands: [puw]
+      - commands:
+          [
+            while true; do docker compose exec paint.fpm php artisan tinker; sleep 1; done,
+          ]
+      - commands: [ts]
+
+  - name: brush
+    root: ~/Code/saatchi/brush-wip
+    manual: true
+    layout: main-horizontal
+    commands: [v]
+    panes:
+      - commands: [docker compose up brush.node --force-recreate]
+      - commands: [vitest]
+      - commands:
+          [
+            while true; do docker compose exec brush.node node --experimental-repl-await -i; sleep 5; done,
+          ]
+      - commands: [ts]
+
+  - name: nginx
+    # https://leafgroup.udemy.com/course/nginx-fundamentals/learn/lecture/10614656#overview
+    root: ~/Code/test/nginx
+    manual: true
+    layout: main-horizontal
+    commands:
+      - v
+      - noglob ag -l -g '.*\\.conf' | entr -cr /usr/local/bin/docker compose up --force-recreate -d
+
+  - name: http
+    root: ~/Code/saatchi/http
+    manual: true
+    commands: [v]
+
+  - name: journal
+    commands: [journal]
+
+  - name: news
+    manual: true
+    commands: [news]
+
+  - name: mastodon
+    manual: true
+    commands: [toot tui]

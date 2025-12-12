@@ -1,0 +1,398 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    // see `opencode models`
+    // "model": "openrouter/claude-sonnet-4-5-20250929",
+    "model": "opencode/big-pickle",
+    // "model": "openrouter/anthropic/claude-haiku-4.5",
+    "small_model": "openrouter/claude-3-5-haiku-20241022",
+    "theme": "system",
+    // "theme": "tokyonight",
+    "share": "manual",
+    // "instructions": [
+    //     "CRUSH.md"
+    // ],
+    "disabled_providers": [
+        "alibaba",
+        "amazon-bedrock",
+        "github-copilot",
+        "github-models",
+        "openai",
+        // "opencode",
+        "anthropic",
+        "xai"
+    ],
+    "permission": {
+        "bash": {
+            "git status": "allow",
+            "git diff": "allow",
+            "ls": "allow",
+            "pwd": "allow",
+            "grep *": "allow",
+            "find *": "allow",
+            "*php -l *": "allow",
+            "*phpspec *": "allow",
+            "*phpunit *": "allow",
+            "*phpstan *": "allow",
+            "*phpcs *": "allow",
+            "*yarn jest *": "allow",
+            "*": "ask"
+        }
+    },
+    "lsp": {
+        "php": {
+            "disabled": true,
+            "command": [
+                "{env:HOME}/.local/share/nvim/mason/bin/intelephense",
+                "--stdio"
+            ],
+            "extensions": [
+                ".php",
+                ".phtml"
+            ]
+        },
+        "scss": {
+            "command": [
+                "/Users/mikefunk/.local/share/nvim/mason/bin/some-sass-language-server",
+                "--stdio"
+            ],
+            "extensions": [
+                ".scss"
+            ]
+        }
+    },
+    "mcp": {
+        "context7": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "-y",
+                "@upstash/context7-mcp"
+            ]
+        },
+        // https://spotlightjs.com/
+        // "spotlight": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "-y",
+        //         "@spotlightjs/spotlight",
+        //         "--stdio-mcp"
+        //     ]
+        // },
+        // TODO: REQUIRES Figma desktop app to be running.
+        // @see https://github.com/sst/opencode/issues/3875
+        "figma": {
+            "type": "remote",
+            "enabled": false,
+            "url": "http://127.0.0.1:3845/mcp"
+        },
+        "memory-graph": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/gregorydickson/memory-graph.git",
+                "memorygraph"
+            ]
+        },
+        "sentry": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.sentry.dev/mcp"
+            ]
+        },
+        "spotify": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "--python",
+                "3.12",
+                "--from",
+                "git+https://github.com/varunneal/spotify-mcp",
+                "spotify-mcp"
+            ],
+            "environment": {
+                "SPOTIFY_CLIENT_ID": "{env:SPOTIFY_CLIENT_ID}",
+                "SPOTIFY_CLIENT_SECRET": "{env:SPOTIFY_CLIENT_SECRET}",
+                "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+            }
+        },
+        // TODO: FUCK SALESFORCE SO MUCH it is the worst. You have to first `sf org login web` which doesn't work for me.
+        "salesforce": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "@salesforce/mcp",
+                "--orgs",
+                "saatchiart",
+                "--toolsets",
+                "all"
+            ]
+        },
+        "obsidian": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "mcp-obsidian"
+            ],
+            "environment": {
+                "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
+                // "OBSIDIAN_HOST": "<your_obsidian_host>",
+                // "OBSIDIAN_PORT": "<your_obsidian_port>"
+            }
+        },
+        "snyk": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "snyk",
+                "mcp",
+                "-t",
+                "stdio"
+            ]
+        },
+        "aws-knowledge-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "fastmcp",
+                "run",
+                "https://knowledge-mcp.global.api.aws"
+            ]
+        },
+        "awslabs.eks-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.eks-mcp-server@latest",
+                // "--allow-write",
+                "--allow-sensitive-data-access"
+            ],
+            "environment": {
+                "FASTMCP_LOG_LEVEL": "ERROR",
+                "AWS_PROFILE": "{env:AWS_PROFILE}"
+            },
+        },
+        "awslabs.cloudwatch-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.cloudwatch-mcp-server@latest"
+            ],
+            "environment": {
+                "AWS_PROFILE": "{env:AWS_PROFILE}",
+                "FASTMCP_LOG_LEVEL": "ERROR"
+            }
+        },
+        "awslabs.cost-explorer-mcp-server": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "awslabs.cost-explorer-mcp-server@latest"
+            ],
+            "environment": {
+                "FASTMCP_LOG_LEVEL": "ERROR",
+                "AWS_PROFILE": "{env:AWS_PROFILE}"
+            },
+        },
+        "apple-mcp": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "--no-cache",
+                "apple-mcp@latest"
+            ]
+        },
+        "github": {
+            "type": "local",
+            // apparently this can add a large amount of context to each call, pushing the token limit
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://api.githubcopilot.com/mcp/",
+                "--header",
+                "Authorization: Bearer {env:GITHUB_TOKEN}"
+            ]
+        },
+        "postman": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote",
+                "https://mcp.postman.com/minimal",
+                "--header",
+                "Authorization: Bearer {env:POSTMAN_API_TOKEN}"
+            ]
+        },
+        "youtube-transcript": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/jkawamoto/mcp-youtube-transcript",
+                "mcp-youtube-transcript"
+            ]
+        },
+        "playwright": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "@playwright/mcp@latest"
+            ]
+        },
+        "slack": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "slack-mcp-server@latest",
+                "--transport",
+                "stdio"
+            ],
+            "environment": {
+                "SLACK_MCP_XOXC_TOKEN": "{env:SLACK_MCP_XOXC_TOKEN}",
+                "SLACK_MCP_XOXD_TOKEN": "{env:SLACK_MCP_XOXD_TOKEN}",
+                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            }
+        },
+        "atlassian": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "-y",
+                "mcp-remote@0.1.13",
+                "https://mcp.atlassian.com/v1/sse",
+                "--transport",
+                "sse-only"
+            ],
+        },
+        "tree-sitter": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "mcp-server-tree-sitter"
+            ]
+        },
+        "zen": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/BeehiveInnovations/zen-mcp-server.git",
+                "zen-mcp-server"
+            ],
+            "environment": {
+                "OPENROUTER_API_KEY": "{env:OPENROUTER_API_KEY}",
+                "DISABLED_TOOLS": "analyze,refactor,testgen,secaudit,docgen,tracer",
+                "DEFAULT_MODEL": "auto"
+            }
+        },
+        "cloudflare-observability": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "mcp-remote",
+                "https://observability.mcp.cloudflare.com/mcp"
+            ]
+        },
+        "cloudflare-bindings": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "mcp-remote",
+                "https://bindings.mcp.cloudflare.com/mcp"
+            ]
+        },
+        // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
+        // "strava": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         // "uvx",
+        //         // "--python",
+        //         // "3.13",
+        //         // "strava-activity-mcp-server"
+        //         // "strava-mcp-server"
+        //     ],
+        //     "environment": {
+        //         "STRAVA_CLIENT_ID": "{env:STRAVA_CLIENT_ID}",
+        //         "STRAVA_CLIENT_SECRET": "{env:STRAVA_CLIENT_SECRET}",
+        //         "STRAVA_REFRESH_TOKEN": "{env:STRAVA_REFRESH_TOKEN}"
+        //     }
+        // },
+        // TODO: does not work because my account does not have roles/serviceusage.serviceUsageConsumer
+        // "bigquery": {
+        //     "type": "local",
+        //     "enabled": true,
+        //     "command": [
+        //         "toolbox",
+        //         "--prebuilt",
+        //         "bigquery",
+        //         "--stdio"
+        //     ],
+        //     "environment": {
+        //         "BIGQUERY_PROJECT": "bi-saatchi-fission",
+        //     }
+        // },
+    },
+    "formatter": {
+        "php_cs_fixer": {
+            "command": [
+                "php-cs-fixer",
+                "fix",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        },
+        "rector": {
+            "command": [
+                "rector",
+                "process",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        },
+        "phpcbf": {
+            "command": [
+                "phpcbf",
+                "$FILE"
+            ],
+            "extensions": [
+                "php"
+            ]
+        }
+    }
+}
