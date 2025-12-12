@@ -40,7 +40,7 @@
     },
     "lsp": {
         "php": {
-            "disabled": false,
+            "disabled": true,
             "command": [
                 "{env:HOME}/.local/share/nvim/mason/bin/intelephense",
                 "--stdio"
@@ -100,7 +100,7 @@
         },
         "sentry": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -222,7 +222,7 @@
         "github": {
             "type": "local",
             // apparently this can add a large amount of context to each call, pushing the token limit
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -265,7 +265,7 @@
         },
         "slack": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "bunx",
                 "-y",
@@ -293,7 +293,7 @@
         },
         "tree-sitter": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "uvx",
                 "mcp-server-tree-sitter"
