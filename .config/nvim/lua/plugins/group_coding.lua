@@ -60,7 +60,6 @@ return {
     -- "strottie/nvim-coverage", branch = "strottie-cpp-cobertura",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "folke/tokyonight.nvim",
       "folke/snacks.nvim",
     },
     opts = function()
