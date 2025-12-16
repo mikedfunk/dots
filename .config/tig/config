@@ -205,6 +205,9 @@ bind generic gSc !git-spice branch checkout
 bind generic gSg !git-spice upstack onto
 bind generic gSe !git-spice stack edit
 bind generic gSt @git-spice branch track
+# worktrees
+# (pneumonic: git worktree switch)
+# bind generic gws !git wts
 
 # Go back to the previous view state
 bind generic <C-O> back

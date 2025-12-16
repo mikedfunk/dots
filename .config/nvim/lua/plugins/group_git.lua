@@ -93,27 +93,37 @@ return {
     dependencies = {
       "folke/snacks.nvim",
       "nvim-lua/plenary.nvim",
+      {
+        "folke/which-key.nvim",
+        opts = {
+          spec = {
+            { "<leader>gw", group = "+worktree" }, -- just to set the icon. Mapping below.
+          },
+        },
+      },
     },
-    opts = {},
+    opts = {
+      -- log_level = vim.log.levels.DEBUG,
+    },
     keys = {
       {
         "<Leader>gws",
         function()
-          Snacks.picker.worktrees()
+          require("snacks").picker.worktrees()
         end,
         desc = "Git worktree select",
       },
       {
         "<Leader>gwn",
         function()
-          Snacks.picker.worktrees_new()
+          require("snacks").picker.worktrees_new()
         end,
         desc = "Git worktree new",
       },
       {
         "<Leader>gwr",
         function()
-          Snacks.picker.worktrees_remove()
+          require("snacks").picker.worktrees_remove()
         end,
         desc = "Git worktree remove",
       },

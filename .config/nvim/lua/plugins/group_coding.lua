@@ -64,29 +64,43 @@ return {
       "folke/snacks.nvim",
     },
     opts = function()
+      require("snacks")
+        .toggle({
+          name = "Coverage Markers",
+          get = require("coverage.signs").is_enabled,
+          set = function(state)
+            if state then
+              require("coverage").load(true)
+            else
+              require("coverage").clear()
+            end
+          end,
+        })
+        :map("<leader>uv")
+
       return {
         highlights = {
-          covered = { fg = Snacks.util.color("DiagnosticOk") },
-          uncovered = { fg = Snacks.util.color("DiagnosticError") },
+          covered = { fg = require("snacks").util.color("DiagnosticOk") },
+          uncovered = { fg = require("snacks").util.color("DiagnosticError") },
         },
         auto_reload = true,
         lcov_file = "./coverage/lcov.info",
       }
     end,
-    keys = {
-      {
-        "<leader>tc",
-        function()
-          if require("coverage.signs").is_enabled() then
-            require("coverage").clear()
-          else
-            require("coverage").load(true)
-          end
-        end,
-        noremap = true,
-        desc = "Toggle Coverage",
-      },
-    },
+    -- keys = {
+    --   {
+    --     "<leader>uv",
+    --     function()
+    --       if require("coverage.signs").is_enabled() then
+    --         require("coverage").clear()
+    --       else
+    --         require("coverage").load(true)
+    --       end
+    --     end,
+    --     noremap = true,
+    --     desc = "Toggle Test Coverage Markers",
+    --   },
+    -- },
   },
   -- TODO: doesn't work with treesitter main branch :/
   -- {
