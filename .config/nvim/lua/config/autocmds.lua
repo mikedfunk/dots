@@ -32,12 +32,21 @@ vim.api.nvim_create_autocmd("WinLeave", {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = vim.api.nvim_create_augroup("mike_dont_autoformat", { clear = true }),
+  group = vim.api.nvim_create_augroup("mike_do_not_autoformat_filename", { clear = true }),
   pattern = { "composer.json", "programming_quotes.lua" },
   callback = function()
     vim.b.autoformat = false
   end,
-  desc = "dont autoformat these",
+  desc = "don't autoformat by filename",
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup("mike_do_not_autoformat_filetype", { clear = true }),
+  pattern = { "xml" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+  desc = "don't autoformat by filetype",
 })
 
 vim.api.nvim_create_autocmd("Filetype", {

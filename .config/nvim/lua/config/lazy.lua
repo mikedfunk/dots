@@ -79,6 +79,7 @@ require("lazy").setup({
   },
   install = {
     colorscheme = {
+      "thorn",
       "tokyonight",
       "everforest",
     },

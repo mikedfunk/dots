@@ -10,6 +10,7 @@ return {
   -- },
   {
     "folke/tokyonight.nvim",
+    enabled = false,
     opts = {
       style = "night",
       lualine_bold = true, -- bold headers for each section header
@@ -66,6 +67,35 @@ return {
         }
       end,
     },
+  },
+  {
+    "jpwol/thorn.nvim",
+    enabled = false,
+    lazy = false,
+    dependencies = {
+      {
+        "LazyVim/LazyVim",
+        opts = {
+          colorscheme = "thorn",
+        },
+      },
+    },
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    dependencies = {
+      {
+        "LazyVim/LazyVim",
+        opts = {
+          colorscheme = "everforest",
+        },
+      },
+    },
+    priority = 1000,
   },
   { "rubiin/highlighturl.nvim", event = "VeryLazy", opts = {} },
 }
