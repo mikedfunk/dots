@@ -276,6 +276,7 @@
     who = shortlog -ns --no-merges # who has contributed to a project
     wiff = diff --color-words
     wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads # show branches sorted ascending by recent
+    ; wts = !cd "$(git worktree list | fzf | awk '{print $1}')" # TODO: doesn't work because cd is run in a subshell.
     # wip = !git add -u && git commit -m "WIP" # work in progress commit
     # uncommit the last commit... but make a backup ref first just in case
     # wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard

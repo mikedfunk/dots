@@ -343,3 +343,5 @@ webhooks
 sa
 qa
 api
+worktree
+worktrees

@@ -301,7 +301,10 @@ alias updatedb="/usr/libexec/locate.updatedb" # remember to sudo
 alias be="bundle exec"
 alias ccusage="npx -y ccusage@latest"
 alias mycli="mycli --defaults-group-suffix=_mycli"
-(( $+commands[kubecolor] )) && alias kubectl=kubecolor && compdef kubecolor=kubectl
+(( $+commands[kubecolor] && $+commands[kubectl] )) && {
+  alias kubectl=kubecolor
+  compdef kubecolor=kubectl
+}
 alias k="kubectl"
 compdef k="kubectl"
 alias pspg="pspg --clipboard-app=3"
@@ -560,7 +563,7 @@ ZLE_RPROMPT_INDENT=0
 
 # source "$HOME"/.fzf.zsh 2>/dev/null # fuzzy finder - installed via yadm bootstrap (still from homebrew)
 # source <(fzf --zsh)
-_evalcache fzf --zsh
+_evalcache fzf --zsh 2>/dev/null
 # }}}
 
 # tmux dark mode watcher {{{
