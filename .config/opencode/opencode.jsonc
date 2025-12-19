@@ -11,6 +11,9 @@
     // "instructions": [
     //     "CRUSH.md"
     // ],
+    "plugin": [
+        "opencode-skills" // https://github.com/malhashemi/opencode-skills
+    ],
     "disabled_providers": [
         "alibaba",
         "amazon-bedrock",
@@ -23,9 +26,11 @@
     ],
     "permission": {
         "bash": {
+            "ag *": "allow",
             "git status": "allow",
             "git diff": "allow",
             "ls": "allow",
+            "ls *": "allow",
             "pwd": "allow",
             "grep *": "allow",
             "find *": "allow",
@@ -34,6 +39,7 @@
             "*phpunit *": "allow",
             "*phpstan *": "allow",
             "*phpcs *": "allow",
+            "rg *": "allow",
             "*yarn jest *": "allow",
             "*": "ask"
         }
@@ -66,7 +72,6 @@
             "enabled": true,
             "command": [
                 "bunx",
-                "-y",
                 "@upstash/context7-mcp"
             ]
         },
@@ -76,7 +81,6 @@
         //     "enabled": false,
         //     "command": [
         //         "bunx",
-        //         "-y",
         //         "@spotlightjs/spotlight",
         //         "--stdio-mcp"
         //     ]
@@ -86,6 +90,7 @@
         "figma": {
             "type": "remote",
             "enabled": false,
+            // "url": "https://mcp.figma.com/mcp"
             "url": "http://127.0.0.1:3845/mcp"
         },
         "memory-graph": {
@@ -103,7 +108,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "mcp-remote",
                 "https://mcp.sentry.dev/mcp"
             ]
@@ -131,7 +135,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "@salesforce/mcp",
                 "--orgs",
                 "saatchiart",
@@ -215,7 +218,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "--no-cache",
                 "apple-mcp@latest"
             ]
         },
@@ -225,7 +227,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "mcp-remote",
                 "https://api.githubcopilot.com/mcp/",
                 "--header",
@@ -237,7 +238,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "mcp-remote",
                 "https://mcp.postman.com/minimal",
                 "--header",
@@ -259,7 +259,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "@playwright/mcp@latest"
             ]
         },
@@ -268,7 +267,6 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
                 "slack-mcp-server@latest",
                 "--transport",
                 "stdio"
@@ -284,11 +282,8 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "-y",
-                "mcp-remote@0.1.13",
-                "https://mcp.atlassian.com/v1/sse",
-                "--transport",
-                "sse-only"
+                "mcp-remote",
+                "https://mcp.atlassian.com/v1/sse"
             ],
         },
         "tree-sitter": {

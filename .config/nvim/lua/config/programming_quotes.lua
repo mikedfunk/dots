@@ -326,6 +326,7 @@ M.quotes = {
   { "Much of the excitement we get out of our work is that we don't really know what we are doing.", "", "- Edsger W. Dijkstra" },
   { "My goal is to feel better about a project after a year than I did in the starry-eyed beginning, and TDD helps me achieve this.", "", "- Kent Beck" },
   { "My rule of thumb is 1/3 of the schedule for design, 1/6 for coding, 1/4 for component testing, and 1/4 for system testing.", "", "- Fred Brooks" },
+  { "Nature does not hurry, yet everything is accomplished.", "", "- Lao Tzu" },
   { "Never discourage anyone who continually makes progress, no matter how slow.", "", "- Plato" },
   { "Never exaggerate your faults. Your friends will attend to that.", "", "- Francis Bacon" },
   { "Nine people can’t make a baby in a month.", "", "- Frederick P. Brooks" },
@@ -593,6 +594,7 @@ M.quotes = {
   { "Write tests until fear is transformed into boredom.", "", "- Kent Beck" },
   { "You can learn more from failure than success. In failure you're forced to find out what part did not work. But in success you can believe everything you did was great, when in fact some parts may not have worked at all. Failure forces you to face reality.", "", "- Fred Brooks" },
   { "You can't write perfect software.", "", "Software can't be perfect. Protect your code and users from the inevitable errors.", "", "- The Pragmatic Programmer" },
+  { "You don't get your best performances by trying harder. When you see the guy who wins the race, he usually jogs out of it waving to the crowd, feeling good. The people who look the worst come in after the top guy.", "", "- Ryan Hall" },
   { "You have agency.", "", "It's your life. Grab hold of it and make it what you want.", "", "- The Pragmatic Programmer" },
   { "You haven't mastered a tool until you understand when it should not be used.", "", "- Kelsey Hightower" },
   { "You know you are working on clean code when each routine you read turns out to be pretty much what you expected.", "", "- Ward Cunningham" },
@@ -604,6 +606,8 @@ M.quotes = {
   { "Your code will eventually have its assumptions challenged and stop working.", "", "- /u/the7key (reddit)" },
   { "Your mind is programmable – if you're not programming your mind someone else will program it for you.", "", "- Jeremy Hammond" },
   { "Your task is not to foresee the future, but to enable it.", "", "- Antoine de Saint Exupéry" },
+  { "Always do what you are afraid to do.", "", "- Ralph Waldo Emerson" },
+  { "Don't let the noise of others' opinions drown out your inner voice.", "", "- Steve Jobs" },
 }
 
 local memoized_quote = nil
