@@ -125,7 +125,8 @@ return {
             "-q",
             "--report=json",
             "--cache=.php_cs.cache",
-            "--warning-severity=3", -- show warnings from severity 3 up to the max of 5
+            "--warning-severity=4", -- show warnings from severity 3 up to the max of 5
+            -- "--warning-severity=3", -- show warnings from severity 3 up to the max of 5
             -- "--warning-severity=0", -- do not show warnings, same as -n
             "-d",
             "memory_limit=100M",
