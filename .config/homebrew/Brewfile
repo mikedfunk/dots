@@ -359,6 +359,7 @@ brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
+brew "mago", postinstall: "mago self-update" # php linter/formatter and soon to be more
 brew "mas" if OS.mac? # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
 brew "media-control" if OS.mac? # macos media status helper (used for my tmux statusbar)
 brew "mise" # asdf but faster and includes direnv (TODO: extract to install script outside of brew)

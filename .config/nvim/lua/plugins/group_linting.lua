@@ -1,19 +1,29 @@
--- vim: set fdm=marker:
+-- vim: set foldmethod=marker:
 return {
   {
     -- automatically install nvim-lint packages that are configured
     "rshkarin/mason-nvim-lint",
     -- enabled = false,
-    opts = function()
+    opts = function(opts)
       -- add some missing packages :/
       require("mason-nvim-lint.mapping").nvimlint_to_package =
         vim.tbl_deep_extend("force", require("mason-nvim-lint.mapping").nvimlint_to_package, {
           -- checkmake = "checkmake",
           ["editorconfig-checker"] = "editorconfig-checker",
           ["markdownlint-cli2"] = "markdownlint-cli2",
+          mago_analyze = "mago_analyze",
+          mago_lint = "mago_lint",
           sqruff = "sqruff",
           gitlint = "gitlint",
         })
+
+      return {
+        quiet_mode = true,
+        ignore_install = {
+          "mago_lint",
+          "mago_analyze",
+        },
+      }
     end,
     dependencies = {
       "mfussenegger/nvim-lint",
@@ -95,12 +105,14 @@ return {
         -- typescriptreact = { "cspell" },
         markdown = { "markdownlint" },
         make = { "checkmake" },
-        -- php = { "cspell" },
         sql = {}, -- sqruff and sqlfluff are so brittle. They die on local vars and json selectors.
         -- sql = { "sqruff" },
-        -- php = { "cspell", "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
+        -- php = { "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
+        php = { "mago_analyze", "mago_lint" },
       },
       linters = {
+        mago_analyze = {},
+        mago_lint = {},
         -- phpstan is file-based and cannot be read from stdin, so it is not
         -- only slow (on level 9), it blocks the neovim UI while nvim-lint
         -- ("the async linter") is running it. My shitty workaround for now is

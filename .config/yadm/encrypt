@@ -21,6 +21,7 @@ Code/saatchi/**/.projections.json
 Code/saatchi/**/AGENTS.md
 Code/saatchi/**/codebook.toml
 Code/saatchi/**/compose.override.yml
+Code/saatchi/**/mago.toml
 Code/saatchi/**/mise.toml
 Code/saatchi/**/pyrightconfig.json
 
