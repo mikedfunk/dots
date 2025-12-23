@@ -43,6 +43,7 @@ conform.*
 coverage
 crush.json
 codebook.toml
+mago.toml
 mise.toml
 nohup.out
 root_local

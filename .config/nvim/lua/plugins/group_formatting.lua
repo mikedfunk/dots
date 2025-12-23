@@ -21,7 +21,7 @@ return {
     "stevearc/conform.nvim",
     opts_extend = {
       -- "formatters_by_ft.python",
-      "formatters_by_ft.php",
+      -- "formatters_by_ft.php",
       -- "formatters_by_ft.sql",
       "formatters.phpcbf.prepend_args",
     },
@@ -33,11 +33,22 @@ return {
       },
       formatters_by_ft = {
         -- python = { "black" }, -- moved to lazy extra
-        php = { "php_cs_fixer", "rector", "phpcbf" },
+
+        -- these are all too slow
+        -- php = { "php_cs_fixer", "rector", "phpcbf" },
+        -- php = { "php_cs_fixer", "phpcbf" },
+        -- php = { "php_cs_fixer" },
+        php = { "php_cs_fixer" },
+        -- this is just not ready yet. it does some weird things. (1.0.2)
+        -- php = { "mago_lint", "mago_format" },
+
         hurl = { "hurlfmt" },
         sql = { "sleek" }, -- less brittle than sqlfluff and sqruff
       },
       formatters = {
+        mago = {
+          args = { "lint", "--fix", "$FILENAME" },
+        },
         sleek = {
           args = { "--uppercase", "false", "--indent-spaces", "2" },
         },

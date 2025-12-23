@@ -8,11 +8,12 @@
   "css-lsp": "4.10.0",
   "cssmodules-language-server": "1.5.2",
   "cucumber-language-server": "1.7.0",
-  "deno": "v2.6.1",
+  "deno": "v2.6.3",
   "docker-compose-language-service": "0.4.0",
   "dockerfile-language-server": "0.15.0",
   "editorconfig-checker": "v3.6.0",
   "emmet-language-server": "2.8.0",
+  "eslint-lsp": "4.10.0",
   "gitlint": "0.19.1",
   "groovy-language-server": "0746b250604c0a75bf620f7257aed8df12d025c3",
   "hadolint": "v2.14.0",
@@ -25,7 +26,7 @@
   "markdownlint": "0.47.0",
   "markdownlint-cli2": "0.20.0",
   "php-cs-fixer": "v3.92.3",
-  "phpactor": "2025.10.17.0",
+  "phpactor": "2025.12.21.0",
   "phpcbf": "4.0.1",
   "phpcs": "4.0.1",
   "postgres-language-server": "0.18.0",
@@ -45,5 +46,5 @@
   "tree-sitter-cli": "v0.26.3",
   "vtsls": "0.2.9",
   "yaml-language-server": "1.19.2",
-  "zk": "v0.15.1"
+  "zk": "v0.15.2"
 }
