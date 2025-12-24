@@ -97,18 +97,13 @@ return {
     opts = {
       linters_by_ft = {
         fish = {}, -- BUGFIX: There is no such nvim-lint linter as "fish"
-        editorconfig = { "editorconfig-checker" },
-        gitcommit = { "gitlint" },
-        -- javascript = { "cspell" },
-        -- javascriptreact = { "cspell" },
-        -- typescript = { "cspell" },
-        -- typescriptreact = { "cspell" },
-        markdown = { "markdownlint" },
-        make = { "checkmake" },
-        sql = {}, -- sqruff and sqlfluff are so brittle. They die on local vars and json selectors.
-        -- sql = { "sqruff" },
+        editorconfig = { "editorconfig-checker" }, -- extend
+        gitcommit = { "gitlint" }, -- extend
+        markdown = { "markdownlint" }, -- extend
+        make = { "checkmake" }, -- extend
+        sql = {}, -- Replace. sqruff and sqlfluff are so brittle. They die on local vars and json selectors.
         -- php = { "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
-        php = { "mago_analyze", "mago_lint" },
+        php = { "mago_analyze", "mago_lint" }, -- extend
       },
       linters = {
         mago_analyze = {},

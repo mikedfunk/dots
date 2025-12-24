@@ -4,7 +4,7 @@
   "black": "25.12.0",
   "bqls": "v0.4.3",
   "checkmake": "0.2.2",
-  "codebook": "v0.3.20",
+  "codebook": "v0.3.22",
   "css-lsp": "4.10.0",
   "cssmodules-language-server": "1.5.2",
   "cucumber-language-server": "1.7.0",
@@ -20,8 +20,9 @@
   "intelephense": "1.16.3",
   "js-debug-adapter": "v1.105.0",
   "json-lsp": "4.10.0",
+  "laravel-ls": "v0.0.12",
   "lemminx": "0.29.0",
-  "lua-language-server": "3.16.2",
+  "lua-language-server": "3.16.3",
   "markdown-toc": "1.2.0",
   "markdownlint": "0.47.0",
   "markdownlint-cli2": "0.20.0",
@@ -44,7 +45,7 @@
   "tailwindcss-language-server": "0.14.29",
   "taplo": "0.10.0",
   "tree-sitter-cli": "v0.26.3",
-  "vtsls": "0.2.9",
+  "vtsls": "0.3.0",
   "yaml-language-server": "1.19.2",
   "zk": "v0.15.2"
 }

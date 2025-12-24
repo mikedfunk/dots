@@ -58,9 +58,6 @@ return {
         },
         contextive = {
           root_markers = { ".contextive" },
-          -- root_dir = function(startpath)
-          --   return require("lspconfig.util").root_pattern(".contextive")(startpath)
-          -- end,
           enabled = false, -- to use this LS, :LspStop then :LspStart contextive
         },
         cssls = {
@@ -70,9 +67,6 @@ return {
         cucumber_language_server = {},
         denols = {
           root_markers = { "deno.json" },
-          -- root_dir = function(startpath)
-          --   return require("lspconfig.util").root_pattern("deno.json")(startpath)
-          -- end,
         },
         -- expert = {}, -- elixir
         eslint = { enabled = vim.fn.executable("eslint") == 1 },
@@ -161,14 +155,7 @@ return {
           --   },
           -- },
         },
-        -- TODO: mason doesn't recognize arm64 build so I installed with mise. Switch when available.
-        laravel_ls = {
-          mason = false,
-          -- fix bug with root_dir throwing an error for this ls
-          root_dir = function(startpath)
-            return require("lspconfig.util").root_pattern("artisan")(startpath)
-          end,
-        },
+        laravel_ls = { root_markers = { "artisan" } },
         lemminx = {},
         -- lsp_ai = {},
         marksman = { enabled = false },
@@ -241,16 +228,6 @@ return {
             "tailwind.config.cts",
             "tailwind.config.mts",
           },
-          -- root_dir = function(startpath)
-          --   return require("lspconfig.util").root_pattern(
-          --     "tailwind.config.js",
-          --     "tailwind.config.cjs",
-          --     "tailwind.config.mjs",
-          --     "tailwind.config.ts",
-          --     "tailwind.config.cts",
-          --     "tailwind.config.mts"
-          --   )(startpath)
-          -- end,
         },
         taplo = {},
         vtsls = {
@@ -260,11 +237,8 @@ return {
             },
           },
         },
-        -- For some reason this root_dir function now breaks vtsls - it never starts
         -- vtsls = {
-        --   root_dir = function(startpath)
-        --     return require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json")(startpath)
-        --   end,
+        --   root_markers = { "tsconfig.json", "jsconfig.json" }
         --   -- single_file_support = false, -- deprecated
         --   workspace_required = true,
         -- },
@@ -298,10 +272,7 @@ return {
     event = "LspAttach",
     opts = {
       autocmd = { enabled = true },
-      sign = {
-        text = "",
-        hl = "DiagnosticSignWarn",
-      },
+      sign = { text = "", hl = "DiagnosticSignWarn" },
     },
   },
   -- mouse hover to lsp hover

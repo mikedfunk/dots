@@ -37,10 +37,10 @@ return {
         -- these are all too slow
         -- php = { "php_cs_fixer", "rector", "phpcbf" },
         -- php = { "php_cs_fixer", "phpcbf" },
-        -- php = { "php_cs_fixer" },
         php = { "php_cs_fixer" },
         -- this is just not ready yet. it does some weird things. (1.0.2)
         -- php = { "mago_lint", "mago_format" },
+        -- php = { "mago_format" },
 
         hurl = { "hurlfmt" },
         sql = { "sleek" }, -- less brittle than sqlfluff and sqruff
