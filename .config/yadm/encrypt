@@ -43,6 +43,7 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 .config/multitail/multitail.conf
 .config/pg/{.pgpass,pg_service.conf}
 .config/{aws,kube}/config
+.local/share/nvim/{jsongerber-thanks.json,triforce_stats.json}
 .mailmap
 .mylogin.cnf
 .netrc

@@ -11,9 +11,6 @@
     // "instructions": [
     //     "CRUSH.md"
     // ],
-    "plugin": [
-        "opencode-skills" // https://github.com/malhashemi/opencode-skills
-    ],
     "disabled_providers": [
         "alibaba",
         "amazon-bedrock",
@@ -25,23 +22,30 @@
         "xai"
     ],
     "permission": {
+        "external_directory": "ask",
+        "webfetch": "allow",
         "bash": {
-            "ag *": "allow",
-            "git status": "allow",
-            "git diff": "allow",
-            "ls": "allow",
-            "ls *": "allow",
-            "pwd": "allow",
-            "grep *": "allow",
-            "find *": "allow",
+            "*": "ask",
             "*php -l *": "allow",
-            "*phpspec *": "allow",
-            "*phpunit *": "allow",
-            "*phpstan *": "allow",
             "*phpcs *": "allow",
-            "rg *": "allow",
-            "*yarn jest *": "allow",
-            "*": "ask"
+            "*phpcs": "allow",
+            "*phpspec *": "allow",
+            "*phpspec": "allow",
+            "*phpstan *": "allow",
+            "*phpstan": "allow",
+            "*phpunit *": "allow",
+            "*phpunit": "allow",
+            "*yarn jest": "allow",
+            "ag *": "allow",
+            "find *": "allow",
+            "git diff *": "allow",
+            "git diff": "allow",
+            "git status": "allow",
+            "grep *": "allow",
+            "ls *": "allow",
+            "ls": "allow",
+            "pwd": "allow",
+            "rg *": "allow"
         }
     },
     "lsp": {
@@ -58,7 +62,7 @@
         },
         "scss": {
             "command": [
-                "/Users/mikefunk/.local/share/nvim/mason/bin/some-sass-language-server",
+                "{env:HOME}/.local/share/nvim/mason/bin/some-sass-language-server",
                 "--stdio"
             ],
             "extensions": [
