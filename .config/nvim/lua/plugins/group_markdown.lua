@@ -142,8 +142,39 @@ return {
     "jmbuhr/otter.nvim",
     ft = "markdown",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("otter").activate()
-    end,
+    -- config = function()
+    --   require("otter").activate()
+    -- end,
+  },
+  {
+    "obsidian-nvim/obsidian.nvim",
+    version = "*",
+    ft = "markdown",
+    dependencies = {
+      "folke/snacks.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "MeanderingProgrammer/render-markdown.nvim",
+    },
+    ---@module 'obsidian'
+    ---@type obsidian.config
+    opts = {
+      legacy_commands = false,
+      templates = { folder = "Templates" },
+      daily_notes = { folder = "~/Notes/journal" },
+      frontmatter = { enabled = false },
+      workspaces = {
+        {
+          name = "journal",
+          path = "~/Notes/journal",
+        },
+        {
+          name = "saatchi",
+          path = "~/Notes/saatchi",
+        },
+      },
+      footer = {
+        format = "{{backlinks}} backlinks",
+      },
+    },
   },
 }

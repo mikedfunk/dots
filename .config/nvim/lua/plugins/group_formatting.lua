@@ -32,12 +32,13 @@ return {
         async = true,
       },
       formatters_by_ft = {
+        -- markdown = { "markdownlint-cli2", "markdown-toc" }, -- disable prettier. It fucks up front matter with templates.
         -- python = { "black" }, -- moved to lazy extra
 
         -- these are all too slow
         -- php = { "php_cs_fixer", "rector", "phpcbf" },
-        -- php = { "php_cs_fixer", "phpcbf" },
-        php = { "php_cs_fixer" },
+        php = { "php_cs_fixer", "phpcbf" },
+        -- php = { "php_cs_fixer" },
         -- this is just not ready yet. it does some weird things. (1.0.2)
         -- php = { "mago_lint", "mago_format" },
         -- php = { "mago_format" },
@@ -46,9 +47,9 @@ return {
         sql = { "sleek" }, -- less brittle than sqlfluff and sqruff
       },
       formatters = {
-        mago = {
-          args = { "lint", "--fix", "$FILENAME" },
-        },
+        -- mago = {
+        --   args = { "lint", "--fix", "$FILENAME" },
+        -- },
         sleek = {
           args = { "--uppercase", "false", "--indent-spaces", "2" },
         },
