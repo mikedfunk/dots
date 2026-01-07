@@ -15,7 +15,7 @@ return {
     "neovim/nvim-lspconfig",
     -- TODO: not working
     opts_extend = {
-      "servers.snyk_ls.filetypes",
+      -- "servers.snyk_ls.filetypes",
       "servers.emmet_language_server.filetypes",
     },
     ---@class PluginLspOpts
@@ -158,6 +158,13 @@ return {
         laravel_ls = { root_markers = { "artisan" } },
         lemminx = {},
         -- lsp_ai = {},
+        -- markdown_oxide = {
+        --   capabilities = {
+        --     workspace = {
+        --       didChangeWatchedFiles = { dynamicRegistration = true },
+        --     },
+        --   },
+        -- },
         marksman = { enabled = false },
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua
         ---@see https://github.com/snyk/snyk-ls#configuration-1
@@ -252,7 +259,7 @@ return {
             },
           },
         },
-        zk = {}, -- because marksman crashes a lot
+        zk = {}, -- because marksman crashes a lot (switched to markdown_oxide)
       },
     },
   },

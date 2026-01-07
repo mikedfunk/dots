@@ -11,8 +11,8 @@ return {
           -- checkmake = "checkmake",
           ["editorconfig-checker"] = "editorconfig-checker",
           ["markdownlint-cli2"] = "markdownlint-cli2",
-          mago_analyze = "mago_analyze",
-          mago_lint = "mago_lint",
+          -- mago_analyze = "mago_analyze",
+          -- mago_lint = "mago_lint",
           sqruff = "sqruff",
           gitlint = "gitlint",
         })
@@ -20,8 +20,8 @@ return {
       return {
         quiet_mode = true,
         ignore_install = {
-          "mago_lint",
-          "mago_analyze",
+          -- "mago_lint",
+          -- "mago_analyze",
         },
       }
     end,
@@ -91,7 +91,7 @@ return {
       "linters_by_ft.typescriptreact",
       "linters_by_ft.markdown",
       "linters_by_ft.make",
-      "linters_by_ft.php",
+      -- "linters_by_ft.php",
       -- "linters_by_ft.sql",
     },
     opts = {
@@ -103,11 +103,11 @@ return {
         make = { "checkmake" }, -- extend
         sql = {}, -- Replace. sqruff and sqlfluff are so brittle. They die on local vars and json selectors.
         -- php = { "phpstan" }, -- see below - moved phpstan to ALE for now to avoid blocking the UI on save
-        php = { "mago_analyze", "mago_lint" }, -- extend
+        -- php = { "mago_analyze", "mago_lint" }, -- extend
       },
       linters = {
-        mago_analyze = {},
-        mago_lint = {},
+        -- mago_analyze = {},
+        -- mago_lint = {},
         -- phpstan is file-based and cannot be read from stdin, so it is not
         -- only slow (on level 9), it blocks the neovim UI while nvim-lint
         -- ("the async linter") is running it. My shitty workaround for now is

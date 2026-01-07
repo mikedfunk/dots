@@ -419,6 +419,7 @@ return {
   {
     "folke/sidekick.nvim",
     enabled = true,
+    event = "VeryLazy",
     dependencies = {
       {
         "neovim/nvim-lspconfig",
@@ -429,6 +430,11 @@ return {
             opts.servers.copilot = opts.servers.copilot or {}
           end
         end,
+      },
+      {
+        -- add AI section to which-key
+        "folke/which-key.nvim",
+        opts = { spec = { { "<leader>a", group = "+ai" } } },
       },
     },
     opts = {
