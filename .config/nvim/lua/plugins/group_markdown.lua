@@ -160,16 +160,12 @@ return {
     opts = {
       legacy_commands = false,
       templates = { folder = "Templates" },
-      daily_notes = { folder = "~/Notes/journal" },
+      daily_notes = { folder = "" },
       frontmatter = { enabled = false },
       workspaces = {
         {
-          name = "journal",
-          path = "~/Notes/journal",
-        },
-        {
-          name = "saatchi",
-          path = "~/Notes/saatchi",
+          name = "Notes",
+          path = "~/Notes",
         },
       },
       footer = {
