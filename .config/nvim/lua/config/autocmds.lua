@@ -152,3 +152,22 @@ vim.api.nvim_create_autocmd("Filetype", {
 --     end
 --   end,
 -- })
+--
+
+-- moved to ~/.support/tmux-dark-mode-watcher.sh invoked by ~/.zshrc
+-- When updating dark-notify theme, reload tmux theme
+-- vim.api.nvim_create_autocmd("User", {
+--   group = vim.api.nvim_create_augroup("mike_tmux_reload_dark_notify", { clear = true }),
+--   pattern = "UpdateDarkNotifyTheme",
+--   callback = function()
+--     -- these tmux plugins must be loaded after theme change or they stop working
+--     -- in statusbar because the script just sets tmux variables which are set by their tmux plugins.
+--     vim.cmd(
+--       "silent! !( defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark "
+--         .. "&& tmux source ~/.config/tmux/tmuxline-dark.conf || tmux source ~/.config/tmux/tmuxline-light.conf ) "
+--         .. "&& tmux run-shell $TMUX_PLUGIN_MANAGER_PATH/tmux-cpu/cpu.tmux "
+--         .. "&& tmux run-shell $TMUX_PLUGIN_MANAGER_PATH/tmux-battery/battery.tmux"
+--     )
+--   end,
+--   desc = "Reload tmux status on dark-notify update",
+-- })
