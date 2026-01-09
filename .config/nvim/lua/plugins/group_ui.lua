@@ -316,8 +316,8 @@ return {
           y = { "254", "238" }, -- one away from right-most statusline section
           x = { "255", "239" }, -- two away from right-most statusline section
 
-          bg = { "16", "0" }, -- statusline background between sections
-          win = { "16", "0" }, -- unselected "tab" aka window in tmux
+          bg = { "16", "8" }, -- statusline background between sections
+          win = { "16", "8" }, -- unselected "tab" aka window in tmux
           cwin = { "231", "14", "bold" }, -- selected "tab" aka window in tmux
         }
         vim.cmd("command! MyTmuxline :Tmuxline | TmuxlineSnapshot! ~/.config/tmux/tmuxline-light.conf") -- apply tmuxline settings or snapshot to file
