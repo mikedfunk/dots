@@ -25,7 +25,7 @@
         "external_directory": "ask",
         "webfetch": "allow",
         "bash": {
-            "*": "ask",
+            "composer ci-*": "allow",
             "*php -l *": "allow",
             "*phpcs *": "allow",
             "*phpcs": "allow",
@@ -45,7 +45,11 @@
             "ls *": "allow",
             "ls": "allow",
             "pwd": "allow",
-            "rg *": "allow"
+            "rg *": "allow",
+            "tail *": "allow",
+            "head *": "allow",
+            "wc *": "allow",
+            "*": "ask"
         }
     },
     "lsp": {
