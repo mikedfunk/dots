@@ -2,12 +2,16 @@
     "$schema": "https://opencode.ai/config.json",
     // see `opencode models`
     // "model": "openrouter/claude-sonnet-4-5-20250929",
-    "model": "opencode/big-pickle",
+    // "model": "opencode/big-pickle",
+    "model": "gemini-claude-sonnet-4-5-thinking",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     "small_model": "openrouter/claude-3-5-haiku-20241022",
     "theme": "system",
     // "theme": "tokyonight",
     "share": "manual",
+    "plugin": [
+        "opencode-google-antigravity-auth"
+    ],
     // "instructions": [
     //     "CRUSH.md"
     // ],
@@ -23,6 +27,9 @@
     ],
     "permission": {
         "external_directory": "ask",
+        "grep": "allow",
+        "glob": "allow",
+        "read": "allow",
         "webfetch": "allow",
         "bash": {
             "composer ci-*": "allow",
@@ -37,19 +44,247 @@
             "*phpunit": "allow",
             "*yarn jest": "allow",
             "ag *": "allow",
+            "echo *": "allow",
             "find *": "allow",
             "git diff *": "allow",
             "git diff": "allow",
+            "git show *": "allow",
             "git status": "allow",
             "grep *": "allow",
+            "head *": "allow",
             "ls *": "allow",
             "ls": "allow",
             "pwd": "allow",
             "rg *": "allow",
+            "sort *": "allow",
             "tail *": "allow",
-            "head *": "allow",
             "wc *": "allow",
             "*": "ask"
+        }
+    },
+    "provider": {
+        "google": {
+            "npm": "@ai-sdk/google",
+            "models": {
+                "gemini-3-pro-preview": {
+                    "id": "gemini-3-pro-preview",
+                    "name": "3 Pro",
+                    "release_date": "2025-11-18",
+                    "reasoning": true,
+                    "limit": {
+                        "context": 1000000,
+                        "output": 64000
+                    },
+                    "cost": {
+                        "input": 2,
+                        "output": 12,
+                        "cache_read": 0.2
+                    },
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image",
+                            "video",
+                            "audio",
+                            "pdf"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "variants": {
+                        "low": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "low",
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "medium": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "medium",
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "high": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "high",
+                                    "includeThoughts": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "gemini-3-flash": {
+                    "id": "gemini-3-flash",
+                    "name": "3 Flash",
+                    "release_date": "2025-12-17",
+                    "reasoning": true,
+                    "limit": {
+                        "context": 1048576,
+                        "output": 65536
+                    },
+                    "cost": {
+                        "input": 0.5,
+                        "output": 3,
+                        "cache_read": 0.05
+                    },
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image",
+                            "video",
+                            "audio",
+                            "pdf"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "variants": {
+                        "minimal": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "minimal",
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "low": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "low",
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "medium": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "medium",
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "high": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingLevel": "high",
+                                    "includeThoughts": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "gemini-2.5-flash-lite": {
+                    "id": "gemini-2.5-flash-lite",
+                    "name": "2.5 Flash Lite",
+                    "reasoning": false
+                },
+                "gemini-claude-sonnet-4-5-thinking": {
+                    "id": "gemini-claude-sonnet-4-5-thinking",
+                    "name": "Sonnet 4.5",
+                    "reasoning": true,
+                    "limit": {
+                        "context": 200000,
+                        "output": 64000
+                    },
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image",
+                            "pdf"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "variants": {
+                        "none": {
+                            "reasoning": false,
+                            "options": {
+                                "thinkingConfig": {
+                                    "includeThoughts": false
+                                }
+                            }
+                        },
+                        "low": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 4000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "medium": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 16000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "high": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 32000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "gemini-claude-opus-4-5-thinking": {
+                    "id": "gemini-claude-opus-4-5-thinking",
+                    "name": "Opus 4.5",
+                    "release_date": "2025-11-24",
+                    "reasoning": true,
+                    "limit": {
+                        "context": 200000,
+                        "output": 64000
+                    },
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image",
+                            "pdf"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "variants": {
+                        "low": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 4000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "medium": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 16000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        },
+                        "high": {
+                            "options": {
+                                "thinkingConfig": {
+                                    "thinkingBudget": 32000,
+                                    "includeThoughts": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "lsp": {

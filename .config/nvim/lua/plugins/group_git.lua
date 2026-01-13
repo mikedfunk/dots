@@ -129,4 +129,5 @@ return {
       },
     },
   },
+  -- { "kokusenz/deltaview.nvim", event = "VeryLazy", opts = {} },
 }
