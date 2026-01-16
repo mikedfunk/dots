@@ -21,8 +21,8 @@ export XDG_BIN_DIR="$HOME"/.local/bin
 # confirmations, etc.) must go above this block; everything else may go below.
 
 # P10k is installed as a ZSH plugin.
-[[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
-  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+# [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
+#   source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
 # }}}
 
 # Paths {{{
@@ -567,11 +567,11 @@ _evalcache fzf --zsh 2>/dev/null
 # }}}
 
 # tmux dark mode watcher {{{
-# Start tmux Dark/Light mode watcher once per login
+# Start tmux Dark/Light mode watcher silently once per login
 WATCHER_PID_FILE="$HOME/.tmux-dark-mode-watcher.pid"
 
 if [ ! -f "$WATCHER_PID_FILE" ] || ! kill -0 $(cat "$WATCHER_PID_FILE") 2>/dev/null; then
-    nohup ~/.support/tmux-dark-mode-watcher.sh >/tmp/tmux-dark-mode.log 2>&1 < /dev/null &
+    { nohup dark-notify -c '~/.support/tmux-dark-mode-watcher.sh' >/tmp/tmux-dark-mode.log 2>&1 < /dev/null & } 2>/dev/null
     echo $! > "$WATCHER_PID_FILE"
 fi
 # }}}
