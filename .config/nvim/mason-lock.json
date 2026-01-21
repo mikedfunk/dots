@@ -13,6 +13,7 @@
   "dockerfile-language-server": "0.15.0",
   "editorconfig-checker": "v3.6.0",
   "emmet-language-server": "2.8.0",
+  "eslint-lsp": "4.10.0",
   "gitlint": "0.19.1",
   "groovy-language-server": "0746b250604c0a75bf620f7257aed8df12d025c3",
   "hadolint": "v2.14.0",

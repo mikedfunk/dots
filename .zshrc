@@ -218,6 +218,7 @@ export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/evalcache
 
 export AQUA_GLOBAL_CONFIG="$XDG_CONFIG_HOME"/aquaproj-aqua/aqua.yaml
 
+# https://github.com/jnsahaj/lumen
 export LUMEN_AI_PROVIDER="openrouter"
 export LUMEN_AI_MODEL="qwen/qwen3-coder:free"
 
@@ -321,8 +322,8 @@ alias acli-login="echo $JIRA_USER_API_KEY | acli jira auth login --site $JIRA_SI
 
 # Public: pass the current ssh alias. Used by my promptline theme and .screenrc to show the alias in the PS1.
 # servers don't like anything *-256color so I need to use screen via ssh
-ssh () { env TERM=screen LC_SSH_ALIAS=$1 command ssh $@; }
-autossh () { LC_SSH_ALIAS=$1 command autossh $@; }
+ssh () { env TERM=screen LC_SSH_ALIAS=$1 command ssh "$@"; }
+autossh () { LC_SSH_ALIAS=$1 command autossh "$@"; }
 compdef autossh="ssh"
 
 # https://www.youtube.com/watch?v=Wl7CDe9jsuo&feature=youtu.be
@@ -340,7 +341,7 @@ alias du="grc --colour=auto /usr/bin/du"
 (( $+commands[eza] )) && alias ls="eza"
 
 alias ll='ls -lhA --classify=auto'
-# phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug,develop -dxdebug.client_port=${XDEBUG_PORT:-9003} $@; }
+# phpx() { php -d xdebug.start_with_request=yes -dxdebug.mode=debug,develop -dxdebug.client_port=${XDEBUG_PORT:-9003} "$@"; }
 alias work="tmuxinator start work --suppress-tmux-version-warning"
 alias home="tmuxinator start home --suppress-tmux-version-warning"
 
@@ -363,12 +364,13 @@ alias art="php artisan"
 # compdef pg="phing"
 
 alias news="BROWSER='open %u' newsboat"
+alias privoxy="privoxy $XDG_CONFIG_HOME/privoxy/config"
 
 k9s () {
     defaults read -g AppleInterfaceStyle &>/dev/null
     local skin_file=$([ $? -eq 0 ] && echo "$XDG_CONFIG_HOME"/k9s/skins/skin_dark.yaml || echo "$XDG_CONFIG_HOME"/k9s/skins/skin_light.yaml)
     command cp "$skin_file" "$XDG_CONFIG_HOME"/k9s/skins/skin.yaml
-    command k9s $@
+    command k9s "$@"
 }
 
 alias y="yadm"
@@ -413,7 +415,7 @@ pgcli_service() {
 alias pu="phpunitnotify"
 
 # phpunit coverage
-puc-html() { pu --coverage-html=./coverage $@ && open coverage/index.html; }
+puc-html() { pu --coverage-html=./coverage "$@" && open coverage/index.html; }
 alias puc='pu --coverage-cobertura="coverage/cobertura.xml"'
 alias puf="pu --filter="
 
@@ -429,7 +431,7 @@ puw() {
         -dxdebug.mode=off \
         ./vendor/bin/phpunit \
         --colors=always \
-        $@
+        "$@"
 }
 
 # phpunit coverage watch
@@ -444,7 +446,7 @@ pucw() {
         ./vendor/bin/phpunit \
         --colors=always \
         --coverage-cobertura="coverage/cobertura.xml" \
-        $@
+        "$@"
 }
 # }}}
 
@@ -475,7 +477,7 @@ psw() {
         -dmemory_limit=1024M \
         -ddisplay_errors=off \
         -dxdebug.mode=off \
-        ./vendor/bin/phpspec run --no-interaction -vvv $@
+        ./vendor/bin/phpspec run --no-interaction -vvv "$@"
 }
 
 # phpspec coverage
@@ -487,7 +489,7 @@ psc-html() {
         --no-interaction \
         --no-code-generation \
         -vvv \
-        $@ \
+        "$@" \
         && open coverage/index.html
 }
 alias psc="php \
@@ -511,7 +513,7 @@ pscw() {
         --no-interaction \
         --no-code-generation \
         -vvv \
-        $@
+        "$@"
 }
 # }}}
 
