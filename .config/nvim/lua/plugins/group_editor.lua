@@ -192,4 +192,101 @@ return {
   --   },
   --   lazy = false,
   -- },
+  {
+    -- like marks but with comments, and you can send them to AI
+    "TheNoeTrevino/haunt.nvim",
+    dependencies = {
+      "folke/snacks.nvim",
+      "folke/sidekick.nvim",
+      {
+        "folke/which-key.nvim",
+        opts = {
+          spec = {
+            { "<leader>h", group = "+haunt" }, -- just to set the icon. Mapping below.
+          },
+        },
+      },
+      {
+        "folke/sidekick.nvim",
+        ---@class sidekick.Config
+        opts = {
+          cli = {
+            prompts = {
+              haunt_all = function()
+                return require("haunt.sidekick").get_locations()
+              end,
+              haunt_buffer = function()
+                return require("haunt.sidekick").get_locations({ current_buffer = true })
+              end,
+            },
+          },
+        },
+      },
+    },
+    opts = {},
+
+    keys = {
+      -- annotations
+      {
+        "<leader>ha",
+        function()
+          require("haunt.api").annotate()
+        end,
+        desc = "Annotate",
+      },
+      {
+        "<leader>ht",
+        function()
+          require("haunt.api").toggle_annotation()
+        end,
+        desc = "Toggle annotation",
+      },
+      {
+        "<leader>hT",
+        function()
+          require("haunt.api").toggle_all_lines()
+        end,
+        desc = "Toggle all annotations",
+      },
+      {
+        "<leader>hd",
+        function()
+          require("haunt.api").delete()
+        end,
+        desc = "Delete bookmark",
+      },
+      {
+        "<leader>hC",
+        function()
+          require("haunt.api").clear_all()
+        end,
+        desc = "Delete all bookmarks",
+      },
+
+      -- move
+      {
+        "<leader>hp",
+        function()
+          require("haunt.api").prev()
+        end,
+        desc = "Previous bookmark",
+      },
+      {
+        "<leader>hn",
+        function()
+          require("haunt.api").next()
+        end,
+        desc = "Next bookmark",
+      },
+
+      -- picker
+      {
+        "<leader>hl",
+        function()
+          require("haunt.picker").show()
+        end,
+        desc = "Show Picker",
+      },
+    },
+  },
 }

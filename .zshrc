@@ -21,8 +21,8 @@ export XDG_BIN_DIR="$HOME"/.local/bin
 # confirmations, etc.) must go above this block; everything else may go below.
 
 # P10k is installed as a ZSH plugin.
-# [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
-#   source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+[[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
 # }}}
 
 # Paths {{{
@@ -218,6 +218,9 @@ export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/evalcache
 
 export AQUA_GLOBAL_CONFIG="$XDG_CONFIG_HOME"/aquaproj-aqua/aqua.yaml
 
+export LUMEN_AI_PROVIDER="openrouter"
+export LUMEN_AI_MODEL="qwen/qwen3-coder:free"
+
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
 export BAT_THEME="TwoDark"
 # use `gO` to open a quickfix with a table of contents!
@@ -307,6 +310,10 @@ alias mycli="mycli --defaults-group-suffix=_mycli"
 }
 alias k="kubectl"
 compdef k="kubectl"
+
+alias d="docker"
+compdef d="docker"
+
 alias pspg="pspg --clipboard-app=3"
 compdef git-spice="gs"
 
@@ -325,7 +332,8 @@ alias mkdir="mkdir -vp"
 
 cd () { builtin cd "$@" && ls -F -A -G; } # auto ls on cd
 alias ..="cd .."
-alias ...="cd ../.."
+alias ....="cd ../.."
+alias ......="cd ../.."
 alias du="grc --colour=auto /usr/bin/du"
 
 # https://github.com/sharkdp/vivid/issues/25#issuecomment-450423306
