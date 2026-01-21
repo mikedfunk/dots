@@ -21,6 +21,7 @@
 # tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # tap "jannis-baum/tap" # vivify
 # tap "jetbrains/utils" # qodana
+# tap "jnsahaj/lumen" # lumen
 # tap "lihaoyun6/tap" # quickrecorder
 # tap "mikedfunk/keytty" # keytty
 # tap "mutagen-io/mutagen"
@@ -34,7 +35,6 @@
 # tap "zackriya-solutions/meetily" # meetily
 tap "buo/cask-upgrade" # for `brew cu`
 tap "grishka/grishka" # neardrop
-tap "jnsahaj/lumen" # lumen
 tap "mikedfunk/zoomhider" # zoomhider
 
 # }}}
@@ -198,6 +198,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "lockrun" # simple way to lock cron jobs with a lock file and clear them when done
 # brew "lsd" # pretty ls augmentation
 # brew "luajit" # needed for luarocks, which is used by neovim nvim-coverage plugin
+# brew "lumen" # git diff and helper tool (tap above)
 # brew "lunchy" # launchctl wrapper to make it more developer-friendly. Moved from ~/Gemfile (moved to mise)
 # brew "lynx" # console web browser. used by ranger to preview html.
 # brew "m-cli" # mac cli tools e.g. restart, screensaver, bluetooth, etc.
@@ -360,7 +361,6 @@ brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
-brew "lumen" # git diff and helper tool (tap above)
 brew "mago", postinstall: "mago self-update" # php linter/formatter and soon to be more
 brew "mas" if OS.mac? # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
 brew "media-control" if OS.mac? # macos media status helper (used for my tmux statusbar)
@@ -372,6 +372,7 @@ brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
+brew "privoxy" # turn a socks5 proxy into an http proxy
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "scrcpy" if OS.mac? # mirror android screen
