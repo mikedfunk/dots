@@ -152,32 +152,33 @@ _clear_evalcache() {
 _apply_mac_preferences() {
     [ "$system_type" = "Darwin" ] || return
     _log_info "Setting general mac preferences"
+    defaults write -g ApplePressAndHoldEnabled -bool false # Disable press-and-hold for keys in favor of key repeat
     defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-    defaults write com.apple.LaunchServices LSQuarantine -bool false                             # disable mac quarantining all downloaded files from mise
+    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false                           # disables "corrects spelling automatically"
     defaults write -g NSWindowShouldDragOnGesture -bool true                                     # Enable cmd-ctrl-drag to drag window from any part, not just the titlebar
-    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false                     # Disable “natural” (Lion-style) scrolling
-    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
-    defaults write com.apple.dock "autohide" -bool true                                          # Autohide
-    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'                             # mac dark mode
-    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
-    defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
-    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40          # Increase sound quality for Bluetooth headphones/headsets
-    defaults write com.apple.screensaver askForPassword -int 1                                   # Require password immediately after sleep or screen saver begins
-    defaults write com.apple.screensaver askForPasswordDelay -int 0                              # Disable screensaver delay to ask for password
-    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"                          # Use column view in all Finder windows by default. Other view modes: `icnv`, `Nlsv`, `Flwv`
-    defaults write com.apple.Finder AppleShowAllFiles true                                       # show hidden files in finder
     defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true                            # Show file extensions
-    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false        # Chrome - Disable the all too sensitive backswipe on Magic Mouse
-    defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false # Disable swipe for back/forward (e.g. browsers)
-    defaults write com.apple.screencapture location ~/Screenshots                                # Save screenshots to ~/Screenshots
-    defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"                        # Search scope current folder
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
+    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
+    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'                             # mac dark mode
+    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false                     # Disable “natural” (Lion-style) scrolling
     defaults write com.apple.AdLib.plist allowApplePersonalizedAdvertising -bool false           # Disable Apple Advertising
     defaults write com.apple.AdLib.plist allowIdentifierForAdvertising -bool false               # Disable Apple Advertising
     defaults write com.apple.AdLib.plist personalizedAdsMigrated -bool false                     # Disable Apple Advertising
-    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false                           # disables "corrects spelling automatically"
-    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40          # Increase sound quality for Bluetooth headphones/headsets
+    defaults write com.apple.Finder AppleShowAllFiles true                                       # show hidden files in finder
+    defaults write com.apple.LaunchServices LSQuarantine -bool false                             # disable mac quarantining all downloaded files from mise
     defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
-    defaults write NSGlobalDomain AppleAquaColorVariant -int 6                                   # graphite color theme
+    defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
+    defaults write com.apple.dock "autohide" -bool true                                          # Autohide
+    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
+    defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
+    defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"                        # Search scope current folder
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"                          # Use column view in all Finder windows by default. Other view modes: `icnv`, `Nlsv`, `Flwv`
+    defaults write com.apple.screencapture location ~/Screenshots                                # Save screenshots to ~/Screenshots
+    defaults write com.apple.screensaver askForPassword -int 1                                   # Require password immediately after sleep or screen saver begins
+    defaults write com.apple.screensaver askForPasswordDelay -int 0                              # Disable screensaver delay to ask for password
+    defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false        # Chrome - Disable the all too sensitive backswipe on Magic Mouse
+    defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false # Disable swipe for back/forward (e.g. browsers)
     chflags nohidden ~/Library                                                                   # Show the ~/Library folder
     # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false # Disable press-and-hold for keys in favor of key repeat
     # defaults write NSGlobalDomain KeyRepeat -int 1 # Set a blazingly fast keyboard repeat rate

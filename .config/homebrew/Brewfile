@@ -34,6 +34,7 @@
 # tap "zackriya-solutions/meetily" # meetily
 tap "buo/cask-upgrade" # for `brew cu`
 tap "grishka/grishka" # neardrop
+tap "jnsahaj/lumen" # lumen
 tap "mikedfunk/zoomhider" # zoomhider
 
 # }}}
@@ -359,6 +360,7 @@ brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)
+brew "lumen" # git diff and helper tool (tap above)
 brew "mago", postinstall: "mago self-update" # php linter/formatter and soon to be more
 brew "mas" if OS.mac? # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
 brew "media-control" if OS.mac? # macos media status helper (used for my tmux statusbar)
@@ -570,6 +572,7 @@ cask "nightfall" if OS.mac? # more reliable way to toggle dark mode. Menubar app
 cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
+cask "session-manager-plugin" # needed for certain SSH operations
 cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app. Alternative: super-productivity
