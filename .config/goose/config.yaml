@@ -1,4 +1,4 @@
-GOOSE_PROVIDER: anthropic
+GOOSE_PROVIDER: google
 extensions:
   computercontroller:
     bundled: true
@@ -47,5 +47,7 @@ extensions:
     name: tutorial
     timeout: 300
     type: builtin
-GOOSE_MODEL: claude-sonnet-4-0
+GOOSE_MODEL: gemini-2.0-flash
 GOOSE_MODE: smart_approve
+GOOSE_TELEMETRY_ENABLED: false
+OPENROUTER_HOST: https://openrouter.ai
