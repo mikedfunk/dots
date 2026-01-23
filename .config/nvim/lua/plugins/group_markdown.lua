@@ -172,5 +172,31 @@ return {
         format = "{{backlinks}} backlinks",
       },
     },
+    keys = {
+      {
+        "<a-N>",
+        "<Cmd>Obsidian new_from_template<cr>",
+        mode = "n",
+        noremap = true,
+        buffer = true,
+        desc = "Obsidian New From Template",
+      },
+      {
+        "<a-T>",
+        "<Cmd>Obsidian template<cr>",
+        mode = "n",
+        noremap = true,
+        buffer = true,
+        desc = "Obsidian Apply Template",
+      },
+      {
+        "<a-D>",
+        "<Cmd>Obsidian today<cr>",
+        mode = "n",
+        noremap = true,
+        buffer = true,
+        desc = "Obsidian Apply Template",
+      },
+    },
   },
 }
