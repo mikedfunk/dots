@@ -199,4 +199,10 @@ return {
       },
     },
   },
+  {
+    -- c-b for bold, c-i for italic, etc.
+    "antonk52/markdowny.nvim",
+    ft = "markdown",
+    opts = {},
+  },
 }
