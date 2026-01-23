@@ -185,10 +185,14 @@ return {
           --   "php",
           -- },
           init_options = {
-            token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
-            enableTrustedFoldersFeature = "false",
+            activateSnykCodeQuality = "true",
+            activateSnykCodeSecurity = "true",
+            enableSnykOpenBrowserActions = "true",
             enableTelemetry = "false",
+            enableTrustedFoldersFeature = "false",
+            manageBinariesAutomatically = "false",
             organization = "leaf-saatchiart",
+            token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
           },
         },
         -- phpactor = {},

@@ -372,7 +372,7 @@ brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
-brew "privoxy" # turn a socks5 proxy into an http proxy
+brew "privoxy" # turn a socks5 proxy into an http proxy. Used when VPN is down to tunnel kubectl through an http proxy which forwards to a socks5 proxy.
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
 brew "scrcpy" if OS.mac? # mirror android screen
@@ -396,6 +396,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "adoptopenjdk" # needed to install akamai cli
 # cask "adoptopenjdk8" # needed for swagger-codegen
 # cask "aerial" # cool apple tv style screensavers
+# cask "aionui" # AI UI like ChatGPT app but for multiple providers
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "android-platform-tools" # adb, etc.
 # cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??

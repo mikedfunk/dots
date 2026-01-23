@@ -2,6 +2,28 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- ensure LSPs are only attached to file buffers
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp_non_file_buffers_fix", { clear = true }),
+  callback = function(args)
+    local bufnr = args.buf
+
+    if vim.bo[bufnr].buftype == "nofile" then
+      vim.lsp.buf_detach_client(bufnr, args.data.client_id)
+    end
+  end,
+  desc = "LSP non-file buffers fix",
+})
+
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     local uri = vim.uri_from_bufnr(args.buf)
+--     if not uri:match("^file://") then
+--       vim.lsp.buf_detach_client(args.buf, args.data.client_id)
+--     end
+--   end,
+-- })
+
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   group = vim.api.nvim_create_augroup("mike_grep_open_quickfix", { clear = true }),
   pattern = { "[^l]*", "l*" },
@@ -171,3 +193,5 @@ vim.api.nvim_create_autocmd("Filetype", {
 --   end,
 --   desc = "Reload tmux status on dark-notify update",
 -- })
+--
+--
