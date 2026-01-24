@@ -580,9 +580,10 @@ _evalcache fzf --zsh 2>/dev/null
 # Start tmux Dark/Light mode watcher silently once per login
 WATCHER_PID_FILE="$HOME/.tmux-dark-mode-watcher.pid"
 
-if [ ! -f "$WATCHER_PID_FILE" ] || ! kill -0 $(cat "$WATCHER_PID_FILE") 2>/dev/null; then
-    { nohup dark-notify -c '~/.support/tmux-dark-mode-watcher.sh' >/tmp/tmux-dark-mode.log 2>&1 < /dev/null & } 2>/dev/null
-    echo $! > "$WATCHER_PID_FILE"
+if [ ! -f "$WATCHER_PID_FILE" ] || ! kill -0 "$(cat "$WATCHER_PID_FILE")" 2>/dev/null; then
+  dark-notify -c "$HOME/.support/tmux-dark-mode-watcher.sh" \
+    >/tmp/tmux-dark-mode.log 2>&1 < /dev/null &!
+  echo $! > "$WATCHER_PID_FILE"
 fi
 # }}}
 
