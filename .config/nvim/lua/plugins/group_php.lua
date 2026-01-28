@@ -24,6 +24,8 @@ return {
   {
     "adalessa/laravel.nvim",
     dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
       "nvim-neotest/nvim-nio",
       {
         "saghen/blink.cmp",
@@ -41,6 +43,7 @@ return {
     cmd = { "Laravel" },
     opts = {
       extensions = {
+        artisan_hub = { enable = false },
         command_center = { enable = false },
         completion = { enable = true },
         composer_dev = { enable = true },

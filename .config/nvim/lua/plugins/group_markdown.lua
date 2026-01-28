@@ -197,6 +197,14 @@ return {
         buffer = true,
         desc = "Obsidian Apply Template",
       },
+      {
+        "<a-CR>",
+        "<Cmd>Obsidian follow_link<cr>",
+        mode = "n",
+        noremap = true,
+        buffer = true,
+        desc = "Obsidian Follow Link",
+      },
     },
   },
   {
