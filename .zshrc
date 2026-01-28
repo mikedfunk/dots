@@ -581,8 +581,7 @@ _evalcache fzf --zsh 2>/dev/null
 WATCHER_PID_FILE="$HOME/.tmux-dark-mode-watcher.pid"
 
 if [ ! -f "$WATCHER_PID_FILE" ] || ! kill -0 "$(cat "$WATCHER_PID_FILE")" 2>/dev/null; then
-  dark-notify -c "$HOME/.support/tmux-dark-mode-watcher.sh" \
-    >/tmp/tmux-dark-mode.log 2>&1 < /dev/null &!
+  dark-notify -c "$HOME/.support/tmux-dark-mode-watcher.sh" < /dev/null &!
   echo $! > "$WATCHER_PID_FILE"
 fi
 # }}}

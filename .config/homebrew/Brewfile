@@ -399,6 +399,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "aionui" # AI UI like ChatGPT app but for multiple providers
 # cask "alt-tab" # windows-style app switcher (with previews)
 # cask "android-platform-tools" # adb, etc.
+# cask "anki" # flash cards
 # cask "beekeeper-studio" # sql editor... but it costs money to have more than 2 filters and export multiple tables??
 # cask "betterdiscord-installer" if OS.mac? # hacks for discord native app (no longer supported)
 # cask "bettertouchtool" # with a config file this lets me vimify any cocoa app https://raw.githubusercontent.com/Vincent-Carrier/CocoaVim/master/CocoaVim.bttpreset
@@ -552,6 +553,7 @@ cask "bitwarden" # mas upgrades are a pain
 cask "chatgpt" # desktop app <opt-space>
 cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
+cask "crystalfetch" # app to download windows ISOs for utm
 cask "dbeaver-community" # used for postgresql GUI
 cask "discord" # chat
 cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
@@ -574,8 +576,9 @@ cask "nightfall" if OS.mac? # more reliable way to toggle dark mode. Menubar app
 cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
-cask "session-manager-plugin" # needed for certain SSH operations
+cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session manager as a proxy command in an SSH config.
 cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
+cask "utm" # vmware/parallels/virtualbox alternative
 cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app. Alternative: super-productivity
 

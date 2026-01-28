@@ -385,6 +385,8 @@
             "enabled": false,
             "command": [
                 "uvx",
+                "--directory",
+                "{env:HOME}/Notes",
                 "mcp-obsidian"
             ],
             "environment": {
@@ -521,7 +523,7 @@
             "command": [
                 "bunx",
                 "mcp-remote",
-                "https://mcp.atlassian.com/v1/sse"
+                "https://mcp.atlassian.com/v1/mcp"
             ],
         },
         "tree-sitter": {
