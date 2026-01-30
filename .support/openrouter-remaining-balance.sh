@@ -3,7 +3,7 @@
 
 CACHE_FILE="/tmp/openrouter_balance.cache"
 ICON='󰑩'
-CACHE_TTL=$((5 * 60)) # 5 minutes
+CACHE_TTL=$((1 * 60)) # 5 minutes
 # CACHE_TTL=0
 
 # Check if cache exists and is fresh {{{

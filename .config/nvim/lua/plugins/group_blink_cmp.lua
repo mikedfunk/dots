@@ -5,6 +5,7 @@ return {
     opts = {
       enabled = function()
         return not vim.tbl_contains({
+          "AgenticInput",
           "TelescopePrompt",
           "markdown",
           "snacks_picker_input",
