@@ -147,6 +147,8 @@ return {
       --   highlight = "PmenuSel",
       -- },
       excluded_filetypes = {
+        "AgenticChat",
+        "AgenticInput",
         "Avante",
         "AvanteInput",
         "DressingInput",
@@ -431,6 +433,8 @@ return {
       highlight = { link = "Comment" },
       ignore = {
         filetypes = {
+          "AgenticChat",
+          "AgenticInput",
           "Avante",
           "AvanteInput",
           "DressingInput",

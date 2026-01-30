@@ -106,6 +106,8 @@ return {
       virtualtext = {
         auto_trigger_ft = { "*" },
         auto_trigger_ignore_ft = {
+          "AgenticChat",
+          "AgenticInput",
           "Avante",
           "AvanteInput",
           "DressingInput",
@@ -154,7 +156,7 @@ return {
       },
     },
     keys = {
-      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Toggle Codeium" },
+      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Codeium Toggle" },
       {
         -- "<a-cr>",
         "<a-y>",
@@ -209,6 +211,8 @@ return {
     opts = {
       silent = true,
       filetypes = {
+        AgenticChat = false,
+        AgenticInput = false,
         Avante = false,
         AvanteInput = false,
         DressingInput = false,
@@ -453,14 +457,14 @@ return {
           require("sidekick.cli").send({ msg = "{this}" })
         end,
         mode = { "x", "n" },
-        desc = "Send This",
+        desc = "Sidekick Send This",
       },
       {
         "<leader>af",
         function()
           require("sidekick.cli").send({ msg = "{file}" })
         end,
-        desc = "Send File",
+        desc = "Sidekick Send File",
       },
       {
         "<leader>av",
@@ -468,7 +472,7 @@ return {
           require("sidekick.cli").send({ msg = "{selection}" })
         end,
         mode = { "x" },
-        desc = "Send Visual Selection",
+        desc = "Sidekick Send Selection",
       },
       {
         "<leader>ap",
@@ -480,4 +484,38 @@ return {
       },
     },
   },
+  -- {
+  --   "carlos-algms/agentic.nvim",
+  --   opts = {
+  --     -- Available by default: "claude-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "auggie-acp"
+  --     provider = "opencode-acp", -- setting the name here is all you need to get started
+  --   },
+  --
+  --   keys = {
+  --     {
+  --       "<leader>ac",
+  --       function()
+  --         require("agentic").toggle()
+  --       end,
+  --       mode = { "n", "v", "i" },
+  --       desc = "Agentic Toggle Chat",
+  --     },
+  --     {
+  --       "<leader>aa",
+  --       function()
+  --         require("agentic").add_selection_or_file_to_context()
+  --       end,
+  --       mode = { "n", "v" },
+  --       desc = "Agentic Add to Context",
+  --     },
+  --     {
+  --       "<leader>as",
+  --       function()
+  --         require("agentic").new_session()
+  --       end,
+  --       mode = { "n", "v", "i" },
+  --       desc = "Agentic New Session",
+  --     },
+  --   },
+  -- },
 }
