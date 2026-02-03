@@ -8,6 +8,5 @@ export PATH="/opt/homebrew/bin:$PATH"
     defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark &&
         tmux source "$XDG_CONFIG_HOME"/tmux/tmuxline-dark.conf || tmux source "$XDG_CONFIG_HOME"/tmux/tmuxline-light.conf
 ) &&
-    sleep 2 &&
     tmux run-shell "$TMUX_PLUGIN_MANAGER_PATH"/tmux-cpu/cpu.tmux &&
     tmux run-shell "$TMUX_PLUGIN_MANAGER_PATH"/tmux-battery/battery.tmux
