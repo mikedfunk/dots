@@ -299,7 +299,7 @@
         "openrouter": {
             "models": {
                 "openrouter/auto": {
-                    "name": "Auto Router"
+                    "name": "Auto"
                 }
             }
         }
@@ -355,7 +355,7 @@
         },
         "memory-graph": {
             "type": "local",
-            "enabled": true,
+            "enabled": false,
             "command": [
                 "uvx",
                 "--from",
