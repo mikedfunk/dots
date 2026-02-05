@@ -72,6 +72,27 @@ matches:
             osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
             pbpaste | opencode run "Respond with plain text only. Rewrite this more clearly"
 
+  - trigger: ";aif"
+    replace: "{{result}}"
+    vars:
+      - name: form1
+        type: form
+        params:
+          layout: |
+            Message:
+            [[message]]
+          fields:
+            message:
+              multiline: true
+              rows: 15
+              cols: 80
+      - name: result
+        type: shell
+        params:
+          cmd: |
+            osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
+            opencode run "Respond with plain text only. {{form1.message}}"
+
   # Simple text replacement
   # - trigger: ";espanso"
   #   replace: "Hi there!"
