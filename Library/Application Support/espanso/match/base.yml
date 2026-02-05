@@ -11,16 +11,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 
 matches:
-  # Simple text replacement
-  - trigger: ":espanso"
-    replace: "Hi there!"
-
   # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
 
   # But matches can also be dynamic:
 
   # Print the current date
-  - trigger: ":date"
+  - trigger: ";date"
     replace: "{{mydate}}"
     vars:
       - name: mydate
@@ -28,13 +24,144 @@ matches:
         params:
           format: "%Y-%m-%d"
 
-  # Print the output of a shell command
-  - trigger: ":shell"
+  - trigger: collectino
+    replace: collection
+    propagate_case: true
+    word: true
+
+  - trigger: connectino
+    replace: connection
+    propagate_case: true
+    word: true
+
+  - trigger: instaed
+    replace: instead
+    propagate_case: true
+    word: true
+
+  # - regex: ";greet\\((?P<person>.*)\\)"
+  #   replace: "Hi {{person}}!"
+
+  # - regex: "//\\s*;aic\\((?P<message>.+)\\)"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: shell
+  #       params:
+  #         cmd: |
+  #           opencode run "Reply as a short code comment. No markdown. $ESPANSO_MESSAGE" \
+  #           | sed '/^\/\//! s/^/\/\/ /'
+
+  - regex: ";ai\\((?P<message>.+)\\)"
     replace: "{{output}}"
     vars:
       - name: output
         type: shell
         params:
-          cmd: "echo 'Hello from your shell'"
+          cmd: |
+            osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
+            opencode run "Respond with plain text only. $ESPANSO_MESSAGE"
 
+  - trigger: ";aip"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: |
+            osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
+            pbpaste | opencode run "Respond with plain text only. Rewrite this more clearly"
+
+  # Simple text replacement
+  # - trigger: ";espanso"
+  #   replace: "Hi there!"
+
+  # Print the output of a shell command
+  # - trigger: ";shell"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: shell
+  #       params:
+  #         cmd: "echo 'Hello from your shell'"
+
+  # - regex: =sum\((?P<num1>\d+),(?P<num2>\d+)\)
+  #   replace: "{{result}}"
+  #   vars:
+  #     - name: result
+  #       type: shell
+  #       params:
+  #         cmd: "expr $ESPANSO_NUM1 + $ESPANSO_NUM2"
+
+  # - regex: ":greet\\d"
+  #   replace: "Hello!"
+
+  # - trigger: ":form"
+  #   form: |
+  #     [[choices]]
+  #   form_fields:
+  #     choices:
+  #       type: list
+  #       values:
+  #         - First choice
+  #         - Second choice
+
+  # - trigger: ":form"
+  #   form: |
+  #     [[choices]]
+  #   form_fields:
+  #     choices:
+  #       type: choice
+  #       values:
+  #         - First choice
+  #         - Second choice
+
+  # - trigger: ":greet"
+  #   form: |
+  #     Hey [[name]],
+  #     [[text]]
+  #     Happy Birthday!
+  #   form_fields:
+  #     text:
+  #       multiline: true
+
+  # - trigger: ":greet"
+  #   form: |
+  #     Hey [[name]],
+  #     Happy Birthday!
+
+  # - trigger: ":pyscript"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: script
+  #       params:
+  #         args:
+  #           - python
+  #           - /path/to/your/script.py
+
+  # - trigger: ":ip"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: shell
+  #       params:
+  #         cmd: "curl 'https://api.ipify.org'"
+
+  # - trigger: ";a"
+  #   replace: "<a href='{{clipb}}' />$|$</a>"
+  #   vars:
+  #     - name: "clipb"
+  #       type: "clipboard"
+
+  # - trigger: ";quote"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: choice
+  #       params:
+  #         values:
+  #           - "Every moment is a fresh beginning."
+  #           - "Everything you can imagine is real."
+  #           - "Whatever you do, do it well."
   # And much more! For more information, visit the docs: https://espanso.org/docs/
