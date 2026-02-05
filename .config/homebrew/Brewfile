@@ -557,6 +557,7 @@ cask "crystalfetch" # app to download windows ISOs for utm
 cask "dbeaver-community" # used for postgresql GUI
 cask "discord" # chat
 cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
+cask "espanso" # text expander alternative. Free and open source but no gui - just a yaml config file.
 cask "figma" # mockups app. Includes MCP server.
 cask "firefox" # I use firefox for my home profile
 cask "firefox@developer-edition" # I use dev edition for my work profile
