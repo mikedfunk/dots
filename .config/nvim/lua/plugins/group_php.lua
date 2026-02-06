@@ -21,46 +21,47 @@ return {
   -- - route info in virtual text next to controller actions
   -- - I have completion enabled for blade templates but I don't really use it
   -- - composer.json version virtual text for new versions, etc.
-  {
-    "adalessa/laravel.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-neotest/nvim-nio",
-      {
-        "saghen/blink.cmp",
-        opts_extend = { "sources.compat" },
-        opts = {
-          sources = {
-            compat = {
-              "laravel",
-            },
-          },
-        },
-      },
-    },
-    ft = { "php", "json" },
-    cmd = { "Laravel" },
-    opts = {
-      extensions = {
-        artisan_hub = { enable = false },
-        command_center = { enable = false },
-        completion = { enable = true },
-        composer_dev = { enable = true },
-        composer_info = { enable = true },
-        diagnostic = { enable = false },
-        dump_server = { enable = false },
-        model_info = { enable = false },
-        override = { enable = false },
-        route_info = { enable = true, view = "right" },
-        tinker = { enable = false },
-      },
-      lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
-      features = {
-        pickers = { enable = false },
-      },
-    },
-  },
+  -- TODO: this is broken again :( 2026-02-05
+  -- {
+  --   "adalessa/laravel.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-neotest/nvim-nio",
+  --     {
+  --       "saghen/blink.cmp",
+  --       opts_extend = { "sources.compat" },
+  --       opts = {
+  --         sources = {
+  --           compat = {
+  --             "laravel",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  --   ft = { "php", "json" },
+  --   cmd = { "Laravel" },
+  --   opts = {
+  --     extensions = {
+  --       artisan_hub = { enable = false },
+  --       command_center = { enable = false },
+  --       completion = { enable = true },
+  --       composer_dev = { enable = true },
+  --       composer_info = { enable = true },
+  --       diagnostic = { enable = false },
+  --       dump_server = { enable = false },
+  --       model_info = { enable = false },
+  --       override = { enable = false },
+  --       route_info = { enable = true, view = "right" },
+  --       tinker = { enable = false },
+  --     },
+  --     lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
+  --     features = {
+  --       pickers = { enable = false },
+  --     },
+  --   },
+  -- },
   {
     "gbprod/phpactor.nvim",
     dependencies = {
