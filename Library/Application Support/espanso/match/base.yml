@@ -13,9 +13,29 @@
 matches:
   # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
 
-  # But matches can also be dynamic:
+  - trigger: ";sem"
+    replace: "mike.funk@saatchiart.com"
+  - trigger: ";lem"
+    replace: "mike.funk@leafgroup.com"
 
-  # Print the current date
+  - trigger: ";ddg"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params: { cmd: duck-gen }
+
+  - trigger: ";a1"
+    replace: "11920 Dorothy St."
+  - trigger: ";a2"
+    replace: "Unit 106"
+  - trigger: ";ac"
+    replace: "Los Angeles"
+  - trigger: ";as"
+    replace: "California"
+  - trigger: ";az"
+    replace: "90049"
+
   - trigger: ";date"
     replace: "{{mydate}}"
     vars:
@@ -24,12 +44,22 @@ matches:
         params:
           format: "%Y-%m-%d"
 
-  - trigger: collectino
+  - triggers: [collectino, colleciton]
     replace: collection
     propagate_case: true
     word: true
 
-  - trigger: connectino
+  - triggers: [aritsan, arisan]
+    replace: artisan
+    propagate_case: true
+    word: true
+
+  - trigger: aond
+    replace: and
+    propagate_case: true
+    word: true
+
+  - triggers: [connectino, conneciton]
     replace: connection
     propagate_case: true
     word: true
@@ -71,6 +101,16 @@ matches:
           cmd: |
             osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
             pbpaste | opencode run "Respond with plain text only. Rewrite this more clearly"
+
+  - trigger: ";aiq"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: |
+            osascript -e 'display notification "Thinking…" with title "Espanso -> Opencode"' &
+            pbpaste | opencode run "Respond with plain text only."
 
   - trigger: ";aif"
     replace: "{{result}}"

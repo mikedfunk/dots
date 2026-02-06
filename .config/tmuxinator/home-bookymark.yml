@@ -6,5 +6,5 @@ windows:
       panes:
         - editor: [v]
         - git: [ts]
-        - ai: [opencode]
+        # - ai: [opencode]
         - devpod: [devpod up . && ssh bookymark.devpod]

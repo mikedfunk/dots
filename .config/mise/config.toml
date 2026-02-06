@@ -60,6 +60,7 @@ tmux = "latest"
 uv = "latest"
 yadm = "latest"
 "cargo:envex" = "latest"
+"go:github.com/chowder/duck-gen" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
