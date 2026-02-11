@@ -345,14 +345,29 @@
         //         "--stdio-mcp"
         //     ]
         // },
-        // TODO: REQUIRES Figma desktop app to be running.
+        // NOTE: requires shitty workaround for now
+        // @see https://github.com/connorads/opencode/tree/mcp-auth-workaround?tab=readme-ov-file#mcp-auth-workaround <- WORKS!
         // @see https://github.com/sst/opencode/issues/3875
         "figma": {
             "type": "remote",
             "enabled": false,
-            // "url": "https://mcp.figma.com/mcp"
-            "url": "http://127.0.0.1:3845/mcp"
+            "url": "https://mcp.figma.com/mcp"
+            // TODO: REQUIRES Figma desktop app to be running.
+            // @see https://github.com/sst/opencode/issues/3875
+            // "url": "http://127.0.0.1:3845/mcp"
         },
+        // http 405 because opencode is not whitelisted >:(
+        // "figma": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "mcp-remote",
+        //         "https://mcp.figma.com/mcp",
+        //         "--transport",
+        //         "sse-only"
+        //     ]
+        // },
         "memory-graph": {
             "type": "local",
             "enabled": false,
