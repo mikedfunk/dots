@@ -64,6 +64,11 @@ matches:
     propagate_case: true
     word: true
 
+  - trigger: taht
+    replace: that
+    propagate_case: true
+    word: true
+
   - trigger: instaed
     replace: instead
     propagate_case: true
