@@ -64,6 +64,11 @@ matches:
     propagate_case: true
     word: true
 
+  - triggers: [estimatino, estimaiton]
+    replace: estimation
+    propagate_case: true
+    word: true
+
   - trigger: taht
     replace: that
     propagate_case: true
