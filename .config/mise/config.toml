@@ -8,7 +8,7 @@ deno = "latest"
 go = "latest"
 java = "latest" # needed for plantuml
 lua = "5.4"  # 5.5 not yet supported by LuaRocks
-node = { version = "latest", postinstall = "corepack enable" }
+node = { version = "latest", postinstall = "npm install -g corepack && corepack enable" }
 php-brew = { version = "8.4", postinstall = "pie install xdebug/xdebug && pie install php-memcached/php-memcached --with-zlib-dir=$(brew --prefix zlib) && pie install imagick/imagick" }
 python = "latest"
 ruby = "latest"
