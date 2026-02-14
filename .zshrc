@@ -69,7 +69,7 @@ export fpath=(
 # )
 
 export path=(
-  # $(brew --prefix mysql-client@8.0)/bin
+  $(brew --prefix mysql-client)/bin
   # $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
   # "${KREW_ROOT:-$HOME/.krew}"/bin
@@ -230,6 +230,7 @@ source "$HOME"/.private_vars.sh 2>/dev/null
 source "$(brew --prefix)"/etc/grc.zsh 2>/dev/null # generic colorizer
 
 _evalcache mise activate zsh 2>/dev/null
+export MISE_NODE_COREPACK=true
 
 # https://github.com/variadico/noti/blob/master/docs/noti.md#environment
 export NOTI_NSUSER_SOUNDNAME="Hero"
