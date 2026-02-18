@@ -1,6 +1,6 @@
 {
   "bash-language-server": "5.6.0",
-  "biome": "2.3.15",
+  "biome": "2.4.2",
   "black": "26.1.0",
   "bqls": "v0.4.3",
   "checkmake": "v0.3.2",
@@ -8,7 +8,8 @@
   "css-lsp": "4.10.0",
   "cssmodules-language-server": "1.5.2",
   "cucumber-language-server": "1.7.0",
-  "deno": "v2.6.9",
+  "debugpy": "1.8.20",
+  "deno": "v2.6.10",
   "docker-compose-language-service": "0.5.0",
   "dockerfile-language-server": "0.15.0",
   "editorconfig-checker": "v3.6.1",
@@ -25,8 +26,9 @@
   "lua-language-server": "3.17.1",
   "markdown-toc": "1.2.0",
   "markdownlint": "0.47.0",
-  "markdownlint-cli2": "0.20.0",
-  "php-cs-fixer": "v3.94.0",
+  "markdownlint-cli2": "0.21.0",
+  "php-cs-fixer": "v3.94.1",
+  "php-debug-adapter": "v1.40.0",
   "phpactor": "2025.12.21.1",
   "phpcbf": "4.0.1",
   "phpcs": "4.0.1",
@@ -47,6 +49,6 @@
   "taplo": "0.10.0",
   "tree-sitter-cli": "v0.26.5",
   "vtsls": "0.3.0",
-  "yaml-language-server": "1.19.2",
+  "yaml-language-server": "1.20.0",
   "zk": "v0.15.2"
 }
