@@ -414,6 +414,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
+# cask "deskreen" if OS.mac? # use tablet or phone as a second screen (over wifi... laggy but good for presentation notes. Pairs well with deskpad.)
 # cask "dockdoor" # show windows open in each app in dock on hover
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
@@ -555,9 +556,9 @@ cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I c
 cask "crystalfetch" # app to download windows ISOs for utm
 cask "dbeaver-community" # used for postgresql GUI
 cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
-cask "deskreen" if OS.mac? # use tablet or phone as a second screen (over wifi... laggy but good for presentation notes. Pairs well with deskpad.)
 cask "discord" # chat
 cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
+cask "duet" if OS.mac? # use a tablet as a second screen - wired, fast, and retina
 cask "espanso" # text expander alternative. Free and open source but no gui - just a yaml config file.
 cask "figma" # mockups app. Includes MCP server.
 cask "firefox" # I use firefox for my home profile
