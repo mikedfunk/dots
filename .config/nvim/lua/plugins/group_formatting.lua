@@ -110,8 +110,8 @@ return {
             -- "--warning-severity=0", -- do not fix warnings, same as -n
             "-d",
             "memory_limit=100m",
-            "-d",
-            "xdebug.mode=off",
+            -- "-d",
+            -- "xdebug.mode=off",
             "-d",
             "zend.enable_gc=0",
           },
