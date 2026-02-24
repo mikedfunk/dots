@@ -29,3 +29,21 @@ customCommands:
   - description: "git spice branch graft onto"
     context: "localBranches"
     command: "git-spice upstack onto"
+  - description: "git branch clean merged"
+    context: "localBranches"
+    command: "git checkout develop && git pull && git cleanmerged && git checkout -"
+  # TODO: not working
+  - description: "git tag semantic versions"
+    context: "localBranches"
+    command: "git semver"
+  - description: "fetch"
+    key: "<c-f>"
+    context: "localBranches"
+    command: "git fetch"
+git:
+  mainBranches:
+    - develop
+    - main
+    - master
+  pagers:
+    - pager: delta --diff-so-fancy --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
