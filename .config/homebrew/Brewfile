@@ -352,6 +352,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
+brew "btop" # another top/atop/glances/htop alternative, apparently the most popular
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "git"

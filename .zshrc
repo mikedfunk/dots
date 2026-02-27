@@ -374,6 +374,13 @@ k9s () {
     command k9s "$@"
 }
 
+btop () {
+    defaults read -g AppleInterfaceStyle &>/dev/null
+    local config_file=$([ $? -eq 0 ] && echo "$XDG_CONFIG_HOME"/btop/btop-dark.conf || echo "$XDG_CONFIG_HOME"/btop/btop-light.conf)
+    command cp "$config_file" "$XDG_CONFIG_HOME"/btop/btop.conf
+    command btop "$@"
+}
+
 alias y="yadm"
 compdef y="yadm"
 alias upgrades="yadm bootstrap"
