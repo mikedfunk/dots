@@ -63,6 +63,8 @@ yadm = "latest"
 astro = "latest"
 "ubi:chowder/duck-gen" = "latest"
 pnpm = "latest"
+"aqua:BurntSushi/xsv" = "latest"
+lazydocker = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

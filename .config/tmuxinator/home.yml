@@ -8,7 +8,7 @@ windows:
       panes:
         - editor: [v]
         - yadm: [cd && while true; do clear && yadm st; sleep 60; done]
-        - docker: [while true; do ctop; sleep 5; done]
+        - docker: [while true; do lazydocker; sleep 5; done]
         - htop: [htop]
   - journal:
       root: ~/.Notes
