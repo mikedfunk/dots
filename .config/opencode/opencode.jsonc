@@ -18,7 +18,6 @@
     // "model": "openrouter/claude-sonnet-4-5-20250929",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     "small_model": "opencode/glm-4.7-free",
-    "theme": "system",
     // "theme": "tokyonight",
     "share": "manual",
     "plugin": [
@@ -336,6 +335,14 @@
             "command": [
                 "bunx",
                 "@upstash/context7-mcp"
+            ]
+        },
+        "gmail": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "@gongrzhe/server-gmail-autoauth-mcp"
             ]
         },
         // https://spotlightjs.com/

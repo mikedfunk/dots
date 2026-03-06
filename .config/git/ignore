@@ -35,14 +35,15 @@
 .users_cache.json
 .yarn
 AGENTS.md
+CLAUDE.md
 CONTEXT.md
 CRUSH.md
 __pycache__
 cobertura.xml
+codebook.toml
 conform.*
 coverage
 crush.json
-codebook.toml
 mago.toml
 mise.toml
 nohup.out

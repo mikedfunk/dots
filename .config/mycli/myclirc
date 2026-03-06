@@ -55,7 +55,7 @@ table_format = psql
 # syntax_style = vim
 # syntax_style = friendly
 # syntax_style = colorful
-syntax_style = trac
+syntax_style = vim
 
 # Keybindings: Possible values: emacs, vi.
 # Emacs mode: Ctrl-A is home, Ctrl-E is end. All emacs keybindings are available in the REPL.
