@@ -366,6 +366,7 @@ brew "mago", postinstall: "mago self-update" # php linter/formatter and soon to 
 brew "mas" if OS.mac? # mac app store cli. e.g. `mas install Xcode` Used by brew bundle
 brew "media-control" if OS.mac? # macos media status helper (used for my tmux statusbar)
 brew "mise" # asdf but faster and includes direnv (TODO: extract to install script outside of brew)
+brew "moreutils" # for parallel and sponge
 brew "multitail" # tail multiple files or tail streams in splits with pretty colors. I use this a lot.
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"

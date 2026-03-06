@@ -316,7 +316,18 @@ compdef k="kubectl"
 alias d="docker"
 compdef d="docker"
 
-alias claude='bunx strip-json-comments-cli ~/.config/claude/settings.jsonc | envsubst | jq . > ~/.config/claude/settings.json && command claude'
+claude() {
+    # what a pain. keep my mcp servers in ~/.config/claude/settings.jsonc so I
+    # can comment out ones I'm not using because claude code doesn't support
+    # configuration mcp servers and enabling them dynamically. They also don't
+    # support jsonc so I can't comment them out. Then splice those in with
+    # ~/.claude.json because that is also used for current auth state along
+    # with mcp servers.
+    local MY_MCP_SERVERS="$(bunx strip-json-comments-cli ~/.config/claude/settings.jsonc | envsubst | jq '.mcpServers')"
+    jq --argjson mcpServers "$MY_MCP_SERVERS" '.mcpServers = $mcpServers' ~/.claude.json > ~/.claude.json.tmp \
+        && command mv ~/.claude.json.tmp ~/.claude.json \
+        && command claude "$@"
+}
 
 alias pspg="pspg --clipboard-app=3"
 compdef git-spice="gs"

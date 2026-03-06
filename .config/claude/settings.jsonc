@@ -6,10 +6,12 @@
                 "@upstash/context7-mcp"
             ]
         },
-        // "gmail": {
-        //     "command": "bunx",
-        //     "args": ["@gongrzhe/server-gmail-autoauth-mcp"]
-        // },
+        "gmail": {
+            "command": "bunx",
+            "args": [
+                "@gongrzhe/server-gmail-autoauth-mcp"
+            ]
+        },
         // "figma": {
         //     "type": "sse",
         //     "url": "https://mcp.figma.com/mcp"
@@ -18,25 +20,25 @@
         //     "command": "uvx",
         //     "args": ["--from", "git+https://github.com/gregorydickson/memory-graph.git", "memorygraph"]
         // },
-        // "sentry": {
-        //     "type": "sse",
-        //     "url": "https://mcp.sentry.dev/mcp"
-        // },
-        // "spotify": {
-        //     "command": "uvx",
-        //     "args": [
-        //         "--python",
-        //         "3.12",
-        //         "--from",
-        //         "git+https://github.com/varunneal/spotify-mcp",
-        //         "spotify-mcp"
-        //     ],
-        //     "env": {
-        //         "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
-        //         "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
-        //         "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
-        //     }
-        // },
+        "sentry": {
+            "type": "http",
+            "url": "https://mcp.sentry.dev/mcp"
+        },
+        "spotify": {
+            "command": "uvx",
+            "args": [
+                "--python",
+                "3.12",
+                "--from",
+                "git+https://github.com/varunneal/spotify-mcp",
+                "spotify-mcp"
+            ],
+            "env": {
+                "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
+                "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
+                "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+            }
+        },
         // "salesforce": {
         //     "command": "bunx",
         //     "args": [
@@ -58,10 +60,14 @@
                 "OBSIDIAN_API_KEY": "$OBSIDIAN_API_KEY"
             }
         },
-        // "snyk": {
-        //     "command": "snyk",
-        //     "args": ["mcp", "-t", "stdio"]
-        // },
+        "snyk": {
+            "command": "snyk",
+            "args": [
+                "mcp",
+                "-t",
+                "stdio"
+            ]
+        },
         // "aws-knowledge-mcp-server": {
         //     "command": "uvx",
         //     "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
@@ -107,13 +113,13 @@
         //         "Authorization": "Bearer $GITHUB_TOKEN"
         //     }
         // },
-        // "postman": {
-        //     "type": "sse",
-        //     "url": "https://mcp.postman.com/minimal",
-        //     "headers": {
-        //         "Authorization": "Bearer $POSTMAN_API_TOKEN"
-        //     }
-        // },
+        "postman": {
+            "type": "http",
+            "url": "https://mcp.postman.com/minimal",
+            "headers": {
+                "Authorization": "Bearer $POSTMAN_API_TOKEN"
+            }
+        },
         // "youtube-transcript": {
         //     "command": "uvx",
         //     "args": [
@@ -126,19 +132,19 @@
         //     "command": "bunx",
         //     "args": ["@playwright/mcp@latest"]
         // },
-        // "slack": {
-        //     "command": "bunx",
-        //     "args": [
-        //         "slack-mcp-server@latest",
-        //         "--transport",
-        //         "stdio"
-        //     ],
-        //     "env": {
-        //         "SLACK_MCP_XOXC_TOKEN": "$SLACK_MCP_XOXC_TOKEN",
-        //         "SLACK_MCP_XOXD_TOKEN": "$SLACK_MCP_XOXD_TOKEN",
-        //         "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
-        //     }
-        // },
+        "slack": {
+            "command": "bunx",
+            "args": [
+                "slack-mcp-server@latest",
+                "--transport",
+                "stdio"
+            ],
+            "env": {
+                "SLACK_MCP_XOXC_TOKEN": "$SLACK_MCP_XOXC_TOKEN",
+                "SLACK_MCP_XOXD_TOKEN": "$SLACK_MCP_XOXD_TOKEN",
+                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            }
+        },
         // "atlassian": {
         //     "type": "sse",
         //     "url": "https://mcp.atlassian.com/v1/mcp"
