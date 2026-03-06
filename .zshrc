@@ -316,6 +316,8 @@ compdef k="kubectl"
 alias d="docker"
 compdef d="docker"
 
+alias claude='bunx strip-json-comments-cli ~/.config/claude/settings.jsonc | envsubst | jq . > ~/.config/claude/settings.json && command claude'
+
 alias pspg="pspg --clipboard-app=3"
 compdef git-spice="gs"
 
