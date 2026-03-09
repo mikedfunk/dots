@@ -1,0 +1,98 @@
+{
+  "version": 3,
+  "skills": {
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "installedAt": "2026-01-29T18:49:15.552Z",
+      "updatedAt": "2026-01-29T18:49:20.847Z"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "skillFolderHash": "98a510d1cfef9f82c3b1eec200229ca68725e613",
+      "installedAt": "2026-01-29T19:06:10.779Z",
+      "updatedAt": "2026-03-06T22:45:15.585Z"
+    },
+    "create-opencode-plugin": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": "agents/create-opencode-plugin/.opencode/skill/create-opencode-plugin/SKILL.md",
+      "skillFolderHash": "adb02b30cb18c7c7c56253109b6868e39e4f50d0",
+      "installedAt": "2026-01-29T21:22:42.420Z",
+      "updatedAt": "2026-01-29T21:22:42.420Z"
+    },
+    "opencode-config": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": ".opencode/skill/opencode-config/SKILL.md",
+      "skillFolderHash": "89da979f6eefdd54d63d37fd12b1838954175f8c",
+      "installedAt": "2026-01-29T21:31:18.288Z",
+      "updatedAt": "2026-01-29T21:31:18.288Z"
+    },
+    "plugin-installer": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": "agents/opencode-configurator/skill/plugin-installer/SKILL.md",
+      "skillFolderHash": "68340c736610f57fa7b1840beb79f79744e20a71",
+      "installedAt": "2026-01-29T21:31:27.358Z",
+      "updatedAt": "2026-01-29T21:31:27.358Z"
+    },
+    "command-creator": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/command-creator/SKILL.md",
+      "skillFolderHash": "7d6bf8d3e9c8c87fca7f1636da1283dbe1e8c58e",
+      "installedAt": "2026-01-29T21:31:30.397Z",
+      "updatedAt": "2026-01-29T21:31:30.397Z"
+    },
+    "agent-architect": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": ".opencode/skill/agent-architect/SKILL.md",
+      "skillFolderHash": "c22ba5676fc36e369584bb4a37d388adbc17de9c",
+      "installedAt": "2026-01-29T21:31:34.469Z",
+      "updatedAt": "2026-01-29T21:31:34.469Z"
+    },
+    "mcp-installer": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": "agents/opencode-configurator/skill/mcp-installer/SKILL.md",
+      "skillFolderHash": "83fde040c6e7e475b9a9c6884bb201b78fbf37ef",
+      "installedAt": "2026-01-29T21:31:36.069Z",
+      "updatedAt": "2026-01-29T21:31:36.069Z"
+    },
+    "model-researcher": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": "agents/opencode-configurator/skill/model-researcher/SKILL.md",
+      "skillFolderHash": "2f0be555a89d31bf6c188217981777aeb0f3def4",
+      "installedAt": "2026-01-29T21:31:36.793Z",
+      "updatedAt": "2026-01-29T21:31:36.793Z"
+    },
+    "confluence-automation": {
+      "source": "composiohq/awesome-claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/composiohq/awesome-claude-skills.git",
+      "skillPath": "confluence-automation/SKILL.md",
+      "skillFolderHash": "cffb131885c9925592126a780bf719751e75c36d",
+      "installedAt": "2026-02-13T19:11:39.614Z",
+      "updatedAt": "2026-02-13T19:11:39.614Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  }
+}
