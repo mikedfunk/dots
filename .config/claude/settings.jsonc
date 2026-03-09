@@ -1,4 +1,14 @@
 {
+    "disabledMcpServers": [
+        "claude.ai Asana",
+        "claude.ai Box",
+        "claude.ai Canva",
+        "claude.ai HubSpot",
+        "claude.ai Intercom",
+        "claude.ai Linear",
+        "claude.ai monday.com",
+        "claude.ai Notion"
+    ],
     "mcpServers": {
         "context7": {
             "command": "bunx",
@@ -6,68 +16,62 @@
                 "@upstash/context7-mcp"
             ]
         },
-        "gmail": {
-            "command": "bunx",
+        "memory-graph": {
+            "command": "uvx",
             "args": [
-                "@gongrzhe/server-gmail-autoauth-mcp"
+                "--from",
+                "git+https://github.com/gregorydickson/memory-graph.git",
+                "memorygraph"
             ]
         },
+        // "gmail": {
+        //     "command": "bunx",
+        //     "args": [
+        //         "@gongrzhe/server-gmail-autoauth-mcp"
+        //     ]
+        // },
         // "figma": {
         //     "type": "sse",
         //     "url": "https://mcp.figma.com/mcp"
         // },
-        // "memory-graph": {
-        //     "command": "uvx",
-        //     "args": ["--from", "git+https://github.com/gregorydickson/memory-graph.git", "memorygraph"]
+        // "sentry": {
+        //     "type": "http",
+        //     "url": "https://mcp.sentry.dev/mcp"
         // },
-        "sentry": {
-            "type": "http",
-            "url": "https://mcp.sentry.dev/mcp"
-        },
-        "spotify": {
-            "command": "uvx",
-            "args": [
-                "--python",
-                "3.12",
-                "--from",
-                "git+https://github.com/varunneal/spotify-mcp",
-                "spotify-mcp"
-            ],
-            "env": {
-                "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
-                "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
-                "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
-            }
-        },
-        // "salesforce": {
-        //     "command": "bunx",
+        // "spotify": {
+        //     "command": "uvx",
         //     "args": [
-        //         "@salesforce/mcp",
-        //         "--orgs",
-        //         "saatchiart",
-        //         "--toolsets",
-        //         "all"
+        //         "--python",
+        //         "3.12",
+        //         "--from",
+        //         "git+https://github.com/varunneal/spotify-mcp",
+        //         "spotify-mcp"
+        //     ],
+        //     "env": {
+        //         "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
+        //         "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
+        //         "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+        //     }
+        // },
+        // "obsidian": {
+        //     "command": "uvx",
+        //     "args": [
+        //         "--directory",
+        //         "/Users/mikefunk/Notes",
+        //         "mcp-obsidian"
+        //     ],
+        //     "env": {
+        //         "OBSIDIAN_API_KEY": "$OBSIDIAN_API_KEY"
+        //     }
+        // },
+        // "snyk": {
+        //     "command": "snyk",
+        //     "args": [
+        //         "mcp",
+        //         "-t",
+        //         "stdio"
         //     ]
         // },
-        "obsidian": {
-            "command": "uvx",
-            "args": [
-                "--directory",
-                "/Users/mikefunk/Notes",
-                "mcp-obsidian"
-            ],
-            "env": {
-                "OBSIDIAN_API_KEY": "$OBSIDIAN_API_KEY"
-            }
-        },
-        "snyk": {
-            "command": "snyk",
-            "args": [
-                "mcp",
-                "-t",
-                "stdio"
-            ]
-        },
         // "aws-knowledge-mcp-server": {
         //     "command": "uvx",
         //     "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
@@ -107,19 +111,19 @@
         // },
         // "github": {
         //     // NOTE: adds large context per call
-        //     "type": "sse",
+        //     "type": "http",
         //     "url": "https://api.githubcopilot.com/mcp/",
         //     "headers": {
         //         "Authorization": "Bearer $GITHUB_TOKEN"
         //     }
         // },
-        "postman": {
-            "type": "http",
-            "url": "https://mcp.postman.com/minimal",
-            "headers": {
-                "Authorization": "Bearer $POSTMAN_API_TOKEN"
-            }
-        },
+        // "postman": {
+        //     "type": "http",
+        //     "url": "https://mcp.postman.com/minimal",
+        //     "headers": {
+        //         "Authorization": "Bearer $POSTMAN_API_TOKEN"
+        //     }
+        // },
         // "youtube-transcript": {
         //     "command": "uvx",
         //     "args": [
@@ -160,6 +164,16 @@
         // "cloudflare-bindings": {
         //     "type": "sse",
         //     "url": "https://bindings.mcp.cloudflare.com/mcp"
-        // }
+        // },
+        // "salesforce": {
+        //     "command": "bunx",
+        //     "args": [
+        //         "@salesforce/mcp",
+        //         "--orgs",
+        //         "saatchiart",
+        //         "--toolsets",
+        //         "all"
+        //     ]
+        // },
     }
 }
