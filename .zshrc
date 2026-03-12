@@ -75,7 +75,7 @@ export path=(
   # "${KREW_ROOT:-$HOME/.krew}"/bin
   # $HOME/.yarn/bin
   $HOME/.docker/bin
-  # docker labs k8s toolkit, mise, self-updated tools
+  # docker labs k8s toolkit, mise, claude code, self-updated tools
   $HOME/.local/bin
   # to install groovy-language-server
   # $(brew --prefix openjdk@17)/bin
@@ -208,6 +208,8 @@ export COMPOSE_HTTP_TIMEOUT=120
 
 # for ctop:
 export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
+
+export ENABLE_CLAUDEAI_MCP_SERVERS=false
 
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
 export OLLAMA_NUM_PARALLEL=1
