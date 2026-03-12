@@ -1,14 +1,4 @@
 {
-    "disabledMcpServers": [
-        "claude.ai Asana",
-        "claude.ai Box",
-        "claude.ai Canva",
-        "claude.ai HubSpot",
-        "claude.ai Intercom",
-        "claude.ai Linear",
-        "claude.ai monday.com",
-        "claude.ai Notion"
-    ],
     "mcpServers": {
         "context7": {
             "command": "bunx",
@@ -30,9 +20,41 @@
         //         "@gongrzhe/server-gmail-autoauth-mcp"
         //     ]
         // },
+        // TODO: this requires Zendesk full admin access to add an API key (or oauth app) which I don't have.
+        // https://saatchiart.zendesk.com/admin/apps-integrations/apis/zendesk-api/settings
+        // "zendesk": {
+        //     "command": "uvx",
+        //     "args": [
+        //         "--from",
+        //         "git+https://github.com/reminia/zendesk-mcp-server.git",
+        //         "zendesk-mcp-server"
+        //     ],
+        //     "env": {
+        //         "ZENDESK_SUBDOMAIN": "support.saatchiart.com",
+        //         "ZENDESK_EMAIL": "$ZENDESK_EMAIL",
+        //         "ZENDESK_API_KEY": "$ZENDESK_API_KEY"
+        //     }
+        // },
         // "figma": {
         //     "type": "sse",
         //     "url": "https://mcp.figma.com/mcp"
+        // },
+        // TODO: some problem with GCP project permissions. I don't want to pay for this!
+        // "google-maps": {
+        //     "command": "bunx",
+        //     "args": [
+        //         "google-maps-mcp-server"
+        //     ],
+        //     "env": {
+        //         "GOOGLE_MAPS_API_KEY": "$GOOGLE_MAPS_API_KEY"
+        //     }
+        // },
+        // TODO: this is correct but I don't have account access on the google side currently
+        // https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
+        // https://docs.cloud.google.com/mcp/authenticate-mcp
+        // "bigquery": {
+        //     "type": "http",
+        //     "url": "https://bigquery.googleapis.com/mcp"
         // },
         // "sentry": {
         //     "type": "http",
@@ -136,19 +158,19 @@
         //     "command": "bunx",
         //     "args": ["@playwright/mcp@latest"]
         // },
-        "slack": {
-            "command": "bunx",
-            "args": [
-                "slack-mcp-server@latest",
-                "--transport",
-                "stdio"
-            ],
-            "env": {
-                "SLACK_MCP_XOXC_TOKEN": "$SLACK_MCP_XOXC_TOKEN",
-                "SLACK_MCP_XOXD_TOKEN": "$SLACK_MCP_XOXD_TOKEN",
-                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
-            }
-        },
+        // "slack": {
+        //     "command": "bunx",
+        //     "args": [
+        //         "slack-mcp-server@latest",
+        //         "--transport",
+        //         "stdio"
+        //     ],
+        //     "env": {
+        //         "SLACK_MCP_XOXC_TOKEN": "$SLACK_MCP_XOXC_TOKEN",
+        //         "SLACK_MCP_XOXD_TOKEN": "$SLACK_MCP_XOXD_TOKEN",
+        //         "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+        //     }
+        // },
         // "atlassian": {
         //     "type": "sse",
         //     "url": "https://mcp.atlassian.com/v1/mcp"

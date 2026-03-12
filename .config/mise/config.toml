@@ -65,7 +65,6 @@ astro = "latest"
 pnpm = "latest"
 "aqua:BurntSushi/xsv" = "latest"
 lazydocker = "latest"
-gh = "latest"
 claude = "latest"
 
 [tools."http:atlassian-cli"]
