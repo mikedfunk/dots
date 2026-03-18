@@ -667,3 +667,6 @@ ZVM_CURSOR_STYLE_ENABLED=false
 zinit cdreplay -q
 
 # }}}
+
+# bun completions
+[ -s "/Users/mikefunk/.bun/_bun" ] && source "/Users/mikefunk/.bun/_bun"
