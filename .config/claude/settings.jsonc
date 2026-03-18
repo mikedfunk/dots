@@ -14,6 +14,12 @@
                 "memorygraph"
             ]
         },
+        "habitica": {
+            "command": "bunx",
+            "args": [
+                "github:siddhero97/habitica-mcp-server#fixingClientHeader"
+            ]
+        },
         // "gmail": {
         //     "command": "bunx",
         //     "args": [
@@ -131,14 +137,14 @@
         //     "command": "bunx",
         //     "args": ["apple-mcp@latest"]
         // },
-        // "github": {
-        //     // NOTE: adds large context per call
-        //     "type": "http",
-        //     "url": "https://api.githubcopilot.com/mcp/",
-        //     "headers": {
-        //         "Authorization": "Bearer $GITHUB_TOKEN"
-        //     }
-        // },
+        "github": {
+            // NOTE: adds large context per call
+            "type": "http",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "headers": {
+                "Authorization": "Bearer $GITHUB_TOKEN"
+            }
+        },
         // "postman": {
         //     "type": "http",
         //     "url": "https://mcp.postman.com/minimal",
@@ -171,10 +177,10 @@
         //         "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
         //     }
         // },
-        // "atlassian": {
-        //     "type": "sse",
-        //     "url": "https://mcp.atlassian.com/v1/mcp"
-        // },
+        "atlassian": {
+            "type": "http",
+            "url": "https://mcp.atlassian.com/v1/mcp"
+        },
         // "tree-sitter": {
         //     "command": "uvx",
         //     "args": ["mcp-server-tree-sitter"]
