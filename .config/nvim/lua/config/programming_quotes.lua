@@ -259,6 +259,7 @@ M.quotes = {
   { "If you want more effective programmers, you will discover that they should not waste their time debugging, they should not introduce the bugs to start with.", "", "- Edsger W. Dijkstra" },
   { "If you want to increase your success rate, double your failure rate.", "", "- Thomas Watson Jr" },
   { "If you're actually doing TDD, you're throwing away tests all the time, as your understanding of what the code is changes.", "", "- Kerri Miller" },
+  { "If you think good architecture is expensive, try bad architecture.", "", "- Brian Foote and Joseph Yoder" },
   { "If you're afraid to change something it is clearly poorly designed.", "", "- Martin Fowler" },
   { "If you're ever worried about losing some data, just put it after a todo comment in a codebase. Those things never get removed.", "", "- Ólafur Waage" },
   { "If you're having trouble succeeding, fail.", "", "- Kent Beck" },
