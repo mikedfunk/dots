@@ -17,7 +17,8 @@
         "habitica": {
             "command": "bunx",
             "args": [
-                "github:siddhero97/habitica-mcp-server#fixingClientHeader"
+                // "github:siddhero97/habitica-mcp-server#fixingClientHeader"
+                "github:mikedfunk/habitica-mcp-server#v0.2.4"
             ]
         },
         // "gmail": {
