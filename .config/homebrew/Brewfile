@@ -380,6 +380,7 @@ brew "qcachegrind" # like kcachegrind which is useful for profiling php apps wit
 brew "scrcpy" if OS.mac? # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
+brew "tailscale" # vpn-like and remote access alternative
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
 brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (mise version doesn't work right for some reason)
 brew "tig" # git? tig! (note: this requires asciidoc)
