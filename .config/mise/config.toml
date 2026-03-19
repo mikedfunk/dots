@@ -66,6 +66,8 @@ pnpm = "latest"
 "aqua:BurntSushi/xsv" = "latest"
 lazydocker = "latest"
 claude = "latest"
+bitwarden = "latest"
+"npm:@bitwarden/mcp-server" = "latest" # can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
 
 [tools."http:atlassian-cli"]
 version = "latest"

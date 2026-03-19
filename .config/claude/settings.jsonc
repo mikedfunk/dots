@@ -178,10 +178,28 @@
         //         "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
         //     }
         // },
+        "firefox-devtools": {
+            "command": "bunx",
+            "args": [
+                "firefox-devtools-mcp"
+            ],
+            "env": {
+                // "FIREFOX_HEADLESS": "true"
+            }
+        },
         "atlassian": {
             "type": "http",
             "url": "https://mcp.atlassian.com/v1/mcp"
         },
+        // NOTE: can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
+        // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`
+        "bitwarden": {
+            "type": "stdio",
+            "command": "/Users/mikefunk/.support/bitwarden-mcp-helper.sh",
+            "env": {
+                "BW_SESSION": "$BW_SESSION"
+            }
+        }
         // "tree-sitter": {
         //     "command": "uvx",
         //     "args": ["mcp-server-tree-sitter"]

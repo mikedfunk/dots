@@ -1,14 +1,13 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    // see `opencode models`
+    // see `opencode models` or https://models.dev
     //
     // FREE:
-    "model": "opencode/kimi-k2.5-free",
     // "model": "openrouter/moonshotai/kimi-k2:free",
     // "model": "openrouter/qwen/qwen3-coder:free",
     // "model": "openrouter/free",
     // "model": "opencode/glm-5-free",
-    // "model": "opencode/minimax-m2.5-free",
+    "model": "opencode/minimax-m2.5-free",
     // "model": "google/gemini-flash",
     // "model": "qwen/qwen3-coder:free",
     // "model": "opencode/big-pickle",
@@ -18,6 +17,7 @@
     // "model": "openrouter/auto",
     // "model": "openrouter/claude-sonnet-4-5-20250929",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
+    // "model": "opencode/kimi-k2.5",
     "small_model": "opencode/glm-4.7-free",
     // "theme": "tokyonight",
     "share": "manual",
@@ -354,6 +354,17 @@
                 // "github:siddhero97/habitica-mcp-server#fixingClientHeader"
                 "github:mikedfunk/habitica-mcp-server#v0.2.4"
             ]
+        },
+        "firefox-devtools": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "firefox-devtools-mcp@latest"
+            ],
+            "environment": {
+                "FIREFOX_HEADLESS": "true",
+            }
         },
         // https://spotlightjs.com/
         // "spotlight": {
