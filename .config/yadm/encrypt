@@ -27,6 +27,8 @@ Code/saatchi/**/pyrightconfig.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 
+.claude/commands/saatchi-ship
+
 # }}}
 
 # misc {{{
@@ -53,5 +55,7 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 .warprc
 Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 intelephense/licence.txt
+.claude/CLAUDE.md
+.claude/commands/renew-github-token
 
 # }}}

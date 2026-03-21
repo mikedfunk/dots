@@ -335,7 +335,7 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "@upstash/context7-mcp"
+                "@upstash/context7-mcp@latest"
             ]
         },
         "gmail": {
@@ -343,7 +343,7 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "@gongrzhe/server-gmail-autoauth-mcp"
+                "@gongrzhe/server-gmail-autoauth-mcp@latest"
             ]
         },
         "habitica": {
@@ -366,13 +366,24 @@
                 "FIREFOX_HEADLESS": "true",
             }
         },
+        // NOTE: can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
+        // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`
+        "bitwarden": {
+            "type": "local",
+            "command": [
+                "{env:HOME}/.support/bitwarden-mcp-helper.sh"
+            ],
+            "environment": {
+                "BW_SESSION": "{env:BW_SESSION}"
+            }
+        },
         // https://spotlightjs.com/
         // "spotlight": {
         //     "type": "local",
         //     "enabled": false,
         //     "command": [
         //         "bunx",
-        //         "@spotlightjs/spotlight",
+        //         "@spotlightjs/spotlight@latest",
         //         "--stdio-mcp"
         //     ]
         // },
@@ -393,7 +404,7 @@
         //     "enabled": false,
         //     "command": [
         //         "bunx",
-        //         "mcp-remote",
+        //         "mcp-remote@latest",
         //         "https://mcp.figma.com/mcp",
         //         "--transport",
         //         "sse-only"
@@ -437,7 +448,7 @@
             "enabled": false,
             "command": [
                 "bunx",
-                "@salesforce/mcp",
+                "@salesforce/mcp@latest",
                 "--orgs",
                 "saatchiart",
                 "--toolsets",
