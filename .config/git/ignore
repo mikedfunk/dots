@@ -28,6 +28,7 @@
 .phpspec
 .phpunit.cache
 .phpunit.result.cache
+.playwright-mcp
 .pre-commit-config.yaml
 .projections.json
 .ruby-lsp

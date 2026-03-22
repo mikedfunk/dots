@@ -23,7 +23,9 @@
     "share": "manual",
     "plugin": [
         // "opencode-gemini-auth@latest",
-        "@mohak34/opencode-notifier@latest"
+        "@mohak34/opencode-notifier@latest",
+        // requires accompanying mcp - see mcp section
+        "context-mode@latest"
         // "@tarquinen/opencode-dcp@latest",
         // "opencode-google-antigravity-auth"
     ],
@@ -365,6 +367,15 @@
             "environment": {
                 "FIREFOX_HEADLESS": "true",
             }
+        },
+        // requires accompanying plugin - see plugins section
+        "context-mode": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "bunx",
+                "context-mode@latest"
+            ]
         },
         // NOTE: can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
         // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`

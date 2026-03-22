@@ -18,7 +18,7 @@ Code/saatchi/**/.lazy.lua
 Code/saatchi/**/.neoconf.json
 Code/saatchi/**/.pre-commit-config.yaml
 Code/saatchi/**/.projections.json
-Code/saatchi/**/AGENTS.md
+Code/saatchi/**/{CLAUDE,AGENTS}.md
 Code/saatchi/**/codebook.toml
 Code/saatchi/**/compose.override.yml
 Code/saatchi/**/mago.toml
@@ -55,7 +55,7 @@ Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 .warprc
 Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 intelephense/licence.txt
-.claude/CLAUDE.md
-.claude/commands/renew-github-token
+.claude/{CLAUDE.md,commands/renew-github-token}
+.config/opencode/AGENTS.md
 
 # }}}
