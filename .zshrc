@@ -321,17 +321,44 @@ compdef k="kubectl"
 alias d="docker"
 compdef d="docker"
 
+_claude_persistent_mcps() {
+    bunx strip-json-comments-cli ~/.config/claude/persistent_mcps.jsonc | envsubst
+}
+
+_claude_optional_mcps() {
+    bunx strip-json-comments-cli ~/.config/claude/optional_mcps.jsonc | envsubst
+}
+
+_claude_inject_mcps() {
+    local mcpServers="$1"
+    jq --argjson mcpServers "$mcpServers" '.mcpServers = $mcpServers' ~/.claude.json > ~/.claude.json.tmp \
+        && command mv ~/.claude.json.tmp ~/.claude.json
+}
+
 claude() {
-    # what a pain. keep my mcp servers in ~/.config/claude/settings.jsonc so I
-    # can comment out ones I'm not using because claude code doesn't support
-    # configuration mcp servers and enabling them dynamically. They also don't
-    # support jsonc so I can't comment them out. Then splice those in with
-    # ~/.claude.json because that is also used for current auth state along
-    # with mcp servers.
-    local MY_MCP_SERVERS="$(bunx strip-json-comments-cli ~/.config/claude/settings.jsonc | envsubst | jq '.mcpServers')"
-    jq --argjson mcpServers "$MY_MCP_SERVERS" '.mcpServers = $mcpServers' ~/.claude.json > ~/.claude.json.tmp \
-        && command mv ~/.claude.json.tmp ~/.claude.json \
-        && command claude "$@"
+    # Always inject persistent + all optional MCPs into ~/.claude.json before launching.
+    local merged
+    merged="$(jq -s '.[0] * .[1]' <(_claude_persistent_mcps) <(_claude_optional_mcps))"
+    _claude_inject_mcps "$merged" && command claude "$@"
+}
+
+claude-mcp() {
+    # Always inject persistent MCPs; use fzf to select which optional ones to add.
+    local optional all_optional selected keys_json filtered merged
+    optional="$(_claude_optional_mcps)"
+
+    selected="$(echo "$optional" | jq -r 'keys[]' | fzf --multi --prompt='Optional MCPs > ')"
+
+    if [[ -z "$selected" ]]; then
+        echo "No optional MCPs selected, launching with persistent MCPs only."
+    fi
+
+    keys_json="$(echo "$selected" | jq -R . | jq -s .)"
+    filtered="$(echo "$optional" | jq --argjson keys "$keys_json" \
+        'with_entries(select(.key as $k | $keys | index($k) != null))')"
+
+    merged="$(jq -s '.[0] * .[1]' <(_claude_persistent_mcps) <(echo "$filtered"))"
+    _claude_inject_mcps "$merged" && command claude "$@"
 }
 
 alias pspg="pspg --clipboard-app=3"
