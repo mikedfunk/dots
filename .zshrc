@@ -209,8 +209,6 @@ export COMPOSE_HTTP_TIMEOUT=120
 # for ctop:
 export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
 
-export ENABLE_CLAUDEAI_MCP_SERVERS=false
-
 # https://github.com/ollama/ollama/issues/7762#issuecomment-2489192027
 export OLLAMA_NUM_PARALLEL=1
 
@@ -231,11 +229,16 @@ export BAT_THEME="TwoDark"
 source "$HOME"/.private_vars.sh 2>/dev/null
 source "$(brew --prefix)"/etc/grc.zsh 2>/dev/null # generic colorizer
 
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
+export ENABLE_CLAUDEAI_MCP_SERVERS=false # configure my own instead
+
 _evalcache mise activate zsh 2>/dev/null
 export MISE_NODE_COREPACK=true
 
 # https://github.com/variadico/noti/blob/master/docs/noti.md#environment
 export NOTI_NSUSER_SOUNDNAME="Hero"
+
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 
 # https://pre-commit.com/#cli
 export PRE_COMMIT_COLOR="always"

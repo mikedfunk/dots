@@ -24,7 +24,12 @@
         "gmail": {
             "command": "bunx",
             "args": [
-                "@gongrzhe/server-gmail-autoauth-mcp@latest"
+                // TODO: archived - look for a working fork
+                "@gongrzhe/server-gmail-autoauth-mcp@latest",
+                // "maintained fork" but not on npm and github version doesn't work :/
+                // "@ArtyMcLabin/Gmail-MCP-Server@latest",
+                "--client",
+                "claude"
             ]
         },
         "figma": {

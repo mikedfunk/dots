@@ -84,7 +84,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "cmake" # used by youcompleteme (which I no longer use)
 # brew "code-minimap" # for a vim plugin
 # brew "codespell" # neat little utility to show and fix code misspellings
-# brew "codex" # openai version of claude-code, etc. (replaced with crush)
 # brew "colortail" # tail with support for colors (I use multitail)
 # brew "composer" # php dependency management (now installed via phpenv)
 # brew "coreutils" # used by k zsh plugin and msgpack gem which is a dependency of rouge and neovim gems. Also required by asdf. (moved to mise)
@@ -351,6 +350,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "btop" # another top/atop/glances/htop alternative, apparently the most popular
+brew "codex" # openai version of claude-code, etc.
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "gettext" # this includes envsubst which I use in my ~/.zshrc
