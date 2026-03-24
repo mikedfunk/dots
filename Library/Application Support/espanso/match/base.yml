@@ -49,6 +49,11 @@ matches:
     propagate_case: true
     word: true
 
+  - triggers: [comopser]
+    replace: composer
+    propagate_case: true
+    word: true
+
   - triggers: [aritsan, arisan]
     replace: artisan
     propagate_case: true
