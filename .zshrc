@@ -336,10 +336,8 @@ _claude_inject_mcps() {
 }
 
 claude() {
-    # Always inject persistent + all optional MCPs into ~/.claude.json before launching.
-    local merged
-    merged="$(jq -s '.[0] * .[1]' <(_claude_persistent_mcps) <(_claude_optional_mcps))"
-    _claude_inject_mcps "$merged" && command claude "$@"
+    # Only inject persistent MCPs into ~/.claude.json before launching.
+    _claude_inject_mcps "$(_claude_persistent_mcps)" && command claude "$@"
 }
 
 claude-mcp() {
@@ -347,7 +345,7 @@ claude-mcp() {
     local optional all_optional selected keys_json filtered merged
     optional="$(_claude_optional_mcps)"
 
-    selected="$(echo "$optional" | jq -r 'keys[]' | fzf --multi --prompt='Optional MCPs > ')"
+    selected="$(echo "$optional" | jq -r 'keys[]' | fzf --multi --prompt='Optional MCPs (TAB to select, ENTER to continue) > ')"
 
     if [[ -z "$selected" ]]; then
         echo "No optional MCPs selected, launching with persistent MCPs only."

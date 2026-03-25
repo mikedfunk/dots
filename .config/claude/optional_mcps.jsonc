@@ -17,6 +17,15 @@
             "claude"
         ]
     },
+    "coderabbitai": {
+        "command": "bunx",
+        "args": [
+            "coderabbitai-mcp@latest"
+        ],
+        "env": {
+            "GITHUB_PAT": "$GITHUB_TOKEN"
+        }
+    },
     "figma": {
         "type": "http",
         "url": "https://mcp.figma.com/mcp"
