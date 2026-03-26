@@ -65,6 +65,5 @@
       }
     }
   },
-  "voiceEnabled": true,
-  "model": "haiku"
+  "voiceEnabled": true
 }

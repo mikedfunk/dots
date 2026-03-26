@@ -183,14 +183,14 @@
             "mcp-server-tree-sitter"
         ]
     },
-    // "cloudflare-observability": {
-    //     "type": "sse",
-    //     "url": "https://observability.mcp.cloudflare.com/mcp"
-    // },
-    // "cloudflare-bindings": {
-    //     "type": "sse",
-    //     "url": "https://bindings.mcp.cloudflare.com/mcp"
-    // },
+    "cloudflare-observability": {
+        "type": "http",
+        "url": "https://observability.mcp.cloudflare.com/mcp"
+    },
+    "cloudflare-bindings": {
+        "type": "http",
+        "url": "https://bindings.mcp.cloudflare.com/mcp"
+    },
     // "salesforce": {
     //     "command": "bunx",
     //     "args": [
