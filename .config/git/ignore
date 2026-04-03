@@ -2,6 +2,7 @@
 # _ide_helper.php
 # composer.phar
 
+# CLAUDE.md
 **/.claude/settings.local.json
 *.swp
 *.tsbuildinfo
@@ -9,6 +10,7 @@
 .DS_Store
 .aider*
 .channels_cache_v2.json
+.claude/
 .conform*
 .crush/
 .deptrac.cache
@@ -36,7 +38,6 @@
 .users_cache.json
 .yarn
 AGENTS.md
-CLAUDE.md
 CONTEXT.md
 CRUSH.md
 __pycache__
@@ -48,5 +49,6 @@ crush.json
 mago.toml
 mise.toml
 nohup.out
+openspec
 root_local
 yarn-error.log

@@ -157,24 +157,6 @@
       | gsed --regexp-extended 's/^.*(SA(AT)?-[0-9]{3,4}).*$/https:\\/\\/saatchiart.atlassian.net\\/browse\\/\\1/' \
       | xargs open; \
     }; f"
-    # kubernetes namespace
-    # kn = "!f() { \
-    #   echo $(git branch --show-current) \
-    #   | sed -E 's/(feature|hotfix|release)\\/([a-zA-Z0-9_.\\/-]{0,12}).*/\\2/' \
-    #   | sed -E 's/_/-/g' \
-    #   | sed -E 's/^(.*)-$/\\1/' \
-    #   | tr '[:upper:]' '[:lower:]'; \
-    # }; f"
-    # chatgpt version that does all three sed transformations above at once with semicolons
-    kn = "!f() { \
-      git branch --show-current \
-        | sed -E ' \
-            s/^(feature|hotfix|release)\\/([a-zA-Z0-9_.\\/-]{0,12}).*/\\2/; \
-            s/_/-/g; \
-            s/^(.*)-$/\\1/ \
-        ' \
-      | tr '[:upper:]' '[:lower:]'; \
-    }; f"
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
     # show latest commits on all branches by most recent
@@ -225,8 +207,6 @@
     rbm = rebase -i master
     rbs = rebase --skip
     rba = rebase --abort
-    # release create (useful for github-flow)
-    rc = "!f() { git checkout develop && git pull && gh release create $1 --generate-notes && gh release ls --limit=1; }; f"
     # rebase interactively on to the upstream to this branch
     ready = rebase -i @{u}
     rh = reset --hard
@@ -430,6 +410,7 @@
     # https://adamj.eu/tech/2022/10/15/how-to-rebase-stacked-git-branches/
     # updateRefs = true
 [push]
+    # by default push just the current branch to the linked remote branch
     default = current
     # push any missing _annotated_ tags related to this branch to remote when
     # pushing a branch. Useful for git flow - pushes related release tags for
@@ -437,7 +418,7 @@
     # tags.
     followTag = true
     # https://adamj.eu/tech/2022/10/31/git-how-to-automatically-create-upstream-branches/
-	autoSetupRemote = true
+    autoSetupRemote = true
 [pull]
     rebase = true
 [rerere]
@@ -453,7 +434,7 @@
 
 # credentials {{{
 [credential]
-	helper = 
+	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
     # helper = osxkeychain
 [credential "https://dev.azure.com"]
