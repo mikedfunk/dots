@@ -70,6 +70,7 @@ bitwarden = "latest"
 "npm:@bitwarden/mcp-server" = "latest" # can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
 "npm:@googleworkspace/cli" = "latest"
 "npm:@playwright/cli" = "latest"
+"npm:@fission-ai/openspec" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
