@@ -1,4 +1,4 @@
-# vim: set foldmethod=marker:
+# vim: set foldmethod=marker ft=dosini:
 # global git config
 
 # Tips {{{
