@@ -59,7 +59,7 @@
         "command": "uvx",
         "args": [
             "--directory",
-            "/Users/mikefunk/Notes",
+            "$HOME/Notes",
             "mcp-obsidian"
         ],
         "env": {
@@ -178,7 +178,7 @@
     // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`
     "bitwarden": {
         "type": "stdio",
-        "command": "/Users/mikefunk/.support/bitwarden-mcp-helper.sh",
+        "command": "$HOME/.support/bitwarden-mcp-helper.sh",
         "env": {
             "BW_SESSION": "$BW_SESSION"
         }
