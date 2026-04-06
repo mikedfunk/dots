@@ -1,4 +1,10 @@
 {
+    "context7": {
+        "command": "bunx",
+        "args": [
+            "@upstash/context7-mcp@latest"
+        ]
+    },
     "habitica": {
         "command": "bunx",
         "args": [
@@ -239,6 +245,15 @@
     //         "firefox-devtools-mcp@latest",
     //         "--",
     //         "--connect-existing"
+    //     ]
+    // },
+    // No longer needed with Claude which has its own memory
+    // "memory-graph": {
+    //     "command": "uvx",
+    //     "args": [
+    //         "--from",
+    //         "git+https://github.com/gregorydickson/memory-graph.git",
+    //         "memorygraph"
     //     ]
     // },
 }
