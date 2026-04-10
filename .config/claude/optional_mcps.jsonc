@@ -2,12 +2,14 @@
     "context7": {
         "command": "bunx",
         "args": [
+            "--bun",
             "@upstash/context7-mcp@latest"
         ]
     },
     "habitica": {
         "command": "bunx",
         "args": [
+            "--bun",
             // "github:siddhero97/habitica-mcp-server#fixingClientHeader"
             "github:mikedfunk/habitica-mcp-server#v0.2.4"
         ]
@@ -15,6 +17,7 @@
     "gmail": {
         "command": "bunx",
         "args": [
+            "--bun",
             // TODO: archived - look for a working fork
             "@gongrzhe/server-gmail-autoauth-mcp@latest",
             // "maintained fork" but not on npm and github version doesn't work :/
@@ -23,15 +26,16 @@
             "claude"
         ]
     },
-    "coderabbitai": {
-        "command": "bunx",
-        "args": [
-            "coderabbitai-mcp@latest"
-        ],
-        "env": {
-            "GITHUB_PAT": "$GITHUB_TOKEN"
-        }
-    },
+    // "coderabbitai": {
+    //     "command": "bunx",
+    //     "args": [
+    //         "--bun",
+    //         "coderabbitai-mcp@latest"
+    //     ],
+    //     "env": {
+    //         "GITHUB_PAT": "$GITHUB_TOKEN"
+    //     }
+    // },
     "figma": {
         "type": "http",
         "url": "https://mcp.figma.com/mcp"
@@ -40,21 +44,22 @@
         "type": "http",
         "url": "https://mcp.sentry.dev/mcp"
     },
-    "spotify": {
-        "command": "uvx",
-        "args": [
-            "--python",
-            "3.12",
-            "--from",
-            "git+https://github.com/varunneal/spotify-mcp",
-            "spotify-mcp"
-        ],
-        "env": {
-            "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
-            "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
-            "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
-        }
-    },
+    // NOTE: requires Spotify premium
+    // "spotify": {
+    //     "command": "uvx",
+    //     "args": [
+    //         "--python",
+    //         "3.12",
+    //         "--from",
+    //         "git+https://github.com/varunneal/spotify-mcp",
+    //         "spotify-mcp"
+    //     ],
+    //     "env": {
+    //         "SPOTIFY_CLIENT_ID": "$SPOTIFY_CLIENT_ID",
+    //         "SPOTIFY_CLIENT_SECRET": "$SPOTIFY_CLIENT_SECRET",
+    //         "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+    //     }
+    // },
     "obsidian": {
         "command": "uvx",
         "args": [
@@ -116,6 +121,7 @@
     "apple-mcp": {
         "command": "bunx",
         "args": [
+            "--bun",
             "apple-mcp@latest"
         ]
     },
@@ -148,6 +154,7 @@
     "playwright": {
         "command": "bunx",
         "args": [
+            "--bun",
             "@playwright/mcp@latest",
             "--browser",
             "chromium",
@@ -158,6 +165,7 @@
     "slack": {
         "command": "bunx",
         "args": [
+            "--bun",
             "slack-mcp-server@latest",
             "--transport",
             "stdio"
@@ -197,9 +205,11 @@
         "type": "http",
         "url": "https://bindings.mcp.cloudflare.com/mcp"
     },
+    // Salesforce sucks as we all know so this is extremely complicated to set up of course
     // "salesforce": {
     //     "command": "bunx",
     //     "args": [
+    // "--bun",
     //         "@salesforce/mcp@latest",
     //         "--orgs",
     //         "saatchiart",
@@ -226,6 +236,7 @@
     // "google-maps": {
     //     "command": "bunx",
     //     "args": [
+    // "--bun",
     //         "google-maps-mcp-server@latest"
     //     ],
     //     "env": {
@@ -242,6 +253,7 @@
     // "firefox-devtools": {
     //     "command": "bunx",
     //     "args": [
+    // "--bun",
     //         "firefox-devtools-mcp@latest",
     //         "--",
     //         "--connect-existing"

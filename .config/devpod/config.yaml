@@ -3,9 +3,6 @@ contexts:
     defaultIde: none
     defaultProvider: docker
     options:
-      DOTFILES_URL:
-        userProvided: true
-        value: git@github.com:mikedfunk/devpod-dotfiles.git
       GPG_AGENT_FORWARDING:
         userProvided: true
         value: "true"
