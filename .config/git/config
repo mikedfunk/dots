@@ -23,8 +23,18 @@
     browser = open
 [instaweb]
     httpd = webrick
-[includeIf "gitdir/i:~/Code/saatchi/"]
+
+# NOTE: Previously used includeIf "gitdir/i:~/Code/saatchi/" so the saatchi config
+# (including SSH URL rewrites) only applied inside ~/Code/saatchi/ repos.
+# Problem: tools like `bunx skills` clone to temp dirs outside ~/Code/saatchi/,
+# so the SSH rewrite never loaded and they fell back to HTTPS + GCM prompts.
+# Switching to unconditional [include]: git silently skips the file if it
+# doesn't exist, so this is safe on machines without the saatchi config.
+# [includeIf "gitdir/i:~/Code/saatchi/"]
+#     path = ~/.config/git/config-saatchi
+[include]
     path = ~/.config/git/config-saatchi
+
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
@@ -514,4 +524,3 @@
         allowed = AKIAIOSFODNN7EXAMPLE
         allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 # }}}
-[url "git@github.com:"]

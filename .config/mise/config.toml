@@ -71,6 +71,8 @@ bitwarden = "latest"
 "npm:@googleworkspace/cli" = "latest"
 "npm:@playwright/cli" = "latest"
 "npm:@fission-ai/openspec" = "latest"
+caddy = "latest"
+"npm:defuddle" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

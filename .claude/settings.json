@@ -43,7 +43,6 @@
     "php-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "claude-hud@claude-hud": true,
     "context-mode@context-mode": true
   },
   "extraKnownMarketplaces": {
@@ -66,6 +65,7 @@
       }
     }
   },
+  "effortLevel": "medium",
   "voiceEnabled": true,
   "skipAutoPermissionPrompt": true
 }

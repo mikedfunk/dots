@@ -20,7 +20,8 @@ return {
     },
     ---@class PluginLspOpts
     opts = {
-      codelens = { enabled = true },
+      -- TODO: this is bugging out lately and causing the cursor to move left on every completion
+      -- codelens = { enabled = true },
       servers = {
         apex_ls = {
           apex_jar_path = vim.fn.stdpath("data") .. "/mason/share/apex-language-server/apex-jorje-lsp.jar",

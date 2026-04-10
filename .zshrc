@@ -1,10 +1,3 @@
-# OPENSPEC:START
-# OpenSpec shell completions configuration
-fpath=("/Users/mikefunk/.zsh/completions" $fpath)
-autoload -Uz compinit
-compinit
-# OPENSPEC:END
-
 #!/usr/bin/env zsh
 # vim: set foldmethod=marker ft=zsh:
 
@@ -54,6 +47,8 @@ typeset -U path fpath manpath
 
 export fpath=(
   $HOME/.docker/completions
+  # OpenSpec shell completions configuration
+  $HOME/.zsh/completions
   ${fpath:-}
 )
 
@@ -303,6 +298,8 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 # this might interfere with fzf-tab https://github.com/orgs/carapace-sh/discussions/2596
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 { source <(carapace _carapace) } 2>/dev/null
+# bun completions
+source "$HOME/.bun/_bun" 2>/dev/null
 
 _evalcache acli completion zsh 2>/dev/null
 _evalcache devpod completion zsh 2>/dev/null
@@ -703,6 +700,3 @@ ZVM_CURSOR_STYLE_ENABLED=false
 zinit cdreplay -q
 
 # }}}
-
-# bun completions
-[ -s "/Users/mikefunk/.bun/_bun" ] && source "/Users/mikefunk/.bun/_bun"
