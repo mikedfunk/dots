@@ -175,7 +175,9 @@
             "SLACK_MCP_XOXD_TOKEN": "$SLACK_MCP_XOXD_TOKEN",
             "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0",
             "SLACK_MCP_ADD_MESSAGE_TOOL": "true",
-            "SLACK_MCP_ADD_MESSAGE_UNFURLING": "true"
+            "SLACK_MCP_ADD_MESSAGE_UNFURLING": "true",
+            // Cache channels for 30 days. Delete ~/Library/Caches/slack-mcp-server/T02*_channels_cache_v2.json to force refresh.
+            "SLACK_MCP_CACHE_TTL": "720h"
         }
     },
     "atlassian": {

@@ -3,6 +3,7 @@
 # composer.phar
 
 # CLAUDE.md
+# .claude/
 **/.claude/settings.local.json
 *.swp
 *.tsbuildinfo
@@ -10,7 +11,6 @@
 .DS_Store
 .aider*
 .channels_cache_v2.json
-.claude/
 .conform*
 .crush/
 .deptrac.cache
@@ -22,7 +22,8 @@
 .neoconf.json
 .netrwhist
 .nvim.lua
-.opencode
+.opencode/*
+!.opencode/agents
 .phing_targets
 .php-cs-fixer.cache
 .php_cs.cache

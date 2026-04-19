@@ -586,7 +586,8 @@ cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session man
 cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "utm" # vmware/parallels/virtualbox alternative
 cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
-cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app. Alternative: super-productivity
+cask "wispr-flow" # voice to text
+cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
 

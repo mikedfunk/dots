@@ -3,6 +3,7 @@
     // see `opencode models` or https://models.dev
     //
     // FREE:
+    // "model": "openrouter/openrouter/free",
     // "model": "openrouter/moonshotai/kimi-k2:free",
     // "model": "openrouter/qwen/qwen3-coder:free",
     // "model": "openrouter/free",
@@ -18,9 +19,15 @@
     // "model": "openrouter/claude-sonnet-4-5-20250929",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     // "model": "opencode/kimi-k2.5",
-    "small_model": "opencode/glm-4.7-free",
+    //
+    "small_model": "openrouter/openrouter/free",
     // "theme": "tokyonight",
     "share": "manual",
+    "compaction": {
+        "auto": true,
+        "prune": true,
+        "reserved": 5000
+    },
     "plugin": [
         // "opencode-gemini-auth@latest",
         "@mohak34/opencode-notifier@latest",
@@ -309,6 +316,17 @@
             }
         }
     },
+    "agent": {
+        // Use free model for read-only codebase exploration
+        "explore": {
+            // "model": "opencode/glm-4.7-free"
+            "model": "openrouter/openrouter/free",
+        },
+        // Use cheapest paid model for planning (no writes needed)
+        "plan": {
+            "model": "openrouter/anthropic/claude-haiku-4.5"
+        }
+    },
     "lsp": {
         "php": {
             "disabled": true,
@@ -337,6 +355,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "@upstash/context7-mcp@latest"
             ]
         },
@@ -345,6 +364,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "@gongrzhe/server-gmail-autoauth-mcp@latest"
             ]
         },
@@ -353,6 +373,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 // "github:siddhero97/habitica-mcp-server#fixingClientHeader"
                 "github:mikedfunk/habitica-mcp-server#v0.2.4"
             ]
@@ -362,10 +383,11 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "firefox-devtools-mcp@latest"
             ],
             "environment": {
-                "FIREFOX_HEADLESS": "true",
+                "FIREFOX_HEADLESS": "true"
             }
         },
         // requires accompanying plugin - see plugins section
@@ -374,6 +396,7 @@
             "enabled": true,
             "command": [
                 "bunx",
+                "--bun",
                 "context-mode@latest"
             ]
         },
@@ -381,6 +404,7 @@
         // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`
         "bitwarden": {
             "type": "local",
+            "enabled": false,
             "command": [
                 "{env:HOME}/.support/bitwarden-mcp-helper.sh"
             ],
@@ -393,7 +417,7 @@
         //     "type": "local",
         //     "enabled": false,
         //     "command": [
-        //         "bunx",
+        //         "bunx", "--bun",
         //         "@spotlightjs/spotlight@latest",
         //         "--stdio-mcp"
         //     ]
@@ -414,7 +438,7 @@
         //     "type": "local",
         //     "enabled": false,
         //     "command": [
-        //         "bunx",
+        //         "bunx", "--bun",
         //         "mcp-remote@latest",
         //         "https://mcp.figma.com/mcp",
         //         "--transport",
@@ -459,6 +483,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "@salesforce/mcp@latest",
                 "--orgs",
                 "saatchiart",
@@ -476,7 +501,7 @@
                 "mcp-obsidian"
             ],
             "environment": {
-                "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
+                "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}"
                 // "OBSIDIAN_HOST": "<your_obsidian_host>",
                 // "OBSIDIAN_PORT": "<your_obsidian_port>"
             }
@@ -513,7 +538,7 @@
             "environment": {
                 "FASTMCP_LOG_LEVEL": "ERROR",
                 "AWS_PROFILE": "{env:AWS_PROFILE}"
-            },
+            }
         },
         "awslabs.cloudwatch-mcp-server": {
             "type": "local",
@@ -537,13 +562,14 @@
             "environment": {
                 "FASTMCP_LOG_LEVEL": "ERROR",
                 "AWS_PROFILE": "{env:AWS_PROFILE}"
-            },
+            }
         },
         "apple-mcp": {
             "type": "local",
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "apple-mcp@latest"
             ]
         },
@@ -579,6 +605,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "@playwright/mcp@latest"
             ]
         },
@@ -587,6 +614,7 @@
             "enabled": false,
             "command": [
                 "bunx",
+                "--bun",
                 "slack-mcp-server@latest",
                 "--transport",
                 "stdio"
@@ -594,7 +622,11 @@
             "environment": {
                 "SLACK_MCP_XOXC_TOKEN": "{env:SLACK_MCP_XOXC_TOKEN}",
                 "SLACK_MCP_XOXD_TOKEN": "{env:SLACK_MCP_XOXD_TOKEN}",
-                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+                "SLACK_MCP_USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0",
+                "SLACK_MCP_ADD_MESSAGE_TOOL": "true",
+                "SLACK_MCP_ADD_MESSAGE_UNFURLING": "true",
+                // Cache channels for 30 days. Delete ~/Library/Caches/slack-mcp-server/T02*_channels_cache_v2.json to force refresh.
+                "SLACK_MCP_CACHE_TTL": "720h"
             }
         },
         "atlassian": {
@@ -634,7 +666,7 @@
             "type": "remote",
             "enabled": false,
             "url": "https://bindings.mcp.cloudflare.com/mcp"
-        },
+        }
         // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
         // "strava": {
         //     "type": "local",
