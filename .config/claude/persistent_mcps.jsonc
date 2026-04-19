@@ -2,15 +2,8 @@
     // "context7": {
     //     "command": "bunx",
     //     "args": [
+    //         "--bun",
     //         "@upstash/context7-mcp@latest"
     //     ]
     // },
-    // "memory-graph": {
-    //     "command": "uvx",
-    //     "args": [
-    //         "--from",
-    //         "git+https://github.com/gregorydickson/memory-graph.git",
-    //         "memorygraph"
-    //     ]
-    // }
 }

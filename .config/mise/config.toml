@@ -73,6 +73,10 @@ bitwarden = "latest"
 "npm:@fission-ai/openspec" = "latest"
 caddy = "latest"
 "npm:defuddle" = "latest"
+terraform = "latest"
+helm = "latest"
+doctl = "latest"
+"aqua:j178/prek" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

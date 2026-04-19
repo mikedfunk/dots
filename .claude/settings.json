@@ -1,6 +1,7 @@
 {
   "env": {
-    "ENABLE_TOOL_SEARCH": "true"
+    "ENABLE_TOOL_SEARCH": "true",
+    "BASH_MAX_OUTPUT_LENGTH": "150000"
   },
   "attribution": {
     "commit": "",
@@ -9,6 +10,13 @@
   "permissions": {
     "allow": [
       "Read(~/.claude)"
+    ],
+    "deny": [
+      "Read(**/node_modules/**)",
+      "Read(**/.svelte-kit/**)",
+      "Read(**/dist/**)",
+      "Read(**/build/**)",
+      "Read(**/coverage/**)"
     ],
     "defaultMode": "auto"
   },
@@ -43,7 +51,8 @@
     "php-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "context-mode@context-mode": true
+    "context-mode@context-mode": true,
+    "pr-review-toolkit@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -66,6 +75,6 @@
     }
   },
   "effortLevel": "medium",
-  "voiceEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
