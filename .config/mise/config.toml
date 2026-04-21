@@ -77,6 +77,7 @@ terraform = "latest"
 helm = "latest"
 doctl = "latest"
 "aqua:j178/prek" = "latest"
+fnox = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

@@ -47,6 +47,7 @@ codebook.toml
 conform.*
 coverage
 crush.json
+fnox.toml
 mago.toml
 mise.toml
 nohup.out
