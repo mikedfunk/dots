@@ -20,7 +20,7 @@
   "groovy-language-server": "0746b250604c0a75bf620f7257aed8df12d025c3",
   "hadolint": "v2.14.0",
   "intelephense": "1.16.5",
-  "js-debug-adapter": "v1.112.0",
+  "js-debug-adapter": "v1.117.0",
   "json-lsp": "4.10.0",
   "laravel-ls": "v0.1.0",
   "lemminx": "0.29.0",

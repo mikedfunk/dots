@@ -237,6 +237,8 @@ export ENABLE_CLAUDEAI_MCP_SERVERS=false # configure my own instead
 _evalcache mise activate zsh 2>/dev/null
 export MISE_NODE_COREPACK=true
 
+_evalcache fnox activate zsh 2>/dev/null
+
 # https://github.com/variadico/noti/blob/master/docs/noti.md#environment
 export NOTI_NSUSER_SOUNDNAME="Hero"
 
