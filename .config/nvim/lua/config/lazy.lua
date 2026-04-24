@@ -15,6 +15,7 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- { "dpetka2001/LazyVim", commit = "23bb9e47f0d84ad33ff9168de3577f1468767394", import = "lazyvim.plugins" },
     -- import any extras modules here
     -- moved here instead of ~/.config/nvim/lazyvim.json so I can use .lazy.lua to import these only when needed
     -- :LazyExtras to see available extras
@@ -26,7 +27,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.inc-rename" },
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.editor.navic" },
-    { import = "lazyvim.plugins.extras.editor.refactoring" },
+    -- { import = "lazyvim.plugins.extras.editor.refactoring" },
     { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
     { import = "lazyvim.plugins.extras.editor.snacks_picker" },
     { import = "lazyvim.plugins.extras.formatting.black" },

@@ -702,5 +702,3 @@ ZVM_CURSOR_STYLE_ENABLED=false
 zinit cdreplay -q
 
 # }}}
-
-export PATH=$PATH:/Users/mikefunk/.spicetify

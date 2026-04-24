@@ -193,6 +193,11 @@
             "BW_SESSION": "$BW_SESSION"
         }
     },
+    // NOTE: requires storybook on local
+    "storybook": {
+        "type": "http",
+        "url": "http://localhost:6006/mcp"
+    },
     "tree-sitter": {
         "command": "uvx",
         "args": [

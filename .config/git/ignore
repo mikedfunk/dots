@@ -54,3 +54,4 @@ nohup.out
 openspec
 root_local
 yarn-error.log
+.fallow/*.bin
