@@ -371,6 +371,7 @@ brew "multitail" # tail multiple files or tail streams in splits with pretty col
 brew "mycli" # Mysql cli augmentation with completion, highlighting, etc.
 brew "mysql-client@8.0"
 brew "nss" if OS.mac? # required by mkcert to make certs trusted in firefox
+brew "ntfy" # cli notifier works with native android app
 brew "pinentry-mac" if OS.mac? # native gpg pin entry for yadm and others. Opens a native window.
 brew "plantuml" # uml generation from text. requires java (I use regularly for diagramming processes and sometimes uml class diagrams)
 brew "pngpaste" # save image from clipboard to file
