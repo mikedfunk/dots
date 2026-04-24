@@ -85,229 +85,6 @@
         "webfetch": "allow"
     },
     "provider": {
-        // "google": {
-        //     "npm": "@ai-sdk/google",
-        //     "models": {
-        //         "gemini-3-pro-preview": {
-        //             "id": "gemini-3-pro-preview",
-        //             "name": "3 Pro",
-        //             "release_date": "2025-11-18",
-        //             "reasoning": true,
-        //             "limit": {
-        //                 "context": 1000000,
-        //                 "output": 64000
-        //             },
-        //             "cost": {
-        //                 "input": 2,
-        //                 "output": 12,
-        //                 "cache_read": 0.2
-        //             },
-        //             "modalities": {
-        //                 "input": [
-        //                     "text",
-        //                     "image",
-        //                     "video",
-        //                     "audio",
-        //                     "pdf"
-        //                 ],
-        //                 "output": [
-        //                     "text"
-        //                 ]
-        //             },
-        //             "variants": {
-        //                 "low": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "low",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "medium": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "medium",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "high": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "high",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //         "gemini-3-flash": {
-        //             "id": "gemini-3-flash",
-        //             "name": "3 Flash",
-        //             "release_date": "2025-12-17",
-        //             "reasoning": true,
-        //             "limit": {
-        //                 "context": 1048576,
-        //                 "output": 65536
-        //             },
-        //             "cost": {
-        //                 "input": 0.5,
-        //                 "output": 3,
-        //                 "cache_read": 0.05
-        //             },
-        //             "modalities": {
-        //                 "input": [
-        //                     "text",
-        //                     "image",
-        //                     "video",
-        //                     "audio",
-        //                     "pdf"
-        //                 ],
-        //                 "output": [
-        //                     "text"
-        //                 ]
-        //             },
-        //             "variants": {
-        //                 "minimal": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "minimal",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "low": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "low",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "medium": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "medium",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "high": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingLevel": "high",
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //         "gemini-2.5-flash-lite": {
-        //             "id": "gemini-2.5-flash-lite",
-        //             "name": "2.5 Flash Lite",
-        //             "reasoning": false
-        //         },
-        //         "gemini-claude-sonnet-4-5-thinking": {
-        //             "id": "gemini-claude-sonnet-4-5-thinking",
-        //             "name": "Sonnet 4.5",
-        //             "reasoning": true,
-        //             "limit": {
-        //                 "context": 200000,
-        //                 "output": 64000
-        //             },
-        //             "modalities": {
-        //                 "input": [
-        //                     "text",
-        //                     "image",
-        //                     "pdf"
-        //                 ],
-        //                 "output": [
-        //                     "text"
-        //                 ]
-        //             },
-        //             "variants": {
-        //                 "none": {
-        //                     "reasoning": false,
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "includeThoughts": false
-        //                         }
-        //                     }
-        //                 },
-        //                 "low": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 4000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "medium": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 16000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "high": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 32000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //         "gemini-claude-opus-4-5-thinking": {
-        //             "id": "gemini-claude-opus-4-5-thinking",
-        //             "name": "Opus 4.5",
-        //             "release_date": "2025-11-24",
-        //             "reasoning": true,
-        //             "limit": {
-        //                 "context": 200000,
-        //                 "output": 64000
-        //             },
-        //             "modalities": {
-        //                 "input": [
-        //                     "text",
-        //                     "image",
-        //                     "pdf"
-        //                 ],
-        //                 "output": [
-        //                     "text"
-        //                 ]
-        //             },
-        //             "variants": {
-        //                 "low": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 4000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "medium": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 16000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 },
-        //                 "high": {
-        //                     "options": {
-        //                         "thinkingConfig": {
-        //                             "thinkingBudget": 32000,
-        //                             "includeThoughts": true
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
         "openrouter": {
             "models": {
                 "openrouter/auto": {
@@ -378,18 +155,18 @@
                 "github:mikedfunk/habitica-mcp-server#v0.2.4"
             ]
         },
-        "firefox-devtools": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "bunx",
-                "--bun",
-                "firefox-devtools-mcp@latest"
-            ],
-            "environment": {
-                "FIREFOX_HEADLESS": "true"
-            }
-        },
+        // "firefox-devtools": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "--bun",
+        //         "firefox-devtools-mcp@latest"
+        //     ],
+        //     "environment": {
+        //         "FIREFOX_HEADLESS": "true"
+        //     }
+        // },
         // requires accompanying plugin - see plugins section
         "context-mode": {
             "type": "local",
@@ -402,16 +179,16 @@
         },
         // NOTE: can't run with bunx yet because of this bug https://github.com/bitwarden/mcp-server/issues/158
         // WARNING: requires `export BW_SESSION=$(bw unlock --raw)`
-        "bitwarden": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "{env:HOME}/.support/bitwarden-mcp-helper.sh"
-            ],
-            "environment": {
-                "BW_SESSION": "{env:BW_SESSION}"
-            }
-        },
+        // "bitwarden": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "{env:HOME}/.support/bitwarden-mcp-helper.sh"
+        //     ],
+        //     "environment": {
+        //         "BW_SESSION": "{env:BW_SESSION}"
+        //     }
+        // },
         // https://spotlightjs.com/
         // "spotlight": {
         //     "type": "local",
@@ -425,14 +202,14 @@
         // NOTE: requires shitty workaround for now
         // @see https://github.com/connorads/opencode/tree/mcp-auth-workaround?tab=readme-ov-file#mcp-auth-workaround <- WORKS!
         // @see https://github.com/sst/opencode/issues/3875
-        "figma": {
-            "type": "remote",
-            "enabled": false,
-            "url": "https://mcp.figma.com/mcp"
-            // TODO: REQUIRES Figma desktop app to be running.
-            // @see https://github.com/sst/opencode/issues/3875
-            // "url": "http://127.0.0.1:3845/mcp"
-        },
+        // "figma": {
+        //     "type": "remote",
+        //     "enabled": false,
+        //     "url": "https://mcp.figma.com/mcp"
+        //     // TODO: REQUIRES Figma desktop app to be running.
+        //     // @see https://github.com/sst/opencode/issues/3875
+        //     // "url": "http://127.0.0.1:3845/mcp"
+        // },
         // http 405 because opencode is not whitelisted >:(
         // "figma": {
         //     "type": "local",
@@ -445,52 +222,52 @@
         //         "sse-only"
         //     ]
         // },
-        "memory-graph": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "--from",
-                "git+https://github.com/gregorydickson/memory-graph.git",
-                "memorygraph"
-            ]
-        },
+        // "memory-graph": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "--from",
+        //         "git+https://github.com/gregorydickson/memory-graph.git",
+        //         "memorygraph"
+        //     ]
+        // },
         "sentry": {
             "type": "remote",
             "enabled": false,
             "url": "https://mcp.sentry.dev/mcp"
         },
-        "spotify": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "--python",
-                "3.12",
-                "--from",
-                "git+https://github.com/varunneal/spotify-mcp",
-                "spotify-mcp"
-            ],
-            "environment": {
-                "SPOTIFY_CLIENT_ID": "{env:SPOTIFY_CLIENT_ID}",
-                "SPOTIFY_CLIENT_SECRET": "{env:SPOTIFY_CLIENT_SECRET}",
-                "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
-            }
-        },
+        // "spotify": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "--python",
+        //         "3.12",
+        //         "--from",
+        //         "git+https://github.com/varunneal/spotify-mcp",
+        //         "spotify-mcp"
+        //     ],
+        //     "environment": {
+        //         "SPOTIFY_CLIENT_ID": "{env:SPOTIFY_CLIENT_ID}",
+        //         "SPOTIFY_CLIENT_SECRET": "{env:SPOTIFY_CLIENT_SECRET}",
+        //         "SPOTIFY_REDIRECT_URI": "http://127.0.0.1:8039/callback"
+        //     }
+        // },
         // TODO: FUCK SALESFORCE SO MUCH it is the worst. You have to first `sf org login web` which doesn't work for me.
-        "salesforce": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "bunx",
-                "--bun",
-                "@salesforce/mcp@latest",
-                "--orgs",
-                "saatchiart",
-                "--toolsets",
-                "all"
-            ]
-        },
+        // "salesforce": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "--bun",
+        //         "@salesforce/mcp@latest",
+        //         "--orgs",
+        //         "saatchiart",
+        //         "--toolsets",
+        //         "all"
+        //     ]
+        // },
         "obsidian": {
             "type": "local",
             "enabled": false,
@@ -516,54 +293,54 @@
                 "stdio"
             ]
         },
-        "aws-knowledge-mcp-server": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "fastmcp",
-                "run",
-                "https://knowledge-mcp.global.api.aws"
-            ]
-        },
-        "awslabs.eks-mcp-server": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "awslabs.eks-mcp-server@latest",
-                // "--allow-write",
-                "--allow-sensitive-data-access"
-            ],
-            "environment": {
-                "FASTMCP_LOG_LEVEL": "ERROR",
-                "AWS_PROFILE": "{env:AWS_PROFILE}"
-            }
-        },
-        "awslabs.cloudwatch-mcp-server": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "awslabs.cloudwatch-mcp-server@latest"
-            ],
-            "environment": {
-                "AWS_PROFILE": "{env:AWS_PROFILE}",
-                "FASTMCP_LOG_LEVEL": "ERROR"
-            }
-        },
-        "awslabs.cost-explorer-mcp-server": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "awslabs.cost-explorer-mcp-server@latest"
-            ],
-            "environment": {
-                "FASTMCP_LOG_LEVEL": "ERROR",
-                "AWS_PROFILE": "{env:AWS_PROFILE}"
-            }
-        },
+        // "aws-knowledge-mcp-server": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "fastmcp",
+        //         "run",
+        //         "https://knowledge-mcp.global.api.aws"
+        //     ]
+        // },
+        // "awslabs.eks-mcp-server": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "awslabs.eks-mcp-server@latest",
+        //         // "--allow-write",
+        //         "--allow-sensitive-data-access"
+        //     ],
+        //     "environment": {
+        //         "FASTMCP_LOG_LEVEL": "ERROR",
+        //         "AWS_PROFILE": "{env:AWS_PROFILE}"
+        //     }
+        // },
+        // "awslabs.cloudwatch-mcp-server": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "awslabs.cloudwatch-mcp-server@latest"
+        //     ],
+        //     "environment": {
+        //         "AWS_PROFILE": "{env:AWS_PROFILE}",
+        //         "FASTMCP_LOG_LEVEL": "ERROR"
+        //     }
+        // },
+        // "awslabs.cost-explorer-mcp-server": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "awslabs.cost-explorer-mcp-server@latest"
+        //     ],
+        //     "environment": {
+        //         "FASTMCP_LOG_LEVEL": "ERROR",
+        //         "AWS_PROFILE": "{env:AWS_PROFILE}"
+        //     }
+        // },
         "apple-mcp": {
             "type": "local",
             "enabled": false,
@@ -590,25 +367,25 @@
                 "Authorization": "Bearer {env:POSTMAN_API_TOKEN}"
             }
         },
-        "youtube-transcript": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "--from",
-                "git+https://github.com/jkawamoto/mcp-youtube-transcript",
-                "mcp-youtube-transcript"
-            ]
-        },
-        "playwright": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "bunx",
-                "--bun",
-                "@playwright/mcp@latest"
-            ]
-        },
+        // "youtube-transcript": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "--from",
+        //         "git+https://github.com/jkawamoto/mcp-youtube-transcript",
+        //         "mcp-youtube-transcript"
+        //     ]
+        // },
+        // "playwright": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "bunx",
+        //         "--bun",
+        //         "@playwright/mcp@latest"
+        //     ]
+        // },
         "slack": {
             "type": "local",
             "enabled": false,
@@ -634,14 +411,14 @@
             "enabled": false,
             "url": "https://mcp.atlassian.com/v1/mcp"
         },
-        "tree-sitter": {
-            "type": "local",
-            "enabled": false,
-            "command": [
-                "uvx",
-                "mcp-server-tree-sitter"
-            ]
-        },
+        // "tree-sitter": {
+        //     "type": "local",
+        //     "enabled": false,
+        //     "command": [
+        //         "uvx",
+        //         "mcp-server-tree-sitter"
+        //     ]
+        // },
         // "zen": {
         //     "type": "local",
         //     "enabled": false,
@@ -657,16 +434,16 @@
         //         "DEFAULT_MODEL": "auto"
         //     }
         // },
-        "cloudflare-observability": {
-            "type": "remote",
-            "enabled": false,
-            "url": "https://observability.mcp.cloudflare.com/mcp"
-        },
-        "cloudflare-bindings": {
-            "type": "remote",
-            "enabled": false,
-            "url": "https://bindings.mcp.cloudflare.com/mcp"
-        }
+        // "cloudflare-observability": {
+        //     "type": "remote",
+        //     "enabled": false,
+        //     "url": "https://observability.mcp.cloudflare.com/mcp"
+        // },
+        // "cloudflare-bindings": {
+        //     "type": "remote",
+        //     "enabled": false,
+        //     "url": "https://bindings.mcp.cloudflare.com/mcp"
+        // }
         // TODO: no strava mcp I tried works. Prob gonna have to generate my own.
         // "strava": {
         //     "type": "local",

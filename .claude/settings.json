@@ -44,7 +44,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/mikefunk/.claude/statusline-command.sh"
+    "command": "bunx ccusage@latest statusline"
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
