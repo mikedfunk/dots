@@ -144,6 +144,7 @@ return {
             "-",
           },
         },
+        shellcheck = {},
       },
     },
   },

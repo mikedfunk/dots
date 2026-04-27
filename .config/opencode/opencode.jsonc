@@ -3,7 +3,7 @@
     // see `opencode models` or https://models.dev
     //
     // FREE:
-    // "model": "openrouter/openrouter/free",
+    "model": "openrouter/openrouter/free",
     // "model": "openrouter/moonshotai/kimi-k2:free",
     // "model": "openrouter/qwen/qwen3-coder:free",
     // "model": "openrouter/free",
@@ -15,7 +15,7 @@
     // "model": "gemini-claude-sonnet-4-5-thinking", // antigravity
     //
     // PAID:
-    "model": "openrouter/openrouter/auto",
+    // "model": "openrouter/openrouter/auto",
     // "model": "openrouter/claude-sonnet-4-5-20250929",
     // "model": "openrouter/anthropic/claude-haiku-4.5",
     // "model": "opencode/kimi-k2.5",
