@@ -32,6 +32,7 @@ return {
         async = true,
       },
       formatters_by_ft = {
+        bash = { "shfmt" },
         -- markdown = { "markdownlint-cli2", "markdown-toc" }, -- disable prettier. It fucks up front matter with templates.
         -- python = { "black" }, -- moved to lazy extra
 

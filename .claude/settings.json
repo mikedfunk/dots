@@ -44,7 +44,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bunx ccusage@latest statusline"
+    "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text"
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,

@@ -450,6 +450,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "google-drive" (menubar app for google drive access)
 # cask "gpg-suite" # allows adding GPG passphrase to keychain
 # cask "haptickey" # give haptic feedback on touchpad when pressing the touchbar
+# cask "headlamp" is OS.mac? # native k8s dashboard without having to deploy to the cluster
 # cask "helium" # android backup without root (doesn't seem to work, but the chrome app does)
 # cask "http-toolkit" # kind of like charles or wireshark, but with support for docker. (docker support seems to be coming soon)
 # cask "httpie" # postman alternative
