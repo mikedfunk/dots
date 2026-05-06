@@ -136,6 +136,13 @@
                 "@upstash/context7-mcp@latest"
             ]
         },
+        "codebase-memory-mcp": {
+            "enabled": true,
+            "type": "local",
+            "command": [
+                "{env:HOME}/.local/bin/codebase-memory-mcp"
+            ]
+        },
         "gmail": {
             "type": "local",
             "enabled": false,
@@ -411,6 +418,18 @@
             "enabled": false,
             "url": "https://mcp.atlassian.com/v1/mcp"
         },
+        "mysql": {
+            "type": "local",
+            "enabled": false,
+            "command": [
+                "bunx",
+                "--bun",
+                "@benborla29/mcp-server-mysql@latest"
+            ],
+            "environment": {
+                "MYSQL_CONNECTION_STRING": "mysql --login-path=central1_local central1"
+            }
+        }
         // "tree-sitter": {
         //     "type": "local",
         //     "enabled": false,
