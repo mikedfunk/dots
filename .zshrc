@@ -233,6 +233,7 @@ source "$(brew --prefix)"/etc/grc.zsh 2>/dev/null # generic colorizer
 
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
 export ENABLE_CLAUDEAI_MCP_SERVERS=false # configure my own instead
+export BASH_MAX_OUTPUT_LENGTH=15000
 
 _evalcache mise activate zsh 2>/dev/null
 export MISE_NODE_COREPACK=true

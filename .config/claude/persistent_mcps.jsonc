@@ -1,4 +1,7 @@
 {
+    "codebase-memory-mcp": {
+        "command": "/Users/mikefunk/.local/bin/codebase-memory-mcp"
+    }
     // "context7": {
     //     "command": "bunx",
     //     "args": [
