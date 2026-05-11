@@ -20,6 +20,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -36,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code needs input\" with title \"Claude Code\" sound name \"Bottle\"'"
+            "command": "~/.claude/hooks/notify-needs-input"
           }
         ]
       }
@@ -53,6 +54,14 @@
       }
     ],
     "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\""
+          }
+        ]
+      },
       {
         "matcher": "startup",
         "hooks": [
@@ -88,14 +97,6 @@
             "command": "~/.claude/hooks/cbm-session-reminder"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs"
-          }
-        ]
       }
     ]
   },
@@ -105,7 +106,8 @@
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
+    "pr-review-toolkit@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {

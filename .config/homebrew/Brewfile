@@ -558,6 +558,7 @@ brew "zsh" # awesome bash shell replacement
 cask "bitwarden" # mas upgrades are a pain
 cask "chatgpt" # desktop app <opt-space>
 cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
+cask "coderabbit" # coderabbit CLI - used for free CLI code reviews
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
 cask "crystalfetch" # app to download windows ISOs for utm
 cask "dbeaver-community" # used for postgresql GUI

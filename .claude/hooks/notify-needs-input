@@ -1,0 +1,5 @@
+#!/bin/zsh
+payload=$(cat)
+if echo "$payload" | grep -q '"notification_type":"idle_prompt"'; then
+  osascript -e 'if application "iTerm2" is not frontmost then display notification "Claude Code needs input" with title "Claude Code" sound name "Bottle"'
+fi
