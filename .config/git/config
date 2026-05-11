@@ -532,3 +532,5 @@
         allowed = AKIAIOSFODNN7EXAMPLE
         allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 # }}}
+[coderabbit]
+	machineId = cli/9e4e5318a51643d181686740edcae02b
