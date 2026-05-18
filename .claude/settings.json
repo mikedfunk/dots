@@ -98,7 +98,8 @@
           }
         ]
       }
-    ]
+    ],
+    "PostToolUse": []
   },
   "statusLine": {
     "type": "command",
@@ -130,6 +131,7 @@
     }
   },
   "effortLevel": "medium",
+  "theme": "auto",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
 }
