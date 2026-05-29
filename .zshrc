@@ -703,3 +703,7 @@ ZVM_CURSOR_STYLE_ENABLED=false
 zinit cdreplay -q
 
 # }}}
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/mikefunk/.local/bin:$PATH"
