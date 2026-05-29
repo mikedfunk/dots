@@ -130,7 +130,7 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "low",
   "theme": "auto",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
