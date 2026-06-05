@@ -576,6 +576,7 @@ cask "grandperspective" if OS.mac? # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer. jordanbaird-ice stopped working.
 cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" if OS.mac? # menubar calendar
+cask "logitune" # logitech brio webcam adjuster app
 cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server

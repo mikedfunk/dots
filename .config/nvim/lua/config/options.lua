@@ -248,6 +248,7 @@ vim.treesitter.language.register("sql", "bigquery")
 -- https://www.lazyvim.org/extras/lang/php#options
 vim.g.lazyvim_php_lsp = "intelephense"
 vim.g.ai_cmp = false
+vim.g.lazyvim_ts_lsp = "tsgo"
 
 -- neovide (moved to ~/.config/neovide/config.toml)
 -- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14"
