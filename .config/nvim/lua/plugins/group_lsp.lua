@@ -102,6 +102,7 @@ return {
         --   }
         -- }, -- annoying grammar checker that usually reports false positives in code
         intelephense = {
+          -- enabled = false,
           settings = {
             intelephense = {
               environment = { shortOpenTag = false },
@@ -169,6 +170,7 @@ return {
         marksman = { enabled = false },
         ---@see https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/snyk_ls.lua
         ---@see https://github.com/snyk/snyk-ls#configuration-1
+        phpantom_lsp = { enabled = false },
         snyk_ls = {
           filetypes = { "php" }, -- add more filetypes
           -- filetypes = {
@@ -242,13 +244,13 @@ return {
           },
         },
         taplo = {},
-        vtsls = {
-          settings = {
-            vtsls = {
-              autoUseWorkspaceTsdk = true,
-            },
-          },
-        },
+        -- vtsls = {
+        --   settings = {
+        --     vtsls = {
+        --       autoUseWorkspaceTsdk = true,
+        --     },
+        --   },
+        -- },
         -- vtsls = {
         --   root_markers = { "tsconfig.json", "jsconfig.json" }
         --   -- single_file_support = false, -- deprecated
