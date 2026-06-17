@@ -199,6 +199,7 @@
     },
     // NOTE: requires voicebox native MacOS app to be running
     "voicebox": {
+        "type": "http",
         "url": "http://127.0.0.1:17493/mcp",
         "headers": {
             "X-Voicebox-Client-Id": "claude-code"
