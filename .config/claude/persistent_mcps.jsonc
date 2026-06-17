@@ -1,7 +1,4 @@
 {
-    "codebase-memory-mcp": {
-        "command": "/Users/mikefunk/.local/bin/codebase-memory-mcp"
-    },
     "context7": {
         "type": "http",
         "url": "https://mcp.context7.com/mcp",
@@ -9,11 +6,4 @@
             "CONTEXT7_API_KEY": "$CONTEXT7_API_KEY"
         }
     },
-    // "context7": {
-    //     "command": "bunx",
-    //     "args": [
-    //         "--bun",
-    //         "@upstash/context7-mcp@latest"
-    //     ]
-    // },
 }

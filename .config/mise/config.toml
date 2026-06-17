@@ -79,7 +79,9 @@ doctl = "latest"
 "aqua:j178/prek" = "latest"
 fnox = "latest"
 shellcheck = "latest"
-"npm:codeburn" = "latest"
+"npm:@chojs23/ec" = "latest"
+# "pipx:headroom-ai" = { version = "latest", uvx = false, pipx_args = "--python python3.13" }
+rust = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"

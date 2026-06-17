@@ -108,6 +108,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "dos2unix" # converts dos line endings to unix in a file
 # brew "dtrx" # do the right extraction - so you don't have to remember tar args (I found a helpful pneumonic to remember tar args: eXtract Ze Vucking Files, Compress Ze Vucking Files)
 # brew "duti" # find osc 8 links registered with macos
+# brew "ec" easy conflict. Much nicer than neovim or neovim plugin-based conflict fixers IMHO.
 # brew "emacs" # text editor - the terminal version
 # brew "eza" # pretty ls replacement (moved to mise)
 # brew "fasd" # Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v. (I use wd) (used by zsh-autocomplete)
@@ -547,6 +548,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "vlc" # watch the videos I download (switchtd to mpv)
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
+# cask "wispr-flow" # voice to text
 # cask "wormhole" # interact with your phone screen from your computer
 # cask "xbar" # use any cli command to show stuff in the menubar with colors and icons and provide menu options (I switched to swiftbar)
 # cask "xquartz" # needed to install xclip, which is needed to copy text from multitail (I installed all of that, copy still didn't work :/ ) also needed for wine-stable
@@ -590,7 +592,6 @@ cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session man
 cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "utm" # vmware/parallels/virtualbox alternative
 cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
-cask "wispr-flow" # voice to text
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}

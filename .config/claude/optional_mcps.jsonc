@@ -197,6 +197,13 @@
             "mcp-server-tree-sitter"
         ]
     },
+    // NOTE: requires voicebox native MacOS app to be running
+    "voicebox": {
+        "url": "http://127.0.0.1:17493/mcp",
+        "headers": {
+            "X-Voicebox-Client-Id": "claude-code"
+        }
+    },
     "cloudflare-observability": {
         "type": "http",
         "url": "https://observability.mcp.cloudflare.com/mcp"
