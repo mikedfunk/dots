@@ -20,7 +20,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet[1m]",
+  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -61,8 +61,7 @@
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
-    "pr-review-toolkit@claude-plugins-official": true
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -85,7 +84,8 @@
     }
   },
   "effortLevel": "low",
-  "voiceEnabled": true,
+  "theme": "auto",
   "skipAutoPermissionPrompt": true,
-  "theme": "auto"
+  "voiceEnabled": true,
+  "tui": "fullscreen"
 }
