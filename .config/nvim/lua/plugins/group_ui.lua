@@ -468,9 +468,9 @@ return {
       },
     },
     opts = {
-      keymap = {
-        show_profile = "<Leader>tp",
-      },
+      -- keymap = {
+      --   show_profile = "<Leader>tp",
+      -- },
     },
   },
   -- doesn't work :/
