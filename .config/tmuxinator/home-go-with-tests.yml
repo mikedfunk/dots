@@ -1,4 +1,5 @@
 ---
+project_name: home-go-with-tests
 windows:
   - go:
       root: ~/Code/test/go-with-tests
