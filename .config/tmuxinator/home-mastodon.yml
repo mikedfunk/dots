@@ -1,4 +1,5 @@
 ---
+project_name: home-mastodon
 windows:
   - mastodon:
       panes: [toot tui]

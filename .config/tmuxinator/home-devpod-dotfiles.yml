@@ -1,4 +1,5 @@
 ---
+project_name: home-devpod-dotfiles
 windows:
   - devpod:
       root: ~/Code/devpod-dotfiles

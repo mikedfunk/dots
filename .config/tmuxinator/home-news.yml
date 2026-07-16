@@ -1,4 +1,5 @@
 ---
+project_name: home-news
 windows:
   - news:
       panes: [news]

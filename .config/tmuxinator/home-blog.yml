@@ -1,4 +1,5 @@
 ---
+project_name: home-blog
 windows:
   - blog:
       root: ~/Code/mikedfunk.github.io
