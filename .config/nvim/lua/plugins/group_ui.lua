@@ -348,6 +348,7 @@ return {
             "#(~/.support/tmux-cpu-status.sh)",
             "#(~/.support/tmux-mem-status.sh)",
             "#(~/.support/tmux-battery-status.sh)",
+            "#(~/.support/tmux-wifi-status.sh)",
           }, " "),
         },
         c = {
