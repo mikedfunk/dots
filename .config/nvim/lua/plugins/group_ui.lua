@@ -345,13 +345,9 @@ return {
         a = { "#S" }, -- session name |
         b = {
           table.concat({
-            -- "#{cpu_fg_color}#{cpu_icon}#[fg=default]",
-            -- "#{ram_fg_color}#{ram_icon}#[fg=default]",
-            ("#{battery_color_charge_fg}#[bg=colour%s]#{battery_icon_charge}#{battery_color_status_fg}#[bg=colour%s]#{battery_icon_status}"):format(
-              vim.g.tmuxline_theme.b[2],
-              vim.g.tmuxline_theme.b[2]
-            ),
-            -- .. "#{wifi_icon}",
+            "#(~/.support/tmux-cpu-status.sh)",
+            "#(~/.support/tmux-mem-status.sh)",
+            "#(~/.support/tmux-battery-status.sh)",
           }, " "),
         },
         c = {
