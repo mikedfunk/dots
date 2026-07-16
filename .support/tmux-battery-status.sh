@@ -6,7 +6,8 @@ cache_ttl=1
 if [[ ! -f "$cache_file" || $(($(date +%s) - $(stat -f %m "$cache_file"))) -gt $cache_ttl ]]; then
     pmset -g batt | awk '/InternalBattery/{
         match($0, /[0-9]+%/); pct = substr($0, RSTART, RLENGTH-1)
-        match($0, /charging|charged|discharging/); state = substr($0, RSTART, RLENGTH)
+        split($0, parts, ";"); state = parts[2]
+        gsub(/^[ \t]+|[ \t]+$/, "", state)
         print pct, state
     }' >"$cache_file"
 fi
@@ -24,6 +25,6 @@ for i in "${!thresholds[@]}"; do
     fi
 done
 
-[[ "$state" == "charging" ]] && output+="#[fg=colour2]󱐋#[fg=default]"
+[[ "$state" == "charging" || "$state" == "charged" ]] && output+=" #[fg=colour2]󰚥#[fg=default]"
 
 echo -n "$output"
