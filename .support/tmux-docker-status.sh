@@ -26,6 +26,10 @@ paused)
     ;;
 esac
 
+if ! docker compose -f /Users/mikefunk/Code/traefik-global/compose.yml ps --status running --format '{{.Name}}' 2>/dev/null | grep -q .; then
+    output+=" #[fg=red]T#[fg=default]"
+fi
+
 # Append the saatchi docker status on the same line
 saatchi_status=$(bash "$HOME/.support/saatchi/tmux-docker-status.sh" 2>/dev/null)
 [[ -n "$saatchi_status" ]] && output+=" ${saatchi_status}"
