@@ -61,7 +61,8 @@
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -84,8 +85,8 @@
     }
   },
   "effortLevel": "low",
+  "tui": "fullscreen",
   "theme": "auto",
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }
