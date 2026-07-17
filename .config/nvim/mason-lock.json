@@ -17,7 +17,7 @@
   "emmet-language-server": "2.8.0",
   "eslint-lsp": "4.10.0",
   "gitlint": "0.19.1",
-  "groovy-language-server": "0746b250604c0a75bf620f7257aed8df12d025c3",
+  "groovy-language-server": "347d098a928707223ce44b52cc45174a6327a5f3",
   "hadolint": "v2.14.0",
   "intelephense": "1.18.5",
   "js-debug-adapter": "v1.117.0",
