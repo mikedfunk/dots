@@ -1,93 +1,101 @@
 {
-  "env": {
-    "ENABLE_TOOL_SEARCH": "true",
-    "BASH_MAX_OUTPUT_LENGTH": "150000"
-  },
   "attribution": {
     "commit": "",
     "pr": ""
   },
+  "effortLevel": "low",
+  "enabledPlugins": {
+    "context-mode@context-mode": true,
+    "lua-lsp@claude-plugins-official": true,
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "env": {
+    "BASH_MAX_OUTPUT_LENGTH": "150000",
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "repo": "anthropics/skills",
+        "source": "github"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "repo": "jarrodwatts/claude-hud",
+        "source": "github"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "repo": "mksglu/context-mode",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "~/.claude/hooks/notify-needs-input",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [],
+    "PreToolUse": [],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\"",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "/Users/mikefunk/.local/share/mise/installs/npm-vshulcz-deja-vu/0.12.0/lib/node_modules/@vshulcz/deja-vu/node_modules/@vshulcz/deja-vu-darwin-arm64/bin/deja hook-context",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "Read(~/.claude)"
     ],
+    "defaultMode": "auto",
     "deny": [
       "Read(**/node_modules/**)",
       "Read(**/.svelte-kit/**)",
       "Read(**/dist/**)",
       "Read(**/build/**)",
       "Read(**/coverage/**)"
-    ],
-    "defaultMode": "auto"
+    ]
   },
-  "model": "sonnet",
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/notify-needs-input"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\""
-          }
-        ]
-      }
-    ],
-    "PostToolUse": []
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text"
-  },
-  "enabledPlugins": {
-    "context-mode@context-mode": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
-    "lua-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-hud": {
-      "source": {
-        "source": "github",
-        "repo": "jarrodwatts/claude-hud"
-      }
-    },
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
-    "context-mode": {
-      "source": {
-        "source": "github",
-        "repo": "mksglu/context-mode"
-      }
-    }
-  },
-  "effortLevel": "low",
-  "tui": "fullscreen",
-  "theme": "auto",
   "skipAutoPermissionPrompt": true,
+  "statusLine": {
+    "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text",
+    "type": "command"
+  },
+  "theme": "auto",
+  "tui": "fullscreen",
   "voiceEnabled": true
 }
