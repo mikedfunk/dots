@@ -429,7 +429,7 @@
             "environment": {
                 "MYSQL_CONNECTION_STRING": "mysql --login-path=central1_local central1"
             }
-        }
+        },
         // "tree-sitter": {
         //     "type": "local",
         //     "enabled": false,
@@ -494,6 +494,7 @@
         //         "BIGQUERY_PROJECT": "bi-saatchi-fission",
         //     }
         // },
+    "deja": {"type":"local","command":["/Users/mikefunk/.local/share/mise/installs/npm-vshulcz-deja-vu/0.12.0/lib/node_modules/@vshulcz/deja-vu/node_modules/@vshulcz/deja-vu-darwin-arm64/bin/deja","mcp"]}
     },
     "formatter": {
         "php_cs_fixer": {
