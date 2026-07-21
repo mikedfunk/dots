@@ -35,6 +35,7 @@
 # tap "zackriya-solutions/meetily" # meetily
 tap "buo/cask-upgrade" # for `brew cu`
 tap "grishka/grishka" # neardrop
+tap "jasonlong/tap" # mater pomodoro app
 tap "mikedfunk/zoomhider" # zoomhider
 
 # }}}
@@ -580,6 +581,7 @@ cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos 
 cask "itsycal" if OS.mac? # menubar calendar
 cask "logitune" # logitech brio webcam adjuster app
 cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
+cask "mater" if OS.mac? # pomodoro menubar app
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
 cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!

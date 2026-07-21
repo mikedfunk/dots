@@ -2,6 +2,10 @@
 project_name: home
 name: "󰋜 Home"
 # enable_pane_titles: true
+on_project_first_start:
+  - wd traefik
+  - docker compose up -d
+  - cd -
 windows:
   - config:
       root: ~/.config/yadm
