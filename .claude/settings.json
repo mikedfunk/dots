@@ -1,46 +1,33 @@
 {
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "effortLevel": "low",
-  "enabledPlugins": {
-    "context-mode@context-mode": true,
-    "lua-lsp@claude-plugins-official": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
-    "swift-lsp@claude-plugins-official": true
-  },
   "env": {
     "BASH_MAX_OUTPUT_LENGTH": "150000",
     "ENABLE_TOOL_SEARCH": "true"
   },
-  "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "repo": "anthropics/skills",
-        "source": "github"
-      }
-    },
-    "claude-hud": {
-      "source": {
-        "repo": "jarrodwatts/claude-hud",
-        "source": "github"
-      }
-    },
-    "context-mode": {
-      "source": {
-        "repo": "mksglu/context-mode",
-        "source": "github"
-      }
-    }
+  "attribution": {
+    "commit": "",
+    "pr": ""
   },
+  "permissions": {
+    "allow": [
+      "Read(~/.claude)"
+    ],
+    "deny": [
+      "Read(**/node_modules/**)",
+      "Read(**/.svelte-kit/**)",
+      "Read(**/dist/**)",
+      "Read(**/build/**)",
+      "Read(**/coverage/**)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
         "hooks": [
           {
-            "command": "~/.claude/hooks/notify-needs-input",
-            "type": "command"
+            "type": "command",
+            "command": "~/.claude/hooks/notify-needs-input"
           }
         ]
       }
@@ -51,16 +38,16 @@
       {
         "hooks": [
           {
-            "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\"",
-            "type": "command"
+            "type": "command",
+            "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\""
           }
         ]
       },
       {
         "hooks": [
           {
-            "command": "/Users/mikefunk/.local/share/mise/installs/npm-vshulcz-deja-vu/0.12.0/lib/node_modules/@vshulcz/deja-vu/node_modules/@vshulcz/deja-vu-darwin-arm64/bin/deja hook-context",
-            "type": "command"
+            "type": "command",
+            "command": "/Users/mikefunk/.local/share/mise/installs/npm-vshulcz-deja-vu/0.12.0/lib/node_modules/@vshulcz/deja-vu/node_modules/@vshulcz/deja-vu-darwin-arm64/bin/deja hook-context"
           }
         ]
       }
@@ -69,33 +56,46 @@
       {
         "hooks": [
           {
-            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'",
-            "type": "command"
+            "type": "command",
+            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'"
           }
         ]
       }
     ]
   },
-  "model": "sonnet",
-  "permissions": {
-    "allow": [
-      "Read(~/.claude)"
-    ],
-    "defaultMode": "auto",
-    "deny": [
-      "Read(**/node_modules/**)",
-      "Read(**/.svelte-kit/**)",
-      "Read(**/dist/**)",
-      "Read(**/build/**)",
-      "Read(**/coverage/**)"
-    ]
-  },
-  "skipAutoPermissionPrompt": true,
   "statusLine": {
-    "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text",
-    "type": "command"
+    "type": "command",
+    "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text"
   },
-  "theme": "auto",
+  "enabledPlugins": {
+    "context-mode@context-mode": true,
+    "lua-lsp@claude-plugins-official": true,
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    }
+  },
+  "effortLevel": "medium",
   "tui": "fullscreen",
+  "theme": "auto",
+  "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
 }
