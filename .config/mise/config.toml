@@ -83,6 +83,7 @@ shellcheck = "latest"
 # "pipx:headroom-ai" = { version = "latest", uvx = false, pipx_args = "--python python3.13" }
 rust = "latest"
 "npm:@vshulcz/deja-vu" = "latest"
+"npm:@colbymchenry/codegraph" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
