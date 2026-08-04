@@ -33,21 +33,23 @@
       }
     ],
     "PostToolUse": [],
-    "PreToolUse": [],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
             "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\""
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/mikefunk/.local/share/mise/installs/npm-vshulcz-deja-vu/0.12.0/lib/node_modules/@vshulcz/deja-vu/node_modules/@vshulcz/deja-vu-darwin-arm64/bin/deja hook-context"
           }
         ]
       }
@@ -69,9 +71,7 @@
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
-    "lua-lsp@claude-plugins-official": true,
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": true,
-    "swift-lsp@claude-plugins-official": true
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": false
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
