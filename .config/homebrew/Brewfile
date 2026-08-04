@@ -33,6 +33,7 @@
 # tap "wfxr/code-minimap" # for a vim plugin
 # tap "xvxx/code" # shy
 # tap "zackriya-solutions/meetily" # meetily
+tap "alielsokary/tap" # caskhub
 tap "buo/cask-upgrade" # for `brew cu`
 tap "grishka/grishka" # neardrop
 tap "jasonlong/tap" # mater pomodoro app
@@ -380,6 +381,7 @@ brew "pngpaste" # save image from clipboard to file
 brew "privoxy" # turn a socks5 proxy into an http proxy. Used when VPN is down to tunnel kubectl through an http proxy which forwards to a socks5 proxy.
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
+brew "rtk" # claude bash context saver
 brew "scrcpy" if OS.mac? # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
@@ -559,6 +561,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "bitwarden" # mas upgrades are a pain
+cask "caskhub" if OS.mac? # native brew cask browser and installer
 cask "chatgpt" # desktop app <opt-space>
 cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
 cask "coderabbit" # coderabbit CLI - used for free CLI code reviews
