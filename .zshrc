@@ -347,7 +347,9 @@ _claude_inject_mcps() {
 
 claude() {
     # Only inject persistent MCPs into ~/.claude.json before launching.
-    _claude_inject_mcps "$(_claude_persistent_mcps)" && command claude "$@"
+    command claude update && \
+    _claude_inject_mcps "$(_claude_persistent_mcps)" && \
+    command claude "$@"
 }
 
 claude-mcp() {
