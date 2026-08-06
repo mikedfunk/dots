@@ -78,7 +78,6 @@
     "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text"
   },
   "enabledPlugins": {
-    "context-mode@context-mode": true,
     "saatchi-art-claude-plugins@local-desktop-app-uploads": false
   },
   "extraKnownMarketplaces": {
