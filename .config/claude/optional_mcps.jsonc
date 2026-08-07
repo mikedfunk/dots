@@ -37,6 +37,10 @@
         "type": "http",
         "url": "https://mcp.sentry.dev/mcp"
     },
+    "typeform": {
+        "type": "http",
+        "url": "https://api.typeform.com/mcp"
+    },
     // NOTE: requires Spotify premium
     // "spotify": {
     //     "command": "uvx",
