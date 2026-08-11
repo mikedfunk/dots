@@ -251,7 +251,7 @@ export PRE_COMMIT_COLOR="always"
 
 export PSQL_PAGER="pspg --clipboard-app=3"
 
-set PLANTUML_LIMIT_SIZE=8192
+# set PLANTUML_LIMIT_SIZE=8192
 
 export HOMEBREW_NO_ANALYTICS=1
 
