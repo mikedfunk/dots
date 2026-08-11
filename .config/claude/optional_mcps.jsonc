@@ -33,6 +33,18 @@
         "type": "http",
         "url": "https://mcp.figma.com/mcp"
     },
+    "opensearch": {
+        "command": "uvx",
+        "args": [
+            "--python",
+            "3.12",
+            "opensearch-mcp-server-py@latest"
+        ],
+        "env": {
+            "OPENSEARCH_URL": "$OPENSEARCH_URL",
+            "OPENSEARCH_NO_AUTH": "true"
+        }
+    },
     "sentry": {
         "type": "http",
         "url": "https://mcp.sentry.dev/mcp"
