@@ -45,6 +45,10 @@
             "OPENSEARCH_NO_AUTH": "true"
         }
     },
+    "sequel-ace": {
+        "type": "http",
+        "url": " http://127.0.0.1:8765/mcp"
+    },
     "sentry": {
         "type": "http",
         "url": "https://mcp.sentry.dev/mcp"
