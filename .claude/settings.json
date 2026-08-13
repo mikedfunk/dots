@@ -18,7 +18,8 @@
       "mcp__codegraph__codegraph_callees",
       "mcp__codegraph__codegraph_impact",
       "mcp__codegraph__codegraph_files",
-      "mcp__codegraph__codegraph_status"
+      "mcp__codegraph__codegraph_status",
+      "mcp__codegraph__*"
     ],
     "deny": [
       "Read(**/node_modules/**)",
@@ -59,6 +60,16 @@
           {
             "type": "command",
             "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "codegraph prompt-hook"
           }
         ]
       }
