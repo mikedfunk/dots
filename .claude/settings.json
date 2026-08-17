@@ -32,16 +32,7 @@
   },
   "model": "sonnet",
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/notify-needs-input"
-          }
-        ]
-      }
-    ],
+    "Notification": [],
     "PostToolUse": [],
     "PreToolUse": [],
     "SessionStart": [
@@ -54,16 +45,7 @@
         ]
       }
     ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'if application \"iTerm2\" is not frontmost then display notification \"Claude Code is done\" with title \"Claude Code\" sound name \"Blow\"'"
-          }
-        ]
-      }
-    ],
+    "Stop": [],
     "UserPromptSubmit": [
       {
         "hooks": [
