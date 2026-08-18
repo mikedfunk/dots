@@ -96,6 +96,7 @@ return {
       },
     },
     priority = 1000,
+    opts = {},
   },
   { "rubiin/highlighturl.nvim", event = "VeryLazy", opts = {} },
 }

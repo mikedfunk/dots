@@ -24,6 +24,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --   end,
 -- })
 
+-- disable treesitter highlighting in diff mode to avoid it choking on merge conflict markers
+-- (lsp diagnostics already handled by git-conflict.nvim's disable_diagnostics option)
+vim.api.nvim_create_autocmd({ "BufWinEnter", "OptionSet" }, {
+  callback = function(args)
+    if vim.wo.diff then
+      vim.treesitter.stop(args.buf)
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   group = vim.api.nvim_create_augroup("mike_grep_open_quickfix", { clear = true }),
   pattern = { "[^l]*", "l*" },
