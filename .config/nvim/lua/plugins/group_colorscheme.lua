@@ -96,7 +96,10 @@ return {
       },
     },
     priority = 1000,
-    opts = {},
+    -- doesn't work with opts = {}
+    config = function()
+      require("everforest").setup({})
+    end,
   },
   { "rubiin/highlighturl.nvim", event = "VeryLazy", opts = {} },
 }
