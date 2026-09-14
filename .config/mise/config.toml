@@ -84,6 +84,7 @@ shellcheck = "latest"
 rust = "latest"
 "npm:@vshulcz/deja-vu" = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
+"npm:@coldtea/pr-lens-cli" = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
