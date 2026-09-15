@@ -436,6 +436,15 @@ btop () {
     command btop "$@"
 }
 
+ctop () {
+    defaults read -g AppleInterfaceStyle &>/dev/null
+    if [ $? -eq 0 ]; then
+        command ctop "$@"
+    else
+        command ctop -i "$@"
+    fi
+}
+
 
 alias y="yadm"
 compdef y="yadm"
