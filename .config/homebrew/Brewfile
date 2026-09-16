@@ -414,28 +414,36 @@ brew "zsh" # awesome bash shell replacement
 # cask "browserstacklocal" # local ie11, etc? If I have to. /Applications/BrowserStackLocal.app
 # cask "burp-suite" # web vulnerability scanner (eclipse-based)
 # cask "caffeine" # keep mac awake (replaced with amphetamine)
+# cask "caskhub" if OS.mac? # native brew cask browser and installer
+# cask "chatgpt" # desktop app <opt-space>
 # cask "cheatsheet" # hold <cmd> for a bit to get a modal of available keyboard shortcuts (kind of annoying - rarely comes up when I actually want it to, too much info)
 # cask "chromium" # no google tracking for me
+# cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
 # cask "claude" # desktop app <opt-space> (tags: llm, llama, openai, chatgpt)
 # cask "clocker" if OS.mac? # menubar world clock
 # cask "clop" # automatically optimize copied images (also copies path to clipboard. Ends up with 2 images in sequence in clipboard. Kind of messy. Can't easily quit app.)
+# cask "coderabbit" # coderabbit CLI - used for free CLI code reviews
 # cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
+# cask "crystalfetch" # app to download windows ISOs for utm
 # cask "deskreen" if OS.mac? # use tablet or phone as a second screen (over wifi... laggy but good for presentation notes. Pairs well with deskpad.)
 # cask "dockdoor" # show windows open in each app in dock on hover
 # cask "docker" # docker for mac desktop app (temporarily because it's downloading the intel version)
 # cask "dozer" # little menubar app that allows hiding menubar icon clutter (replaced by hiddenbar)
 # cask "dropbox" # I especially use this for syncing my notes so I can view them in the joplin mobile app (not using this feature right now)
+# cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
 # cask "duet" if OS.mac? # use a tablet as a second screen - wired, fast, and retina
 # cask "dynamic-dark-mode" # menubar app to toggle dark mode by ambient light level. Should be a feature in MacOS!
 # cask "eloston-chromium" # de-googled chromium (company installs chrome anyway :/ )
 # cask "emacs" # this actually makes sense as a cask. It becomes tmux, vim, and kitty all in one. This is the standalone gui native mac app version, not the terminal version.
 # cask "epic-games" # game store (I can just use the web version - I only use this to claim free games weekly)
 # cask "eqmac" # graphic equalizer (tired of audio problems from this)
+# cask "espanso" # text expander alternative. Free and open source but no gui - just a yaml config file.
 # cask "eul" # nice menubar and widget stats
 # cask "ferdi" # all messaging in one electron app (slack, discord, google voice, android messages, etc.) another approach to this is matrix (riot.im) with "bridges" to other services
 # cask "fig" # indispensable terminal completion helper (2022-04-20 If I type too fast it will mess up character order)
+# cask "firefox@developer-edition" # I use dev edition for my work profile
 # cask "flameshot" # another screenshot app, easier and free! <s-cmd-x> to screenshot, "s" to rectangle, "a" to arrow, <cmd-c> to copy and close. MacOS screenshot preview is so much slower - can't keep annotation controls open, keyboard shortcuts don't work, have to manually cancel saving after copying.
 # cask "font-caskaydia-cove-nerd-font" # Microsoft coding font with cursive italics
 # cask "font-commit-mono" # coding font (NOT nerd)
@@ -478,13 +486,16 @@ brew "zsh" # awesome bash shell replacement
 # cask "lepton" # I don't get it... "snippet manager" just gives you an electron gui for gists. No way to use snippets in other apps.
 # cask "licecap" # shitty, simple gif screen capture. OSX used to have this but I think they got rid of the gif exporting :/
 # cask "lofi" # spotify mini mode companion app
+# cask "logitune" # logitech brio webcam adjuster app
 # cask "loom" # yet another screenshot, screencast, etc. service, free up to 5 mins and like 50 most recent screenshots/shares, includes a video corner box, trying it out
 # cask "lunchy" # launchctl cli wrapper. Port of lunchy gem. (Tried this, was missing options, back to gem)
 # cask "macai" # interact with claude, chatgpt, etc.
+# cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
 # cask "macfusion" # other half of tool to mount ssh directories in the finder (see osxfuse)
 # cask "macgdbp" # xdebug gui client (I use nvim-dap instead)
 # cask "malwarebytes" # ya neva know (company has another antivirus installed)
 # cask "masscode" # snippet manager... I don't get it. No variables, no logic it seems.
+# cask "mater" if OS.mac? # pomodoro menubar app
 # cask "meetily" # AI meeting notetaker (local LLM. NOTE: requires Xcode to compile)
 # cask "menubar-colors" # color picker in the menubar
 # cask "menubar-stats" # used to show bluetooth headphones battery level in menubar (Doesn't work with my headphones for some reason... and it's $5)
@@ -495,9 +506,11 @@ brew "zsh" # awesome bash shell replacement
 # cask "mudlet" # muds are rad
 # cask "multifirefox" # profile picker until firefox fixes this glaring omission ( switched to using firefox developer edition and regular firefox for work and home )
 # cask "multipass" # "ubuntu LTS on tap" launch instances of ubuntu and initialize them with cloud-init metadata in a matter of seconds. Uses hypervisor or virtualbox behind the scenes.
+# cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 # cask "muzzle" # stop notifications while screensharing ( lately it's been incorrectly hiding a lot of notifications when I'm not even in zoom :/ Also Zoom added this feature )
 # cask "mysql-shell" # new shell for mysql8
 # cask "ngrok" # securely expose your local site to the internet and inspect and repeat traffic
+# cask "nightfall" if OS.mac? # more reliable way to toggle dark mode. Menubar app. <ctrl-cmd-opt-T> to toggle.
 # cask "noti" # mac native pushbullet notifications (I use the chrome/firefox extension)
 # cask "nvidia-geforce-now" # game streaming
 # cask "obsidian" # used for solo RPGs, etc. I don't use it for work notes.
@@ -512,6 +525,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "postico" # postgresql gui. Useful for some time saver capabilities like copy/paste rows, etc. (paid app, ugh)
 # cask "postman" # http api client (I use the web interface mostly)
 # cask "postman-cli" # new postman cli runner. Replaces newman. This is for running collections locally as tests (which we don't use Postman for).
+# cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
 # cask "qlcolorcode" # quicklook plugin to provide syntax highlighting to code files (fails to install)
 # cask "qlimagesize" # quicklook plugin (display image size and resolution in the title in preview)
 # cask "qlmarkdown" # quicklook plugin (preview markdown)
@@ -520,6 +534,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "quicklook-csv" # quicklook plugin (preview csvs)
 # cask "quicklook-json" # quicklook plugin (preview json)
 # cask "quickrecorder" # menubar video recorder
+# cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 # cask "scummvm" # old school
 # cask "sequel-pro" # mysql gui client. I mostly use mycli.
 # cask "sequel-pro-nightly" # nightly has bug fixes and dark mode! B)
@@ -539,6 +554,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "steam" # yep
 # cask "stoplight-studio" # openapi ide. This is cool but you can also just use the web version at https://stoplight.io/p/studio but the desktop app works with local files _and_ automatically mocks local apis with prism - their built-in api mocker (this is really only useful as a fancy local openapi spec editor since even their ci docs generator just hits their api)
 # cask "suspicious-package" # quicklook plugin for mac dmg package inspection (I don't care about inspecting these)
+# cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 # cask "syncthing" # technically not needed as you can go to a local web app at http://localhost:8384
 # cask "synthesia" # piano learning software
 # cask "tableplus" # alternative to sequelpro
@@ -548,6 +564,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "vagrant" # development VM maker/manager (I use docker now, but this is helpful for a linux training course I'm taking)
 # cask "virtualbox" # virtual machine software. `VBoxManage setextradata global "VBoxInternal2/EnableX86OnArm" 1` to enable ARM support.
 # cask "vivaldi" # chrome alternative with some cool features (I switched back to chrome for now - profiles are kind of buggy atm)
+# cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
 # cask "vlc" # watch the videos I download (switchtd to mpv)
 # cask "webpquicklook" # quicklook plugin (preview webp images)
 # cask "wireshark" # analyze network data (but not on virtualbox networks)
@@ -561,20 +578,12 @@ brew "zsh" # awesome bash shell replacement
 # cask "zdoom" # doom, hexen, heretic, etc.
 # cask "zoom" # zoom video conferencing (installed and managed via my company)
 cask "bitwarden" # mas upgrades are a pain
-cask "caskhub" if OS.mac? # native brew cask browser and installer
-cask "chatgpt" # desktop app <opt-space>
-cask "chronos" # jira worklog timer... overcomplicated and I wish I could do this easily in a CLI instead but I haven't found anything yet (abandoned but still works)
-cask "coderabbit" # coderabbit CLI - used for free CLI code reviews
 cask "cold-turkey-blocker" if OS.mac? # blocks distracting website access so I can work (reddit, discord, youtube, etc.). tags: focus, distractions
-cask "crystalfetch" # app to download windows ISOs for utm
 cask "dbeaver-community" # used for postgresql GUI
-cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing.
+cask "deskpad" # cool virtual display for screen sharing in zoom, etc. This allows me to hide floating meeting controls while screen sharing, put full-screen apps in a window, etc.
 cask "discord" # chat
-cask "dropshelf" if OS.mac? # staging drop area so you can drag to a temp spot, then drag to your destination
-cask "espanso" # text expander alternative. Free and open source but no gui - just a yaml config file.
 cask "figma" # mockups app. Includes MCP server.
 cask "firefox" # I use firefox for my home profile
-cask "firefox@developer-edition" # I use dev edition for my work profile
 cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "glance-chamburr" if OS.mac? # fork of glance kept alive (all-in-one quicklook collection)
@@ -582,21 +591,13 @@ cask "grandperspective" if OS.mac? # visualize storage hogs in the hard drive
 cask "hiddenbar" # hide/show part of the menubvar. replaces dozer. jordanbaird-ice stopped working.
 cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" if OS.mac? # menubar calendar
-cask "logitune" # logitech brio webcam adjuster app
-cask "maccy" if OS.mac? # simple clipboard manager. WAY better than jumpcut!
-cask "mater" if OS.mac? # pomodoro menubar app
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
-cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 cask "neardrop" if OS.mac? # android nearby devices drop
-cask "nightfall" if OS.mac? # more reliable way to toggle dark mode. Menubar app. <ctrl-cmd-opt-T> to toggle.
-cask "protonvpn" # free, privacy-focused VPN https://protonvpn.com/free-vpn
-cask "rectangle" if OS.mac? # snap window to screen edges with mouse or keyboard. replaces spectacle. Hoping the macOS one gets better someday.
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session manager as a proxy command in an SSH config.
-cask "swiftbar" if OS.mac? # run arbitrary bash scripts in menubar like xbar/bitbar. I use this for Zoom mute status in menubar.
 cask "utm" # vmware/parallels/virtualbox alternative
-cask "viz" if OS.mac? # capture text from images, videos, QR codes, etc. <ctrl-cmd-1>
+cask "vorssaint" # all-in-one menubar helper that replaces several menubar apps
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
