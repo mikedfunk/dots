@@ -64,7 +64,8 @@
   "enabledPlugins": {
     "saatchi-art-claude-plugins@local-desktop-app-uploads": false,
     "ponytail@ponytail": true,
-    "context-mode@context-mode": true
+    "context-mode@context-mode": true,
+    "design@synced": false
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {

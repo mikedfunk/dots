@@ -1,4 +1,3 @@
----
 customCommands:
   - description: "git spice stack restack"
     context: "localBranches"
@@ -44,7 +43,6 @@ customCommands:
     command: "git mergetool {{ .SelectedFile.Name }}"
     context: "files"
     loadingText: "opening git mergetool"
-
   # TODO: not working
   - description: "git tag semantic versions"
     context: "localBranches"
@@ -58,5 +56,5 @@ git:
     - develop
     - main
     - master
-  pagers:
-    - pager: delta --diff-so-fancy --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  diffRenderers:
+    - command: delta --diff-so-fancy --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"

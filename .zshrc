@@ -331,12 +331,12 @@ compdef d="docker"
 
 _claude_persistent_mcps() {
     # note: no extra commas
-    bunx strip-json-comments-cli ~/.config/claude/persistent_mcps.jsonc | envsubst
+    bunx strip-json-comments-cli ~/.config/claude/persistent_mcps.jsonc | envsubst | jq
 }
 
 _claude_optional_mcps() {
     # note: no extra commas
-    bunx strip-json-comments-cli ~/.config/claude/optional_mcps.jsonc | envsubst
+    bunx strip-json-comments-cli ~/.config/claude/optional_mcps.jsonc | envsubst | jq
 }
 
 _claude_inject_mcps() {
