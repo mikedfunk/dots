@@ -353,7 +353,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "btop" # another top/atop/glances/htop alternative, apparently the most popular
-brew "codex" # openai version of claude-code, etc.
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
 brew "entr" # file watcher (I use this a lot in my shell functions)
 brew "gettext" # this includes envsubst which I use in my ~/.zshrc
@@ -423,6 +422,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "clocker" if OS.mac? # menubar world clock
 # cask "clop" # automatically optimize copied images (also copies path to clipboard. Ends up with 2 images in sequence in clipboard. Kind of messy. Can't easily quit app.)
 # cask "coderabbit" # coderabbit CLI - used for free CLI code reviews
+# cask "codex" # openai version of claude-code, etc.
 # cask "colorpicker-skalacolor" # custom color picker tab, easier for devs
 # cask "command-x" # cut and paste in the finder without having to remember weird shortcuts
 # cask "commandq" # quit delayer for all apps
@@ -597,18 +597,22 @@ cask "neardrop" if OS.mac? # android nearby devices drop
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session manager as a proxy command in an SSH config.
 cask "utm" # vmware/parallels/virtualbox alternative
-cask "vorssaint" # all-in-one menubar helper that replaces several menubar apps
+cask "vorssaint" # all-in-one menubar helper that replaces a bunch of menubar apps
 cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc>x3. Absolutely essential when using the Zoom native app.
 
 # }}}
 
 # mac app store {{{
 
+# mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app, replaced by vorssaint
 # mas "Bitwarden", id: 1352778147 # lastpass replacement (password manager)
+# mas "Clocker", id: 1056643111 # menubar world clock
 # mas "Downlink", id: 1454269192 # cool live (20 min refresh) earth view on my desktop (tries to reinstall every time :/ )
 # mas "Fello AI", id: 6447705369 # some AI app to make a Gemini desktop app (5 free questions per day :/ )
+# mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, vorssaint, etc.)
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
+# mas "MuteKey", id: 1509590766 # global media mute hotkey, replaced by vorssaint
 # mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 # mas "Session - Pomodoro Focus Timer", id: 1521432881
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
@@ -616,9 +620,5 @@ cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc
 # mas "Xcode", id: 497799835 # needed for some tools: Meetily
 # mas "d-d-beyond", id: 1501810129 # dnd beyond / d&d beyond
 # mas "liquid", id: 569048352 # text clipboard processor
-mas "Amphetamine", id: 937984704 # replacement for discontinued "caffeine" menubar app
-mas "Clocker", id: 1056643111 # menubar world clock
-mas "GIPHY CAPTURE", id: 668208984 # capture screen to gif (alternative to licecap, etc.)
-mas "MuteKey", id: 1509590766 # global media mute hotkey
 
 # }}}
