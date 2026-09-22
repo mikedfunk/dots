@@ -98,5 +98,7 @@
   "tui": "fullscreen",
   "theme": "auto",
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true
 }
