@@ -149,7 +149,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
 # brew "hg" # mercurial (who still uses mercurial? no rebase)
 # brew "highlight" # colorizes html and other output on the command line. used by ranger. (I don't use ranger these days)
-# brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json. (moved to mise)
 # brew "httpie" # a cool alternative to curl (http --help) (NOTE: `man http` is something different :/ ) (moved to mise)
 # brew "https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb" # use an ssh password. trying this for leaf group LDAP access. (didn't work, don't need it for anything else at the moment)
 # brew "hub" # , args: ["devel"] # github tool is a superset of git with extra commands.
@@ -361,6 +360,7 @@ brew "git"
 brew "gnu-sed" if OS.mac? # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
+brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json. (moved to mise)
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
 brew "less" # huh, there's a newer version of less available (be sure to `brew link less`)

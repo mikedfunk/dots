@@ -27,7 +27,7 @@ usage = "latest" # needed for mise completion
 "npm:@devcontainers/cli" = "latest"
 "ubi:abhinav/git-spice" = { version = "latest", exe = "gs", rename_exe = "git-spice" }
 "ubi:algolia/cli" = { version = "latest", exe = "algolia" }
-"ubi:cbednarski/hostess" = "latest"
+# "ubi:cbednarski/hostess" = "latest"
 "ubi:cormacrelf/dark-notify" = "latest"
 # "aqua:mas-cli/mas" = "latest" # TODO: doesn't work - wrong path
 # "ubi:https://github.com/plantuml/plantuml/releases/download/v1.2025.9/plantuml-1.2025.9.jar" = { version = "1.2025.9", rename_exe = "plantuml" } # it gets renamed properly but it doesn't work
