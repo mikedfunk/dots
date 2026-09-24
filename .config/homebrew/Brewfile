@@ -613,12 +613,12 @@ cask "zoomhider" if OS.mac? # hide/show zoom floating meeting controls with <esc
 # mas "Jira", id: 1475897096 # official jira cloud desktop app
 # mas "Keeper", id: 414781829 # used by leaf group, like lastpass (There's a brew cask version)
 # mas "MuteKey", id: 1509590766 # global media mute hotkey, replaced by vorssaint
-# mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 # mas "Session - Pomodoro Focus Timer", id: 1521432881
 # mas "Texty for Google Messages", id: 1538996043 # Google Messages on mac
 # mas "Timkee", id: 1670602751 # Jira time tracking menubar app
 # mas "Xcode", id: 497799835 # needed for some tools: Meetily
 # mas "d-d-beyond", id: 1501810129 # dnd beyond / d&d beyond
 # mas "liquid", id: 569048352 # text clipboard processor
+mas "Parcel - Delivery Tracking", id: 639968404 # with Ventura widget
 
 # }}}
