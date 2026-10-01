@@ -28,6 +28,7 @@ Code/saatchi/**/pyrightconfig.json
 
 Library/LaunchAgents/launched.mike.saatchi-tunnel.autossh.plist
 Library/LaunchAgents/launched.mike.hackathon-tunnel.kubectl.plist
+Library/LaunchAgents/com.mikefunk.zoom-scrum.plist
 
 .claude/commands/saatchi-ship
 

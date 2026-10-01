@@ -100,7 +100,6 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
   "autoMode": {
     "environment": [
       "### Org-wide",
@@ -129,5 +128,6 @@
       "**Org-specific CLIs**: None configured for this repo — note that the global CLAUDE.md references Saatchi Art-specific workflows (gh, Slack MCP, Jira) and repo path variables (SAATCHI_REPO_*) for a separate set of repos not in scope here (just this project = yadm dotfiles)",
       "**routine under <user>/ prefix**: None configured"
     ]
-  }
+  },
+  "voiceEnabled": true
 }
