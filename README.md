@@ -19,10 +19,10 @@ Light mode:
 ## Key files, annotated
 
 - [Yadm bootstrap file - script to install/upgrade everything](.config/yadm/bootstrap)
-- [Homebrew packages, casks, and mac store apps](Brewfile)
+- [Homebrew packages, casks, and mac store apps](.config/homebrew/Brewfile)
 - [Lazyvim config](.config/nvim/lua/config/lazy.lua) ([more info](https://dotfyle.com/mikedfunk/dots-config-nvim))
 - Luasnip php snippets: [lua](.config/nvim/luasnippets/php.lua) and [json](.config/nvim/snippets/php.json)
-- [Zshrc](.zshrc), [Zsh plugins](.zsh_plugins.txt)
+- [Zshrc](.zshrc)
 - [P10k prompt config](.p10k.zsh)
 - [Git config](.config/git/config), [Tig config](.config/tig/config)
 - [Tmux config and tmux plugins](.config/tmux/tmux.conf), [Home tmuxinator layouts](.config/tmuxinator/)
