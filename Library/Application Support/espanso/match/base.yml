@@ -13,28 +13,12 @@
 matches:
   # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
 
-  - trigger: ";sem"
-    replace: "mike.funk@saatchiart.com"
-  - trigger: ";lem"
-    replace: "mike.funk@leafgroup.com"
-
   - trigger: ";ddg"
     replace: "{{output}}"
     vars:
       - name: output
         type: shell
         params: { cmd: duck-gen }
-
-  - trigger: ";a1"
-    replace: "11920 Dorothy St."
-  - trigger: ";a2"
-    replace: "Unit 106"
-  - trigger: ";ac"
-    replace: "Los Angeles"
-  - trigger: ";as"
-    replace: "California"
-  - trigger: ";az"
-    replace: "90049"
 
   - trigger: ";date"
     replace: "{{mydate}}"
