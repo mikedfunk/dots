@@ -86,6 +86,7 @@ rust = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
 "npm:@coldtea/pr-lens-cli" = "latest"
 ansible = "latest"
+"aqua:mas-cli/mas" = "2.3.0"
 
 [tools."http:atlassian-cli"]
 version = "latest"

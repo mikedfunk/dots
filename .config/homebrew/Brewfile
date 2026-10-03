@@ -506,6 +506,7 @@ brew "zsh" # awesome bash shell replacement
 # cask "mudlet" # muds are rad
 # cask "multifirefox" # profile picker until firefox fixes this glaring omission ( switched to using firefox developer edition and regular firefox for work and home )
 # cask "multipass" # "ubuntu LTS on tap" launch instances of ubuntu and initialize them with cloud-init metadata in a matter of seconds. Uses hypervisor or virtualbox behind the scenes.
+# cask "muse" if OS.mac? # meta AI (removed upstream)
 # cask "music-decoy" if OS.mac? # Stop loading apple music when spotify isn't open and you accidentally hit a music control!
 # cask "muzzle" # stop notifications while screensharing ( lately it's been incorrectly hiding a lot of notifications when I'm not even in zoom :/ Also Zoom added this feature )
 # cask "mysql-shell" # new shell for mysql8
@@ -593,7 +594,6 @@ cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos 
 cask "itsycal" if OS.mac? # menubar calendar
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings
 cask "microsoft-openjdk@17" # Needed for groovy-language-server
-cask "muse" if OS.mac? # meta AI
 cask "neardrop" if OS.mac? # android nearby devices drop
 cask "sequel-ace" if OS.mac? # Maintained fork of sequel pro. See also: table-plus. (mac only)
 cask "session-manager-plugin" # aws cli plugin. needed to set up AWS session manager as a proxy command in an SSH config.

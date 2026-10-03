@@ -80,6 +80,7 @@ export path=(
   $HOME/.docker/bin
   # docker labs k8s toolkit, mise, claude code, self-updated tools
   $HOME/.local/bin
+  $HOME/.local/share/mise/shims
   # to install groovy-language-server
   # $(brew --prefix openjdk@17)/bin
   # my own scripts
