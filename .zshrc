@@ -185,8 +185,6 @@ export LC_ALL=en_US.UTF-8
 
 # export ELS_LOCAL=1
 
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder#usage
-export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 export PGPASSFILE="${XDG_CONFIG_HOME}/pg/.pgpass"
 export PGSERVICEFILE="${XDG_CONFIG_HOME}/pg/pg_service.conf"
@@ -739,14 +737,6 @@ WORDCHARS='*?_[]~&;!#$%^(){}<>'
 zstyle ':fzf-tab:*' query-string ''
 # }}}
 
-# zsh-autocomplete {{{
-# so chatty
-zstyle ':autocomplete:*:no-matches-yet' message ''
-zstyle ':autocomplete:*:too-many-matches' message ''
-zstyle ':autocomplete:*:no-matches-at-all' message ''
-# turn off fzf bindings
-zstyle ':autocomplete:*' fuzzy-search off
-# }}}
 
 # zsh-autosuggest {{{
 # https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy (this prevents me from typing more e.g. `php artisan ...`!)
@@ -767,9 +757,6 @@ zstyle ':notify:*' success-title "✅ in #{time_elapsed}"
 zstyle ':notify:*' success-sound 'default'
 # }}}
 
-# zsh-vi-mode {{{
-ZVM_CURSOR_STYLE_ENABLED=false
-# }}}
 
 zinit cdreplay -q
 
