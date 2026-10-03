@@ -19,8 +19,6 @@
 	signingkey = 4E721DA7058E2551
 [web]
     browser = open
-[instaweb]
-    httpd = webrick
 
 # NOTE: Previously used includeIf "gitdir/i:~/Code/saatchi/" so the saatchi config
 # (including SSH URL rewrites) only applied inside ~/Code/saatchi/ repos.
@@ -33,13 +31,8 @@
 [include]
     path = ~/.config/git/config-saatchi
 
-[filter "media"]
-    clean = git-media-clean %f
-    smudge = git-media-smudge %f
 [pre-commit]
     checks = php, tabs, white_space, console_log, merge_conflict, json, yaml, coffeelint
-[github]
-    user = mikedfunk
 [url "git@github.com"]
     insteadOf = gh
 [url "git@bitbucket.org"]
@@ -156,7 +149,6 @@
     # headref = "!git show-ref --head -s | awk 'NR==1'"
     # Show files ignored by git
     # ign = ls-files -o -i --exclude-standard
-    iw = instaweb --httpd webrick
     # jira open
     jo = "!f() { \
       git log develop.. --oneline \
@@ -201,7 +193,7 @@
     # pp = !git pull && git push
     prc = "!gh pr create"
     # PR fuzzy search
-    prf = "!f() { gh pr list | fzf | head -n 1 | cut -c 1- | awk '{print $1}' | xargs hub pr show; }; f"
+    prf = "!f() { gh pr list | fzf | head -n 1 | cut -c 1- | awk '{print $1}' | xargs gh pr view; }; f"
     pro = "!gh pr view --web"
     ps = push
     # pull and update submodules... i hate submodules...
@@ -378,9 +370,6 @@
 [diftool "nvimdiff3"]
     path = nvim
     # path = $EDITOR
-[mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
 [merge]
     # tool = opendiff
     # tool = vimdiff
@@ -459,16 +448,6 @@
     # helper = osxkeychain
 [credential "https://dev.azure.com"]
 	useHttpPath = true
-# }}}
-
-# git flow avh settings {{{
-# @link https://github.com/petervanderdoes/gitflow-avh/wiki/Reference:-Configuration
-[gitflow "feature.finish"]
-    keepremote = false
-[gitflow "release.finish"]
-    keepremote = false
-[gitflow "hotfix.finish"]
-    keepremote = false
 # }}}
 
 # git-profile {{{
