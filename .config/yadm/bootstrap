@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
-# yadm bootstrap: first-time machine setup. Runs automatically after `yadm clone`.
-# For periodic tool upgrades, run `upgrade` (~/.local/bin/upgrade).
+# yadm bootstrap: machine setup and upgrades. Runs automatically after `yadm clone`.
+#
+# Toggle what runs by commenting/uncommenting the calls at the bottom:
+#   - Install section: first-time setup on a fresh machine
+#   - Upgrade section: periodic tool upgrades (uncomment to run, re-comment after)
 
 _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
 
 system_type=$(uname -s)
+
+# Install {{{
 
 _change_shell_to_zsh() {
     which_zsh=$(which zsh)
@@ -103,6 +108,55 @@ _install_zinit() {
 #     sudo hostess apply "$HOME/.support/hosts.json"
 # }
 
+# }}}
+
+# Upgrade {{{
+
+_upgrade_homebrew_packages() {
+    _log_info "Upgrading homebrew packages"
+    builtin cd "$HOME" || return
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew cu --yes
+    builtin cd - || return
+}
+
+_upgrade_mise() {
+    _log_info "Upgrading mise plugins and tools"
+    mise plugins update --yes
+    builtin cd "$HOME" || return
+    mise install --yes
+    mise upgrade --yes
+    builtin cd - || return
+}
+
+_upgrade_zinit_plugins() {
+    _log_info "Upgrading zinit plugins"
+    zsh -c "source \"$XDG_DATA_HOME\"/zinit/zinit.git/zinit.zsh && zinit update --parallel"
+}
+
+_upgrade_spicetify() {
+    _log_info "Upgrading spicetify"
+    spicetify update
+}
+
+# _upgrade_gcloud_components() {
+#     _log_info "Upgrading gcloud components"
+#     gcloud components update --quiet
+# }
+
+# _upgrade_akamai_commands() {
+#     _log_info "Upgrading akamai commands"
+#     akamai update
+# }
+
+# _reinstall_neovim_stable() {
+#     _log_info "Reinstalling neovim stable"
+#     mise uninstall neovim@stable --yes
+#     mise use --global neovim@stable --yes
+# }
+
+# }}}
+
 _apply_mac_preferences() {
     [ "$system_type" = "Darwin" ] || return
     _log_info "Setting general mac preferences"
@@ -149,6 +203,7 @@ _clear_evalcache() {
     rm -f "$ZSH_EVALCACHE_DIR/init-*.sh"
 }
 
+# Install (fresh machine) {{{
 _change_shell_to_zsh
 _create_code_dir_if_missing
 _install_mac_xcode_command_line_tools
@@ -165,5 +220,17 @@ _install_mise_dependencies
 _clear_evalcache
 _apply_mac_preferences
 _start_saatchi_tunnel
+# }}}
 
-_log_info "Installation complete"
+# Upgrade (uncomment to run upgrades) {{{
+# _upgrade_homebrew_packages
+# _upgrade_mise
+# _upgrade_zinit_plugins
+# _upgrade_spicetify
+# _upgrade_gcloud_components
+# _upgrade_akamai_commands
+# _reinstall_neovim_stable
+# _clear_evalcache
+# }}}
+
+_log_info "Done"
