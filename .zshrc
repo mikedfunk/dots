@@ -169,7 +169,6 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export MYCLI_HISTFILE="$XDG_DATA_HOME"/mycli/history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export NVM_DIR="$XDG_DATA_HOME"/nvm
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export PSPG_CONF="$XDG_CONFIG_HOME"/pspg/.pspgconf
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
@@ -239,7 +238,7 @@ export BASH_MAX_OUTPUT_LENGTH=15000
 _evalcache mise activate zsh 2>/dev/null
 export MISE_NODE_COREPACK=true
 
-_evalcache fnox activate zsh 2>/dev/null
+# _evalcache fnox activate zsh 2>/dev/null
 
 # https://github.com/variadico/noti/blob/master/docs/noti.md#environment
 export NOTI_NSUSER_SOUNDNAME="Hero"
@@ -390,7 +389,7 @@ alias mkdir="mkdir -vp"
 cd () { builtin cd "$@" && ls -F -A -G; } # auto ls on cd
 alias ..="cd .."
 alias ....="cd ../.."
-alias ......="cd ../.."
+alias ......="cd ../../.."
 alias du="grc --colour=auto /usr/bin/du"
 
 # https://github.com/sharkdp/vivid/issues/25#issuecomment-450423306
@@ -450,9 +449,67 @@ alias y="yadm"
 compdef y="yadm"
 alias upgrades="yadm bootstrap"
 
-save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+# save-dotfiles {{{
+# Re-encrypt the yadm archive only when an encrypted source actually changed.
+# yadm encrypt rewrites the entire GPG blob (ciphertext doesn't delta-compress),
+# so encrypting on every save is what balloons the repo history.
+_yadm_encrypt_files() {
+  # Prints the exact set of files yadm would encrypt, one per line.
+  # Mirrors yadm's parse_encrypt: git pathspec globs over untracked files.
+  local yadm_repo="${XDG_DATA_HOME:-$HOME/.local/share}/yadm/repo.git"
+  local encrypt_list="$HOME/.config/yadm/encrypt"
+  [[ -d "$yadm_repo" && -f "$encrypt_list" ]] || return 1
+  local -a include exclude
+  local pat
+  while IFS= read -r pat || [[ -n "$pat" ]]; do
+    if [[ "${pat:0:1}" == "!" ]]; then
+      exclude+=("--exclude=/${pat:1}")
+    elif ! [[ "$pat" =~ ^[[:blank:]]*(#|$) ]]; then
+      include+=("$pat")
+    fi
+  done < "$encrypt_list"
+  (( ${#include[@]} )) || return 1
+  (
+    cd "$HOME" || exit 1
+    GIT_DIR="$yadm_repo" GIT_WORK_TREE="$HOME" \
+      git --glob-pathspecs ls-files --others -- "${exclude[@]}" -- "${include[@]}" 2>/dev/null
+  )
+}
+
+_yadm_needs_encrypt() {
+  # Returns 0 when yadm encrypt should run: first run, or any encrypted
+  # source added/removed/changed since the last encrypt.
+  local yadm_repo="${XDG_DATA_HOME:-$HOME/.local/share}/yadm/repo.git"
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"
+  local manifest="$cache_dir/yadm-encrypt.manifest"
+  local file_list
+  file_list="$(_yadm_encrypt_files)" || return 0  # uncertain -> encrypt (safe)
+  local -a files=("${(@f)file_list}")
+  files=("${(@)files:#}")
+  local -a hashed
+  local f h
+  for f in "${files[@]}"; do
+    h="$(cd "$HOME" && GIT_DIR="$yadm_repo" GIT_WORK_TREE="$HOME" git hash-object -- "$f" 2>/dev/null)" || return 0
+    hashed+=("$h  $f")
+  done
+  local new_manifest="${(j:\n:)${(o)hashed}}"
+  if [[ ! -f "$manifest" ]] || [[ "$new_manifest" != "$(<"$manifest")" ]]; then
+    mkdir -p "$cache_dir"
+    print -r -- "$new_manifest" >| "$manifest"
+    return 0
+  fi
+  return 1
+}
+
+save-dotfiles () {
+  _yadm_needs_encrypt && yadm encrypt
+  yadm add -u && yadm ci -m ${1:-working} && yadm ps
+}
+# save-dotfiles () { yadm encrypt && yadm add -u && yadm ci -m ${1:-working} && yadm ps; }
+# }}}
+
 alias save-notes="wd notes && git add -A && git commit -am 'working' && git push"
-alias save-queries"wd queries && git add -A && git commit -am 'working' && git push"
+alias save-queries="wd queries && git add -A && git commit -am 'working' && git push"
 
 alias journal="zk journal"
 alias notes="zk edit --interactive"
@@ -627,10 +684,10 @@ phpspecnotify() {
         noti --message "❌ Specs failed"
 }
 
-pux() {
-    phpx -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpunit --colors "${@}"
-    [[ $? == 0 ]] && noti --message "✅ PHPUnit tests passed" || noti --message "❌ PHPUnit tests failed"
-}
+# pux() {
+#     phpx -dmemory_limit=2048M -ddisplay_errors=on ./vendor/bin/phpunit --colors "${@}"
+#     [[ $? == 0 ]] && noti --message "✅ PHPUnit tests passed" || noti --message "❌ PHPUnit tests failed"
+# }
 # }}}
 
 # }}}

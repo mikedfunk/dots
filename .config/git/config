@@ -11,8 +11,6 @@
 # General {{{
 [apply]
     whitespace = nowarn
-[http]
-	sslVerify = false
 [help]
 	autocorrect = 10
 [user]

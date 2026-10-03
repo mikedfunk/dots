@@ -35,7 +35,7 @@
   "phpantom_lsp": "0.10.0",
   "phpcbf": "4.0.4",
   "phpcs": "4.0.4",
-  "postgres-language-server": "0.25.7",
+  "postgres-language-server": "0.26.0",
   "prettier": "3.9.9",
   "pyright": "1.1.414",
   "ruff": "0.16.9",

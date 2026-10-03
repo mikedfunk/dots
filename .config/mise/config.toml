@@ -21,7 +21,7 @@ usage = "latest" # needed for mise completion
 "aqua:snyk/cli" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
 "aqua:variadico/noti" = "latest"
-"aqua:zk-org/zk" = "latest"
+# "aqua:zk-org/zk" = "latest"
 "gem:lunchy" = "latest"
 "gem:terminal-notifier" = "latest"
 "npm:@devcontainers/cli" = "latest"
@@ -85,6 +85,7 @@ rust = "latest"
 "npm:@vshulcz/deja-vu" = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
 "npm:@coldtea/pr-lens-cli" = "latest"
+ansible = "latest"
 
 [tools."http:atlassian-cli"]
 version = "latest"
