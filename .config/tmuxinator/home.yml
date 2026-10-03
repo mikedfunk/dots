@@ -3,9 +3,7 @@ project_name: "󰋜 Home"
 name: "󰋜 Home"
 # enable_pane_titles: true
 on_project_first_start:
-  - wd traefik
-  - docker compose up -d
-  - cd -
+  - cd ~/Code/traefik-global && docker compose up -d
 windows:
   - config:
       root: ~/.config/yadm
