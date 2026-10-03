@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Periodic tool upgrades. Run manually when you want fresh tools.
+# First-time machine setup lives in .config/yadm/bootstrap (run by `yadm clone`).
+
+_log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
+
+_upgrade_homebrew_packages() {
+    _log_info "Installing/upgrading homebrew packages"
+    builtin cd "$HOME" || return
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
+    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew cu --yes
+    builtin cd - || return
+}
+
+_upgrade_mise() {
+    _log_info "Upgrading mise plugins and tools"
+    mise plugins update --yes
+    builtin cd "$HOME" || return
+    mise install --yes
+    mise upgrade --yes
+    builtin cd - || return
+}
+
+_upgrade_zinit_plugins() {
+    _log_info "Upgrading zinit plugins"
+    zsh -c "source \"$XDG_DATA_HOME\"/zinit/zinit.git/zinit.zsh && zinit update --parallel"
+}
+
+_upgrade_spicetify() {
+    _log_info "Upgrading spicetify"
+    spicetify update
+}
+
+# _upgrade_gcloud_components() {
+#     _log_info "Upgrading gcloud components"
+#     gcloud components update --quiet
+# }
+
+# _upgrade_akamai_commands() {
+#     _log_info "Upgrading akamai commands"
+#     akamai update
+# }
+
+# _reinstall_neovim_stable() {
+#     _log_info "Reinstalling neovim stable"
+#     mise uninstall neovim@stable --yes
+#     mise use --global neovim@stable --yes
+# }
+
+_clear_evalcache() {
+    _log_info "Clearing evalcache"
+    rm -f "$ZSH_EVALCACHE_DIR/init-*.sh"
+}
+
+_upgrade_homebrew_packages
+_upgrade_mise
+_upgrade_zinit_plugins
+_upgrade_spicetify
+# _upgrade_gcloud_components
+# _upgrade_akamai_commands
+# _reinstall_neovim_stable
+_clear_evalcache
+
+_log_info "Upgrade complete"
