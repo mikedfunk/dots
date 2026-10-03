@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>launched.mike.dark-notify</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/mikefunk/.local/share/mise/shims/dark-notify</string>
+        <string>-c</string>
+        <string>/Users/mikefunk/.support/tmux-dark-mode-watcher.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/mikefunk/Library/Logs/dark-notify.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/mikefunk/Library/Logs/dark-notify.log</string>
+</dict>
+</plist>
