@@ -20,7 +20,6 @@ usage = "latest" # needed for mise completion
 "aqua:bensadeh/tailspin" = "latest"
 "aqua:snyk/cli" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
-"aqua:variadico/noti" = "latest"
 # "aqua:zk-org/zk" = "latest"
 "gem:lunchy" = "latest"
 "gem:terminal-notifier" = "latest"
@@ -86,15 +85,8 @@ rust = "latest"
 "npm:@colbymchenry/codegraph" = "latest"
 "npm:@coldtea/pr-lens-cli" = "latest"
 ansible = "latest"
-"aqua:mas-cli/mas" = "2.3.0"
-
-[tools."http:atlassian-cli"]
-version = "latest"
-rename_exe = "acli"
-platforms.macos-x64.url = "https://acli.atlassian.com/darwin/latest/acli_darwin_amd64/acli"
-platforms.macos-arm64.url = "https://acli.atlassian.com/darwin/latest/acli_darwin_arm64/acli"
-platforms.linux-x64.url = "https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli"
-platforms.linux-arm64.url = "https://acli.atlassian.com/linux/latest/acli_linux_arm64/acli"
+"aqua:mas-cli/mas" = "7.0.0"
+"go:codeberg.org/roble/noti/cmd/noti" = "3.9.0"
 
 [tools."http:akamai-cli"]
 version = "2.0.2"

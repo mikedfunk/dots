@@ -19,6 +19,13 @@
             "claude"
         ]
     },
+    "dbeaver": {
+        "command": "bunx",
+        "args": [
+            "--bun",
+            "dbeaver-mcp-server"
+        ]
+    },
     // "coderabbitai": {
     //     "command": "bunx",
     //     "args": [

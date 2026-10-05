@@ -5,6 +5,20 @@
 _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(tput sgr0)"; }
 
 system_type=$(uname -s)
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+failed=()
+# Run a step; remember its name if it fails so the summary at the end is honest.
+_run() { "$@" || failed+=("$1"); }
+
+# Prompt for sudo once up front (some casks need it) and keep it alive until the script exits.
+_sudo_keepalive() {
+    [ "$system_type" = "Darwin" ] || return 0
+    sudo -v || return 1
+    while kill -0 "$$" 2>/dev/null; do sudo -n true; sleep 50; done &
+    trap 'kill $! 2>/dev/null' EXIT
+}
 
 _change_shell_to_zsh() {
     which_zsh=$(which zsh)
@@ -20,9 +34,10 @@ _create_code_dir_if_missing() {
 }
 
 _install_mac_xcode_command_line_tools() {
-    [ "$system_type" = "Darwin" ] || return
-    _log_info "Installing mac xcode command line tools if missing"
-    xcode-select --install || true
+    [ "$system_type" = "Darwin" ] || return 0
+    xcode-select -p &>/dev/null && return 0
+    _log_info "Installing mac xcode command line tools"
+    xcode-select --install
 }
 
 _install_homebrew() {
@@ -30,28 +45,35 @@ _install_homebrew() {
         _log_info "Install homebrew"
         yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
+    # Not on PATH yet right after a fresh install (Apple silicon prefix).
+    command -v brew &>/dev/null || eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 _install_upgrade_homebrew_packages() {
     _log_info "Installing/upgrading homebrew packages"
-    builtin cd "$HOME" || return
-    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew bundle
-    HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile" brew cu --yes
-    builtin cd - || return
+    (
+        cd "$HOME" || exit 1
+        export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
+        rc=0
+        brew bundle || rc=1
+        brew cu --yes || rc=1
+        exit $rc
+    )
 }
 
 _install_upgrade_mise_plugins() {
     _log_info "Installing/upgrading mise plugins"
     mise plugins update --yes
-    mise plugins install php-brew https://github.com/ntzrbtr/asdf-php-brew.git
+    mise plugins ls | grep -qx php-brew ||
+        mise plugins install php-brew https://github.com/ntzrbtr/asdf-php-brew.git
 }
 
 _install_and_upgrade_mise_dependencies() {
     _log_info "Installing/upgrading mise dependencies"
-    builtin cd "$HOME" || return
-    mise install --yes
-    mise upgrade --yes
-    builtin cd - || return
+    (
+        cd "$HOME" || exit 1
+        mise install --yes && mise upgrade --yes
+    )
 }
 
 _install_or_upgrade_zinit() {
@@ -131,8 +153,10 @@ _upgrade_zinit_plugins() {
 # }
 
 _apply_mac_preferences() {
-    [ "$system_type" = "Darwin" ] || return
+    [ "$system_type" = "Darwin" ] || return 0
     _log_info "Setting general mac preferences"
+    mkdir -p ~/Screenshots
+    before=$(defaults read 2>/dev/null | shasum)
     defaults write -g ApplePressAndHoldEnabled -bool false # Disable press-and-hold for keys in favor of key repeat
     defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
     defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false                           # disables "corrects spelling automatically"
@@ -147,7 +171,6 @@ _apply_mac_preferences() {
     defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40          # Increase sound quality for Bluetooth headphones/headsets
     defaults write com.apple.Finder AppleShowAllFiles true                                       # show hidden files in finder
     defaults write com.apple.LaunchServices LSQuarantine -bool false                             # disable mac quarantining all downloaded files from mise
-    defaults write com.apple.dashboard dashboard-enabled-state -int 1                            # disable dashboard
     defaults write com.apple.dock "autohide" -bool true                                          # Autohide
     defaults write com.apple.dock orientation -string 'left'                                     # dock on left side
     defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"                        # Search scope current folder
@@ -159,14 +182,14 @@ _apply_mac_preferences() {
     defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false # Disable swipe for back/forward (e.g. browsers)
     chflags nohidden ~/Library                                                                   # Show the ~/Library folder
 
-    killall Dock
-    killall Finder
-    killall SystemUIServer
+    # Only restart the UI when something actually changed, to avoid a flicker on every run.
+    [ "$before" = "$(defaults read 2>/dev/null | shasum)" ] && return 0
+    killall Dock Finder SystemUIServer
 }
 
 _start_saatchi_tunnel() {
-    [ "$system_type" = "Darwin" ] || return
-    (lunchy status launched.mike.saatchi-tunnel.autossh | grep --quiet launched.mike.saatchi-tunnel.autossh) && return
+    [ "$system_type" = "Darwin" ] || return 0
+    (lunchy status launched.mike.saatchi-tunnel.autossh | grep --quiet launched.mike.saatchi-tunnel.autossh) && return 0
     _log_info "Starting Saatchi tunnel"
     lunchy start --write launched.mike.saatchi-tunnel.autossh
 }
@@ -178,29 +201,35 @@ _upgrade_spicetify() {
 
 _clear_evalcache() {
     _log_info "Clearing evalcache"
-    rm -f "$ZSH_EVALCACHE_DIR/init-*.sh"
+    : "${ZSH_EVALCACHE_DIR:?ZSH_EVALCACHE_DIR is not set}"
+    rm -f "$ZSH_EVALCACHE_DIR"/init-*.sh
 }
 
-_change_shell_to_zsh
-_create_code_dir_if_missing
-_install_mac_xcode_command_line_tools
-_install_homebrew
-_install_upgrade_homebrew_packages
-_install_upgrade_mise_plugins
-_install_and_upgrade_mise_dependencies
-# _install_and_configure_php_81_extensions
-# _install_and_configure_php_84_extensions
-# _upgrade_gcloud_components
-# _install_akamai_purge_command
-# _upgrade_akamai_commands
-# _install_tmux_plugin_manager
-# _reinstall_neovim_stable
-# _install_or_upgrade_zinit
-_upgrade_zinit_plugins
-# _sync_hosts_file
-_clear_evalcache
-_apply_mac_preferences
-_start_saatchi_tunnel
-_upgrade_spicetify
+_sudo_keepalive
+_run _change_shell_to_zsh
+_run _create_code_dir_if_missing
+_run _install_mac_xcode_command_line_tools
+_run _install_homebrew
+_run _install_upgrade_homebrew_packages
+_run _install_upgrade_mise_plugins
+_run _install_and_upgrade_mise_dependencies
+# _run _install_and_configure_php_81_extensions
+# _run _install_and_configure_php_84_extensions
+# _run _upgrade_gcloud_components
+# _run _install_akamai_purge_command
+# _run _upgrade_akamai_commands
+# _run _install_tmux_plugin_manager
+# _run _reinstall_neovim_stable
+_run _install_or_upgrade_zinit
+_run _upgrade_zinit_plugins
+# _run _sync_hosts_file
+_run _clear_evalcache
+_run _apply_mac_preferences
+_run _start_saatchi_tunnel
+_run _upgrade_spicetify
 
+if [ ${#failed[@]} -gt 0 ]; then
+    echo -e "$(tput setaf 1)$(tput bold) ✗ Done, but these steps failed: ${failed[*]} $(tput sgr0)"
+    exit 1
+fi
 _log_info "Done"

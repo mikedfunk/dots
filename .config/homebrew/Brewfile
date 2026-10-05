@@ -8,7 +8,6 @@
 # tap "abhinav/tap" # git-spice
 # tap "andersjanmyr/homebrew-tap" # mc
 # tap "artginzburg/tap" # for sudo-touchid
-# tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
 # tap "charmbracelet/tap" # crush and others
 # tap "charmbracelet/tap" # for gum
 # tap "codekitchen/pipeline" # pipeline
@@ -20,6 +19,7 @@
 # tap "homebrew/cask-fonts" # weird, I have to tap this manually?
 # tap "homebrew/cask-versions" # brew cask (needed for firefox developer edition)
 # tap "jannis-baum/tap" # vivify
+# tap "jasonlong/tap" # mater pomodoro app
 # tap "jetbrains/utils" # qodana
 # tap "jnsahaj/lumen" # lumen
 # tap "lihaoyun6/tap" # quickrecorder
@@ -34,16 +34,16 @@
 # tap "xvxx/code" # shy
 # tap "zackriya-solutions/meetily" # meetily
 tap "alielsokary/tap" # caskhub
+tap "atlassian/homebrew-acli" # atlassian acli for jira, etc.
 tap "buo/cask-upgrade" # for `brew cu`
 tap "grishka/grishka" # neardrop
-tap "jasonlong/tap" # mater pomodoro app
 tap "mikedfunk/zoomhider" # zoomhider
 
 # }}}
 
 # brew {{{
 
-# brew "acli" # atlassian CLI for Jira, etc. (moved to mise)
+brew "atlassian/acli/acli" # atlassian CLI for Jira, etc.
 # brew "aicommits" # AI commit message writer
 # brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "akamai" # interact with akamai caching (moved to mise)
