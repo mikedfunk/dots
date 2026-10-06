@@ -12,6 +12,9 @@ The note is built from your Daily Scrum Meeting Template: {{date}} is filled
 in and the "..." body placeholder is replaced with the summary text, exactly
 as if you had pasted it yourself.
 
+After the note is written, the summary email is archived in Gmail (INBOX
+label removed) so it doesn't pile up.
+
 Usage:
     python3 zoom_scrum_note.py            # normal run
     python3 zoom_scrum_note.py --dry-run  # print what would happen, change nothing
@@ -211,6 +214,16 @@ def extract_body(msg):
     return ""
 
 
+def archive_message(message_id):
+    """Archive a Gmail message by removing the INBOX label."""
+    gws("gmail", "users", "messages", "modify",
+        "--params", json.dumps({
+            "userId": "me",
+            "id": message_id,
+            "removeLabelIds": ["INBOX"],
+        }))
+
+
 def note_path_for(date):
     now = datetime.datetime.now(ZoneInfo(TIMEZONE))
     ampm = "am" if now.hour < 12 else "pm"
@@ -256,11 +269,15 @@ def main():
     if dry_run:
         print(f"[dry run] Would write {len(summary_text)} chars of summary to:\n  {path}")
         print(f"[dry run] From email subject: {subject}")
+        print(f"[dry run] Would archive email: {subject}")
         return 0
 
     with open(path, "w") as f:
         f.write(build_note(date, summary_text))
     print(f"Wrote {path} ({len(summary_text)} chars from '{subject}')")
+
+    archive_message(msg["id"])
+    print(f"Archived '{subject}' in Gmail")
     return 0
 
 
