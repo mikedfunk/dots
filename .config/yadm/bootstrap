@@ -26,7 +26,7 @@ _sudo_keepalive() {
         sleep 30
     done &
     _sudo_keepalive_pid=$!
-    Intentional: expand the PID now, not at EXIT.
+    # Intentional: expand the PID now, not at EXIT.
     # shellcheck disable=SC2064
     trap "kill ${_sudo_keepalive_pid} 2>/dev/null" EXIT
 }
