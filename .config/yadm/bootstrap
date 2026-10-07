@@ -16,8 +16,19 @@ _run() { "$@" || failed+=("$1"); }
 _sudo_keepalive() {
     [ "$system_type" = "Darwin" ] || return 0
     sudo -v || return 1
-    while kill -0 "$$" 2>/dev/null; do sudo -n true; sleep 50; done &
-    trap 'kill $! 2>/dev/null' EXIT
+    # macOS expires the sudo timestamp after 5 idle minutes; long brew steps
+    # exceed that, so refresh it every 30s. Capture the loop PID explicitly —
+    # $! inside an EXIT trap expands at trap-fire time and is fragile if later
+    # steps background their own jobs. Echo if a refresh ever fails so a dying
+    # keepalive is visible instead of silently expiring mid-run.
+    while kill -0 "$$" 2>/dev/null; do
+        sudo -n true 2>/dev/null || echo "sudo keepalive: timestamp refresh failed" >&2
+        sleep 30
+    done &
+    _sudo_keepalive_pid=$!
+    Intentional: expand the PID now, not at EXIT.
+    # shellcheck disable=SC2064
+    trap "kill ${_sudo_keepalive_pid} 2>/dev/null" EXIT
 }
 
 _change_shell_to_zsh() {
