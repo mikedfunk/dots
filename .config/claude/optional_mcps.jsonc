@@ -225,6 +225,10 @@
             "BW_SESSION": "$BW_SESSION"
         }
     },
+    "orcasecurity": {
+        "type": "http",
+        "url": "https://mcp.orcasecurity.io"
+    },
     // NOTE: requires storybook on local
     "storybook": {
         "type": "http",

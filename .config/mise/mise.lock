@@ -2643,7 +2643,7 @@ provenance = "github-attestations"
 
 [[tools.poetry]]
 version = "2.5.1"
-backend = "asdf:poetry"
+backend = "vfox:mise-plugins/vfox-poetry"
 specifiers = ["latest"]
 
 [[tools.pre-commit]]
