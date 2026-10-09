@@ -7,6 +7,7 @@ _log_info() { echo -e "$(tput setaf 2)$(tput rev)$(tput bold) \xE2\x9C\x93 $1 $(
 system_type=$(uname -s)
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 failed=()
 # Run a step; remember its name if it fails so the summary at the end is honest.
@@ -42,6 +43,13 @@ _change_shell_to_zsh() {
 _create_code_dir_if_missing() {
     _log_info "Creating code directory if missing"
     mkdir -p "$HOME/Code"
+}
+
+# zsh won't create the directory of HISTFILE (~/.zshrc points it here), so history is silently not saved without it.
+# The history itself is machine-local: not tracked or encrypted by yadm.
+_create_zsh_history_dir_if_missing() {
+    _log_info "Creating zsh history directory if missing"
+    mkdir -p "$XDG_STATE_HOME/zsh"
 }
 
 _install_mac_xcode_command_line_tools() {
@@ -219,6 +227,7 @@ _clear_evalcache() {
 _sudo_keepalive
 _run _change_shell_to_zsh
 _run _create_code_dir_if_missing
+_run _create_zsh_history_dir_if_missing
 _run _install_mac_xcode_command_line_tools
 _run _install_homebrew
 _run _install_upgrade_homebrew_packages

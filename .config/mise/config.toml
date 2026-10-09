@@ -87,6 +87,7 @@ rust = "latest"
 ansible = "latest"
 "aqua:mas-cli/mas" = "7.0.0"
 "go:codeberg.org/roble/noti/cmd/noti" = "3.9.0"
+"go:golang.org/x/tools/cmd/godoc" = "latest"
 
 [tools."http:akamai-cli"]
 version = "2.0.2"

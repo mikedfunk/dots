@@ -71,8 +71,12 @@ export fpath=(
 #   ${manpath:-}
 # )
 
+# Go module cache under XDG (otherwise ~/go). mise sets GOROOT and GOBIN, not GOPATH.
+export GOPATH="$XDG_DATA_HOME"/go
+
 export path=(
-  $(brew --prefix mysql-client)/bin
+  # the version the Brewfile installs. Not `$(brew --prefix ...)`: that spawns brew (over a second) on every shell start
+  $HOMEBREW_PREFIX/opt/mysql-client@8.0/bin
   # $(brew --prefix git)/share/git-core/contrib/git-jump
   # kubectl plugin manager (plugins will be installed to this bin)
   # "${KREW_ROOT:-$HOME/.krew}"/bin
@@ -95,8 +99,8 @@ export path=(
   # $(brew --prefix)/opt/curl/bin
   # rust cargo packages
   $HOME/.cargo/bin
-  # golang packages
-  "$GOPATH"/bin
+  # golang packages: no entry needed. mise sets GOBIN to its own go bin dir (already on the path), so
+  # `go install` lands there. GOPATH is only here to keep the module cache under XDG.
   # $HOME/go/bin
   # golang executables
   # $(brew --prefix)/opt/go/libexec/bin
@@ -159,7 +163,6 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 export GEM_HOME="$XDG_DATA_HOME"/gem
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export GOPATH="$XDG_DATA_HOME"/go
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/homebrew/Brewfile
@@ -193,6 +196,15 @@ export PGSERVICEFILE="${XDG_CONFIG_HOME}/pg/pg_service.conf"
 # disable weird highlighting of pasted text
 # https://old.reddit.com/r/zsh/comments/c160o2/command_line_pasted_text/erbg6hy/
 zle_highlight=('paste:none')
+
+# make pasted bash-style snippets behave like they do in bash
+# `# comment` lines are allowed instead of "command not found: #"
+setopt interactive_comments
+# an unmatched glob (`--include=*`, `foo[1]`, `?`) is passed through as-is instead of
+# "zsh: no matches found" before the command even runs
+unsetopt nomatch
+# `!` is not history expansion ("zsh: event not found"). Uncomment if you never use `!!`/`sudo !!`
+# unsetopt bang_hist
 
 # weird, this should have already been done :/
 builtin setopt aliases
@@ -228,7 +240,7 @@ export BAT_THEME="TwoDark"
 # use `gO` to open a quickfix with a table of contents!
 (( $+commands[nvim] )) && export MANPAGER='nvim +Man!'
 source "$HOME"/.private_vars.sh 2>/dev/null
-source "$(brew --prefix)"/etc/grc.zsh 2>/dev/null # generic colorizer
+source "$HOMEBREW_PREFIX"/etc/grc.zsh 2>/dev/null # generic colorizer
 
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
 export ENABLE_CLAUDEAI_MCP_SERVERS=false # configure my own instead
@@ -346,7 +358,8 @@ _claude_inject_mcps() {
 
 claude() {
     # Only inject persistent MCPs into ~/.claude.json before launching.
-    command claude update && \
+    # An update that fails (offline, rate limited) must not stop claude from starting.
+    command claude update
     _claude_inject_mcps "$(_claude_persistent_mcps)" && \
     command claude "$@"
 }
@@ -386,7 +399,9 @@ alias mv="mv -iv"
 alias cp="cp -riv"
 alias mkdir="mkdir -vp"
 
-cd () { builtin cd "$@" && ls -F -A -G; } # auto ls on cd
+# auto ls on cd. Only when stdout is a terminal: a plain `cd` function also printed the listing into
+# `$(...)` captures and tool output (e.g. _yadm_encrypt_files returned `ls` output instead of files)
+chpwd() { if [[ -o interactive && -t 1 ]]; then ls -F -A -G; fi; }
 alias ..="cd .."
 alias ....="cd ../.."
 alias ......="cd ../../.."
@@ -724,6 +739,11 @@ bindkey '^x^e' edit-command-line
 
 # https://unix.stackexchange.com/questions/167582/why-zsh-ends-a-line-with-a-highlighted-percent-symbol
 export PROMPT_EOL_MARK=''
+
+# history: the default (2000 in memory, 1000 saved) trims old commands, and panes don't share it
+HISTSIZE=100000
+SAVEHIST=100000
+setopt share_history hist_ignore_dups hist_ignore_space
 
 # make ctrl-w stop at dashes like in bash (no "-" or "=")
 WORDCHARS='*?_[]~&;!#$%^(){}<>'
