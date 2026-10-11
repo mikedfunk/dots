@@ -296,7 +296,7 @@ export AUTOSSH_PORT=0
 
 # gpg {{{
 # https://unix.stackexchange.com/a/608921
-export PINENTRY_USER_DATA="USE_CURSES=1"
+# export PINENTRY_USER_DATA="USE_CURSES=1"
 # }}}
 
 # fzf {{{
