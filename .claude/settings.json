@@ -33,8 +33,6 @@
   "model": "sonnet",
   "hooks": {
     "Notification": [],
-    "PostToolUse": [],
-    "PreToolUse": [],
     "SessionStart": [
       {
         "hooks": [
@@ -43,9 +41,18 @@
             "command": "\"/Users/mikefunk/.claude/hooks/context-mode-cache-heal.mjs\""
           }
         ]
+      },
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/mikefunk/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
       }
     ],
-    "Stop": [],
     "UserPromptSubmit": [
       {
         "hooks": [

@@ -43,7 +43,6 @@ tap "mikedfunk/zoomhider" # zoomhider
 
 # brew {{{
 
-brew "atlassian/acli/acli" # atlassian CLI for Jira, etc.
 # brew "aicommits" # AI commit message writer
 # brew "aider" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "akamai" # interact with akamai caching (moved to mise)
@@ -350,6 +349,7 @@ brew "atlassian/acli/acli" # atlassian CLI for Jira, etc.
 # brew "zsh-completions" # tab completions (I install this via my zsh plugin manager instead)
 # brew "zsh-lovers" # https://grml.org/zsh/zsh-lovers.html
 # php has been moved to homebrew-php. In the process, php70 was removed >:( I've switched to phpenv and pecl instead. I don't even know how extensions work in the new homebrew php.
+brew "atlassian/acli/acli" # atlassian CLI for Jira, etc.
 brew "autossh" # ssh that reconnects (I use this a lot for tunnels, etc)
 brew "btop" # another top/atop/glances/htop alternative, apparently the most popular
 brew "curl" # http cli tool. Included with mac of course, but this gives me the updated version. Also needed for phpenv https://github.com/phpenv/phpenv/issues/90#issuecomment-550538864 and for asdf.
@@ -360,6 +360,7 @@ brew "git"
 brew "gnu-sed" if OS.mac? # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
+brew "herdr" # AI tmux sort of
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json. (moved to mise)
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
