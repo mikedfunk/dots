@@ -226,13 +226,13 @@
     #     && [ -n \"$LOG\" ] \
     #     && echo \"\\n\\n !!! NOT SAFE TO MERGE !!! \\n\\n\\n${LOG}\" \
     #     || echo \"Safe to merge, no release is in progress.\"
-    canimerge = !git pull --autostash >/dev/null \
-        && git fetch --tags >/dev/null \
-        && LAST_SEMVER=$(git tag --sort=v:refname | grep -E \"^\\d+.\\d+.\\d+$\" | tail -n1) \
+    # fetch only (no pull/checkout) so a dirty tree can't matter; any failure aborts instead of printing "safe"
+    canimerge = !git fetch --tags origin >/dev/null \
+        && LAST_SEMVER=$(git tag -l --sort=-v:refname '[0-9]*.[0-9]*.[0-9]*' | head -n1) \
         && LOG=$(git log --use-mailmap --pretty=format:'%h - %s (%cr) <%aN>' \"$LAST_SEMVER\"..origin/develop --no-merges) \
-        && [ -n \"$LOG\" ] \
-        && echo \"\\n$(tput setaf 1)$(tput rev)$(tput bold) \\xE2\\x9C\\x97 NOT SAFE TO MERGE! $(tput sgr0)\\n\\n${LOG}\\n\" \
-        || echo \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\xE2\\x9C\\x93 Safe to merge, no release is in progress. $(tput sgr0)\\n\"
+        && ( [ -n \"$LOG\" ] \
+            && printf \"\\n$(tput setaf 1)$(tput rev)$(tput bold) \\342\\234\\227 NOT SAFE TO MERGE! $(tput sgr0)\\n\\n%s\\n\\n\" \"$LOG\" \
+            || printf \"\\n$(tput setaf 2)$(tput rev)$(tput bold) \\342\\234\\223 Safe to merge, no release is in progress. $(tput sgr0)\\n\\n\" )
     # save a stash with "git stash save my_stash_name"
     # search for a stash by saved description e.g. "git sshow my_stash_name"
     sshow = "!f() { git stash show stash^{/$*} -p; }; f"

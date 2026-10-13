@@ -275,6 +275,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "redis" # key/value store (If I need this I'll use docker)
 # brew "ripgrep" # needed for lunarvim telescope plugin (moved to mise)
 # brew "rlwrap" # wrap a command in readline to enable up for history, etc. Useful for python repl: `rlwrap python`
+# brew "rtk" # claude bash context saver
 # brew "ruby" # (rbenv covers it for me)
 # brew "ruby-build" # an rbenv plugin that provides an rbenv install command to compile and install different versions of ruby
 # brew "rustywind" # sorts tailwind classes, deletes unused classes https://github.com/avencera/rustywind
@@ -381,7 +382,6 @@ brew "pngpaste" # save image from clipboard to file
 brew "privoxy" # turn a socks5 proxy into an http proxy. Used when VPN is down to tunnel kubectl through an http proxy which forwards to a socks5 proxy.
 brew "pspg" # , args: ["HEAD"] # "postgres pager" also useful for mysql, etc.
 brew "qcachegrind" # like kcachegrind which is useful for profiling php apps with xdebug (usage: cli `qcachegrind ./cachegrind.out.*`)
-brew "rtk" # claude bash context saver
 brew "scrcpy" if OS.mac? # mirror android screen
 brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of useless without "spicetify marketplace", which is a separate install via github shell script. https://spicetify.app
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
