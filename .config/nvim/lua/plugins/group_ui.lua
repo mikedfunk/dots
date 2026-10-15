@@ -454,22 +454,22 @@ return {
       },
     },
   },
-  {
-    "gisketch/triforce.nvim",
-    dependencies = {
-      "nvzone/volt",
-      {
-        -- add Triforce section to which-key
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>t", group = "+triforce" } } },
-      },
-    },
-    opts = {
-      -- keymap = {
-      --   show_profile = "<Leader>tp",
-      -- },
-    },
-  },
+  -- {
+  --   "gisketch/triforce.nvim",
+  --   dependencies = {
+  --     "nvzone/volt",
+  --     {
+  --       -- add Triforce section to which-key
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>t", group = "+triforce" } } },
+  --     },
+  --   },
+  --   opts = {
+  --     -- keymap = {
+  --     --   show_profile = "<Leader>tp",
+  --     -- },
+  --   },
+  -- },
   -- doesn't work :/
   -- {
   --   "soemre/commentless.nvim",
