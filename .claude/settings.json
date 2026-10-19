@@ -32,7 +32,6 @@
   },
   "model": "sonnet",
   "hooks": {
-    "Notification": [],
     "SessionStart": [
       {
         "hooks": [
@@ -69,10 +68,11 @@
     "command": "bunx ccusage@latest statusline --visual-burn-rate=emoji-text"
   },
   "enabledPlugins": {
-    "saatchi-art-claude-plugins@local-desktop-app-uploads": false,
-    "ponytail@ponytail": true,
     "context-mode@context-mode": true,
-    "design@synced": false
+    "design@synced": false,
+    "ponytail@ponytail": true,
+    "saatchi-art-claude-plugins@local-desktop-app-uploads": false,
+    "lua-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
