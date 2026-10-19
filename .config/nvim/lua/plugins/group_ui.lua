@@ -94,7 +94,20 @@ return {
       })
     end,
   },
-  { "folke/which-key.nvim", opts = { win = { border = "rounded" } } },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      win = { border = "rounded" },
+      -- which-key quirk: `gc` is both a mapping and a prefix of `gcc`. If the next key arrives within
+      -- `timeoutlen`, which-key runs `gc` early and the second `c` is left stray, so a fast `gcc` does nothing
+      -- (a slow one works). Fixed by `vim.o.timeoutlen = 0` in config/options.lua (250 and 1 both fail).
+      -- Fallback if timeoutlen = 0 breaks other mappings: restore timeoutlen to 250 and hide `g...` mappings
+      -- from which-key so it creates no `g` trigger (loses the popup after pressing `g`, mappings still work):
+      -- filter = function(mapping)
+      --   return not (mapping.lhs:sub(1, 1) == "g" and (mapping.mode == "n" or mapping.mode == "x"))
+      -- end,
+    },
+  },
   { "LazyVim/LazyVim", opts = { ui = { border = "rounded" } } },
   {
     "cormacrelf/dark-notify",

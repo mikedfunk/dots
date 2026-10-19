@@ -13,7 +13,7 @@ vim.o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add" -- this is n
 vim.opt.spelloptions:append("camel")
 -- vim.o.foldlevel = 99 -- default high foldlevel so files are not folded on read
 vim.o.formatoptions = "croqjt"
-vim.o.timeoutlen = 250 -- trying this out for which-key.nvim
+vim.o.timeoutlen = 0 -- with >0 which-key fires `gc` early on a fast `gcc` (tested: 1 fails, 0 works)
 -- vim.o.textwidth = 80 -- line width to break on with <visual>gw TODO: getting overridden to 999 somewhere
 vim.o.relativenumber = true -- relative line numbers
 vim.o.mousemoveevent = true -- enable hover X on bufferline tabs

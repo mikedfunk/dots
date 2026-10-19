@@ -84,6 +84,7 @@ return {
         -- plantuml = "' %s", -- doesn't have a treesitter parser
         -- neon = "# %s", -- doesn't have a treesitter parser
         ini = "# %s",
+        ruby = "# %s", -- Brewfile is filetype ruby
         sql = "-- %s",
         git_config = "# %s",
       },
