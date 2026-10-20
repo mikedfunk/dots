@@ -145,6 +145,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "gptme" # AI coding assistant (tags: llm, llama, openai, chatgpt) (replaced with crush)
 # brew "graphviz" # useful for xdebug profiler class maps
 # brew "gum" # spiffy shell script UI helper
+# brew "herdr" # AI tmux sort of (agent multiplexer; not needed now that Claude's iterm2_with_bell alerts cover it)
 # brew "heroku-toolbelt" # heroku deploy tools (I don't use heroku atm)
 # brew "hg" # mercurial (who still uses mercurial? no rebase)
 # brew "highlight" # colorizes html and other output on the command line. used by ranger. (I don't use ranger these days)
@@ -361,7 +362,6 @@ brew "git"
 brew "gnu-sed" if OS.mac? # linux version of sed - saves as gsed (required for diff-so-fancy)
 brew "gpg" # used by s3cmd and yadm to encrypt stuff
 brew "grc" # generic colorizer - used to colorize ps, ls, netstat, etc.
-brew "herdr" # AI tmux sort of
 brew "hostess" # manage hosts file `hostess help` TODO try https://github.com/feross/hostile - you can apply/unapply separate hosts file in normal hosts file format rather than json. (moved to mise)
 brew "htop" # prettier, more powerful version of top. gets the top running processes. (see my notes)
 brew "icu4c@77" # Added separately for dependencies for various runtimes so I don't have to pin it.
@@ -590,7 +590,7 @@ cask "font-iosevka-nerd-font" # Tall, narrow programming font
 cask "font-jetbrains-mono-nerd-font"
 cask "glance-chamburr" if OS.mac? # fork of glance kept alive (all-in-one quicklook collection)
 cask "grandperspective" if OS.mac? # visualize storage hogs in the hard drive
-cask "hiddenbar" # hide/show part of the menubvar. replaces dozer. jordanbaird-ice stopped working.
+cask "hiddenbar" # hide/show part of the menubar. replaces dozer. jordanbaird-ice stopped working.
 cask "iterm2@beta" if OS.mac? # I was using kitty but they use opengl and macos deprecated opengl support, so it crashes regularly. iTerm now has gpu rendering, so I'm back to iTerm! It has a bunch of other cool new stuff now anyway. (There's also iterm2-nightly and iterm2-beta, which I've found to be unstable.)
 cask "itsycal" if OS.mac? # menubar calendar
 cask "meetingbar" if OS.mac? # full screen notifications for zoom meetings

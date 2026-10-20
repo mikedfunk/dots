@@ -104,6 +104,7 @@
   "effortLevel": "medium",
   "tui": "fullscreen",
   "theme": "auto",
+  "preferredNotifChannel": "iterm2_with_bell",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,

@@ -1,0 +1,22 @@
+onboarding = false
+
+[theme]
+# "terminal" borrows the terminal's own palette, so it follows whatever light/dark switching the terminal does
+name = "terminal"
+# follow the terminal's light/dark appearance so the light-only overrides below don't apply in dark mode
+auto_switch = true
+light_name = "terminal"
+dark_name = "terminal"
+
+# "terminal" draws labels in ANSI white, which vanishes on a light background
+[theme.custom.light]
+text = "black"
+subtext0 = "darkgray"
+overlay0 = "darkgray"
+overlay1 = "darkgray"
+
+[ui.toast]
+delivery = "system"
+
+[ui]
+status_indicators = "symbols"
