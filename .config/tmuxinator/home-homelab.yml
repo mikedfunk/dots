@@ -1,0 +1,8 @@
+---
+project_name: home-homelab
+windows:
+  - homelab:
+      root: ~/Code/homelab
+      layout: main-horizontal
+      panes:
+        - editor: [v]

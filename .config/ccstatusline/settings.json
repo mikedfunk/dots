@@ -1,0 +1,65 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "ea17bf91-18e7-4486-b05b-150eda20fead",
+        "type": "session-name",
+        "backgroundColor": "bgBrightYellow"
+      },
+      {
+        "id": "853d02eb-b1eb-4eb1-820f-dbaf6666a295",
+        "type": "model",
+        "backgroundColor": "bgYellow"
+      },
+      {
+        "id": "1715f755-30fc-4692-b6a2-c511212096fb",
+        "type": "thinking-effort",
+        "backgroundColor": "bgBrightRed"
+      },
+      {
+        "id": "1",
+        "type": "context-bar",
+        "color": "cyan"
+      },
+      {
+        "id": "f2ce8222-110b-4827-ae50-12a09317db3e",
+        "type": "extra-usage-remaining",
+        "backgroundColor": "bgWhite"
+      }
+    ],
+    [],
+    []
+  ],
+  "flexMode": "full",
+  "compactThreshold": 60,
+  "colorLevel": 3,
+  "defaultPadding": " ",
+  "defaultPaddingSide": "both",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [
+      ""
+    ],
+    "theme": "nord-aurora",
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "bun"
+  }
+}

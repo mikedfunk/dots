@@ -387,6 +387,7 @@ brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of u
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailscale" # vpn-like and remote access alternative
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
+brew "terminal-browser" # used by claude code mod to show browser with claude code https://www.claudemod.com/mods/terminal-browser
 brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (mise version doesn't work right for some reason)
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "toot" # mastodon cli/tui client

@@ -339,6 +339,9 @@ compdef k="kubectl"
 alias d="docker"
 compdef d="docker"
 
+# iterm2 doesn't support kitty image protocol yet :/
+# export CLAUDE_CODE_FORCE_TERMINAL_IMAGES=1
+
 _claude_persistent_mcps() {
     # note: no extra commas
     # @latest: without it bunx runs a project's node_modules/.bin/strip-json-comments (old v1, leaves trailing commas)

@@ -1,0 +1,11 @@
+---
+project_name: home-dev-env
+windows:
+  - bookymark:
+      root: ~/Code/dev-env
+      layout: main-horizontal
+      panes:
+        - editor: [v]
+        - git: [ts]
+        # - ai: [opencode]
+        - devpod: [devpod up . && devpod ssh .]
