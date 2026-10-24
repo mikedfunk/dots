@@ -3,11 +3,6 @@
   "lines": [
     [
       {
-        "id": "ea17bf91-18e7-4486-b05b-150eda20fead",
-        "type": "session-name",
-        "backgroundColor": "bgBrightYellow"
-      },
-      {
         "id": "853d02eb-b1eb-4eb1-820f-dbaf6666a295",
         "type": "model",
         "backgroundColor": "bgYellow"
@@ -21,6 +16,16 @@
         "id": "1",
         "type": "context-bar",
         "color": "cyan"
+      },
+      {
+        "id": "d5a7152b-45ab-4a59-8017-1209385b79de",
+        "type": "session-cost",
+        "backgroundColor": "bgBrightBlack"
+      },
+      {
+        "id": "8597b0f0-b856-44aa-8981-feee567ba124",
+        "type": "session-cost-rate",
+        "backgroundColor": "bgBrightYellow"
       },
       {
         "id": "f2ce8222-110b-4827-ae50-12a09317db3e",
@@ -41,7 +46,7 @@
   "gitCacheTtlSeconds": 5,
   "terminalWidthCacheTtlSeconds": 5,
   "customCommandCacheTtlSeconds": 0,
-  "minimalistMode": false,
+  "minimalistMode": true,
   "powerline": {
     "enabled": true,
     "separators": [

@@ -313,6 +313,7 @@ tap "mikedfunk/zoomhider" # zoomhider
 # brew "tealdeer" # more consise community man pages (faster than tldr) (moved to mise)
 # brew "teleconsole" # share your console with others easily (Extremely rare that I need something like this)
 # brew "telnet" # I don't have telnet? How am I going to watch star wars?
+# brew "terminal-browser" # used by claude code mod to show browser with claude code https://www.claudemod.com/mods/terminal-browser
 # brew "terminal-notifier" # used by tmux plugin marzocchi/zsh-notify and my circleci pre-push hook (this is really just a gem so watch for it being installed by dependencies of other gems :/ ) This overlaps with noti but it provides full access to the desktop notification api unlike noti. (moved to mise)
 # brew "terraform" # IAC
 # brew "tidy-html5" # needed to build php https://github.com/shivammathur/homebrew-php/blob/master/.github/deps/macos11_20201107.1
@@ -387,7 +388,6 @@ brew "spicetify-cli" # spotify app customization via cli NOTE: this is kind of u
 brew "syncthing" # sync files between devices. Dashboard: http://localhost:8384 . `brew services start syncthing`
 brew "tailscale" # vpn-like and remote access alternative
 brew "tailspin" # tail colorizer (usage: "..." | tspin)
-brew "terminal-browser" # used by claude code mod to show browser with claude code https://www.claudemod.com/mods/terminal-browser
 brew "the_silver_searcher" # awesome fast grep replacement: `ag --help` see also: ripgrep (mise version doesn't work right for some reason)
 brew "tig" # git? tig! (note: this requires asciidoc)
 brew "toot" # mastodon cli/tui client
