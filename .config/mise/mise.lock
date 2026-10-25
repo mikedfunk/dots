@@ -2340,6 +2340,7 @@ specifiers = ["latest"]
 
 [[tools."npm:@coldtea/pr-lens-cli"]]
 version = "0.13.2"
+aube = { path = "locks/npm-coldtea-pr-lens-cli/0.13.2", digest = "sha256:f6a31d85c483c5a08045f7300bf045aed5fdb240e9e199dcf97f22c53ffdec05" }
 backend = "npm:@coldtea/pr-lens-cli"
 specifiers = ["latest"]
 
@@ -2351,6 +2352,7 @@ specifiers = ["latest"]
 
 [[tools."npm:@fission-ai/openspec"]]
 version = "1.14.3"
+aube = { path = "locks/npm-fission-ai-openspec/1.14.3", digest = "sha256:a4eac77dfd175043aeda9d4d678c5b166fab4902a55945cc74f1eb8d056b8ea9" }
 backend = "npm:@fission-ai/openspec"
 specifiers = ["latest"]
 
@@ -2368,6 +2370,7 @@ specifiers = ["latest"]
 
 [[tools."npm:@vshulcz/deja-vu"]]
 version = "0.23.0"
+aube = { path = "locks/npm-vshulcz-deja-vu/0.23.0", digest = "sha256:897745177dc2c57b0db755f2fd13a3df4fa7a961aea7abae239e274c5aac2af8" }
 backend = "npm:@vshulcz/deja-vu"
 specifiers = ["latest"]
 
@@ -2822,6 +2825,16 @@ url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/47811
 [[tools.ruby]]
 version = "4.0.8"
 backend = "core:ruby"
+
+[tools.ruby."platforms.windows-x64"]
+url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.8-1/rubyinstaller-4.0.8-1-x64.7z"
+
+[tools.ruby."platforms.windows-x64-baseline"]
+url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.8-1/rubyinstaller-4.0.8-1-x64.7z"
+
+[[tools.ruby]]
+version = "4.0.8"
+backend = "core:ruby"
 specifiers = ["latest"]
 
 [tools.ruby.options]
@@ -2869,16 +2882,6 @@ url = "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.8.tar.gz"
 [tools.ruby."platforms.macos-x64-baseline"]
 checksum = "sha256:0968e2ac4cbd6f1fd85d3092aed66cd3c2d8ba4a5e2493d6e6c6cb0c431897d2"
 url = "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.8.tar.gz"
-
-[[tools.ruby]]
-version = "4.0.8"
-backend = "core:ruby"
-
-[tools.ruby."platforms.windows-x64"]
-url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.8-1/rubyinstaller-4.0.8-1-x64.7z"
-
-[tools.ruby."platforms.windows-x64-baseline"]
-url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.8-1/rubyinstaller-4.0.8-1-x64.7z"
 
 [[tools.rust]]
 version = "1.99.1"

@@ -77,7 +77,7 @@ wider_completion_menu = False
 # prompt = '\h [\d] > '
 # prompt = " \t \u@\h:\d  "
 # prompt = "\h [\d]  "
-prompt = " \h  "
+prompt = '\<html><style fg="#333333" bg="#a0d8b0">  \h </style><style fg="#a0d8b0" bg="#a0c0e8"></style><style fg="#333333" bg="#a0c0e8">  \u </style><style fg="#a0c0e8" bg="#e0a8a8"></style><style fg="#333333" bg="#e0a8a8">  \d </style><style fg="#b00020" bg="#e0a8a8"><b>\b </b></style><style fg="#e0a8a8"></style> '
 # prompt = "\x1b[31m\h [\d]  "
 
 # Skip intro info on startup and outro info on exit
@@ -103,35 +103,34 @@ enable_pager = True
 
 # colors {{{
 [colors]
-# COLOR PROMPT
-# https://github.com/dbcli/mycli/issues/394#issuecomment-432024890
-Token.Prompt = "#ffffff bg:#4444aa"
+# mycli 2.x uses prompt_toolkit style names (the old Token.* names broke).
+# The prompt (was Token.Prompt).
+# prompt = '#ffffff bg:#4444aa'  # off: it would fill behind the powerline segments
 
 # Completion menus.
-Token.Menu.Completions.Completion.Current = 'bg:#00aaaa #000000'
-Token.Menu.Completions.Completion = 'bg:#008888 #ffffff'
-Token.Menu.Completions.MultiColumnMeta = 'bg:#aaffff #000000'
-Token.Menu.Completions.ProgressButton = 'bg:#003333'
-Token.Menu.Completions.ProgressBar = 'bg:#00aaaa'
+completion-menu.completion.current = 'bg:#00aaaa #000000'
+completion-menu.completion = 'bg:#008888 #ffffff'
+completion-menu.multi-column-meta = 'bg:#aaffff #000000'
+scrollbar.arrow = 'bg:#003333'
+scrollbar = 'bg:#00aaaa'
 
 # Selected text.
-Token.SelectedText = '#ffffff bg:#6666aa'
+selected = '#ffffff bg:#6666aa'
 
 # Search matches. (reverse-i-search)
-Token.SearchMatch = '#ffffff bg:#4444aa'
-Token.SearchMatch.Current = '#ffffff bg:#44aa44'
+search = '#ffffff bg:#4444aa'
+search.current = '#ffffff bg:#44aa44'
 
 # The bottom toolbar.
-Token.Toolbar = 'bg:#222222 #aaaaaa'
-Token.Toolbar.Off = 'bg:#222222 #888888'
-Token.Toolbar.On = 'bg:#222222 #ffffff'
+bottom-toolbar = 'bg:#222222 #aaaaaa'
+bottom-toolbar.off = 'bg:#222222 #888888'
+bottom-toolbar.on = 'bg:#222222 #ffffff'
 
 # Search/arg/system toolbars.
-Token.Toolbar.Search = 'noinherit bold'
-Token.Toolbar.Search.Text = 'nobold'
-Token.Toolbar.System = 'noinherit bold'
-Token.Toolbar.Arg = 'noinherit bold'
-Token.Toolbar.Arg.Text = 'nobold'
+search-toolbar = 'noinherit bold'
+search-toolbar.text = 'nobold'
+system-toolbar = 'noinherit bold'
+arg-toolbar = 'noinherit bold'
 
 # }}}
 
