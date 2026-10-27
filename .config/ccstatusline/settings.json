@@ -13,14 +13,14 @@
         "backgroundColor": "bgBrightRed"
       },
       {
-        "id": "1",
-        "type": "context-bar",
-        "color": "cyan"
-      },
-      {
         "id": "d5a7152b-45ab-4a59-8017-1209385b79de",
         "type": "session-cost",
         "backgroundColor": "bgBrightBlack"
+      },
+      {
+        "id": "1",
+        "type": "context-bar",
+        "color": "cyan"
       },
       {
         "id": "8597b0f0-b856-44aa-8981-feee567ba124",
