@@ -77,7 +77,7 @@ wider_completion_menu = False
 # prompt = '\h [\d] > '
 # prompt = " \t \u@\h:\d  "
 # prompt = "\h [\d]  "
-prompt = '\<html><style fg="#333333" bg="#a0d8b0">  \h </style><style fg="#a0d8b0" bg="#a0c0e8"></style><style fg="#333333" bg="#a0c0e8">  \u </style><style fg="#a0c0e8" bg="#e0a8a8"></style><style fg="#333333" bg="#e0a8a8">  \d </style><style fg="#b00020" bg="#e0a8a8"><b>\b </b></style><style fg="#e0a8a8"></style> '
+prompt = '\<html><style fg="#333333" bg="#a0d8b0"> \h </style><style fg="#a0d8b0" bg="#a0c0e8"></style><style fg="#333333" bg="#a0c0e8">  \u </style><style fg="#a0c0e8" bg="#e0a8a8"></style><style fg="#333333" bg="#e0a8a8">  \d </style><style fg="#b00020" bg="#e0a8a8"><b>\b</b></style><style fg="#e0a8a8"></style> '
 # prompt = "\x1b[31m\h [\d]  "
 
 # Skip intro info on startup and outro info on exit

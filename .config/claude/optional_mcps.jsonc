@@ -165,6 +165,10 @@
             "Authorization": "Bearer $GITHUB_TOKEN"
         }
     },
+    "klaviyo": {
+        "type": "http",
+        "url": "https://mcp.klaviyo.com/mcp"
+    },
     "postman": {
         "type": "http",
         "url": "https://mcp.postman.com/minimal",
@@ -234,10 +238,6 @@
         "type": "http",
         "url": "http://localhost:6006/mcp"
     },
-    "klaviyo": {
-        "type": "http",
-        "url": "https://mcp.klaviyo.com/mcp"
-    },
     "tree-sitter": {
         "command": "uvx",
         "args": [
@@ -245,13 +245,13 @@
         ]
     },
     // NOTE: requires voicebox native MacOS app to be running
-    "voicebox": {
-        "type": "http",
-        "url": "http://127.0.0.1:17493/mcp",
-        "headers": {
-            "X-Voicebox-Client-Id": "claude-code"
-        }
-    },
+    // "voicebox": {
+    //     "type": "http",
+    //     "url": "http://127.0.0.1:17493/mcp",
+    //     "headers": {
+    //         "X-Voicebox-Client-Id": "claude-code"
+    //     }
+    // },
     "cloudflare-observability": {
         "type": "http",
         "url": "https://observability.mcp.cloudflare.com/mcp"
@@ -259,7 +259,7 @@
     "cloudflare-bindings": {
         "type": "http",
         "url": "https://bindings.mcp.cloudflare.com/mcp"
-    },
+    }
     // Salesforce sucks as we all know so this is extremely complicated to set up of course
     // "salesforce": {
     //     "command": "bunx",
