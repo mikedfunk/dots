@@ -1,6 +1,6 @@
 {
   "bash-language-server": "5.8.1",
-  "biome": "2.6.3",
+  "biome": "2.6.4",
   "black": "26.10.1",
   "bqls": "v0.8.1",
   "checkmake": "v0.3.2",
@@ -45,7 +45,7 @@
   "snyk": "v1.1308.3",
   "snyk-ls": "v20250325.145416",
   "some-sass-language-server": "2.3.8",
-  "sqlfluff": "4.4.0",
+  "sqlfluff": "4.5.0",
   "sqlls": "1.7.1",
   "stylua": "v2.6.0",
   "svelte-language-server": "0.18.5",

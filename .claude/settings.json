@@ -44,7 +44,8 @@
     "anthropic-skills:pdf": "off",
     "anthropic-skills:built-in-browser": "off",
     "anthropic-skills:chrome-browser": "off",
-    "anthropic-skills:docs": "off"
+    "anthropic-skills:docs": "off",
+    "teach": "off"
   },
   "hooks": {
     "SessionStart": [
@@ -80,8 +81,9 @@
     "ponytail@ponytail": true,
     "saatchi-art-claude-plugins@local-desktop-app-uploads": false,
     "lua-lsp@claude-plugins-official": true,
-    "image-view@claude-image-view": true,
-    "agent-usage-guard@agent-usage-guard": false
+    "agent-usage-guard@agent-usage-guard": false,
+    "image-view@claude-image-view": false,
+    "tokeneconomizer@tokeneconomizer": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -131,10 +133,19 @@
         "source": "github",
         "repo": "rbartoli/agent-usage-guard"
       }
+    },
+    "tokeneconomizer": {
+      "source": {
+        "source": "github",
+        "repo": "mikedfunk/TokenEconomizer"
+      }
     }
   },
   "outputStyle": "Attention-kind",
   "effortLevel": "medium",
+  "remote": {
+    "defaultEnvironmentId": "env_01Ms6ux1gNokT47tNB5tcdGy"
+  },
   "tui": "fullscreen",
   "theme": "auto",
   "preferredNotifChannel": "iterm2_with_bell",
@@ -170,8 +181,5 @@
       "**routine under <user>/ prefix**: None configured"
     ]
   },
-  "voiceEnabled": true,
-  "remote": {
-    "defaultEnvironmentId": "env_01Ms6ux1gNokT47tNB5tcdGy"
-  }
+  "voiceEnabled": true
 }
