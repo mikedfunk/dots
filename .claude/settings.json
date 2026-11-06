@@ -83,7 +83,8 @@
     "lua-lsp@claude-plugins-official": true,
     "agent-usage-guard@agent-usage-guard": false,
     "image-view@claude-image-view": false,
-    "tokeneconomizer@tokeneconomizer": true
+    "tokeneconomizer@tokeneconomizer": true,
+    "floorplan@floorplan": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -138,6 +139,12 @@
       "source": {
         "source": "github",
         "repo": "mikedfunk/TokenEconomizer"
+      }
+    },
+    "floorplan": {
+      "source": {
+        "source": "github",
+        "repo": "haydenschmitty/floorplan"
       }
     }
   },

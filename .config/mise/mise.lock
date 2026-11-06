@@ -2375,6 +2375,11 @@ aube = { path = "locks/npm-vshulcz-deja-vu/0.23.1", digest = "sha256:d366b4bc2b8
 backend = "npm:@vshulcz/deja-vu"
 specifiers = ["latest"]
 
+[[tools."npm:agent-desktop"]]
+version = "1.0.2"
+backend = "npm:agent-desktop"
+specifiers = ["latest"]
+
 [[tools."npm:defuddle"]]
 version = "0.19.6"
 aube = { path = "locks/npm-defuddle/0.19.6", digest = "sha256:e36bcc488c68303e0924304d8592e234b3eb20ca419754097cb7285f0e914e07" }
