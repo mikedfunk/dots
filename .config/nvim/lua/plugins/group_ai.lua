@@ -144,97 +144,98 @@ return {
     --   require("minuet.virtualtext")
     -- end,
   },
-  {
-    "monkoose/neocodeium",
-    enabled = true,
-    event = "VeryLazy",
-    dependencies = {
-      {
-        -- add AI section to which-key
-        "folke/which-key.nvim",
-        opts = { spec = { { "<leader>a", group = "+ai" } } },
-      },
-    },
-    keys = {
-      { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Codeium Toggle" },
-      {
-        -- "<a-cr>",
-        "<a-y>",
-        function()
-          require("neocodeium").accept()
-        end,
-        mode = "i",
-        desc = "Codeium Accept",
-      },
-      {
-        "<a-w>",
-        function()
-          require("neocodeium").accept_word()
-        end,
-        mode = "i",
-        desc = "Codeium Accept Word",
-      },
-      -- conflicts with luasnip mapping
-      -- {
-      --   "<a-l>",
-      --   function()
-      --     require("neocodeium").accept_line()
-      --   end,
-      --   mode = "i",
-      --   desc = "Codeium Accept Line",
-      -- },
-      {
-        "<a-n>",
-        function()
-          require("neocodeium").cycle(1)
-        end,
-        mode = "i",
-        desc = "Next Codeium Completion",
-      },
-      {
-        "<a-p>",
-        function()
-          require("neocodeium").cycle(-1)
-        end,
-        mode = "i",
-        desc = "Prev Codeium Completion",
-      },
-      {
-        "<a-e>",
-        function()
-          require("neocodeium").clear()
-        end,
-        mode = "i",
-        desc = "Clear Codeium",
-      },
-    },
-    opts = {
-      silent = true,
-      filetypes = {
-        AgenticChat = false,
-        AgenticInput = false,
-        Avante = false,
-        AvanteInput = false,
-        DressingInput = false,
-        NvimTree = false,
-        TelescopePrompt = false,
-        TelescopeResults = false,
-        alpha = false,
-        cmp = false,
-        codecompanion = false,
-        ["dap-repl"] = false,
-        dashboard = false,
-        harpoon = false,
-        lazy = false,
-        lspinfo = false,
-        ["neoai-input"] = false,
-        snacks_picker_input = false,
-        starter = false,
-        ["triforce-profile"] = false,
-      },
-      -- show_label = false,
-    },
-  },
+  -- discontinued as of November 2026 :(
+  -- {
+  --   "monkoose/neocodeium",
+  --   enabled = true,
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     {
+  --       -- add AI section to which-key
+  --       "folke/which-key.nvim",
+  --       opts = { spec = { { "<leader>a", group = "+ai" } } },
+  --     },
+  --   },
+  --   keys = {
+  --     { "<leader>at", "<Cmd>NeoCodeium toggle<cr>", noremap = true, desc = "Codeium Toggle" },
+  --     {
+  --       -- "<a-cr>",
+  --       "<a-y>",
+  --       function()
+  --         require("neocodeium").accept()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept",
+  --     },
+  --     {
+  --       "<a-w>",
+  --       function()
+  --         require("neocodeium").accept_word()
+  --       end,
+  --       mode = "i",
+  --       desc = "Codeium Accept Word",
+  --     },
+  --     -- conflicts with luasnip mapping
+  --     -- {
+  --     --   "<a-l>",
+  --     --   function()
+  --     --     require("neocodeium").accept_line()
+  --     --   end,
+  --     --   mode = "i",
+  --     --   desc = "Codeium Accept Line",
+  --     -- },
+  --     {
+  --       "<a-n>",
+  --       function()
+  --         require("neocodeium").cycle(1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Next Codeium Completion",
+  --     },
+  --     {
+  --       "<a-p>",
+  --       function()
+  --         require("neocodeium").cycle(-1)
+  --       end,
+  --       mode = "i",
+  --       desc = "Prev Codeium Completion",
+  --     },
+  --     {
+  --       "<a-e>",
+  --       function()
+  --         require("neocodeium").clear()
+  --       end,
+  --       mode = "i",
+  --       desc = "Clear Codeium",
+  --     },
+  --   },
+  --   opts = {
+  --     silent = true,
+  --     filetypes = {
+  --       AgenticChat = false,
+  --       AgenticInput = false,
+  --       Avante = false,
+  --       AvanteInput = false,
+  --       DressingInput = false,
+  --       NvimTree = false,
+  --       TelescopePrompt = false,
+  --       TelescopeResults = false,
+  --       alpha = false,
+  --       cmp = false,
+  --       codecompanion = false,
+  --       ["dap-repl"] = false,
+  --       dashboard = false,
+  --       harpoon = false,
+  --       lazy = false,
+  --       lspinfo = false,
+  --       ["neoai-input"] = false,
+  --       snacks_picker_input = false,
+  --       starter = false,
+  --       ["triforce-profile"] = false,
+  --     },
+  --     -- show_label = false,
+  --   },
+  -- },
   -- {
   --   "coder/claudecode.nvim",
   --   dependencies = { "folke/snacks.nvim" },

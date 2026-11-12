@@ -31,7 +31,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
   "skillOverrides": {
     "anthropic-skills:deep-research": "off",
     "anthropic-skills:submit-skill": "off",
@@ -76,7 +76,7 @@
     "refreshInterval": 10
   },
   "enabledPlugins": {
-    "context-mode@context-mode": true,
+    "context-mode@context-mode": false,
     "design@synced": false,
     "ponytail@ponytail": true,
     "saatchi-art-claude-plugins@local-desktop-app-uploads": false,

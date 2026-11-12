@@ -26,6 +26,10 @@
             "dbeaver-mcp-server"
         ]
     },
+    "constructor-docs": {
+        "type": "http",
+        "url": "https://docs.constructor.com/mcp"
+    },
     // "coderabbitai": {
     //     "command": "bunx",
     //     "args": [
