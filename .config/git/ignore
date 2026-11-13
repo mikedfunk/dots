@@ -55,3 +55,5 @@ openspec
 root_local
 yarn-error.log
 .fallow/*.bin
+
+**/.claude/.cc-writes/
