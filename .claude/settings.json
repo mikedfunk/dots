@@ -20,7 +20,8 @@
       "mcp__codegraph__codegraph_impact",
       "mcp__codegraph__codegraph_files",
       "mcp__codegraph__codegraph_status",
-      "mcp__codegraph__*"
+      "mcp__codegraph__*",
+      "Bash(curl *ac.cnstrc.com*)"
     ],
     "deny": [
       "Read(**/node_modules/**)",
@@ -244,6 +245,58 @@
     }
   },
   "outputStyle": "Attention-kind",
+  "sandbox": {
+    "enabled": false,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "*.github.com",
+        "*.githubusercontent.com",
+        "proxy.golang.org",
+        "sum.golang.org",
+        "*.golang.org",
+        "registry.npmjs.org",
+        "*.npmjs.org",
+        "repo.packagist.org",
+        "*.packagist.org",
+        "*.slack.com",
+        "jenkins.xsaatchi.com",
+        "*.saatchiart.com"
+      ],
+      "allowUnixSockets": [
+        "/var/run/com.apple.launchd.e7WZwfej72/Listeners"
+      ]
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/.local/share/go",
+        "~/Library/Caches/go-build"
+      ],
+      "denyRead": [
+        "~/.ssh",
+        "~/.aws",
+        "~/.netrc",
+        "~/.private_vars.sh",
+        "~/.duck_token",
+        "~/.config/gh/hosts.yml",
+        "~/.composer/auth.json",
+        "~/.gesso-env-backup"
+      ],
+      "allowRead": [
+        "~/.ssh/config",
+        "~/.ssh/known_hosts"
+      ]
+    },
+    "excludedCommands": [
+      "gh *",
+      "git push *",
+      "git fetch *",
+      "git pull *",
+      "git ls-remote *"
+    ]
+  },
   "effortLevel": "medium",
   "remote": {
     "defaultEnvironmentId": "env_01Ms6ux1gNokT47tNB5tcdGy"
@@ -283,57 +336,5 @@
       "**routine under <user>/ prefix**: None configured"
     ]
   },
-  "voiceEnabled": true,
-  "sandbox": {
-    "enabled": false,
-    "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": false,
-    "excludedCommands": [
-      "gh *",
-      "git push *",
-      "git fetch *",
-      "git pull *",
-      "git ls-remote *"
-    ],
-    "network": {
-      "allowedDomains": [
-        "github.com",
-        "*.github.com",
-        "*.githubusercontent.com",
-        "proxy.golang.org",
-        "sum.golang.org",
-        "*.golang.org",
-        "registry.npmjs.org",
-        "*.npmjs.org",
-        "repo.packagist.org",
-        "*.packagist.org",
-        "*.slack.com",
-        "jenkins.xsaatchi.com",
-        "*.saatchiart.com"
-      ],
-      "allowUnixSockets": [
-        "/var/run/com.apple.launchd.e7WZwfej72/Listeners"
-      ]
-    },
-    "filesystem": {
-      "denyRead": [
-        "~/.ssh",
-        "~/.aws",
-        "~/.netrc",
-        "~/.private_vars.sh",
-        "~/.duck_token",
-        "~/.config/gh/hosts.yml",
-        "~/.composer/auth.json",
-        "~/.gesso-env-backup"
-      ],
-      "allowRead": [
-        "~/.ssh/config",
-        "~/.ssh/known_hosts"
-      ],
-      "allowWrite": [
-        "~/.local/share/go",
-        "~/Library/Caches/go-build"
-      ]
-    }
-  }
+  "voiceEnabled": true
 }

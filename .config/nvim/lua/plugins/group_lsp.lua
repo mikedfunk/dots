@@ -195,6 +195,8 @@ return {
             enableTrustedFoldersFeature = "false",
             manageBinariesAutomatically = "false",
             organization = "leaf-saatchiart",
+            -- authenticationMethod = "token",
+            authenticationMethod = "pat",
             token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
           },
         },

@@ -1,67 +1,120 @@
 return {
-  -- NOTE: This is the old version, there is some bug where latest 4.x isn't working
-  -- TODO: after rebuilding my neovim config, this isn't working either :/
-  -- {
-  --   "adalessa/laravel.nvim",
-  --   tag = "v3.3.0",
-  --   ft = { "php", "json" },
-  --   dependencies = { "kevinhwang91/promise-async" },
-  --   opts = {
-  --     lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
-  --     features = {
-  --       -- I only use this for route info
-  --       route_info = { enable = true, view = "right" },
-  --       model_info = { enable = false },
-  --       override = { enable = false },
-  --       pickers = { enable = false },
-  --     },
-  --   },
-  -- },
-  -- NOTE: I use this for:
-  -- - route info in virtual text next to controller actions
-  -- - I have completion enabled for blade templates but I don't really use it
-  -- - composer.json version virtual text for new versions, etc.
-  -- TODO: this is broken again :( 2026-02-05
-  -- {
-  --   "adalessa/laravel.nvim",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-neotest/nvim-nio",
-  --     {
-  --       "saghen/blink.cmp",
-  --       opts_extend = { "sources.compat" },
-  --       opts = {
-  --         sources = {
-  --           compat = {
-  --             "laravel",
-  --           },
-  --         },
-  --       },
-  --     },
-  --   },
-  --   ft = { "php", "json" },
-  --   cmd = { "Laravel" },
-  --   opts = {
-  --     extensions = {
-  --       artisan_hub = { enable = false },
-  --       command_center = { enable = false },
-  --       completion = { enable = true },
-  --       composer_dev = { enable = true },
-  --       composer_info = { enable = true },
-  --       diagnostic = { enable = false },
-  --       dump_server = { enable = false },
-  --       model_info = { enable = false },
-  --       override = { enable = false },
-  --       route_info = { enable = true, view = "right" },
-  --       tinker = { enable = false },
-  --     },
-  --     lsp_server = vim.g.lazyvim_php_lsp or "phpactor",
-  --     features = {
-  --       pickers = { enable = false },
-  --     },
-  --   },
-  -- },
+  {
+    "adalessa/laravel.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
+      {
+        -- add AI section to which-key
+        "folke/which-key.nvim",
+        opts = { spec = { { "<leader>P", group = "+laravel" } } },
+      },
+    },
+    ft = { "php", "blade" },
+    event = { "BufEnter composer.json" },
+    keys = {
+      {
+        "<leader>Pl",
+        function()
+          Laravel.pickers.laravel()
+        end,
+        desc = "Laravel: Picker",
+      },
+      {
+        "<leader>Pa",
+        function()
+          Laravel.pickers.artisan()
+        end,
+        desc = "Laravel: Artisan Picker",
+      },
+      {
+        "<leader>Pr",
+        function()
+          Laravel.pickers.routes()
+        end,
+        desc = "Laravel: Routes Picker",
+      },
+      {
+        "<leader>Pm",
+        function()
+          Laravel.pickers.make()
+        end,
+        desc = "Laravel: Make Picker",
+      },
+      {
+        "<leader>Pc",
+        function()
+          Laravel.pickers.commands()
+        end,
+        desc = "Laravel: Custom Commands Picker",
+      },
+      {
+        "<leader>Po",
+        function()
+          Laravel.pickers.resources()
+        end,
+        desc = "Laravel: Resources Picker",
+      },
+      {
+        "<leader>Ph",
+        function()
+          Laravel.run("artisan docs")
+        end,
+        desc = "Laravel: Documentation",
+      },
+      {
+        "<leader>Pt",
+        function()
+          Laravel.commands.run("actions")
+        end,
+        desc = "Laravel: Code Actions",
+      },
+      {
+        "<leader>Pu",
+        function()
+          Laravel.commands.run("hub")
+        end,
+        desc = "Laravel: Artisan Hub",
+      },
+      {
+        "<leader>Pp",
+        function()
+          Laravel.commands.run("command_center")
+        end,
+        desc = "Laravel: Command Center",
+      },
+      {
+        "<c-g>",
+        function()
+          Laravel.commands.run("view:finder")
+        end,
+        desc = "Laravel: View Finder",
+      },
+      {
+        "gf",
+        function()
+          if Laravel.app("gf").cursorOnResource() then
+            return "<cmd>lua Laravel.commands.run('gf')<cr>"
+          end
+          return "gf"
+        end,
+        expr = true,
+        noremap = true,
+        desc = "Laravel: Go to resource",
+      },
+    },
+    opts = {
+      features = {
+        pickers = {
+          provider = "snacks", -- telescope | fzf-lua | snacks | ui.select
+        },
+      },
+      extensions = {
+        route_info = { enable = true, view = "right" },
+      },
+    },
+  },
   {
     "gbprod/phpactor.nvim",
     dependencies = {
