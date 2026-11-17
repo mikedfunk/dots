@@ -153,8 +153,6 @@ return {
   -- TODO: breaks my terminal due to some problem with character width
   {
     "petertriho/nvim-scrollbar",
-    -- TODO(2026-11-16): v2 becomes main, delete the branch line below
-    branch = "refactor/v2",
     event = "VeryLazy",
     opts = {
       providers = { gitsigns = true },

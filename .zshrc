@@ -242,8 +242,10 @@ export BAT_THEME="TwoDark"
 source "$HOME"/.private_vars.sh 2>/dev/null
 source "$HOMEBREW_PREFIX"/etc/grc.zsh 2>/dev/null # generic colorizer
 
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
 export ENABLE_CLAUDEAI_MCP_SERVERS=false # configure my own instead
+# export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=false
+export CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1
 export BASH_MAX_OUTPUT_LENGTH=15000
 
 _evalcache mise activate zsh 2>/dev/null
@@ -362,7 +364,8 @@ _claude_inject_mcps() {
 claude() {
     # Only inject persistent MCPs into ~/.claude.json before launching.
     # An update that fails (offline, rate limited) must not stop claude from starting.
-    command claude update
+    # command claude update
+    mise upgrade claude
     _claude_inject_mcps "$(_claude_persistent_mcps)" && \
     command claude "$@"
 }
