@@ -153,6 +153,7 @@ return {
   -- TODO: breaks my terminal due to some problem with character width
   {
     "petertriho/nvim-scrollbar",
+    branch = "refactor/v2", -- v2 fixes winborder inheritance and zindex (issue #121)
     event = "VeryLazy",
     opts = {
       providers = { gitsigns = true },

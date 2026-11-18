@@ -41,22 +41,26 @@ return {
   -- :DiffviewFileHistory % (log of current file)
   -- :DiffviewFileHistory (log of current repo)
   -- :DiffviewOpen (show all modified files)
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   lazy = false, -- avoid probs with git mergetool
+  --   -- event = "VeryLazy",
+  --   opts = {
+  --     default = {
+  --       disable_diagnostics = false,
+  --     },
+  --     view = {
+  --       merge_tool = {
+  --         disable_diagnostics = false,
+  --         winbar_info = true,
+  --       },
+  --     },
+  --     enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+  --   },
+  -- },
   {
-    "sindrets/diffview.nvim",
-    lazy = false, -- avoid probs with git mergetool
-    -- event = "VeryLazy",
-    opts = {
-      default = {
-        disable_diagnostics = false,
-      },
-      view = {
-        merge_tool = {
-          disable_diagnostics = false,
-          winbar_info = true,
-        },
-      },
-      enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-    },
+    "esmuellert/codediff.nvim",
+    cmd = "CodeDiff",
   },
   {
     "rhysd/committia.vim",

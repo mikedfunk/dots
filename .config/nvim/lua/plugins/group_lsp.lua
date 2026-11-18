@@ -173,6 +173,8 @@ return {
         phpantom_lsp = { enabled = false },
         snyk_ls = {
           filetypes = { "php" }, -- add more filetypes
+          -- lspconfig's default is `snyk language-server` (the CLI's built-in server), which opens a browser login; Mason's standalone snyk-ls uses the token
+          cmd = { "snyk-ls", "-l", "info" },
           -- filetypes = {
           --   "go",
           --   "gomod",
@@ -196,8 +198,9 @@ return {
             manageBinariesAutomatically = "false",
             organization = "leaf-saatchiart",
             -- authenticationMethod = "token",
-            authenticationMethod = "pat",
-            token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
+            -- authenticationMethod = "pat",
+            -- token = os.getenv("SNYK_TOKEN"), -- docs say it will auto read the env var but it doesn't work :/
+            -- cliPath = vim.fn.stdpath("data") .. "/mason/bin/snyk", -- Mason's CLI; the server can't find it otherwise
           },
         },
         -- phpactor = {},
